@@ -51,8 +51,8 @@ namespace Skydat.forms2065
             this.tChart2.Titles[0].Text = "";
             this.tChart2.Titles[0].Alignment = ContentAlignment.TopCenter;
             this.tChart2.Titles[0].ForeColor = Color.Black;
-           // tChart1.ChartAreas.Add("a1");
-            //tChart1.Legends.Add("a1");
+           // OnlineChart.ChartAreas.Add("a1");
+            //OnlineChart.Legends.Add("a1");
             tChart1.ChartAreas[0].Area3DStyle.Enable3D = false;
 
             tChart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
@@ -60,8 +60,8 @@ namespace Skydat.forms2065
             tChart1.ChartAreas[0].AxisY.LineColor = Color.Black;
 
             tChart1.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
-            //tChart1.ChartAreas[0].AxisY.Title = "coulomb(c)";
-            //tChart1.ChartAreas[0].AxisX.Title = "Time(s)";
+            //OnlineChart.ChartAreas[0].AxisY.Title = "coulomb(c)";
+            //OnlineChart.ChartAreas[0].AxisX.Title = "Time(s)";
             tChart1.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
 
@@ -240,7 +240,7 @@ namespace Skydat.forms2065
                         try
                         {
                             
-                            //fPeak.richTextBox1.Text += cPeak.manual(tChart1.Series[0].,XValues.Value, tChart1.Series[0].YValues.Value, X_V1, Y_V1, X_V2, Y_V2, (int)(Math.Abs(P2 - P1) / Step));
+                            //fPeak.richTextBox1.Text += cPeak.manual(OnlineChart.Series[0].,XValues.Value, OnlineChart.Series[0].YValues.Value, X_V1, Y_V1, X_V2, Y_V2, (int)(Math.Abs(P2 - P1) / Step));
                             //fPeak.richTextBox1.Text += cPeak.findp1(XX, YY, (int)((P2 - P1) / Step));
                         }
                         catch
@@ -283,8 +283,8 @@ namespace Skydat.forms2065
                         tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
                     else
                         tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;tChart1.ChartAreas[0].AxisX.Minimum +
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//tChart1.ChartAreas[0].AxisX.Minimum +
+                        tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
+                        tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
                                   
                     mDown = xv;
                     mDowny = yv;
@@ -422,8 +422,8 @@ namespace Skydat.forms2065
                         if (i >= tChart1.Series.Count)
                             tChart1.Series.Add("ser" + i + 1);
                         tChart1.Series[i].Enabled = true;
-                        //  tChart1.Titles[0].Text = classes.clasglobal.TechName[Overlay_tech[i]];
-                        // tChart1.Series[i].Title = tChart1.Header.Text;
+                        //  OnlineChart.Titles[0].Text = classes.clasglobal.TechName[Overlay_tech[i]];
+                        // OnlineChart.Series[i].Title = OnlineChart.Header.Text;
                         tChart1.ChartAreas[0].AxisY.LabelStyle.Angle = 0;
                         tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle[Overlay_tech[i]];
                         tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle[Overlay_tech[i]];
@@ -453,7 +453,7 @@ namespace Skydat.forms2065
                 }
             
             }
-            //tChart1.Refresh();
+            //OnlineChart.Refresh();
         }
 
         private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
@@ -561,7 +561,7 @@ namespace Skydat.forms2065
             {
                 treeView3.SelectedNode = treeView3.Nodes[0].LastNode;
                 treeView3.Nodes[0].LastNode.Checked = true;
-                //treeView3.Nodes[0].LastNode.ForeColor = tChart1.Series[tChart1.Series.Count - 1].Color;
+                //treeView3.Nodes[0].LastNode.ForeColor = OnlineChart.Series[OnlineChart.Series.Count - 1].Color;
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -764,7 +764,7 @@ namespace Skydat.forms2065
                     }
                     else
                         k--;
-                //tChart1.Series[num_data + num_ser].Title [0]= fileName;
+                //OnlineChart.Series[num_data + num_ser].Title [0]= fileName;
 
             }
 
@@ -1071,7 +1071,7 @@ namespace Skydat.forms2065
             Random Random1 = new Random();
             Random rndm2 = new Random();
             Random rndm3 = new Random();
-            //tChart1.Titles[0].Text = "  ";
+            //OnlineChart.Titles[0].Text = "  ";
             int Random_Color_Index = 0;
             Random_Color_Index = (int)(Random1.NextDouble() * 90);
             if (!overlaymain)
@@ -1105,22 +1105,22 @@ namespace Skydat.forms2065
           
 
             tChart1.ChartAreas[0].Area3DStyle.Enable3D= false;
-           // tChart1.BackColor = Color.White;
+           // OnlineChart.BackColor = Color.White;
            
-            //tChart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
-            //tChart1.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
+            //OnlineChart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
+            //OnlineChart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle[tech];
             tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle[tech];
             if (num_Series < 1)
                 Overlay_tech[0] = tech;
             else
                 Overlay_tech[num_Series] = tech;
-            //tChart1.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
-            //tChart1.ChartAreas[0].AxisX.LabelStyle.Format = "#.##";
-            //this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            //this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
-            //this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-            //this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+            //OnlineChart.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
+            //OnlineChart.ChartAreas[0].AxisX.LabelStyle.Format = "#.##";
+            //this.OnlineChart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            //this.OnlineChart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
+            //this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            //this.OnlineChart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
             }
 
         private void clearselplot()
@@ -1188,7 +1188,7 @@ namespace Skydat.forms2065
             mc.Math_Operation(P, I, XorY, txt, value);
 
 
-            // tChart1.Series[num_Series].Clear();
+            // OnlineChart.Series[num_Series].Clear();
             operation = "Mathematics";
             show_Graph(0, this, "SubChart", mc.AR, mc.BR, true,mc.AR.Length);
 
@@ -1269,10 +1269,10 @@ namespace Skydat.forms2065
         private void toolStripButton21_Click(object sender, EventArgs e)
         {
             tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-          //  tChart1.ChartAreas[0].AxisX.MinorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MinorTickMark.Enabled;
+          //  OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-          //  tChart1.ChartAreas[0].AxisY.MinorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MinorTickMark.Enabled;
+          //  OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
 
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
@@ -1300,8 +1300,8 @@ namespace Skydat.forms2065
             //string[] color = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat");  // هنگام باز کردن رنگ همه یکی میشود
             //string s = color[7].ToString().Substring(color[7].ToString().IndexOf(":") + 1);
             //Color cl = Color.FromArgb(Convert.ToInt32(s));
-            //for (int i = 0; i < tChart1.Series.Count; i++)
-            //    tChart1.Series[i].Color = cl;
+            //for (int i = 0; i < OnlineChart.Series.Count; i++)
+            //    OnlineChart.Series[i].Color = cl;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1587,8 +1587,8 @@ namespace Skydat.forms2065
                                     tChart2.ChartAreas[0].AxisY.ScaleView.Position = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview2 / 500);
                                 else
                                     tChart2.ChartAreas[0].AxisY.ScaleView.Position = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                                tChart2.ChartAreas[0].AxisX.ScaleView.Size = difxview2; //(tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;tChart1.ChartAreas[0].AxisX.Minimum +
-                                tChart2.ChartAreas[0].AxisY.ScaleView.Size = difyview2;// (tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//tChart1.ChartAreas[0].AxisX.Minimum +
+                                tChart2.ChartAreas[0].AxisX.ScaleView.Size = difxview2; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
+                                tChart2.ChartAreas[0].AxisY.ScaleView.Size = difyview2;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
 
                                 mDown = xv;
                                 mDowny = yv;
@@ -2535,7 +2535,7 @@ namespace Skydat.forms2065
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message + Environment.NewLine + "selected File is not in valid Format...", "Warning");
-                    //if (overlayopen == 1 || this.grf.tChart1.Series.Count < 1)
+                    //if (overlayopen == 1 || this.grf.OnlineChart.Series.Count < 1)
                     //    this.grf.Close();
 
                     //isOkfile = false;
@@ -5799,7 +5799,7 @@ namespace Skydat.forms2065
                     color[7] = "2065 graph analysis:" + cl.Color.ToArgb().ToString();
                     File.WriteAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat", color);
 
-                    //for (int i = 0; i < tChart1.Series.Count; i++)
+                    //for (int i = 0; i < OnlineChart.Series.Count; i++)
                     int i = treeView3.SelectedNode.Index;
                     tChart1.Series[i].Color = cl.Color;
 

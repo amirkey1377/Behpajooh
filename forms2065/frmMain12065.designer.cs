@@ -35,7 +35,7 @@ namespace Skydat.forms2065
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.xyLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TechStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.colAA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,7 +72,7 @@ namespace Skydat.forms2065
             this.toolStripStatusLabel3,
             this.xyLabel,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel5,
+            this.TechStatus,
             this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 663);
             this.statusStrip1.Name = "statusStrip1";
@@ -120,13 +120,13 @@ namespace Skydat.forms2065
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 19);
             // 
-            // toolStripStatusLabel5
+            // TechStatus
             // 
-            this.toolStripStatusLabel5.AutoSize = false;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(180, 19);
-            this.toolStripStatusLabel5.ToolTipText = "Run State";
-            this.toolStripStatusLabel5.TextChanged += new System.EventHandler(this.toolStripStatusLabel5_TextChanged);
+            this.TechStatus.AutoSize = false;
+            this.TechStatus.Name = "TechStatus";
+            this.TechStatus.Size = new System.Drawing.Size(180, 19);
+            this.TechStatus.ToolTipText = "Run State";
+            this.TechStatus.TextChanged += new System.EventHandler(this.toolStripStatusLabel5_TextChanged);
             // 
             // toolStripProgressBar1
             // 
@@ -334,7 +334,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         public System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        public System.Windows.Forms.ToolStripStatusLabel TechStatus;
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAA;
         private System.Windows.Forms.DataGridViewTextBoxColumn colQ1;

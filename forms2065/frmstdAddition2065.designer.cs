@@ -110,11 +110,11 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Unknown:";
             // 
-            // label4
+            // Parameters
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(4, 83);
-            this.label4.Name = "label4";
+            this.label4.Name = "Parameters";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Addition 1:";
