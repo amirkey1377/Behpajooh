@@ -174,7 +174,7 @@ namespace Skydat.forms2080
             this.btnshowaxes.UseVisualStyleBackColor = false;
             this.btnshowaxes.Click += new System.EventHandler(this.btnshowaxes_Click);
             // 
-            // tChart1
+            // OnlineChart
             // 
             this.tChart1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tChart1.BorderlineColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -184,8 +184,8 @@ namespace Skydat.forms2080
             chartArea1.Position.Height = 100F;
             chartArea1.Position.Width = 100F;
             this.tChart1.ChartAreas.Add(chartArea1);
-            resources.ApplyResources(this.tChart1, "tChart1");
-            this.tChart1.Name = "tChart1";
+            resources.ApplyResources(this.tChart1, "OnlineChart");
+            this.tChart1.Name = "OnlineChart";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
@@ -206,11 +206,11 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // label4
+            // Parameters
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.label4, "Parameters");
+            this.label4.Name = "Parameters";
             this.label4.ReadOnly = true;
             // 
             // label1

@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="treeView3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 11.25pt</value>
+  </data>
   <data name="treeView3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 69</value>
   </data>
@@ -373,28 +376,28 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 1</value>
+  <data name="OnlineChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>620, 696</value>
+  <data name="OnlineChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 0</value>
   </data>
-  <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="OnlineChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>655, 695</value>
   </data>
-  <data name="tChart1.Text" xml:space="preserve">
-    <value>chart1</value>
+  <data name="OnlineChart.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="&gt;&gt;tChart1.Name" xml:space="preserve">
-    <value>tChart1</value>
+  <data name="&gt;&gt;OnlineChart.Name" xml:space="preserve">
+    <value>OnlineChart</value>
   </data>
-  <data name="&gt;&gt;tChart1.Type" xml:space="preserve">
+  <data name="&gt;&gt;OnlineChart.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
   </data>
-  <data name="&gt;&gt;tChart1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;OnlineChart.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;tChart1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;OnlineChart.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -418,28 +421,28 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 321</value>
+  <data name="Parameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 326</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 220</value>
+  <data name="Parameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 214</value>
   </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="Parameters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="Parameters.Text" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
+  <data name="&gt;&gt;Parameters.Name" xml:space="preserve">
+    <value>Parameters</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name="&gt;&gt;Parameters.Type" xml:space="preserve">
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Parameters.Parent" xml:space="preserve">
     <value>panel3</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Parameters.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="txtcomment.Location" type="System.Drawing.Point, System.Drawing">

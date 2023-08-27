@@ -72,12 +72,12 @@ namespace Skydat.forms2065
             this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label4
+            // Parameters
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.label4, "Parameters");
+            this.label4.Name = "Parameters";
             // 
             // treeView3
             // 
@@ -146,7 +146,7 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.datedescToolStripMenuItem, "datedescToolStripMenuItem");
             this.datedescToolStripMenuItem.Click += new System.EventHandler(this.datedescToolStripMenuItem_Click);
             // 
-            // tChart1
+            // OnlineChart
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
             this.tChart1.BorderlineColor = System.Drawing.Color.Black;
@@ -157,8 +157,8 @@ namespace Skydat.forms2065
             chartArea1.Position.Width = 100F;
             this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.tChart1, "tChart1");
-            this.tChart1.Name = "tChart1";
+            resources.ApplyResources(this.tChart1, "OnlineChart");
+            this.tChart1.Name = "OnlineChart";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;

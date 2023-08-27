@@ -116,10 +116,10 @@ namespace Skydat.forms2080
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 19);
             // 
-            // toolStripStatusLabel5
+            // TechStatus
             // 
             this.toolStripStatusLabel5.AutoSize = false;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Name = "TechStatus";
             this.toolStripStatusLabel5.Size = new System.Drawing.Size(180, 19);
             this.toolStripStatusLabel5.ToolTipText = "Run State";
             this.toolStripStatusLabel5.TextChanged += new System.EventHandler(this.toolStripStatusLabel5_TextChanged);

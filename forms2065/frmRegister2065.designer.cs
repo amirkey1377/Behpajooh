@@ -67,10 +67,10 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Enter License Key for this computer: ";
             // 
-            // label4
+            // Parameters
             // 
             this.label4.Location = new System.Drawing.Point(189, 76);
-            this.label4.Name = "label4";
+            this.label4.Name = "Parameters";
             this.label4.Size = new System.Drawing.Size(152, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "000000000000000";
