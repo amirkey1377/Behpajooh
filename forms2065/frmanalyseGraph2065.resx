@@ -155,18 +155,15 @@
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 251</value>
+    <value>0, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 382</value>
+    <value>100, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -212,13 +209,13 @@
     <value>2</value>
   </data>
   <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 3</value>
+    <value>0, 0</value>
   </data>
   <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>635, 305</value>
+    <value>675, 313</value>
   </data>
   <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>35</value>
   </data>
   <data name="&gt;&gt;tChart1.Name" xml:space="preserve">
     <value>tChart1</value>

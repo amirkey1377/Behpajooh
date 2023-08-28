@@ -236,7 +236,7 @@ namespace Skydat.forms2065
             try
             {
                 Int32 ii1 = 0;//در زبان دلفی که به اینجا منتقل شده است از نوع علامت دار بود. به همین علت در تکنیک سی اچ پی اینجا مقدار نهایی اختلاف داشت
-                int t1, t2, t3, n = 1, Pnum = 0, j = 0, /*ii1 = 0,*/ i = 0;
+                int t1, t2, t3, Pnum = 0, j = 0, /*ii1 = 0,*/ i = 0;
                 int Elo = 0, Stp = 0;
                 byte check = 0, Teq = 0;
                 short[] Powr = new short[1];
