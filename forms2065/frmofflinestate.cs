@@ -11,7 +11,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows;
 using Skydat.classes2065;
 using System.Runtime.InteropServices;
-using Skydat.classes2065;
 using System.IO.Ports;
 using System.Threading;
 
@@ -242,7 +241,7 @@ namespace Skydat.forms2065
                 short[] Powr = new short[1];
                 short[] Crnt = new short[1];
 
-                bool Equ = false, pulsy = false, N_gtv = false, evn = false, hi_lo;
+                bool Equ = false, pulsy = false, N_gtv = false, evn = false;
                 string Sign = "", outstr = "";
                 double SR0, i1 = 0, i2 = 0, ss = 0;
                 if (!sp1.IsOpen)

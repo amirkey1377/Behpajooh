@@ -49,11 +49,11 @@ namespace Skydat.forms2065
             this.Parameters = new System.Windows.Forms.RichTextBox();
             this.txtcomment = new System.Windows.Forms.RichTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbhold = new System.Windows.Forms.ToolStripButton();
-            this.tsbcont = new System.Windows.Forms.ToolStripButton();
-            this.tsbstop = new System.Windows.Forms.ToolStripButton();
-            this.tsbshowd = new System.Windows.Forms.ToolStripButton();
-            this.tsbsave = new System.Windows.Forms.ToolStripButton();
+            this.Holdbtn = new System.Windows.Forms.ToolStripButton();
+            this.Continuebtn = new System.Windows.Forms.ToolStripButton();
+            this.Stopbtn = new System.Windows.Forms.ToolStripButton();
+            this.Showbtn = new System.Windows.Forms.ToolStripButton();
+            this.Savebtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
@@ -212,8 +212,8 @@ namespace Skydat.forms2065
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             series1.Name = "Series1";
             this.OnlineChart.Series.Add(series1);
-            this.OnlineChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseMove);
-            this.OnlineChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseUp);
+            this.OnlineChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseMove);
+            this.OnlineChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseUp);
             // 
             // panel3
             // 
@@ -246,57 +246,56 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.Color.Gainsboro;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbhold,
-            this.tsbcont,
-            this.tsbstop,
-            this.tsbshowd,
-            this.tsbsave});
+            this.Holdbtn,
+            this.Continuebtn,
+            this.Stopbtn,
+            this.Showbtn,
+            this.Savebtn});
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // tsbhold
+            // Holdbtn
             // 
-            resources.ApplyResources(this.tsbhold, "tsbhold");
-            this.tsbhold.ForeColor = System.Drawing.Color.Black;
-            this.tsbhold.Image = global::Skydat.Properties.Resources.Pause_icon;
-            this.tsbhold.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbhold.Name = "tsbhold";
-            this.tsbhold.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
+            resources.ApplyResources(this.Holdbtn, "Holdbtn");
+            this.Holdbtn.ForeColor = System.Drawing.Color.Black;
+            this.Holdbtn.Image = global::Skydat.Properties.Resources.Pause_icon;
+            this.Holdbtn.Margin = new System.Windows.Forms.Padding(0);
+            this.Holdbtn.Name = "Holdbtn";
+            this.Holdbtn.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
             // 
-            // tsbcont
+            // Continuebtn
             // 
-            resources.ApplyResources(this.tsbcont, "tsbcont");
-            this.tsbcont.ForeColor = System.Drawing.Color.Black;
-            this.tsbcont.Image = global::Skydat.Properties.Resources.Play_icon;
-            this.tsbcont.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbcont.Name = "tsbcont";
-            this.tsbcont.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
+            resources.ApplyResources(this.Continuebtn, "Continuebtn");
+            this.Continuebtn.ForeColor = System.Drawing.Color.Black;
+            this.Continuebtn.Image = global::Skydat.Properties.Resources.Play_icon;
+            this.Continuebtn.Margin = new System.Windows.Forms.Padding(0);
+            this.Continuebtn.Name = "Continuebtn";
+            this.Continuebtn.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
             // 
-            // tsbstop
+            // Stopbtn
             // 
-            resources.ApplyResources(this.tsbstop, "tsbstop");
-            this.tsbstop.ForeColor = System.Drawing.Color.Black;
-            this.tsbstop.Image = global::Skydat.Properties.Resources.Stop_icon;
-            this.tsbstop.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbstop.Name = "tsbstop";
-            this.tsbstop.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
+            resources.ApplyResources(this.Stopbtn, "Stopbtn");
+            this.Stopbtn.ForeColor = System.Drawing.Color.Black;
+            this.Stopbtn.Image = global::Skydat.Properties.Resources.Stop_icon;
+            this.Stopbtn.Margin = new System.Windows.Forms.Padding(0);
+            this.Stopbtn.Name = "Stopbtn";
+            this.Stopbtn.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
-            // tsbshowd
+            // Showbtn
             // 
-            resources.ApplyResources(this.tsbshowd, "tsbshowd");
-            this.tsbshowd.ForeColor = System.Drawing.Color.Black;
-            this.tsbshowd.Image = global::Skydat.Properties.Resources.Data_Sheet;
-            this.tsbshowd.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbshowd.Name = "tsbshowd";
-            this.tsbshowd.Click += new System.EventHandler(this.toolStripButton2_Click);
+            resources.ApplyResources(this.Showbtn, "Showbtn");
+            this.Showbtn.ForeColor = System.Drawing.Color.Black;
+            this.Showbtn.Image = global::Skydat.Properties.Resources.Data_Sheet;
+            this.Showbtn.Margin = new System.Windows.Forms.Padding(0);
+            this.Showbtn.Name = "Showbtn";
+            this.Showbtn.Click += new System.EventHandler(this.Showbtn_Click);
             // 
-            // tsbsave
+            // Savebtn
             // 
-            this.tsbsave.ForeColor = System.Drawing.Color.Black;
-            this.tsbsave.Image = global::Skydat.Properties.Resources.flappy;
-            resources.ApplyResources(this.tsbsave, "tsbsave");
-            this.tsbsave.Name = "tsbsave";
-            this.tsbsave.Click += new System.EventHandler(this.tsbsave_Click);
+            this.Savebtn.ForeColor = System.Drawing.Color.Black;
+            this.Savebtn.Image = global::Skydat.Properties.Resources.flappy;
+            resources.ApplyResources(this.Savebtn, "Savebtn");
+            this.Savebtn.Name = "Savebtn";
             // 
             // toolStripSeparator1
             // 
@@ -468,8 +467,8 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton tsbhold;
-        private System.Windows.Forms.ToolStripButton tsbstop;
+        private System.Windows.Forms.ToolStripButton Holdbtn;
+        private System.Windows.Forms.ToolStripButton Stopbtn;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnshowvalue;
@@ -478,11 +477,11 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button btnzoomout;
         private System.Windows.Forms.Button btnshowgrid;
         private System.Windows.Forms.Button btnshowaxes;
-        private System.Windows.Forms.ToolStripButton tsbcont;
-        private System.Windows.Forms.ToolStripButton tsbshowd;
+        private System.Windows.Forms.ToolStripButton Continuebtn;
+        private System.Windows.Forms.ToolStripButton Showbtn;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.RichTextBox txtcomment;
-        private System.Windows.Forms.ToolStripButton tsbsave;
+        private System.Windows.Forms.ToolStripButton Savebtn;
         private System.Windows.Forms.Button button1;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
         private System.Windows.Forms.RichTextBox Parameters;
