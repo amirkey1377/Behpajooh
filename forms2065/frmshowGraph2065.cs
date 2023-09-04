@@ -49,7 +49,7 @@ namespace Skydat.forms2065
 
         private drawline_chart drawline1;
         public int[] Overlay_tech = new int[1000];
-        public frmMain12065 mainf;
+        public frmMain2065 mainf;
         public frmOption12065 opForm;
 
         private string statebutton = "";
@@ -158,7 +158,7 @@ namespace Skydat.forms2065
         private void Set_line_Setting()
         {
             drawline1.EnableDraw = opForm.cbDrawLine.Checked;
-            drawline1.pen_ch.Color = ((frmMain12065)(this.MdiParent)).drawColor;
+            drawline1.pen_ch.Color = ((frmMain2065)(this.MdiParent)).drawColor;
             switch (Convert.ToInt16(opForm.cmbStyleDraw.SelectedIndex))
             {
                 case 0: drawline1.pen_ch.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
@@ -1150,12 +1150,12 @@ namespace Skydat.forms2065
 
                 }
             }
+
             if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
             {
-                
+
                 while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
                 {
-                    
 
                     if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
                     {
@@ -1180,29 +1180,10 @@ namespace Skydat.forms2065
                     //Settxtfill_func(2, $"counter:{counter}", 2, 1);
                     // serialPort2.WriteLine("step");
                     number = serialPort2.BytesToRead;
-                    Setbtnenabled(true, 1, 2);
+                    //Setbtnenabled(true, 1, 2);
 
                     if (number >= 0)
                     {
-                        double pos = 0;
-                        double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
-                        OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-                        OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-                        //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                        //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
-                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-                        OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
-
-                        //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
-                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                        //pos =+ 5;
-                        if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
-                        {
-                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
-                        }
-
-                        OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
-
                         try
                         {
                             //Settxtfill_func(2, $"counter1", 2, 1);
@@ -1215,6 +1196,24 @@ namespace Skydat.forms2065
 
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
                                 {
+                                    double pos = 0;
+                                    double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                                    OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+                                    OnlineChart.ChartAreas[0].AxisY.Title = dschart1.chartlist1_run.Rows[row][15].ToString();
+                                    //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                                    //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
+                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+                                    //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+                                    //pos =+ 5;
+                                    if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+                                    {
+                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+                                    }
+                                    OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
                                     if (string1.Contains("end14"))
                                     {
                                         end = 1;
@@ -1238,9 +1237,96 @@ namespace Skydat.forms2065
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
+
                                     }
                                 }
 
+                                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+                                {
+                                    if (string1.Contains("end11"))
+                                    {
+                                        end = 1;
+                                        number = 0;
+                                        Settxtfill_func(2, "end", 2, 1);
+                                    }
+                                    else
+                                    {
+
+                                        strings = string1.Split('@');
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
+                                        oinp3 = (byte)Int32.Parse(strings[1]);
+                                        oinp1 = (byte)Int32.Parse(strings[2]);
+                                        oinp2 = (byte)Int32.Parse(strings[3]);
+                                        counter = (int)Int32.Parse(strings[4]);
+                                        //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+                                        // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+                                        // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                        counter++;
+                                        sign = 1;
+                                        number = 0;
+                                        flag_running = true;
+
+                                    }
+                                }
+
+                                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
+                                {
+                                    if (string1.Contains("end12"))
+                                    {
+                                        end = 1;
+                                        number = 0;
+                                        Settxtfill_func(2, "end", 2, 1);
+                                    }
+                                    else
+                                    {
+
+                                        strings = string1.Split('@');
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
+                                        oinp3 = (byte)Int32.Parse(strings[1]);
+                                        oinp1 = (byte)Int32.Parse(strings[2]);
+                                        oinp2 = (byte)Int32.Parse(strings[3]);
+                                        //counter = (int)Int32.Parse(strings[4]);
+                                        //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                        counter++;
+                                        sign = 1;
+                                        number = 0;
+                                        flag_running = true;
+
+                                    }
+                                }
+
+                                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
+                                {
+                                    if (string1.Contains("end15"))
+                                    {
+                                        end = 1;
+                                        number = 0;
+                                        Settxtfill_func(2, "end", 2, 1);
+                                    }
+                                    else
+                                    {
+
+                                        strings = string1.Split('@');
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
+                                        oinp3 = (byte)Int32.Parse(strings[1]);
+                                        oinp1 = (byte)Int32.Parse(strings[2]);
+                                        oinp2 = (byte)Int32.Parse(strings[3]);
+                                        //counter = (int)Int32.Parse(strings[4]);
+                                        //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                        counter++;
+                                        sign = 1;
+                                        number = 0;
+                                        flag_running = true;
+
+                                    }
+                                }
                                 if (outc == 0x60) //اگر pause بود 
                                 {
                                     outc_b = 0x60;
@@ -1264,6 +1350,7 @@ namespace Skydat.forms2065
                                         Array.Resize(ref datas2_state, datas2_state.Length + 100);
                                         for (int l = shomarchpa; l < datas2_state.Length; l++)
                                             datas2_state[l] = 2;
+
                                     }
                                     sign = 0;
                                     datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
@@ -1274,16 +1361,15 @@ namespace Skydat.forms2065
                                     watch.Start();
                                     shomarchpa++;
                                 }
+
                             }
+
                         }
                         catch
                         {
 
                         }
                     }
-
-
-
 
                     if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
                     {
@@ -1309,6 +1395,171 @@ namespace Skydat.forms2065
                     }
                 }
             }
+
+
+
+
+
+
+            //if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
+            //{
+
+            //    while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+            //    {
+
+
+            //        if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
+            //        {
+            //            runerror = true;
+            //            watch.Stop();
+            //            staterun = "";
+            //            break;
+            //        }
+            //        if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
+            //        {
+            //            while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+            //            watch.Stop();
+            //            watch.Reset();
+            //        }
+            //        else
+            //        {
+            //            while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+            //            watch.Stop();
+            //            watch.Reset();
+            //        }
+            //        counter++;
+            //        //Settxtfill_func(2, $"counter:{counter}", 2, 1);
+            //        // serialPort2.WriteLine("step");
+            //        number = serialPort2.BytesToRead;
+            //        Setbtnenabled(true, 1, 2);
+
+            //        if (number >= 0)
+            //        {
+            //            double pos = 0;
+            //            double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+            //            OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+            //            //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+            //            //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
+            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+            //            //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+            //            //pos =+ 5;
+            //            if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+            //            {
+            //                OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+            //            }
+
+            //            OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
+
+            //            try
+            //            {
+            //                //Settxtfill_func(2, $"counter1", 2, 1);
+            //                string1 = serialPort2.ReadLine();
+
+
+            //                //string1.Remove(string1.Length-1);
+            //                if (sign == 0)
+            //                {
+
+            //                    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
+            //                    {
+            //                        if (string1.Contains("end14"))
+            //                        {
+            //                            end = 1;
+            //                            number = 0;
+            //                            Settxtfill_func(2, "end", 2, 1);
+            //                        }
+            //                        else
+            //                        {
+            //                            //Settxtfill_func(2, $"counter2", 2, 1);
+            //                            strings = string1.Split('@');
+            //                            //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
+            //                            oinp3 = 6;
+            //                            oinp1 = (byte)Int32.Parse(strings[2]);
+            //                            oinp2 = (byte)Int32.Parse(strings[3]);
+            //                            //counter = (int)Int32.Parse(strings[4]);
+            //                            //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+            //                            //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
+            //                            //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
+            //                            //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+            //                            counter++;
+            //                            sign = 1;
+            //                            number = 0;
+            //                            flag_running = true;
+            //                        }
+            //                    }
+
+            //                    if (outc == 0x60) //اگر pause بود 
+            //                    {
+            //                        outc_b = 0x60;
+            //                        watch.Start();
+            //                        continue;
+            //                    }
+            //                    if (outc == 0x20 && outc_b == 0x60)//
+            //                    {
+            //                        outc_b = 0x20;
+            //                        watch.Start();
+            //                        continue;
+            //                    }
+
+            //                    if ((byte)(oinp3 & 0x0f) <= 7)
+            //                    {
+            //                        if (shomarchpa >= datas2_state.Length)
+            //                        {
+            //                            Array.Resize(ref datas2_2, datas2_state.Length + 100);
+            //                            Array.Resize(ref datas2_0, datas2_state.Length + 100);
+            //                            Array.Resize(ref datas2_1, datas2_state.Length + 100);
+            //                            Array.Resize(ref datas2_state, datas2_state.Length + 100);
+            //                            for (int l = shomarchpa; l < datas2_state.Length; l++)
+            //                                datas2_state[l] = 2;
+            //                        }
+            //                        sign = 0;
+            //                        datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
+            //                        datas2_0[shomarchpa] = (byte)oinp1;//read porta
+            //                        datas2_1[shomarchpa] = (byte)oinp2;//read portb
+            //                        datas2_state[shomarchpa] = 0;
+            //                        showdata(row);
+            //                        watch.Start();
+            //                        shomarchpa++;
+            //                    }
+            //                }
+            //            }
+            //            catch
+            //            {
+
+            //            }
+            //        }
+
+
+
+
+            //        if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+            //        {
+            //            int poi = 1;
+            //            end = 0;
+            //            serialPort2.Write("stop");
+            //            System.Threading.Thread.Sleep(100);
+            //            serialPort2.Close();
+
+            //            //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
+            //            watch.Start();
+            //            while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
+            //            watch.Stop();
+            //            watch.Reset();
+
+            //            // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
+            //            Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
+            //            System.Threading.Thread.Sleep(100);
+            //            usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
+            //            usb_fun.ClosePipes();
+            //            detect_Error = false;
+            //            return;
+            //        }
+            //    }
+            //}
         }
 
         unsafe private void doRun2(int row)
@@ -2023,7 +2274,7 @@ namespace Skydat.forms2065
             byte* InBuff = &num2;
             string string1;
             byte end = 0;
-            int counter = 0, number = 0, number2 = 0;
+            float counter = 0, number = 0, number2 = 0;
             double volt = 0;
 
             double pos = 0;
@@ -2125,7 +2376,7 @@ namespace Skydat.forms2065
                                     volt = double.Parse(strings[1]);
                                     datas[0] = (byte)Int32.Parse(strings[2]);
                                     datas[1] = (byte)Int32.Parse(strings[3]);
-                                    counter = (int)Int32.Parse(strings[4]);
+                                    counter = float.Parse(strings[4]);
                                     volt1 = (int)Int32.Parse(strings[5]);
                                     Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
                                     //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
@@ -2176,10 +2427,10 @@ namespace Skydat.forms2065
                 if (sign == 1)
                 {
 
-                    Vold = counter+0.1*i;
+                    Vold = counter;
                     //Vold = counter;
                     I1 = volt1;
-                    //Settxtfill_func(2, $"vold2{Vold}", 2, 1);
+                    Settxtfill_func(2, $"vold2{Vold}", 2, 1);
                     Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
                     //Settxtfill_func(2, $"2={Vold}:{I1}:{I2} ", 2, 1);
                     sign = 0;
@@ -3454,6 +3705,7 @@ namespace Skydat.forms2065
                     {
                         OnlineChart.Titles.Clear();
                         OnlineChart.Titles.Add("t1");
+                        OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
                     }
                     break;
                 case 2:
