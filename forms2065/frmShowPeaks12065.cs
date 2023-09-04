@@ -17,7 +17,7 @@ namespace Skydat.forms2065
             InitializeComponent();
         }
         public frmOption12065 Foption;
-        public frmMain12065 fm;
+        public frmMain2065 fm;
         clasPeak cPeak = new clasPeak();
         clasMain mc = new clasMain();
 

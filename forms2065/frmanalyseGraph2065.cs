@@ -123,7 +123,7 @@ namespace Skydat.forms2065
         public byte tech = 0;
         public int grfNo = 0, nindexchart2 = 0;
         public frmselecttech2065 sf;
-        public frmMain12065 mainf;
+        public frmMain2065 mainf;
         public frmOption12065 opForm;
         public clasMain mc = new clasMain();
         public clasPeak cPeak = new clasPeak();
