@@ -84,7 +84,6 @@ namespace Skydat.forms2065
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-         
             if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
             {
                 this.Cursor = Cursors.Default;
@@ -92,11 +91,10 @@ namespace Skydat.forms2065
                 return;
             }
 
-            frmMain12065 frm = new frmMain12065();
+            frmMain2065 frm = new frmMain2065();
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
-            this.Cursor = Cursors.Default;
         }
 
        

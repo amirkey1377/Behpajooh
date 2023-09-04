@@ -348,8 +348,6 @@ namespace Skydat.forms2080
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
         public System.IO.Ports.SerialPort sp1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn xDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbstop;
         private System.Windows.Forms.ToolStripButton tsbshowd;

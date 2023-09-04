@@ -15,7 +15,7 @@ namespace Skydat.forms2065
         {
             InitializeComponent();
         }
-        public frmMain12065 mf;
+        public frmMain2065 mf;
 
         private void button5_Click(object sender, EventArgs e)
         {

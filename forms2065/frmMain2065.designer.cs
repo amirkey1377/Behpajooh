@@ -1,6 +1,6 @@
 namespace Skydat.forms2065
 {
-    partial class frmMain12065
+    partial class frmMain2065
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace Skydat.forms2065
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain12065));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain2065));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsocpTime = new System.Windows.Forms.ToolStripStatusLabel();
@@ -291,7 +291,7 @@ namespace Skydat.forms2065
             this.panel5.Size = new System.Drawing.Size(890, 655);
             this.panel5.TabIndex = 1;
             // 
-            // frmMain12065
+            // frmMain2065
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -306,7 +306,7 @@ namespace Skydat.forms2065
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.KeyPreview = true;
-            this.Name = "frmMain12065";
+            this.Name = "frmMain2065";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PGC 2066";
             this.TransparencyKey = System.Drawing.Color.White;
