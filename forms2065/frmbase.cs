@@ -49,15 +49,11 @@ namespace Skydat.forms2065
 
         private void frmbase_Load(object sender, EventArgs e)
         {
-            //if (Skydat.Properties.Settings.Default.backimg.Trim() != "")
-            //    this.BackgroundImage = GetImage(Skydat.Properties.Settings.Default.backimg);
-
-            //pictureBox1.Controls.Add(label1);
-            //label1.Location = new Point(10, ((this.Height - 100) - 80));
-            //label1.BackColor = Color.Transparent;
-
-
-            try  {   pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); }catch { }
+            try  
+            {   
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); 
+            }
+            catch { }
         }
         public Image GetImage(string value)
         {
@@ -173,6 +169,11 @@ namespace Skydat.forms2065
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             Process.Start("chrome.exe", "https://behpajooh.net/");
+        }
+
+        private void toolStripLabel12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
