@@ -212,6 +212,7 @@ namespace Skydat.forms2065
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
             series1.Name = "Series1";
             this.OnlineChart.Series.Add(series1);
+            this.OnlineChart.Click += new System.EventHandler(this.OnlineChart_Click);
             this.OnlineChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseMove);
             this.OnlineChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseUp);
             // 

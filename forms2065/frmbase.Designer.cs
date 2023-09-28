@@ -237,6 +237,7 @@
             // 
             // toolStripButton5
             // 
+            this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton5.AutoSize = false;
             this.toolStripButton5.BackColor = System.Drawing.Color.White;
             this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -247,6 +248,7 @@
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStripButton5.Size = new System.Drawing.Size(150, 95);
             this.toolStripButton5.Text = "Technical Support";
             this.toolStripButton5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
