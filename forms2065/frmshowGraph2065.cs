@@ -419,12 +419,14 @@ namespace Skydat.forms2065
             catch (Exception ex) { errors_cls err = new errors_cls(ex, txtcomment, 2); }
         }
 
+
         unsafe private void doRun2_1(int row)
         {
             byte num1, num2;
+            uint RecvLength = 3;
             byte* OutBuff = &num1;
             byte* InBuff = &num2;
-            byte oinp1 = 0, oinp2 = 0, oinp3 = 0;
+            byte oinp1 = 0, oinp2 = 0, oinp3 = 0, oinp4 = 0;
             byte[] data = new byte[65520];
             byte[] Powr = new Byte[32710];//توان
             double[] Crnt = new double[32710];//جریان
@@ -433,21 +435,26 @@ namespace Skydat.forms2065
             double[] Crn = new double[32710];
             Boolean[] signe = new Boolean[32710];
 
+
             int number = 0, number2 = 0, sign = 0, end = 0, counter = 0;
             string string1;
             string[] strings = new string[4];
+            int i = 0;
             flag_running = true;
             shomarchpa = 0;
-            System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));//  گرفتن زمان تعادل و بخواب بردن دستگاه
+            System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));   //  گرفتن زمان تعادل و بخواب بردن دستگاه
+
             serialPort2.ReadTimeout = 5000;
             serialPort2.DiscardInBuffer();
             var watch = System.Diagnostics.Stopwatch.StartNew();// ایجاد کردن تایمر
 
-            //OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-
-            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
+            this.Invoke((MethodInvoker)delegate ()
             {
+                OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+            });
 
+            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+            {
                 while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
                 {
 
@@ -473,9 +480,9 @@ namespace Skydat.forms2065
                     counter++;
                     //Settxtfill_func(2, $"counter:{counter}", 2, 1);
                     // serialPort2.WriteLine("step");
+                    Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
                     number = serialPort2.BytesToRead;
                     Setbtnenabled(true, 1, 2);
-
                     if (number >= 0)
                     {
                         try
@@ -484,56 +491,10 @@ namespace Skydat.forms2065
                             string1 = serialPort2.ReadLine();
 
 
-                            //DataReceived.Remove(DataReceived.Length-1);
+                            //string1.Remove(string1.Length-1);
                             if (sign == 0)
                             {
 
-                                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
-                                {
-                                    double pos = 0;
-                                    double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-                                    OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-                                    OnlineChart.ChartAreas[0].AxisY.Title = dschart1.chartlist1_run.Rows[row][15].ToString();
-                                    //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                                    //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
-
-                                    //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                                    //pos =+ 5;
-                                    if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
-                                    {
-                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
-                                    }
-                                    OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
-                                    if (string1.Contains("end10"))
-                                    {
-                                        end = 1;
-                                        number = 0;
-                                        Settxtfill_func(2, "end", 2, 1);
-                                    }
-                                    else
-                                    {
-                                        //Settxtfill_func(2, $"counter2", 2, 1);
-                                        strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
-                                        oinp3 = 6;
-                                        oinp1 = (byte)Int32.Parse(strings[2]);
-                                        oinp2 = (byte)Int32.Parse(strings[3]);
-                                        //counter = (int)Int32.Parse(strings[4]);
-                                        //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
-                                        counter++;
-                                        sign = 1;
-                                        number = 0;
-                                        flag_running = true;
-
-                                    }
-                                }
 
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
                                 {
@@ -547,15 +508,15 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
                                         //counter = (int)Int32.Parse(strings[4]);
-                                        //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
-                                        // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
-                                        // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                        Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+                                        Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+                                        Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+                                        Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
                                         number2 = 0;
                                         sign = 1;
@@ -564,7 +525,6 @@ namespace Skydat.forms2065
 
                                     }
                                 }
-
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
                                 {
                                     if (string1.Contains("end12"))
@@ -577,7 +537,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -595,6 +555,8 @@ namespace Skydat.forms2065
                                     }
                                 }
 
+
+
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
                                 {
                                     if (string1.Contains("end15"))
@@ -607,7 +569,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -666,10 +628,17 @@ namespace Skydat.forms2065
                         {
 
                         }
+
+
+
                     }
+
+
+
 
                     if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
                     {
+                        byte inpt = 0;
                         int poi = 1;
                         end = 0;
                         serialPort2.Write("stop");
@@ -685,16 +654,26 @@ namespace Skydat.forms2065
                         // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
                         Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
                         System.Threading.Thread.Sleep(100);
+
+
                         usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
                         usb_fun.ClosePipes();
                         detect_Error = false;
                         return;
                     }
+
+
                 }
+
+
+
+
+
             }
-            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
             {
-                while (shomarchpa * ti < Analiz_T3 * 50 && outc != 0xA0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+
+                while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
                 {
 
                     if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
@@ -720,7 +699,7 @@ namespace Skydat.forms2065
                     //Settxtfill_func(2, $"counter:{counter}", 2, 1);
                     // serialPort2.WriteLine("step");
                     number = serialPort2.BytesToRead;
-                    ////////////////////////////////////////////////Setbtnenabled(true, 1, 2);
+                    Setbtnenabled(true, 1, 2);
                     if (number >= 0)
                     {
                         try
@@ -729,12 +708,37 @@ namespace Skydat.forms2065
                             string1 = serialPort2.ReadLine();
 
 
-                            //DataReceived.Remove(DataReceived.Length-1);
+                            //string1.Remove(string1.Length-1);
                             if (sign == 0)
                             {
 
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
                                 {
+                                    this.Invoke((MethodInvoker)delegate ()
+                                    {
+                                        double pos = 0;
+                                        double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                                        OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+                                        OnlineChart.ChartAreas[0].AxisY.Title = "V(mv)";
+                                        //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                                        //OnlineChart.ChartAreas[0].AxisX.Maximum = tChart1.ChartAreas[0].AxisX.Maximum;
+                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+                                        //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+                                        //pos =+ 5;
+                                        if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+                                        {
+                                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+                                        }
+
+
+                                        OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
+                                    });
+                                    
+
                                     if (string1.Contains("end10"))
                                     {
                                         end = 1;
@@ -745,16 +749,13 @@ namespace Skydat.forms2065
                                     {
                                         //Settxtfill_func(2, $"counter2", 2, 1);
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = 6;
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
-                                        //counter = (int)Int32.Parse(strings[4]);
-                                        //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
-                                        //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -774,16 +775,17 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
-                                        //counter = (int)Int32.Parse(strings[4]);
+                                        counter = (int)Int32.Parse(strings[4]);
                                         //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
                                         // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
                                         // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -802,7 +804,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -812,6 +814,7 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -833,7 +836,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -843,6 +846,7 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -887,13 +891,21 @@ namespace Skydat.forms2065
                             }
 
                         }
-                        catch (Exception Msg)
+                        catch
                         {
-                            MessageBox.Show(Msg.Message);
+
                         }
+
+
+
                     }
-                    if (shomarchpa * ti >= (Analiz_T3 * 50) || outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+
+
+
+
+                    if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
                     {
+                        byte inpt = 0;
                         int poi = 1;
                         end = 0;
                         serialPort2.Write("stop");
@@ -909,14 +921,19 @@ namespace Skydat.forms2065
                         // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
                         Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
                         System.Threading.Thread.Sleep(100);
-
-
                         usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
                         usb_fun.ClosePipes();
                         detect_Error = false;
                         return;
                     }
+
+
                 }
+
+
+
+
+
             }
             if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
             {
@@ -957,7 +974,7 @@ namespace Skydat.forms2065
                             string1 = serialPort2.ReadLine();
 
 
-                            //DataReceived.Remove(DataReceived.Length-1);
+                            //string1.Remove(string1.Length-1);
                             if (sign == 0)
                             {
 
@@ -973,7 +990,7 @@ namespace Skydat.forms2065
                                     {
                                         //Settxtfill_func(2, $"counter2", 2, 1);
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = 6;
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -983,6 +1000,7 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -1002,7 +1020,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -1012,6 +1030,7 @@ namespace Skydat.forms2065
                                         // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -1030,7 +1049,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -1040,6 +1059,7 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -1061,7 +1081,7 @@ namespace Skydat.forms2065
                                     {
 
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -1071,6 +1091,7 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
@@ -1119,6 +1140,9 @@ namespace Skydat.forms2065
                         {
 
                         }
+
+
+
                     }
 
 
@@ -1126,6 +1150,7 @@ namespace Skydat.forms2065
 
                     if (shomarchpa * ti >= (Analiz_T3) || outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
                     {
+                        byte inpt = 0;
                         int poi = 1;
                         end = 0;
                         serialPort2.Write("stop");
@@ -1152,9 +1177,33 @@ namespace Skydat.forms2065
 
                 }
             }
-
             if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
             {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    double pos = 0;
+                    double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+                    OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+                    OnlineChart.ChartAreas[0].AxisY.Title = "Potenial(mV)";
+                    //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                    //OnlineChart.ChartAreas[0].AxisX.Maximum = tChart1.ChartAreas[0].AxisX.Maximum;
+                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                    OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+                    //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+                    //pos =+ 5;
+                    if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+                    {
+                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+                    }
+
+
+                    OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
+                    //OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.Position + 5 ;
+                    //OnlineChart.ChartAreas[0].RecalculateAxesScale();
+
+                });
 
                 while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
                 {
@@ -1182,8 +1231,7 @@ namespace Skydat.forms2065
                     //Settxtfill_func(2, $"counter:{counter}", 2, 1);
                     // serialPort2.WriteLine("step");
                     number = serialPort2.BytesToRead;
-                    //Setbtnenabled(true, 1, 2);
-
+                    Setbtnenabled(true, 1, 2);
                     if (number >= 0)
                     {
                         try
@@ -1192,30 +1240,12 @@ namespace Skydat.forms2065
                             string1 = serialPort2.ReadLine();
 
 
-                            //DataReceived.Remove(DataReceived.Length-1);
+                            //string1.Remove(string1.Length-1);
                             if (sign == 0)
                             {
 
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
                                 {
-                                    double pos = 0;
-                                    double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-                                    OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-                                    OnlineChart.ChartAreas[0].AxisY.Title = dschart1.chartlist1_run.Rows[row][15].ToString();
-                                    //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                                    //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
-
-                                    //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
-                                    OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                                    //pos =+ 5;
-                                    if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
-                                    {
-                                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
-                                    }
-                                    OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
                                     if (string1.Contains("end14"))
                                     {
                                         end = 1;
@@ -1226,7 +1256,7 @@ namespace Skydat.forms2065
                                     {
                                         //Settxtfill_func(2, $"counter2", 2, 1);
                                         strings = string1.Split('@');
-                                        //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+                                        //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = 6;
                                         oinp1 = (byte)Int32.Parse(strings[2]);
                                         oinp2 = (byte)Int32.Parse(strings[3]);
@@ -1236,13 +1266,12 @@ namespace Skydat.forms2065
                                         //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
                                         //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                         counter++;
+                                        number2 = 0;
                                         sign = 1;
                                         number = 0;
                                         flag_running = true;
-
                                     }
                                 }
-
 
                                 if (outc == 0x60) //اگر pause بود 
                                 {
@@ -1277,15 +1306,16 @@ namespace Skydat.forms2065
                                     watch.Start();
                                     shomarchpa++;
                                 }
-
                             }
-
                         }
                         catch
                         {
 
                         }
                     }
+
+
+
 
                     if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
                     {
@@ -1312,172 +1342,903 @@ namespace Skydat.forms2065
                     }
                 }
             }
-
-
-
-
-
-
-            //if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
-            //{
-
-            //    while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
-            //    {
-
-
-            //        if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
-            //        {
-            //            runerror = true;
-            //            watch.Stop();
-            //            staterun = "";
-            //            break;
-            //        }
-            //        if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
-            //        {
-            //            while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
-            //            watch.Stop();
-            //            watch.Reset();
-            //        }
-            //        else
-            //        {
-            //            while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
-            //            watch.Stop();
-            //            watch.Reset();
-            //        }
-            //        counter++;
-            //        //Settxtfill_func(2, $"counter:{counter}", 2, 1);
-            //        // serialPort2.WriteLine("step");
-            //        number = serialPort2.BytesToRead;
-            //        Setbtnenabled(true, 1, 2);
-
-            //        if (number >= 0)
-            //        {
-            //            double pos = 0;
-            //            double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
-            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-            //            OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
-            //            //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-            //            //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
-            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
-
-            //            //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
-            //            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-            //            //pos =+ 5;
-            //            if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
-            //            {
-            //                OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
-            //            }
-
-            //            OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
-
-            //            try
-            //            {
-            //                //Settxtfill_func(2, $"counter1", 2, 1);
-            //                DataReceived = serialPort2.ReadLine();
-
-
-            //                //DataReceived.Remove(DataReceived.Length-1);
-            //                if (sign == 0)
-            //                {
-
-            //                    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
-            //                    {
-            //                        if (DataReceived.Contains("end14"))
-            //                        {
-            //                            end = 1;
-            //                            number = 0;
-            //                            Settxtfill_func(2, "end", 2, 1);
-            //                        }
-            //                        else
-            //                        {
-            //                            //Settxtfill_func(2, $"counter2", 2, 1);
-            //                            strings = DataReceived.Split('@');
-            //                            //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
-            //                            oinp3 = 6;
-            //                            oinp1 = (byte)Int32.Parse(strings[2]);
-            //                            oinp2 = (byte)Int32.Parse(strings[3]);
-            //                            //counter = (int)Int32.Parse(strings[4]);
-            //                            //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
-            //                            //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
-            //                            //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
-            //                            //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
-            //                            counter++;
-            //                            sign = 1;
-            //                            number = 0;
-            //                            flag_running = true;
-            //                        }
-            //                    }
-
-            //                    if (outc == 0x60) //اگر pause بود 
-            //                    {
-            //                        outc_b = 0x60;
-            //                        watch.Start();
-            //                        continue;
-            //                    }
-            //                    if (outc == 0x20 && outc_b == 0x60)//
-            //                    {
-            //                        outc_b = 0x20;
-            //                        watch.Start();
-            //                        continue;
-            //                    }
-
-            //                    if ((byte)(oinp3 & 0x0f) <= 7)
-            //                    {
-            //                        if (shomarchpa >= datas2_state.Length)
-            //                        {
-            //                            Array.Resize(ref datas2_2, datas2_state.Length + 100);
-            //                            Array.Resize(ref datas2_0, datas2_state.Length + 100);
-            //                            Array.Resize(ref datas2_1, datas2_state.Length + 100);
-            //                            Array.Resize(ref datas2_state, datas2_state.Length + 100);
-            //                            for (int l = shomarchpa; l < datas2_state.Length; l++)
-            //                                datas2_state[l] = 2;
-            //                        }
-            //                        sign = 0;
-            //                        datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
-            //                        datas2_0[shomarchpa] = (byte)oinp1;//read porta
-            //                        datas2_1[shomarchpa] = (byte)oinp2;//read portb
-            //                        datas2_state[shomarchpa] = 0;
-            //                        showdata(row);
-            //                        watch.Start();
-            //                        shomarchpa++;
-            //                    }
-            //                }
-            //            }
-            //            catch
-            //            {
-
-            //            }
-            //        }
-
-
-
-
-            //        if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
-            //        {
-            //            int poi = 1;
-            //            end = 0;
-            //            serialPort2.Write("stop");
-            //            System.Threading.Thread.Sleep(100);
-            //            serialPort2.Close();
-
-            //            //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
-            //            watch.Start();
-            //            while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
-            //            watch.Stop();
-            //            watch.Reset();
-
-            //            // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
-            //            Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
-            //            System.Threading.Thread.Sleep(100);
-            //            usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
-            //            usb_fun.ClosePipes();
-            //            detect_Error = false;
-            //            return;
-            //        }
-            //    }
-            //}
         }
+
+        //unsafe private void doRun2_1(int row)
+        //{
+        //    byte num1, num2;
+        //    byte* OutBuff = &num1;
+        //    byte* InBuff = &num2;
+        //    byte oinp1 = 0, oinp2 = 0, oinp3 = 0;
+        //    byte[] data = new byte[65520];
+        //    byte[] Powr = new Byte[32710];//توان
+        //    double[] Crnt = new double[32710];//جریان
+        //    double[] C = new double[32710];//بار خازنی
+        //    byte[] Po = new Byte[32710];
+        //    double[] Crn = new double[32710];
+        //    Boolean[] signe = new Boolean[32710];
+
+        //    int number = 0, number2 = 0, sign = 0, end = 0, counter = 0;
+        //    string string1;
+        //    string[] strings = new string[4];
+        //    flag_running = true;
+        //    shomarchpa = 0;
+        //    System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));//  گرفتن زمان تعادل و بخواب بردن دستگاه
+        //    serialPort2.ReadTimeout = 5000;
+        //    serialPort2.DiscardInBuffer();
+        //    var watch = System.Diagnostics.Stopwatch.StartNew();// ایجاد کردن تایمر
+
+        //    //OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+
+        //    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
+        //    {
+
+        //        while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+        //        {
+
+        //            if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
+        //            {
+        //                runerror = true;
+        //                watch.Stop();
+        //                staterun = "";
+        //                break;
+        //            }
+        //            if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            else
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            counter++;
+        //            //Settxtfill_func(2, $"counter:{counter}", 2, 1);
+        //            // serialPort2.WriteLine("step");
+        //            number = serialPort2.BytesToRead;
+        //            Setbtnenabled(true, 1, 2);
+
+        //            if (number >= 0)
+        //            {
+        //                try
+        //                {
+        //                    //Settxtfill_func(2, $"counter1", 2, 1);
+        //                    string1 = serialPort2.ReadLine();
+
+
+        //                    //DataReceived.Remove(DataReceived.Length-1);
+        //                    if (sign == 0)
+        //                    {
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
+        //                        {
+        //                            double pos = 0;
+        //                            double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+        //                            OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+        //                            OnlineChart.ChartAreas[0].AxisY.Title = dschart1.chartlist1_run.Rows[row][15].ToString();
+        //                            //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+        //                            //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+        //                            //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+        //                            //pos =+ 5;
+        //                            if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+        //                            {
+        //                                OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+        //                            }
+        //                            OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
+        //                            if (string1.Contains("end10"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+        //                                //Settxtfill_func(2, $"counter2", 2, 1);
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = 6;
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+        //                        {
+        //                            if (string1.Contains("end11"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                number2 = 0;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
+        //                        {
+        //                            if (string1.Contains("end12"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                number2 = 0;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
+        //                        {
+        //                            if (string1.Contains("end15"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                number2 = 0;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+        //                        if (outc == 0x60) //اگر pause بود 
+        //                        {
+        //                            outc_b = 0x60;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+        //                        if (outc == 0x20 && outc_b == 0x60)//
+        //                        {
+        //                            outc_b = 0x20;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+
+        //                        if ((byte)(oinp3 & 0x0f) <= 7)
+        //                        {
+        //                            if (shomarchpa >= datas2_state.Length)
+        //                            {
+        //                                Array.Resize(ref datas2_2, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_0, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_1, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_state, datas2_state.Length + 100);
+        //                                for (int l = shomarchpa; l < datas2_state.Length; l++)
+        //                                    datas2_state[l] = 2;
+
+        //                            }
+        //                            sign = 0;
+        //                            datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
+        //                            datas2_0[shomarchpa] = (byte)oinp1;//read porta
+        //                            datas2_1[shomarchpa] = (byte)oinp2;//read portb
+        //                            datas2_state[shomarchpa] = 0;
+        //                            showdata(row);
+        //                            watch.Start();
+        //                            shomarchpa++;
+        //                        }
+
+        //                    }
+
+        //                }
+        //                catch
+        //                {
+
+        //                }
+        //            }
+
+        //            if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+        //            {
+        //                int poi = 1;
+        //                end = 0;
+        //                serialPort2.Write("stop");
+        //                System.Threading.Thread.Sleep(100);
+        //                serialPort2.Close();
+
+        //                //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
+        //                watch.Start();
+        //                while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
+        //                watch.Stop();
+        //                watch.Reset();
+
+        //                // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
+        //                Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
+        //                System.Threading.Thread.Sleep(100);
+        //                usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
+        //                usb_fun.ClosePipes();
+        //                detect_Error = false;
+        //                return;
+        //            }
+        //        }
+        //    }
+        //    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+        //    {
+        //        while (shomarchpa * ti < Analiz_T3 * 50 && outc != 0xA0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+        //        {
+
+        //            if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
+        //            {
+        //                runerror = true;
+        //                watch.Stop();
+        //                staterun = "";
+        //                break;
+        //            }
+        //            if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            else
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            counter++;
+        //            //Settxtfill_func(2, $"counter:{counter}", 2, 1);
+        //            // serialPort2.WriteLine("step");
+        //            number = serialPort2.BytesToRead;
+        //            ////////////////////////////////////////////////Setbtnenabled(true, 1, 2);
+        //            if (number >= 0)
+        //            {
+        //                try
+        //                {
+        //                    //Settxtfill_func(2, $"counter1", 2, 1);
+        //                    string1 = serialPort2.ReadLine();
+
+
+        //                    //DataReceived.Remove(DataReceived.Length-1);
+        //                    if (sign == 0)
+        //                    {
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
+        //                        {
+        //                            if (string1.Contains("end10"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+        //                                //Settxtfill_func(2, $"counter2", 2, 1);
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = 6;
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+        //                        {
+        //                            if (string1.Contains("end11"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
+        //                        {
+        //                            if (string1.Contains("end12"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
+        //                        {
+        //                            if (string1.Contains("end15"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+        //                        if (outc == 0x60) //اگر pause بود 
+        //                        {
+        //                            outc_b = 0x60;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+        //                        if (outc == 0x20 && outc_b == 0x60)//
+        //                        {
+        //                            outc_b = 0x20;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+
+        //                        if ((byte)(oinp3 & 0x0f) <= 7)
+        //                        {
+        //                            if (shomarchpa >= datas2_state.Length)
+        //                            {
+        //                                Array.Resize(ref datas2_2, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_0, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_1, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_state, datas2_state.Length + 100);
+        //                                for (int l = shomarchpa; l < datas2_state.Length; l++)
+        //                                    datas2_state[l] = 2;
+
+        //                            }
+        //                            sign = 0;
+        //                            datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
+        //                            datas2_0[shomarchpa] = (byte)oinp1;//read porta
+        //                            datas2_1[shomarchpa] = (byte)oinp2;//read portb
+        //                            datas2_state[shomarchpa] = 0;
+        //                            showdata(row);
+        //                            watch.Start();
+        //                            shomarchpa++;
+        //                        }
+
+        //                    }
+
+        //                }
+        //                catch (Exception Msg)
+        //                {
+        //                    MessageBox.Show(Msg.Message);
+        //                }
+        //            }
+        //            if (shomarchpa * ti >= (Analiz_T3 * 50) || outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+        //            {
+        //                int poi = 1;
+        //                end = 0;
+        //                serialPort2.Write("stop");
+        //                System.Threading.Thread.Sleep(100);
+        //                serialPort2.Close();
+
+        //                //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
+        //                watch.Start();
+        //                while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
+        //                watch.Stop();
+        //                watch.Reset();
+
+        //                // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
+        //                Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
+        //                System.Threading.Thread.Sleep(100);
+
+
+        //                usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
+        //                usb_fun.ClosePipes();
+        //                detect_Error = false;
+        //                return;
+        //            }
+        //        }
+        //    }
+        //    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
+        //    {
+        //        while (shomarchpa * ti < Analiz_T3 && outc != 0xA0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+        //        {
+
+
+
+        //            if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
+        //            {
+        //                runerror = true;
+        //                watch.Stop();
+        //                staterun = "";
+        //                break;
+        //            }
+        //            if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            else
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            counter++;
+        //            //Settxtfill_func(2, $"counter:{counter}", 2, 1);
+        //            // serialPort2.WriteLine("step");
+        //            number = serialPort2.BytesToRead;
+        //            Setbtnenabled(true, 1, 2);
+        //            if (number >= 0)
+        //            {
+        //                try
+        //                {
+        //                    //Settxtfill_func(2, $"counter1", 2, 1);
+        //                    string1 = serialPort2.ReadLine();
+
+
+        //                    //DataReceived.Remove(DataReceived.Length-1);
+        //                    if (sign == 0)
+        //                    {
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
+        //                        {
+        //                            if (string1.Contains("end10"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+        //                                //Settxtfill_func(2, $"counter2", 2, 1);
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = 6;
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
+        //                        {
+        //                            if (string1.Contains("end11"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                counter = (int)Int32.Parse(strings[4]);
+        //                                //  Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                // Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
+        //                        {
+        //                            if (string1.Contains("end12"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
+        //                        {
+        //                            if (string1.Contains("end15"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = (byte)Int32.Parse(strings[1]);
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+        //                        if (outc == 0x60) //اگر pause بود 
+        //                        {
+        //                            outc_b = 0x60;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+        //                        if (outc == 0x20 && outc_b == 0x60)//
+        //                        {
+        //                            outc_b = 0x20;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+
+        //                        if ((byte)(oinp3 & 0x0f) <= 7)
+        //                        {
+        //                            if (shomarchpa >= datas2_state.Length)
+        //                            {
+        //                                Array.Resize(ref datas2_2, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_0, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_1, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_state, datas2_state.Length + 100);
+        //                                for (int l = shomarchpa; l < datas2_state.Length; l++)
+        //                                    datas2_state[l] = 2;
+
+        //                            }
+        //                            sign = 0;
+        //                            datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
+        //                            datas2_0[shomarchpa] = (byte)oinp1;//read porta
+        //                            datas2_1[shomarchpa] = (byte)oinp2;//read portb
+        //                            datas2_state[shomarchpa] = 0;
+        //                            showdata(row);
+        //                            watch.Start();
+        //                            shomarchpa++;
+        //                        }
+
+        //                    }
+
+        //                }
+        //                catch
+        //                {
+
+        //                }
+        //            }
+
+
+
+
+        //            if (shomarchpa * ti >= (Analiz_T3) || outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+        //            {
+        //                int poi = 1;
+        //                end = 0;
+        //                serialPort2.Write("stop");
+        //                System.Threading.Thread.Sleep(100);
+        //                serialPort2.Close();
+
+        //                //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
+        //                watch.Start();
+        //                while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
+        //                watch.Stop();
+        //                watch.Reset();
+
+        //                // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
+        //                Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
+        //                System.Threading.Thread.Sleep(100);
+
+
+        //                usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
+        //                usb_fun.ClosePipes();
+        //                detect_Error = false;
+        //                return;
+        //            }
+
+
+        //        }
+        //    }
+
+        //    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
+        //    {
+
+        //        while (outc != 0xA0 && end == 0)//((shomarchpa * ti < Analiz_t3 ) && (outc != 0xa0))   ->  if state run 
+        //        {
+
+        //            if (staterun.Trim() == "stop") // اگر وضعیت stop شد 
+        //            {
+        //                runerror = true;
+        //                watch.Stop();
+        //                staterun = "";
+        //                break;
+        //            }
+        //            if (shomarchpa == 0)//شماره چاپ     -> به نظر دارد یک تاخیر ایجاد میکند
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            else
+        //            {
+        //                while (watch.ElapsedMilliseconds < (ti * 10)) ;//4  
+        //                watch.Stop();
+        //                watch.Reset();
+        //            }
+        //            counter++;
+        //            //Settxtfill_func(2, $"counter:{counter}", 2, 1);
+        //            // serialPort2.WriteLine("step");
+        //            number = serialPort2.BytesToRead;
+        //            //Setbtnenabled(true, 1, 2);
+
+        //            if (number >= 0)
+        //            {
+        //                try
+        //                {
+        //                    //Settxtfill_func(2, $"counter1", 2, 1);
+        //                    string1 = serialPort2.ReadLine();
+
+
+        //                    //DataReceived.Remove(DataReceived.Length-1);
+        //                    if (sign == 0)
+        //                    {
+
+        //                        if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
+        //                        {
+        //                            double pos = 0;
+        //                            double size = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 2000;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+        //                            OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
+        //                            OnlineChart.ChartAreas[0].AxisY.Title = dschart1.chartlist1_run.Rows[row][15].ToString();
+        //                            //OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+        //                            //OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.ChartAreas[0].AxisX.Maximum;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
+
+        //                            //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+        //                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+        //                            //pos =+ 5;
+        //                            if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+        //                            {
+        //                                OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
+        //                            }
+        //                            OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
+        //                            if (string1.Contains("end14"))
+        //                            {
+        //                                end = 1;
+        //                                number = 0;
+        //                                Settxtfill_func(2, "end", 2, 1);
+        //                            }
+        //                            else
+        //                            {
+        //                                //Settxtfill_func(2, $"counter2", 2, 1);
+        //                                strings = string1.Split('@');
+        //                                //Settxtfill_func(2, $"endpacket:{DataReceived}", 2, 1);
+        //                                oinp3 = 6;
+        //                                oinp1 = (byte)Int32.Parse(strings[2]);
+        //                                oinp2 = (byte)Int32.Parse(strings[3]);
+        //                                //counter = (int)Int32.Parse(strings[4]);
+        //                                //Settxtfill_func(2, $"c:{oinp3},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"a:{oinp2},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"b:{oinp1},i{i}", 2, 1);
+        //                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+        //                                counter++;
+        //                                sign = 1;
+        //                                number = 0;
+        //                                flag_running = true;
+
+        //                            }
+        //                        }
+
+
+        //                        if (outc == 0x60) //اگر pause بود 
+        //                        {
+        //                            outc_b = 0x60;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+        //                        if (outc == 0x20 && outc_b == 0x60)//
+        //                        {
+        //                            outc_b = 0x20;
+        //                            watch.Start();
+        //                            continue;
+        //                        }
+
+        //                        if ((byte)(oinp3 & 0x0f) <= 7)
+        //                        {
+        //                            if (shomarchpa >= datas2_state.Length)
+        //                            {
+        //                                Array.Resize(ref datas2_2, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_0, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_1, datas2_state.Length + 100);
+        //                                Array.Resize(ref datas2_state, datas2_state.Length + 100);
+        //                                for (int l = shomarchpa; l < datas2_state.Length; l++)
+        //                                    datas2_state[l] = 2;
+        //                            }
+        //                            sign = 0;
+        //                            datas2_2[shomarchpa] = (byte)(oinp3 & 0x0F);//(inprt(P_C) and $0F); در اینجا سه تا ارایه 100 تایی پر می شود(خودم)
+        //                            datas2_0[shomarchpa] = (byte)oinp1;//read porta
+        //                            datas2_1[shomarchpa] = (byte)oinp2;//read portb
+        //                            datas2_state[shomarchpa] = 0;
+        //                            showdata(row);
+        //                            watch.Start();
+        //                            shomarchpa++;
+        //                        }
+
+        //                    }
+
+        //                }
+        //                catch
+        //                {
+
+        //                }
+        //            }
+
+        //            if (outc == 0xA0 || end == 1)//((shomarchpa * ti>= Analiz_T3) || outc ==0xa0)  -> (0xa0 means stop  )  for stop device
+        //            {
+        //                byte inpt = 0;
+        //                int poi = 1;
+        //                end = 0;
+        //                serialPort2.Write("stop");
+        //                System.Threading.Thread.Sleep(100);
+        //                serialPort2.Close();
+
+        //                //transmit 0x80 to portc in ppi    -> i think 0x80 for accept and answer must be 0x80
+        //                watch.Start();
+        //                while (watch.ElapsedMilliseconds < 100) ;//4  delay for 100ms 
+        //                watch.Stop();
+        //                watch.Reset();
+
+        //                // inpt = 0x0a;                           // Settxtfill_func(1, $"finish running----{inpt}", 2, 1);
+        //                Settxtfill_func(1, "finish running-" + poi.ToString().Trim(), 2, 1);
+        //                System.Threading.Thread.Sleep(100);
+        //                usb_fun.Outprt(P_C, 0x00); //transmit 0x00 to portc for accept stop
+        //                usb_fun.ClosePipes();
+        //                detect_Error = false;
+        //                return;
+        //            }
+        //        }
+        //    }
+
+        //}
 
 
         unsafe private void doRun2(int row)
@@ -1512,8 +2273,10 @@ namespace Skydat.forms2065
             double Itot = 0;
             double V = 0, I1 = 0, I2 = 0, Vold;
 
-            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
-
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+            });
 
             if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
                 V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());// e1 
@@ -2734,7 +3497,7 @@ namespace Skydat.forms2065
                             }
                         }
                     }
-                    catch(Exception Msg)
+                    catch (Exception Msg)
                     {
                         MessageBox.Show(Msg.Message);
                     }
