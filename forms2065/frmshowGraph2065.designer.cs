@@ -199,6 +199,8 @@ namespace Skydat.forms2065
             this.OnlineChart.BackColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisX.IsMarksNextToAxis = false;
+            chartArea1.AxisX.LineWidth = 2;
             chartArea1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             chartArea1.Name = "ChartArea1";
             chartArea1.Position.Auto = false;
@@ -209,7 +211,7 @@ namespace Skydat.forms2065
             this.OnlineChart.Name = "OnlineChart";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Name = "Series1";
             this.OnlineChart.Series.Add(series1);
             this.OnlineChart.Click += new System.EventHandler(this.OnlineChart_Click);

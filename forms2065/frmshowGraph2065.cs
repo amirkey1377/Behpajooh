@@ -315,14 +315,15 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) != 9999) Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-
                         break;
+
                     case clasglobal.CPC:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) != 9999) Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                         //if (double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) != 9999) //Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         break;
+
                     case clasglobal.CCC:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
@@ -366,7 +367,6 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) != 9999) Parameters.Text = Parameters.Text + "EUP =" + double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "EDO =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + " Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) != 9999) Parameters.Text = Parameters.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
                         break;
@@ -418,7 +418,6 @@ namespace Skydat.forms2065
             }
             catch (Exception ex) { errors_cls err = new errors_cls(ex, txtcomment, 2); }
         }
-
 
         unsafe private void doRun2_1(int row)
         {
@@ -490,12 +489,9 @@ namespace Skydat.forms2065
                             //Settxtfill_func(2, $"counter1", 2, 1);
                             string1 = serialPort2.ReadLine();
 
-
                             //string1.Remove(string1.Length-1);
                             if (sign == 0)
                             {
-
-
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 11)
                                 {
                                     if (string1.Contains("end11"))
@@ -506,7 +502,6 @@ namespace Skydat.forms2065
                                     }
                                     else
                                     {
-
                                         strings = string1.Split('@');
                                         //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
@@ -525,6 +520,7 @@ namespace Skydat.forms2065
 
                                     }
                                 }
+
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 12)
                                 {
                                     if (string1.Contains("end12"))
@@ -555,8 +551,6 @@ namespace Skydat.forms2065
                                     }
                                 }
 
-
-
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
                                 {
                                     if (string1.Contains("end15"))
@@ -567,7 +561,6 @@ namespace Skydat.forms2065
                                     }
                                     else
                                     {
-
                                         strings = string1.Split('@');
                                         //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
                                         oinp3 = (byte)Int32.Parse(strings[1]);
@@ -586,6 +579,7 @@ namespace Skydat.forms2065
 
                                     }
                                 }
+
                                 if (outc == 0x60) //اگر pause بود 
                                 {
                                     outc_b = 0x60;
@@ -620,17 +614,13 @@ namespace Skydat.forms2065
                                     watch.Start();
                                     shomarchpa++;
                                 }
-
                             }
 
                         }
-                        catch
+                        catch (Exception Msg)
                         {
-
+                            MessageBox.Show(Msg.Message);
                         }
-
-
-
                     }
 
 
@@ -661,15 +651,9 @@ namespace Skydat.forms2065
                         detect_Error = false;
                         return;
                     }
-
-
                 }
-
-
-
-
-
             }
+
             if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10)
             {
 
@@ -737,7 +721,7 @@ namespace Skydat.forms2065
 
                                         OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
                                     });
-                                    
+
 
                                     if (string1.Contains("end10"))
                                     {
@@ -4824,7 +4808,7 @@ namespace Skydat.forms2065
                         OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
                         OnlineChart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
 
-                        OnlineChart.MouseWheel += chart_MouseWheel;
+                        OnlineChart.MouseWheel += OnlineChart_MouseWheel;
                     }
                     break;
                 case 3:
@@ -4851,7 +4835,7 @@ namespace Skydat.forms2065
         }
 
         private readonly Stack<ZoomFrame> _zoomFrames = new Stack<ZoomFrame>();
-        private void chart_MouseWheel(object sender, MouseEventArgs e)
+        private void OnlineChart_MouseWheel(object sender, MouseEventArgs e)
         {
             var chart = (Chart)sender;
             var xAxis = chart.ChartAreas[0].AxisX;
@@ -4885,16 +4869,43 @@ namespace Skydat.forms2065
 
                     _zoomFrames.Push(new ZoomFrame { XStart = xMin, XFinish = xMax });
 
-                    var posXStart = xAxis.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 4;
-                    var posXFinish = xAxis.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 4;
+                    int row = show_number_runing;
+                    var posXStart = xAxis.PixelPositionToValue(e.Location.X) - (xMax - xMin) ;
+                    var posXFinish = xAxis.PixelPositionToValue(e.Location.X) + (xMax - xMin) ;
                     //var posYStart = yAxis.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
                     //var posYFinish = yAxis.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
 
+                    posXStart /= 3;
+                    posXFinish /= 3;
                     xAxis.ScaleView.Zoom(posXStart, posXFinish);
-                    //yAxis.ScaleView.Zoom(posYStart, posYFinish);
+
+                    int I = int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString());
+
+                    //switch (I)
+                    //{
+                    //    case 0:
+                    //        posXStart /= 3;
+                    //        posXFinish /= 3;
+                    //        xAxis.ScaleView.Zoom(posXStart, posXFinish);
+                    //        //yAxis.ScaleView.Zoom(posYStart, posYFinish);
+                    //        break;
+
+                    //    case 1:
+                    //        posXStart /= 2;
+                    //        posXFinish /= 2;
+                    //        //var posYStart = yAxis.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
+                    //        //var posYFinish = yAxis.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
+
+                    //        xAxis.ScaleView.Zoom(posXStart, posXFinish);
+                    //        //yAxis.ScaleView.Zoom(posYStart, posYFinish);
+                    //        break;
+                    //}
                 }
             }
-            catch { }
+            catch (Exception Msg)
+            {
+                MessageBox.Show(Msg.Message);
+            }
         }
 
         delegate void Setgrftchart1Callback1(Series ser1, int code, int state);
