@@ -243,13 +243,13 @@
             this.label20.TabIndex = 2;
             this.label20.Text = "reproduction or distribution of this program may result in severe civil and ";
             // 
-            // label4
+            // Parameters
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label4.ForeColor = System.Drawing.Color.MidnightBlue;
             this.label4.Location = new System.Drawing.Point(159, 10);
-            this.label4.Name = "label4";
+            this.label4.Name = "Parameters";
             this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "M. Shaemi Barzoki,";

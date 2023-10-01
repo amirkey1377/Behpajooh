@@ -14,7 +14,7 @@ namespace Skydat.classes2065
         //نام مخفف یا مستعار تکنیک ها درون آرایه قرار داده میشود و در قسمتهایی از برنامه با شماره اندیس فراخوانی می شود
         public static string[] TechName = { "DCV", "NPV", "DPV", "SWV",
                                             "CV", "LSV", "DCS","DPS",
-                                            "CCC", "CPC","CHP","CHA",
+                                            "CCC", "CPC","CP","CHA",
                                             "CHC","","CD","OCP"," SC"};       
        
         //نام کامل تکنیکها

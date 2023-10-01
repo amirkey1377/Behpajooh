@@ -112,11 +112,11 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Desired RPM";
             // 
-            // label4
+            // Parameters
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(5, 93);
-            this.label4.Name = "label4";
+            this.label4.Name = "Parameters";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Real RPM:";

@@ -371,11 +371,11 @@ namespace Skydat.forms2065
             // treeView1
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.treeView1, "treeView1");
             this.treeView1.ForeColor = System.Drawing.Color.Black;
             this.treeView1.FullRowSelect = true;
             this.treeView1.HideSelection = false;
             this.treeView1.LineColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.treeView1, "treeView1");
             this.treeView1.Name = "treeView1";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView1.Nodes")))});

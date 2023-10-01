@@ -16,7 +16,7 @@ namespace Skydat.forms2065
             InitializeComponent();
         }
         public int dfrno = 0;
-        public frmMain12065 mf;
+        public frmMain2065 mf;
         public frmOption12065 opForm;
 
         private void DataForm_Load(object sender, EventArgs e)
