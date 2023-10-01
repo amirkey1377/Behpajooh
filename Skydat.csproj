@@ -191,6 +191,12 @@
     <Compile Include="datasets\Dschart1.cs">
       <DependentUpon>Dschart1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="formEIS\LandingEIS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formEIS\LandingEIS.Designer.cs">
+      <DependentUpon>LandingEIS.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms2065\frmselecttypeshow.cs">
       <SubType>Form</SubType>
     </Compile>
