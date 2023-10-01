@@ -166,12 +166,12 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.clearPlotsToolStripMenuItem, "clearPlotsToolStripMenuItem");
             this.clearPlotsToolStripMenuItem.Click += new System.EventHandler(this.clearPlotsToolStripMenuItem_Click);
             // 
-            // label4
+            // Parameters
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.label4, "Parameters");
+            this.label4.Name = "Parameters";
             // 
             // treeView3
             // 
@@ -186,7 +186,7 @@ namespace Skydat.forms2080
             this.treeView3.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterCheck);
             this.treeView3.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
             // 
-            // tChart1
+            // OnlineChart
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
             chartArea1.BackColor = System.Drawing.Color.Black;
@@ -196,8 +196,8 @@ namespace Skydat.forms2080
             chartArea1.Position.Width = 100F;
             this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.tChart1, "tChart1");
-            this.tChart1.Name = "tChart1";
+            resources.ApplyResources(this.tChart1, "OnlineChart");
+            this.tChart1.Name = "OnlineChart";
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Chart1_KeyDown);
             this.tChart1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tChart1_KeyUp);

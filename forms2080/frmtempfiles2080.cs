@@ -11,7 +11,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows;
 using Skydat.classes2065;
 using System.Runtime.InteropServices;
-using Skydat.classes2065;
 using System.Linq;
 namespace Skydat.forms2080
 {

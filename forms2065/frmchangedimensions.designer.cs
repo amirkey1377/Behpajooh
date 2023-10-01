@@ -164,11 +164,11 @@
             this.txtymin.TabIndex = 0;
             this.txtymin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtxmin_KeyPress);
             // 
-            // label4
+            // Parameters
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(8, 26);
-            this.label4.Name = "label4";
+            this.label4.Name = "Parameters";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 21;
             this.label4.Text = "Min :";

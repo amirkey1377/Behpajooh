@@ -49,15 +49,11 @@ namespace Skydat.forms2065
 
         private void frmbase_Load(object sender, EventArgs e)
         {
-            //if (Skydat.Properties.Settings.Default.backimg.Trim() != "")
-            //    this.BackgroundImage = GetImage(Skydat.Properties.Settings.Default.backimg);
-
-            //pictureBox1.Controls.Add(label1);
-            //label1.Location = new Point(10, ((this.Height - 100) - 80));
-            //label1.BackColor = Color.Transparent;
-
-
-            try  {   pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); }catch { }
+            try  
+            {   
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); 
+            }
+            catch { }
         }
         public Image GetImage(string value)
         {
@@ -84,7 +80,6 @@ namespace Skydat.forms2065
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-         
             if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
             {
                 this.Cursor = Cursors.Default;
@@ -92,11 +87,10 @@ namespace Skydat.forms2065
                 return;
             }
 
-            frmMain12065 frm = new frmMain12065();
+            frmMain2065 frm = new frmMain2065();
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
-            this.Cursor = Cursors.Default;
         }
 
        
@@ -175,6 +169,11 @@ namespace Skydat.forms2065
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             Process.Start("chrome.exe", "https://behpajooh.net/");
+        }
+
+        private void toolStripLabel12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

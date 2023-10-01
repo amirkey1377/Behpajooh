@@ -42,8 +42,8 @@ namespace Skydat.forms2080
             tChart1.ChartAreas[0].AxisY.LineColor = Color.Black;
 
             tChart1.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
-            //tChart1.ChartAreas[0].AxisY.Title = "coulomb(c)";
-            //tChart1.ChartAreas[0].AxisX.Title = "Time(s)";
+            //OnlineChart.ChartAreas[0].AxisY.Title = "coulomb(c)";
+            //OnlineChart.ChartAreas[0].AxisX.Title = "Time(s)";
             tChart1.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
            
@@ -264,7 +264,7 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
                          label4.Text = label4.Text + "E3 =" + double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) + "\n";
                          label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        //if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        //if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                          label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                          label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                          label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
@@ -314,7 +314,7 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
                          label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // //label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        // //Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         break;
                     case clasglobal.CCC2080:
                          label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
@@ -323,7 +323,7 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
                          label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // //label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        // //Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         break;
                     case clasglobal.CHP2080:
                          label4.Text = label4.Text + "I1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][17].ToString()) + "\n";
@@ -334,7 +334,7 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
                          label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         break;
                     case clasglobal.CHA2080:
                          label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
@@ -345,15 +345,15 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
                          label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         break;
                     //case clasglobal.CHC2080:
-                    //     label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                    //     label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                    //     label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                    //     label4.Text = label4.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
-                    //     label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                    //    // label4.Text = label4.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                    //     Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
+                    //     Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
+                    //     Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
+                    //     Parameters.Text = Parameters.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
+                    //     Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
+                    //    // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                     //    break;
                 }
             }
@@ -395,10 +395,10 @@ namespace Skydat.forms2080
         private void toolStripButton21_Click(object sender, EventArgs e)
         {
             tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-           // tChart1.ChartAreas[0].AxisX.MinorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MinorTickMark.Enabled;
+           // OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-         //   tChart1.ChartAreas[0].AxisY.MinorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MinorTickMark.Enabled;
+         //   OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
 
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
@@ -1154,8 +1154,8 @@ namespace Skydat.forms2080
 
                         if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.OCP2080)//mn
                         {
-                            //tChart1.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
-                            //this.tChart1.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
+                            //OnlineChart.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
+                            //this.OnlineChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
                            
                             int time_text = this.tChart1.Series[tChart1.Series.Count - 1].Points.Count - 1;
                             this.tChart1.Series[tChart1.Series.Count - 1].Points[time_text].AxisLabel = time_text.ToString();
@@ -1444,18 +1444,18 @@ namespace Skydat.forms2080
                         Random Random1 = new Random();
                         int Random_Color_Index = 0;
                         Random_Color_Index = (byte)(Random1.NextDouble() * 90);
-                        //tChart1.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
+                        //OnlineChart.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
                         tChart1.Series[num_Series].Color = Color.Red;
 
 
                         if (!overlaymain)
                         {
                             tChart1.Series[num_Series].Points.Clear();
-                            //// tChart1.Series.Remove(tChart1.Series[0]);
-                            //if (tChart1.Series.Count > 1)                      ////mn
+                            //// OnlineChart.Series.Remove(OnlineChart.Series[0]);
+                            //if (OnlineChart.Series.Count > 1)                      ////mn
                             //{
-                            //    tChart1.Series[1].Points.Clear();
-                            //    tChart1.Series.Remove(tChart1.Series[1]);
+                            //    OnlineChart.Series[1].Points.Clear();
+                            //    OnlineChart.Series.Remove(OnlineChart.Series[1]);
                             //}
                         }
 
@@ -1468,31 +1468,31 @@ namespace Skydat.forms2080
 
                         //if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CV2080)
                         //{
-                        //    tChart1.ChartAreas[0].AxisX.Maximum = Math.Max(Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
-                        //    tChart1.ChartAreas[0].AxisX.Minimum = Math.Min(Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
-                        //    tChart1.ChartAreas[0].AxisX.Interval = Math.Round((tChart1.ChartAreas[0].AxisX.Maximum - tChart1.ChartAreas[0].AxisX.Minimum) / 10, 1);
+                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
+                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = Math.Min(Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
+                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
 
                         //}
                         //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) <= 8 || double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.LSV2080)
                         //{
-                        //    tChart1.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
-                        //    tChart1.ChartAreas[0].AxisX.Minimum = Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
-                        //    tChart1.ChartAreas[0].AxisX.Interval = Math.Round((tChart1.ChartAreas[0].AxisX.Maximum - tChart1.ChartAreas[0].AxisX.Minimum) / 10, 1);
+                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
+                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
+                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
 
                         //}
                         //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CPC2080)
                         //{
-                        //    tChart1.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString()));
-                        //    tChart1.ChartAreas[0].AxisX.Minimum = 0;
-                        //    tChart1.ChartAreas[0].AxisX.Interval = Math.Round((tChart1.ChartAreas[0].AxisX.Maximum - tChart1.ChartAreas[0].AxisX.Minimum) / 10, 1);
+                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString()));
+                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
 
 
                         //}
                         //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CHA2080 || double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CHP2080 )
                         //{
-                        //    tChart1.ChartAreas[0].AxisX.Maximum = double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString())  ;
-                        //    tChart1.ChartAreas[0].AxisX.Minimum = 0;
-                        //    tChart1.ChartAreas[0].AxisX.Interval = Math.Round((tChart1.ChartAreas[0].AxisX.Maximum - tChart1.ChartAreas[0].AxisX.Minimum) / 10, 1);
+                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString())  ;
+                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
 
 
                         //}
@@ -1527,7 +1527,7 @@ namespace Skydat.forms2080
                     }
                     else
                     {
-                        //if (tChart1.Series.Count == 0)
+                        //if (OnlineChart.Series.Count == 0)
                         tChart1.Series.Add(ser1);
 
                         is_set_graph = true;//mn
@@ -1571,7 +1571,7 @@ namespace Skydat.forms2080
                     else
                     {
                         tChart1.Series[0].Color = color1;
-                       // tChart1.Series[0].Points.Clear();
+                       // OnlineChart.Series[0].Points.Clear();
 
                         for (int i = 0; i < shomar_othertech; i++)
                         {
@@ -2265,7 +2265,7 @@ namespace Skydat.forms2080
                     //case "selectview":
                     //    if (e.Button == MouseButtons.Left)
                     //    {
-                    //    var results1 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                    //    var results1 = OnlineChart.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
                     //    foreach (var result in results1)
                     //    {
 
@@ -2274,17 +2274,17 @@ namespace Skydat.forms2080
 
                     //            if (startpoint_selx == -1)
                     //            {
-                    //                startpoint_selx = Math.Min(Math.Max(e.X, (int)tChart1.Left), tChart1.Left + tChart1.Width);
-                    //                startpoint_sely = Math.Min(Math.Max(e.Y, (int)tChart1.Top), tChart1.Top + tChart1.Height);
+                    //                startpoint_selx = Math.Min(Math.Max(e.X, (int)OnlineChart.Left), OnlineChart.Left + OnlineChart.Width);
+                    //                startpoint_sely = Math.Min(Math.Max(e.Y, (int)OnlineChart.Top), OnlineChart.Top + OnlineChart.Height);
                     //            }
                     //            else
                     //            {
-                    //                tChart1.Refresh();
+                    //                OnlineChart.Refresh();
                     //                this.Invalidate(rectsel);
-                    //                endpoint_selx = Math.Min(Math.Max(e.X, (int)tChart1.Left), tChart1.Left + tChart1.Width);
-                    //                endpoint_sely = Math.Min(Math.Max(e.Y, (int)tChart1.Top), tChart1.Top + tChart1.Height);
+                    //                endpoint_selx = Math.Min(Math.Max(e.X, (int)OnlineChart.Left), OnlineChart.Left + OnlineChart.Width);
+                    //                endpoint_sely = Math.Min(Math.Max(e.Y, (int)OnlineChart.Top), OnlineChart.Top + OnlineChart.Height);
                     //                rectsel = new Rectangle(Math.Min(startpoint_selx, endpoint_selx), startpoint_sely, endpoint_selx - startpoint_selx, endpoint_sely - startpoint_sely);
-                    //                tChart1.CreateGraphics().DrawRectangle(new Pen(Color.Red), rectsel);
+                    //                OnlineChart.CreateGraphics().DrawRectangle(new Pen(Color.Red), rectsel);
                     //            }
 
                     //        }
@@ -2575,8 +2575,8 @@ namespace Skydat.forms2080
                             tChart1.ChartAreas[0].AxisX.ScaleView.Zoom(tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - posXStart, tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + posXFinish, DateTimeIntervalType.Auto, true);
                             tChart1.ChartAreas[0].AxisY.ScaleView.Zoom(tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) - posYStart, tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) + posYFinish, DateTimeIntervalType.Auto, true);
 
-                            //tChart1.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * xMax, DateTimeIntervalType.Auto, true);
-                            //tChart1.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * yMax, DateTimeIntervalType.Auto, true);
+                            //OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * xMax, DateTimeIntervalType.Auto, true);
+                            //OnlineChart.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * yMax, DateTimeIntervalType.Auto, true);
                         }
                     }
                     break;
