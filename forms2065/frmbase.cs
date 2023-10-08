@@ -92,6 +92,7 @@ namespace Skydat.forms2065
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
+            this.Cursor = Cursors.Default;
         }
 
        
@@ -128,7 +129,7 @@ namespace Skydat.forms2065
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
-
+            this.Cursor = Cursors.Default;
         }
 
         private void button1_Click(object sender, EventArgs e)
