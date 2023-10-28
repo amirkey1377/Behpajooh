@@ -519,6 +519,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formEIS\LandingEIS.resx">
+      <DependentUpon>LandingEIS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmselecttypeshow.resx">
       <DependentUpon>frmselecttypeshow.cs</DependentUpon>
       <SubType>Designer</SubType>
