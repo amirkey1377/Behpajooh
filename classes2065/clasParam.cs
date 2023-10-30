@@ -1406,12 +1406,12 @@ namespace Skydat.classes2065
     //public class OCP_params
     //{
     //    //private double _Cycles;
-        
+
     //    private double _T1;
     //    private double _EquilibriumTime;
     //    private string _comment1;
 
-        
+
     //    [CategoryAttribute("OCP Values"), DescriptionAttribute("time(S)\n 1    32000")]
     //    public double T1
     //    {
@@ -1440,7 +1440,7 @@ namespace Skydat.classes2065
     //            _EquilibriumTime = value;
     //        }
     //    }
-        
+
     //    public OCP_params()
     //    {
     //        //
@@ -1457,9 +1457,10 @@ namespace Skydat.classes2065
         private double _T1;
         private double _E2;
         private double _T2;
+        private double _CYCLE;//
         private double _EquilibriumTime;
         private string _comment1;
-        
+
         [CategoryAttribute("CHA Values"), DescriptionAttribute("First potential step(V)\n -8    +8")]
         public double E1
         {
@@ -1511,6 +1512,20 @@ namespace Skydat.classes2065
             set
             {
                 _T2 = value;
+            }
+        }
+
+        [CategoryAttribute("CHA Values"), DescriptionAttribute("CYCLE")]
+        public double CYCLE
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
             }
         }
 
