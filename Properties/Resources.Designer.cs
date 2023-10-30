@@ -113,6 +113,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _2066_illustrat {
+            get {
+                object obj = ResourceManager.GetObject("2066 illustrat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _20801 {
             get {
                 object obj = ResourceManager.GetObject("20801", resourceCulture);
@@ -156,6 +166,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap _20806 {
             get {
                 object obj = ResourceManager.GetObject("20806", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2090_illustrat {
+            get {
+                object obj = ResourceManager.GetObject("2090 illustrat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

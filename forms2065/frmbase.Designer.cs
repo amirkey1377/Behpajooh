@@ -86,7 +86,7 @@
             this.toolStripButton2.BackColor = System.Drawing.Color.White;
             this.toolStripButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.toolStripButton2.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.Image = global::Skydat.Properties.Resources._2066_illustrat;
             this.toolStripButton2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -111,7 +111,7 @@
             this.toolStripButton4.BackColor = System.Drawing.Color.White;
             this.toolStripButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.toolStripButton4.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.Image = global::Skydat.Properties.Resources._2090_illustrat;
             this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
