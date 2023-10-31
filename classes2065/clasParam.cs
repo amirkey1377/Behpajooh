@@ -7,7 +7,6 @@ using System.Drawing;
 
 namespace Skydat.classes2065
 {
-
     //CV Properties *******************************************************************
     [DefaultPropertyAttribute("E1")]
     public class CV_params
@@ -886,7 +885,7 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("SWV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.001    0.025")]
+        [CategoryAttribute("SWV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.002    0.025")]
         public double HStep
         {
             get
@@ -965,7 +964,7 @@ namespace Skydat.classes2065
         }
     }
     
-      //DPS Properties  ****************************************************************
+    //DPS Properties  ****************************************************************
     public class DPS_params
     {
         private double _E1;
@@ -1402,53 +1401,6 @@ namespace Skydat.classes2065
         }
     }
 
-
-    //public class OCP_params
-    //{
-    //    //private double _Cycles;
-
-    //    private double _T1;
-    //    private double _EquilibriumTime;
-    //    private string _comment1;
-
-
-    //    [CategoryAttribute("OCP Values"), DescriptionAttribute("time(S)\n 1    32000")]
-    //    public double T1
-    //    {
-    //        get
-    //        {
-    //            return _T1;
-    //        }
-
-    //        set
-    //        {
-    //            _T1 = value;
-    //        }
-    //    }
-
-    //    [CategoryAttribute("CHP Values"), DescriptionAttribute("Quiescent time before start measuring(S)\n 0    2000")]
-    //    [DisplayName("Equilibrium Time")]
-    //    public double EquilibriumTime
-    //    {
-    //        get
-    //        {
-    //            return _EquilibriumTime;
-    //        }
-
-    //        set
-    //        {
-    //            _EquilibriumTime = value;
-    //        }
-    //    }
-
-    //    public OCP_params()
-    //    {
-    //        //
-    //        // TODO: Add constructor logic here
-    //        //
-    //    }
-    //}
-
     //CA Properties  ****************************************************************
     public class CHA_params
     {
@@ -1565,7 +1517,6 @@ namespace Skydat.classes2065
     }
 
     //CHA Properties  ****************************************************************
-    //CHC Properties  ****************************************************************
     public class CHC_params
     {
         //private double _Cycles;
