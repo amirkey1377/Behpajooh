@@ -586,7 +586,7 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("NPV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.001    0.025")]
+        [CategoryAttribute("NPV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.002    0.025")]
         public double HStep
         {
             get
@@ -721,7 +721,7 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("DPV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.001    0.025")]
+        [CategoryAttribute("DPV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.002    0.025")]
         public double HStep
         {
             get

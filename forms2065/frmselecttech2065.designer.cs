@@ -494,7 +494,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
         private System.Windows.Forms.Panel panel5;
@@ -519,6 +518,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.RadioButton rd_low_cpc;
         private System.Windows.Forms.RadioButton rd_hieght_cpc;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

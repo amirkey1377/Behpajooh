@@ -306,6 +306,7 @@
             this.EIS.AutoSize = false;
             this.EIS.BackColor = System.Drawing.Color.White;
             this.EIS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.EIS.Enabled = false;
             this.EIS.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.EIS.Image = ((System.Drawing.Image)(resources.GetObject("EIS.Image")));
             this.EIS.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -358,7 +359,7 @@
             this.Name = "frmbase";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Behpajooh V1.0.0";
+            this.Text = "Behpajooh Software";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmbase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -534,9 +534,9 @@ namespace Skydat.forms2065
             this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.pnl_peak_search);
-            this.panel3.Controls.Add(this.label41);
-            this.panel3.Controls.Add(this.treeView3);
             this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.treeView3);
+            this.panel3.Controls.Add(this.label41);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
