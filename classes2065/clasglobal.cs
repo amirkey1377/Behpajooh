@@ -14,7 +14,7 @@ namespace Skydat.classes2065
         //نام مخفف یا مستعار تکنیک ها درون آرایه قرار داده میشود و در قسمتهایی از برنامه با شماره اندیس فراخوانی می شود
         public static string[] TechName = { "DCV", "NPV", "DPV", "SWV",
                                             "CV", "LSV", "DCS","DPS",
-                                            "CCC", "CPC","CP","CHA",
+                                            "CCC", "CPC","CP","CA",
                                             "CHC","","CD","OCP"," SC"};       
        
         //نام کامل تکنیکها
@@ -59,7 +59,7 @@ namespace Skydat.classes2065
                                              "Potential(V)","Q(C)","Current(A)","Current(UA)",
                                              "Current(UA)", "Current(A)","Current(UA)","Potential(mV)"};
         
-      //آرایه ای از رنگ ها که به صورت تصادفی از بین اینها برای رنگ گرافها انتخاب می شود
+        //آرایه ای از رنگ ها که به صورت تصادفی از بین اینها برای رنگ گرافها انتخاب می شود
         public static Color[] color_Graph = {
                                  Color.Blue,Color.Aqua,Color.Aquamarine,Color.Bisque,Color.BurlyWood,Color.CadetBlue,Color.Blue,Color.Red,Color.MediumSeaGreen,Color.DarkTurquoise,
                                  Color.Chartreuse,Color.Chocolate,Color.Coral,Color.CornflowerBlue,Color.Cornsilk,Color.Crimson,Color.Cyan,Color.DarkGoldenrod,Color.Blue,Color.MediumSeaGreen,
@@ -71,15 +71,14 @@ namespace Skydat.classes2065
                                  Color.PaleVioletRed,Color.PeachPuff,Color.Peru,Color.Pink,Color.Plum,Color.PowderBlue,Color.Red,Color.Salmon,Color.SandyBrown,Color.SeaGreen,
                                  Color.SkyBlue,Color.SpringGreen,Color.SteelBlue,Color.Tomato,Color.Turquoise,Color.Violet,Color.YellowGreen,Color.MediumTurquoise,Color.Blue,
                                  Color.Red,Color.MediumSeaGreen,Color.DarkTurquoise,Color.PaleVioletRed,Color.Pink,Color.MediumSpringGreen,Color.PeachPuff,
-                               };
+        };
 
 
         //جهت ست کردن مقدار به پارامترهای هر تکنیک یک مقدار به تکنیک داده شده تا نام مخفف آن با عدد صدا زده شود
-        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CHA = 11, CHC = 12, CD = 14, OCP = 15;/////, CA = 11
+        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15;/////, CA = 11
         
         //2080
         public const byte DCV2080 = 1, NPV2080 = 2, DPV2080 = 3, SWV2080 = 4, CV2080 = 5, DCs2080 = 7, DPs2080 = 8, OCP2080 = 9, CPC2080 = 10, CHA2080 = 11, CCC2080 = 12, SC2080 = 13, LSV2080 = 14, CHP2080 = 15;/////, CA = 11
-     
 
         //برای هر تکنیکی پارامترهایی تعریف شده است که داخل کلاس پارام کلاسهای تعریف هر تکنیک و پارامترهاشون قرار دارد
         public static DCV_params dcvprms = new DCV_params();
@@ -129,7 +128,7 @@ namespace Skydat.classes2065
                 case DPs: pGrid.SelectedObject = dpsprms; break;
                 case CPC: pGrid.SelectedObject = cpcprms; break;
                 case CHP: pGrid.SelectedObject = chpprms; break;
-                case CHA: pGrid.SelectedObject = chaprms; break;
+                case CA: pGrid.SelectedObject = chaprms; break;
                 case CHC: pGrid.SelectedObject = chcprms; break;
                 case CD: pGrid.SelectedObject = cdprms; break;
                 case OCP: pGrid.SelectedObject = ocpprms; break;
@@ -408,7 +407,7 @@ namespace Skydat.classes2065
                         Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
                     }
                 }
-                if (tchName == "CHA" || tchName == "All")
+                if (tchName == "CA" || tchName == "All")
                 {
                     Fl.WriteLine("\n");
                     Fl.WriteLine("Technic: CHA");

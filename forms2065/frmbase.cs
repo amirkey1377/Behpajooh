@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using Skydat;
 using System.Diagnostics;
+using Skydat.formEIS;
 
 namespace Skydat.forms2065
 {
@@ -91,6 +92,7 @@ namespace Skydat.forms2065
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
+            this.Cursor = Cursors.Default;
         }
 
        
@@ -106,6 +108,24 @@ namespace Skydat.forms2065
             }
 
             forms2080.frmMain12080 frm = new forms2080.frmMain12080();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            classes2065.movedata.open_form = 1;
+            frm.Show();
+            this.Cursor = Cursors.Default;
+        }
+
+
+        private void EIS_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            LandingEIS frm = new LandingEIS();
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
             frm.Show();
@@ -136,44 +156,10 @@ namespace Skydat.forms2065
             //if (showingform)
         }
 
-        private void frmbase_SizeChanged(object sender, EventArgs e)
-        {
-            //label1.Location = new Point(10, ((this.Height - 100) - 80));
-        }
-
-        private void toolStripSeparator1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             Process.Start("chrome.exe", "https://behpajooh.net/");
         }
 
-        private void toolStripLabel12_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
