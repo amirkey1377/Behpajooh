@@ -31,8 +31,8 @@ namespace Skydat.forms2065
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmshowGraph2065));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -199,21 +199,21 @@ namespace Skydat.forms2065
             this.OnlineChart.BackColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea2.AxisX.IsMarksNextToAxis = false;
-            chartArea2.AxisX.LineWidth = 2;
-            chartArea2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 100F;
-            chartArea2.Position.Width = 100F;
-            this.OnlineChart.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.IsMarksNextToAxis = false;
+            chartArea1.AxisX.LineWidth = 2;
+            chartArea1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 100F;
+            chartArea1.Position.Width = 100F;
+            this.OnlineChart.ChartAreas.Add(chartArea1);
             resources.ApplyResources(this.OnlineChart, "OnlineChart");
             this.OnlineChart.Name = "OnlineChart";
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Name = "Series1";
-            this.OnlineChart.Series.Add(series2);
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.OnlineChart.Series.Add(series1);
             this.OnlineChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseMove);
             this.OnlineChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseUp);
             // 

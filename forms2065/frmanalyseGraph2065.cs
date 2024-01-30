@@ -668,7 +668,7 @@ namespace Skydat.forms2065
                             else if (s.IndexOf("I1") >= 0) I1 = restore_One_Data(s, "I1");
                             else if (s.IndexOf("I2") >= 0) I2 = restore_One_Data(s, "I2");
                             else if (s.IndexOf("comment") >= 0)
-                                comment100 = s.Substring(s.IndexOf(":") + 1);
+                            comment100 = s.Substring(s.IndexOf(":") + 1);
 
                             if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
                             {
