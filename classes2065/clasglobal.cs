@@ -387,7 +387,7 @@ namespace Skydat.classes2065
                         Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
                     }
                 }
-                if (tchName == "CHP" || tchName == "All")
+                if (tchName == "CP" || tchName == "All")
                 {
                     Fl.WriteLine("\n");
                     Fl.WriteLine("Technic: CHP");

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,8 +10,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows;
 using Skydat.classes2065;
 using System.Runtime.InteropServices;
-using Skydat.classes2065;
 using System.Linq;
+using System.Threading;
+
 namespace Skydat.forms2065
 {
     public partial class frmtempfiles : Form
@@ -116,17 +116,18 @@ namespace Skydat.forms2065
                 {
                     restore_Data(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\"+e.Node.Text.Trim());
                     if (smooth_state)
-                        smootht4();
+                    smootht4();
                     else
                     {
-                        if (tech == "CHP" || tech == "CHA" || tech == "CHC")
+                        if (tech == "CHP" || tech == "CHA" || tech == "CHC" || tech == "CD")
                             tChart1.Series[0].Points.AddXY(0, othertech_val1[0]);//رسم در نقطه صفر زمان // technics chp cha chc
 
                         tech = "";
 
-                        for (int i = 0; i < shomar_val; i++) 
+                        for (int i = 0; i < shomar_val; i++)
                         {
                             tChart1.Series[0].Points.AddXY(othertech_val0[i], othertech_val1[i]);
+                           
                         }
                     }
 
@@ -184,7 +185,7 @@ namespace Skydat.forms2065
                                             tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle[i];
                                             label41.Text = "Technique name :" + clasglobal.TechName[i];
                                             label4.Text = "";
-                                            if (clasglobal.TechName[i].ToLower() == "cha" || clasglobal.TechName[i].ToLower() == "chp" || clasglobal.TechName[i].ToLower() == "chc")
+                                            if (clasglobal.TechName[i].ToLower() == "cha" || clasglobal.TechName[i].ToLower() == "chp" || clasglobal.TechName[i].ToLower() == "chc" || clasglobal.TechName[i].ToLower() == "cd")
                                                 smooth_state = false;
                                             else
                                                 smooth_state = true;

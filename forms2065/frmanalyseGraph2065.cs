@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -80,7 +79,7 @@ namespace Skydat.forms2065
 
             tChart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.ScrollBar.BackColor = Color.Black;
-         //   tChart2.ChartAreas.Add("b1");
+            //tChart2.ChartAreas.Add("b1");
            // tChart2.Legends.Add("b1");
             tChart2.ChartAreas[0].Area3DStyle.Enable3D = false;
 
