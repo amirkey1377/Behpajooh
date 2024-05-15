@@ -10,6 +10,9 @@ using System.IO;
 using Skydat;
 using System.Diagnostics;
 using Skydat.formEIS;
+using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.IO.Ports;
 
 namespace Skydat.forms2065
 {
@@ -77,7 +80,33 @@ namespace Skydat.forms2065
             af.ShowDialog();
         }
 
-               
+        List<string> ComPortNames(String VID, String PID)
+        {
+            String pattern = String.Format("^VID_{0}.PID_{1}", VID, PID);
+            Regex _rx = new Regex(pattern, RegexOptions.IgnoreCase);
+            List<string> comports = new List<string>();
+            RegistryKey rk1 = Registry.LocalMachine;
+            RegistryKey rk2 = rk1.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum");
+            foreach (String s3 in rk2.GetSubKeyNames())
+            {
+                RegistryKey rk3 = rk2.OpenSubKey(s3);
+                foreach (String s in rk3.GetSubKeyNames())
+                {
+                    if (_rx.Match(s).Success)
+                    {
+                        RegistryKey rk4 = rk3.OpenSubKey(s);
+                        foreach (String s2 in rk4.GetSubKeyNames())
+                        {
+                            RegistryKey rk5 = rk4.OpenSubKey(s2);
+                            RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
+                            comports.Add((string)rk6.GetValue("PortName"));
+                        }
+                    }
+                }
+            }
+            return comports;
+        }
+
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -88,14 +117,46 @@ namespace Skydat.forms2065
                 return;
             }
 
-            frmMain2065 frm = new frmMain2065();
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            classes2065.movedata.open_form = 1;
-            frm.Show();
-            this.Cursor = Cursors.Default;
+
+            List<string> names = ComPortNames("1a86", "7523");
+            if (names.Count > 0)
+            {
+                string[] x = SerialPort.GetPortNames();
+                int match = 0;
+                foreach (String c in x)
+                {
+                    if (names.Contains(c))
+                    {
+                        try
+                        {
+                            serialPort2.PortName = c;
+                            serialPort2.BaudRate = 1000000;
+                            match = 1;
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("مشکل در ارتباط");
+                        }
+                    }
+                }
+
+                if (match != 1)
+                {
+
+                    MessageBox.Show("Please make sure the cable connected to device properly and then try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Cursor = Cursors.Default;
+                    return;
+
+                }
+
+                frmMain2065 frm = new frmMain2065();
+                frm.Show();
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                classes2065.movedata.open_form = 1;
+                this.Cursor = Cursors.Default;
+            }
         }
 
-       
         private void btnFRA_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;

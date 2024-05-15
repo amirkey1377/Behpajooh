@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmbase));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
@@ -53,6 +54,7 @@
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -394,5 +396,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripButton EIS;
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
+        private System.IO.Ports.SerialPort serialPort2;
     }
 }

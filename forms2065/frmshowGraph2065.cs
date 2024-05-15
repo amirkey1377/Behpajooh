@@ -117,51 +117,48 @@ namespace Skydat.forms2065
                 //serialPort2.BaudRate = int.Parse(Properties.Settings.Default.baudrate);
                 ///string[] ports = System.IO.Ports.SerialPort.GetPortNames();
 
-                //test = FindCH340Port();
-                //List<string> names = ComPortNames("10c4", "ea60");
-                List<string> names = ComPortNames("1a86", "7523");
-                if (names.Count > 0)
-                {
-                    string[] x = SerialPort.GetPortNames();
-                    int match = 0;
-                    foreach (String c in x)
-                    {
-                        if (names.Contains(c))
-                        {
-                            try
-                            {
-                                serialPort2.PortName = c;
-                                serialPort2.BaudRate = 1000000;
-                                match = 1;
-                            }
-                            catch (Exception)
-                            {
+                ////test = FindCH340Port();
+                ////List<string> names = ComPortNames("10c4", "ea60");
+                //List<string> names = ComPortNames("1a86", "7523");
+                //if (names.Count > 0)
+                //{
+                //    string[] x = SerialPort.GetPortNames();
+                //    int match = 0;
+                //    foreach (String c in x)
+                //    {
+                //        if (names.Contains(c))
+                //        {
+                //            try
+                //            {
+                //                serialPort2.PortName = c;
+                //                serialPort2.BaudRate = 1000000;
+                //                match = 1;
+                //            }
+                //            catch (Exception)
+                //            {
 
-                                MessageBox.Show("مشکل در ارتباط");
+                //                MessageBox.Show("مشکل در ارتباط");
 
-                            }
-
-
-                        }
+                //            }
 
 
-                    }
-                    if (match != 1)
-                    {
-
-                        MessageBox.Show("کابل راوصل نکردید کابل را وصل کنید و سربرگ 2066 را دوباره راه اندازی کنید  ");
-                        return;
-
-                    }
-                }
-
-                // Select the last COM port from the list
-                //string lastPort = ports.Length > 0 ? ports[ports.Length - 1] : null;
-                //serialPort2.PortName = lastPort;
-                //serialPort2.BaudRate = 1000000;
+                //        }
 
 
+                //    }
+                //    if (match != 1)
+                //    {
 
+                //        MessageBox.Show("کابل راوصل نکردید کابل را وصل کنید و سربرگ 2066 را دوباره راه اندازی کنید  ");
+                //        return;
+
+                //    }
+                //}
+
+                //// Select the last COM port from the list
+                ////string lastPort = ports.Length > 0 ? ports[ports.Length - 1] : null;
+                ////serialPort2.PortName = lastPort;
+                ////serialPort2.BaudRate = 1000000;
 
                 //Set parameter like color & ... for graph
                 System.Drawing.Color ChartColor = Color.Black;
@@ -463,7 +460,7 @@ namespace Skydat.forms2065
 
             Series ser1 = new Series();
             ser1.LabelFormat = "#,##0.###########";
-            ser1.ChartType = SeriesChartType.FastLine;
+            ser1.ChartType = SeriesChartType.Point;
             if (opForm.rbfLine.Checked)
             {
                 ser1.ChartType = SeriesChartType.Line;
