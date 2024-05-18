@@ -80,7 +80,7 @@ namespace Skydat.forms2065
             af.ShowDialog();
         }
 
-        List<string> ComPortNames(String VID, String PID)
+        List<string> ComPortNames(String VID, String PID)//این متد برای پیدا کردن رجیستری متناظر با پورتی هست که دستگاه به آن وصل شده برای اتوماتیک وصل کردن دستگاه
         {
             String pattern = String.Format("^VID_{0}.PID_{1}", VID, PID);
             Regex _rx = new Regex(pattern, RegexOptions.IgnoreCase);
@@ -117,9 +117,8 @@ namespace Skydat.forms2065
                 return;
             }
 
-
             List<string> names = ComPortNames("1a86", "7523");
-            if (names.Count > 0)
+            if (names.Count > 0)// نرم افزار به صورت اتوماتیک اتصال دستگاه را تشخیص میدهد
             {
                 string[] x = SerialPort.GetPortNames();
                 int match = 0;
@@ -146,7 +145,6 @@ namespace Skydat.forms2065
                     MessageBox.Show("Please make sure the cable connected to device properly and then try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Cursor = Cursors.Default;
                     return;
-
                 }
 
                 frmMain2065 frm = new frmMain2065();
