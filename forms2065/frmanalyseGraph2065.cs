@@ -45,6 +45,7 @@ namespace Skydat.forms2065
           
             tChart2.Titles.Clear();
             Title header1 = this.tChart2.Titles.Add("Header");
+            
             header1.Alignment = ContentAlignment.TopLeft;
             header1.Docking = Docking.Top;
             this.tChart2.Titles[0].Text = "";
@@ -1818,7 +1819,7 @@ namespace Skydat.forms2065
             sfd.DefaultExt = "dat";
             string dir_sfd = "";
             sfd.Filter = "Data Files(*.dat)|*.dat|Signal File(*.sig)|*.sig"; 
-            int nn = this.treeView3.Nodes[0].Nodes.Count;
+            int nn = treeView3.Nodes[0].Nodes.Count;
             int filename_index = 1, index_main_dataset = 0;
             string filename = "0";
 
@@ -1828,7 +1829,7 @@ namespace Skydat.forms2065
             {
                 string ext = sfd.FileName.Substring(sfd.FileName.Length - 3, 3);
 
-                if (ext == "dat")
+                if (ext == "dat")//حالتی که فایل پیشوند dat ذخیره سازی شده باشد
                 {
                     for (int j = 0; j < nn; j++)
                     {
@@ -1861,7 +1862,8 @@ namespace Skydat.forms2065
                         index_main_dataset++;
                     }
                 }
-                else if(ext == "sig")
+
+                else if(ext == "sig")//حالتی که فایل پیشوند sig ذخیره سازی شده باشد
                 {
                     string name = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
 

@@ -24,7 +24,7 @@ namespace Skydat.classes2065
         private double _HoldTime;
         private string _comment1;
 
-        [CategoryAttribute("CV Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    15")]
+        [CategoryAttribute("CV Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    100")]
         public double Cycles
         {
             get
