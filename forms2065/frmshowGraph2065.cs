@@ -1059,8 +1059,6 @@ namespace Skydat.forms2065
         unsafe private void DoRun2(int row)
         {
             byte[] datas = new byte[3];
-            uint RecvLength = 3;
-            int s = 0;
             Int32 n = 0;
             Int64 j = 0, h = 0;
             byte num1, num2;
@@ -1069,14 +1067,7 @@ namespace Skydat.forms2065
             byte* InBuff = &num2;
             string string1;
             byte end = 0;
-            int counter = 0, number = 0, number2 = 0;
-            //byte[] data = new byte[65520];//قبلا این مقادیر بود اما اگر تعداد سیکل ها بالا رود رویداد این پارامترها رفرش نمیشود بنابراین هر سیکل در ادامه هم ذخیره میشد و نهایتا اگر از تعداد آرایه بالا میزد خطا میداد
-            //byte[] Powr = new Byte[32710];
-            //double[] Crnt = new double[32710];
-            //double[] C = new double[32710];
-            //byte[] Po = new Byte[32710];
-            //double[] Crn = new double[32710];
-            //Boolean[] signe = new Boolean[32710];
+            int counter = 0, number = 0;
             byte[] Powr = new Byte[4000000];
             double[] Crnt = new double[4000000];
             double[] C = new double[4000000];

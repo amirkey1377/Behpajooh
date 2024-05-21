@@ -51,6 +51,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.EIS = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
@@ -281,6 +282,7 @@
             this.toolStripLabel10,
             this.EIS,
             this.toolStripLabel12,
+            this.toolStripButton3,
             this.toolStripSeparator1,
             this.toolStripLabel9,
             this.toolStripButton9,
@@ -319,7 +321,7 @@
             this.EIS.Text = "EIS";
             this.EIS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.EIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.EIS.ToolTipText = "Device 2080 - 2090";
+            this.EIS.ToolTipText = "EIS";
             this.EIS.Click += new System.EventHandler(this.EIS_Click);
             // 
             // toolStripLabel12
@@ -329,10 +331,28 @@
             this.toolStripLabel12.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel12.Text = "            ";
             // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.AutoSize = false;
+            this.toolStripButton3.BackColor = System.Drawing.Color.White;
+            this.toolStripButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripButton3.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.toolStripButton3.Image = global::Skydat.Properties.Resources.importData;
+            this.toolStripButton3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(100, 95);
+            this.toolStripButton3.Text = "Import Data";
+            this.toolStripButton3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton3.ToolTipText = "Import Data";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(40, 97);
+            this.toolStripLabel3.Size = new System.Drawing.Size(40, 15);
             this.toolStripLabel3.Text = "           ";
             // 
             // toolStripSeparator2
@@ -344,7 +364,7 @@
             // 
             this.toolStripLabel6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(22, 97);
+            this.toolStripLabel6.Size = new System.Drawing.Size(22, 15);
             this.toolStripLabel6.Text = "     ";
             // 
             // frmbase
@@ -397,5 +417,6 @@
         private System.Windows.Forms.ToolStripButton EIS;
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
         private System.IO.Ports.SerialPort serialPort2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
     }
 }

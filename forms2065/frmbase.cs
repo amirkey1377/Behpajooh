@@ -19,7 +19,7 @@ namespace Skydat.forms2065
     public partial class frmbase : Form
     {
         //public string Version_No = "Version 8.2";
-
+        bool Idata = true;
         public frmbase()
         {
             InitializeComponent();
@@ -109,6 +109,7 @@ namespace Skydat.forms2065
 
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
+            Idata = false;
             this.Cursor = Cursors.WaitCursor;
             if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
             {
@@ -147,7 +148,7 @@ namespace Skydat.forms2065
                     return;
                 }
 
-                frmMain2065 frm = new frmMain2065();
+                frmMain2065 frm = new frmMain2065(Idata);
                 frm.Show();
                 frm.StartPosition = FormStartPosition.CenterScreen;
                 classes2065.movedata.open_form = 1;
@@ -220,5 +221,22 @@ namespace Skydat.forms2065
             Process.Start("chrome.exe", "https://behpajooh.net/");
         }
 
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Idata = true;
+            this.Cursor = Cursors.WaitCursor;
+            if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
+            {
+                this.Cursor = Cursors.Default;
+                MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmMain2065 frm = new frmMain2065(Idata);
+            frm.Show();
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            classes2065.movedata.open_form = 1;
+            this.Cursor = Cursors.Default;
+        }
     }
 }

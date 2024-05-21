@@ -68,11 +68,11 @@ namespace Skydat.forms2065
             this.restoreTechniquesparametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.pGrid = new System.Windows.Forms.PropertyGrid();
-            this.dschart1 = new Skydat.datasets.Dschart1();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.rd_low_cpc = new System.Windows.Forms.RadioButton();
             this.rd_hieght_cpc = new System.Windows.Forms.RadioButton();
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
+            this.dschart1 = new Skydat.datasets.Dschart1();
             this.panel6.SuspendLayout();
             this.toolstripChart.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -401,11 +401,6 @@ namespace Skydat.forms2065
             this.pGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pGrid_PropertyValueChanged);
             this.pGrid.Click += new System.EventHandler(this.pGrid_Click);
             // 
-            // dschart1
-            // 
-            this.dschart1.DataSetName = "Dschart1";
-            this.dschart1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // rd_low_cpc
             // 
             resources.ApplyResources(this.rd_low_cpc, "rd_low_cpc");
@@ -434,6 +429,11 @@ namespace Skydat.forms2065
             this.reSize1.InitialHostContainerHeight = 603D;
             this.reSize1.InitialHostContainerWidth = 743D;
             this.reSize1.Tag = null;
+            // 
+            // dschart1
+            // 
+            this.dschart1.DataSetName = "Dschart1";
+            this.dschart1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // frmselecttech2065
             // 
