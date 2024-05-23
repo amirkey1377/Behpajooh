@@ -260,6 +260,7 @@
             this.toolStripButton5.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "About";
+            this.toolStripButton5.Visible = false;
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripLabel11

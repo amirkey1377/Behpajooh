@@ -129,17 +129,17 @@
             this.rbAutoPeak.UseVisualStyleBackColor = true;
             this.rbAutoPeak.CheckedChanged += new System.EventHandler(this.rbAutoPeak_CheckedChanged);
             // 
-            // frmShowPeaks
+            // frmShowPeaks12065
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 546);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
-            this.Name = "frmShowPeaks";
+            this.Name = "frmShowPeaks12065";
             this.Text = "Peak detecting window";
-            this.Load += new System.EventHandler(this.frmShowPeaks_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmShowPeaks_FormClosing);
+            this.Load += new System.EventHandler(this.frmShowPeaks_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
