@@ -766,11 +766,14 @@ namespace Skydat.forms2065
                     //    watch.Stop();
                     //    watch.Reset();
                     //}
-                    
+
                     //Settxtfill_func(2, $"counter:{counter}", 2, 1);
                     // serialPort2.WriteLine("step");
                     number = serialPort2.BytesToRead;
-                    Setbtnenabled(true, 1, 2);
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        Setbtnenabled(true, 1, 2);
+                    });
                     if (number > 0)
                     {
                         try
@@ -826,9 +829,9 @@ namespace Skydat.forms2065
                                         oinp2 = (byte)Int32.Parse(strings[3]);
 
                                         counter++;
-                                        
+
                                         sign = 1;
-                                        
+
                                         flag_running = true;
 
                                     }
@@ -932,7 +935,11 @@ namespace Skydat.forms2065
                     counter++;
 
                     number = serialPort2.BytesToRead;
-                    Setbtnenabled(true, 1, 2);
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        Setbtnenabled(true, 1, 2);
+                    });
+
                     if (number > 0)
                     {
                         try
@@ -961,9 +968,9 @@ namespace Skydat.forms2065
                                     oinp2 = (byte)Int32.Parse(strings[3]);
 
                                     counter++;
-                                    
+
                                     sign = 1;
-                                    
+
                                     flag_running = true;
 
                                 }
@@ -1050,7 +1057,7 @@ namespace Skydat.forms2065
                 }
             }
 
-            
+
         }
 
 
@@ -1196,7 +1203,7 @@ namespace Skydat.forms2065
                 }
                 catch
                 {
-                    
+
                 }
                 if (sign == 1)
                 {
@@ -1651,24 +1658,24 @@ namespace Skydat.forms2065
                     {
                         OnlineChart.ChartAreas[0].AxisX.ScrollBar.Enabled = true;
                         OnlineChart.ChartAreas[0].AxisY.Title = "Potenial(mV)";
-                            //tChart1.ChartAreas[0].AxisX.Minimum = 0;
-                            //tChart1.ChartAreas[0].AxisX.Maximum = tChart1.ChartAreas[0].AxisX.Maximum;
-                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                        //tChart1.ChartAreas[0].AxisX.Minimum = 0;
+                        //tChart1.ChartAreas[0].AxisX.Maximum = tChart1.ChartAreas[0].AxisX.Maximum;
+                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
                         OnlineChart.ChartAreas[0].AxisX.ScaleView.SizeType = DateTimeIntervalType.Number;
 
-                            //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
-                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                            //pos =+ 5;
-                            if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
+                        //double size = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + 100 ;
+                        OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+                        //pos =+ 5;
+                        if (OnlineChart.ChartAreas[0].AxisX.Maximum >= 5)
                         {
                             OnlineChart.ChartAreas[0].AxisX.ScaleView.Position = OnlineChart.ChartAreas[0].AxisX.Maximum - 5;
                         }
 
 
                         OnlineChart.ChartAreas[0].CursorX.AutoScroll = true;
-                            //tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.Position + 5 ;
-                            //tChart1.ChartAreas[0].RecalculateAxesScale();
-                        });
+                        //tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.Position + 5 ;
+                        //tChart1.ChartAreas[0].RecalculateAxesScale();
+                    });
                     number = serialPort2.BytesToRead;
                     if (number > 0)
                     {
@@ -2428,7 +2435,7 @@ namespace Skydat.forms2065
                                 smootht0_t1(TechSeries, OnlineChart.Series[0].Color);
                             }
                             dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
-                            
+
                             break;
 
                         case 5://LSV
