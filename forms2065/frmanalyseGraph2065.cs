@@ -131,7 +131,9 @@ namespace Skydat.forms2065
         public double ContactpointX = 0, contactpointY = 0;
         public bool isSelectedLine = false;
         int  startpoint_selx = -1, startpoint_sely = -1, endpoint_selx = -1, endpoint_sely = -1;
-      
+        //این دو متغییر برای درست کردن داده های تب شو ریزالت در حالتی که تکنیک سی وی را بدون اسموٍث فعال میکنیم استفاده شده است
+        double[] array_modify = new double[1000];
+        double[] array_modify2 = new double[1000];
         KeyEventArgs ee = new KeyEventArgs(Keys.Alt);
         private void GraphForm_Load(object sender, EventArgs e)
         {
@@ -1820,89 +1822,96 @@ namespace Skydat.forms2065
       
         private void save_Data()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.AddExtension = true;
-            sfd.DefaultExt = "dat";
-            string dir_sfd = "";
-            sfd.Filter = "Data Files(*.dat)|*.dat|Signal File(*.sig)|*.sig"; 
-            int nn = treeView3.Nodes[0].Nodes.Count;
-            int filename_index = 1, index_main_dataset = 0;
-            string filename = "0";
-
-            if (dir_sfd != "") sfd.InitialDirectory = dir_sfd;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+            try
             {
-                string ext = sfd.FileName.Substring(sfd.FileName.Length - 3, 3);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.AddExtension = true;
+                sfd.DefaultExt = "dat";
+                string dir_sfd = "";
+                sfd.Filter = "Data Files(*.dat)|*.dat|Signal File(*.sig)|*.sig";
+                int nn = treeView3.Nodes[0].Nodes.Count;
+                int filename_index = 1, index_main_dataset = 0;
+                string filename = "0";
 
-                if (ext == "dat")//حالتی که فایل پیشوند dat ذخیره سازی شده باشد
+                if (dir_sfd != "") sfd.InitialDirectory = dir_sfd;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    for (int j = 0; j < nn; j++)
+                    string ext = sfd.FileName.Substring(sfd.FileName.Length - 3, 3);
+
+                    if (ext == "dat")//حالتی که فایل پیشوند dat ذخیره سازی شده باشد
                     {
-                        if (Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
+                        for (int j = 0; j < nn; j++)
                         {
-                            for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
-                                if (this.treeView3.Nodes[0].Nodes[f].Checked)
+                            if (Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
+                            {
+                                for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
+                                    if (this.treeView3.Nodes[0].Nodes[f].Checked)
+                                    {
+                                        filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[f].Text + "_" + (filename_index).ToString() + ".dat";
+
+                                        File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
+                                        filename_index++;
+                                        break;
+                                    }
+
+                                j += Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) - 1; // becuse cycle this here is a graf but in database not rows
+                            }
+                            else
+                            {
+                                if (this.treeView3.Nodes[0].Nodes[j].Checked)
                                 {
-                                    filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[f].Text + "_" + (filename_index).ToString() + ".dat";
+                                    filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[j].Text + "_" + (filename_index).ToString() + ".dat";
 
                                     File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
-                                    filename_index++;
-                                    break;
-                                }
 
-                            j += Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) - 1; // becuse cycle this here is a graf but in database not rows
+                                    filename_index++;
+                                }
+                            }
+
+                            index_main_dataset++;
                         }
-                        else
+                    }
+
+                    else if (ext == "sig")//حالتی که فایل پیشوند sig ذخیره سازی شده باشد
+                    {
+                        string name = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
+
+                        for (int j = 0; j < nn; j++)
                         {
+                            string file_name = name + "_" + (j + 1).ToString() + "." + ext;
+
                             if (this.treeView3.Nodes[0].Nodes[j].Checked)
                             {
-                                filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[j].Text + "_" + (filename_index).ToString() + ".dat";
+                                Array.Clear(volt, 0, Counter_num);
+                                Array.Clear(current, 0, Counter_num);
 
-                                File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
+                                Counter_num = tChart1.Series[j].Points.Count;
 
-                                filename_index++;
+                                Array.Resize(ref volt, Counter_num);
+                                Array.Resize(ref current, Counter_num);
+
+                                for (int i = 0; i < Counter_num; i++)
+                                {
+                                    double d = tChart1.Series[j].Points[i].XValue;
+                                    string msg = string.Format("{0:N4}", d);
+                                    msg = msg + "1";//نرم افزاری که فایل سیگ را باز میکند اگر مقادیر اعشار نداشته باشد گراف ترسیم نمیکند
+
+                                    volt[i] = Double.Parse(msg);
+                                    current[i] = tChart1.Series[j].Points[i].YValues[0];
+                                }
+
+                                File.WriteAllBytes(file_name, fill_matris());
                             }
-                        }
 
-                        index_main_dataset++;
+                            row_sig++;
+                        }
                     }
                 }
-
-                else if(ext == "sig")//حالتی که فایل پیشوند sig ذخیره سازی شده باشد
-                {
-                    string name = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
-
-                    for (int j = 0; j < nn; j++)
-                    {
-                        string file_name = name + "_" + (j + 1).ToString() + "." + ext;
-
-                        if (this.treeView3.Nodes[0].Nodes[j].Checked)
-                        {       
-                            Array.Clear(volt, 0, Counter_num);
-                            Array.Clear(current, 0, Counter_num);
-
-                            Counter_num = tChart1.Series[j].Points.Count;
-
-                            Array.Resize(ref volt, Counter_num);
-                            Array.Resize(ref current, Counter_num);
-                                                       
-                            for (int i = 0; i < Counter_num; i++)
-                            {
-                                double d = tChart1.Series[j].Points[i].XValue;
-                                string msg = string.Format("{0:N4}", d);
-                                msg = msg + "1";//نرم افزاری که فایل سیگ را باز میکند اگر مقادیر اعشار نداشته باشد گراف ترسیم نمیکند
-                               
-                                volt[i] = Double.Parse(msg);
-                                current[i] = tChart1.Series[j].Points[i].YValues[0];
-                            }
-                                                                                    
-                            File.WriteAllBytes(file_name, fill_matris());
-                        }
-
-                        row_sig++;
-                    }
-                }
+            }
+            catch(Exception EX)
+            {
+                MessageBox.Show(EX.Message);
             }
         }
 
@@ -2606,6 +2615,7 @@ namespace Skydat.forms2065
                 {
                     restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);      
 
+
                     operation = "i_Reverse";
                     show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true,shomar_val);
                     nindexchart2 = ii;
@@ -2621,8 +2631,38 @@ namespace Skydat.forms2065
       
         }
 
+        //private void toolStripButton11_Click_1(object sender, EventArgs e)
+        //{
+        //    drawline1.EnableDraw = false;
+        //    drawline1.removeall();
+        //    int shomarcheck = 0, ii = 0;
+        //    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+        //        if (treeView3.Nodes[0].Nodes[i].Checked)
+        //        {
+        //            shomarcheck++;
+        //            ii = i;
+        //        }
+        //    if (shomarcheck == 1)
+        //    {
+        //        treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
+
+        //        restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 1, 1);      
+
+
+
+
+        //        operation = "show_without_smoothing";
+        //        show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true,shomar_val);
+        //        nindexchart2 = ii;
+        //    }
+        //    else
+        //        MessageBox.Show("show graph without smoothing Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
+        //}
+
+
         private void toolStripButton11_Click_1(object sender, EventArgs e)
         {
+            int j = 0;
             drawline1.EnableDraw = false;
             drawline1.removeall();
             int shomarcheck = 0, ii = 0;
@@ -2636,13 +2676,34 @@ namespace Skydat.forms2065
             {
                 treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
 
-                restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 1, 1);      
-               
+                restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 1, 1);
+
 
 
 
                 operation = "show_without_smoothing";
-                show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true,shomar_val);
+                for (int i = 0; i < othertech_val0.Length; i++)// در تکنیک سی وی به دلیل اینکه در حالت بدون اسموث داده اشتباهی در نقطه صفر و صفر داشتیم از این کد برای پالایش و حذف داده غیرمربوط استفاده کردیم
+                {
+                    if (othertech_val0.Length > array_modify.Length)
+                    {
+                        Array.Resize(ref array_modify, othertech_val0.Length);
+                        Array.Resize(ref array_modify2, othertech_val0.Length);
+                    }
+
+                    if (othertech_val0[i] == 0 && othertech_val1[i] == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        array_modify[j] = othertech_val0[i];
+                        array_modify2[j] = othertech_val1[i];
+                        j++;
+                    }
+
+
+                }
+                show_Graph(0, this, "SubChart", array_modify, array_modify2, true, j);
                 nindexchart2 = ii;
             }
             else

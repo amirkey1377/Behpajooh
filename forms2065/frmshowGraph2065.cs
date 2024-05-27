@@ -595,7 +595,7 @@ namespace Skydat.forms2065
                         {
                             //Settxtfill_func(2, $"counter1", 2, 1);
                             string1 = serialPort2.ReadLine();
-                            serialPort2.DiscardInBuffer();//برای جلوگیری از اورفلو شدن بافر ذخیره دادهای گرفتخ شده از یو اس بی
+                            //serialPort2.DiscardInBuffer();//برای جلوگیری از اورفلو شدن بافر ذخیره دادهای گرفتخ شده از یو اس بی
 
                             if (string1.Contains("stop"))
                             {
@@ -780,7 +780,7 @@ namespace Skydat.forms2065
                         {
                             //Settxtfill_func(2, $"counter1", 2, 1);
                             string1 = serialPort2.ReadLine();
-                            serialPort2.DiscardInBuffer();//برای جلوگیری از اورفلو شدن بافر ذخیره دادهای گرفتخ شده از یو اس بی
+                            //serialPort2.DiscardInBuffer();//برای جلوگیری از اورفلو شدن بافر ذخیره دادهای گرفتخ شده از یو اس بی
 
                             //ReciveString.Remove(ReciveString.Length-1);
                             if (sign == 0)
@@ -1085,6 +1085,8 @@ namespace Skydat.forms2065
             int i = 0;
             double Itot = 0;
             double V = 0, I1 = 0, I2 = 0, Vold;
+
+            countcv = 0;
 
             //متد اینوکر برای اینکه تابعی که در ترد دیگری اجرا می‌شود را به صورت متغییر فراخوانی کنیم
             this.Invoke((MethodInvoker)delegate ()
@@ -2431,8 +2433,11 @@ namespace Skydat.forms2065
                             run_key_tch4(TechSeries);//به علت داشتن سیکل ذخیره فایل و نرم کردن درون توابع زیرمجموعه انجام می شود
                             if (cv_stop)
                             {
+                                countcv++;
                                 transferdata(TechSeries, 1);
+                                Setgrfnodetext(TechSeries, 4, 1);
                                 smootht0_t1(TechSeries, OnlineChart.Series[0].Color);
+                                
                             }
                             dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
 
@@ -2591,22 +2596,21 @@ namespace Skydat.forms2065
 
         private void transferdata(int rownum, int typecall)
         {
+            string Directory = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\";
             string strpath = "";// fName = "";
 
             for (long i = 100001; i < 1000000; i++)
             {
-                if (!File.Exists(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\" + clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat"))
+                if (!File.Exists(Directory + clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat"))
                 {
                     if (cycle_number_in_file <= 1)// without cycle
                     {
-                        strpath = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\" + clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
-                        //fName = clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
+                        strpath = Directory + clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
                         break;
                     }
-                    else
+                    else // with cycle
                     {
                         strpath = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\" + clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + (i - 1).ToString().Trim() + ".dat";
-                        //fName = clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
                         break;
                     }
                 }
