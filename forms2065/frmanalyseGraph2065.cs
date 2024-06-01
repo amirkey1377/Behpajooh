@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -932,8 +932,10 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart2.analyselist.Rows[row][16].ToString()) != 9999) str_fillparam = str_fillparam + "I2 =" + double.Parse(dschart2.analyselist.Rows[row][16].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][3].ToString()) != 9999) str_fillparam = str_fillparam + "EUP =" + double.Parse(dschart2.analyselist.Rows[row][3].ToString()) + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "EDO =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][10].ToString()) != 9999) str_fillparam = str_fillparam + "Cycle =" + double.Parse(dschart2.analyselist.Rows[row][10].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
 
                 }
@@ -1843,7 +1845,7 @@ namespace Skydat.forms2065
                     {
                         for (int j = 0; j < nn; j++)
                         {
-                            if (Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
+                            if (Convert.ToDouble(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
                             {
                                 for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
                                     if (this.treeView3.Nodes[0].Nodes[f].Checked)
@@ -5920,10 +5922,6 @@ namespace Skydat.forms2065
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {

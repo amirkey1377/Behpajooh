@@ -362,7 +362,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) != 9999) Parameters.Text = Parameters.Text + "E3 =" + double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) != 9999) Parameters.Text = Parameters.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        //if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                        if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) != 9999) Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
@@ -445,9 +445,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) != 9999) Parameters.Text = Parameters.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) != 9999) Parameters.Text = Parameters.Text + "EUP =" + double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "EDO =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
-                        if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + " Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        if (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) != 9999) Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        if (double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) != 9999) Parameters.Text = Parameters.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
+                        if (double.Parse(dschart1.chartlist1_run.Rows[row][12].ToString()) != 9999) Parameters.Text = Parameters.Text + " Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][12].ToString()) + "\n";
                         break;
                 }
                 Parameters.Text = Parameters.Text + "comment =" + dschart1.chartlist1_run.Rows[row]["comment"].ToString();
@@ -1175,9 +1173,9 @@ namespace Skydat.forms2065
                                 }
 
                                 //counter = (int)Int32.Parse(strings[4]);
-                                //          Settxtfill_func(2, $"c:{datas[2]},i{i}", 2, 1);
-                                //        Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
-                                //      Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
+                                //Settxtfill_func(2, $"c:{datas[2]},i{i}", 2, 1);
+                                //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
+                                //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
 
                                 counter++;
                                 sign = 1;
@@ -1340,7 +1338,7 @@ namespace Skydat.forms2065
                                             I1 = C[j - 1];
                                             //Settxtfill_func(2, $"positive2", 2, 1);
                                             //I1 = C[j - 1] - C[j];
-                                            // I2 = 0;
+                                            //I2 = 0;
                                         }
 
                                         // Addxy(V1,I0,'',Colr[cl])
@@ -2023,6 +2021,10 @@ namespace Skydat.forms2065
                                 datas[1] = (byte)Int32.Parse(strings[3]);
                                 //counter = (int)Int32.Parse(strings[4]);
 
+                                //Settxtfill_func(2, $"c:{datas[2]},i{i}", 2, 1);
+                                //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
+                                //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
+
 
                                 counter++;
                                 sign = 1;
@@ -2431,15 +2433,19 @@ namespace Skydat.forms2065
 
                         case 4://CV   
                             run_key_tch4(TechSeries);//به علت داشتن سیکل ذخیره فایل و نرم کردن درون توابع زیرمجموعه انجام می شود
+                            dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
                             if (cv_stop)
                             {
                                 countcv++;
+                                dschart1.chartlist1_run.Rows[TechSeries][13] = countcv;
+                                movedata.main_cycle = Convert.ToString(countcv);
+
                                 transferdata(TechSeries, 1);
                                 Setgrfnodetext(TechSeries, 4, 1);
+                                fillTechParameter(treeView3.Nodes[0].Nodes[TechSeries].Index, 1);
                                 smootht0_t1(TechSeries, OnlineChart.Series[0].Color);
-                                
+
                             }
-                            dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
 
                             break;
 
@@ -3270,14 +3276,8 @@ namespace Skydat.forms2065
             });
         }
 
-        private void OnlineChart_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Settxtfill_func(int typetxt, string txt, int code, int state)
         {
-
             switch (code)
             {
                 case 1:
