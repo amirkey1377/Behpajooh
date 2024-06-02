@@ -25,59 +25,13 @@ namespace Skydat.forms2065
             InitializeComponent();
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            frmbackgroundset frm = new frmbackgroundset(this,5);
-            frm.StartPosition = FormStartPosition.CenterScreen;
-            frm.ShowDialog();
-           
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\Help.pdf");
-            }
-            catch (Exception s)
-            {
-                MessageBox.Show(s.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
         private void frmbase_Load(object sender, EventArgs e)
         {
             try  
-            {   
+            {
                 pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); 
             }
             catch { }
-        }
-        public Image GetImage(string value)
-        {
-            byte[] bytes = Convert.FromBase64String(value);
-            Image image;
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-            return image;
-        }
-        
-
-       
-        private void btnchangepass_Click(object sender, EventArgs e)
-        {
-            frmAbout2065 af = new frmAbout2065();
-            af.StartPosition = FormStartPosition.CenterScreen;
-            //af.VerLabel.Text = Version_No;
-            af.ShowDialog();
         }
 
         List<string> ComPortNames(String VID, String PID)//این متد برای پیدا کردن رجیستری متناظر با پورتی هست که دستگاه به آن وصل شده برای اتوماتیک وصل کردن دستگاه
@@ -107,7 +61,7 @@ namespace Skydat.forms2065
             return comports;
         }
 
-        private void btnAnalyze_Click(object sender, EventArgs e)
+        private void Btn2066_Click(object sender, EventArgs e)
         {
             Idata = false;
             this.Cursor = Cursors.WaitCursor;
@@ -174,7 +128,6 @@ namespace Skydat.forms2065
             this.Cursor = Cursors.Default;
         }
 
-
         private void EIS_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -192,36 +145,12 @@ namespace Skydat.forms2065
             this.Cursor = Cursors.Default;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            //classes2065.clasmpusbapi usb_fun = new classes2065.clasmpusbapi();
-
-            //if (usb_fun.OpenPipes() != 1)
-            //{
-            //    MessageBox.Show("no usb", "Warning");
-
-            //}
-            //else
-            //{
-               // MessageBox.Show(usb_fun.getfwversion(), "Warning");
-                forms2080.frmPortOption2080 prtopt = new forms2080.frmPortOption2080();
-                prtopt.StartPosition = FormStartPosition.CenterScreen;
-                prtopt.ShowDialog();
-            //}
-            //bool showingform = true;
-            //if (sender is ToolStripMenuItem)
-            //    if ((sender as ToolStripMenuItem) == portOptionToolStripMenuItem)
-            //        showingform = true;
-            //if (showingform)
-        }
-
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            Process.Start("chrome.exe", "https://behpajooh.net/");
+            
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void ImportBtn_Click(object sender, EventArgs e)
         {
             Idata = true;
             this.Cursor = Cursors.WaitCursor;
@@ -238,5 +167,38 @@ namespace Skydat.forms2065
             classes2065.movedata.open_form = 1;
             this.Cursor = Cursors.Default;
         }
+
+        private void CustomizeBtn_Click(object sender, EventArgs e)
+        {
+            frmbackgroundset frm = new frmbackgroundset(this, 5);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.ShowDialog();
+        }
+
+        private void HelpBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\Help.pdf");
+            }
+            catch (Exception s)
+            {
+                MessageBox.Show(s.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PortBtn_Click(object sender, EventArgs e)
+        {
+            forms2080.frmPortOption2080 prtopt = new forms2080.frmPortOption2080();
+            prtopt.StartPosition = FormStartPosition.CenterScreen;
+            prtopt.ShowDialog();
+        }
+
+        private void TechnicalBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start("chrome.exe", "https://behpajooh.net/");
+        }
+
+
     }
 }

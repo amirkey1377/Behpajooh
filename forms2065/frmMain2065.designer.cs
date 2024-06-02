@@ -157,7 +157,6 @@ namespace Skydat.forms2065
             // sfd
             // 
             this.sfd.InitialDirectory = "D:\\Shaemi\\Skydat\\Skydat\\bin\\Debug";
-            this.sfd.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // textBox1
             // 
