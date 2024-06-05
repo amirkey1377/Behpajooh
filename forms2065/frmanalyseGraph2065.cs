@@ -42,10 +42,10 @@ namespace Skydat.forms2065
         public frmanalyseGraph2065()
         {
             InitializeComponent();
-          
+
             tChart2.Titles.Clear();
             Title header1 = this.tChart2.Titles.Add("Header");
-            
+
             header1.Alignment = ContentAlignment.TopLeft;
             header1.Docking = Docking.Top;
             this.tChart2.Titles[0].Text = "";
@@ -81,7 +81,7 @@ namespace Skydat.forms2065
             tChart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.ScrollBar.BackColor = Color.Black;
             //tChart2.ChartAreas.Add("b1");
-           // tChart2.Legends.Add("b1");
+            // tChart2.Legends.Add("b1");
             tChart2.ChartAreas[0].Area3DStyle.Enable3D = false;
 
             tChart2.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
@@ -94,7 +94,7 @@ namespace Skydat.forms2065
             tChart2.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
             tChart2.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
 
-            tChart2.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0"; 
+            tChart2.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
             tChart2.ChartAreas[0].AxisX.LabelStyle.Format = "#0.##";
             this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             this.tChart2.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
@@ -112,12 +112,12 @@ namespace Skydat.forms2065
         private System.Drawing.Rectangle rectsel;
         bool smooth_state = false;
         public string operation = "";
-        public  System.Windows.Forms.DataVisualization.Charting.Chart chart ;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chart;
         public drawline_chart drawline1;
-        private string statebutton = "",statebutton_1="";
+        private string statebutton = "", statebutton_1 = "";
         public int num_Series = 0;
         double[] othertech_val0 = new double[200];
-        double[] othertech_val1 = new double[200];       
+        double[] othertech_val1 = new double[200];
         private int shomar_val = 0;
         public int[] Overlay_tech = new int[1000];
         public byte tech = 0;
@@ -130,7 +130,7 @@ namespace Skydat.forms2065
         public frmShowPeaks12065 fPeak;
         public double ContactpointX = 0, contactpointY = 0;
         public bool isSelectedLine = false;
-        int  startpoint_selx = -1, startpoint_sely = -1, endpoint_selx = -1, endpoint_sely = -1;
+        int startpoint_selx = -1, startpoint_sely = -1, endpoint_selx = -1, endpoint_sely = -1;
         //این دو متغییر برای درست کردن داده های تب شو ریزالت در حالتی که تکنیک سی وی را بدون اسموٍث فعال میکنیم استفاده شده است
         double[] array_modify = new double[1000];
         double[] array_modify2 = new double[1000];
@@ -171,7 +171,7 @@ namespace Skydat.forms2065
             }
         }
 
-      
+
         public void Set_line_Setting()
         {
             drawline1.EnableDraw = opForm.cbDrawLine.Checked;
@@ -194,7 +194,7 @@ namespace Skydat.forms2065
             {
                 if (isSelectedLine)
                 {
-                   
+
                     if (mainf.Detect_Peak && fPeak.rbManualPeak.Checked)
                     {
                         double Step = Math.Abs(tChart1.Series[0].Points[1].XValue - tChart1.Series[0].Points[1].XValue);
@@ -203,14 +203,14 @@ namespace Skydat.forms2065
                         int X2 = sender.ToPoint.X;
                         int Y2 = sender.ToPoint.Y;
                         var results1 = tChart1.HitTest(X1, Y1, false, ChartElementType.PlottingArea);
-                        double X_V1=0, Y_V1=0, X_V2=0, Y_V2=0;
+                        double X_V1 = 0, Y_V1 = 0, X_V2 = 0, Y_V2 = 0;
                         foreach (var result in results1)
                         {
                             if (result.ChartElementType == ChartElementType.PlottingArea)
                             {
                                 X_V1 = result.ChartArea.AxisX.PixelPositionToValue(X1);
                                 Y_V1 = result.ChartArea.AxisY.PixelPositionToValue(Y1);
-                                
+
                             }
                         }
                         var results2 = tChart1.HitTest(X2, Y2, false, ChartElementType.PlottingArea);
@@ -241,7 +241,7 @@ namespace Skydat.forms2065
                         }
                         try
                         {
-                            
+
                             //fPeak.richTextBox1.Text += cPeak.manual(OnlineChart.Series[0].,XValues.Value, OnlineChart.Series[0].YValues.Value, X_V1, Y_V1, X_V2, Y_V2, (int)(Math.Abs(P2 - P1) / Step));
                             //fPeak.richTextBox1.Text += cPeak.findp1(XX, YY, (int)((P2 - P1) / Step));
                         }
@@ -255,7 +255,7 @@ namespace Skydat.forms2065
             catch { }
         }
 
-     
+
 
         private void GraphForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -263,7 +263,7 @@ namespace Skydat.forms2065
             if (mainf.grfNum > 0)
                 mainf.grfNum--;
         }
-      
+
 
         private void Chart1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -285,12 +285,12 @@ namespace Skydat.forms2065
                         tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
                     else
                         tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
-                                  
+                    tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
+                    tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
+
                     mDown = xv;
                     mDowny = yv;
-                   
+
                 }
                 else
                 {
@@ -308,7 +308,7 @@ namespace Skydat.forms2065
                                 case "showvalue":
                                     tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
 
-                                    break;                              
+                                    break;
                                 default:
                                     tChart1.Cursor = System.Windows.Forms.Cursors.Default;
                                     break;
@@ -349,13 +349,14 @@ namespace Skydat.forms2065
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-      
+
 
         private void Chart1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
                 drawline1.EnableDraw = true;
-            if (e.KeyValue == 91)          {
+            if (e.KeyValue == 91)
+            {
 
 
                 chart.Dispose();
@@ -377,26 +378,26 @@ namespace Skydat.forms2065
 
         private void tChart1_PostPaint(object sender, ChartPaintEventArgs e)
         {
-            Chart1_AfterDraw(sender);  
+            Chart1_AfterDraw(sender);
         }
 
         private void Chart1_AfterDraw(object sender)
         {
-            mainf.Enable_Button(tChart1.Series.Count);     
+            mainf.Enable_Button(tChart1.Series.Count);
         }
-           
+
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             opForm.mf = this.mainf;
             opForm.gf = this;
             opForm.ShowDialog();
         }
-        
+
         private void clearPlotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clearselplot();
         }
-        
+
         public void clearform()
         {
             for (int i = treeView3.Nodes[0].Nodes.Count - 1; i >= 0; i--)
@@ -406,7 +407,7 @@ namespace Skydat.forms2065
             for (int i = tChart1.Series.Count - 1; i >= 0; i--)
                 tChart1.Series.RemoveAt(i);
             tChart1.Refresh();
-            dschart2.analyselist.Clear();          
+            dschart2.analyselist.Clear();
             tChart2.Titles[0].Text = "";
             tChart2.Series.Clear();
             drawline1.removeall();
@@ -414,7 +415,7 @@ namespace Skydat.forms2065
         }
 
         private void treeView3_AfterCheck(object sender, TreeViewEventArgs e)
-        {       
+        {
             if (e.Node.Level > 0)
             {
                 for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
@@ -442,18 +443,19 @@ namespace Skydat.forms2065
 
                 }
             }
-            else if (e.Node.Level == 0) {
+            else if (e.Node.Level == 0)
+            {
                 if (treeView3.Nodes[0].Checked)
                 {
                     for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        treeView3.Nodes[0].Nodes[i].Checked = true;                     
+                        treeView3.Nodes[0].Nodes[i].Checked = true;
                 }
-                else 
+                else
                 {
                     for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
                         treeView3.Nodes[0].Nodes[i].Checked = false;
                 }
-            
+
             }
             //OnlineChart.Refresh();
         }
@@ -464,7 +466,7 @@ namespace Skydat.forms2065
             {
                 if (e.Node.IsSelected)
                 {
-                    label4.Text=fillparam(1,e.Node.Index);
+                    label4.Text = fillparam(1, e.Node.Index);
                 }
 
             }
@@ -484,16 +486,16 @@ namespace Skydat.forms2065
                         break;
                     case DialogResult.Cancel:
                         return;
-                      
+
                 }
             }
-           
+
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.DereferenceLinks = false;
             ofd.AutoUpgradeEnabled = false;
             ofd.Multiselect = true;
             ofd.DefaultExt = "txt";
-            
+
             ofd.Filter = "Text Files(*.Txt);Data Files(*.Dat)|*.txt;*.dat";
             ofd.ShowDialog();
             bool beOverlay = overlaymain;
@@ -517,7 +519,7 @@ namespace Skydat.forms2065
                         }
                         else
                             k--;
-                                       
+
                     string fName_2 = fName;
                     fName = "";
                     int ok = 0;
@@ -528,12 +530,12 @@ namespace Skydat.forms2065
                                 break;
                             else
                                 fName = fName + fName_2[g].ToString();  //mnfile
-                            
-                        
+
+
                         if (fName_2[g].ToString() == "_") ok = 1;
                     }
                     if (ok == 0) fName = fName_2.Substring(0, fName_2.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
-                                      
+
                     for (int ii = 0; ii < cycle; ii++)
                     {
                         restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
@@ -542,19 +544,20 @@ namespace Skydat.forms2065
 
                         if (cycle > 1)
                             treeView3.Nodes[0].Nodes.Add(fName + "-" + (ii + 1));  // CV-1.dat
-                       else
+                        else
                             treeView3.Nodes[0].Nodes.Add(fName);  // CV.dat
                     }
 
                     n--;
-                                      
-                    if (dschart2.analyselist.Rows.Count == n) {
+
+                    if (dschart2.analyselist.Rows.Count == n)
+                    {
                         MessageBox.Show("FILE FORMAT IS NOT CORRECT" + Environment.NewLine + "Please try again");
                         return;
-                    }   
+                    }
 
                     cycle = 1;
-                                       
+
                     Text = ofd.FileNames.GetValue(i).ToString();
 
                 }
@@ -576,20 +579,20 @@ namespace Skydat.forms2065
 
         }
 
-        Int16 cycle = 1,line_file=-1;
+        Int16 cycle = 1, line_file = -1;
         private void restore_Data(string fileName, bool overlaymain)
         {
             double[] xTmp = { 0 };
             double[] yTmp = { 0 };
-            string s = "", fs = "", comment100 = "";
+            string s , fs = "", comment100 = "";
             bool isData = false;
             int num_ser = 0, num_data = 0;
-            //int row = 0;
+
             if (fileName != "")
                 fs = fileName;
             StreamReader Fl;
             int tch = 0; double CR = 9999, E1 = 9999, E2 = 9999, E3 = 9999, HS = 9999, QT = 9999, SRF = 9999, SRR = 9999;
-            double TS = 9999, PW = 9999, PH = 9999, FR = 9999, CY=1 /*CY = 9999*/, HT = 9999, T1 = 9999, T2 = 9999, I1 = 9999, I2 = 9999;
+            double TS = 9999, PW = 9999, PH = 9999, FR = 9999, CY = 1 /*CY = 9999*/, HT = 9999, T1 = 9999, T2 = 9999, I1 = 9999, I2 = 9999;
             double AA = 9999, Q1 = 9999;
             EventArgs e = new EventArgs();
             if (fs != "")
@@ -600,11 +603,11 @@ namespace Skydat.forms2065
                 try
                 {
                     Int32 line = -1;
-                    
+
                     while (!Fl.EndOfStream)
                     {
                         s = Fl.ReadLine();
-                       
+
                         line_file++;
 
                         line++;
@@ -670,7 +673,7 @@ namespace Skydat.forms2065
                             else if (s.IndexOf("I1") >= 0) I1 = restore_One_Data(s, "I1");
                             else if (s.IndexOf("I2") >= 0) I2 = restore_One_Data(s, "I2");
                             else if (s.IndexOf("comment") >= 0)
-                            comment100 = s.Substring(s.IndexOf(":") + 1);
+                                comment100 = s.Substring(s.IndexOf(":") + 1);
 
                             if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
                             {
@@ -772,7 +775,7 @@ namespace Skydat.forms2065
 
         }
         private void fillgraphlist(int tch, double CR, double E1, double E2, double E3, double HS, double QT, double SRF, double SRR,
-           double TS, double PW, double PH, double FR, double CY, double HT, double T1, double T2, double I1, double I2, double AA, double Q1,string strpath,string comment100)
+           double TS, double PW, double PH, double FR, double CY, double HT, double T1, double T2, double I1, double I2, double AA, double Q1, string strpath, string comment100)
         {
 
             DataRow dr = dschart2.analyselist.NewRow();
@@ -800,20 +803,21 @@ namespace Skydat.forms2065
             dschart2.analyselist.Rows.Add(dr);
 
         }
-        private string fillparam(int typecall ,int row)
+        private string fillparam(int typecall, int row)
         {
-             string str_fillparam = "";
+            string str_fillparam = "";
             try
             {
-               
+
                 if (typecall == 1)
                 {
                     str_fillparam = "Properties :" + Environment.NewLine;
                     label41.Text = "";
                     label41.Text = "Technique name :" + clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[row][0].ToString())];
                 }
-                else {
-                    str_fillparam = "Technique name :" + clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[row][0].ToString())] + "\n\n"+"Properties :" +"\n";
+                else
+                {
+                    str_fillparam = "Technique name :" + clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[row][0].ToString())] + "\n\n" + "Properties :" + "\n";
                 }
                 switch (byte.Parse(dschart2.analyselist.Rows[row][0].ToString()))
                 {
@@ -893,7 +897,7 @@ namespace Skydat.forms2065
                         break;
                     case clasglobal.CPC:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString())+ "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
@@ -913,9 +917,9 @@ namespace Skydat.forms2065
                         break;
                     case clasglobal.CA:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString())  + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString())  + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
@@ -950,13 +954,12 @@ namespace Skydat.forms2065
             smootht4(row, tChart1.Series[row].Color, 1, 2);
             tChart1.Refresh();
         }
-         private double restore_One_Data(string str, string prmName)
+        private double restore_One_Data(string str, string prmName)
         {
             if (prmName == "Tech")
             {
-                string strTch = "";
-                byte Tch = 0;
-                strTch = str.Substring(str.IndexOf(':') + 1).Trim();
+                string strTch = str.Substring(str.IndexOf(':') + 1).Trim();
+                byte Tch;
                 switch (strTch)
                 {
                     case "DCV": Tch = clasglobal.DCV; break;
@@ -972,11 +975,11 @@ namespace Skydat.forms2065
                     case "CHP": Tch = clasglobal.CHP; break;
                     case "CA": Tch = clasglobal.CA; break;
                     case "CHC": Tch = clasglobal.CHC; break;
-                    //case "SC": Tch = clasglobal.SC; break;
+                    case "CD": Tch = clasglobal.CD; break;
                     case "CCC": Tch = clasglobal.CCC; break;
                     default: Tch = 15; break;
                 }
-                return (double)Tch;
+                return Tch;
             }
             str = str.ToLower();
             prmName = prmName.ToLower();
@@ -1024,7 +1027,7 @@ namespace Skydat.forms2065
                 MessageBox.Show("Overlay must be checked \n Number of open graphs must be equal 2");
 
         }
-        public void show_Graph(int num_ser, frmanalyseGraph2065 grfn, string main_subchart, double[] xx, double[] yy, bool overlaymain,int shomaresh)
+        public void show_Graph(int num_ser, frmanalyseGraph2065 grfn, string main_subchart, double[] xx, double[] yy, bool overlaymain, int shomaresh)
         {
             int L = 0;
             if (xx.Length != yy.Length) // Convert bigest Array to smallest if length of x and y is not equal
@@ -1032,18 +1035,18 @@ namespace Skydat.forms2065
                 L = xx.Length;
                 if (yy.Length < L) L = yy.Length;
             }
-            
+
             if (L == 0)
             {
                 Array.Resize(ref xx, shomaresh);
                 Array.Resize(ref yy, shomaresh);
 
-              
+
             }
             if (main_subchart == "MainChart")
             {
                 Set_Graph(0, true, overlaymain);
-              
+
                 tChart1.Series[num_Series].Points.DataBindXY(xx, yy);
             }
             if (main_subchart == "SubChart")
@@ -1059,23 +1062,23 @@ namespace Skydat.forms2065
                     this.tChart2.ChartAreas[0].AxisX.MinorGrid.Enabled = this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled;
                     this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled = this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled;
                     this.tChart2.ChartAreas[0].AxisY.MinorGrid.Enabled = this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled;
-                   
-                    if ( operation == "i_Forward")
+
+                    if (operation == "i_Forward")
                         smootht4(0, tChart2.Series[0].Color, 2, 3);
-                    else if (operation == "i_Reverse" )
+                    else if (operation == "i_Reverse")
                         smootht4(0, tChart2.Series[0].Color, 2, 4);
                     else
                         tChart2.Series[0].Points.DataBindXY(xx, yy);
                     tChart2.ChartAreas[0].RecalculateAxesScale();
-                   // tChart2.Refresh();
+                    // tChart2.Refresh();
 
                 }
             }
-           difxview2 = tChart2.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-           difyview2 = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+            difxview2 = tChart2.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+            difyview2 = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
 
         }
-       
+
         public void Set_Graph(int num, bool isFromOpen, bool overlaymain)
         {
             Random Random1 = new Random();
@@ -1085,38 +1088,38 @@ namespace Skydat.forms2065
             int Random_Color_Index = 0;
             Random_Color_Index = (int)(Random1.NextDouble() * 90);
             if (!overlaymain)
-                  tChart1.Series.Clear();
+                tChart1.Series.Clear();
             System.Windows.Forms.DataVisualization.Charting.Series ser1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             ser1.Color = clasglobal.color_Graph[Random_Color_Index];
             ser1.LabelFormat = "#,##0.###########";
             if (opForm.rbfLine.Checked)
             {
-                ser1.ChartType=SeriesChartType.FastLine; 
+                ser1.ChartType = SeriesChartType.FastLine;
 
             }
             if (opForm.rbLine.Checked)
             {
-                ser1.ChartType = SeriesChartType.Line; 
+                ser1.ChartType = SeriesChartType.Line;
             }
             if (opForm.rbPoint.Checked)
             {
-                ser1.ChartType = SeriesChartType.Point; 
+                ser1.ChartType = SeriesChartType.Point;
             }
             tChart1.Series.Add(ser1);
             num_Series = tChart1.Series.Count - 1;////////////////////////////
-            tChart1.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];         
-           
+            tChart1.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
+
             if (!overlaymain)
             {
                 tChart1.Series[num_Series].Points.Clear();
-               
+
                 tChart1.Series.Remove(tChart1.Series[0]);
             }
-          
 
-            tChart1.ChartAreas[0].Area3DStyle.Enable3D= false;
-           // OnlineChart.BackColor = Color.White;
-           
+
+            tChart1.ChartAreas[0].Area3DStyle.Enable3D = false;
+            // OnlineChart.BackColor = Color.White;
+
             //OnlineChart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
             //OnlineChart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
             tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle[tech];
@@ -1131,7 +1134,7 @@ namespace Skydat.forms2065
             //this.OnlineChart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
             //this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
             //this.OnlineChart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
-            }
+        }
 
         private void clearselplot()
         {
@@ -1184,7 +1187,7 @@ namespace Skydat.forms2065
 
             }
         }
-      
+
         public void mathematicf(int XorY, string txt, double value, int i)
         {
 
@@ -1200,7 +1203,7 @@ namespace Skydat.forms2065
 
             // OnlineChart.Series[num_Series].Clear();
             operation = "Mathematics";
-            show_Graph(0, this, "SubChart", mc.AR, mc.BR, true,mc.AR.Length);
+            show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
 
         }
 
@@ -1231,7 +1234,7 @@ namespace Skydat.forms2065
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int i1 = 0;
             int shomarcheck = 0;
             for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
@@ -1262,12 +1265,12 @@ namespace Skydat.forms2065
         private void toolStripButton16_Click(object sender, EventArgs e)
         {
             frmShowPeaks12065 fpeak = new frmShowPeaks12065();
-           // bool Detect_Peak = true;
+            // bool Detect_Peak = true;
             // fpeak.fm = this;
             fpeak.Foption = this.opForm;
             fpeak.MdiParent = this;
             fpeak.Show();
-        }   
+        }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
@@ -1279,16 +1282,16 @@ namespace Skydat.forms2065
         private void toolStripButton21_Click(object sender, EventArgs e)
         {
             tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-          //  OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
+            //  OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-          //  OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
+            //  OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
 
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
             this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
             this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled = false;        
+            this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
         }
 
         private void toolStripButton11_Click(object sender, EventArgs e)
@@ -1302,7 +1305,7 @@ namespace Skydat.forms2065
             tChart2.Series.Clear();
             tChart2.Refresh();
             pnl_peak_search.Visible = false;
-             
+
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
             opengraph();
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
@@ -1339,7 +1342,7 @@ namespace Skydat.forms2065
 
                 }
                 mc.Derivate(P, I);
-                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true,mc.AR.Length);
+                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
                 nindexchart2 = i1;
             }
             else
@@ -1347,7 +1350,7 @@ namespace Skydat.forms2065
 
         }
 
-    
+
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
@@ -1373,7 +1376,7 @@ namespace Skydat.forms2065
                         nindexchart2 = i;
                     }
                 drawline1.EnableDraw = true;
-               
+
                 tChart2.Focus();
             }
             else
@@ -1382,16 +1385,16 @@ namespace Skydat.forms2065
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-           // save_Data();
+            // save_Data();
         }
 
-  
+
         private void tsbSaveAll_Click(object sender, EventArgs e)
         {
             int f = 0;
 
-            for(int i=0;i<treeView3.Nodes[0].Nodes.Count;i++)
-                if(treeView3.Nodes[0].Nodes[i].Checked==true )
+            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+                if (treeView3.Nodes[0].Nodes[i].Checked == true)
                 {
                     f = 1;
                     break;
@@ -1402,10 +1405,10 @@ namespace Skydat.forms2065
             else
                 MessageBox.Show("There is not any case select for saving !!!");
         }
-       
+
         private System.Drawing.Point point_start, TempPoint, point_end;
         int numline = -1;
-      
+
         private void tChart2_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -1446,10 +1449,10 @@ namespace Skydat.forms2065
                     tChart2.Cursor = Cursors.Default;
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }                   
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        public void draw_point(double x,double y)
+        public void draw_point(double x, double y)
         {
             try
             {
@@ -1497,7 +1500,7 @@ namespace Skydat.forms2065
                     if (x >= volt[forward_count - 1])//برای انتخاب آخرین نقطه
                         x_2 = volt[forward_count - 1];
                 }
-                
+
 
 
                 if (x_2 == -32000)//اگر حتما مقداری انتخاب شده است
@@ -1556,11 +1559,11 @@ namespace Skydat.forms2065
                     else
                         final_y = y_stor;
                 }
-                
+
                 tChart2.Series[1].Points.AddXY(x_2, final_y);
-       
+
                 start_click = 0;
-                end_click = 1;    
+                end_click = 1;
             }
             catch (Exception m)
             {
@@ -1625,7 +1628,7 @@ namespace Skydat.forms2065
                                 break;
 
                             default:
-                                if (start_click == 0 && end_click==0)
+                                if (start_click == 0 && end_click == 0)
                                     tChart2.Cursor = System.Windows.Forms.Cursors.Default;
                                 break;
                         }
@@ -1657,7 +1660,7 @@ namespace Skydat.forms2065
                         }
 
                         string x = x111.ToString("#.##");
-                       
+
                         if (x111 < 1)//قرار دادن صفر قبل از ممیز
                         {
                             if (x111 >= 0)
@@ -1668,7 +1671,7 @@ namespace Skydat.forms2065
                                 x = "-0" + x;
                             }
                         }
-                                                                      
+
                         mainf.xyLabel.Text = x + "," + y111.ToString("#.#e-0");
                         //mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
 
@@ -1710,7 +1713,7 @@ namespace Skydat.forms2065
             }
 
         }
-                             
+
         private void tChart2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 108 || e.KeyValue == 76)
@@ -1733,8 +1736,8 @@ namespace Skydat.forms2065
 
             }
 
-        }      
-        public void conv_pixel_cord(int xx,int yy)
+        }
+        public void conv_pixel_cord(int xx, int yy)
         {
             var results = tChart2.HitTest(xx, yy, false, ChartElementType.PlottingArea);
             foreach (var result in results)
@@ -1744,18 +1747,18 @@ namespace Skydat.forms2065
                     double xVal = result.ChartArea.AxisX.PixelPositionToValue(xx);
                     double yVal = result.ChartArea.AxisY.PixelPositionToValue(yy);
                     drawline_chart.multipoint l1;
-                    l1.pointx=xVal;
-                    l1.pointy=yVal;
+                    l1.pointx = xVal;
+                    l1.pointy = yVal;
 
-                     drawline1.Lines_master.Add(l1);
+                    drawline1.Lines_master.Add(l1);
 
                 }
             }
         }
-     
-        public void smootht4(int row1,Color color1,int typechart,int colnum)
-        {         
-            double  I0, I1 = 0;
+
+        public void smootht4(int row1, Color color1, int typechart, int colnum)
+        {
+            double I0, I1 = 0;
             int vn = shomar_val;
             if (typechart != 1 || smooth_state)
             {
@@ -1797,20 +1800,20 @@ namespace Skydat.forms2065
 
                 if (dschart2.analyselist.Rows[row1][0].ToString() == "10" || dschart2.analyselist.Rows[row1][0].ToString() == "11" || dschart2.analyselist.Rows[row1][0].ToString() == "12")
                     tChart1.Series[row1].Points.AddXY(0, othertech_val1[0]);//رسم در نقطه صفر زمان // technics chp cha chc
-                  
+
                 for (int i = 0; i < vn; i++)
                 {
                     tChart1.Series[row1].Points.AddXY(othertech_val0[i], othertech_val1[i]);
                 }
             }
-            else 
+            else
             {
                 tChart2.Series[row1].Points.Clear();
                 for (int i = 0; i < vn; i++)
                 {
                     tChart2.Series[row1].Points.AddXY(othertech_val0[i], othertech_val1[i]);
                 }
-            }            
+            }
         }
 
         private void tsbNew_Click(object sender, EventArgs e)
@@ -1821,7 +1824,7 @@ namespace Skydat.forms2065
                 clearform();
             }
         }
-      
+
         private void save_Data()
         {
             try
@@ -1911,7 +1914,7 @@ namespace Skydat.forms2065
                     }
                 }
             }
-            catch(Exception EX)
+            catch (Exception EX)
             {
                 MessageBox.Show(EX.Message);
             }
@@ -2403,7 +2406,7 @@ namespace Skydat.forms2065
                     b[Counter] = (byte)Temp[(Temp.Length - 1) - i2];
                     Counter++;
                 }
-               
+
                 ///////////current
 
                 Temp = HexstringToByteArray(DoubletoHex(current[i1]));  // jarian
@@ -2564,45 +2567,11 @@ namespace Skydat.forms2065
             }
 
         }
-   
+
         private void toolStripButton2_Click_1(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
-            int shomarcheck = 0, ii = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked){
-                    shomarcheck++;
-                    ii=i;
-                }
-            if (shomarcheck == 1)
-            {
-                treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
-                if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 2 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 3)
-                {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2, 1);      
-                   
-
-                   
-                    operation = "i_Forward";
-                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true,shomar_val);
-                    nindexchart2 = ii;
-                }
-                else 
-                {
-                    MessageBox.Show("operation is not correct for this technique", "Error");
-                    return;
-                }
-            }
-            else
-                MessageBox.Show("i_Forward Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
-      
-        }
-
-        private void toolStripButton4_Click_1(object sender, EventArgs e)
-        {
-            drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int shomarcheck = 0, ii = 0;
             for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
                 if (treeView3.Nodes[0].Nodes[i].Checked)
@@ -2615,11 +2584,46 @@ namespace Skydat.forms2065
                 treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
                 if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 2 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 3)
                 {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);      
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2, 1);
+
+
+
+                    operation = "i_Forward";
+                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
+                    nindexchart2 = ii;
+                }
+                else
+                {
+                    MessageBox.Show("operation is not correct for this technique", "Error");
+                    return;
+                }
+            }
+            else
+                MessageBox.Show("i_Forward Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
+
+        }
+
+        private void toolStripButton4_Click_1(object sender, EventArgs e)
+        {
+            drawline1.EnableDraw = false;
+            drawline1.removeall();
+            int shomarcheck = 0, ii = 0;
+            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+                if (treeView3.Nodes[0].Nodes[i].Checked)
+                {
+                    shomarcheck++;
+                    ii = i;
+                }
+            if (shomarcheck == 1)
+            {
+                treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
+                if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 2 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 3)
+                {
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);
 
 
                     operation = "i_Reverse";
-                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true,shomar_val);
+                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
                     nindexchart2 = ii;
                 }
                 else
@@ -2630,7 +2634,7 @@ namespace Skydat.forms2065
             }
             else
                 MessageBox.Show("i_Reverse Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
-      
+
         }
 
         //private void toolStripButton11_Click_1(object sender, EventArgs e)
@@ -2740,9 +2744,9 @@ namespace Skydat.forms2065
                 numline--;
                 tChart2.Refresh();
             }
-        }       
+        }
 
-       
+
         private void toolStripButton9_Click_1(object sender, EventArgs e)
         {
             int shomarcheck = 0, i1 = 1, i2 = 1;
@@ -2761,7 +2765,7 @@ namespace Skydat.forms2065
                 {
                     try
                     {
-                        StreamWriter Fl = new StreamWriter(sfd.FileName, false, Encoding.ASCII);                       
+                        StreamWriter Fl = new StreamWriter(sfd.FileName, false, Encoding.ASCII);
 
                         i2++;
                         for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
@@ -2784,7 +2788,7 @@ namespace Skydat.forms2065
                                 Fl.WriteLine("");
                             }
                         }
-                        
+
                         Fl.Close();
                         MessageBox.Show("Done!");
                     }
@@ -2800,7 +2804,7 @@ namespace Skydat.forms2065
                 MessageBox.Show("Please select one technique!!!");
             }
         }
-        private  string ExportToExcel(int colnum1,int typecall1, string outputPath)
+        private string ExportToExcel(int colnum1, int typecall1, string outputPath)
         {
             try
             {
@@ -2813,11 +2817,11 @@ namespace Skydat.forms2065
                 // ساخت یک WorkBook جدید
                 Workbook excelWorkbook = excelApp.Workbooks.Add(Type.Missing);
 
-                              
-                int sheetIndex = 0,i2=0,i1=0;
+
+                int sheetIndex = 0, i2 = 0, i1 = 0;
 
                 // ساخت آرایه به طول تعداد سطرهای دیتاتیبل+1 و تعداد ستونهای دیتاتیبل
-                int rownum1=0;
+                int rownum1 = 0;
                 if (typecall1 == 1)
                 {
                     for (int m1 = 0; m1 < tChart1.Series.Count; m1++)
@@ -2825,10 +2829,11 @@ namespace Skydat.forms2065
                         rownum1 += tChart1.Series[m1].Points.Count;
                     }
                 }
-                else {
+                else
+                {
                     rownum1 = tChart2.Series[0].Points.Count;
                 }
-                object[,] rawData = new object[rownum1 + 1,colnum1];
+                object[,] rawData = new object[rownum1 + 1, colnum1];
                 if (typecall1 == 1)
                 {
                     rawData[i2, 0] = "technique number";
@@ -2852,7 +2857,8 @@ namespace Skydat.forms2065
                             i1++;
                         }
                 }
-                else {
+                else
+                {
                     rawData[i2, 0] = "row";
                     rawData[i2, 1] = "X value";
                     rawData[i2, 2] = "Y value";
@@ -2865,7 +2871,7 @@ namespace Skydat.forms2065
                         i2++;
                     }
                 }
-                
+
                 // محاسبه نام ستونهای اکسل
 
                 string finalColLetter = string.Empty;
@@ -2945,7 +2951,7 @@ namespace Skydat.forms2065
                 sfd.Filter = "Excel 97-2003 Workbook(*.xls)|*.xls";
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show(ExportToExcel(5, 1, sfd.FileName),"Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show(ExportToExcel(5, 1, sfd.FileName), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -2953,7 +2959,7 @@ namespace Skydat.forms2065
                 MessageBox.Show("Please select one technique!!!");
             }
         }
-            
+
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
             tChart2.Printing.PrintPreview();
@@ -3011,7 +3017,7 @@ namespace Skydat.forms2065
         private void toolStripButton7_Click_1(object sender, EventArgs e)
         {
             try
-            {        
+            {
                 if (tChart2.Series.Count <= 0)
                     return;
                 if (tChart2.Series[0].Points.Count > 0)
@@ -3034,7 +3040,7 @@ namespace Skydat.forms2065
 
         private void btnshowvalue_Click(object sender, EventArgs e)
         {
-            
+
             if (statebutton == "showvalue")
                 statebutton = "";
             else
@@ -3043,7 +3049,7 @@ namespace Skydat.forms2065
         }
 
         private void selectpchart_func(bool state)
-        {       
+        {
             tChart1.ChartAreas[0].CursorX.IsUserEnabled = state;
             tChart1.ChartAreas[0].CursorY.IsUserEnabled = state;
             tChart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = state;
@@ -3081,7 +3087,7 @@ namespace Skydat.forms2065
             }
         }
 
-       
+
 
         private void btnzoomin_Click(object sender, EventArgs e)
         {
@@ -3095,7 +3101,7 @@ namespace Skydat.forms2065
             tChart1.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * (xMax - xMin), DateTimeIntervalType.Auto, true);
             tChart1.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * (yMax - yMin), DateTimeIntervalType.Auto, true);
             difxview = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-            difyview = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;            
+            difyview = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
         }
 
         private void btnzoomout_Click(object sender, EventArgs e)
@@ -3106,14 +3112,14 @@ namespace Skydat.forms2065
             tChart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
             tChart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
         }
-               
+
         private void btnshowgrid_Click(object sender, EventArgs e)
         {
             statebutton = "";
             selectpchart_func(false);
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled;
             this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled;
-          
+
         }
 
         private void btnshowaxes_Click(object sender, EventArgs e)
@@ -3124,19 +3130,20 @@ namespace Skydat.forms2065
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
             tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
-      
+
         }
 
         private void tChart1_MouseUp(object sender, MouseEventArgs e)
-        {   
+        {
             mDown = double.NaN;
-            mDowny = double.NaN;    
+            mDowny = double.NaN;
         }
-      
+
 
         private void showDataPointsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView3.SelectedNode.Index >= 0 && treeView3.SelectedNode.Level==1) {
+            if (treeView3.SelectedNode.Index >= 0 && treeView3.SelectedNode.Level == 1)
+            {
                 frmshowdata frm = new frmshowdata();
                 frm.listView1.Items.Clear();
                 for (int i = 0; i < tChart1.Series[treeView3.SelectedNode.Index].Points.Count; i++)
@@ -3158,7 +3165,7 @@ namespace Skydat.forms2065
             {
                 filetype = frm.filetype_select;
             }
-           
+
             switch (filetype)
             {
                 case 1:
@@ -3169,7 +3176,7 @@ namespace Skydat.forms2065
                     break;
                 case 3:
 
-                    double xminb=0, xmaxb=0, yminb=0, ymaxb=0,shomartypevi=0,shomartypevt=0,shomartypeit=0,shomartypeqt=0;
+                    double xminb = 0, xmaxb = 0, yminb = 0, ymaxb = 0, shomartypevi = 0, shomartypevt = 0, shomartypeit = 0, shomartypeqt = 0;
                     for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
                         if (treeView3.Nodes[0].Nodes[i].Checked)
                         {
@@ -3181,13 +3188,13 @@ namespace Skydat.forms2065
                                 shomartypevt++;
                             else if (clasglobal.HAxisTitle[int.Parse(dschart2.analyselist.Rows[i][0].ToString())].Substring(0, 1) == "T" && clasglobal.VAxisTitle[int.Parse(dschart2.analyselist.Rows[i][0].ToString())].Substring(0, 1) == "Q")
                                 shomartypeqt++;
-                          
+
                             shomarcheck++;
                             i1 = i;
                             if (shomarcheck == 0)
                             {
                                 MessageBox.Show("EXPORTING works with one graph" + (char)13 + "Please select ONE !!!");
-                            
+
                             }
                             else if (shomarcheck == 1)
                             {
@@ -3222,7 +3229,7 @@ namespace Skydat.forms2065
                     if (shomarcheck == 1)
                     {
                         strlegend = fillparam(2, i1);
-                        frmshowgraph frm1 = new frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb,titlegraph,"");
+                        frmshowgraph frm1 = new frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph, "");
                         if (frm1.Chart1.Series.Count > 0)
                             frm1.Chart1.Series[0].Points.Clear();
                         for (int i = 0; i < tChart1.Series[i1].Points.Count; i++)
@@ -3237,7 +3244,7 @@ namespace Skydat.forms2065
                         // MessageBox.Show("EXPORTING works with one graph" + (char)13 + "Please select ONE only!!!");
                         strlegend = "";
 
-                        frmshowgraph frm2 = new frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb,titlegraph,"");
+                        frmshowgraph frm2 = new frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph, "");
                         if (frm2.Chart1.Series.Count > 0)
                         {
                             frm2.Chart1.Series[0].Points.Clear();
@@ -3284,7 +3291,7 @@ namespace Skydat.forms2065
             selectpchart_func(false);
             frmselectfiletype frm = new frmselectfiletype();
             frm.StartPosition = FormStartPosition.CenterScreen;
-            int i1 = 0, shomarcheck = 0, filetype = 0;           
+            int i1 = 0, shomarcheck = 0, filetype = 0;
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 filetype = frm.filetype_select;
@@ -3299,9 +3306,9 @@ namespace Skydat.forms2065
                     toolStripButton7_Click_1(sender, e);
                     break;
                 case 3:
-                    if (tChart2.Series.Count>0 && tChart2.Series[0].Points.Count > 0)
+                    if (tChart2.Series.Count > 0 && tChart2.Series[0].Points.Count > 0)
                         shomarcheck = 1;
-                    i1 = 0;                    
+                    i1 = 0;
                     if (shomarcheck == 1)
                     {
                         string strlegend = fillparam(2, nindexchart2);
@@ -3584,9 +3591,9 @@ namespace Skydat.forms2065
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            
+
         }
-                 
+
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
@@ -3621,10 +3628,10 @@ namespace Skydat.forms2065
                 MessageBox.Show("You must first click the new button.", "Error", MessageBoxButtons.OK);
         }
 
-      
+
         private void button7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -3651,13 +3658,13 @@ namespace Skydat.forms2065
 
 
                     int forward_count = Counter_num;//برای گراف سی وی که رفت و برگشت دارد این رفت
-                    
+
                     for (int i = 1; i < Counter_num; i++)
                     {
                         if (volt[i] < volt[i - 1])//برای تکنیک سی وی هنگام برگشت
                         {
                             forward_count = i - 1;
-                         
+
                             break;
                         }
                     }
@@ -3738,7 +3745,7 @@ namespace Skydat.forms2065
                         max_jarian_khales = current[maxs] - y32;
                         if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
                             max_jarian_khales = max_jarian_khales * (-1);
-                        
+
 
                         if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
                         {
@@ -3755,7 +3762,7 @@ namespace Skydat.forms2065
                         double x13 = volt[start_index], y13 = current[start_index], x23 = volt[end_index], y23 = current[end_index];
                         double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
                         double x3, y3;
-                                               
+
                         x3 = volt[peak];
                         y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
                         base_peak = y3;
@@ -3845,7 +3852,7 @@ namespace Skydat.forms2065
 
                         double aria = 0, t = 0, ft = 0, ft1 = 0, ft2 = 0;
 
-                        double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 =current[end_index];
+                        double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
                         double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
                         double xx, yy;
 
@@ -3871,7 +3878,7 @@ namespace Skydat.forms2065
                             ft = (ft1 + ft2) / 2;
                             aria = aria + (t * ft);
                         }
-                      
+
                         //============
 
 
@@ -4059,7 +4066,7 @@ namespace Skydat.forms2065
                             double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
                             double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
                             double xx, yy;
-                                                      
+
                             for (int k = start_index + 1; k <= forward_count; k++)
                             {
                                 xx = volt[k - 1];
@@ -4078,12 +4085,12 @@ namespace Skydat.forms2065
                                 ft = (ft1 + ft2) / 2;
                                 aria = aria + (t * ft);
                             }
-        
+
                         }
                         //================================================
                         else  //برگشت cv
                         //================================================
-                        {                           
+                        {
                             double x11 = volt[start_index], y11 = current[start_index], x22 = volt[end_index], y22 = current[end_index];
                             double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
                             double x32 = 0, y32 = 0;
@@ -4220,8 +4227,8 @@ namespace Skydat.forms2065
                             double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
                             double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
                             double xx, yy;
-                                                       
-                            for (int k = Counter_num - 2; k >= start_index ; k--)//حرکت معکوس
+
+                            for (int k = Counter_num - 2; k >= start_index; k--)//حرکت معکوس
                             {
                                 xx = volt[k + 1];
                                 yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
@@ -4239,7 +4246,7 @@ namespace Skydat.forms2065
                                 ft = (ft1 + ft2) / 2;
                                 aria = aria + (t * ft);
                             }
-                           
+
                         }
 
 
@@ -4800,7 +4807,7 @@ namespace Skydat.forms2065
 
 
                             string height = max_jarian_khales.ToString();
-                        try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
+                            try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
                             tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
                             tChart2.Series[ser].ChartType = SeriesChartType.Spline;
                             tChart2.Series[ser].Color = Color.Gold;
@@ -5213,7 +5220,7 @@ namespace Skydat.forms2065
                                 ft = (ft1 + ft2) / 2;
                                 aria = aria + (t * ft);
                             }
-                            
+
 
                             tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
                             tChart2.Series[ser].ChartType = SeriesChartType.Spline;
@@ -5799,7 +5806,7 @@ namespace Skydat.forms2065
 
         }
 
-      
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             try
@@ -5888,10 +5895,10 @@ namespace Skydat.forms2065
             {
                 forms2065.frm_big_analys frm = new forms2065.frm_big_analys();
                 frm.WindowState = FormWindowState.Maximized;
-               
+
                 foreach (System.Windows.Forms.DataVisualization.Charting.Series ser in tChart2.Series)
                     frm.chart1.Series.Add(ser);
-                
+
                 frm.chart1.BackColor = tChart1.BackColor;
                 frm.chart1.BorderlineColor = tChart1.BackColor;
                 frm.chart1.ChartAreas[0].BackColor = tChart1.BackColor;
@@ -5909,7 +5916,7 @@ namespace Skydat.forms2065
 
         private void button7_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
@@ -5925,16 +5932,16 @@ namespace Skydat.forms2065
 
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {
-                if (!point_start.IsEmpty)
-                    e.Graphics.DrawLine(Pens.White, point_start, TempPoint);
+            if (!point_start.IsEmpty)
+                e.Graphics.DrawLine(Pens.White, point_start, TempPoint);
 
-                for (int p = 0; p < drawline1.Lines.Count; p++)
-                {
-                    if (p == numline)
-                        e.Graphics.DrawLine(Pens.Red, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
-                    else
-                        e.Graphics.DrawLine(Pens.White, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
-                }
+            for (int p = 0; p < drawline1.Lines.Count; p++)
+            {
+                if (p == numline)
+                    e.Graphics.DrawLine(Pens.Red, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
+                else
+                    e.Graphics.DrawLine(Pens.White, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
+            }
         }
         private void btnzoomin_1_Click(object sender, EventArgs e)
         {
@@ -5962,7 +5969,7 @@ namespace Skydat.forms2065
             selectpchart_func_1(false);
             this.tChart2.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             tChart2.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
-            tChart2.ChartAreas[0].AxisY.ScaleView.ZoomReset(1); 
+            tChart2.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)
@@ -5971,7 +5978,7 @@ namespace Skydat.forms2065
             selectpchart_func_1(false);
             this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled;
             this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled;
-          
+
         }
 
         private void btnshowaxes_1_Click(object sender, EventArgs e)
@@ -5982,7 +5989,7 @@ namespace Skydat.forms2065
             tChart2.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart2.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart2.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart2.ChartAreas[0].AxisY.LabelStyle.Enabled;
             tChart2.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart2.ChartAreas[0].AxisY.MajorTickMark.Enabled;
-      
+
         }
         double mDown = double.NaN, mDowny = double.NaN, difxview = double.NaN, difyview = double.NaN, difxview2 = double.NaN, difyview2 = double.NaN;
         private void tChart1_MouseDown(object sender, MouseEventArgs e)
@@ -6009,9 +6016,10 @@ namespace Skydat.forms2065
         private void button2_Click_1(object sender, EventArgs e)
         {
             forms2065.frmselecttypeshow frm = new frmselecttypeshow();
-            frm.StartPosition=FormStartPosition.CenterScreen;
-            if (frm.ShowDialog() == DialogResult.OK) {
-                if(frm.type_txt_y.Trim()!="")
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (frm.type_txt_y.Trim() != "")
                     tChart2.ChartAreas[0].AxisY.LabelStyle.Format = frm.type_txt_y;
                 if (frm.type_txt_x.Trim() != "")
                     tChart2.ChartAreas[0].AxisX.LabelStyle.Format = frm.type_txt_x;
@@ -6033,6 +6041,6 @@ namespace Skydat.forms2065
                 tChart1.ChartAreas[0].RecalculateAxesScale();
             }
 
-        } 
+        }
     }
 }

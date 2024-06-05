@@ -3019,6 +3019,7 @@ namespace Skydat.forms2065
         }
         private void run_key_tch15(int row)
         {
+            counterforstop_1 = 0;
             N_gtv = false;
             Xinv = false;
             dorun2_costum_2(row);
