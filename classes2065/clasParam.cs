@@ -1,7 +1,4 @@
-using System;
 using System.ComponentModel;
-using System.IO;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
 
@@ -549,7 +546,7 @@ namespace Skydat.classes2065
     //NPV Properties  ****************************************************************
     public class NPV_params
     {
-        private double _E1;
+        public double _E1;
         private double _E2;
         private double _ScanRate;
         private double _HStep;

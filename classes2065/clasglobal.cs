@@ -118,7 +118,6 @@ namespace Skydat.classes2065
         {
             switch (Tch)
             {
-                case DCV: pGrid.SelectedObject = dcvprms; break;
                 case NPV: pGrid.SelectedObject = npvprms; break;
                 case DPV: pGrid.SelectedObject = dpvprms; break;
                 case SWV: pGrid.SelectedObject = swvprms; break;
