@@ -455,8 +455,8 @@ namespace Skydat.forms2065
                     for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
                         treeView3.Nodes[0].Nodes[i].Checked = false;
                 }
-
             }
+            Thread.Sleep(100);
             //OnlineChart.Refresh();
         }
 
@@ -486,7 +486,6 @@ namespace Skydat.forms2065
                         break;
                     case DialogResult.Cancel:
                         return;
-
                 }
             }
 
@@ -504,7 +503,6 @@ namespace Skydat.forms2065
                 {
                     overlaymain = true;
                     int n = dschart2.analyselist.Rows.Count;
-
                     cycle = 1;
                     line_file = -1;//if cycle>1 get number line for continue read file
 
@@ -519,7 +517,7 @@ namespace Skydat.forms2065
                         }
                         else
                             k--;
-
+                    
                     string fName_2 = fName;
                     fName = "";
                     int ok = 0;
@@ -532,7 +530,7 @@ namespace Skydat.forms2065
                                 fName = fName + fName_2[g].ToString();  //mnfile
 
 
-                        if (fName_2[g].ToString() == "_") ok = 1;
+                        //if (fName_2[g].ToString() == "_") ok = 1;
                     }
                     if (ok == 0) fName = fName_2.Substring(0, fName_2.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
 
@@ -541,13 +539,11 @@ namespace Skydat.forms2065
                         restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
                         fillparamdata(n);
                         n++;
-
                         if (cycle > 1)
                             treeView3.Nodes[0].Nodes.Add(fName + "-" + (ii + 1));  // CV-1.dat
                         else
                             treeView3.Nodes[0].Nodes.Add(fName);  // CV.dat
                     }
-
                     n--;
 
                     if (dschart2.analyselist.Rows.Count == n)
@@ -555,11 +551,8 @@ namespace Skydat.forms2065
                         MessageBox.Show("FILE FORMAT IS NOT CORRECT" + Environment.NewLine + "Please try again");
                         return;
                     }
-
                     cycle = 1;
-
                     Text = ofd.FileNames.GetValue(i).ToString();
-
                 }
 
             try
@@ -567,7 +560,6 @@ namespace Skydat.forms2065
                 treeView3.SelectedNode = treeView3.Nodes[0].LastNode;
                 treeView3.Nodes[0].LastNode.Checked = true;
                 //treeView3.Nodes[0].LastNode.ForeColor = OnlineChart.Series[OnlineChart.Series.Count - 1].Color;
-
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -575,8 +567,6 @@ namespace Skydat.forms2065
             Chart2 = tChart1;
             treeView3.ExpandAll();
             //grf.tech = 0;
-
-
         }
 
         Int16 cycle = 1, line_file = -1;
@@ -1305,16 +1295,9 @@ namespace Skydat.forms2065
             tChart2.Series.Clear();
             tChart2.Refresh();
             pnl_peak_search.Visible = false;
-
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
             opengraph();
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
-
-            //string[] color = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat");  // هنگام باز کردن رنگ همه یکی میشود
-            //string s = color[7].ToString().Substring(color[7].ToString().IndexOf(":") + 1);
-            //Color cl = Color.FromArgb(Convert.ToInt32(s));
-            //for (int i = 0; i < OnlineChart.Series.Count; i++)
-            //    OnlineChart.Series[i].Color = cl;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -2687,7 +2670,28 @@ namespace Skydat.forms2065
 
 
 
-                operation = "show_without_smoothing";
+                operation = "show_without_smoothing"; 
+                for (int i = 0; i < othertech_val0.Length; i++)
+                {
+                    if (othertech_val0.Length > array_modify.Length)
+                    {
+                        Array.Resize(ref array_modify, othertech_val0.Length);
+                        Array.Resize(ref array_modify2, othertech_val0.Length);
+                    }
+
+                    if (othertech_val0[i] == 0 && othertech_val1[i] == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        array_modify[j] = othertech_val0[i];
+                        array_modify2[j] = othertech_val1[i];
+                        j++;
+                    }
+
+
+                }
                 for (int i = 0; i < othertech_val0.Length; i++)// در تکنیک سی وی به دلیل اینکه در حالت بدون اسموث داده اشتباهی در نقطه صفر و صفر داشتیم از این کد برای پالایش و حذف داده غیرمربوط استفاده کردیم
                 {
                     if (othertech_val0.Length > array_modify.Length)
@@ -5929,6 +5933,17 @@ namespace Skydat.forms2065
 
         }
 
+        private void treeView3_MouseClick(object sender, MouseEventArgs e)
+        {
+            TreeViewEventArgs en = new TreeViewEventArgs(treeView3.SelectedNode);
+            treeView3_AfterCheck(sender, en);
+        }
+
+        private void treeView3_DoubleClick(object sender, EventArgs e)
+        {
+            TreeViewEventArgs en = new TreeViewEventArgs(treeView3.SelectedNode);
+            treeView3_AfterCheck(sender, en);
+        }
 
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {

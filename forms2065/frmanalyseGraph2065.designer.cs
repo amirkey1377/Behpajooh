@@ -185,6 +185,8 @@ namespace Skydat.forms2065
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView3.Nodes")))});
             this.treeView3.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterCheck);
             this.treeView3.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
+            this.treeView3.DoubleClick += new System.EventHandler(this.treeView3_DoubleClick);
+            this.treeView3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView3_MouseClick);
             // 
             // tChart1
             // 
