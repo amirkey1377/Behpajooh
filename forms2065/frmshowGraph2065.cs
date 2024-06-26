@@ -73,7 +73,6 @@ namespace Skydat.forms2065
             }
             System.Windows.Forms.Cursor result = new System.Windows.Forms.Cursor(LoadCursorFromFile(fileName1));
             File.Delete(fileName1);
-
             return result;
         }
 
@@ -116,7 +115,6 @@ namespace Skydat.forms2065
                 //serialPort2.PortName = Properties.Settings.Default.portname;
                 //serialPort2.BaudRate = int.Parse(Properties.Settings.Default.baudrate);
                 ///string[] ports = System.IO.Ports.SerialPort.GetPortNames();
-
                 ////test = FindCH340Port();
                 ////List<string> names = ComPortNames("10c4", "ea60");
                 List<string> names = ComPortNames("1a86", "7523");
@@ -1733,12 +1731,6 @@ namespace Skydat.forms2065
             double V = 0, I1 = 0, I2 = 0, Vold;
 
             float counter = 0, number = 0, number2 = 0;
-
-            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
-                V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());// e1 
-            else if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) >= 9)//cpc ,chp,cha,chc
-                V = ti;
-            Vold = V;
             flag_running = true;
             serialPort2.ReadTimeout = Timeout.Infinite;
             float volt1 = 0;
@@ -1758,44 +1750,106 @@ namespace Skydat.forms2065
                 ////Setbtnenabled(true, 1, 2);
                 // serialPort2.WriteLine("start");
                 number = serialPort2.BytesToRead;
-
-                try
+                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
                 {
-                    if (number > 0)
+                    try
                     {
-                        string1 = serialPort2.ReadLine();
-                        //DataReceived.Remove(DataReceived.Length-1);
-                        if (sign == 0)
+                        if (number > 0)
                         {
-                            if (string1.Contains("end15"))
+                            string1 = serialPort2.ReadLine();
+                            //DataReceived.Remove(DataReceived.Length-1);
+                            if (sign == 0)
                             {
-                                end = 1;
-                                Settxtfill_func(2, "end", 2, 1);
-                            }
-                            else
-                            {
-                                strings = string1.Split('@');
+                                if (string1.Contains("end15"))
+                                {
+                                    end = 1;
+                                    Settxtfill_func(2, "end", 2, 1);
+                                }
+                                else
+                                {
+                                    strings = string1.Split('@');
 
-                                counter = float.Parse(strings[1]);
-                                volt1 = Int32.Parse(strings[2]);
+                                    counter = float.Parse(strings[1]);
+                                    volt1 = Int32.Parse(strings[2]);
 
-                                Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
-                                // Settxtfill_func(2, $"counter:{counter}", 2, 1);
-                                //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
-                                //serialPort2.DiscardInBuffer();
-                                sign = 1;
-                                number = 0;
-                                flag_running = true;
+                                    Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
+                                    // Settxtfill_func(2, $"counter:{counter}", 2, 1);
+                                    //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
+                                    //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
+                                    //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                    //serialPort2.DiscardInBuffer();
+                                    sign = 1;
+                                    number = 0;
+                                    flag_running = true;
+                                }
                             }
                         }
+                        n--;
                     }
-                    n--;
-                }
-                catch
-                {
+                    catch
+                    {
 
+                    }
+                }
+                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 16)
+                {
+                    String A = "\u0394R";
+                    String B = "\u0394T";
+                    OnlineChart.ChartAreas[0].AxisY.Title = $"{A}/{B}";
+                    try
+                    {
+                        if (number > 0)
+                        {
+                            string1 = serialPort2.ReadLine();
+
+                            //DataReceived.Remove(DataReceived.Length-1);
+                            if (sign == 0)
+                            {
+
+
+                                first++;
+                                if (string1.Contains("end15"))
+                                {
+                                    end = 1;
+                                    Settxtfill_func(2, "end", 2, 1);
+                                }
+                                else
+                                {
+                                    strings = string1.Split('@');
+
+                                    counter = float.Parse(strings[1]);
+                                    resistance = Int32.Parse(strings[2]);
+                                    if (first == 1)
+                                    {
+
+                                        Settxtfill_func(2, $"resistance_initial:{resistance}", 2, 1);
+                                    }
+                                    else
+                                    {
+                                        Settxtfill_func(2, $"resistance:{resistance}", 2, 1);
+                                    }
+
+                                    // Settxtfill_func(2, $"counter:{counter}", 2, 1);
+                                    //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
+                                    //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
+                                    //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
+                                    //serialPort2.DiscardInBuffer();
+
+                                    sign = 1;
+                                    number = 0;
+                                    flag_running = true;
+                                }
+
+                            }
+                        }
+
+                        n--;
+
+                    }
+                    catch
+                    {
+
+                    }
                 }
 
                 if (sign == 1)
@@ -2493,6 +2547,17 @@ namespace Skydat.forms2065
                                 break;
                             }
                             break;
+                        case 16:
+                            run_key_tch16(TechSeries);//RT
+                            if (!runerror)
+                            {
+                                transferdata(TechSeries, 1);
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            break;
                     }
 
                     if (!runerror)
@@ -2942,8 +3007,11 @@ namespace Skydat.forms2065
             dorun2_costum_2(row);
         }
 
-
-
+        private void run_key_tch16(int row)
+        {
+            counterforstop_1 = 0;
+            dorun2_costum_2(row);
+        }
 
         public void runf(byte rng, double cp11, double ct11, double cp12, double ct12, double cp13, double ct13)
         {
@@ -3663,6 +3731,8 @@ namespace Skydat.forms2065
 
                 case clasglobal.OCP:
                     dschart1.chartlist1_run.Rows[row][15] = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) / 1000;
+                    break;
+                case clasglobal.RT:
                     break;
                 default: break;
             }
@@ -4762,7 +4832,7 @@ namespace Skydat.forms2065
                 t_mp = byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString());
 
                 serialPort2.Write(t_mp.ToString() + "@");
-                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 15)
+                if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 16)
                 {
                     Temp = (long)Analiz_CP1;
                     serialPort2.Write(Temp.ToString() + "@");
@@ -5270,6 +5340,23 @@ namespace Skydat.forms2065
 
                             // V = ti; 
                         }
+
+                    }
+                    if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 16)
+                    {
+                        Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()));//for low cpc,and high cpc
+                                                                                                    //Temp = (int)(double.Parse(ds);//for low cpc,and high cpc
+
+                        serialPort2.Write(Temp.ToString() + "@");
+                        Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()));
+
+                        serialPort2.Write(Temp.ToString() + "@");
+                        serialPort2.Write(".");
+
+                        //Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
+                        //ti = 0.02;
+                        //if (Analiz_T3 > 100) ti = ((int)(Analiz_T3 / 100)) * ti;
+                        //serialPort2.Write("finish_p");
 
                     }
                 }

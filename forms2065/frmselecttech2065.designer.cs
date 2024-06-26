@@ -153,6 +153,7 @@ namespace Skydat.forms2065
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel6.SuspendLayout();
             this.toolstripChart.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -873,6 +874,7 @@ namespace Skydat.forms2065
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.comboBox1);
             this.tabPage3.Controls.Add(this.rd_hieght_cpc);
             this.tabPage3.Controls.Add(this.rd_low_cpc);
             this.tabPage3.Controls.Add(this.pGrid);
@@ -1240,6 +1242,16 @@ namespace Skydat.forms2065
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView2.Nodes")))});
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // frmselecttech2065
             // 
             resources.ApplyResources(this, "$this");
@@ -1415,6 +1427,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.TextBox E3_CV;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

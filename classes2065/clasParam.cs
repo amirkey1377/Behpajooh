@@ -186,7 +186,7 @@ namespace Skydat.classes2065
             //
         }
     }
-    
+
     // LSV Properties *******************************************************************
     public class LSV_params
     {
@@ -1800,7 +1800,31 @@ namespace Skydat.classes2065
         }
     */
     // LSV Properties *******************************************************************
+    public class RT_params
+    {
+        //private double _Cycles;
 
+        private double _T1;
+
+
+        [CategoryAttribute("TIME Values"), DescriptionAttribute("Time(S)\n 0    +1000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
+
+
+
+    }
 
     public class Cd_params
     {
