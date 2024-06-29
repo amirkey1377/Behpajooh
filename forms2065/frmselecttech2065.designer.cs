@@ -112,9 +112,8 @@ namespace Skydat.forms2065
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.E3_CV = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.Description_CV = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.EqTime_CV = new System.Windows.Forms.TextBox();
@@ -153,7 +152,6 @@ namespace Skydat.forms2065
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
             this.treeView2 = new System.Windows.Forms.TreeView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel6.SuspendLayout();
             this.toolstripChart.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -652,6 +650,7 @@ namespace Skydat.forms2065
             this.E2.Name = "E2";
             this.E2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
             this.E2.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
+            this.E2.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E2.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -664,6 +663,7 @@ namespace Skydat.forms2065
             this.E1.Name = "E1";
             this.E1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
             this.E1.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
+            this.E1.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E1.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -758,6 +758,7 @@ namespace Skydat.forms2065
             this.E1_DPV.Name = "E1_DPV";
             this.E1_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
             this.E1_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
+            this.E1_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E1_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -794,6 +795,7 @@ namespace Skydat.forms2065
             this.E2_DPV.Name = "E2_DPV";
             this.E2_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
             this.E2_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
+            this.E2_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E2_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -882,12 +884,20 @@ namespace Skydat.forms2065
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
+            resources.ApplyResources(this.comboBox1, "comboBox1");
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
             this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tabPage4.Controls.Add(this.E3_CV);
-            this.tabPage4.Controls.Add(this.label37);
             this.tabPage4.Controls.Add(this.Description_CV);
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.EqTime_CV);
@@ -909,20 +919,6 @@ namespace Skydat.forms2065
             this.tabPage4.Controls.Add(this.label28);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
-            // 
-            // E3_CV
-            // 
-            resources.ApplyResources(this.E3_CV, "E3_CV");
-            this.E3_CV.ForeColor = System.Drawing.Color.Black;
-            this.E3_CV.Name = "E3_CV";
-            this.E3_CV.ReadOnly = true;
-            this.E3_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
-            // 
-            // label37
-            // 
-            resources.ApplyResources(this.label37, "label37");
-            this.label37.ForeColor = System.Drawing.Color.Black;
-            this.label37.Name = "label37";
             // 
             // Description_CV
             // 
@@ -966,6 +962,7 @@ namespace Skydat.forms2065
             this.E1_CV.ForeColor = System.Drawing.Color.Black;
             this.E1_CV.Name = "E1_CV";
             this.E1_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.E1_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E1_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -1000,6 +997,7 @@ namespace Skydat.forms2065
             this.E2_CV.ForeColor = System.Drawing.Color.Black;
             this.E2_CV.Name = "E2_CV";
             this.E2_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.E2_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E2_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -1183,6 +1181,7 @@ namespace Skydat.forms2065
             this.E2_LSV.ForeColor = System.Drawing.Color.Black;
             this.E2_LSV.Name = "E2_LSV";
             this.E2_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.E2_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E2_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -1194,6 +1193,7 @@ namespace Skydat.forms2065
             this.E1_LSV.ForeColor = System.Drawing.Color.Black;
             this.E1_LSV.Name = "E1_LSV";
             this.E1_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.E1_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
             this.E1_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -1241,16 +1241,6 @@ namespace Skydat.forms2065
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView2.Nodes")))});
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // frmselecttech2065
             // 
@@ -1425,8 +1415,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label Description_LSV;
         private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.TextBox E3_CV;
-        private System.Windows.Forms.Label label37;
         private System.Windows.Forms.ComboBox comboBox1;
     }
 }
