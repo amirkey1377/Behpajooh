@@ -391,7 +391,7 @@ namespace Skydat.classes2065
                 if (tchName == "CP" || tchName == "All")
                 {
                     Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: CHP");
+                    Fl.WriteLine("Technic: CP");
                     //Fl.WriteLine("TchNo: " + CA.ToString());
                     Fl.WriteLine("I1:" + dr[17].ToString());
                     Fl.WriteLine("I2:" + dr[18].ToString());
