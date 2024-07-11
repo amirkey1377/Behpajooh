@@ -1865,7 +1865,7 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("cycle Values"), DescriptionAttribute("cycle")]
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
         public double CYCLE
         {
             get
