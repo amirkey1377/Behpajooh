@@ -337,10 +337,10 @@ namespace Skydat.forms2065
             this.pGrid2.CommandsActiveLinkColor = System.Drawing.Color.Red;
             this.pGrid2.CommandsBackColor = System.Drawing.Color.White;
             this.pGrid2.CommandsForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.pGrid2, "pGrid2");
             this.pGrid2.HelpBackColor = System.Drawing.Color.White;
             this.pGrid2.HelpForeColor = System.Drawing.Color.Black;
             this.pGrid2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            resources.ApplyResources(this.pGrid2, "pGrid2");
             this.pGrid2.Name = "pGrid2";
             this.pGrid2.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.pGrid2.ToolbarVisible = false;
@@ -564,7 +564,6 @@ namespace Skydat.forms2065
             this.EqTime.ForeColor = System.Drawing.Color.Black;
             this.EqTime.Name = "EqTime";
             this.EqTime.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.EqTime.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.EqTime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
             this.EqTime.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -582,7 +581,6 @@ namespace Skydat.forms2065
             this.PW.ForeColor = System.Drawing.Color.Black;
             this.PW.Name = "PW";
             this.PW.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.PW.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.PW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.PW.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -618,7 +616,6 @@ namespace Skydat.forms2065
             this.SR.ForeColor = System.Drawing.Color.Black;
             this.SR.Name = "SR";
             this.SR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.SR.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.SR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.SR.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -637,7 +634,6 @@ namespace Skydat.forms2065
             this.Hs.ForeColor = System.Drawing.Color.Black;
             this.Hs.Name = "Hs";
             this.Hs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.Hs.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.Hs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.Hs.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -649,7 +645,6 @@ namespace Skydat.forms2065
             this.E2.ForeColor = System.Drawing.Color.Black;
             this.E2.Name = "E2";
             this.E2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.E2.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.E2.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
@@ -662,7 +657,6 @@ namespace Skydat.forms2065
             this.E1.ForeColor = System.Drawing.Color.Black;
             this.E1.Name = "E1";
             this.E1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
-            this.E1.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.E1.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
@@ -719,7 +713,6 @@ namespace Skydat.forms2065
             this.PH_DPV.ForeColor = System.Drawing.Color.Black;
             this.PH_DPV.Name = "PH_DPV";
             this.PH_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.PH_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.PH_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PH_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.PH_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -737,7 +730,6 @@ namespace Skydat.forms2065
             this.EqTime_DPV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_DPV.Name = "EqTime_DPV";
             this.EqTime_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.EqTime_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.EqTime_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
             this.EqTime_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -757,7 +749,6 @@ namespace Skydat.forms2065
             this.E1_DPV.ForeColor = System.Drawing.Color.Black;
             this.E1_DPV.Name = "E1_DPV";
             this.E1_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.E1_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.E1_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
@@ -776,7 +767,6 @@ namespace Skydat.forms2065
             this.PW_DPV.ForeColor = System.Drawing.Color.Black;
             this.PW_DPV.Name = "PW_DPV";
             this.PW_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.PW_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.PW_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PW_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.PW_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -794,7 +784,6 @@ namespace Skydat.forms2065
             this.E2_DPV.ForeColor = System.Drawing.Color.Black;
             this.E2_DPV.Name = "E2_DPV";
             this.E2_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.E2_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.E2_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
@@ -825,7 +814,6 @@ namespace Skydat.forms2065
             this.Hs_DPV.ForeColor = System.Drawing.Color.Black;
             this.Hs_DPV.Name = "Hs_DPV";
             this.Hs_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.Hs_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.Hs_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.Hs_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -843,7 +831,6 @@ namespace Skydat.forms2065
             this.SR_DPV.ForeColor = System.Drawing.Color.Black;
             this.SR_DPV.Name = "SR_DPV";
             this.SR_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
-            this.SR_DPV.ForeColorChanged += new System.EventHandler(this.E1_ForeColorChanged);
             this.SR_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.SR_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -889,7 +876,8 @@ namespace Skydat.forms2065
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1")});
+            resources.GetString("comboBox1.Items1"),
+            resources.GetString("comboBox1.Items2")});
             resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -1260,8 +1248,8 @@ namespace Skydat.forms2065
             this.Name = "frmselecttech2065";
             this.ShowIcon = false;
             this.TransparencyKey = System.Drawing.Color.White;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmselecttech2065_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.panel6.ResumeLayout(false);
             this.toolstripChart.ResumeLayout(false);
             this.toolstripChart.PerformLayout();
