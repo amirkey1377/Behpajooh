@@ -171,7 +171,7 @@ namespace Skydat.forms2065
             // panel6
             // 
             resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.toolstripChart);
             this.panel6.Name = "panel6";
             // 
@@ -253,7 +253,7 @@ namespace Skydat.forms2065
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.label16);
             this.panel8.Controls.Add(this.radioButton7);
             this.panel8.Controls.Add(this.radioButton6);
@@ -359,7 +359,7 @@ namespace Skydat.forms2065
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.ForeColor = System.Drawing.Color.Black;
@@ -597,6 +597,8 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.Comment, "Comment");
             this.Comment.Name = "Comment";
             this.Comment.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
+            this.Comment.MouseLeave += new System.EventHandler(this.Comment_Validated);
+            this.Comment.Validated += new System.EventHandler(this.Comment_Validated);
             // 
             // label7
             // 
@@ -801,6 +803,8 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.Comment_DPV, "Comment_DPV");
             this.Comment_DPV.Name = "Comment_DPV";
             this.Comment_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.Comment_DPV.MouseLeave += new System.EventHandler(this.Comment_Validated);
+            this.Comment_DPV.Validated += new System.EventHandler(this.Comment_Validated);
             // 
             // label15
             // 
@@ -1002,6 +1006,7 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.Comment_CV, "Comment_CV");
             this.Comment_CV.Name = "Comment_CV";
             this.Comment_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.Comment_CV.Validated += new System.EventHandler(this.Comment_Validated);
             // 
             // label24
             // 
@@ -1121,6 +1126,8 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.Comment_LSV, "Comment_LSV");
             this.Comment_LSV.Name = "Comment_LSV";
             this.Comment_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.Comment_LSV.MouseLeave += new System.EventHandler(this.Comment_Validated);
+            this.Comment_LSV.Validated += new System.EventHandler(this.Comment_Validated);
             // 
             // label32
             // 
@@ -1207,6 +1214,7 @@ namespace Skydat.forms2065
             // 
             // tabPage6
             // 
+            this.tabPage6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage6.Controls.Add(this.label11);
             resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Name = "tabPage6";
