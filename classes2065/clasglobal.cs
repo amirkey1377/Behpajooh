@@ -11,6 +11,11 @@ namespace Skydat.classes2065
 {
     public static class clasglobal
     {
+        public static int Graph_Color
+        {
+            set; get;
+        }
+
         //نام مخفف یا مستعار تکنیک ها درون آرایه قرار داده میشود و در قسمتهایی از برنامه با شماره اندیس فراخوانی می شود
         public static string[] TechName = { "DCV", "NPV", "DPV", "SWV",
                                             "CV", "LSV", "DCS","DPS",
@@ -71,6 +76,19 @@ namespace Skydat.classes2065
                                  Color.PaleVioletRed,Color.PeachPuff,Color.Peru,Color.Pink,Color.Plum,Color.PowderBlue,Color.Red,Color.Salmon,Color.SandyBrown,Color.SeaGreen,
                                  Color.SkyBlue,Color.SpringGreen,Color.SteelBlue,Color.Tomato,Color.Turquoise,Color.Violet,Color.YellowGreen,Color.MediumTurquoise,Color.Blue,
                                  Color.Red,Color.MediumSeaGreen,Color.DarkTurquoise,Color.PaleVioletRed,Color.Pink,Color.MediumSpringGreen,Color.PeachPuff,
+        };
+
+        //بعد از تمام شدن هر نکنیک به ترتیب رنگ های زیر به رنگ چارت اعمال می شود
+        public static Color[] color_Graph2065 = {
+                Color.Blue,Color.Red,Color.Green,Color.Yellow,Color.Orange,Color.Violet,Color.DarkRed,Color.DarkBlue,Color.DarkOrange,Color.DarkViolet,
+                Color.DarkGreen,Color.DarkCyan,Color.DarkOliveGreen,Color.DarkMagenta,Color.Peru,Color.OliveDrab,Color.Salmon,Color.YellowGreen,Color.PaleGreen,Color.DarkMagenta,
+                Color.DarkTurquoise,Color.Goldenrod,Color.Coral,Color.DarkOrchid,Color.CadetBlue,Color.DarkSalmon,Color.DarkSeaGreen,Color.CornflowerBlue,Color.Cyan,Color.MediumVioletRed,
+                Color.Blue,Color.Red,Color.Green,Color.Yellow,Color.Orange,Color.Violet,Color.DarkRed,Color.DarkBlue,Color.DarkOrange,Color.DarkViolet,
+                Color.DarkGreen,Color.DarkCyan,Color.DarkOliveGreen,Color.DarkMagenta,Color.Peru,Color.OliveDrab,Color.Salmon,Color.YellowGreen,Color.PaleGreen,Color.DarkMagenta,
+                Color.DarkTurquoise,Color.Goldenrod,Color.Coral,Color.DarkOrchid,Color.CadetBlue,Color.DarkSalmon,Color.DarkSeaGreen,Color.CornflowerBlue,Color.Cyan,Color.MediumVioletRed,
+                Color.Blue,Color.Red,Color.Green,Color.Yellow,Color.Orange,Color.Violet,Color.DarkRed,Color.DarkBlue,Color.DarkOrange,Color.DarkViolet,
+                Color.DarkGreen,Color.DarkCyan,Color.DarkOliveGreen,Color.DarkMagenta,Color.Peru,Color.OliveDrab,Color.Salmon,Color.YellowGreen,Color.PaleGreen,Color.DarkMagenta,
+                Color.DarkTurquoise,Color.Goldenrod,Color.Coral,Color.DarkOrchid,Color.CadetBlue,Color.DarkSalmon,Color.DarkSeaGreen,Color.CornflowerBlue,Color.Cyan,Color.MediumVioletRed
         };
 
 
@@ -177,20 +195,33 @@ namespace Skydat.classes2065
             box.SelectedText = text;
             // box.SelectionColor = box.ForeColor;
         }
-         public static void WriteToFile(DataRow dr, string tchName, string fileName, int row,int typedevice)//ذخیره اطلاعات و دیتای تکنیک درون فایل متنی
+
+        public static void ChangeColor(string fileName)
         {
-            //string s = "";
-            //if (fileName != "")
-            //    s = fileName;
-            //else
-            //    s = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\Prms.prj";
-             
+            var lines = File.ReadAllLines(fileName).ToList();
+            lines.RemoveAt(2);
+            lines.Insert(2, ("Color:" + Graph_Color)); // افزودن محتوای جدید
+            File.WriteAllLines(fileName, lines);
+
+        }
+
+        private static void SetChartColor()
+        {
+            Random rand = new Random();
+            int RandomNumber = rand.Next(90);
+            Graph_Color = clasglobal.color_Graph2065[RandomNumber].ToArgb();
+        }
+
+        public static void WriteToFile(DataRow dr, string tchName, string fileName, int row,int typedevice)//ذخیره اطلاعات و دیتای تکنیک درون فایل متنی
+        { 
             StreamWriter Fl = new StreamWriter(fileName, false, Encoding.ASCII);
 
             if (tchName != "APP" && tchName != "SEQ")
             {
                 Fl.WriteLine("Settings for Parameters:");
                 Fl.WriteLine("Date:" + DateTime.Now.ToString());
+                SetChartColor();
+                Fl.WriteLine("Color:" + Graph_Color);
 
                 if (tchName == "DCV" || tchName == "All")
                 {

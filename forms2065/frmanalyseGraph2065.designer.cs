@@ -36,6 +36,7 @@ namespace Skydat.forms2065
             this.showDataPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearPlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.tChart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -118,6 +119,7 @@ namespace Skydat.forms2065
             this.y2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -144,7 +146,8 @@ namespace Skydat.forms2065
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showDataPointsToolStripMenuItem,
             this.clearPlotsToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.setColorToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
@@ -166,6 +169,12 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
+            // setColorToolStripMenuItem
+            // 
+            this.setColorToolStripMenuItem.Name = "setColorToolStripMenuItem";
+            resources.ApplyResources(this.setColorToolStripMenuItem, "setColorToolStripMenuItem");
+            this.setColorToolStripMenuItem.Click += new System.EventHandler(this.setColorToolStripMenuItem_Click);
+            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -175,11 +184,11 @@ namespace Skydat.forms2065
             // 
             // treeView3
             // 
-            this.treeView3.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.treeView3.BackColor = System.Drawing.Color.White;
             this.treeView3.CheckBoxes = true;
             this.treeView3.ContextMenuStrip = this.contextMenuStrip1;
-            this.treeView3.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.treeView3, "treeView3");
+            this.treeView3.ForeColor = System.Drawing.Color.Black;
             this.treeView3.Name = "treeView3";
             this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView3.Nodes")))});
@@ -1076,5 +1085,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem setColorToolStripMenuItem;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

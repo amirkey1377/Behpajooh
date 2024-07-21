@@ -146,8 +146,14 @@
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Options...</value>
   </data>
+  <data name="setColorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="setColorToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set Color</value>
+  </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 70</value>
+    <value>169, 92</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
@@ -177,6 +183,9 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="treeView3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+  </data>
   <data name="treeView3.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
   </data>
@@ -184,10 +193,17 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAGEFsbChzYXZlZCBvciBwcm9jZXNzaW5nKQYEAAAA
-        AAYFAAAABW5vZGUwAP////8JBAAAAP////8JBAAAAAAAAAAL
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQoAAAAHUHJvcEJhZwRUZXh0C1Rvb2xUaXBUZXh0BE5hbWUJ
+        SXNDaGVja2VkCkltYWdlSW5kZXgISW1hZ2VLZXkSU2VsZWN0ZWRJbWFnZUluZGV4EFNlbGVjdGVkSW1h
+        Z2VLZXkKQ2hpbGRDb3VudAQBAQEAAAEAAQApU3lzdGVtLldpbmRvd3MuRm9ybXMuT3duZXJEcmF3UHJv
+        cGVydHlCYWcCAAAAAQgICAIAAAAJAwAAAAYEAAAAGEFsbChzYXZlZCBvciBwcm9jZXNzaW5nKQYFAAAA
+        AAYGAAAABW5vZGUwAP////8JBQAAAP////8JBQAAAAAAAAAMCAAAAFFTeXN0ZW0uRHJhd2luZywgVmVy
+        c2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBh
+        M2EFAwAAAClTeXN0ZW0uV2luZG93cy5Gb3Jtcy5Pd25lckRyYXdQcm9wZXJ0eUJhZwMAAAAJQmFja0Nv
+        bG9yCUZvcmVDb2xvcgRGb250BAQCFFN5c3RlbS5EcmF3aW5nLkNvbG9yCAAAABRTeXN0ZW0uRHJhd2lu
+        Zy5Db2xvcggAAAACAAAABff///8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25v
+        d25Db2xvcgVzdGF0ZQEAAAAJBwcIAAAACgAAAAAAAAAAAAAAAAH2////9////woAAAAAAAAAAAMAAQAK
+        Cw==
 </value>
   </data>
   <data name="treeView3.Size" type="System.Drawing.Size, System.Drawing">
@@ -2216,6 +2232,12 @@
   <data name="&gt;&gt;optionsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;setColorToolStripMenuItem.Name" xml:space="preserve">
+    <value>setColorToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;setColorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dschart2.Name" xml:space="preserve">
     <value>dschart2</value>
   </data>
@@ -2348,10 +2370,19 @@
   <data name="&gt;&gt;reSize1.Type" xml:space="preserve">
     <value>LarcomAndYoung.Windows.Forms.ReSize, LarcomAndYoung.Windows.Forms.ReSize, Version=4.1.1130.7807, Culture=neutral, PublicKeyToken=2ccc9fa17f463fce</value>
   </data>
+  <data name="&gt;&gt;colorDialog1.Name" xml:space="preserve">
+    <value>colorDialog1</value>
+  </data>
+  <data name="&gt;&gt;colorDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColorDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmanalyseGraph2065</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>690, 17</value>
+  </metadata>
 </root>

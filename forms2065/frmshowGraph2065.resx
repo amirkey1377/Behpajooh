@@ -193,6 +193,9 @@
   <data name="btnshowvalue.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnshowvalue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnshowvalue.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 17</value>
   </data>
@@ -223,6 +226,9 @@
   <data name="btnselectonly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="btnselectonly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnselectonly.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 47</value>
   </data>
@@ -249,6 +255,9 @@
   </data>
   <data name="btnzoomin.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
+  </data>
+  <data name="btnzoomin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnzoomin.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 76</value>
@@ -277,6 +286,9 @@
   <data name="btnzoomout.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnzoomout.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnzoomout.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 106</value>
   </data>
@@ -304,6 +316,9 @@
   <data name="btnshowgrid.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnshowgrid.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnshowgrid.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 136</value>
   </data>
@@ -330,6 +345,9 @@
   </data>
   <data name="btnshowaxes.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
+  </data>
+  <data name="btnshowaxes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnshowaxes.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 166</value>
@@ -896,6 +914,9 @@
         AADgAAAA4AAAAOAIAAAgDAAAAAwAAMAOAAAgDgAAgA8AAOAPAADgDwAA4A4AAOAOAADgB8AA4AvAAOAN
         gADgDgAA4A8AAOAD3N/gCeKf4Az8f+AOfH/gDztP4A+HJ8APzzuAD/+5gA//nQ==
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;dschart1.Name" xml:space="preserve">
     <value>dschart1</value>
