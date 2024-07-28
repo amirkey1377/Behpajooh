@@ -17,7 +17,6 @@ namespace Skydat.classes2065
         private double _HStep;
         private double _TStep;
         private double _EquilibriumTime;
-        //private double _ScanRateR;
         private double _HoldTime;
         private string _comment1;
 
@@ -1254,6 +1253,7 @@ namespace Skydat.classes2065
             //
         }
     }
+
     //CA Properties  ****************************************************************
     public class CHP_params
     {
@@ -1613,6 +1613,7 @@ namespace Skydat.classes2065
         }
     }
 
+    //OCP Properties  ****************************************************************
     public class OCP_params
     {
         //private double _Cycles;
@@ -1799,7 +1800,8 @@ namespace Skydat.classes2065
             }
         }
     */
-    // LSV Properties *******************************************************************
+
+    // RT Properties *******************************************************************
     public class RT_params
     {
         //private double _Cycles;
@@ -2126,6 +2128,7 @@ namespace Skydat.classes2065
 
         }
     }
+
     [DefaultPropertyAttribute("BackGroundColor")]
     public class Color_params
     {

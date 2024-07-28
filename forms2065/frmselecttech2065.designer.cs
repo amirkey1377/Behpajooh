@@ -197,7 +197,7 @@ namespace Skydat.forms2065
             this.tsbNew.Image = global::Skydat.Properties.Resources.eraser1;
             this.tsbNew.Margin = new System.Windows.Forms.Padding(0);
             this.tsbNew.Name = "tsbNew";
-            this.tsbNew.Click += new System.EventHandler(this.tsbNew_Click);
+            this.tsbNew.Click += new System.EventHandler(this.tsbClear_Click);
             // 
             // tsbOpen
             // 
@@ -206,7 +206,7 @@ namespace Skydat.forms2065
             this.tsbOpen.Image = global::Skydat.Properties.Resources.OpenNew;
             this.tsbOpen.Margin = new System.Windows.Forms.Padding(0);
             this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Click += new System.EventHandler(this.restoreTechniquesparametersToolStripMenuItem_Click);
+            this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
             // tsbSaveAll
             // 
@@ -214,7 +214,7 @@ namespace Skydat.forms2065
             this.tsbSaveAll.ForeColor = System.Drawing.Color.Black;
             this.tsbSaveAll.Image = global::Skydat.Properties.Resources.flappy;
             this.tsbSaveAll.Name = "tsbSaveAll";
-            this.tsbSaveAll.Click += new System.EventHandler(this.saveTechniquesparametersToolStripMenuItem_Click);
+            this.tsbSaveAll.Click += new System.EventHandler(this.tsbSaveAll_Click);
             // 
             // tsbRun
             // 
@@ -222,7 +222,7 @@ namespace Skydat.forms2065
             this.tsbRun.ForeColor = System.Drawing.Color.Black;
             this.tsbRun.Image = global::Skydat.Properties.Resources.Run1;
             this.tsbRun.Name = "tsbRun";
-            this.tsbRun.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            this.tsbRun.Click += new System.EventHandler(this.tsbRun_Click);
             // 
             // colAA
             // 
@@ -421,7 +421,7 @@ namespace Skydat.forms2065
             // 
             this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
             resources.ApplyResources(this.runToolStripMenuItem1, "runToolStripMenuItem1");
-            this.runToolStripMenuItem1.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            this.runToolStripMenuItem1.Click += new System.EventHandler(this.tsbRun_Click);
             // 
             // toolStripSeparator3
             // 
@@ -432,13 +432,13 @@ namespace Skydat.forms2065
             // 
             this.saveTechniquesparametersToolStripMenuItem.Name = "saveTechniquesparametersToolStripMenuItem";
             resources.ApplyResources(this.saveTechniquesparametersToolStripMenuItem, "saveTechniquesparametersToolStripMenuItem");
-            this.saveTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.saveTechniquesparametersToolStripMenuItem_Click);
+            this.saveTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.tsbSaveAll_Click);
             // 
             // restoreTechniquesparametersToolStripMenuItem
             // 
             this.restoreTechniquesparametersToolStripMenuItem.Name = "restoreTechniquesparametersToolStripMenuItem";
             resources.ApplyResources(this.restoreTechniquesparametersToolStripMenuItem, "restoreTechniquesparametersToolStripMenuItem");
-            this.restoreTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.restoreTechniquesparametersToolStripMenuItem_Click);
+            this.restoreTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
             // treeView1
             // 

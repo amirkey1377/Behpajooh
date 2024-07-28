@@ -1093,11 +1093,6 @@ namespace Skydat.forms2065
 
                                 }
 
-                                //counter = (int)Int32.Parse(strings[4]);
-                                //Settxtfill_func(2, $"c:{datas[2]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
-
                                 counter++;
                                 sign = 1;
                                 number = 0;

@@ -308,7 +308,7 @@ namespace Skydat.forms2065
             this.KeyPreview = true;
             this.Name = "frmMain2065";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PGC 2066";
+            this.Text = "PGS 2066";
             this.TransparencyKey = System.Drawing.Color.White;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
