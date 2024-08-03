@@ -543,9 +543,11 @@ namespace Skydat.forms2065
 
             try
             {
-                treeView3.SelectedNode = treeView3.Nodes[0].LastNode;
-                treeView3.Nodes[0].LastNode.Checked = true;
-                //treeView3.Nodes[0].LastNode.ForeColor = OnlineChart.Series[OnlineChart.Series.Count - 1].Color;
+                if (treeView3.Nodes[0].Nodes.Count > 0)
+                {
+                    treeView3.SelectedNode = treeView3.Nodes[0].LastNode;
+                    treeView3.Nodes[0].LastNode.Checked = true;
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 
