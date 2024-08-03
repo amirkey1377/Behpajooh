@@ -13,12 +13,17 @@ using Skydat.formEIS;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.IO.Ports;
+using System.Management;
 
 namespace Skydat.forms2065
 {
     public partial class frmbase : Form
     {
         //public string Version_No = "Version 8.2";
+
+        private ManagementEventWatcher connectWatcher;
+        private ManagementEventWatcher disconnectWatcher;
+
         bool Idata = true;
         public frmbase()
         {
@@ -27,11 +32,97 @@ namespace Skydat.forms2065
 
         private void frmbase_Load(object sender, EventArgs e)
         {
-            try  
+            StartMonitoring();
+            if (DeviceIsConnected() != null)
+                btn2066State();
+            GetBackground();
+        }
+
+        private void GetBackground()
+        {
+            try
             {
-                pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg"); 
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\back.jpg");
             }
-            catch { }
+            catch
+            {
+                DialogResult result = MessageBox.Show("تصویر زمینه در دایرکتوری مدنظر یافت نشد", "Warning", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                if (result == DialogResult.Retry)
+                {
+                    GetBackground();
+                }
+                else return;
+            }
+        }
+
+        private void StartMonitoring()
+        {
+            try
+            {
+                WqlEventQuery connectQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
+                connectWatcher = new ManagementEventWatcher(connectQuery);
+                connectWatcher.EventArrived += new EventArrivedEventHandler(DeviceConnectedEvent);
+                connectWatcher.Start();
+
+                WqlEventQuery disconnectQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 3");
+                disconnectWatcher = new ManagementEventWatcher(disconnectQuery);
+                disconnectWatcher.EventArrived += new EventArrivedEventHandler(DeviceDisconnectedEvent);
+                disconnectWatcher.Start();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error on monitoring COM event section","COM Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+        private void DeviceConnectedEvent(object sender, EventArrivedEventArgs e)
+        {
+            btn2066State();
+        }
+
+        private void DeviceDisconnectedEvent(object sender, EventArrivedEventArgs e)
+        {
+            btn2066State();
+        }
+
+        private void btn2066State()
+        {
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                string resualt = DeviceIsConnected();
+                if (resualt != null)
+                {
+                    Btn2066.Enabled = true;
+                }
+                else
+                    Btn2066.Enabled = false;
+            });
+        }  
+
+        public string DeviceIsConnected()
+        {
+            List<string> names = ComPortNames("1a86", "7523");
+            string[] x = SerialPort.GetPortNames();
+            foreach (String c in x)
+            {
+                if (names.Contains(c))
+                {
+                    try
+                    {
+                        serialPort2.PortName = c;
+                        serialPort2.BaudRate = 1000000;
+                        return c;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("به دلیل وجود مشکل در ارتباط دستگاه به نرم افزار متصل نشده، لطفا از اتصال صحیح کابل اطمینان حاصل فرمایید"
+                            ,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        throw;
+                    }
+                }
+            }
+            return null;
         }
 
         List<string> ComPortNames(String VID, String PID)//این متد برای پیدا کردن رجیستری متناظر با پورتی هست که دستگاه به آن وصل شده برای اتوماتیک وصل کردن دستگاه
@@ -61,9 +152,8 @@ namespace Skydat.forms2065
             return comports;
         }
 
-        private void Btn2066_Click(object sender, EventArgs e)
+        private void IsFrmOpen()
         {
-            Idata = false;
             this.Cursor = Cursors.WaitCursor;
             if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
             {
@@ -71,73 +161,33 @@ namespace Skydat.forms2065
                 MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            List<string> names = ComPortNames("1a86", "7523");
-            if (names.Count > 0)// نرم افزار به صورت اتوماتیک اتصال دستگاه را تشخیص میدهد
-            {
-                string[] x = SerialPort.GetPortNames();
-                int match = 0;
-                foreach (String c in x)
-                {
-                    if (names.Contains(c))
-                    {
-                        try
-                        {
-                            serialPort2.PortName = c;
-                            serialPort2.BaudRate = 1000000;
-                            match = 1;
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("مشکل در ارتباط");
-                        }
-                    }
-                }
-
-                if (match != 1)
-                {
-
-                    MessageBox.Show("Please make sure the cable connected to device properly and then try again", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Cursor = Cursors.Default;
-                    return;
-                }
-
-                frmMain2065 frm = new frmMain2065(Idata);
-                frm.Show();
-                frm.StartPosition = FormStartPosition.CenterScreen;
-                classes2065.movedata.open_form = 1;
-                this.Cursor = Cursors.Default;
-            }
         }
 
-        private void btnFRA_Click(object sender, EventArgs e)
+        private void Btn2066_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            Idata = false;
+            IsFrmOpen();
 
-            if(classes2065.movedata.open_form == 1)
-            {
-                this.Cursor = Cursors.Default;
-                MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            frmMain2065 frm = new frmMain2065(Idata);
+            frm.StartPosition = FormStartPosition.CenterScreen;
+            frm.Show();
+            classes2065.movedata.open_form = 1;
+            this.Cursor = Cursors.Default;
+        }
 
+        private void Btn2090_Click(object sender, EventArgs e)
+        {
+            IsFrmOpen();
             forms2080.frmMain12080 frm = new forms2080.frmMain12080();
             frm.StartPosition = FormStartPosition.CenterScreen;
-            classes2065.movedata.open_form = 1;
             frm.Show();
+            classes2065.movedata.open_form = 1;
             this.Cursor = Cursors.Default;
         }
 
         private void EIS_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
-            if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
-            {
-                this.Cursor = Cursors.Default;
-                MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            IsFrmOpen();
             LandingEIS frm = new LandingEIS();
             frm.StartPosition = FormStartPosition.CenterScreen;
             classes2065.movedata.open_form = 1;
@@ -145,26 +195,13 @@ namespace Skydat.forms2065
             this.Cursor = Cursors.Default;
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void ImportBtn_Click(object sender, EventArgs e)
         {
             Idata = true;
-            this.Cursor = Cursors.WaitCursor;
-            if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
-            {
-                this.Cursor = Cursors.Default;
-                MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
             frmMain2065 frm = new frmMain2065(Idata);
-            frm.Show();
             frm.StartPosition = FormStartPosition.CenterScreen;
-            classes2065.movedata.open_form = 1;
+            frm.Show();
             this.Cursor = Cursors.Default;
         }
 
@@ -196,9 +233,7 @@ namespace Skydat.forms2065
 
         private void TechnicalBtn_Click(object sender, EventArgs e)
         {
-            Process.Start("chrome.exe", "https://behpajooh.net/");
+            Process.Start("https://behpajooh.net/");
         }
-
-
     }
 }

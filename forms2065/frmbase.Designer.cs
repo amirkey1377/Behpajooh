@@ -35,10 +35,9 @@
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.Btn2066 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.Btn2090 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.PortBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.HelpBtn = new System.Windows.Forms.ToolStripButton();
@@ -56,6 +55,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
+            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +88,7 @@
             this.Btn2066.AutoSize = false;
             this.Btn2066.BackColor = System.Drawing.Color.White;
             this.Btn2066.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn2066.Enabled = false;
             this.Btn2066.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
             this.Btn2066.Image = global::Skydat.Properties.Resources._2066_illustrat;
             this.Btn2066.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -108,23 +109,23 @@
             this.toolStripLabel5.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel5.Text = "            ";
             // 
-            // toolStripButton4
+            // Btn2090
             // 
-            this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.BackColor = System.Drawing.Color.White;
-            this.toolStripButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton4.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton4.Image = global::Skydat.Properties.Resources._2090_illustrat;
-            this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton4.Text = "2090 - 2080";
-            this.toolStripButton4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton4.ToolTipText = "Device 2080 - 2090";
-            this.toolStripButton4.Click += new System.EventHandler(this.btnFRA_Click);
+            this.Btn2090.AutoSize = false;
+            this.Btn2090.BackColor = System.Drawing.Color.White;
+            this.Btn2090.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn2090.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.Btn2090.Image = global::Skydat.Properties.Resources._2090_illustrat;
+            this.Btn2090.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2090.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Btn2090.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Btn2090.Name = "Btn2090";
+            this.Btn2090.Size = new System.Drawing.Size(100, 95);
+            this.Btn2090.Text = "2090 - 2080";
+            this.Btn2090.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2090.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Btn2090.ToolTipText = "Device 2080 - 2090";
+            this.Btn2090.Click += new System.EventHandler(this.Btn2090_Click);
             // 
             // toolStripLabel10
             // 
@@ -139,13 +140,6 @@
             this.toolStripSeparator1.ForeColor = System.Drawing.Color.Maroon;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 100);
-            // 
-            // toolStripLabel9
-            // 
-            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
-            this.toolStripLabel9.Text = "            ";
             // 
             // PortBtn
             // 
@@ -261,7 +255,6 @@
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "About";
             this.toolStripButton5.Visible = false;
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripLabel11
             // 
@@ -279,7 +272,7 @@
             this.toolStripLabel8,
             this.Btn2066,
             this.toolStripLabel5,
-            this.toolStripButton4,
+            this.Btn2090,
             this.toolStripLabel10,
             this.EIS,
             this.toolStripLabel12,
@@ -368,6 +361,13 @@
             this.toolStripLabel6.Size = new System.Drawing.Size(22, 15);
             this.toolStripLabel6.Text = "     ";
             // 
+            // toolStripLabel9
+            // 
+            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
+            this.toolStripLabel9.Text = "            ";
+            // 
             // frmbase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,10 +398,9 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
         private System.Windows.Forms.ToolStripButton Btn2066;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton Btn2090;
         private System.Windows.Forms.ToolStripLabel toolStripLabel10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
         private System.Windows.Forms.ToolStripButton PortBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton HelpBtn;
@@ -419,5 +418,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
         private System.IO.Ports.SerialPort serialPort2;
         private System.Windows.Forms.ToolStripButton ImportBtn;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
     }
 }
