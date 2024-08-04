@@ -168,8 +168,10 @@ namespace Skydat.forms2065
             Idata = false;
             IsFrmOpen();
 
-            frmMain2065 frm = new frmMain2065(Idata);
-            frm.StartPosition = FormStartPosition.CenterScreen;
+            frmMain2065 frm = new frmMain2065(Idata)
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             frm.Show();
             classes2065.movedata.open_form = 1;
             this.Cursor = Cursors.Default;
@@ -178,8 +180,10 @@ namespace Skydat.forms2065
         private void Btn2090_Click(object sender, EventArgs e)
         {
             IsFrmOpen();
-            forms2080.frmMain12080 frm = new forms2080.frmMain12080();
-            frm.StartPosition = FormStartPosition.CenterScreen;
+            forms2080.frmMain12080 frm = new forms2080.frmMain12080
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             frm.Show();
             classes2065.movedata.open_form = 1;
             this.Cursor = Cursors.Default;
@@ -188,8 +192,10 @@ namespace Skydat.forms2065
         private void EIS_Click(object sender, EventArgs e)
         {
             IsFrmOpen();
-            LandingEIS frm = new LandingEIS();
-            frm.StartPosition = FormStartPosition.CenterScreen;
+            LandingEIS frm = new LandingEIS
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             classes2065.movedata.open_form = 1;
             frm.Show();
             this.Cursor = Cursors.Default;
@@ -199,16 +205,20 @@ namespace Skydat.forms2065
         {
             Idata = true;
 
-            frmMain2065 frm = new frmMain2065(Idata);
-            frm.StartPosition = FormStartPosition.CenterScreen;
+            frmMain2065 frm = new frmMain2065(Idata)
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             frm.Show();
             this.Cursor = Cursors.Default;
         }
 
         private void CustomizeBtn_Click(object sender, EventArgs e)
         {
-            frmbackgroundset frm = new frmbackgroundset(this, 5);
-            frm.StartPosition = FormStartPosition.CenterScreen;
+            frmbackgroundset frm = new frmbackgroundset(this, 5)
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             frm.ShowDialog();
         }
 
@@ -226,8 +236,10 @@ namespace Skydat.forms2065
 
         private void PortBtn_Click(object sender, EventArgs e)
         {
-            forms2080.frmPortOption2080 prtopt = new forms2080.frmPortOption2080();
-            prtopt.StartPosition = FormStartPosition.CenterScreen;
+            forms2080.frmPortOption2080 prtopt = new forms2080.frmPortOption2080
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             prtopt.ShowDialog();
         }
 
