@@ -21,8 +21,8 @@ namespace Skydat.forms2065
     {
         //public string Version_No = "Version 8.2";
 
-        private ManagementEventWatcher connectWatcher;
-        private ManagementEventWatcher disconnectWatcher;
+        private ManagementEventWatcher connectWatcher;//ایونت وصل شدن پورت COM
+        private ManagementEventWatcher disconnectWatcher;//ایونت قطع شدن پورت COM
 
         bool Idata = true;
         public frmbase()
@@ -32,7 +32,7 @@ namespace Skydat.forms2065
 
         private void frmbase_Load(object sender, EventArgs e)
         {
-            StartMonitoring();
+            StartMonitoring();//تعریف کردن ایونت برای قطع و وصل شدن USB
             if (DeviceIsConnected() != null)
                 btn2066State();
             GetBackground();
