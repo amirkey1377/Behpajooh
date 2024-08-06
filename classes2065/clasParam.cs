@@ -1348,7 +1348,7 @@ namespace Skydat.classes2065
             }
         }
         [CategoryAttribute("Cycle Values"), DescriptionAttribute("CYCLE")]
-        public double CYCLE
+        public double Cycle
         {
             get
             {
@@ -1465,7 +1465,7 @@ namespace Skydat.classes2065
         }
 
         [CategoryAttribute("CHA Values"), DescriptionAttribute("CYCLE")]
-        public double CYCLE
+        public double Cycle
         {
             get
             {
@@ -1868,7 +1868,7 @@ namespace Skydat.classes2065
         }
 
         [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
-        public double CYCLE
+        public double Cycle
         {
             get
             {
