@@ -153,7 +153,6 @@ namespace Skydat.forms2080
 
         }
 
-      
         public void Set_line_Setting()
         {
             drawline1.EnableDraw = opForm.cbDrawLine.Checked;
@@ -236,8 +235,6 @@ namespace Skydat.forms2080
             }
             catch { }
         }
-
-     
 
         private void GraphForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -330,8 +327,6 @@ namespace Skydat.forms2080
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-     
-
         private void Chart1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
@@ -392,8 +387,6 @@ namespace Skydat.forms2080
             opForm.gf = this;
             opForm.ShowDialog();
         }
-
-
 
         private void clearPlotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -6118,6 +6111,11 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         }
 
         private void tChart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label41_Click(object sender, EventArgs e)
         {
 
         }
