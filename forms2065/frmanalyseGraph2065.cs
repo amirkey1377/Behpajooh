@@ -432,7 +432,6 @@ namespace Skydat.forms2065
                 {
                     label4.Text = fillparam(1, e.Node.Index);
                 }
-
             }
         }
 
@@ -459,13 +458,14 @@ namespace Skydat.forms2065
                 }
             }
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.DereferenceLinks = false;
-            ofd.AutoUpgradeEnabled = false;
-            ofd.Multiselect = true;
-            ofd.DefaultExt = "txt";
-
-            ofd.Filter = "Text Files(*.Txt);Data Files(*.Dat)|*.txt;*.dat";
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                DereferenceLinks = false,
+                AutoUpgradeEnabled = false,
+                Multiselect = true,
+                DefaultExt = "txt",
+                Filter = "Text Files(*.Txt);Data Files(*.Dat)|*.txt;*.dat"
+            };
             ofd.ShowDialog();
             bool beOverlay = overlaymain;
             for (int i = 0; i <= ofd.FileNames.GetUpperBound(0); i++)
@@ -497,23 +497,22 @@ namespace Skydat.forms2065
                             if (fName_2[g].ToString() == "_" || fName_2[g].ToString() == "-" || fName_2[g].ToString() == ".")
                                 break;
                             else
-                                fName = fName + fName_2[g].ToString();  //mnfile
-
+                                fName += fName_2[g].ToString();  //mnfile
 
                         //if (fName_2[g].ToString() == "_") ok = 1;
                     }
                     if (ok == 0) fName = fName_2.Substring(0, fName_2.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
 
-                    for (int ii = 0; ii < cycle; ii++)
+                    for (int j = 0; j < cycle; j++)
                     {
                         restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
                         fillparamdata(n);
                         n++;
                         if (cycle > 1)
                         {
-                            //treeView3.Nodes[0].Nodes.Add(fName + "-" + (ii + 1));  // CV-1.dat
+                            //treeView3.Nodes[0].Nodes.Add(fName + "-" + (j + 1));  // CV-1.dat
                             // ایجاد یک نود جدید
-                            TreeNode newNode = new TreeNode(fName + "-" + (ii + 1)); // CV-1.dat
+                            TreeNode newNode = new TreeNode(fName + "-" + (j + 1)); // CV-1.dat
                             // تنظیم رنگ متن نود
                             newNode.ForeColor = GetColor();
                             // اضافه کردن نود جدید به نود صفرم TreeView
@@ -562,20 +561,20 @@ namespace Skydat.forms2065
         {
             double[] xTmp = { 0 };
             double[] yTmp = { 0 };
-            string s = "", fs = "", comment100 = "";
+            string s = "", comment100 = "";
             bool isData = false;
             int num_ser = 0, num_data = 0;
 
-            if (fileName != "")
-                fs = fileName;
+            //if (fileName != "")
+            //    fs = fileName;
             StreamReader Fl;
             int tch = 0; double CR = 9999, E1 = 9999, E2 = 9999, E3 = 9999, HS = 9999, QT = 9999, SRF = 9999, SRR = 9999;
             double TS = 9999, PW = 9999, PH = 9999, FR = 9999, CY = 1 /*CY = 9999*/, HT = 9999, T1 = 9999, T2 = 9999, I1 = 9999, I2 = 9999;
             double AA = 9999, Q1 = 9999, Vup = 9999, Vdo = 9999;
             EventArgs e = new EventArgs();
-            if (fs != "")
+            if (fileName != "")
             {
-                Fl = new StreamReader(fs);
+                Fl = new StreamReader(fileName);
                 if (overlaymain)
                     num_data = tChart1.Series.Count;
                 try
@@ -584,9 +583,7 @@ namespace Skydat.forms2065
                     while (!Fl.EndOfStream)
                     {
                         s = Fl.ReadLine();
-
                         line_file++;
-
                         line++;
 
                         if (s.ToUpper().IndexOf("NEW SERIES") >= 0)
@@ -627,7 +624,7 @@ namespace Skydat.forms2065
                                         if (clasglobal.TechName[i] == s.Substring(s.IndexOf(':') + 1).Trim())
                                         {
                                             tch = i;
-                                            if (clasglobal.TechName[i].ToLower() == "cha" || clasglobal.TechName[i].ToLower() == "cp" || clasglobal.TechName[i].ToLower() == "chc" || clasglobal.TechName[i].ToLower() == "cd")
+                                            if (clasglobal.TechName[i].ToLower() == "ca" || clasglobal.TechName[i].ToLower() == "cp" || clasglobal.TechName[i].ToLower() == "chc" || clasglobal.TechName[i].ToLower() == "cd")
                                                 smooth_state = false;
                                             else
                                                 smooth_state = true;
@@ -651,7 +648,7 @@ namespace Skydat.forms2065
                             else if (s.IndexOf("ScanRate_R") >= 0) SRR = restore_One_Data(s, "ScanRate_R");
                             else if (s.IndexOf("TStep") >= 0) TS = restore_One_Data(s, "TStep");
                             else if (s.IndexOf("Pulse Width") >= 0) PW = restore_One_Data(s, "Pulse Width");
-                            else if (s.IndexOf("pulse ") >= 0) PH = restore_One_Data(s, "Hpuls");
+                            else if (s.IndexOf("Pulse Height") >= 0) PH = restore_One_Data(s, "Pulse Height");
                             else if (s.IndexOf("Frequency") >= 0) FR = restore_One_Data(s, "Frequency");
                             else if (s.IndexOf("Cycle") >= 0) CY = restore_One_Data(s, "Cycle");
                             else if (s.IndexOf("T1") >= 0) T1 = restore_One_Data(s, "T1");
@@ -870,38 +867,14 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
                         break;
-                    case clasglobal.DCs:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
 
-                        break;
-                    case clasglobal.DPs:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][9].ToString()) != 9999) str_fillparam = str_fillparam + "Pulse Height =" + double.Parse(dschart2.analyselist.Rows[row][9].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][8].ToString()) != 9999) str_fillparam = str_fillparam + "Pulse Width =" + double.Parse(dschart2.analyselist.Rows[row][8].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-
-                        break;
                     case clasglobal.CPC:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
-                    case clasglobal.CCC:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) * 1000 + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
-                        break;
+                    
                     case clasglobal.CHP:
                         if (double.Parse(dschart2.analyselist.Rows[row][15].ToString()) != 9999) str_fillparam = str_fillparam + "I1 =" + double.Parse(dschart2.analyselist.Rows[row][15].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][16].ToString()) != 9999) str_fillparam = str_fillparam + "I2 =" + double.Parse(dschart2.analyselist.Rows[row][16].ToString()) + "\n";
@@ -912,13 +885,14 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart2.analyselist.Rows[row][10].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][10].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         break;
+
                     case clasglobal.CA:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
+                        if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
                     case clasglobal.CHC:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -966,15 +940,12 @@ namespace Skydat.forms2065
                     case "SWV": Tch = clasglobal.SWV; break;
                     case "CV": Tch = clasglobal.CV; break;
                     case "LSV": Tch = clasglobal.LSV; break;
-                    case "DCs": Tch = clasglobal.DCs; break;
-                    case "DPs": Tch = clasglobal.DPs; break;
                     case "OCP": Tch = clasglobal.OCP; break;
                     case "CPC": Tch = clasglobal.CPC; break;
                     case "CHP": Tch = clasglobal.CHP; break;
                     case "CA": Tch = clasglobal.CA; break;
-                    case "CHC": Tch = clasglobal.CHC; break;
+                    case "CC": Tch = clasglobal.CHC; break;
                     case "CD": Tch = clasglobal.CD; break;
-                    case "CCC": Tch = clasglobal.CCC; break;
                     default: Tch = 15; break;
                 }
                 return Tch;
@@ -1849,7 +1820,8 @@ namespace Skydat.forms2065
                     {
                         for (int j = 0; j < nn; j++)
                         {
-                            if (Convert.ToDouble(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
+                            if (Convert.ToDouble(dschart2.analyselist.Rows[j][11].ToString()) > 1 && (Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 14 ||
+                                Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 10 || Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 12) ) //cycle > 1
                             {
                                 for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
                                     if (this.treeView3.Nodes[0].Nodes[f].Checked)
@@ -1857,12 +1829,16 @@ namespace Skydat.forms2065
                                         filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[f].Text + "_" + (filename_index).ToString() + ".dat";
 
                                         File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
-                                        clasglobal.ChangeColor(filename);
+                                        if (ColorChangedFlag)
+                                        {
+                                            clasglobal.ChangeColor(filename);
+                                            ColorChangedFlag = false;
+                                        }
 
                                         filename_index++;
                                         break;
                                     }
-
+                                int x = Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString());
                                 j += Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) - 1; // becuse cycle this here is a graf but in database not rows
                             }
                             else
@@ -1872,7 +1848,11 @@ namespace Skydat.forms2065
                                     filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[j].Text + "_" + (filename_index).ToString() + ".dat";
 
                                     File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
-                                    clasglobal.ChangeColor(filename);
+                                    if (ColorChangedFlag)
+                                    {
+                                        clasglobal.ChangeColor(filename);
+                                        ColorChangedFlag = false;
+                                    }
 
                                     filename_index++;
                                 }
@@ -5985,6 +5965,7 @@ namespace Skydat.forms2065
             tChart2.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
         }
 
+        bool ColorChangedFlag = false;
         private void setColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.ShowDialog();
@@ -5994,7 +5975,7 @@ namespace Skydat.forms2065
                 treeView3.SelectedNode.ForeColor = GetColor();
             }
             tChart1.Series[treeView3.SelectedNode.Index].Color = GetColor();
-
+            ColorChangedFlag = true;
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)

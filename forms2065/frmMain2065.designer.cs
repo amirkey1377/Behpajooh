@@ -79,7 +79,6 @@ namespace Skydat.forms2065
             this.statusStrip1.Size = new System.Drawing.Size(1018, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
             // 
             // toolStripStatusLabel1
             // 
@@ -126,7 +125,7 @@ namespace Skydat.forms2065
             this.TechStatus.Name = "TechStatus";
             this.TechStatus.Size = new System.Drawing.Size(180, 19);
             this.TechStatus.ToolTipText = "Run State";
-            this.TechStatus.TextChanged += new System.EventHandler(this.toolStripStatusLabel5_TextChanged);
+            this.TechStatus.TextChanged += new System.EventHandler(this.TechStatus_TextChanged);
             // 
             // toolStripProgressBar1
             // 
@@ -211,7 +210,6 @@ namespace Skydat.forms2065
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(884, 649);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // tabPage1
             // 

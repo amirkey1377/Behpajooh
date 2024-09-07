@@ -193,7 +193,7 @@ namespace Skydat.forms2065
 
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
-                        clasglobal.WriteToFile(dschart11.chartlist1_run.Rows[0], clasglobal.TechName[int.Parse(dschart11.chartlist1_run.Rows[0][1].ToString())], sfd.FileName, 0, 1);//header in file
+                        ReadWrite.WriteToFile(dschart11.chartlist1_run.Rows[0], clasglobal.TechName[int.Parse(dschart11.chartlist1_run.Rows[0][1].ToString())], sfd.FileName, 0, 1);//header in file
 
                         StreamWriter sa1 = new StreamWriter(sfd.FileName, true);
                         sa1.WriteLine("============================================================");
@@ -241,7 +241,7 @@ namespace Skydat.forms2065
                 short[] Powr = new short[1];
                 short[] Crnt = new short[1];
 
-                bool Equ = false, pulsy = false, N_gtv = false, evn = false;
+                bool pulsy = false, N_gtv = false, evn = false;
                 string Sign = "", outstr = "";
                 double SR0, i1 = 0, i2 = 0, ss = 0;
                 if (!sp1.IsOpen)
@@ -378,7 +378,7 @@ namespace Skydat.forms2065
                         Elo = IE;
                         if (E3 != IE)
                         {
-                            Equ = false;
+                            
                             Elo = E3;
                         }
                     }

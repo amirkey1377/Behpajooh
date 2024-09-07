@@ -14,6 +14,7 @@ namespace Skydat.forms2065
         public frmOption12065()
         {
             InitializeComponent();
+            cmbStyleDraw.SelectedIndex = 0;
         }
         public frmMain2065 mf;
         public clasMain mc = new clasMain();

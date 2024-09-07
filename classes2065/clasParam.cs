@@ -1854,6 +1854,21 @@ namespace Skydat.classes2065
                 _I1 = value;
             }
         }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
         [CategoryAttribute("Cd Values"), DescriptionAttribute("Second current step(mA)\n -360    +360")]
         public double I2
         {
@@ -1867,33 +1882,6 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
-        public double Cycle
-        {
-            get
-            {
-                return _CYCLE;
-            }
-
-            set
-            {
-                _CYCLE = value;
-            }
-        }
-
-            [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
-        public double T1
-        {
-            get
-            {
-                return _T1;
-            }
-
-            set
-            {
-                _T1 = value;
-            }
-        }
         [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
         public double T2
         {
@@ -1921,6 +1909,7 @@ namespace Skydat.classes2065
                 _EUP = value;
             }
         }
+
         [CategoryAttribute("Cd Values"), DescriptionAttribute("lowwer cutoff voltage(V)")]
         public double EDO
         {
@@ -1932,6 +1921,20 @@ namespace Skydat.classes2065
             set
             {
                 _EDO = value;
+            }
+        }
+
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
+        public double Cycle
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
             }
         }
 

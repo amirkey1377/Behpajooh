@@ -107,7 +107,6 @@ namespace Skydat.forms2065
         {
             List<string> names = ComPortNames("1a86", "7523");
             string[] x = SerialPort.GetPortNames();
-            int match = 0;
             foreach (String c in x)
             {
                 if (names.Contains(c))
@@ -116,7 +115,6 @@ namespace Skydat.forms2065
                     {
                         serialPort2.PortName = c;
                         serialPort2.BaudRate = 1000000;
-                        match = 1;
                     }
                     catch (Exception)
                     {
@@ -130,11 +128,9 @@ namespace Skydat.forms2065
         public frmshowGraph2065()
         {
             InitializeComponent();
-
             try
             {
                 DeviceIsConnected();
-
                 //Set parameter like color & ... for graph
                 System.Drawing.Color ChartColor = Color.Black;
                 OnlineChart.ChartAreas[0].AxisX.LabelStyle.ForeColor = ChartColor;
@@ -469,8 +465,6 @@ namespace Skydat.forms2065
             }
             catch (Exception ex) { errors_cls err = new errors_cls(ex, txtcomment, 2); }
         }
-
-
 
         unsafe private void doRun2_1(int row)
         {
@@ -1346,7 +1340,7 @@ namespace Skydat.forms2065
                                 I1 = C[j]; // Addxy(V1,C[j],'',Colr[cl]);
                             I2 = 0;
                             Vold = V;
-                            V = V + ti;
+                            V += ti;
                             sign = 0;
                             j++;
                         }
@@ -1379,7 +1373,10 @@ namespace Skydat.forms2065
                             temp4 = othertech_val3[shomar_othertech - 1];
                             smootht4(row, OnlineChart.Series[0].Color);
                             Setgrfnodetext(row, 2, 1);
-                            show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
+                            this.Invoke((MethodInvoker)delegate ()
+                            {
+                                show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
+                            });
                             cv_stop = false;
                             if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)//cycle >0
                             {
@@ -1456,23 +1453,6 @@ namespace Skydat.forms2065
                 }
             }
         }
-
-        void FinishTech(int row)
-        {
-            try
-            {
-                serialPort2.Close();
-                System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));//delay with equlibirum time                                                                                                                                                                                                 // System.Threading.Thread.Sleep(int.Parse(this.dschart1.chartlist.Rows[row][7].ToString()));
-                Setbtnenabled(true, 2, 1);
-                detect_Error = false;
-                return;
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show(Ex.Message);
-            }
-        }
-
 
         unsafe private void dorun2_costum(int row)//CD
         {
@@ -1834,10 +1814,6 @@ namespace Skydat.forms2065
                 }
             }
         }
-
-
-
-
 
         unsafe private void dorun3(int row)
         {
@@ -2286,6 +2262,11 @@ namespace Skydat.forms2065
                     //fillparamdata(treeView3.Nodes[0].LastNode.Index.Index);   
 
                     movedata.main_cycle = dschart1.chartlist1_run.Rows[TechSeries][13].ToString();
+                    string s = dschart1.chartlist1_run.Rows[TechSeries][1].ToString();
+                    if (dschart1.chartlist1_run.Rows[TechSeries][1].ToString() == "11")
+                    {
+                        movedata.main_cycle = dschart1.chartlist1_run.Rows[TechSeries][12].ToString();
+                    }
 
                     Set_value2(TechSeries); //ست کردن و پردازش اولیه اطلاعات خام وارد شده توسط کاربر و ست درون دیتاست اجرا و ارسال به دستگاه
 
@@ -2472,7 +2453,6 @@ namespace Skydat.forms2065
                             if (!runerror)
                             {
                                 transferdata(TechSeries, 1);
-                                // smootht10(TechSeries, OnlineChart.Series[0].Color,ti,25);
                             }
                             else
                             {
@@ -2511,14 +2491,11 @@ namespace Skydat.forms2065
                             Setgrfnodetext(TechSeries, 2, 1);// ست کردن دیتا درون دیتاست و نمودار فرم بعدی که آنالیز می باشد
                         }
                     }
-
-                    //System.Threading.Thread.Sleep(3000);
                 }
                 if (!runerror)
                 {
                     Setbtnenabled(true, 2, 1);//نمایش دکمه و متن پایان اجرا
                 }
-
             }
             catch (Exception ex)
             {
@@ -2549,7 +2526,7 @@ namespace Skydat.forms2065
             }
 
             if (cycle_number_in_file <= 1)
-                clasglobal.WriteToFile(dschart1.chartlist1_run.Rows[rownum], clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())], strpath, rownum, 1);//header in file
+                ReadWrite.WriteToFile(dschart1.chartlist1_run.Rows[rownum], clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())], strpath, rownum, 1);//header in file
             else
             {
                 StreamWriter s = new StreamWriter(strpath, true);
@@ -2557,6 +2534,7 @@ namespace Skydat.forms2065
                 s.Close();
             }
 
+            dschart1.chartlist1_run.Rows[rownum][23] = strpath;
             StreamWriter sa1 = new StreamWriter(strpath, true);
             sa1.WriteLine("============================================================");
 
@@ -2596,7 +2574,6 @@ namespace Skydat.forms2065
                 }
             }
             sa1.Close();
-            dschart1.chartlist1_run.Rows[rownum][23] = strpath;
         }
 
         private void run_key_tch0(int row)
@@ -2957,21 +2934,26 @@ namespace Skydat.forms2065
             dorun2_costum_2(row);
         }
 
-        public void runf(byte rng, double cp11, double ct11, double cp12, double ct12, double cp13, double ct13)
+        public void Runf(byte rng, bool precodtion)
         {
             this.treeView3.Nodes[0].Nodes.Clear();
-            Analiz_CP1 = cp11 * 1000;
-            Analiz_CP2 = cp12 * 1000;
-            Analiz_CP3 = cp13 * 1000;
-            Analiz_CT1 = ct11;
-            Analiz_CT2 = ct12;
-            Analiz_CT3 = ct13;
-            Range1 = rng;
+
+            if (precodtion)
+            {
+                Analiz_CP1 = clasglobal.cpctprms.CP1 * 1000;
+                Analiz_CP2 = clasglobal.cpctprms.CP2 * 1000;
+                Analiz_CP3 = clasglobal.cpctprms.CP3 * 1000;
+                Analiz_CT1 = clasglobal.cpctprms.CT1;
+                Analiz_CT2 = clasglobal.cpctprms.CT2;
+                Analiz_CT3 = clasglobal.cpctprms.CT3;
+                Range1 = rng;
+            }
 
             if (outc == 0xA0)//if serial is stop 
             {
                 outc = 0x20;//change mode to run
             }
+
             if (thread_grf.ThreadState == ThreadState.Aborted || thread_grf.ThreadState == ThreadState.Unstarted)
                 thread_grf.Start();
             else if (thread_grf.ThreadState == ThreadState.Stopped)
@@ -2979,7 +2961,6 @@ namespace Skydat.forms2065
                 thread_grf = new Thread(Run_key);
                 thread_grf.Start();
             }
-
         }
 
         delegate void Setgrftchart1Callback(bool overlaymain, int row1, int code, int state);
@@ -3259,6 +3240,7 @@ namespace Skydat.forms2065
                 mainf.TechStatus.Text = (show_number_runing + 1).ToString().Trim() + " - Running technique " + treeView3.Nodes[0].Nodes[show_number_runing].Text;
         }
 
+        private int Cycle = Convert.ToInt32(movedata.main_cycle);
         delegate void SetgrfnodeCallback(int txt, int code, int state);
         private void Setgrfnodetext(int txt, int code, int state)
         {
@@ -3272,6 +3254,7 @@ namespace Skydat.forms2065
                     }
                     else
                     {
+                        this.treeView3.Nodes[0].Nodes[txt].ForeColor = Color.DarkCyan;
                         mainf.TechStatus.ForeColor = Color.DarkCyan;
                         mainf.TechStatus.Text = (txt + 1).ToString().Trim() + "- Running technique " + treeView3.Nodes[0].Nodes[txt].Text;
                     }
@@ -3346,8 +3329,13 @@ namespace Skydat.forms2065
                             this.mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
                             // this.mainf.grf.Set_Graph(0, false, true);
 
-                            mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
-                            mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[1];// برگشتن به فرم در حال اجرا
+                            if (!(mainf.tabControl1.SelectedTab == mainf.tabControl1.TabPages[2]))
+                            {
+                                var lastTab = mainf.tabControl1.SelectedTab;
+                                mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
+                                mainf.tabControl1.SelectedTab = lastTab;// برگشتن به فرم در حال اجرا
+                            }
+
                             this.mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", time_cha_chc, volt_cha_chc, true, shomar_cha_chc);
                             //this.mainf.grf.treeView3.SelectedNode = this.mainf.grf.treeView3.Nodes[0].Nodes[maxrana - 1];
                             this.mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
@@ -3362,8 +3350,14 @@ namespace Skydat.forms2065
 
                             this.mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
                             // this.mainf.grf.Set_Graph(0, false, true);
-                            mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
-                            mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[1];// برگشتن به فرم در حال اجرا
+
+                            if (!(mainf.tabControl1.SelectedTab == mainf.tabControl1.TabPages[2]))
+                            {
+                                var lastTab = mainf.tabControl1.SelectedTab;
+                                mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
+                                mainf.tabControl1.SelectedTab = lastTab;// برگشتن به فرم در حال اجرا
+                            }
+
                             this.mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", othertech_val0, othertech_val3, true, shomar_othertech);
                             //this.mainf.grf.treeView3.SelectedNode = this.mainf.grf.treeView3.Nodes[0].Nodes[maxrana - 1];
                             this.mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
@@ -3382,7 +3376,7 @@ namespace Skydat.forms2065
                         for (int iii1 = 0; iii1 < dschart1.chartlist1_run.Rows.Count; iii1++)
                         {
                             this.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(this.dschart1.chartlist1_run.Rows[iii1][1].ToString())]);
-                            this.treeView3.Nodes[0].Nodes[iii1].ForeColor = Color.DarkCyan;
+                            this.treeView3.Nodes[0].Nodes[iii1].ForeColor = Color.Black;
                         }
                     }
                     break;
@@ -3473,7 +3467,6 @@ namespace Skydat.forms2065
             switch (code)
             {
                 case 1:
-
                     if (state == 1)
                     {
                         SetenabledCallback d = new SetenabledCallback(Setbtnenabled);
@@ -3489,6 +3482,7 @@ namespace Skydat.forms2065
                         //////////////////mainf.toolStripProgressBar1.Visible = true;
                     }
                     break;
+
                 case 2:
                     if (state == 1)
                     {
@@ -3500,10 +3494,8 @@ namespace Skydat.forms2065
                         mainf.TechStatus.Text = "Stop";
                         this.mainf.stf.tsbNew.Enabled = true;
                         mainf.toolStripProgressBar1.Visible = false;
-
                         Holdbtn.Enabled = false;
                         Stopbtn.Enabled = false;
-
                         mainf.stf.runToolStripMenuItem1.Enabled = true;
                         mainf.stf.tsbRun.Enabled = true;
                         // timer3.Enabled = false;
@@ -3534,7 +3526,6 @@ namespace Skydat.forms2065
 
         private void Set_value2(int row)
         {
-            //_Timer = 0;
             detect_Error = false;
             shomar_othertech = 0;
             Array.Clear(othertech_val0, 0, othertech_val0.Length);
@@ -3542,7 +3533,7 @@ namespace Skydat.forms2065
             Array.Clear(othertech_val2, 0, othertech_val2.Length);
             Array.Clear(othertech_val3, 0, othertech_val3.Length);
 
-            switch (byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()))
+            switch (byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()))//switch(tech)
             {
                 case clasglobal.DCV:
                 case clasglobal.NPV:
@@ -3634,13 +3625,13 @@ namespace Skydat.forms2065
                     dschart1.chartlist1_run.Rows[row][16] = dschart1.chartlist1_run.Rows[row][15];
                     Analiz_St2 = Analiz_St1;
                     break;
-                case clasglobal.CPC:
 
+                case clasglobal.CPC:
                     dschart1.chartlist1_run.Rows[row][13] = 1;
                     dschart1.chartlist1_run.Rows[row][15] = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());
                     break;
-                case clasglobal.CHP:
 
+                case clasglobal.CHP:
                     //dschart1.chartlist1_run.Rows[row][13] = 1;
                     dschart1.chartlist1_run.Rows[row][15] = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) / 1000;
                     dschart1.chartlist1_run.Rows[row][16] = double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) / 1000;
@@ -4761,11 +4752,10 @@ namespace Skydat.forms2065
             byte* InBuff = &num;
             byte[] datas = new byte[3];
 
-            uint RecvLength = 3;
             byte[] data = new byte[65520];
             // int j = 0;
             double[] C = new double[32710];
-            byte t_mp, t_mq;
+            byte t_mp;
             Int64 Point = 0, Temp = 0;
 
             if (serialPort2.IsOpen)
@@ -6103,9 +6093,9 @@ namespace Skydat.forms2065
         public void smootht0_t1(int row1, Color color1)
         {
             double Stp = 0;
-            double I_tot = 0, A0, A1, B0, AB, A2, ai, I0, I1 = 0, b, Ec, V1, SS, mini, Mp, Vi = 0;
-            long Ts, len, k, j = 0, cl = 0, k1, NUM, MaxC, R_cmp = 0;
-            bool cmpn = false, Colm = false, ctrl = false, Drvt = false, mx = false, grftfl = false;
+            double I0, I1 = 0, V1, SS, Vi = 0;
+            long Ts, len, k1, NUM, R_cmp = 0;
+            bool cmpn = false, Colm = false, ctrl = false, Drvt = false, grftfl = false;
             // char Sign = '0';
             len = shomar_othertech;
             int L_Teq = int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()); //,a;
@@ -6128,7 +6118,6 @@ namespace Skydat.forms2065
 
             NUM = len - 1;
             SS = Tss / 1000;
-            MaxC = 0;
             long vn = NUM;
 
             long ngtv = (finalE - 0) > 0 ? 1 : -1;
@@ -6242,7 +6231,6 @@ namespace Skydat.forms2065
                 //    I1 = othertech_val3[k1];
                 //}
 
-                I_tot = 0;
                 for (long i = 0; i <= len; i++)
                 {
                     I1 = (Colm) || (Drvt) ? othertech_val3[i + k1] : othertech_val3[i];
