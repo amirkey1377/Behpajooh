@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmshowGraph2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -174,24 +174,24 @@ namespace Skydat.forms2080
             this.btnshowaxes.UseVisualStyleBackColor = false;
             this.btnshowaxes.Click += new System.EventHandler(this.btnshowaxes_Click);
             // 
-            // OnlineChart
+            // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tChart1.BorderlineColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 100F;
-            chartArea1.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea1);
-            resources.ApplyResources(this.tChart1, "OnlineChart");
-            this.tChart1.Name = "OnlineChart";
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            series1.Name = "Series1";
-            this.tChart1.Series.Add(series1);
+            chartArea2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.Position.Auto = false;
+            chartArea2.Position.Height = 100F;
+            chartArea2.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea2);
+            resources.ApplyResources(this.tChart1, "tChart1");
+            this.tChart1.Name = "tChart1";
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            series2.Name = "Series1";
+            this.tChart1.Series.Add(series2);
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseMove);
             this.tChart1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseUp);
@@ -206,11 +206,11 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // Parameters
+            // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.label4, "Parameters");
-            this.label4.Name = "Parameters";
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             this.label4.ReadOnly = true;
             // 
             // label1

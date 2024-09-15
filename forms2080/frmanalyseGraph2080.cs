@@ -6120,6 +6120,11 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void ch_area_CheckedChanged(object sender, EventArgs e)
         {
             for (int i = 0; i < series_area_index.Length; i++)

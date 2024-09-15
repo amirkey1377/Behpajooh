@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmanalyseGraph2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDataPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,14 +172,15 @@ namespace Skydat.forms2080
             this.label4.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // treeView3
             // 
             this.treeView3.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.treeView3.CheckBoxes = true;
             this.treeView3.ContextMenuStrip = this.contextMenuStrip1;
-            this.treeView3.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.treeView3, "treeView3");
+            this.treeView3.ForeColor = System.Drawing.Color.Black;
             this.treeView3.Name = "treeView3";
             this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView3.Nodes")))});
@@ -189,12 +190,12 @@ namespace Skydat.forms2080
             // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
-            chartArea1.BackColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 100F;
-            chartArea1.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea1);
+            chartArea7.BackColor = System.Drawing.Color.Black;
+            chartArea7.Name = "ChartArea1";
+            chartArea7.Position.Auto = false;
+            chartArea7.Position.Height = 100F;
+            chartArea7.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea7);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
@@ -483,12 +484,12 @@ namespace Skydat.forms2080
             // 
             this.tChart2.BackColor = System.Drawing.Color.Black;
             this.tChart2.BorderlineColor = System.Drawing.Color.Black;
-            chartArea2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 100F;
-            chartArea2.Position.Width = 100F;
-            this.tChart2.ChartAreas.Add(chartArea2);
+            chartArea8.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea8.Name = "ChartArea1";
+            chartArea8.Position.Auto = false;
+            chartArea8.Position.Height = 100F;
+            chartArea8.Position.Width = 100F;
+            this.tChart2.ChartAreas.Add(chartArea8);
             this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart2, "tChart2");
             this.tChart2.Name = "tChart2";
@@ -507,8 +508,8 @@ namespace Skydat.forms2080
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.label41);
-            this.panel3.Controls.Add(this.treeView3);
             this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.treeView3);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
