@@ -374,7 +374,7 @@
     <value>6</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>621, 1</value>
+    <value>-1, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 244</value>
@@ -914,9 +914,6 @@
         AADgAAAA4AAAAOAIAAAgDAAAAAwAAMAOAAAgDgAAgA8AAOAPAADgDwAA4A4AAOAOAADgB8AA4AvAAOAN
         gADgDgAA4A8AAOAD3N/gCeKf4Az8f+AOfH/gDztP4A+HJ8APzzuAD/+5gA//nQ==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;dschart1.Name" xml:space="preserve">
     <value>dschart1</value>

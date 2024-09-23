@@ -209,7 +209,7 @@ namespace Skydat.forms2065
             this.OnlineChart.ChartAreas.Add(chartArea1);
             resources.ApplyResources(this.OnlineChart, "OnlineChart");
             this.OnlineChart.Name = "OnlineChart";
-            series1.BorderWidth = 2;
+            series1.BorderWidth = 50;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Name = "Series1";

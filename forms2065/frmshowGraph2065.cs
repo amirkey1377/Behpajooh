@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -62,6 +63,9 @@ namespace Skydat.forms2065
         [DllImport("User32.dll", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private static extern IntPtr LoadCursorFromFile(String str);
         public int flag_cd = 0;
+
+        //دیباگ مود برای وقتی است که میخواهیم یرای تعمییر دستگاه استپ های ولتاژی را ببینیم
+        bool DebugMode = true;
 
         //Setting for set customize icon for zoomin & zoomoutButton
         public static System.Windows.Forms.Cursor LoadCursorFromResource(Icon icono)  // Assuming that the resource is an Icon, but also could be a Image or a Bitmap
@@ -442,6 +446,7 @@ namespace Skydat.forms2065
             {
                 ser1.ChartType = SeriesChartType.Point;
             }
+
             Setgrftchart11(ser1, 1, 1);//اد کردن سری به نمودار
 
             Setgrftchart1(overlaymain, row1, 2, 1);// افزودن تایتل محور عمودی و افقی و کلی به نمودار
@@ -977,9 +982,27 @@ namespace Skydat.forms2065
             }
         }
 
+        static void ShiftLeft(double[] arr)
+        {
+            if (arr.Length > 1)
+            {
+                // ذخیره اولین عنصر
+                double firstElement = arr[0];
+
+                // همه عناصر را یک خانه به سمت چپ شیفت دهید
+                for (int i = 0; i < arr.Length - 1; i++)
+                {
+                    arr[i] = arr[i + 1];
+                }
+
+                // قرار دادن اولین عنصر در خانه آخر
+                arr[arr.Length - 1] = 0;
+            }
+        }
+
         unsafe private void DoRun2(int row)
         {
-            byte[] datas = new byte[3];
+            byte[] data = new byte[3];
             Int32 n = 0;
             Int64 j = 0, h = 0;
             byte num1, num2;
@@ -992,15 +1015,25 @@ namespace Skydat.forms2065
             byte[] Powr = new Byte[4000000];
             double[] Crnt = new double[4000000];
             double[] C = new double[4000000];
-            byte[] Po = new Byte[4000000];
+            List<byte> Po = new List<byte> ();
             double[] Crn = new double[4000000];
             Boolean[] signe = new Boolean[4000000];
             int sign = 0;
             int i = 0;
             double Itot = 0;
             double V = 0, I1 = 0, I2 = 0, Vold;
-
             countcv = 0;
+
+            int averagelength = 5;
+            int average = 0;
+            double[] Online_filter = new double[averagelength];
+            double[] Vold_arrey = new double[averagelength];
+            double[] I1_arrey = new double[averagelength];
+            double[] I2_arrey = new double[averagelength];
+
+
+
+            double TechNumber = double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString());
 
             //متد اینوکر برای اینکه تابعی که در ترد دیگری اجرا می‌شود را به صورت متغییر فراخوانی کنیم
             this.Invoke((MethodInvoker)delegate ()
@@ -1009,18 +1042,18 @@ namespace Skydat.forms2065
             });
 
 
-            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
+            if (TechNumber < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
                 V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());// e1 
-            else if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) >= 9)//cpc ,chp,cha,chc
+            else if (TechNumber >= 9)//cpc ,chp,cha,chc
                 V = ti;
             Vold = V;
             flag_running = true;
-            byte oinp, oinp1, oinp2, oinp3;
             serialPort2.ReadTimeout = Timeout.Infinite;
             serialPort2.DiscardInBuffer();
-            for (int delay = 0; delay < Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()); delay++)
+
+            for (int delay = 0; delay < Convert.ToInt32(dschart1.chartlist1_run.Rows[row]["qt"].ToString()); delay++)
             {
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 if (outc == 0xa0)
                 {
                     Settxtfill_func(2, "stop", 2, 1);
@@ -1033,7 +1066,7 @@ namespace Skydat.forms2065
                 }
             }
 
-            for (n = 1; n < 4000000; n++)//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
+            for(; ; )//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
             {
                 if (staterun.Trim() == "stop")
                 {
@@ -1043,76 +1076,55 @@ namespace Skydat.forms2065
                 }
                 string1 = null;
                 string[] strings = new string[4];
-                var v = 0;
-                char char1 = '0';
+
                 Setbtnenabled(true, 1, 2);
+
                 number = serialPort2.BytesToRead;
-                try
+                //Settxtfill_func(2, $"{number}", 2, 1);
+                if (number > 0)
                 {
-                    //serialPort2.Write("very");
+                    string1 = serialPort2.ReadLine();
 
-                    //string1 = serialPort2.ReadLine();
-                    //Settxtfill_func(2, "start", 2, 1);
-
-                    number = serialPort2.BytesToRead;
-                    //Settxtfill_func(2, $"{number}", 2, 1);
-                    if (number > 0)
+                    if (sign == 0)
                     {
-                        string1 = serialPort2.ReadLine();
-
-
-                        if (sign == 0)
+                        if (string1.Contains("end"))
                         {
-                            if (string1.Contains("end"))
-                            {
-
-                                end = 1;
+                            end = 1;
+                            if (DebugMode)
                                 Settxtfill_func(2, $"end", 2, 1);
-                            }
-                            if (string1.Contains("@"))
-                            {
-                                strings = string1.Split('@');
-                                //Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
-                                try
-                                {
+                        }
+                        if (string1.Contains("@"))
+                        {
+                            strings = string1.Split('@');
+                            if (DebugMode)
+                                Settxtfill_func(2, $"endpacket:{string1}", 2, 1);
+                            data[2] = (byte)Int32.Parse(strings[1]);
+                            data[0] = (byte)Int32.Parse(strings[2]);
+                            data[1] = (byte)Int32.Parse(strings[3]);
 
-                                    datas[2] = (byte)Int32.Parse(strings[1]);
-                                    datas[0] = (byte)Int32.Parse(strings[2]);
-                                    datas[1] = (byte)Int32.Parse(strings[3]);
-
-                                }
-                                catch
-                                {
-
-
-                                }
-
-                                counter++;
-                                sign = 1;
-                                number = 0;
-                                flag_running = true;
-                                //                serialPort2.Write("v");
-                                //              serialPort2.DiscardInBuffer();
-                            }
+                            counter++;
+                            sign = 1;
+                            number = 0;
+                            flag_running = true;
                         }
                     }
-                    n--;
-                    // Settxtfill_func(2, $"c:{string1}", 2, 1);
-
-                    //string[] string2 = string1.Split('\n');
-                    // Settxtfill_func(2, "end2", 2, 1);
                 }
-                catch
+
+                if (DebugMode)
                 {
-
+                    foreach (var item in strings)
+                    {
+                        Settxtfill_func(2, $"c:{item}", 2, 1);
+                    }
                 }
+
                 if (sign == 1)
                 {
                     if (fst) //IF fst TRUE 
                     {
                         sign = 0;
-                        Powr[j] = datas[2];//SAVE IN BUFFER 
-                        Crnt[j] = ((datas[0] << 6) | (datas[1] >> 2)); //???
+                        Powr[j] = data[2];//SAVE IN BUFFER 
+                        Crnt[j] = ((data[0] << 6) | (data[1] >> 2)); //???
                                                                        // Settxtfill_func(2, $"power={Powr[j]},{oinp}", 2, 1);
                         if (Crnt[j] > 0x1FFF)//0x1fff = 8191 
                         {
@@ -1129,24 +1141,34 @@ namespace Skydat.forms2065
                     }
                     else//if fst false ??
                     {// for tecno under 8
-                        Po[h] = datas[2];//save power in arry po
-                        Crn[h] = ((datas[0] << 6) | (datas[1] >> 2));
+                        Po.Add(data[2]);//save power in arry po
+                        int example = data[1];
+                        Crn[h] = ((data[0] << 6) | (data[1] >> 2));
                         if (Crn[h] > 0x1FFF)
                         {
                             Crn[h] = (0x4000 - Crn[h]);
                             Crn[h] = Crn[h] * -1;
                         }
                         sign = 0;
-                        // Settxtfill_func(2, $"test1{h}", 2, 1);
+                        if (DebugMode)
+                        {
+                            Settxtfill_func(2, $"test1{h}", 2, 1);
+                        }
+
                         h++;
                         if (h == 5)
                         {
-
                             i++;
-                            //Settxtfill_func(2, $"test2{i}", 2, 1);
-                            Itot = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]) / 5;
+                            if (DebugMode)
+                            {
+                                Settxtfill_func(2, $"test2{i}", 2, 1);
+                            }
+
+                            double sum = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]);
+                            Itot = sum / 5;
+                            
                             Powr[j] = Po[4];
-                            Crnt[j] = Math.Round(Itot, 2);//////trunc(Itot);
+                            Crnt[j] = Math.Round(Itot, 2);
                             if (Crnt[j] > 6560)
                             {
                                 Crnt[j] = Crnt[j] / 10;
@@ -1179,7 +1201,7 @@ namespace Skydat.forms2065
                         if (signe[j] ^ (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 10))
                             C[j] = C[j] * -1;
 
-                        if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8)//if techno == dcv,npv,dpv,swv,cv,lsv,dcs,dps,
+                        if (TechNumber < 8)//if techno == dcv,npv,dpv,swv,cv,lsv,dcs,dps,
                         {
                             //////mn////////////if (Xinv)
                             //////mn////////////    C[j] = C[j] * -1;//در گراف سی وی اگر ولتاژ از بزرگ به کوچک برود جریان را منفی نمی کند
@@ -1188,7 +1210,7 @@ namespace Skydat.forms2065
                             {
 
 
-                                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 2) || (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 1) || (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 7))
+                                if ((TechNumber == 2) || (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 1) || (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 7))
                                 {
 
                                     if (!evn)//
@@ -1267,6 +1289,7 @@ namespace Skydat.forms2065
                             if (!fst)
                             {
                                 h = 0;
+                                Po.Clear();
                                 S_et = false;
                             }
 
@@ -1274,7 +1297,7 @@ namespace Skydat.forms2065
                             evn = !evn;
 
 
-                            if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 4)// if techno ==   cv
+                            if (TechNumber == 4)// if techno ==   cv
                             {
                                 if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) < double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString())) //if (e1<e2)
                                 {
@@ -1357,15 +1380,41 @@ namespace Skydat.forms2065
                         }
                         else
                         {
-                            // Settxtfill_func(2, $"vold2{Vold}", 2, 1);
-                            Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
-                                                       //Settxtfill_func(2, $"2={Vold}:{I1}:{I2} ", 2, 1);
+                            if (TechNumber == 4) //CV
+                            {
+                                I1_arrey[average] = I1;
+                                Vold_arrey[average] = Vold;
+                                I2_arrey[average] = I2;
 
+                                if (average >= averagelength - 1)
+                                {
+                                    I1_arrey[average - (averagelength - 1)] = I1_arrey.Take(averagelength).Average();
+                                    Runnig2(Vold_arrey[average - (averagelength - 1)], I1_arrey[average - (averagelength - 1)], I2_arrey[average - (averagelength - 1)], row);///// رسم گراف اصلی
+                                    ShiftLeft(I1_arrey);
+                                    ShiftLeft(Vold_arrey);
+                                    ShiftLeft(I2_arrey);
+
+                                    average = 3;
+                                    if (Vold_arrey[average] == double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()))
+                                    {
+                                        for (int k = 0; k <= average; k++)
+                                        {
+                                            Runnig2(Vold_arrey[k], I1_arrey[k], I2_arrey[k], row);///// رسم گراف اصلی
+                                        }
+                                    }
+                                }
+
+                                average++;
+                            }
+                            else
+                            {
+                                Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
+                            }
                         }
 
                         if (E_nd)
                         {
-                            transferdata(row, 1);
+                            transferdata(row, 1); 
                             double temp1, temp2, temp3, temp4;
                             temp1 = othertech_val0[shomar_othertech - 1];
                             temp2 = othertech_val1[shomar_othertech - 1];
@@ -2281,14 +2330,14 @@ namespace Skydat.forms2065
 
                     switch (int.Parse(dschart1.chartlist1_run.Rows[TechSeries][1].ToString()))// techno 
                     {
-                        case 0://DCV
-                            run_key_tch0(TechSeries);// و نمایش همزمان اطلاعات روی نمودار DCV اجرا تکنیک 
-                            if (!runerror)
-                            {
-                                transferdata(TechSeries, 1);// ذخیره دیتای اجرا شده به صورت خودکار در پوشه تمپ نرم افزار
-                                smootht0_t1(TechSeries, OnlineChart.Series[0].Color);// پس از اتمام اجرای تکنیک و ذخیره دیتا نیاز است تا گراف نرم نمایش داده شود. این الگوریتم میانگیری برای نرم کردن از زمان دلفی پیاده سازی شده و ممکن است در آینده نسبت به الگوریتم های جدید بهینه و با کیفیت نباشد
-                            }
-                            break;
+                        //case 0://DCV
+                        //    run_key_tch0(TechSeries);// و نمایش همزمان اطلاعات روی نمودار DCV اجرا تکنیک 
+                        //    if (!runerror)
+                        //    {
+                        //        transferdata(TechSeries, 1);// ذخیره دیتای اجرا شده به صورت خودکار در پوشه تمپ نرم افزار
+                        //        smootht0_t1(TechSeries, OnlineChart.Series[0].Color);// پس از اتمام اجرای تکنیک و ذخیره دیتا نیاز است تا گراف نرم نمایش داده شود. این الگوریتم میانگیری برای نرم کردن از زمان دلفی پیاده سازی شده و ممکن است در آینده نسبت به الگوریتم های جدید بهینه و با کیفیت نباشد
+                        //    }
+                        //    break;
 
                         case 1://NPV
                             run_key_tch1(TechSeries);
@@ -2574,33 +2623,6 @@ namespace Skydat.forms2065
                 }
             }
             sa1.Close();
-        }
-
-        private void run_key_tch0(int row)
-        {
-            counterforstop_1 = 0;
-            fst1 = false;
-            fst = fst1;
-            S_et = false;
-
-            double E1 = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());
-            double E2 = double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString());
-
-            if (E1 < E2)//if e1<e2
-            {
-                N_gtv = false; //voltage is not negative 
-                Xinv = false;//voltage not inversion
-            }
-            else
-            {
-
-                N_gtv = true;//voltage is negative
-                Xinv = true;// voltage is inversion
-            }
-            pulsy = false; //pulse is 
-
-            DoRun2(row);//اجرای تکنیک و نمایش همزمان جزییات روی نمودار
-
         }
 
         private void run_key_tch1(int row)
@@ -2933,7 +2955,7 @@ namespace Skydat.forms2065
             counterforstop_1 = 0;
             dorun2_costum_2(row);
         }
-
+        
         public void Runf(byte rng, bool precodtion)
         {
             this.treeView3.Nodes[0].Nodes.Clear();
@@ -6310,8 +6332,7 @@ namespace Skydat.forms2065
 
         public void smootht4(int row1, Color color1)
         {
-            // string bat = "";
-            long len, Fore = 0, Rev = 0, j = 0, NUM, vx = 0, vn = 0, k, Frs, Lst;
+            long len, Fore = 0, Rev = 0, j = 0, NUM, vx = 0, vn = 0, k = 0, Frs, Lst;
             double Stp = 0;
             double IE = 0, FE = 0, EE3 = 0, I_tot = 0, A0, A1, B0, AB, A2, ai, I0, I1 = 0, b, Ec, V1, SS, EE = 0, EE1 = 0, EE2 = 0, mini, Mp, Vi = 0, Tss = 0;
             int Ts, c_ycl = 0, cl = 1, k1, ser = 0, MaxC, ngtv = 0, NM = 0, R_cmp = 0;
@@ -6323,9 +6344,9 @@ namespace Skydat.forms2065
             IE = double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()) * 1000;
             FE = double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()) * 1000;
             EE3 = double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()) * 1000;
-            onc = true;
             Stp = double.Parse(dschart1.chartlist1_run.Rows[row1][6].ToString()) * 1000;
             Ts = (int)(double.Parse(dschart1.chartlist1_run.Rows[row1][9].ToString()) * 1000);
+
             if (Ts > 32768)
             {
                 Ts = (Ts & 32767) / 100;
@@ -6339,30 +6360,24 @@ namespace Skydat.forms2065
             Fore = (len / 4) + 1;
             Rev = len + 1;
             j = len;
-            k = 0;
             NUM = j - 1;
             SS = (Tss / 1000);
             vx = NUM / 2;
+
             if (IE == EE3)
                 vn = (int)(((FE - IE) / Stp) * 2);
             else
                 vn = (int)(((FE - IE) / Stp) + ((FE - EE3) / Stp));
+
             if (vn >= NUM)
                 onc = true;
             else
                 onc = false;
 
-            if (Suby)
-                if ((Tq != L_Teq) || (NM != NUM) || ((EE1 != IE) || (EE2 != FE)))
-                {
-
-                    return;
-                }
-                else
-                    ser++;
             MaxC = 0;
             vn = NUM;
-            if (L_Teq == 4)
+
+            if (L_Teq == 4)//اگر تکنیک سی وی بود
             {
                 IE = IE + (FE - IE) % Stp;
                 EE3 = EE3 + (FE - EE3) % Stp;
@@ -6411,8 +6426,8 @@ namespace Skydat.forms2065
             {
 
                 othertech_val3[i] = (othertech_val3[i - 3] + othertech_val3[i - 2] + othertech_val3[i - 1] + othertech_val3[i + 3] + othertech_val3[i + 2] + othertech_val3[i + 1]) / 6;
-
             }
+
             if ((cl == 1))
             {
                 I_tot = 0;
