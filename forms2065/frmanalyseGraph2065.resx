@@ -1871,6 +1871,27 @@
   <data name="tsbSaveAll.ToolTipText" xml:space="preserve">
     <value>Save File</value>
   </data>
+  <data name="btnExportToExcel.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnExportToExcel.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="btnExportToExcel.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnExportToExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 47</value>
+  </data>
+  <data name="btnExportToExcel.Text" xml:space="preserve">
+    <value>Excell</value>
+  </data>
+  <data name="btnExportToExcel.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageAboveText</value>
+  </data>
+  <data name="btnExportToExcel.ToolTipText" xml:space="preserve">
+    <value>Save File</value>
+  </data>
   <data name="toolstripChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2260,6 +2281,12 @@
     <value>tsbSaveAll</value>
   </data>
   <data name="&gt;&gt;tsbSaveAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExportToExcel.Name" xml:space="preserve">
+    <value>btnExportToExcel</value>
+  </data>
+  <data name="&gt;&gt;btnExportToExcel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton11.Name" xml:space="preserve">

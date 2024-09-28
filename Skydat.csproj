@@ -832,6 +832,9 @@
     <None Include="Resources\2066 illustrat.png" />
     <None Include="Resources\2090 illustrat.png" />
     <None Include="Resources\importData.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\Excell.png" />
+    <None Include="Resources\excell_Icon.png" />
     <Content Include="Resources\zoomin.ico" />
     <Content Include="Resources\Zoomout.ico" />
     <None Include="Resources\2000px-Tangent_to_a_curve.svg.png" />

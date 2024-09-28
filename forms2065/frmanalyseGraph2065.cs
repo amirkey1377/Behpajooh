@@ -5896,10 +5896,6 @@ namespace Skydat.forms2065
             }
         }
 
-        private void button7_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
         {
@@ -5976,6 +5972,11 @@ namespace Skydat.forms2065
             }
             tChart1.Series[treeView3.SelectedNode.Index].Color = GetColor();
             ColorChangedFlag = true;
+        }
+
+        private void toolStripButton5_Click_2(object sender, EventArgs e)
+        {
+            toolStripButton10_Click_1(sender, e);
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)

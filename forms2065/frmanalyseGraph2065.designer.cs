@@ -98,6 +98,7 @@ namespace Skydat.forms2065
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
             this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
+            this.btnExportToExcel = new System.Windows.Forms.ToolStripButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -756,7 +757,8 @@ namespace Skydat.forms2065
             this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.tsbOpen,
-            this.tsbSaveAll});
+            this.tsbSaveAll,
+            this.btnExportToExcel});
             this.toolstripChart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolstripChart.Name = "toolstripChart";
             this.toolstripChart.TabStop = true;
@@ -787,6 +789,15 @@ namespace Skydat.forms2065
             this.tsbSaveAll.Image = global::Skydat.Properties.Resources.flappy1;
             this.tsbSaveAll.Name = "tsbSaveAll";
             this.tsbSaveAll.Click += new System.EventHandler(this.tsbSaveAll_Click);
+            // 
+            // btnExportToExcel
+            // 
+            this.btnExportToExcel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            resources.ApplyResources(this.btnExportToExcel, "btnExportToExcel");
+            this.btnExportToExcel.ForeColor = System.Drawing.Color.Black;
+            this.btnExportToExcel.Image = global::Skydat.Properties.Resources.excell_Icon;
+            this.btnExportToExcel.Name = "btnExportToExcel";
+            this.btnExportToExcel.Click += new System.EventHandler(this.toolStripButton5_Click_2);
             // 
             // panel5
             // 
@@ -1087,5 +1098,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem setColorToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.ToolStripButton btnExportToExcel;
     }
 }
