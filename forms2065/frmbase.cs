@@ -33,8 +33,8 @@ namespace Skydat.forms2065
         private void frmbase_Load(object sender, EventArgs e)
         {
             StartMonitoring();//تعریف کردن ایونت برای قطع و وصل شدن USB
-            if (DeviceIsConnected() != null)
-                btn2066State();
+            //if (DeviceIsConnected() != null)
+            btn2066State();
             GetBackground();
         }
 
@@ -69,10 +69,10 @@ namespace Skydat.forms2065
                 disconnectWatcher.EventArrived += new EventArrivedEventHandler(DeviceDisconnectedEvent);
                 disconnectWatcher.Start();
             }
-            catch (Exception)
+            catch (Exception EX)
             {
-                MessageBox.Show("Error on monitoring COM event section","COM Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                throw;
+                MessageBox.Show($"Error on monitoring COM event section: {EX.Message}","COM Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
             }
         }
 
@@ -90,14 +90,26 @@ namespace Skydat.forms2065
         {
             this.Invoke((MethodInvoker)delegate ()
             {
-                string resualt = DeviceIsConnected();
-                if (resualt != null)
+                try
                 {
-                    Btn2066.Enabled = true;
+                    string resualt = DeviceIsConnected();
+                    if (resualt != null)
+                    {
+                        Btn2066.Enabled = true;
+                    }
+                    else
+                        Btn2066.Enabled = false;
                 }
-                else
-                    Btn2066.Enabled = false;
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("دستگاه به نرم افزار به درستی متصل نشده", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show($"btn2066 State Error:{Ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             });
+            
         }  
 
         public string DeviceIsConnected()
@@ -110,9 +122,16 @@ namespace Skydat.forms2065
                 {
                     try
                     {
-                        serialPort2.PortName = c;
-                        serialPort2.BaudRate = 1000000;
-                        return c;
+                        using (SerialPort serialPort = new SerialPort(c, 1000000))
+                        {
+                            // پیکربندی پورت سریال
+                            serialPort.Open(); // باز کردن پورت سریال (در صورت نیاز)
+
+                            // انجام عملیات مورد نظر با پورت سریال
+                            // مثلاً ارسال یا دریافت داده
+
+                            return c; // بازگشت نام پورت
+                        }
                     }
                     catch (Exception)
                     {

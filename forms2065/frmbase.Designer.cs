@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmbase));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
@@ -51,11 +50,10 @@
             this.EIS = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
             this.ImportBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
-            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -343,6 +341,13 @@
             this.ImportBtn.ToolTipText = "Import Data";
             this.ImportBtn.Click += new System.EventHandler(this.ImportBtn_Click);
             // 
+            // toolStripLabel9
+            // 
+            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
+            this.toolStripLabel9.Text = "            ";
+            // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
@@ -360,13 +365,6 @@
             this.toolStripLabel6.Name = "toolStripLabel6";
             this.toolStripLabel6.Size = new System.Drawing.Size(22, 15);
             this.toolStripLabel6.Text = "     ";
-            // 
-            // toolStripLabel9
-            // 
-            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
-            this.toolStripLabel9.Text = "            ";
             // 
             // frmbase
             // 
@@ -416,7 +414,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripButton EIS;
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
-        private System.IO.Ports.SerialPort serialPort2;
         private System.Windows.Forms.ToolStripButton ImportBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
     }
