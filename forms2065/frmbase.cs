@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.IO.Ports;
 using System.Management;
+using Skydat.forms2080;
 
 namespace Skydat.forms2065
 {
@@ -23,6 +24,8 @@ namespace Skydat.forms2065
 
         private ManagementEventWatcher connectWatcher;//ایونت وصل شدن پورت COM
         private ManagementEventWatcher disconnectWatcher;//ایونت قطع شدن پورت COM
+
+        frmPortOption2080 frm = new frmPortOption2080();
 
         bool Idata = true;
         public frmbase()
@@ -36,6 +39,7 @@ namespace Skydat.forms2065
             //if (DeviceIsConnected() != null)
             btn2066State();
             GetBackground();
+            frm.RunLoadEvent(); // اجرای رویداد Load برای تنظیم Baud Rate
         }
 
         private void GetBackground()
@@ -92,8 +96,8 @@ namespace Skydat.forms2065
             {
                 try
                 {
-                    string resualt = DeviceIsConnected();
-                    if (resualt != null)
+                    bool resualt = DeviceIsConnected();
+                    if (resualt)
                     {
                         Btn2066.Enabled = true;
                     }
@@ -112,7 +116,7 @@ namespace Skydat.forms2065
             
         }  
 
-        public string DeviceIsConnected()
+        public bool DeviceIsConnected()
         {
             List<string> names = ComPortNames("1a86", "7523");
             string[] x = SerialPort.GetPortNames();
@@ -124,16 +128,11 @@ namespace Skydat.forms2065
                     {
                         using (SerialPort serialPort = new SerialPort(c, 1000000))
                         {
-                            // پیکربندی پورت سریال
-                            serialPort.Open(); // باز کردن پورت سریال (در صورت نیاز)
 
-                            // انجام عملیات مورد نظر با پورت سریال
-                            // مثلاً ارسال یا دریافت داده
-
-                            return c; // بازگشت نام پورت
+                            return true; // بازگشت نام پورت
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         MessageBox.Show("به دلیل وجود مشکل در ارتباط دستگاه به نرم افزار متصل نشده، لطفا از اتصال صحیح کابل اطمینان حاصل فرمایید"
                             ,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -141,7 +140,7 @@ namespace Skydat.forms2065
                     }
                 }
             }
-            return null;
+            return false;
         }
 
         List<string> ComPortNames(String VID, String PID)//این متد برای پیدا کردن رجیستری متناظر با پورتی هست که دستگاه به آن وصل شده برای اتوماتیک وصل کردن دستگاه

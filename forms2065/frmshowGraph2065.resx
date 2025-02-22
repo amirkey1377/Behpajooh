@@ -117,12 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="treeView3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="treeView3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="treeView3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 69</value>
+    <value>0, 66</value>
+  </data>
+  <data name="treeView3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="treeView3.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -135,11 +142,11 @@
 </value>
   </data>
   <data name="treeView3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 251</value>
+    <value>215, 255</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="treeView3.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;treeView3.Name" xml:space="preserve">
     <value>treeView3</value>
@@ -151,23 +158,25 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;treeView3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <metadata name="dschart1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
+  </data>
+  <data name="button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 198</value>
+    <value>0, 180</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -193,14 +202,17 @@
   <data name="btnshowvalue.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnshowvalue.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnshowvalue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnshowvalue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 17</value>
+    <value>0, 150</value>
   </data>
   <data name="btnshowvalue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnshowvalue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -223,6 +235,9 @@
   <data name="btnselectonly.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnselectonly.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnselectonly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -230,10 +245,10 @@
     <value>NoControl</value>
   </data>
   <data name="btnselectonly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 47</value>
+    <value>0, 120</value>
   </data>
   <data name="btnselectonly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnselectonly.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -256,14 +271,17 @@
   <data name="btnzoomin.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnzoomin.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnzoomin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnzoomin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 76</value>
+    <value>0, 90</value>
   </data>
   <data name="btnzoomin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnzoomin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -286,14 +304,17 @@
   <data name="btnzoomout.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnzoomout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnzoomout.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnzoomout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 106</value>
+    <value>0, 60</value>
   </data>
   <data name="btnzoomout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnzoomout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -316,14 +337,17 @@
   <data name="btnshowgrid.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnshowgrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnshowgrid.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnshowgrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 136</value>
+    <value>0, 30</value>
   </data>
   <data name="btnshowgrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnshowgrid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -346,14 +370,17 @@
   <data name="btnshowaxes.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="btnshowaxes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="btnshowaxes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnshowaxes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 166</value>
+    <value>0, 0</value>
   </data>
   <data name="btnshowaxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>36, 30</value>
   </data>
   <data name="btnshowaxes.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -374,10 +401,10 @@
     <value>6</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 0</value>
+    <value>13, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 244</value>
+    <value>36, 232</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -395,13 +422,19 @@
     <value>0</value>
   </data>
   <data name="OnlineChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+    <value>Fill</value>
   </data>
   <data name="OnlineChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-2, 0</value>
+    <value>0, 0</value>
+  </data>
+  <data name="OnlineChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>50, 50, 50, 50</value>
+  </data>
+  <data name="OnlineChart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>200, 10, 10, 10</value>
   </data>
   <data name="OnlineChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>655, 695</value>
+    <value>655, 698</value>
   </data>
   <data name="OnlineChart.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -418,14 +451,17 @@
   <data name="&gt;&gt;OnlineChart.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 0</value>
+    <value>225, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 699</value>
+    <value>659, 702</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
@@ -439,35 +475,17 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Parameters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 326</value>
-  </data>
-  <data name="Parameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 214</value>
-  </data>
-  <data name="Parameters.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="Parameters.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;Parameters.Name" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="&gt;&gt;Parameters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Parameters.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;Parameters.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="txtcomment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
   </data>
   <data name="txtcomment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 546</value>
+    <value>5, 212</value>
+  </data>
+  <data name="txtcomment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>50, 50, 50, 50</value>
   </data>
   <data name="txtcomment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 151</value>
+    <value>205, 160</value>
   </data>
   <data name="txtcomment.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -482,10 +500,70 @@
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtcomment.Parent" xml:space="preserve">
-    <value>panel3</value>
+    <value>panel4</value>
   </data>
   <data name="&gt;&gt;txtcomment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Parameters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="Parameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="Parameters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>50, 50, 50, 50</value>
+  </data>
+  <data name="Parameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 201</value>
+  </data>
+  <data name="Parameters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Parameters.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Parameters.Name" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="&gt;&gt;Parameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Parameters.Parent" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;Parameters.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="panel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 321</value>
+  </data>
+  <data name="panel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 20, 20, 20</value>
+  </data>
+  <data name="panel4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 377</value>
+  </data>
+  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>202, 17</value>
@@ -493,7 +571,7 @@
   <data name="toolStrip1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="toolStrip1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="Holdbtn.AutoSize" type="System.Boolean, mscorlib">
@@ -580,32 +658,11 @@
   <data name="Showbtn.ToolTipText" xml:space="preserve">
     <value>Show data of running technique</value>
   </data>
-  <data name="Savebtn.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="Savebtn.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="Savebtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 63</value>
-  </data>
-  <data name="Savebtn.Text" xml:space="preserve">
-    <value>save</value>
-  </data>
-  <data name="Savebtn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageAboveText</value>
-  </data>
-  <data name="Savebtn.ToolTipText" xml:space="preserve">
-    <value>save data of running technique</value>
-  </data>
-  <data name="Savebtn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>0, 0</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 66</value>
+    <value>215, 66</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -625,11 +682,14 @@
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 699</value>
+    <value>219, 702</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -943,12 +1003,6 @@
     <value>Showbtn</value>
   </data>
   <data name="&gt;&gt;Showbtn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Savebtn.Name" xml:space="preserve">
-    <value>Savebtn</value>
-  </data>
-  <data name="&gt;&gt;Savebtn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">

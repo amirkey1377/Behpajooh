@@ -20,7 +20,7 @@ namespace Skydat.classes2065
         public static string[] TechName = { "DCV", "NPV", "DPV", "SWV",
                                             "CV", "LSV", "DCS","DPS",
                                             "CCC", "CPC","CP","CA",
-                                            "CHC","","CD","OCP","RT"};       
+                                            "CHC","","CD","OCP","RT","CDtest"};       
        
         //نام کامل تکنیکها
         public static string[] Tech_FullName = { "DC Voltammetry","Normal Pulse Voltammetry","Diff. Pulse Voltammetry","Square Wave Voltammetry",
@@ -93,7 +93,7 @@ namespace Skydat.classes2065
 
 
         //جهت ست کردن مقدار به پارامترهای هر تکنیک یک مقدار به تکنیک داده شده تا نام مخفف آن با عدد صدا زده شود
-        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16;/////, CA = 11
+        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16,CDtest = 17;/////, CA = 11
         
         //2080
         public const byte DCV2080 = 1, NPV2080 = 2, DPV2080 = 3, SWV2080 = 4, CV2080 = 5, DCs2080 = 7, DPs2080 = 8, OCP2080 = 9, CPC2080 = 10, CHA2080 = 11, CCC2080 = 12, SC2080 = 13, LSV2080 = 14, CHP2080 = 15;/////, CA = 11
@@ -116,6 +116,7 @@ namespace Skydat.classes2065
         public static Cd_params cdprms = new Cd_params();
         public static OCP_params ocpprms = new OCP_params();
         public static RT_params rtprms = new RT_params();
+        public static CDtest_params cdtestprms = new CDtest_params();
         //2080
         public static CCP_params_ocp cpctprms_ocp = new CCP_params_ocp();
         public static DCV_params_ocp dcvprms_ocp = new DCV_params_ocp();

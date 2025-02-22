@@ -927,7 +927,7 @@ namespace Skydat.classes2065
 
                 }
 
-                if (tchName == "CC" || tchName == "All")
+                if (tchName == "CHC" || tchName == "All")
                 {
                     Fl.WriteLine("\n");
                     Fl.WriteLine("Technic: CHC");

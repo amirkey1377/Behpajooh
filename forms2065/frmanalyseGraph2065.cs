@@ -2,6 +2,8 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -506,7 +508,11 @@ namespace Skydat.forms2065
                     for (int j = 0; j < cycle; j++)
                     {
                         restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
+                        //if (clasglobal.TechName.Contains("v"))
+                        //    fillparamdata(n); 
+                        //else
                         fillparamdata(n);
+
                         n++;
                         if (cycle > 1)
                         {
@@ -725,10 +731,10 @@ namespace Skydat.forms2065
                                 l++;
                             }
 
-                            try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }
-                            try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }
-                            try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; }
-                            try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; }
+                            //try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }
+                            //try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }
+                            //try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; }
+                            //try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; }
 
                             if (shomar_val >= othertech_val0.Length)
                             {
@@ -874,7 +880,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
-                    
+
                     case clasglobal.CHP:
                         if (double.Parse(dschart2.analyselist.Rows[row][15].ToString()) != 9999) str_fillparam = str_fillparam + "I1 =" + double.Parse(dschart2.analyselist.Rows[row][15].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][16].ToString()) != 9999) str_fillparam = str_fillparam + "I2 =" + double.Parse(dschart2.analyselist.Rows[row][16].ToString()) + "\n";
@@ -1287,7 +1293,6 @@ namespace Skydat.forms2065
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + Environment.NewLine + "selected File is not in valid Format...", "Warning");
-                mainf.Close();
             }
 
         }
@@ -1356,26 +1361,12 @@ namespace Skydat.forms2065
                 MessageBox.Show("Tafel works with one graph" + (char)13 + "Please select ONE only");
         }
 
-        private void tsbSave_Click(object sender, EventArgs e)
-        {
-            // save_Data();
-        }
-
         private void tsbSaveAll_Click(object sender, EventArgs e)
         {
-            int f = 0;
-
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked == true)
-                {
-                    f = 1;
-                    break;
-                }
-
-            if (f == 1)
+            if (treeView3.Nodes[0].Nodes.Cast<TreeNode>().Any(node => node.Checked))
                 save_Data();
             else
-                MessageBox.Show("There is not any case select for saving !!!");
+                MessageBox.Show("There is not any case selected for saving !!!");
         }
 
         private System.Drawing.Point point_start, TempPoint, point_end;
@@ -1821,7 +1812,7 @@ namespace Skydat.forms2065
                         for (int j = 0; j < nn; j++)
                         {
                             if (Convert.ToDouble(dschart2.analyselist.Rows[j][11].ToString()) > 1 && (Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 14 ||
-                                Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 10 || Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 12) ) //cycle > 1
+                                Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 10 || Convert.ToDouble(dschart2.analyselist.Rows[j][0].ToString()) == 12)) //cycle > 1
                             {
                                 for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
                                     if (this.treeView3.Nodes[0].Nodes[f].Checked)
@@ -1838,7 +1829,6 @@ namespace Skydat.forms2065
                                         filename_index++;
                                         break;
                                     }
-                                int x = Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString());
                                 j += Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) - 1; // becuse cycle this here is a graf but in database not rows
                             }
                             else
@@ -1898,10 +1888,13 @@ namespace Skydat.forms2065
                         }
                     }
                 }
+
+                MessageBox.Show("Data successfully saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
-            catch (Exception EX)
+            catch (Exception ex)
             {
-                MessageBox.Show(EX.Message);
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2786,36 +2779,142 @@ namespace Skydat.forms2065
                 MessageBox.Show("Please select one technique!!!");
             }
         }
+
         private string ExportToExcel(int colnum1, int typecall1, string outputPath)
         {
+            //try
+            //{
+            //    Microsoft.Office.Interop.Excel.Application excelApp;
+            //    excelApp = new Microsoft.Office.Interop.Excel.Application();
+
+
+            //    // ساخت یک WorkBook جدید
+            //    Workbook excelWorkbook = excelApp.Workbooks.Add(Type.Missing);
+
+
+            //    int sheetIndex = 0, i2 = 0, i1 = 0;
+
+            //    // ساخت آرایه به طول تعداد سطرهای دیتاتیبل+1 و تعداد ستونهای دیتاتیبل
+            //    int rownum1 = 0;
+            //    if (typecall1 == 1)
+            //    {
+            //        for (int m1 = 0; m1 < tChart1.Series.Count; m1++)
+            //        {
+            //            rownum1 += tChart1.Series[m1].Points.Count;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        rownum1 = tChart2.Series[0].Points.Count;
+            //    }
+            //    object[,] rawData = new object[rownum1 + 1, colnum1];
+            //    if (typecall1 == 1)
+            //    {
+            //        rawData[i2, 0] = "technique number";
+            //        rawData[i2, 1] = "technique name";
+            //        rawData[i2, 2] = "point of technique number";
+            //        rawData[i2, 3] = "X value";
+            //        rawData[i2, 4] = "Y value";
+            //        i2++;
+            //        for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+            //            if (treeView3.Nodes[0].Nodes[i].Checked)
+            //            {
+            //                for (int cc1 = 0; cc1 < tChart1.Series[i].Points.Count; cc1++)
+            //                {
+            //                    rawData[i2, 0] = i1;
+            //                    rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i][0].ToString())];
+            //                    rawData[i2, 2] = cc1 + 1;
+            //                    rawData[i2, 3] = tChart1.Series[i].Points[cc1].XValue;
+            //                    rawData[i2, 4] = tChart1.Series[i].Points[cc1].YValues[0];
+            //                    i2++;
+            //                }
+            //                i1++;
+            //            }
+            //    }
+            //    else
+            //    {
+            //        rawData[i2, 0] = "row";
+            //        rawData[i2, 1] = "X value";
+            //        rawData[i2, 2] = "Y value";
+            //        i2++;
+            //        for (int cc1 = 0; cc1 < tChart2.Series[0].Points.Count; cc1++)
+            //        {
+            //            rawData[i2, 0] = cc1 + 1;
+            //            rawData[i2, 1] = tChart2.Series[0].Points[cc1].XValue;
+            //            rawData[i2, 2] = tChart2.Series[0].Points[cc1].YValues[0];
+            //            i2++;
+            //        }
+            //    }
+
+            //    // محاسبه نام ستونهای اکسل
+
+            //    string finalColLetter = string.Empty;
+            //    string colCharset = "ABEFGHIJKLMNOPQRSTUVWXYZ";
+            //    int colCharsetLen = colCharset.Length;
+
+            //    if (colnum1 > colCharsetLen)
+            //    {
+            //        finalColLetter = colCharset.Substring((colnum1 - 1) / colCharsetLen - 1, 1);
+            //    }
+
+            //    finalColLetter += colCharset.Substring((colnum1 - 1) % colCharsetLen, 1);
+
+            //    // ساخت یک Sheet
+            //    Worksheet excelSheet = (Worksheet)excelWorkbook.Sheets.Add(
+            //        excelWorkbook.Sheets.get_Item(++sheetIndex),
+            //        Type.Missing, 1, XlSheetType.xlWorksheet);
+            //    //تنظیم نام شیت به نام دلخواه
+            //    //excelSheet.Name = "List";
+            //    //تنظیم خاصیت راست به چپ برای نمایش اطلاعات
+            //    excelSheet.DisplayRightToLeft = false;
+
+
+            //    // تعیین محدوده سطرها و ستونها
+            //    string excelRange = string.Format("A1:{0}{1}", finalColLetter, rownum1 + 1);
+            //    //انتقال اطلاعات از آرایه به شیت مورد نظر
+            //    excelSheet.get_Range(excelRange, Type.Missing).Value2 = rawData;
+
+            //    // ضخیم کردن اولین سطر برای عنوان ستونها
+            //    ((Range)excelSheet.Rows[1, Type.Missing]).Font.Bold = true;
+
+            //    // تنظیم عرض ستونها به اندازه محتوای ستونها
+            //    for (int col = 0; col < colnum1; col++)
+            //    {
+            //        ((Range)excelSheet.Columns[col + 1]).EntireColumn.AutoFit();
+            //    }
+
+
+            //    //ذخیره و بستن  Workbook
+            //    excelWorkbook.SaveAs(outputPath, XlFileFormat.xlWorkbookNormal, Type.Missing,
+            //        Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive,
+            //        Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            //    excelWorkbook.Close(true, Type.Missing, Type.Missing);
+            //    excelWorkbook = null;
+
+            //    excelApp.Quit();
+            //    excelApp = null;
+
+            //    // Collect the unreferenced objects
+            //    GC.Collect();
+            //    GC.WaitForPendingFinalizers();
+
+            //    return "Saving in excel file is successfully done";
+            //}
+            //catch (Exception ex)
+            //{
+            //    //بدست آوردن کد خطا برای مدیریت خطاها
+            //    int code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
+
+            //    return ex.Message + code;
+            //}
             try
             {
-                // ساخت یک شی اکسل
-                //ApplicationClass excelApp = new ApplicationClass();
-                Microsoft.Office.Interop.Excel.Application excelApp;
-                excelApp = new Microsoft.Office.Interop.Excel.Application();
-
-
-                // ساخت یک WorkBook جدید
-                Workbook excelWorkbook = excelApp.Workbooks.Add(Type.Missing);
-
-
-                int sheetIndex = 0, i2 = 0, i1 = 0;
-
-                // ساخت آرایه به طول تعداد سطرهای دیتاتیبل+1 و تعداد ستونهای دیتاتیبل
-                int rownum1 = 0;
-                if (typecall1 == 1)
-                {
-                    for (int m1 = 0; m1 < tChart1.Series.Count; m1++)
-                    {
-                        rownum1 += tChart1.Series[m1].Points.Count;
-                    }
-                }
-                else
-                {
-                    rownum1 = tChart2.Series[0].Points.Count;
-                }
+                var excelApp = new Microsoft.Office.Interop.Excel.Application();
+                var excelWorkbook = excelApp.Workbooks.Add(Type.Missing);
+                int i2 = 0, i1 = 0;
+                int rownum1 = typecall1 == 1 ? tChart1.Series.Sum(series => series.Points.Count) : tChart2.Series[0].Points.Count;
                 object[,] rawData = new object[rownum1 + 1, colnum1];
+
                 if (typecall1 == 1)
                 {
                     rawData[i2, 0] = "technique number";
@@ -2824,20 +2923,21 @@ namespace Skydat.forms2065
                     rawData[i2, 3] = "X value";
                     rawData[i2, 4] = "Y value";
                     i2++;
-                    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        if (treeView3.Nodes[0].Nodes[i].Checked)
+                    int ExportedTechNumbers = 1;
+                    foreach (TreeNode node in treeView3.Nodes[0].Nodes.Cast<TreeNode>().Where(n => n.Checked))
+                    {
+                        i1 = node.Index;
+                        for (int cc1 = 0; cc1 < tChart1.Series[i1].Points.Count; cc1++)
                         {
-                            for (int cc1 = 0; cc1 < tChart1.Series[i].Points.Count; cc1++)
-                            {
-                                rawData[i2, 0] = i1;
-                                rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i][0].ToString())];
-                                rawData[i2, 2] = cc1 + 1;
-                                rawData[i2, 3] = tChart1.Series[i].Points[cc1].XValue;
-                                rawData[i2, 4] = tChart1.Series[i].Points[cc1].YValues[0];
-                                i2++;
-                            }
-                            i1++;
+                            rawData[i2, 0] = ExportedTechNumbers;
+                            rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i1][0].ToString())];
+                            rawData[i2, 2] = cc1 + 1;
+                            rawData[i2, 3] = tChart1.Series[i1].Points[cc1].XValue;
+                            rawData[i2, 4] = tChart1.Series[i1].Points[cc1].YValues[0];
+                            i2++;
                         }
+                        ExportedTechNumbers++;
+                    }
                 }
                 else
                 {
@@ -2854,92 +2954,82 @@ namespace Skydat.forms2065
                     }
                 }
 
-                // محاسبه نام ستونهای اکسل
+                string colCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string finalColLetter = colnum1 > colCharset.Length ? colCharset[(colnum1 - 1) / colCharset.Length - 1].ToString() : "";
+                finalColLetter += colCharset[(colnum1 - 1) % colCharset.Length];
 
-                string finalColLetter = string.Empty;
-                string colCharset = "ABEFGHIJKLMNOPQRSTUVWXYZ";
-                int colCharsetLen = colCharset.Length;
-
-                if (colnum1 > colCharsetLen)
-                {
-                    finalColLetter = colCharset.Substring((colnum1 - 1) / colCharsetLen - 1, 1);
-                }
-
-                finalColLetter += colCharset.Substring((colnum1 - 1) % colCharsetLen, 1);
-
-                // ساخت یک Sheet
-                Worksheet excelSheet = (Worksheet)excelWorkbook.Sheets.Add(
-                    excelWorkbook.Sheets.get_Item(++sheetIndex),
-                    Type.Missing, 1, XlSheetType.xlWorksheet);
-                //تنظیم نام شیت به نام دلخواه
-                //excelSheet.Name = "List";
-                //تنظیم خاصیت راست به چپ برای نمایش اطلاعات
+                // دریافت اولین شیت اکسل و تنظیم نام آن
+                Worksheet excelSheet = (Worksheet)excelWorkbook.Sheets[1];
+                excelSheet.Name = "Behpajooh 2066";
                 excelSheet.DisplayRightToLeft = false;
-
-
-                // تعیین محدوده سطرها و ستونها
-                string excelRange = string.Format("A1:{0}{1}", finalColLetter, rownum1 + 1);
-                //انتقال اطلاعات از آرایه به شیت مورد نظر
-                excelSheet.get_Range(excelRange, Type.Missing).Value2 = rawData;
-
-                // ضخیم کردن اولین سطر برای عنوان ستونها
-                ((Range)excelSheet.Rows[1, Type.Missing]).Font.Bold = true;
-
-                // تنظیم عرض ستونها به اندازه محتوای ستونها
+                excelSheet.get_Range($"A1:{finalColLetter}{rownum1 + 1}", Type.Missing).Value2 = rawData;
+                ((Range)excelSheet.Rows[1]).Font.Bold = true;
                 for (int col = 0; col < colnum1; col++)
-                {
                     ((Range)excelSheet.Columns[col + 1]).EntireColumn.AutoFit();
-                }
 
-
-                //ذخیره و بستن  Workbook
-                excelWorkbook.SaveAs(outputPath, XlFileFormat.xlWorkbookNormal, Type.Missing,
-                    Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                excelWorkbook.Close(true, Type.Missing, Type.Missing);
-                excelWorkbook = null;
-
+                excelWorkbook.SaveAs(outputPath, XlFileFormat.xlOpenXMLWorkbook); // ذخیره به عنوان .xlsx
+                excelWorkbook.Close(false);
                 excelApp.Quit();
-                excelApp = null;
 
-                // Collect the unreferenced objects
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                Marshal.ReleaseComObject(excelSheet);
+                Marshal.ReleaseComObject(excelWorkbook);
+                Marshal.ReleaseComObject(excelApp);
 
-                return "Saving in excel file is successfully done";
+                return "Saving in Excel file is successfully done";
+            }
+            catch (COMException comEx)
+            {
+                return $"COM Exception: {comEx.Message}";
             }
             catch (Exception ex)
             {
-                //بدست آوردن کد خطا برای مدیریت خطاها
-                int code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
-
-                return ex.Message + code;
+                return $"Error: {ex.Message}";
             }
+
         }
         private void toolStripButton10_Click_1(object sender, EventArgs e)
         {
 
-            int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
-                {
-                    shomarcheck++;
-                }
-            if (shomarcheck > 0)
+            //int shomarcheck = 0;
+            //for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+            //    if (treeView3.Nodes[0].Nodes[i].Checked)
+            //    {
+            //        shomarcheck++;
+            //    }
+            //if (shomarcheck > 0)
+            //{
+            //    SaveFileDialog sfd = new SaveFileDialog();
+            //    sfd.AddExtension = true;
+            //    sfd.DefaultExt = "xls";
+            //    sfd.Filter = "Excel 97-2003 Workbook(*.xls)|*.xls";
+            //    if (sfd.ShowDialog() == DialogResult.OK)
+            //    {
+            //        MessageBox.Show(ExportToExcel(5, 1, sfd.FileName), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Please select one technique!!!");
+            //}
+            if (treeView3.Nodes[0].Nodes.Cast<TreeNode>().Any(node => node.Checked))
             {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.AddExtension = true;
-                sfd.DefaultExt = "xls";
-                sfd.Filter = "Excel 97-2003 Workbook(*.xls)|*.xls";
-                if (sfd.ShowDialog() == DialogResult.OK)
+                using (SaveFileDialog sfd = new SaveFileDialog
                 {
-                    MessageBox.Show(ExportToExcel(5, 1, sfd.FileName), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                    AddExtension = true,
+                    DefaultExt = "xlsx",  // تغییر پیش‌فرض به فرمت جدید
+                    Filter = "Excel Workbook (*.xlsx)|*.xlsx|Excel 97-2003 Workbook (*.xls)|*.xls"
+                })
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show(ExportToExcel(5, 1, sfd.FileName), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
             }
             else
             {
-                MessageBox.Show("Please select one technique!!!");
+                MessageBox.Show("Please select one technique!!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         private void toolStripButton13_Click(object sender, EventArgs e)

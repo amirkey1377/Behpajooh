@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Skydat</RootNamespace>
     <AssemblyName>BHP20xx analysis</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>CHEM1.ICO</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -423,12 +423,6 @@
     <Compile Include="forms2065\frmselecttech2065.designer.cs">
       <DependentUpon>frmselecttech2065.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms2065\frmAbout2065.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms2065\frmAbout2065.designer.cs">
-      <DependentUpon>frmAbout2065.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms2065\frmClbCurve12065.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,12 +470,6 @@
     </Compile>
     <Compile Include="forms2065\frmOption12065.designer.cs">
       <DependentUpon>frmOption12065.cs</DependentUpon>
-    </Compile>
-    <Compile Include="forms2065\frmPortOption2065.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms2065\frmPortOption2065.designer.cs">
-      <DependentUpon>frmPortOption2065.cs</DependentUpon>
     </Compile>
     <Compile Include="forms2065\frmRDECtrl2065.cs">
       <SubType>Form</SubType>
@@ -660,9 +648,6 @@
       <DependentUpon>frmselecttech2065.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms2065\frmAbout2065.resx">
-      <DependentUpon>frmAbout2065.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmClbCurve12065.resx">
       <DependentUpon>frmClbCurve12065.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -693,9 +678,6 @@
     <EmbeddedResource Include="forms2065\frmOption12065.resx">
       <DependentUpon>frmOption12065.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms2065\frmPortOption2065.resx">
-      <DependentUpon>frmPortOption2065.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmRDECtrl2065.resx">
       <DependentUpon>frmRDECtrl2065.cs</DependentUpon>

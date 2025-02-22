@@ -1973,6 +1973,151 @@ namespace Skydat.classes2065
         }
     }
 
+    public class CDtest_params
+    {
+        //private double _Cycles;
+        private double _I1;
+        private double _I2;
+        private double _EUP;
+        private double _EDO;
+        private double _T1;
+        private double _T2;
+        private double _CYCLE;
+        private double _EquilibriumTime;
+        private string _comment1;
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("First current step(mA)\n -360    +360")]
+        public double I1
+        {
+            get
+            {
+                return _I1;
+            }
+
+            set
+            {
+                _I1 = value;
+            }
+        }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Second current step(mA)\n -360    +360")]
+        public double I2
+        {
+            get
+            {
+                return _I2;
+            }
+            set
+            {
+                _I2 = value;
+            }
+        }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T2
+        {
+            get
+            {
+                return _T2;
+            }
+
+            set
+            {
+                _T2 = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Higger cutoff voltage(V)")]
+        public double EUP
+        {
+            get
+            {
+                return _EUP;
+            }
+
+            set
+            {
+                _EUP = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("lowwer cutoff voltage(V)")]
+        public double EDO
+        {
+            get
+            {
+                return _EDO;
+            }
+
+            set
+            {
+                _EDO = value;
+            }
+        }
+
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
+        public double Cycle
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Quiescent time before start measuring(S)\n 0    2000")]
+        [DisplayName("Equilibrium Time")]
+        public double EquilibriumTime
+        {
+            get
+            {
+                return _EquilibriumTime;
+            }
+
+            set
+            {
+                _EquilibriumTime = value;
+            }
+        }
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("detail of expriment")]
+        public string comment1
+        {
+            get
+            {
+                return _comment1;
+            }
+
+            set
+            {
+                _comment1 = value;
+            }
+        }
+        public CDtest_params()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+    }
+
     public partial class CCP_params
     {
         private double _CP1;
