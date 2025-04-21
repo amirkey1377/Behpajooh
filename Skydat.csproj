@@ -203,6 +203,12 @@
     <Compile Include="formEIS\LandingEIS.Designer.cs">
       <DependentUpon>LandingEIS.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms2065\frmChartSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmChartSetting.Designer.cs">
+      <DependentUpon>frmChartSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms2065\frmselecttypeshow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -515,6 +521,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="formEIS\LandingEIS.resx">
       <DependentUpon>LandingEIS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmChartSetting.resx">
+      <DependentUpon>frmChartSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmselecttypeshow.resx">
       <DependentUpon>frmselecttypeshow.cs</DependentUpon>

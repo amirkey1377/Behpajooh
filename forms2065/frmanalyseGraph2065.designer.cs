@@ -179,8 +179,8 @@ namespace Skydat.forms2065
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label4.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.label4, "label4");
+            this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Name = "label4";
             // 
             // treeView3
@@ -547,8 +547,8 @@ namespace Skydat.forms2065
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.pnl_peak_search);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.treeView3);
             this.panel3.Controls.Add(this.label41);
+            this.panel3.Controls.Add(this.treeView3);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
@@ -737,9 +737,9 @@ namespace Skydat.forms2065
             // label41
             // 
             this.label41.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.label41, "label41");
             this.label41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label41.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label41, "label41");
             this.label41.Name = "label41";
             // 
             // panel6
@@ -751,9 +751,9 @@ namespace Skydat.forms2065
             // 
             // toolstripChart
             // 
-            this.toolstripChart.AllowDrop = true;
             resources.ApplyResources(this.toolstripChart, "toolstripChart");
             this.toolstripChart.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolstripChart.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.tsbOpen,
@@ -763,6 +763,7 @@ namespace Skydat.forms2065
             this.toolstripChart.Name = "toolstripChart";
             this.toolstripChart.TabStop = true;
             this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
+            this.toolstripChart.SizeChanged += new System.EventHandler(this.toolstripChart_SizeChanged);
             // 
             // tsbNew
             // 

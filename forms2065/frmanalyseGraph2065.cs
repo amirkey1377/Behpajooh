@@ -1068,19 +1068,22 @@ namespace Skydat.forms2065
                     tChart1.Series.Clear();
                 System.Windows.Forms.DataVisualization.Charting.Series ser1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 
-                if (opForm.rbfLine.Checked)
+                char charType = frmChartSetting.ChartType;
+                switch (charType)
                 {
-                    ser1.ChartType = SeriesChartType.FastLine;
-
+                    case 'L':
+                        ser1.ChartType = SeriesChartType.Line;
+                        break;
+                    case 'C':
+                        ser1.ChartType = SeriesChartType.Spline;
+                        break;
+                    case 'P':
+                        ser1.ChartType = SeriesChartType.Point;
+                        break;
+                    default:
+                        break;
                 }
-                if (opForm.rbLine.Checked)
-                {
-                    ser1.ChartType = SeriesChartType.Line;
-                }
-                if (opForm.rbPoint.Checked)
-                {
-                    ser1.ChartType = SeriesChartType.Point;
-                }
+                
                 ser1.Color = GetColor();
                 ser1.LabelFormat = "#,##0.###########";
                 tChart1.Series.Add(ser1);
@@ -6067,6 +6070,53 @@ namespace Skydat.forms2065
         private void toolStripButton5_Click_2(object sender, EventArgs e)
         {
             toolStripButton10_Click_1(sender, e);
+        }
+
+        private void toolstripChart_SizeChanged(object sender, EventArgs e)
+        {
+            toolstripChart.Height = (int)(this.Height * 0.1);
+
+            if (toolstripChart.Height != 0 && toolstripChart.Width != 0)
+            {
+                int itemWidth = toolstripChart.Width / toolstripChart.Items.Count;// تنظیم اندازه هر آیتم
+                int iconSize = (int)(toolstripChart.Height * 0.4);
+                float fontSize = toolstripChart.Height / 8.0f;
+
+                if (iconSize <= 30)
+                {
+                    iconSize = 30;
+                }
+
+                foreach (ToolStripItem item in toolstripChart.Items)
+                {
+                    item.Width = itemWidth;
+                    item.Font = new System.Drawing.Font(item.Font.FontFamily, fontSize);
+
+                    if (item is ToolStripButton button && button.Image != null)
+                    {
+                        button.Image = ResizeImage(button.Image, iconSize, iconSize);
+                    }
+                    item.Height = toolstripChart.Height;
+
+                }
+            }
+        }
+
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            if (height != 0 && width != 0)
+            {
+                Bitmap resizedImage = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(resizedImage))
+                {
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                    g.DrawImage(image, 0, 0, width, height);
+                }
+                return resizedImage;
+            }
+            return null;
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)

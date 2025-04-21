@@ -113,6 +113,7 @@ namespace Skydat.forms2065
             this.label36 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolstripChart = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
@@ -133,8 +134,8 @@ namespace Skydat.forms2065
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.pGrid2 = new System.Windows.Forms.PropertyGrid();
             this.checkCPsCTs = new System.Windows.Forms.CheckBox();
+            this.pGrid2 = new System.Windows.Forms.PropertyGrid();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -148,6 +149,8 @@ namespace Skydat.forms2065
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveTechniquesparametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreTechniquesparametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
@@ -161,6 +164,7 @@ namespace Skydat.forms2065
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolstripChart.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -172,9 +176,10 @@ namespace Skydat.forms2065
             // panel6
             // 
             resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.tabParam);
-            this.panel6.Controls.Add(this.toolstripChart);
+            this.panel6.Controls.Add(this.panel1);
             this.panel6.Name = "panel6";
             // 
             // tabParam
@@ -193,7 +198,7 @@ namespace Skydat.forms2065
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage1.Controls.Add(this.Description);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.EqTime);
@@ -357,7 +362,7 @@ namespace Skydat.forms2065
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage2.Controls.Add(this.PH_DPV);
             this.tabPage2.Controls.Add(this.label21);
             this.tabPage2.Controls.Add(this.EqTime_DPV);
@@ -597,7 +602,7 @@ namespace Skydat.forms2065
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
-            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage4.Controls.Add(this.Description_CV);
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.EqTime_CV);
@@ -779,7 +784,7 @@ namespace Skydat.forms2065
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
-            this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage5.Controls.Add(this.Description_LSV);
             this.tabPage5.Controls.Add(this.label30);
             this.tabPage5.Controls.Add(this.EqTime_LSV);
@@ -922,7 +927,7 @@ namespace Skydat.forms2065
             // 
             // tabPage6
             // 
-            this.tabPage6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage6.Controls.Add(this.label11);
             resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Name = "tabPage6";
@@ -933,6 +938,13 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.label11, "label11");
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Name = "label11";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.toolstripChart);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
             // 
             // toolstripChart
             // 
@@ -1086,11 +1098,20 @@ namespace Skydat.forms2065
             // 
             // panel5
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.pGrid2);
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.checkCPsCTs);
+            this.panel5.Controls.Add(this.pGrid2);
             resources.ApplyResources(this.panel5, "panel5");
             this.panel5.Name = "panel5";
+            // 
+            // checkCPsCTs
+            // 
+            resources.ApplyResources(this.checkCPsCTs, "checkCPsCTs");
+            this.checkCPsCTs.ForeColor = System.Drawing.Color.Black;
+            this.checkCPsCTs.Name = "checkCPsCTs";
+            this.checkCPsCTs.UseVisualStyleBackColor = true;
+            this.checkCPsCTs.CheckedChanged += new System.EventHandler(this.checkCPsCTs_CheckedChanged);
             // 
             // pGrid2
             // 
@@ -1109,14 +1130,6 @@ namespace Skydat.forms2065
             this.pGrid2.ViewBackColor = System.Drawing.Color.White;
             this.pGrid2.ViewForeColor = System.Drawing.Color.Black;
             this.pGrid2.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pGrid2_PropertyValueChanged);
-            // 
-            // checkCPsCTs
-            // 
-            resources.ApplyResources(this.checkCPsCTs, "checkCPsCTs");
-            this.checkCPsCTs.ForeColor = System.Drawing.Color.Black;
-            this.checkCPsCTs.Name = "checkCPsCTs";
-            this.checkCPsCTs.UseVisualStyleBackColor = true;
-            this.checkCPsCTs.CheckedChanged += new System.EventHandler(this.checkCPsCTs_CheckedChanged);
             // 
             // panel3
             // 
@@ -1162,7 +1175,9 @@ namespace Skydat.forms2065
             this.runToolStripMenuItem1,
             this.toolStripSeparator3,
             this.saveTechniquesparametersToolStripMenuItem,
-            this.restoreTechniquesparametersToolStripMenuItem});
+            this.restoreTechniquesparametersToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.settingToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
@@ -1212,6 +1227,17 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.restoreTechniquesparametersToolStripMenuItem, "restoreTechniquesparametersToolStripMenuItem");
             this.restoreTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
             // treeView1
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -1243,15 +1269,16 @@ namespace Skydat.forms2065
             // 
             // treeView2
             // 
+            resources.ApplyResources(this.treeView2, "treeView2");
             this.treeView2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.treeView2.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView2.ForeColor = System.Drawing.Color.Black;
             this.treeView2.LineColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.treeView2, "treeView2");
             this.treeView2.Name = "treeView2";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView2.Nodes")))});
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
             // 
             // frmselecttech2065
             // 
@@ -1260,11 +1287,11 @@ namespace Skydat.forms2065
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.panel6);
-            this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.panel5);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmselecttech2065";
@@ -1287,6 +1314,7 @@ namespace Skydat.forms2065
             this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.toolstripChart.ResumeLayout(false);
             this.toolstripChart.PerformLayout();
             this.panel8.ResumeLayout(false);
@@ -1429,6 +1457,9 @@ namespace Skydat.forms2065
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
     }
 }
 

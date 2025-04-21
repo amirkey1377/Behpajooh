@@ -161,11 +161,14 @@
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 262</value>
+    <value>0, 237</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 187</value>
+    <value>211, 161</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
@@ -183,11 +186,17 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="treeView3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="treeView3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt, style=Bold</value>
   </data>
   <data name="treeView3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>0, 0</value>
+  </data>
+  <data name="treeView3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="treeView3.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -207,7 +216,7 @@
 </value>
   </data>
   <data name="treeView3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 223</value>
+    <value>211, 204</value>
   </data>
   <data name="treeView3.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -222,7 +231,7 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;treeView3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
     <value>40, 0</value>
@@ -1730,11 +1739,14 @@
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="pnl_peak_search.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="pnl_peak_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 408</value>
+    <value>0, 398</value>
   </data>
   <data name="pnl_peak_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 225</value>
+    <value>211, 235</value>
   </data>
   <data name="pnl_peak_search.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1754,14 +1766,17 @@
   <data name="&gt;&gt;pnl_peak_search.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="label41.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="label41.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 229</value>
+    <value>0, 204</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 33</value>
+    <value>211, 33</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1776,13 +1791,16 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;label41.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
+  </data>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 58</value>
+    <value>0, 62</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 640</value>
+    <value>215, 638</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1808,6 +1826,9 @@
   <data name="toolstripChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="toolstripChart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="tsbNew.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1818,7 +1839,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 47</value>
+    <value>35, 47</value>
   </data>
   <data name="tsbNew.Text" xml:space="preserve">
     <value>clear</value>
@@ -1839,7 +1860,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 47</value>
+    <value>35, 47</value>
   </data>
   <data name="tsbOpen.Text" xml:space="preserve">
     <value>open</value>
@@ -1881,7 +1902,7 @@
     <value>Magenta</value>
   </data>
   <data name="btnExportToExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 47</value>
+    <value>38, 47</value>
   </data>
   <data name="btnExportToExcel.Text" xml:space="preserve">
     <value>Excell</value>
@@ -1895,8 +1916,11 @@
   <data name="toolstripChart.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="toolstripChart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="toolstripChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 50</value>
+    <value>209, 56</value>
   </data>
   <data name="toolstripChart.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1923,7 +1947,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 54</value>
+    <value>213, 60</value>
   </data>
   <data name="panel6.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -2171,7 +2195,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>901, 56</value>
+    <value>901, 62</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
