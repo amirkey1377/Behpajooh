@@ -18,7 +18,7 @@ namespace Skydat.classes2065
             {
                 StreamReader Fl = new StreamReader(fileName, Encoding.ASCII);
                 string s = "";
-                int tech = -1;
+
                 int num_row = 0;
                 bool flag1 = false;
                 if (tchName == "All" || tchName == "Singel")
@@ -29,7 +29,7 @@ namespace Skydat.classes2065
                         {
                             if ((s.Substring(9) == "NPV") && s.LastIndexOf("Technic") >= 0 && s != "")
                             {
-                                tech = clasglobal.NPV;
+
                                 s = Fl.ReadLine(); clasglobal.npvprms.E1 = Convert.ToDouble(s.Substring(3));
                                 s = Fl.ReadLine(); clasglobal.npvprms.E2 = Convert.ToDouble(s.Substring(3));
                                 s = Fl.ReadLine(); clasglobal.npvprms.HStep = Convert.ToDouble(s.Substring(6));
@@ -57,7 +57,7 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "DPV") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.DPV;
+
                                     s = Fl.ReadLine(); clasglobal.dpvprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.dpvprms.E2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.dpvprms.HStep = Convert.ToDouble(s.Substring(6));
@@ -87,7 +87,7 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "SWV") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.SWV;
+
                                     s = Fl.ReadLine(); clasglobal.swvprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.swvprms.E2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.swvprms.Frequency = Convert.ToDouble(s.Substring(10));
@@ -116,7 +116,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CV") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CV;
                                     s = Fl.ReadLine(); clasglobal.cvprms.Cycles = Convert.ToDouble(s.Substring(7));
                                     s = Fl.ReadLine(); clasglobal.cvprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.cvprms.E2 = Convert.ToDouble(s.Substring(3));
@@ -150,7 +149,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "LSV") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.LSV;
                                     s = Fl.ReadLine(); clasglobal.lsvprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.lsvprms.E2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.lsvprms.HStep = Convert.ToDouble(s.Substring(6));
@@ -178,7 +176,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CPC") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CPC;
                                     s = Fl.ReadLine(); clasglobal.cpcprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.cpcprms.EquilibriumTime = Convert.ToDouble(s.Substring(17));
                                     s = Fl.ReadLine(); clasglobal.cpcprms.T1 = Convert.ToDouble(s.Substring(3));
@@ -204,7 +201,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CA") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CA;
                                     s = Fl.ReadLine(); clasglobal.chaprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chaprms.E2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chaprms.EquilibriumTime = Convert.ToDouble(s.Substring(17));
@@ -232,7 +228,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CC") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CHC;
                                     s = Fl.ReadLine(); clasglobal.chcprms.E1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chcprms.E2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chcprms.EquilibriumTime = Convert.ToDouble(s.Substring(17));
@@ -261,7 +256,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CP") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CHP;
                                     s = Fl.ReadLine(); clasglobal.chpprms.I1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chpprms.I2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.chpprms.EUP = Convert.ToDouble(s.Substring(4));
@@ -291,7 +285,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "CD") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.CD;
                                     s = Fl.ReadLine(); clasglobal.cdprms.I1 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.cdprms.I2 = Convert.ToDouble(s.Substring(3));
                                     s = Fl.ReadLine(); clasglobal.cdprms.EUP = Convert.ToDouble(s.Substring(4));
@@ -321,7 +314,6 @@ namespace Skydat.classes2065
                             if ((s.Substring(9) == "OCP") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
-                                    tech = clasglobal.OCP;
                                     s = Fl.ReadLine(); clasglobal.ocpprms.Time = Convert.ToDouble(s.Substring(5));
                                     //s = Fl.ReadLine(); //clasglobal.ocpprms.Cycles = Convert.ToDouble(s.Substring(7));
                                     //s = "            ";

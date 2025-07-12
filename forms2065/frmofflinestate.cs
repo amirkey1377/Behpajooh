@@ -18,7 +18,7 @@ namespace Skydat.forms2065
 {
     public partial class frmofflinestate : Form
     {
-        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21, DATA_READY = 1, TRANS_BUFF = 96;
+        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21, TRANS_BUFF = 96;
         //byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 15, DATA_READY = 1, TRANS_BUFF = 60;//delphi
 
         private Thread thread_grf;
@@ -29,7 +29,7 @@ namespace Skydat.forms2065
         private byte[] buf = new byte[1];
         private byte[] data=new byte[1];
         int shomar_data=0;
-        byte x1_r, i_sim;
+        byte x1_r;
    
         public frmofflinestate()
         {
@@ -242,7 +242,7 @@ namespace Skydat.forms2065
                 short[] Crnt = new short[1];
 
                 bool pulsy = false, N_gtv = false, evn = false;
-                string Sign = "", outstr = "";
+                string outstr = "";
                 double SR0, i1 = 0, i2 = 0, ss = 0;
                 if (!sp1.IsOpen)
                     sp1.Open();
@@ -391,12 +391,10 @@ namespace Skydat.forms2065
                     if (IE < FE)
                     {
                         N_gtv = false;
-                        Sign = " ";
                     }
                     else
                     {
                         N_gtv = true;
-                        Sign = "-";
                     }
                     evn = true;
                 }

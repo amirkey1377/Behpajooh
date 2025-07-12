@@ -69,11 +69,11 @@ namespace Skydat.forms2065
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.tsocpTime,
-            this.toolStripStatusLabel3,
             this.xyLabel,
             this.toolStripStatusLabel2,
             this.TechStatus,
-            this.toolStripProgressBar1});
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabel3});
             this.statusStrip1.Location = new System.Drawing.Point(0, 663);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1018, 24);

@@ -37,6 +37,7 @@ namespace Skydat.forms2065
             this.clearPlotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setActiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.tChart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -148,7 +149,8 @@ namespace Skydat.forms2065
             this.showDataPointsToolStripMenuItem,
             this.clearPlotsToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.setColorToolStripMenuItem});
+            this.setColorToolStripMenuItem,
+            this.setActiveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
@@ -176,6 +178,12 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.setColorToolStripMenuItem, "setColorToolStripMenuItem");
             this.setColorToolStripMenuItem.Click += new System.EventHandler(this.setColorToolStripMenuItem_Click);
             // 
+            // setActiveToolStripMenuItem
+            // 
+            this.setActiveToolStripMenuItem.Name = "setActiveToolStripMenuItem";
+            resources.ApplyResources(this.setActiveToolStripMenuItem, "setActiveToolStripMenuItem");
+            this.setActiveToolStripMenuItem.Click += new System.EventHandler(this.setActiveToolStripMenuItem_Click);
+            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -200,7 +208,7 @@ namespace Skydat.forms2065
             // 
             // tChart1
             // 
-            this.tChart1.BackColor = System.Drawing.Color.Black;
+            this.tChart1.BackColor = System.Drawing.Color.Silver;
             this.tChart1.BorderlineColor = System.Drawing.Color.Black;
             chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.Name = "ChartArea1";
@@ -260,7 +268,7 @@ namespace Skydat.forms2065
             this.button8.Name = "button8";
             this.toolTip1.SetToolTip(this.button8, resources.GetString("button8.ToolTip"));
             this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.Click += new System.EventHandler(this.setColorToolStripMenuItem_Click);
             // 
             // button4
             // 
@@ -1100,5 +1108,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripMenuItem setColorToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ToolStripButton btnExportToExcel;
+        private System.Windows.Forms.ToolStripMenuItem setActiveToolStripMenuItem;
     }
 }

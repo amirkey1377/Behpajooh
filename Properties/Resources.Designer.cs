@@ -283,6 +283,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap alert__1_ {
+            get {
+                object obj = ResourceManager.GetObject("alert (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Analyze_panel_4B {
             get {
                 object obj = ResourceManager.GetObject("Analyze+panel+4B", resourceCulture);
@@ -786,6 +796,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap Exit {
             get {
                 object obj = ResourceManager.GetObject("Exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Experimental_set_up_for_open_circuit_potential_measurements {
+            get {
+                object obj = ResourceManager.GetObject("Experimental-set-up-for-open-circuit-potential-measurements", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1593,9 +1613,9 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap zoom_in {
+        internal static System.Drawing.Bitmap zoom {
             get {
-                object obj = ResourceManager.GetObject("zoom_in", resourceCulture);
+                object obj = ResourceManager.GetObject("zoom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1666,6 +1686,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap zoom_out_icon__1_ {
             get {
                 object obj = ResourceManager.GetObject("zoom_out_icon__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom1 {
+            get {
+                object obj = ResourceManager.GetObject("zoom1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

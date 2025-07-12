@@ -495,5 +495,44 @@ namespace Skydat.forms2065
         {
 
         }
+
+        private void frmtempfiles_Resize(object sender, EventArgs e)
+        {
+            if (toolstripChart.Height != 0 && toolstripChart.Width != 0)
+            {
+                int itemWidth = toolstripChart.Width / toolstripChart.Items.Count;// تنظیم اندازه هر آیتم
+                int iconSize = (int)(toolstripChart.Height * 0.4);
+                float fontSize = toolstripChart.Height / 8.0f;
+
+                if (iconSize <= 30)
+                {
+                    iconSize = 30;
+                }
+                foreach (ToolStripItem item in toolstripChart.Items)
+                {
+                    item.Width = itemWidth;
+                    item.Font = new Font(item.Font.FontFamily, fontSize);
+                    if (item is ToolStripButton button && button.Image != null)
+                    {
+                        button.Image = ResizeImage(button.Image, iconSize, iconSize);
+                    }
+                    item.Height = toolstripChart.Height;
+                }
+            }
+
+        }
+
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            Bitmap resizedImage = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resizedImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                g.DrawImage(image, 0, 0, width, height);
+            }
+            return resizedImage;
+        }
     }
 }

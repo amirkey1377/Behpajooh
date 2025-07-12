@@ -239,6 +239,7 @@ namespace Skydat.forms2065
             // 
             // chartColor
             // 
+            this.chartColor.Color = System.Drawing.Color.DarkCyan;
             this.chartColor.FullOpen = true;
             // 
             // frmChartSetting

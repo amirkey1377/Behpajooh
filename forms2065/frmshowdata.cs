@@ -41,9 +41,9 @@ namespace Skydat.forms2065
                 e.Graphics.DrawString(listView1.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
                 e.DrawFocusRectangle();
             }
-
-
-            catch (Exception ex) { }
+            catch(Exception) {
+                throw;
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)

@@ -36,6 +36,8 @@
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -147,6 +149,12 @@
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Users\Naghdi\Desktop\office.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=2.2.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.2.0\lib\net462\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=2.2.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.WindowsForms.2.2.0\lib\net462\OxyPlot.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="Sentinel.v3.5Client" />
     <Reference Include="System" />
@@ -269,12 +277,6 @@
     <Compile Include="forms2065\frm_big_analys.designer.cs">
       <DependentUpon>frm_big_analys.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms2080\frmAbout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms2080\frmAbout.designer.cs">
-      <DependentUpon>frmAbout.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms2080\frmanalyseGraph2080.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -304,12 +306,6 @@
     </Compile>
     <Compile Include="forms2080\frmColorSelect12080.Designer.cs">
       <DependentUpon>frmColorSelect12080.cs</DependentUpon>
-    </Compile>
-    <Compile Include="forms2080\frmData1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms2080\frmData1.designer.cs">
-      <DependentUpon>frmData1.cs</DependentUpon>
     </Compile>
     <Compile Include="forms2080\frmindata2080.cs">
       <SubType>Form</SubType>
@@ -441,12 +437,6 @@
     <Compile Include="forms2065\frmColorSelect12065.Designer.cs">
       <DependentUpon>frmColorSelect12065.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms2065\frmData12065.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms2065\frmData12065.designer.cs">
-      <DependentUpon>frmData12065.cs</DependentUpon>
-    </Compile>
     <Compile Include="forms2065\frmanalyseGraph2065.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -562,9 +552,6 @@
     <EmbeddedResource Include="forms2065\frm_big_analys.resx">
       <DependentUpon>frm_big_analys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms2080\frmAbout.resx">
-      <DependentUpon>frmAbout.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="forms2080\frmanalyseGraph2080.resx">
       <DependentUpon>frmanalyseGraph2080.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -583,10 +570,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms2080\frmColorSelect12080.resx">
       <DependentUpon>frmColorSelect12080.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms2080\frmData1.resx">
-      <DependentUpon>frmData1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="forms2080\frmindata2080.resx">
@@ -665,10 +648,6 @@
       <DependentUpon>frmColorSelect12065.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms2065\frmData12065.resx">
-      <DependentUpon>frmData12065.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmanalyseGraph2065.resx">
       <DependentUpon>frmanalyseGraph2065.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -714,8 +693,8 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmRegister2065.resx">
       <DependentUpon>frmRegister2065.cs</DependentUpon>
@@ -725,11 +704,6 @@
       <DependentUpon>frmSmoothing2065.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -765,6 +739,11 @@
     </None>
     <None Include="Resources\NEW" />
     <None Include="Resources\TOOL" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -826,6 +805,11 @@
     <None Include="Resources\excel.png" />
     <None Include="Resources\Excell.png" />
     <None Include="Resources\excell_Icon.png" />
+    <None Include="Resources\zoom-in1.png" />
+    <None Include="Resources\zoom.png" />
+    <None Include="Resources\zoom1.png" />
+    <None Include="Resources\alert %281%29.png" />
+    <None Include="Resources\Experimental-set-up-for-open-circuit-potential-measurements.png" />
     <Content Include="Resources\zoomin.ico" />
     <Content Include="Resources\Zoomout.ico" />
     <None Include="Resources\2000px-Tangent_to_a_curve.svg.png" />
@@ -1006,6 +990,13 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

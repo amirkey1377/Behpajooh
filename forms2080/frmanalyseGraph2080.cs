@@ -13,7 +13,6 @@ using Skydat.classes2065;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Office.Interop.Excel;
-using Skydat.classes2065;
 using System.Threading;
 
 namespace Skydat.forms2080
@@ -939,20 +938,6 @@ namespace Skydat.forms2080
                 }
                 switch (byte.Parse(dschart2.analyselist.Rows[row][0].ToString()))
                 {
-                    case clasglobal.DCV2080:
-
-
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
-                        break;
                     case clasglobal.NPV2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
@@ -1014,31 +999,7 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
                        
                         break;
-                    case clasglobal.DCs2080:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
 
-                        break;
-                    case clasglobal.DPs2080:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][9].ToString()) != 9999) str_fillparam = str_fillparam + "Pulse Height =" + double.Parse(dschart2.analyselist.Rows[row][9].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][8].ToString()) != 9999) str_fillparam = str_fillparam + "Pulse Width =" + double.Parse(dschart2.analyselist.Rows[row][8].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
-                        break;
                     case clasglobal.CPC2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
@@ -1203,20 +1164,16 @@ namespace Skydat.forms2080
                 strTch = str.Substring(str.IndexOf(':') + 1).Trim();
                 switch (strTch)
                 {
-                    case "DCV": Tch = clasglobal.DCV2080; break;
                     case "NPV": Tch = clasglobal.NPV2080; break;
                     case "DPV": Tch = clasglobal.DPV2080; break;
                     case "SWV": Tch = clasglobal.SWV2080; break;
                     case "CV": Tch = clasglobal.CV2080; break;
                     case "LSV": Tch = clasglobal.LSV2080; break;
-                    case "DCs": Tch = clasglobal.DCs2080; break;
-                    case "DPs": Tch = clasglobal.DPs2080; break;
                     case "OCP": Tch = clasglobal.OCP2080; break;
                     case "CPC": Tch = clasglobal.CPC2080; break;
                     case "CHP": Tch = clasglobal.CHP2080; break;
                     case "CHA": Tch = clasglobal.CHA2080; break;
                    // case "CHC": Tch = clasglobal.CHC; break;
-                    case "SC": Tch = clasglobal.SC2080; break;
                     case "CCC": Tch = clasglobal.CCC2080; break;
                     default: Tch = 15; break;
                 }

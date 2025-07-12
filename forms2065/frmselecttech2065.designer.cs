@@ -30,6 +30,9 @@ namespace Skydat.forms2065
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmselecttech2065));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tabParam = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -71,7 +74,7 @@ namespace Skydat.forms2065
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxRTtech = new System.Windows.Forms.ComboBox();
             this.rd_hieght_cpc = new System.Windows.Forms.RadioButton();
             this.rd_low_cpc = new System.Windows.Forms.RadioButton();
             this.pGrid = new System.Windows.Forms.PropertyGrid();
@@ -137,10 +140,13 @@ namespace Skydat.forms2065
             this.checkCPsCTs = new System.Windows.Forms.CheckBox();
             this.pGrid2 = new System.Windows.Forms.PropertyGrid();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.picBoxOcp = new System.Windows.Forms.PictureBox();
+            this.btnZoom = new System.Windows.Forms.Button();
+            this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.lblTechDescription = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lblTechName = new System.Windows.Forms.Label();
+            this.contextMenuSelectedTech = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyMultiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,7 +175,9 @@ namespace Skydat.forms2065
             this.panel8.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
+            this.contextMenuSelectedTech.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -240,6 +248,7 @@ namespace Skydat.forms2065
             this.EqTime.ForeColor = System.Drawing.Color.Black;
             this.EqTime.Name = "EqTime";
             this.EqTime.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
+            this.EqTime.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.EqTime.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
             this.EqTime.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -257,6 +266,7 @@ namespace Skydat.forms2065
             this.PW.ForeColor = System.Drawing.Color.Black;
             this.PW.Name = "PW";
             this.PW.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
+            this.PW.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.PW.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PW.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.PW.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -294,6 +304,7 @@ namespace Skydat.forms2065
             this.SR.ForeColor = System.Drawing.Color.Black;
             this.SR.Name = "SR";
             this.SR.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
+            this.SR.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.SR.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.SR.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -312,6 +323,7 @@ namespace Skydat.forms2065
             this.Hs.ForeColor = System.Drawing.Color.Black;
             this.Hs.Name = "Hs";
             this.Hs.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
+            this.Hs.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Hs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
             this.Hs.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
@@ -391,9 +403,9 @@ namespace Skydat.forms2065
             this.PH_DPV.ForeColor = System.Drawing.Color.Black;
             this.PH_DPV.Name = "PH_DPV";
             this.PH_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.PH_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.PH_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PH_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.PH_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.PH_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label21
@@ -408,9 +420,9 @@ namespace Skydat.forms2065
             this.EqTime_DPV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_DPV.Name = "EqTime_DPV";
             this.EqTime_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.EqTime_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.EqTime_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
-            this.EqTime_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.EqTime_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // Description_DPV
@@ -430,7 +442,6 @@ namespace Skydat.forms2065
             this.E1_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E1_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E1_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label12
@@ -445,9 +456,9 @@ namespace Skydat.forms2065
             this.PW_DPV.ForeColor = System.Drawing.Color.Black;
             this.PW_DPV.Name = "PW_DPV";
             this.PW_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.PW_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.PW_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.PW_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.PW_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.PW_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label13
@@ -465,7 +476,6 @@ namespace Skydat.forms2065
             this.E2_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E2_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E2_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label14
@@ -494,9 +504,9 @@ namespace Skydat.forms2065
             this.Hs_DPV.ForeColor = System.Drawing.Color.Black;
             this.Hs_DPV.Name = "Hs_DPV";
             this.Hs_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.Hs_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Hs_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.Hs_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.Hs_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label17
@@ -511,9 +521,9 @@ namespace Skydat.forms2065
             this.SR_DPV.ForeColor = System.Drawing.Color.Black;
             this.SR_DPV.Name = "SR_DPV";
             this.SR_DPV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_DPV_MouseClick);
+            this.SR_DPV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.SR_DPV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR_DPV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.SR_DPV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.SR_DPV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label18
@@ -543,7 +553,7 @@ namespace Skydat.forms2065
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.comboBox1);
+            this.tabPage3.Controls.Add(this.comboBoxRTtech);
             this.tabPage3.Controls.Add(this.rd_hieght_cpc);
             this.tabPage3.Controls.Add(this.rd_low_cpc);
             this.tabPage3.Controls.Add(this.pGrid);
@@ -551,16 +561,16 @@ namespace Skydat.forms2065
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // comboBoxRTtech
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2")});
-            resources.ApplyResources(this.comboBox1, "comboBox1");
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxRTtech.FormattingEnabled = true;
+            this.comboBoxRTtech.Items.AddRange(new object[] {
+            resources.GetString("comboBoxRTtech.Items"),
+            resources.GetString("comboBoxRTtech.Items1"),
+            resources.GetString("comboBoxRTtech.Items2")});
+            resources.ApplyResources(this.comboBoxRTtech, "comboBoxRTtech");
+            this.comboBoxRTtech.Name = "comboBoxRTtech";
+            this.comboBoxRTtech.SelectedIndexChanged += new System.EventHandler(this.comboBoxRTtech_SelectedIndexChanged);
             // 
             // rd_hieght_cpc
             // 
@@ -645,9 +655,9 @@ namespace Skydat.forms2065
             this.EqTime_CV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_CV.Name = "EqTime_CV";
             this.EqTime_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.EqTime_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.EqTime_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
-            this.EqTime_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.EqTime_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // Hs_CV
@@ -656,9 +666,9 @@ namespace Skydat.forms2065
             this.Hs_CV.ForeColor = System.Drawing.Color.Black;
             this.Hs_CV.Name = "Hs_CV";
             this.Hs_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.Hs_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Hs_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.Hs_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.Hs_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // E1_CV
@@ -670,7 +680,6 @@ namespace Skydat.forms2065
             this.E1_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E1_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E1_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label8
@@ -685,9 +694,9 @@ namespace Skydat.forms2065
             this.Hold_CV.ForeColor = System.Drawing.Color.Black;
             this.Hold_CV.Name = "Hold_CV";
             this.Hold_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.Hold_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Hold_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hold_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.Hold_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.Hold_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label22
@@ -705,7 +714,6 @@ namespace Skydat.forms2065
             this.E2_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E2_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E2_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label23
@@ -733,9 +741,9 @@ namespace Skydat.forms2065
             this.Cycle_CV.ForeColor = System.Drawing.Color.Black;
             this.Cycle_CV.Name = "Cycle_CV";
             this.Cycle_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.Cycle_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Cycle_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Cycle_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.Cycle_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.Cycle_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label25
@@ -750,9 +758,9 @@ namespace Skydat.forms2065
             this.SR_CV.ForeColor = System.Drawing.Color.Black;
             this.SR_CV.Name = "SR_CV";
             this.SR_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
+            this.SR_CV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.SR_CV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR_CV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.SR_CV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.SR_CV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label26
@@ -823,9 +831,9 @@ namespace Skydat.forms2065
             this.EqTime_LSV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_LSV.Name = "EqTime_LSV";
             this.EqTime_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.EqTime_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.EqTime_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.EqTime_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EqTime_KeyPress);
-            this.EqTime_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.EqTime_LSV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label31
@@ -860,9 +868,9 @@ namespace Skydat.forms2065
             this.SR_LSV.ForeColor = System.Drawing.Color.Black;
             this.SR_LSV.Name = "SR_LSV";
             this.SR_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.SR_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.SR_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.SR_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.SR_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.SR_LSV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // Ts_LSV
@@ -878,9 +886,9 @@ namespace Skydat.forms2065
             this.Hs_LSV.ForeColor = System.Drawing.Color.Black;
             this.Hs_LSV.Name = "Hs_LSV";
             this.Hs_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
+            this.Hs_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.Hs_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.Hs_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
-            this.Hs_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.Hs_LSV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // E2_LSV
@@ -892,7 +900,6 @@ namespace Skydat.forms2065
             this.E2_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E2_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E2_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E2_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E2_LSV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // E1_LSV
@@ -904,7 +911,6 @@ namespace Skydat.forms2065
             this.E1_LSV.TextChanged += new System.EventHandler(this.E1_TextChanged);
             this.E1_LSV.KeyDown += new System.Windows.Forms.KeyEventHandler(this.E1_KeyDown);
             this.E1_LSV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
-            this.E1_LSV.MouseLeave += new System.EventHandler(this.E1_MouseLeave);
             this.E1_LSV.Validated += new System.EventHandler(this.E1_Validated);
             // 
             // label34
@@ -1026,8 +1032,9 @@ namespace Skydat.forms2065
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.AllowDrop = true;
+            this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel8.Controls.Add(this.label16);
             this.panel8.Controls.Add(this.radioButton7);
             this.panel8.Controls.Add(this.radioButton6);
@@ -1086,6 +1093,7 @@ namespace Skydat.forms2065
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radioButton2.DragDrop += new System.Windows.Forms.DragEventHandler(this.radioButton2_DragDrop);
             // 
             // radioButton1
             // 
@@ -1135,19 +1143,57 @@ namespace Skydat.forms2065
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.picBoxOcp);
+            this.panel3.Controls.Add(this.btnZoom);
+            this.panel3.Controls.Add(this.chartApplayTech);
+            this.panel3.Controls.Add(this.panel8);
+            this.panel3.Controls.Add(this.lblTechDescription);
             this.panel3.Controls.Add(this.checkBox1);
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.lblTechName);
             this.panel3.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // label2
+            // picBoxOcp
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            this.picBoxOcp.Image = global::Skydat.Properties.Resources.Experimental_set_up_for_open_circuit_potential_measurements;
+            resources.ApplyResources(this.picBoxOcp, "picBoxOcp");
+            this.picBoxOcp.Name = "picBoxOcp";
+            this.picBoxOcp.TabStop = false;
+            // 
+            // btnZoom
+            // 
+            this.btnZoom.ForeColor = System.Drawing.Color.Black;
+            this.btnZoom.Image = global::Skydat.Properties.Resources.zoom1;
+            resources.ApplyResources(this.btnZoom, "btnZoom");
+            this.btnZoom.Name = "btnZoom";
+            this.btnZoom.UseVisualStyleBackColor = true;
+            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
+            // 
+            // chartApplayTech
+            // 
+            this.chartApplayTech.BackColor = System.Drawing.Color.Transparent;
+            chartArea7.AxisX.MajorGrid.Enabled = false;
+            chartArea7.BackColor = System.Drawing.Color.Transparent;
+            chartArea7.Name = "ChartArea1";
+            this.chartApplayTech.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chartApplayTech.Legends.Add(legend7);
+            resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
+            this.chartApplayTech.Name = "chartApplayTech";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series7.IsVisibleInLegend = false;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chartApplayTech.Series.Add(series7);
+            // 
+            // lblTechDescription
+            // 
+            this.lblTechDescription.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.lblTechDescription.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.lblTechDescription, "lblTechDescription");
+            this.lblTechDescription.Name = "lblTechDescription";
             // 
             // checkBox1
             // 
@@ -1158,16 +1204,16 @@ namespace Skydat.forms2065
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // label1
+            // lblTechName
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Name = "label1";
+            this.lblTechName.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.lblTechName, "lblTechName");
+            this.lblTechName.ForeColor = System.Drawing.Color.Black;
+            this.lblTechName.Name = "lblTechName";
             // 
-            // contextMenuStrip1
+            // contextMenuSelectedTech
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuSelectedTech.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem4,
             this.copyOneToolStripMenuItem,
             this.copyMultiToolStripMenuItem,
@@ -1178,11 +1224,12 @@ namespace Skydat.forms2065
             this.restoreTechniquesparametersToolStripMenuItem,
             this.toolStripSeparator1,
             this.settingToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            this.contextMenuSelectedTech.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuSelectedTech, "contextMenuSelectedTech");
             // 
             // toolStripMenuItem4
             // 
+            this.toolStripMenuItem4.Image = global::Skydat.Properties.Resources.eraser1;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             resources.ApplyResources(this.toolStripMenuItem4, "toolStripMenuItem4");
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
@@ -1206,6 +1253,7 @@ namespace Skydat.forms2065
             // 
             // runToolStripMenuItem1
             // 
+            this.runToolStripMenuItem1.Image = global::Skydat.Properties.Resources.Run;
             this.runToolStripMenuItem1.Name = "runToolStripMenuItem1";
             resources.ApplyResources(this.runToolStripMenuItem1, "runToolStripMenuItem1");
             this.runToolStripMenuItem1.Click += new System.EventHandler(this.tsbRun_Click);
@@ -1217,12 +1265,14 @@ namespace Skydat.forms2065
             // 
             // saveTechniquesparametersToolStripMenuItem
             // 
+            this.saveTechniquesparametersToolStripMenuItem.Image = global::Skydat.Properties.Resources.Save;
             this.saveTechniquesparametersToolStripMenuItem.Name = "saveTechniquesparametersToolStripMenuItem";
             resources.ApplyResources(this.saveTechniquesparametersToolStripMenuItem, "saveTechniquesparametersToolStripMenuItem");
             this.saveTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.tsbSaveAll_Click);
             // 
             // restoreTechniquesparametersToolStripMenuItem
             // 
+            this.restoreTechniquesparametersToolStripMenuItem.Image = global::Skydat.Properties.Resources.OpenNew;
             this.restoreTechniquesparametersToolStripMenuItem.Name = "restoreTechniquesparametersToolStripMenuItem";
             resources.ApplyResources(this.restoreTechniquesparametersToolStripMenuItem, "restoreTechniquesparametersToolStripMenuItem");
             this.restoreTechniquesparametersToolStripMenuItem.Click += new System.EventHandler(this.tsbOpen_Click);
@@ -1234,6 +1284,7 @@ namespace Skydat.forms2065
             // 
             // settingToolStripMenuItem
             // 
+            this.settingToolStripMenuItem.Image = global::Skydat.Properties.Resources.Options;
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
@@ -1249,7 +1300,6 @@ namespace Skydat.forms2065
             this.treeView1.Name = "treeView1";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView1.Nodes")))});
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
             // reSize1
@@ -1271,8 +1321,9 @@ namespace Skydat.forms2065
             // 
             resources.ApplyResources(this.treeView2, "treeView2");
             this.treeView2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.treeView2.ContextMenuStrip = this.contextMenuStrip1;
+            this.treeView2.ContextMenuStrip = this.contextMenuSelectedTech;
             this.treeView2.ForeColor = System.Drawing.Color.Black;
+            this.treeView2.ItemHeight = 22;
             this.treeView2.LineColor = System.Drawing.Color.Silver;
             this.treeView2.Name = "treeView2";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
@@ -1288,7 +1339,6 @@ namespace Skydat.forms2065
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel8);
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.panel5);
@@ -1323,7 +1373,9 @@ namespace Skydat.forms2065
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).EndInit();
+            this.contextMenuSelectedTech.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1347,10 +1399,10 @@ namespace Skydat.forms2065
         private System.Windows.Forms.CheckBox checkCPsCTs;
         public System.Windows.Forms.PropertyGrid pGrid;
         private datasets.Dschart1 dschart1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuSelectedTech;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTechName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
         private System.Windows.Forms.Panel panel5;
@@ -1375,7 +1427,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.RadioButton rd_low_cpc;
         private System.Windows.Forms.RadioButton rd_hieght_cpc;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTechDescription;
         private System.Windows.Forms.TabControl tabParam;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label9;
@@ -1455,11 +1507,14 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label Description_LSV;
         private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxRTtech;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartApplayTech;
+        private System.Windows.Forms.Button btnZoom;
+        private System.Windows.Forms.PictureBox picBoxOcp;
     }
 }
 

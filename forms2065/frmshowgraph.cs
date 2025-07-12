@@ -17,7 +17,7 @@ namespace Skydat.forms2065
 {
     public partial class frmshowgraph : Form
     {
-        string strlegend,titlegraph,titles;
+        string strlegend,titles;
         double xminb, xmaxb, yminb, ymaxb;
         public frmshowgraph(string strlegend1,double xmin1,double xmax1,double ymin1,double ymax1,string titlegraph1,string titles1)
         {

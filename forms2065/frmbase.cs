@@ -132,7 +132,7 @@ namespace Skydat.forms2065
                             return true; // بازگشت نام پورت
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("به دلیل وجود مشکل در ارتباط دستگاه به نرم افزار متصل نشده، لطفا از اتصال صحیح کابل اطمینان حاصل فرمایید"
                             ,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -170,21 +170,23 @@ namespace Skydat.forms2065
             return comports;
         }
 
-        private void IsFrmOpen()
+        private bool IsFrmOpen()
         {
             this.Cursor = Cursors.WaitCursor;
             if (classes2065.movedata.open_form == 1)// برای کارایی بهتر نرم افزار اجازه باز شدن چند فرم را نمی دهد
             {
                 this.Cursor = Cursors.Default;
                 MessageBox.Show("You have already opened a window. Close it to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return true;
             }
+            return false;
         }
 
         private void Btn2066_Click(object sender, EventArgs e)
         {
             Idata = false;
-            IsFrmOpen();
+            if (IsFrmOpen())
+                return;
 
             frmMain2065 frm = new frmMain2065(Idata)
             {
@@ -197,7 +199,9 @@ namespace Skydat.forms2065
 
         private void Btn2090_Click(object sender, EventArgs e)
         {
-            IsFrmOpen();
+            if (IsFrmOpen())
+                return;
+
             forms2080.frmMain12080 frm = new forms2080.frmMain12080
             {
                 StartPosition = FormStartPosition.CenterScreen
@@ -263,7 +267,7 @@ namespace Skydat.forms2065
 
         private void TechnicalBtn_Click(object sender, EventArgs e)
         {
-            Process.Start("https://behpajooh.net/");
+            Process.Start("https://www.behpajooh.net/");
         }
     }
 }

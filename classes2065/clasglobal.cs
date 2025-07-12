@@ -96,7 +96,7 @@ namespace Skydat.classes2065
         public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16,CDtest = 17;/////, CA = 11
         
         //2080
-        public const byte DCV2080 = 1, NPV2080 = 2, DPV2080 = 3, SWV2080 = 4, CV2080 = 5, DCs2080 = 7, DPs2080 = 8, OCP2080 = 9, CPC2080 = 10, CHA2080 = 11, CCC2080 = 12, SC2080 = 13, LSV2080 = 14, CHP2080 = 15;/////, CA = 11
+        public const byte NPV2080 = 1, DPV2080 = 2, SWV2080 = 3, CV2080 = 4, OCP2080 = 15, CPC2080 = 9, CHA2080 = 11, CCC2080 = 12, LSV2080 = 5, CHP2080 = 10;/////, CA = 11
 
         //برای هر تکنیکی پارامترهایی تعریف شده است که داخل کلاس پارام کلاسهای تعریف هر تکنیک و پارامترهاشون قرار دارد
         public static DCV_params dcvprms = new DCV_params();
@@ -105,8 +105,8 @@ namespace Skydat.classes2065
         public static SWV_params swvprms = new SWV_params();
         public static CV_params cvprms = new CV_params();
         public static LSV_params lsvprms = new LSV_params();
-        public static DCS_params dcsprms = new DCS_params();
-        public static DPS_params dpsprms = new DPS_params();
+        //public static DCS_params dcsprms = new DCS_params();
+        //public static DPS_params dpsprms = new DPS_params();
         public static CPC_params cpcprms = new CPC_params();
         public static CCC_params cccprms = new CCC_params();
         public static CHP_params chpprms = new CHP_params();
@@ -142,9 +142,7 @@ namespace Skydat.classes2065
                 case DPV: pGrid.SelectedObject = dpvprms; break;
                 case SWV: pGrid.SelectedObject = swvprms; break;
                 case CV: pGrid.SelectedObject =  cvprms; break;
-                case LSV: pGrid.SelectedObject = lsvprms; break;
-                case DCs: pGrid.SelectedObject = dcsprms; break;
-                case DPs: pGrid.SelectedObject = dpsprms; break;
+                case LSV: pGrid.SelectedObject = lsvprms; break;;
                 case CPC: pGrid.SelectedObject = cpcprms; break;
                 case CHP: pGrid.SelectedObject = chpprms; break;
                 case CA: pGrid.SelectedObject = chaprms; break;

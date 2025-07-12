@@ -209,18 +209,7 @@ namespace Skydat.forms2080
                 label4.Text = "";
                 switch (byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()))
                 {
-                    case clasglobal.DCV2080:
 
-                         label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                         label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                         label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                         label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                         label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                         label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                         label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                         label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
                     case clasglobal.NPV2080:
                        
                          label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
@@ -283,30 +272,7 @@ namespace Skydat.forms2080
                          label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
                         break;
-                    case clasglobal.DCs2080:
-                         label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                         label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                         label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                         label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                         label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                         label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                         label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                         label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        break;
-                    case clasglobal.DPs2080:
-                         label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                         label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                         label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                         label4.Text = label4.Text + "Pulse Height =" + double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) + "\n";
-                         label4.Text = label4.Text + "Pulse Width =" + double.Parse(dschart1.chartlist1_run.Rows[row][10].ToString()) + "\n";
-                         label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                         label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                         label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                         label4.Text = label4.Text + "vs_OCP =" +dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                         label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
                     case clasglobal.CPC2080:
                          label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                          label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
@@ -968,7 +934,7 @@ namespace Skydat.forms2080
                     I2 = I2 * 0.61035; ////0.61035
                     if (I_sin) I2 *= -1;
 
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CPC2080 && int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CHA2080 && int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.SC2080)
+                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CPC2080 && int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CHA2080)
                     {
                         if (V > 0x8000) V -= 65536;
                         //  if (I2 > 0x8000) I2 -= 65536;
@@ -1048,7 +1014,7 @@ namespace Skydat.forms2080
                     }
                 }
                 //////////////////////////////////////////////////////////
-                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.SC2080))    // CPC return (0,I,T,StepCurr,0)   || SC return (0,I,T,0,0);;   
+                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080))    // CPC return (0,I,T,StepCurr,0)   || SC return (0,I,T,0,0);;   
                 {
                     if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080) 
                         V *= 10;

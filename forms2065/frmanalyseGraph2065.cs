@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Microsoft.Office.Interop.Excel;
 using Skydat.classes2065;
+
 namespace Skydat.forms2065
 {
     public partial class frmanalyseGraph2065 : Form
@@ -26,7 +28,7 @@ namespace Skydat.forms2065
         public int[] Overlay_tech = new int[1000];
         public byte tech = 0;
         public int grfNo = 0, nindexchart2 = 0;
-        public frmselecttech2065 sf;
+
         public frmMain2065 mainf;
         public frmOption12065 opForm;
         public clasMain mc = new clasMain();
@@ -35,8 +37,6 @@ namespace Skydat.forms2065
         public double ContactpointX = 0, contactpointY = 0;
         public bool isSelectedLine = false;
         //این دو متغییر برای درست کردن داده های تب شو ریزالت در حالتی که تکنیک سی وی را بدون اسموٍث فعال میکنیم استفاده شده است
-        double[] array_modify = new double[1000];
-        double[] array_modify2 = new double[1000];
         KeyEventArgs ee = new KeyEventArgs(Keys.Alt);
 
         public frmanalyseGraph2065()
@@ -241,82 +241,86 @@ namespace Skydat.forms2065
         {
             try
             {
-                if (e.Button == MouseButtons.Left)
+                if (statebutton == "showvalue")
                 {
-                    double xv = tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X);
-                    double yv = tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y);
-                    if (xv - mDown > 0)
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum + (difxview / 500);
-                    else if (xv - mDown < 0)
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum - (difxview / 500);
-                    else
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-                    if ((yv - mDowny) > 0)
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum + (difyview / 500);
-                    else if ((yv - mDowny) < 0)
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
-                    else
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                    tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
-                    tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
-
-                    mDown = xv;
-                    mDowny = yv;
-
-                }
-                else
-                {
-                    var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
-                    foreach (var result in results11)
+                    if (e.Button == MouseButtons.Left)
                     {
-                        if (result.ChartElementType == ChartElementType.PlottingArea)
+                        double xv = tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X);
+                        double yv = tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y);
+                        if (xv - mDown > 0)
+                            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum + (difxview / 500);
+                        else if (xv - mDown < 0)
+                            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum - (difxview / 500);
+                        else
+                            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+                        if ((yv - mDowny) > 0)
+                            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum + (difyview / 500);
+                        else if ((yv - mDowny) < 0)
+                            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
+                        else
+                            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                        tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
+                        tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
+
+                        mDown = xv;
+                        mDowny = yv;
+
+                    }
+                    else
+                    {
+                        var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                        foreach (var result in results11)
                         {
-
-                            switch (statebutton)
+                            if (result.ChartElementType == ChartElementType.PlottingArea)
                             {
-                                case "selectonly":
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
-                                    break;
-                                case "showvalue":
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
 
-                                    break;
-                                default:
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-                                    break;
+                                switch (statebutton)
+                                {
+                                    case "selectonly":
+                                        tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
+                                        break;
+                                    case "showvalue":
+                                        tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+
+                                        break;
+                                    default:
+                                        tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+                                        break;
+                                }
+
                             }
+                            else
+                                tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+
 
                         }
-                        else
-                            tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+                        switch (statebutton)
+                        {
+                            case "selectonly":
+                                System.Drawing.Point mousePoint = new System.Drawing.Point(e.X, e.Y);
+                                tChart1.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
+                                tChart1.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
 
-
-                    }
-                    switch (statebutton)
-                    {
-                        case "selectonly":
-                            System.Drawing.Point mousePoint = new System.Drawing.Point(e.X, e.Y);
-                            tChart1.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
-                            tChart1.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
-
-                            break;
-                        case "showvalue":
-                            var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
-                            double x111 = 0, y111 = 0;
-                            foreach (var result in results12)
-                            {
-
-                                if (result.ChartElementType == ChartElementType.PlottingArea)
+                                break;
+                            case "showvalue":
+                                var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                                double x111 = 0, y111 = 0;
+                                foreach (var result in results12)
                                 {
-                                    x111 = result.ChartArea.AxisX.PixelPositionToValue(e.X);
-                                    y111 = result.ChartArea.AxisY.PixelPositionToValue(e.Y);
-                                }
-                            }
-                            mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
 
-                            break;
+                                    if (result.ChartElementType == ChartElementType.PlottingArea)
+                                    {
+                                        x111 = result.ChartArea.AxisX.PixelPositionToValue(e.X);
+                                        y111 = result.ChartArea.AxisY.PixelPositionToValue(e.Y);
+                                    }
+                                }
+                                mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
+
+                                break;
+                        }
                     }
                 }
+                
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -351,6 +355,7 @@ namespace Skydat.forms2065
         private void Chart1_AfterDraw(object sender)
         {
             mainf.Enable_Button(tChart1.Series.Count);
+            
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -508,9 +513,8 @@ namespace Skydat.forms2065
                     for (int j = 0; j < cycle; j++)
                     {
                         restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
-                        //if (clasglobal.TechName.Contains("v"))
-                        //    fillparamdata(n); 
-                        //else
+
+
                         fillparamdata(n);
 
                         n++;
@@ -595,7 +599,7 @@ namespace Skydat.forms2065
                         if (s.ToUpper().IndexOf("NEW SERIES") >= 0)
                         {
                             overlaymain = true;
-                            show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain, xTmp.Length);
+                            show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain);
                             tChart1.Series[num_data + num_ser].Points.Clear();
                             num_ser++;
                             s = Fl.ReadLine();
@@ -639,7 +643,7 @@ namespace Skydat.forms2065
                                 }
 
                                 tech = (byte)restore_One_Data(s, "Tech");
-                                show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain, xTmp.Length);
+                                show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain);
                                 tChart1.Series[num_data + num_ser].Points.Clear();
 
                             }
@@ -997,41 +1001,38 @@ namespace Skydat.forms2065
                     x[i] = tChart1.Series[N1].Points[i].XValue;
                     y[i] = Math.Abs(tChart1.Series[N2].Points[i].YValues[0] - tChart1.Series[N1].Points[i].YValues[0]);
                 }
-                show_Graph(0, this, "SubChart", x, y, true, count);
+                show_Graph(0, this, "SubChart", x, y, true);
             }
             else
                 MessageBox.Show("Overlay must be checked \n Number of open graphs must be equal 2");
 
         }
 
-        public void show_Graph(int num_ser,
-                               frmanalyseGraph2065 grfn,
-                               string main_subchart,
-                               double[] xx,
-                               double[] yy,
-                               bool overlaymain,
-                               int shomaresh)
+        public void show_Graph(int num_ser, frmanalyseGraph2065 grfn, string main_subchart, IEnumerable<double> xx, IEnumerable<double> yy, bool overlaymain)
         {
             int L = 0;
-            if (xx.Length != yy.Length) // Convert bigest Array to smallest if length of x and y is not equal
+
+            var xxList = xx.ToList();
+            var yyList = yy.ToList();
+            if (xxList.Count != yyList.Count) // Convert bigest Array to smallest if length of x and y is not equal
             {
-                L = xx.Length;
-                if (yy.Length < L) L = yy.Length;
+                L = xxList.Count;
+                if (yyList.Count < L) L = yyList.Count;
             }
 
-            if (L == 0)
-            {
-                Array.Resize(ref xx, shomaresh);
-                Array.Resize(ref yy, shomaresh);
+            //if (L == 0)
+            //{
+            //    Array.Resize(ref xx, shomaresh);
+            //    Array.Resize(ref yy, shomaresh);
 
-
-            }
+            //}
             if (main_subchart == "MainChart")
             {
                 Set_Graph(0, true, overlaymain);
 
                 tChart1.Series[num_Series].Points.DataBindXY(xx, yy);
             }
+
             if (main_subchart == "SubChart")
             {
                 if (operation == "i_Reverse" || operation == "i_Forward" || operation == "Integral" || operation == "Derivation" || operation == "Mathematics" || operation == "Overlay" || operation == "Tafel" || operation == "show_without_smoothing")
@@ -1081,6 +1082,7 @@ namespace Skydat.forms2065
                         ser1.ChartType = SeriesChartType.Point;
                         break;
                     default:
+                        ser1.ChartType = SeriesChartType.Line;
                         break;
                 }
                 
@@ -1185,7 +1187,7 @@ namespace Skydat.forms2065
 
             // OnlineChart.Series[num_Series].Clear();
             operation = "Mathematics";
-            show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
+            show_Graph(0, this, "SubChart", mc.AR, mc.BR, true);
 
         }
 
@@ -1238,7 +1240,7 @@ namespace Skydat.forms2065
 
                 }
                 mc.Integral(P, I, 0, 10);
-                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
+                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true);
                 nindexchart2 = i1;
             }
             else
@@ -1325,7 +1327,7 @@ namespace Skydat.forms2065
 
                 }
                 mc.Derivate(P, I);
-                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
+                show_Graph(0, this, "SubChart", mc.AR, mc.BR, true);
                 nindexchart2 = i1;
             }
             else
@@ -1353,7 +1355,7 @@ namespace Skydat.forms2065
                             I[k] = this.tChart1.Series[i].Points[k].YValues[0];
                         }
                         mc.Math_Operation(P, I, 1, "Tafel", 10);
-                        show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
+                        show_Graph(0, this, "SubChart", mc.AR, mc.BR, true);
                         nindexchart2 = i;
                     }
                 drawline1.EnableDraw = true;
@@ -1542,7 +1544,7 @@ namespace Skydat.forms2065
             //label2.Text = tChart2.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X).ToString() + " " + tChart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y).ToString();
             try
             {
-                if (statebutton_1.Trim() == "")
+                if (statebutton_1.Trim() == "showvalue")
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -1890,9 +1892,10 @@ namespace Skydat.forms2065
                             row_sig++;
                         }
                     }
+
+                    MessageBox.Show("Data successfully saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                MessageBox.Show("Data successfully saved", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -2443,19 +2446,17 @@ namespace Skydat.forms2065
             return Value_String;
         }
 
-        private void restore_Data_part(string fileName, int typedata1, int numberaddnode)
+        private void restore_Data_part(string fileName, int typedata1)
         {
-
-            double[] xTmp = { 0 };
-            double[] yTmp = { 0 };
             string s = "", fs = "";
             bool isData = false;
             int row = 0;
-            if (fileName != "")
-                fs = fileName;
-            StreamReader Fl;
 
+            fs = fileName;
+
+            StreamReader Fl;
             EventArgs e = new EventArgs();
+
             if (fs != "")
             {
                 Fl = new StreamReader(fs, Encoding.ASCII);
@@ -2467,7 +2468,6 @@ namespace Skydat.forms2065
                         s = Fl.ReadLine();
                         if (!isData)
                         {
-
                             if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
                             {
                                 isData = true;
@@ -2483,6 +2483,7 @@ namespace Skydat.forms2065
                             string sss = "";
                             int num = 0;
                             double x = 0, y = 0, z = 0, w = 0;
+
                             while (l < s.Length)
                             {
 
@@ -2505,6 +2506,7 @@ namespace Skydat.forms2065
 
                             if (num == 3 && sss.Trim() != "")
                                 w = Convert.ToDouble(sss);
+
                             if (shomar_val >= othertech_val0.Length)
                             {
                                 Array.Resize(ref othertech_val0, othertech_val0.Length + 10);
@@ -2515,16 +2517,15 @@ namespace Skydat.forms2065
                             switch (typedata1)
                             {
                                 case 1:
-
                                     othertech_val1[shomar_val] = y;
                                     break;
+
                                 case 2:
                                     othertech_val1[shomar_val] = z;
-
                                     break;
+
                                 case 3:
                                     othertech_val1[shomar_val] = w;
-
                                     break;
 
                             }
@@ -2565,12 +2566,12 @@ namespace Skydat.forms2065
                 treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
                 if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 2 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 3)
                 {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2, 1);
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2);
 
 
 
                     operation = "i_Forward";
-                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
+                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true);
                     nindexchart2 = ii;
                 }
                 else
@@ -2600,11 +2601,11 @@ namespace Skydat.forms2065
                 treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
                 if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 2 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == 3)
                 {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3);
 
 
                     operation = "i_Reverse";
-                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
+                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true);
                     nindexchart2 = ii;
                 }
                 else
@@ -2649,7 +2650,8 @@ namespace Skydat.forms2065
 
         private void toolStripButton11_Click_1(object sender, EventArgs e)
         {
-            int j = 0;
+            List<double> array_modify = new List<double>();
+            List<double> array_modify2 = new List<double>();
             drawline1.EnableDraw = false;
             drawline1.removeall();
             int shomarcheck = 0, ii = 0;
@@ -2663,31 +2665,20 @@ namespace Skydat.forms2065
             {
                 treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
 
-                restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 1, 1);
+                restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2);
 
                 operation = "show_without_smoothing";
-                for (int i = 0; i < othertech_val0.Length; i++)// در تکنیک سی وی به دلیل اینکه در حالت بدون اسموث داده اشتباهی در نقطه صفر و صفر داشتیم از این کد برای پالایش و حذف داده غیرمربوط استفاده کردیم
+
+                for (int i = 0; i < othertech_val0.Length; i++)
                 {
-                    if (othertech_val0.Length > array_modify.Length)
+                    if (othertech_val0[i] != 0 || othertech_val1[i] != 0)
                     {
-                        Array.Resize(ref array_modify, othertech_val0.Length);
-                        Array.Resize(ref array_modify2, othertech_val0.Length);
+                        array_modify.Add(othertech_val0[i]);
+                        array_modify2.Add(othertech_val1[i]);
                     }
-
-                    if (othertech_val0[i] == 0 && othertech_val1[i] == 0)
-                    {
-
-                    }
-                    else
-                    {
-                        array_modify[j] = othertech_val0[i];
-                        array_modify2[j] = othertech_val1[i];
-                        j++;
-                    }
-
-
                 }
-                show_Graph(0, this, "SubChart", array_modify, array_modify2, true, j);
+
+                show_Graph(0, this, "SubChart", array_modify, array_modify2, true);
                 nindexchart2 = ii;
             }
             else
@@ -6117,6 +6108,25 @@ namespace Skydat.forms2065
                 return resizedImage;
             }
             return null;
+        }
+
+        private void setActiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TreeNode newNode = new TreeNode();
+            int row = treeView3.SelectedNode.Index;
+            double E1 = 0, E2 = 0, H_Step = 0, Eq_Time = 0, Scan_Rate =0, T_Step =0 , PW =0, PH =0;
+
+            if (treeView3.SelectedNode.Level > 0)
+            {
+                if (treeView3.SelectedNode.IsSelected)
+                {
+                    newNode.Name = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[row][0].ToString())];
+                    newNode.Text = treeView3.SelectedNode.Text;
+                    mainf.tabControl1.SelectTab(0);
+                    mainf.stf.Set_Active(newNode, row, dschart2);
+
+                }
+            }
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)

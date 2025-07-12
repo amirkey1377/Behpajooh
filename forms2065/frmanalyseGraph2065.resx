@@ -152,8 +152,14 @@
   <data name="setColorToolStripMenuItem.Text" xml:space="preserve">
     <value>Set Color</value>
   </data>
+  <data name="setActiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="setActiveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Set Active</value>
+  </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 92</value>
+    <value>169, 114</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
     <value>contextMenuStrip1</value>
@@ -2281,6 +2287,12 @@
     <value>setColorToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;setColorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;setActiveToolStripMenuItem.Name" xml:space="preserve">
+    <value>setActiveToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;setActiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dschart2.Name" xml:space="preserve">

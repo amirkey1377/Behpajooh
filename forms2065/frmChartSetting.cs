@@ -13,7 +13,7 @@ namespace Skydat.forms2065
     public partial class frmChartSetting : Form
     {
         public static char ChartType = 'N';
-        public static Color ChartColor;
+        public static Color ChartColor = Color.DarkCyan;
         public frmChartSetting()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace Skydat.forms2065
         {
             int sample;
             if (int.TryParse(txtSampleDelay.Text, out sample))
-                if (sample >= 1)
+                if (sample >= 0)
                 {
                     frmshowGraph2065.SampleRateMultiplier = sample;
                 }
@@ -82,6 +82,23 @@ namespace Skydat.forms2065
         {
             chartColor.Color = ChartColor;
             btnColor.BackColor = chartColor.Color;
+            txtSampleDelay.Text = frmshowGraph2065.SampleRateMultiplier.ToString();
+            txtChartScale.Text = frmshowGraph2065.ChartScaleMultiplier.ToString();
+            switch (ChartType)
+            {
+                case 'L':
+                    rbLine.Checked = true;
+                    break;
+                case 'P':
+                    rbPoint.Checked = true;
+                    break;
+                case 'C':
+                    rbCurve.Checked = true;
+                    break;
+                default:
+                    rbLine.Checked = true;
+                    break;
+            }
         }
 
         private void rbLine_CheckedChanged(object sender, EventArgs e)
