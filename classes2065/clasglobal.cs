@@ -201,8 +201,16 @@ namespace Skydat.classes2065
             lines.RemoveAt(2);
             lines.Insert(2, ("Color:" + Graph_Color)); // افزودن محتوای جدید
             File.WriteAllLines(fileName, lines);
-
         }
+
+        public static void ChangeCycle(string fileName)
+        {
+            var lines = File.ReadAllLines(fileName).ToList();
+            lines.RemoveAt(6);
+            lines.Insert(6, ("Cycles:" + movedata.main_cycle)); // افزودن محتوای جدید
+            File.WriteAllLines(fileName, lines);
+        }
+
 
         public static void SetChartColor()
         {

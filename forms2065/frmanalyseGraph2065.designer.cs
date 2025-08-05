@@ -38,23 +38,12 @@ namespace Skydat.forms2065
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setActiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label4 = new System.Windows.Forms.Label();
-            this.treeView3 = new System.Windows.Forms.TreeView();
+            this.TechParameters = new System.Windows.Forms.Label();
+            this.TechTreeview = new System.Windows.Forms.TreeView();
             this.tChart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnexport = new System.Windows.Forms.Button();
-            this.btnshowvalue = new System.Windows.Forms.Button();
-            this.btnselectonly = new System.Windows.Forms.Button();
-            this.btnzoomin = new System.Windows.Forms.Button();
-            this.btnzoomout = new System.Windows.Forms.Button();
-            this.btnshowgrid = new System.Windows.Forms.Button();
-            this.btnshowaxes = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlCharts = new System.Windows.Forms.Panel();
+            this.pnlToolChart = new System.Windows.Forms.Panel();
+            this.tChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -68,13 +57,42 @@ namespace Skydat.forms2065
             this.btnzoomout_1 = new System.Windows.Forms.Button();
             this.btnshowgrid_1 = new System.Windows.Forms.Button();
             this.btnshowaxes_1 = new System.Windows.Forms.Button();
-            this.tChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Spacer = new System.Windows.Forms.Label();
+            this.pnlMainChart = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnexport = new System.Windows.Forms.Button();
+            this.btnshowvalue = new System.Windows.Forms.Button();
+            this.btnselectonly = new System.Windows.Forms.Button();
+            this.btnzoomin = new System.Windows.Forms.Button();
+            this.btnzoomout = new System.Windows.Forms.Button();
+            this.btnshowgrid = new System.Windows.Forms.Button();
+            this.btnshowaxes = new System.Windows.Forms.Button();
+            this.pnlToolbar = new System.Windows.Forms.Panel();
+            this.toolStripToolbar = new System.Windows.Forms.ToolStrip();
+            this.btnShowWithoutSmooth = new System.Windows.Forms.ToolStripButton();
+            this.btnCalc = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton28 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton36 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton38 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton37 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.dschart2 = new Skydat.datasets.dschart2();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlNav = new System.Windows.Forms.Panel();
             this.pnl_peak_search = new System.Windows.Forms.Panel();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
             this.ch_width = new System.Windows.Forms.CheckBox();
             this.ch_height = new System.Windows.Forms.CheckBox();
             this.ch_area = new System.Windows.Forms.CheckBox();
@@ -93,27 +111,14 @@ namespace Skydat.forms2065
             this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.label41 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.toolstripChart = new System.Windows.Forms.ToolStrip();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TechName = new System.Windows.Forms.Label();
+            this.pnlFileBar = new System.Windows.Forms.Panel();
+            this.toolstripFile = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
             this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
             this.btnExportToExcel = new System.Windows.Forms.ToolStripButton();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton27 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton28 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton36 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton38 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton37 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.rowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,25 +127,26 @@ namespace Skydat.forms2065
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnlCharts.SuspendLayout();
+            this.pnlToolChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tChart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tChart2)).BeginInit();
+            this.pnlMainChart.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.pnlToolbar.SuspendLayout();
+            this.toolStripToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart2)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.pnlNav.SuspendLayout();
             this.pnl_peak_search.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.toolstripChart.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.pnlFileBar.SuspendLayout();
+            this.toolstripFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -184,27 +190,27 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.setActiveToolStripMenuItem, "setActiveToolStripMenuItem");
             this.setActiveToolStripMenuItem.Click += new System.EventHandler(this.setActiveToolStripMenuItem_Click);
             // 
-            // label4
+            // TechParameters
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Name = "label4";
+            this.TechParameters.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.TechParameters, "TechParameters");
+            this.TechParameters.ForeColor = System.Drawing.Color.Black;
+            this.TechParameters.Name = "TechParameters";
             // 
-            // treeView3
+            // TechTreeview
             // 
-            this.treeView3.BackColor = System.Drawing.Color.White;
-            this.treeView3.CheckBoxes = true;
-            this.treeView3.ContextMenuStrip = this.contextMenuStrip1;
-            resources.ApplyResources(this.treeView3, "treeView3");
-            this.treeView3.ForeColor = System.Drawing.Color.Black;
-            this.treeView3.Name = "treeView3";
-            this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView3.Nodes")))});
-            this.treeView3.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterCheck);
-            this.treeView3.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
-            this.treeView3.DoubleClick += new System.EventHandler(this.treeView3_DoubleClick);
-            this.treeView3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView3_MouseClick);
+            this.TechTreeview.BackColor = System.Drawing.Color.White;
+            this.TechTreeview.CheckBoxes = true;
+            this.TechTreeview.ContextMenuStrip = this.contextMenuStrip1;
+            resources.ApplyResources(this.TechTreeview, "TechTreeview");
+            this.TechTreeview.ForeColor = System.Drawing.Color.Black;
+            this.TechTreeview.Name = "TechTreeview";
+            this.TechTreeview.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("TechTreeview.Nodes")))});
+            this.TechTreeview.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterCheck);
+            this.TechTreeview.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
+            this.TechTreeview.DoubleClick += new System.EventHandler(this.treeView3_DoubleClick);
+            this.TechTreeview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeView3_MouseClick);
             // 
             // tChart1
             // 
@@ -213,169 +219,59 @@ namespace Skydat.forms2065
             chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.Name = "ChartArea1";
             chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 100F;
-            chartArea1.Position.Width = 100F;
+            chartArea1.Position.Height = 97F;
+            chartArea1.Position.Width = 99F;
+            chartArea1.Position.Y = 2F;
             this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
             this.tChart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
             this.tChart1.PostPaint += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ChartPaintEventArgs>(this.tChart1_PostPaint);
-            this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Chart1_KeyDown);
             this.tChart1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tChart1_KeyUp);
             this.tChart1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseDown);
             this.tChart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Chart1_MouseMove);
             this.tChart1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseUp);
             // 
-            // panel1
+            // pnlCharts
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.tChart1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.pnlCharts.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlCharts.Controls.Add(this.pnlToolChart);
+            this.pnlCharts.Controls.Add(this.Spacer);
+            this.pnlCharts.Controls.Add(this.pnlMainChart);
+            this.pnlCharts.Controls.Add(this.pnlToolbar);
+            resources.ApplyResources(this.pnlCharts, "pnlCharts");
+            this.pnlCharts.Name = "pnlCharts";
             // 
-            // label1
+            // pnlToolChart
             // 
-            this.label1.BackColor = System.Drawing.Color.Gainsboro;
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.pnlToolChart.Controls.Add(this.tChart2);
+            this.pnlToolChart.Controls.Add(this.pictureBox1);
+            this.pnlToolChart.Controls.Add(this.panel8);
+            resources.ApplyResources(this.pnlToolChart, "pnlToolChart");
+            this.pnlToolChart.Name = "pnlToolChart";
             // 
-            // panel2
+            // tChart2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel2.Controls.Add(this.button8);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.btnexport);
-            this.panel2.Controls.Add(this.btnshowvalue);
-            this.panel2.Controls.Add(this.btnselectonly);
-            this.panel2.Controls.Add(this.btnzoomin);
-            this.panel2.Controls.Add(this.btnzoomout);
-            this.panel2.Controls.Add(this.btnshowgrid);
-            this.panel2.Controls.Add(this.btnshowaxes);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.button8, "button8");
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.Name = "button8";
-            this.toolTip1.SetToolTip(this.button8, resources.GetString("button8.ToolTip"));
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.setColorToolStripMenuItem_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.Control;
-            this.button4.BackgroundImage = global::Skydat.Properties.Resources.color;
-            resources.ApplyResources(this.button4, "button4");
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.Name = "button4";
-            this.toolTip1.SetToolTip(this.button4, resources.GetString("button4.ToolTip"));
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.Image = global::Skydat.Properties.Resources._9;
-            this.button3.Name = "button3";
-            this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // btnexport
-            // 
-            this.btnexport.BackColor = System.Drawing.SystemColors.Control;
-            this.btnexport.BackgroundImage = global::Skydat.Properties.Resources.export_icon;
-            resources.ApplyResources(this.btnexport, "btnexport");
-            this.btnexport.FlatAppearance.BorderSize = 0;
-            this.btnexport.Name = "btnexport";
-            this.toolTip1.SetToolTip(this.btnexport, resources.GetString("btnexport.ToolTip"));
-            this.btnexport.UseVisualStyleBackColor = false;
-            this.btnexport.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnshowvalue
-            // 
-            this.btnshowvalue.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btnshowvalue, "btnshowvalue");
-            this.btnshowvalue.FlatAppearance.BorderSize = 0;
-            this.btnshowvalue.Image = global::Skydat.Properties.Resources.cursor_icon;
-            this.btnshowvalue.Name = "btnshowvalue";
-            this.toolTip1.SetToolTip(this.btnshowvalue, resources.GetString("btnshowvalue.ToolTip"));
-            this.btnshowvalue.UseVisualStyleBackColor = false;
-            this.btnshowvalue.Click += new System.EventHandler(this.btnshowvalue_Click);
-            // 
-            // btnselectonly
-            // 
-            this.btnselectonly.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btnselectonly, "btnselectonly");
-            this.btnselectonly.FlatAppearance.BorderSize = 0;
-            this.btnselectonly.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
-            this.btnselectonly.Name = "btnselectonly";
-            this.toolTip1.SetToolTip(this.btnselectonly, resources.GetString("btnselectonly.ToolTip"));
-            this.btnselectonly.UseVisualStyleBackColor = false;
-            this.btnselectonly.Click += new System.EventHandler(this.btnselectonly_Click);
-            // 
-            // btnzoomin
-            // 
-            this.btnzoomin.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btnzoomin, "btnzoomin");
-            this.btnzoomin.FlatAppearance.BorderSize = 0;
-            this.btnzoomin.Image = global::Skydat.Properties.Resources.zoom_in_icon;
-            this.btnzoomin.Name = "btnzoomin";
-            this.toolTip1.SetToolTip(this.btnzoomin, resources.GetString("btnzoomin.ToolTip"));
-            this.btnzoomin.UseVisualStyleBackColor = false;
-            this.btnzoomin.Click += new System.EventHandler(this.btnzoomin_Click);
-            // 
-            // btnzoomout
-            // 
-            this.btnzoomout.BackColor = System.Drawing.SystemColors.Control;
-            resources.ApplyResources(this.btnzoomout, "btnzoomout");
-            this.btnzoomout.FlatAppearance.BorderSize = 0;
-            this.btnzoomout.Image = global::Skydat.Properties.Resources.zoom_out_icon__1_;
-            this.btnzoomout.Name = "btnzoomout";
-            this.toolTip1.SetToolTip(this.btnzoomout, resources.GetString("btnzoomout.ToolTip"));
-            this.btnzoomout.UseVisualStyleBackColor = false;
-            this.btnzoomout.Click += new System.EventHandler(this.btnzoomout_Click);
-            // 
-            // btnshowgrid
-            // 
-            this.btnshowgrid.BackColor = System.Drawing.SystemColors.Control;
-            this.btnshowgrid.BackgroundImage = global::Skydat.Properties.Resources.activity_grid21600;
-            resources.ApplyResources(this.btnshowgrid, "btnshowgrid");
-            this.btnshowgrid.FlatAppearance.BorderSize = 0;
-            this.btnshowgrid.Name = "btnshowgrid";
-            this.toolTip1.SetToolTip(this.btnshowgrid, resources.GetString("btnshowgrid.ToolTip"));
-            this.btnshowgrid.UseVisualStyleBackColor = false;
-            this.btnshowgrid.Click += new System.EventHandler(this.btnshowgrid_Click);
-            // 
-            // btnshowaxes
-            // 
-            this.btnshowaxes.BackColor = System.Drawing.SystemColors.Control;
-            this.btnshowaxes.BackgroundImage = global::Skydat.Properties.Resources.dimensions_icon;
-            resources.ApplyResources(this.btnshowaxes, "btnshowaxes");
-            this.btnshowaxes.FlatAppearance.BorderSize = 0;
-            this.btnshowaxes.Name = "btnshowaxes";
-            this.toolTip1.SetToolTip(this.btnshowaxes, resources.GetString("btnshowaxes.ToolTip"));
-            this.btnshowaxes.UseVisualStyleBackColor = false;
-            this.btnshowaxes.Click += new System.EventHandler(this.btnshowaxes_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Controls.Add(this.panel8);
-            this.panel4.Controls.Add(this.tChart2);
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Name = "panel4";
+            this.tChart2.BackColor = System.Drawing.Color.Black;
+            this.tChart2.BorderlineColor = System.Drawing.Color.Black;
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.Position.Auto = false;
+            chartArea2.Position.Height = 98F;
+            chartArea2.Position.Width = 98F;
+            chartArea2.Position.Y = 1F;
+            this.tChart2.ChartAreas.Add(chartArea2);
+            this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.tChart2, "tChart2");
+            this.tChart2.Name = "tChart2";
+            this.tChart2.Click += new System.EventHandler(this.tChart2_Click_1);
+            this.tChart2.Paint += new System.Windows.Forms.PaintEventHandler(this.tChart2_Paint);
+            this.tChart2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tChart2_KeyDown);
+            this.tChart2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseDown);
+            this.tChart2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseMove);
+            this.tChart2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseUp);
             // 
             // pictureBox1
             // 
@@ -524,52 +420,323 @@ namespace Skydat.forms2065
             this.btnshowaxes_1.UseVisualStyleBackColor = false;
             this.btnshowaxes_1.Click += new System.EventHandler(this.btnshowaxes_1_Click);
             // 
-            // tChart2
+            // Spacer
             // 
-            this.tChart2.BackColor = System.Drawing.Color.Black;
-            this.tChart2.BorderlineColor = System.Drawing.Color.Black;
-            chartArea2.BackColor = System.Drawing.Color.Black;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 100F;
-            chartArea2.Position.Width = 100F;
-            this.tChart2.ChartAreas.Add(chartArea2);
-            this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.tChart2, "tChart2");
-            this.tChart2.Name = "tChart2";
-            this.tChart2.Click += new System.EventHandler(this.tChart2_Click_1);
-            this.tChart2.Paint += new System.Windows.Forms.PaintEventHandler(this.tChart2_Paint);
-            this.tChart2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tChart2_KeyDown);
-            this.tChart2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseDown);
-            this.tChart2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseMove);
-            this.tChart2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseUp);
+            this.Spacer.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.Spacer, "Spacer");
+            this.Spacer.Name = "Spacer";
+            // 
+            // pnlMainChart
+            // 
+            this.pnlMainChart.Controls.Add(this.tChart1);
+            this.pnlMainChart.Controls.Add(this.panel2);
+            resources.ApplyResources(this.pnlMainChart, "pnlMainChart");
+            this.pnlMainChart.Name = "pnlMainChart";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Maroon;
+            this.panel2.Controls.Add(this.button8);
+            this.panel2.Controls.Add(this.button4);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnexport);
+            this.panel2.Controls.Add(this.btnshowvalue);
+            this.panel2.Controls.Add(this.btnselectonly);
+            this.panel2.Controls.Add(this.btnzoomin);
+            this.panel2.Controls.Add(this.btnzoomout);
+            this.panel2.Controls.Add(this.btnshowgrid);
+            this.panel2.Controls.Add(this.btnshowaxes);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.ForeColor = System.Drawing.Color.Green;
+            this.panel2.Name = "panel2";
+            this.panel2.SizeChanged += new System.EventHandler(this.panel2_SizeChanged);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.button8, "button8");
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.Name = "button8";
+            this.toolTip1.SetToolTip(this.button8, resources.GetString("button8.ToolTip"));
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.setColorToolStripMenuItem_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.Control;
+            this.button4.BackgroundImage = global::Skydat.Properties.Resources.color;
+            resources.ApplyResources(this.button4, "button4");
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.Name = "button4";
+            this.toolTip1.SetToolTip(this.button4, resources.GetString("button4.ToolTip"));
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.Image = global::Skydat.Properties.Resources._9;
+            this.button3.Name = "button3";
+            this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // btnexport
+            // 
+            this.btnexport.BackColor = System.Drawing.SystemColors.Control;
+            this.btnexport.BackgroundImage = global::Skydat.Properties.Resources.export_icon;
+            resources.ApplyResources(this.btnexport, "btnexport");
+            this.btnexport.FlatAppearance.BorderSize = 0;
+            this.btnexport.Name = "btnexport";
+            this.toolTip1.SetToolTip(this.btnexport, resources.GetString("btnexport.ToolTip"));
+            this.btnexport.UseVisualStyleBackColor = false;
+            this.btnexport.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnshowvalue
+            // 
+            this.btnshowvalue.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btnshowvalue, "btnshowvalue");
+            this.btnshowvalue.FlatAppearance.BorderSize = 0;
+            this.btnshowvalue.Image = global::Skydat.Properties.Resources.cursor_icon;
+            this.btnshowvalue.Name = "btnshowvalue";
+            this.toolTip1.SetToolTip(this.btnshowvalue, resources.GetString("btnshowvalue.ToolTip"));
+            this.btnshowvalue.UseVisualStyleBackColor = false;
+            this.btnshowvalue.Click += new System.EventHandler(this.btnshowvalue_Click);
+            // 
+            // btnselectonly
+            // 
+            this.btnselectonly.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btnselectonly, "btnselectonly");
+            this.btnselectonly.FlatAppearance.BorderSize = 0;
+            this.btnselectonly.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
+            this.btnselectonly.Name = "btnselectonly";
+            this.toolTip1.SetToolTip(this.btnselectonly, resources.GetString("btnselectonly.ToolTip"));
+            this.btnselectonly.UseVisualStyleBackColor = false;
+            this.btnselectonly.Click += new System.EventHandler(this.btnselectonly_Click);
+            // 
+            // btnzoomin
+            // 
+            this.btnzoomin.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btnzoomin, "btnzoomin");
+            this.btnzoomin.FlatAppearance.BorderSize = 0;
+            this.btnzoomin.Image = global::Skydat.Properties.Resources.zoom_in_icon;
+            this.btnzoomin.Name = "btnzoomin";
+            this.toolTip1.SetToolTip(this.btnzoomin, resources.GetString("btnzoomin.ToolTip"));
+            this.btnzoomin.UseVisualStyleBackColor = false;
+            this.btnzoomin.Click += new System.EventHandler(this.btnzoomin_Click);
+            // 
+            // btnzoomout
+            // 
+            this.btnzoomout.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.btnzoomout, "btnzoomout");
+            this.btnzoomout.FlatAppearance.BorderSize = 0;
+            this.btnzoomout.Image = global::Skydat.Properties.Resources.zoom_out_icon__1_;
+            this.btnzoomout.Name = "btnzoomout";
+            this.toolTip1.SetToolTip(this.btnzoomout, resources.GetString("btnzoomout.ToolTip"));
+            this.btnzoomout.UseVisualStyleBackColor = false;
+            this.btnzoomout.Click += new System.EventHandler(this.btnzoomout_Click);
+            // 
+            // btnshowgrid
+            // 
+            this.btnshowgrid.BackColor = System.Drawing.SystemColors.Control;
+            this.btnshowgrid.BackgroundImage = global::Skydat.Properties.Resources.activity_grid21600;
+            resources.ApplyResources(this.btnshowgrid, "btnshowgrid");
+            this.btnshowgrid.FlatAppearance.BorderSize = 0;
+            this.btnshowgrid.Name = "btnshowgrid";
+            this.toolTip1.SetToolTip(this.btnshowgrid, resources.GetString("btnshowgrid.ToolTip"));
+            this.btnshowgrid.UseVisualStyleBackColor = false;
+            this.btnshowgrid.Click += new System.EventHandler(this.btnshowgrid_Click);
+            // 
+            // btnshowaxes
+            // 
+            this.btnshowaxes.BackColor = System.Drawing.SystemColors.Control;
+            this.btnshowaxes.BackgroundImage = global::Skydat.Properties.Resources.dimensions_icon;
+            resources.ApplyResources(this.btnshowaxes, "btnshowaxes");
+            this.btnshowaxes.FlatAppearance.BorderSize = 0;
+            this.btnshowaxes.Name = "btnshowaxes";
+            this.toolTip1.SetToolTip(this.btnshowaxes, resources.GetString("btnshowaxes.ToolTip"));
+            this.btnshowaxes.UseVisualStyleBackColor = false;
+            this.btnshowaxes.Click += new System.EventHandler(this.btnshowaxes_Click);
+            // 
+            // pnlToolbar
+            // 
+            this.pnlToolbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlToolbar.Controls.Add(this.toolStripToolbar);
+            resources.ApplyResources(this.pnlToolbar, "pnlToolbar");
+            this.pnlToolbar.Name = "pnlToolbar";
+            // 
+            // toolStripToolbar
+            // 
+            resources.ApplyResources(this.toolStripToolbar, "toolStripToolbar");
+            this.toolStripToolbar.BackColor = System.Drawing.Color.White;
+            this.toolStripToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnShowWithoutSmooth,
+            this.btnCalc,
+            this.toolStripButton28,
+            this.toolStripButton36,
+            this.toolStripButton38,
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton4,
+            this.toolStripButton37,
+            this.toolStripButton3,
+            this.toolStripSeparator7,
+            this.toolStripButton7,
+            this.toolStripButton9,
+            this.toolStripButton8,
+            this.toolStripButton6,
+            this.toolStripButton5});
+            this.toolStripToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStripToolbar.Name = "toolStripToolbar";
+            this.toolStripToolbar.TabStop = true;
+            // 
+            // btnShowWithoutSmooth
+            // 
+            resources.ApplyResources(this.btnShowWithoutSmooth, "btnShowWithoutSmooth");
+            this.btnShowWithoutSmooth.BackColor = System.Drawing.Color.Transparent;
+            this.btnShowWithoutSmooth.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowWithoutSmooth.ForeColor = System.Drawing.Color.Black;
+            this.btnShowWithoutSmooth.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon1;
+            this.btnShowWithoutSmooth.Margin = new System.Windows.Forms.Padding(0);
+            this.btnShowWithoutSmooth.Name = "btnShowWithoutSmooth";
+            this.btnShowWithoutSmooth.Click += new System.EventHandler(this.toolStripButton11_Click_1);
+            // 
+            // btnCalc
+            // 
+            resources.ApplyResources(this.btnCalc, "btnCalc");
+            this.btnCalc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnCalc.Image = global::Skydat.Properties.Resources.calc_icon;
+            this.btnCalc.Name = "btnCalc";
+            this.btnCalc.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripButton28
+            // 
+            resources.ApplyResources(this.toolStripButton28, "toolStripButton28");
+            this.toolStripButton28.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton28.Image = global::Skydat.Properties.Resources.libreoffice_math_icon;
+            this.toolStripButton28.Name = "toolStripButton28";
+            this.toolStripButton28.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
+            // toolStripButton36
+            // 
+            resources.ApplyResources(this.toolStripButton36, "toolStripButton36");
+            this.toolStripButton36.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton36.Image = global::Skydat.Properties.Resources._2000px_Tangent_to_a_curve_svg;
+            this.toolStripButton36.Name = "toolStripButton36";
+            this.toolStripButton36.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton38
+            // 
+            resources.ApplyResources(this.toolStripButton38, "toolStripButton38");
+            this.toolStripButton38.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton38.Image = global::Skydat.Properties.Resources.log_128;
+            this.toolStripButton38.Name = "toolStripButton38";
+            this.toolStripButton38.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // toolStripButton1
+            // 
+            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Skydat.Properties.Resources.Beta_Icon;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::Skydat.Properties.Resources.Layer_Forward_icon;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click_1);
+            // 
+            // toolStripButton4
+            // 
+            resources.ApplyResources(this.toolStripButton4, "toolStripButton4");
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = global::Skydat.Properties.Resources.Layer_Backward_icon;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click_1);
+            // 
+            // toolStripButton37
+            // 
+            resources.ApplyResources(this.toolStripButton37, "toolStripButton37");
+            this.toolStripButton37.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton37.Image = global::Skydat.Properties.Resources.Layers;
+            this.toolStripButton37.Name = "toolStripButton37";
+            this.toolStripButton37.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
+            // toolStripButton3
+            // 
+            resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            // 
+            // toolStripButton7
+            // 
+            resources.ApplyResources(this.toolStripButton7, "toolStripButton7");
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButton7.Name = "toolStripButton7";
+            // 
+            // toolStripButton9
+            // 
+            resources.ApplyResources(this.toolStripButton9, "toolStripButton9");
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButton9.Name = "toolStripButton9";
+            // 
+            // toolStripButton8
+            // 
+            resources.ApplyResources(this.toolStripButton8, "toolStripButton8");
+            this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButton8.Name = "toolStripButton8";
+            // 
+            // toolStripButton6
+            // 
+            resources.ApplyResources(this.toolStripButton6, "toolStripButton6");
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButton6.Name = "toolStripButton6";
+            // 
+            // toolStripButton5
+            // 
+            resources.ApplyResources(this.toolStripButton5, "toolStripButton5");
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButton5.Name = "toolStripButton5";
             // 
             // dschart2
             // 
             this.dschart2.DataSetName = "dschart2";
             this.dschart2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // panel3
+            // pnlNav
             // 
-            this.panel3.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.pnl_peak_search);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label41);
-            this.panel3.Controls.Add(this.treeView3);
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Name = "panel3";
+            this.pnlNav.BackColor = System.Drawing.Color.Gainsboro;
+            this.pnlNav.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlNav.Controls.Add(this.pnl_peak_search);
+            this.pnlNav.Controls.Add(this.TechParameters);
+            this.pnlNav.Controls.Add(this.TechName);
+            this.pnlNav.Controls.Add(this.TechTreeview);
+            this.pnlNav.Controls.Add(this.pnlFileBar);
+            resources.ApplyResources(this.pnlNav, "pnlNav");
+            this.pnlNav.Name = "pnlNav";
+            this.pnlNav.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlNav_Paint);
             // 
             // pnl_peak_search
             // 
+            resources.ApplyResources(this.pnl_peak_search, "pnl_peak_search");
             this.pnl_peak_search.Controls.Add(this.radioButton2);
             this.pnl_peak_search.Controls.Add(this.radioButton1);
-            this.pnl_peak_search.Controls.Add(this.label7);
             this.pnl_peak_search.Controls.Add(this.ch_width);
             this.pnl_peak_search.Controls.Add(this.ch_height);
             this.pnl_peak_search.Controls.Add(this.ch_area);
             this.pnl_peak_search.Controls.Add(this.tabControl1);
-            resources.ApplyResources(this.pnl_peak_search, "pnl_peak_search");
+            this.pnl_peak_search.Controls.Add(this.label7);
             this.pnl_peak_search.Name = "pnl_peak_search";
             // 
             // radioButton2
@@ -590,12 +757,6 @@ namespace Skydat.forms2065
             this.radioButton1.TabStop = true;
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label7.Name = "label7";
             // 
             // ch_width
             // 
@@ -742,36 +903,41 @@ namespace Skydat.forms2065
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // label41
+            // label7
             // 
-            this.label41.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.label41, "label41");
-            this.label41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label41.ForeColor = System.Drawing.Color.Black;
-            this.label41.Name = "label41";
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label7.Name = "label7";
             // 
-            // panel6
+            // TechName
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel6.Controls.Add(this.toolstripChart);
-            resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.Name = "panel6";
+            this.TechName.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.TechName, "TechName");
+            this.TechName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TechName.ForeColor = System.Drawing.Color.Black;
+            this.TechName.Name = "TechName";
             // 
-            // toolstripChart
+            // pnlFileBar
             // 
-            resources.ApplyResources(this.toolstripChart, "toolstripChart");
-            this.toolstripChart.BackColor = System.Drawing.Color.Gainsboro;
-            this.toolstripChart.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pnlFileBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFileBar.Controls.Add(this.toolstripFile);
+            resources.ApplyResources(this.pnlFileBar, "pnlFileBar");
+            this.pnlFileBar.Name = "pnlFileBar";
+            // 
+            // toolstripFile
+            // 
+            resources.ApplyResources(this.toolstripFile, "toolstripFile");
+            this.toolstripFile.BackColor = System.Drawing.Color.White;
+            this.toolstripFile.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.tsbOpen,
             this.tsbSaveAll,
             this.btnExportToExcel});
-            this.toolstripChart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolstripChart.Name = "toolstripChart";
-            this.toolstripChart.TabStop = true;
-            this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
-            this.toolstripChart.SizeChanged += new System.EventHandler(this.toolstripChart_SizeChanged);
+            this.toolstripFile.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolstripFile.Name = "toolstripFile";
+            this.toolstripFile.TabStop = true;
+            this.toolstripFile.SizeChanged += new System.EventHandler(this.toolstripChart_SizeChanged);
             // 
             // tsbNew
             // 
@@ -806,129 +972,7 @@ namespace Skydat.forms2065
             this.btnExportToExcel.ForeColor = System.Drawing.Color.Black;
             this.btnExportToExcel.Image = global::Skydat.Properties.Resources.excell_Icon;
             this.btnExportToExcel.Name = "btnExportToExcel";
-            this.btnExportToExcel.Click += new System.EventHandler(this.toolStripButton5_Click_2);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.panel7);
-            this.panel5.Controls.Add(this.panel6);
-            resources.ApplyResources(this.panel5, "panel5");
-            this.panel5.Name = "panel5";
-            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.toolStrip2);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.AllowDrop = true;
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
-            this.toolStrip2.BackColor = System.Drawing.Color.Gainsboro;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton11,
-            this.toolStripButton27,
-            this.toolStripButton28,
-            this.toolStripButton36,
-            this.toolStripButton38,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton4,
-            this.toolStripButton37,
-            this.toolStripButton3,
-            this.toolStripSeparator7});
-            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.TabStop = true;
-            this.toolStrip2.Click += new System.EventHandler(this.toolStrip2_Click);
-            // 
-            // toolStripButton11
-            // 
-            resources.ApplyResources(this.toolStripButton11, "toolStripButton11");
-            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon1;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click_1);
-            // 
-            // toolStripButton27
-            // 
-            resources.ApplyResources(this.toolStripButton27, "toolStripButton27");
-            this.toolStripButton27.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton27.Image = global::Skydat.Properties.Resources.calc_icon;
-            this.toolStripButton27.Name = "toolStripButton27";
-            this.toolStripButton27.Click += new System.EventHandler(this.toolStripButton4_Click);
-            // 
-            // toolStripButton28
-            // 
-            resources.ApplyResources(this.toolStripButton28, "toolStripButton28");
-            this.toolStripButton28.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton28.Image = global::Skydat.Properties.Resources.libreoffice_math_icon;
-            this.toolStripButton28.Name = "toolStripButton28";
-            this.toolStripButton28.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // toolStripButton36
-            // 
-            resources.ApplyResources(this.toolStripButton36, "toolStripButton36");
-            this.toolStripButton36.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton36.Image = global::Skydat.Properties.Resources._2000px_Tangent_to_a_curve_svg;
-            this.toolStripButton36.Name = "toolStripButton36";
-            this.toolStripButton36.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton38
-            // 
-            resources.ApplyResources(this.toolStripButton38, "toolStripButton38");
-            this.toolStripButton38.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton38.Image = global::Skydat.Properties.Resources.log_128;
-            this.toolStripButton38.Name = "toolStripButton38";
-            this.toolStripButton38.Click += new System.EventHandler(this.toolStripButton7_Click);
-            // 
-            // toolStripButton1
-            // 
-            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Skydat.Properties.Resources.Beta_Icon;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::Skydat.Properties.Resources.Layer_Forward_icon;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click_1);
-            // 
-            // toolStripButton4
-            // 
-            resources.ApplyResources(this.toolStripButton4, "toolStripButton4");
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::Skydat.Properties.Resources.Layer_Backward_icon;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click_1);
-            // 
-            // toolStripButton37
-            // 
-            resources.ApplyResources(this.toolStripButton37, "toolStripButton37");
-            this.toolStripButton37.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton37.Image = global::Skydat.Properties.Resources.Layers;
-            this.toolStripButton37.Name = "toolStripButton37";
-            this.toolStripButton37.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // toolStripButton3
-            // 
-            resources.ApplyResources(this.toolStripButton3, "toolStripButton3");
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.btnExportToExcel.Click += new System.EventHandler(this.toolStripButton10_Click_1);
             // 
             // rowDataGridViewTextBoxColumn1
             // 
@@ -974,44 +1018,55 @@ namespace Skydat.forms2065
             this.reSize1.InitialHostContainerWidth = 901D;
             this.reSize1.Tag = null;
             // 
+            // miniToolStrip
+            // 
+            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
+            resources.ApplyResources(this.miniToolStrip, "miniToolStrip");
+            this.miniToolStrip.BackColor = System.Drawing.Color.Gainsboro;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.TabStop = true;
+            // 
             // frmanalyseGraph2065
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.pnlCharts);
+            this.Controls.Add(this.pnlNav);
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmanalyseGraph2065";
             this.ShowIcon = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphForm_FormClosing);
             this.Load += new System.EventHandler(this.GraphForm_Load);
+            this.SizeChanged += new System.EventHandler(this.frmanalyseGraph2065_SizeChanged);
             this.Enter += new System.EventHandler(this.GraphForm_Enter);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.pnlCharts.ResumeLayout(false);
+            this.pnlToolChart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tChart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tChart2)).EndInit();
+            this.pnlMainChart.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.pnlToolbar.ResumeLayout(false);
+            this.toolStripToolbar.ResumeLayout(false);
+            this.toolStripToolbar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart2)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.pnlNav.ResumeLayout(false);
             this.pnl_peak_search.ResumeLayout(false);
             this.pnl_peak_search.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.toolstripChart.ResumeLayout(false);
-            this.toolstripChart.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.pnlFileBar.ResumeLayout(false);
+            this.toolstripFile.ResumeLayout(false);
+            this.toolstripFile.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1022,27 +1077,18 @@ namespace Skydat.forms2065
         public System.Windows.Forms.ToolStripMenuItem clearPlotsToolStripMenuItem;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         public System.Windows.Forms.DataVisualization.Charting.Chart Chart2;
-        private System.Windows.Forms.Label label4;
-        public System.Windows.Forms.TreeView treeView3;
+        private System.Windows.Forms.Label TechParameters;
+        public System.Windows.Forms.TreeView TechTreeview;
         public System.Windows.Forms.DataVisualization.Charting.Chart tChart1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel pnlCharts;
+        private System.Windows.Forms.Panel pnlNav;
         public datasets.dschart2 dschart2;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Panel panel4;
-        public System.Windows.Forms.DataVisualization.Charting.Chart tChart2;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label TechName;
         private System.Windows.Forms.DataGridViewTextBoxColumn rowDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn xDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn yDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn y1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn y2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStrip toolstripChart;
-        private System.Windows.Forms.ToolStripButton tsbNew;
-        private System.Windows.Forms.ToolStripButton tsbOpen;
-        private System.Windows.Forms.ToolStripButton tsbSaveAll;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnshowvalue;
         private System.Windows.Forms.Button btnselectonly;
@@ -1051,35 +1097,12 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button btnshowgrid;
         private System.Windows.Forms.Button btnshowaxes;
         private System.Windows.Forms.ToolStripMenuItem showDataPointsToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
-        private System.Windows.Forms.ToolStripButton toolStripButton27;
-        private System.Windows.Forms.ToolStripButton toolStripButton28;
-        private System.Windows.Forms.ToolStripButton toolStripButton36;
-        private System.Windows.Forms.ToolStripButton toolStripButton38;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton37;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnexport;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Button btnexport_1;
-        private System.Windows.Forms.Button btnshowval_1;
-        private System.Windows.Forms.Button btnselectonly_1;
-        private System.Windows.Forms.Button btnzoomin_1;
-        private System.Windows.Forms.Button btnzoomout_1;
-        private System.Windows.Forms.Button btnshowgrid_1;
-        private System.Windows.Forms.Button btnshowaxes_1;
-        private System.Windows.Forms.Button btndeleteline;
-        private System.Windows.Forms.Button btnselectline;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.Label Spacer;
         private System.Windows.Forms.TextBox txt_res;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_noise;
@@ -1103,11 +1126,49 @@ namespace Skydat.forms2065
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem setColorToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.ToolStripButton btnExportToExcel;
         private System.Windows.Forms.ToolStripMenuItem setActiveToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlToolChart;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btndeleteline;
+        private System.Windows.Forms.Button btnselectline;
+        private System.Windows.Forms.Button btnexport_1;
+        private System.Windows.Forms.Button btnshowval_1;
+        private System.Windows.Forms.Button btnselectonly_1;
+        private System.Windows.Forms.Button btnzoomin_1;
+        private System.Windows.Forms.Button btnzoomout_1;
+        private System.Windows.Forms.Button btnshowgrid_1;
+        private System.Windows.Forms.Button btnshowaxes_1;
+        public System.Windows.Forms.DataVisualization.Charting.Chart tChart2;
+        private System.Windows.Forms.Panel pnlMainChart;
+        private System.Windows.Forms.Panel pnlToolbar;
+        private System.Windows.Forms.ToolStrip toolStripToolbar;
+        private System.Windows.Forms.ToolStripButton btnShowWithoutSmooth;
+        private System.Windows.Forms.ToolStripButton btnCalc;
+        private System.Windows.Forms.ToolStripButton toolStripButton28;
+        private System.Windows.Forms.ToolStripButton toolStripButton36;
+        private System.Windows.Forms.ToolStripButton toolStripButton38;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButton37;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.Panel pnlFileBar;
+        private System.Windows.Forms.ToolStrip toolstripFile;
+        private System.Windows.Forms.ToolStripButton tsbNew;
+        private System.Windows.Forms.ToolStripButton tsbOpen;
+        private System.Windows.Forms.ToolStripButton tsbSaveAll;
+        private System.Windows.Forms.ToolStripButton btnExportToExcel;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
     }
 }

@@ -30,9 +30,9 @@ namespace Skydat.forms2065
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmselecttech2065));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel6 = new System.Windows.Forms.Panel();
             this.tabParam = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -1173,20 +1173,20 @@ namespace Skydat.forms2065
             // chartApplayTech
             // 
             this.chartApplayTech.BackColor = System.Drawing.Color.Transparent;
-            chartArea7.AxisX.MajorGrid.Enabled = false;
-            chartArea7.BackColor = System.Drawing.Color.Transparent;
-            chartArea7.Name = "ChartArea1";
-            this.chartApplayTech.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chartApplayTech.Legends.Add(legend7);
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.chartApplayTech.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartApplayTech.Legends.Add(legend1);
             resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
             this.chartApplayTech.Name = "chartApplayTech";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series7.IsVisibleInLegend = false;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartApplayTech.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartApplayTech.Series.Add(series1);
             // 
             // lblTechDescription
             // 

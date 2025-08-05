@@ -30,15 +30,14 @@ namespace Skydat.forms2065
         //Declare your global variable here
         private int shomar_cha_chc = 0, countcv = 0, shomar_othertech = 0, shomarchpa = 0, num_Series = 0, num_cycles = -1;
         private bool cv_stop;
-        private bool flag_running = false, S_et = false, fst1, fst2, fst = false, pulsy = false, ngtv, N_gtv, set_ListBoxOK = false, runerror = false;
-        private double cycles = 1, Analiz_St1 = 0, Analiz_St2 = 0, Analiz_CT1 = 0, Analiz_CT2 = 0, Analiz_CT3 = 0, Analiz_CP1 = 0, Analiz_CP2 = 0, Analiz_CP3 = 0, Analiz_T3 = 0, Elo, ti = 0;
+        private bool flag_running = false, S_et = false, fst = false, pulsy = false, ngtv, N_gtv, runerror = false;
+        private double cycles = 1, Analiz_St1 = 0, Analiz_CT1 = 0, Analiz_CT2 = 0, Analiz_CT3 = 0, Analiz_CP1 = 0, Analiz_CP2 = 0, Analiz_CP3 = 0, Analiz_T3 = 0, ti = 0;
         double[] time_cha_chc = new double[200];
         double[] volt_cha_chc = new double[200];
-        double[] othertech_val0 = new double[200];
-        double[] othertech_val1 = new double[200];
-        double[] othertech_val2 = new double[200];
-        double[] othertech_val3 = new double[200];
-        private byte Range1, SerialState = 0x20, outc_b = 0x20;
+        List<double> VoltageStepArray = new List<double>();
+        List<double> othertech_val3 = new List<double>();
+        //double[] othertech_val3 = new double[200];
+        private byte StepRange, SerialState = 0x20, outc_b = 0x20;
         byte[] datas2_0 = new byte[100];
         byte[] datas2_1 = new byte[100];
         byte[] datas2_2 = new byte[100];
@@ -49,8 +48,7 @@ namespace Skydat.forms2065
         private delegate void showDataon(int row);
         private volatile bool _shouldStop = false;//متغیری برای استاپ کردن برنامه در حالتی که فرم به صورت نگهانی بسته شود
 
-
-        int number_runing_cv = 0, show_number_runing = 0;///mehrdad   
+        int show_number_runing = 0;///mehrdad   
         public int cycle_number_in_file = 1;//mn
 
         private double xMinValue, xMaxValue;
@@ -58,13 +56,14 @@ namespace Skydat.forms2065
         private bool statehc = false;
         private string bpausetxt = "";
 
+        private Series currentSeries;
+
         private clasmpusbapi usb_fun = new clasmpusbapi();
         private const byte P_C = 0xC8;
 
         private bool isScrolling = false;
 
         private drawline_chart drawline1;
-        public int[] Overlay_tech = new int[1000];
         public frmMain2065 mainf;
         public frmChartSetting chartSetting;
 
@@ -397,6 +396,11 @@ namespace Skydat.forms2065
         {
             Setgrftchart1(overlaymain, 0, 1, 1);//پاک کردن نمودار و افزودن تایتل خالی به نمودار
 
+            Invoke((MethodInvoker)delegate ()
+            {
+                OnlineChart.Series.Clear();
+            });
+
             Series ChartSeries = new Series();
             ChartSeries.LabelFormat = "#,##0.###########";
             ChartSeries.ChartType = SeriesChartType.Point;
@@ -419,10 +423,11 @@ namespace Skydat.forms2065
                 ChartSeries.Color = Color.DarkCyan;
             }
 
-            Setgrftchart11(ChartSeries, 1, 1);//اد کردن سری به نمودار
-
             Setgrftchart1(overlaymain, row1, 2, 1);// افزودن تایتل محور عمودی و افقی و کلی به نمودار
-        }       
+
+            AddSeriesToChart(ChartSeries, 1, 1);//اد کردن سری به نمودار
+
+        }
 
         unsafe private void doRun2_1(int row)
         {
@@ -952,7 +957,7 @@ namespace Skydat.forms2065
 
             TechniqueEnded = false;
             byte[] data = new byte[3];
-            
+
 
             lock (serialLock)
             {
@@ -972,6 +977,7 @@ namespace Skydat.forms2065
 
                         bytesAvailable = mainSerialPort.BytesToRead;
                     }
+
                     if (bytesAvailable > 0)
                     {
                         if (bytesAvailable > 16300)
@@ -1051,7 +1057,7 @@ namespace Skydat.forms2065
         {
             byte[] data = new byte[3];//دیتا گرفته شده از دستگاه به این ارایه منتقل میشود
             Int64 j = 0, h = 0;
-            bool evn = true, E_nd = false, back_direction = false, TechniqueEnded = false;
+            bool evn = true, TechniqueEnded = false;
             byte[] Powr = new Byte[4000000];
             double[] Crnt = new double[4000000];
             double[] C = new double[4000000];
@@ -1062,7 +1068,7 @@ namespace Skydat.forms2065
             int i = 0;
             double Itot = 0;
             double V = 0, I1 = 0, I2 = 0, Vold;
-            countcv = 0;
+
 
             int averagelength = 3;
             int average = 0;
@@ -1077,6 +1083,8 @@ namespace Skydat.forms2065
             double E1 = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());
             double E2 = double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString());
             int EquilibriumTime = Convert.ToInt32(dschart1.chartlist1_run.Rows[row]["qt"].ToString());
+            double E3 = double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString());
+
 
             // اینوکر برای اینکه تابعی که در ترد(اصلی) دیگری اجرا می‌شود را به صورت متغییر فراخوانی کنیم
             this.Invoke(new Action(() =>
@@ -1119,373 +1127,203 @@ namespace Skydat.forms2065
 
                     data = ReadSerialData(out TechniqueEnded, ref sign);
 
-                    if (sign == 1)
+                    if (fst) //اگر Tstep از 50 میلی ثانیه کمتر شود 
                     {
-                        if (fst) //IF fst TRUE 
-                        {
-                            sign = 0;
-                            Powr[j] = data[0];//SAVE IN BUFFER 
-                            Crnt[j] = ((data[1] << 6) | (data[2] >> 2)); //???
+                        Powr[j] = data[0];//SAVE IN BUFFER 
+                        Crnt[j] = ((data[1] << 6) | (data[2] >> 2)); //???
 
-                            if (Crnt[j] > 0x1FFF)//0x1fff = 8191 
+                        if (Crnt[j] > 0x1FFF)//0x1fff = 8191 
+                        {
+                            Crnt[j] = (0x4000 - Crnt[j]);//16384 - current ->negative current
+                            signe[j] = true;
+                        }
+                        else
+                            signe[j] = false;
+
+                        if (StepRange != 0)//ApplyRangeLimitations
+                            if ((TechNumber < 8) && (Crnt[j] > 6560))//if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps && current >6560
+                                Crnt[j] = 6560;//current 6560
+                        if ((TechNumber == 9) && (Powr[j] == 8)) //if tecno cpc or ccc
+                            Crnt[j] = Crnt[j] * 2; //current upto 1A
+                    }
+                    else
+                    {
+                        Po.Add(data[0]);//save power in arry po
+                        Crn[h] = ((data[1] << 6) | (data[2] >> 2));
+                        if (Crn[h] > 0x1FFF)
+                        {
+                            Crn[h] = (0x4000 - Crn[h]);
+                            Crn[h] = Crn[h] * -1;
+                        }
+
+                        h++;
+                        if (h == 5)
+                        {
+                            i++;
+
+
+                            double sum = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]);
+                            Itot = sum / 5;
+
+                            Powr[j] = Po[4];
+                            Crnt[j] = Math.Round(Itot, 2);
+                            if (Crnt[j] > 6560)
                             {
-                                Crnt[j] = (0x4000 - Crnt[j]);//16384 - current ->negative current
+                                Crnt[j] = Crnt[j] / 10;
+                                Powr[j]++;
+                            }
+                            if (Crnt[j] < 0)
+                            {
+                                Crnt[j] = Crnt[j] * -1;
                                 signe[j] = true;
                             }
                             else
                                 signe[j] = false;
-
-                            if (Range1 != 0)//ApplyRangeLimitations
-                                if ((TechNumber < 8) && (Crnt[j] > 6560))//if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps && current >6560
-                                    Crnt[j] = 6560;//current 6560
-                            if ((TechNumber == 9) && (Powr[j] == 8)) //if tecno cpc or ccc
-                                Crnt[j] = Crnt[j] * 2; //current upto 1A
+                            S_et = true;
                         }
-                        else//if fst false ??
-                        {// for tecno under 8
-                            sign = 0;
-
-                            Po.Add(data[0]);//save power in arry po
-                            Crn[h] = ((data[1] << 6) | (data[2] >> 2));
-                            if (Crn[h] > 0x1FFF)
-                            {
-                                Crn[h] = (0x4000 - Crn[h]);
-                                Crn[h] = Crn[h] * -1;
-                            }
-
-                            h++;
-                            if (h == 5)
-                            {
-                                i++;
-                                if (DebugMode)
-                                {
-                                    Settxtfill_func(2, $"test2{i}", 2, 1);
-                                }
-
-                                double sum = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]);
-                                Itot = sum / 5;
-
-                                Powr[j] = Po[4];
-                                Crnt[j] = Math.Round(Itot, 2);
-                                if (Crnt[j] > 6560)
-                                {
-                                    Crnt[j] = Crnt[j] / 10;
-                                    Powr[j]++;
-                                }
-                                if (Crnt[j] < 0)
-                                {
-                                    Crnt[j] = Crnt[j] * -1;
-                                    signe[j] = true;
-                                }
-                                else
-                                    signe[j] = false;
-                                S_et = true;
-                            }
-                        }
-
-                        if (S_et) //if s_et ==true ??   ->for tecno cpc
-                        {
-
-                            if ((Powr[j] == 8) && (TechNumber != 9))
-                            {//techno <8 and >9
-
-                                C[j] = Crnt[j] * 1.02207 * Math.Pow(10, Powr[j]);/////// - 6
-                            }
-                            else
-                            {
-                                C[j] = Crnt[j] * 0.61035 * Math.Pow(10, Powr[j] - 6); ////- 6  -> for cpc
-                                //Settxtfill_func(2, $"flag1={C[j]},range{Powr[j]} ", 2, 1);
-                            }
-                            if (signe[j] ^ (TechNumber == 10))
-                                C[j] = C[j] * -1;
-
-                            if (TechNumber < 8)//if techno == dcv,npv,dpv,swv,cv,lsv,dcs,dps,
-                            {
-                                //////mn////////////if (Xinv)
-                                //////mn////////////    C[j] = C[j] * -1;//در گراف سی وی اگر ولتاژ از بزرگ به کوچک برود جریان را منفی نمی کند
-
-                                if (pulsy) //if pulsy ==true
-                                {
-                                    if ((TechNumber == 2) || (TechNumber == 1) || (TechNumber == 7))
-                                    {
-
-                                        if (!evn)//
-                                        {
-                                            if (ngtv) //if ngtv == true
-                                            {
-                                                I1 = C[j];
-                                                I2 = C[j - 1];
-                                            }
-                                            else  ////if ngtv == false
-                                            {
-                                                I1 = C[j];
-                                                I2 = C[j - 1];
-                                            }
-
-                                        }
-                                    }
-                                    else
-                                    {
-
-                                        if (!evn)//
-                                        {
-                                            if (ngtv) //if ngtv == true
-                                            {
-                                                //I1 = C[j];
-                                                I1 = C[j - 1];
-                                                I2 = C[j];
-                                                //Settxtfill_func(2, $"negative2", 2, 1);
-                                                //I1 = C[j] - C[j - 1];
-                                                //I2 = 0;
-                                            }
-                                            else  ////if ngtv == false
-                                            {
-
-                                                I2 = C[j];
-                                                I1 = C[j - 1];
-                                                //Settxtfill_func(2, $"positive2", 2, 1);
-                                                //I1 = C[j - 1] - C[j];
-                                                //I2 = 0;
-                                            }
-                                            // Addxy(V1,I0,'',Colr[cl])
-                                        }
-                                    }
-
-                                }
-                                else//if pulsy == false
-                                {
-                                    I1 = C[j];
-                                    I2 = 0;
-                                }
-                                int numdigit = dschart1.chartlist1_run.Rows[row][6].ToString().Length - dschart1.chartlist1_run.Rows[row][6].ToString().IndexOf('.') - 1;// calculate digit number in of heght step
-                                if (!(pulsy && evn))
-                                    if (N_gtv)
-                                    {
-                                        Vold = V;
-                                        V = Math.Round(V - double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()), numdigit);
-                                    }
-                                    else
-                                    {
-                                        Vold = V;
-                                        V = Math.Round(V + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()), numdigit);
-                                    }
-
-                                if (!fst)
-                                {
-                                    h = 0;
-                                    Po.Clear();
-                                    S_et = false;
-                                }
-
-                                j++;
-                                evn = !evn;
-
-
-                                if (TechNumber == 4)// if techno ==   cv
-                                {
-                                    if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) < double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString())) //if (e1<e2)
-                                    {
-                                        if (V >= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString())) // if v>e2
-                                        {
-                                            back_direction = true;
-                                            N_gtv = !N_gtv;
-                                            fst = fst2;
-                                            if (fst)
-                                                S_et = true;
-                                            else
-                                                S_et = false;
-                                        }
-
-
-                                        if (V < Elo && back_direction)
-                                        {
-                                            dschart1.chartlist1_run.Rows[row][13] = int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) - 1;// cycle = cycle-1
-                                            if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) >= 0) //if cycle >= 0
-                                            {
-                                                E_nd = true;
-                                                countcv++;
-
-                                                if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)
-                                                    number_runing_cv++;              //mn
-                                            }
-                                        }
-                                    }
-                                    else//if e1>e2
-                                    {
-                                        if (V <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))//if v<=e2
-                                        {
-                                            back_direction = true;
-                                            N_gtv = !N_gtv;
-                                            fst = fst2;
-                                            if (fst)
-                                                S_et = true;
-                                            else
-                                                S_et = false;
-
-                                        }
-
-                                        if (V > Elo && back_direction)
-                                        {
-                                            dschart1.chartlist1_run.Rows[row][13] = int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) - 1;
-                                            if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) >= 0)
-                                            {
-                                                E_nd = true;
-                                                countcv++;
-
-                                                if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)
-                                                    number_runing_cv++;        //mn2
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {// techno ccc,cpc,chp,cha,chc
-
-                                if (TechNumber == 12)//if techno ==chc
-                                    I1 = I1 + C[j] * ti;
-                                else//techno ...
-                                    I1 = C[j]; // Addxy(V1,C[j],'',Colr[cl]);
-                                I2 = 0;
-                                Vold = V;
-                                V += ti;
-                                sign = 0;
-                                j++;
-                            }
-
-                            if (pulsy)
-                            {
-                                if (evn)
-                                {
-
-                                    Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
-
-                                    if (DebugMode || Maintenance)//for monitoring purpse
-                                    {
-                                        Settxtfill_func(2, $"{Vold}:{I1}:{I2} ", 2, 1);
-                                        Settxtfill_func(2, $"vold1{Vold}", 2, 1);
-                                    }
-                                }
-                            }
-                            else
-                            {
-
-                                if (TechNumber == 4) //CV
-                                {
-                                    if (FilterOnline)
-                                    {
-                                        I1_arrey[average] = I1;
-                                        Vold_arrey[average] = Vold;
-                                        I2_arrey[average] = I2;
-
-                                        if (average >= averagelength - 1)
-                                        {
-                                            double avrageBuffer = (I1_buffer[0] + I1_buffer[1]) / 2;
-                                            double avrageI1 = (I1_arrey[1] + I1_arrey[2]) / 2;
-                                            I1_arrey[average - (averagelength - 1)] = (avrageI1 + avrageBuffer) / 2;
-                                            Runnig2(Vold_arrey[average - (averagelength - 1)], I1_arrey[average - (averagelength - 1)], I2_arrey[average - (averagelength - 1)], row);///// رسم گراف اصلی
-                                            if (DebugMode || Maintenance)
-                                            {
-                                                Settxtfill_func(2, $"V = {Vold_arrey[average - (averagelength - 1)]}\n" +
-                                                                   $":I1 = {I1_arrey[average - (averagelength - 1)]}\n" +
-                                                                   $":I2 = {I2_arrey[average - (averagelength - 1)]}", 2, 1);
-                                            }
-                                            I1_buffer[0] = I1_buffer[1];
-                                            I1_buffer[1] = I1_arrey[0];
-                                            ShiftLeft(I1_arrey);
-                                            ShiftLeft(Vold_arrey);
-                                            ShiftLeft(I2_arrey);
-
-                                            average = 1;
-                                            if (Vold_arrey[average] == double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()))
-                                            {
-                                                for (int k = 0; k <= average; k++)
-                                                {
-                                                    Runnig2(Vold_arrey[k], I1_arrey[k], I2_arrey[k], row);///// رسم گراف اصلی
-                                                }
-                                            }
-                                        }
-                                        average++;
-                                    }
-                                    else
-                                        Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
-
-                                    if (DebugMode || Maintenance)
-                                    {
-                                        Settxtfill_func(2, $"{Vold}:{I1}:{I2} ", 2, 1);
-                                        Settxtfill_func(2, $"vold1{Vold}", 2, 1);
-                                    }
-
-                                }
-                                else
-                                {
-                                    Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
-                                    if (DebugMode || Maintenance)
-                                    {
-                                        Settxtfill_func(2, $"{Vold}:{I1}:{I2} ", 2, 1);
-                                        Settxtfill_func(2, $"vold1{Vold}", 2, 1);
-                                    }
-                                }
-                            }
-
-                            if (E_nd)
-                            {
-                                double temp1, temp2, temp3, temp4;
-                                temp1 = othertech_val0[shomar_othertech - 1];
-                                temp2 = othertech_val1[shomar_othertech - 1];
-                                temp3 = othertech_val2[shomar_othertech - 1];
-                                temp4 = othertech_val3[shomar_othertech - 1];
-                                newSmoth(row, OnlineChart.Series[0].Color);
-                                transferdata(row, 1);
-                                Setgrfnodetext(row, 2, 1);
-                                this.Invoke((MethodInvoker)delegate ()
-                                {
-                                    show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
-                                });
-                                cv_stop = false;
-                                if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)//cycle >0
-                                {
-                                    shomar_othertech = 1;
-
-                                    Array.Clear(othertech_val0, 1, othertech_val0.Length - 1);
-                                    Array.Clear(othertech_val1, 1, othertech_val1.Length - 1);
-                                    Array.Clear(othertech_val2, 1, othertech_val2.Length - 1);
-                                    Array.Clear(othertech_val3, 1, othertech_val3.Length - 1);
-                                    othertech_val0[0] = temp1;
-                                    othertech_val1[0] = temp2;
-                                    othertech_val2[0] = temp3;
-                                    othertech_val3[0] = temp4;
-                                    Setgrfnodetext(row, 4, 1);
-                                    //show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
-                                }
-                                else if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) == 0) // cycle =0
-                                    countcv = 0;
-
-                                fst = fst1;
-                                if (fst)
-                                    S_et = true;
-                                else
-                                    S_et = false;
-
-                                N_gtv = !N_gtv;
-                                if (N_gtv)
-                                {
-                                    V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) - double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString());//v =e1-hs
-                                }
-                                else
-                                {
-                                    V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString());//v=e1+hs
-                                }
-
-                                E_nd = false;
-                                back_direction = false;
-                            }
-
-                        } //if S_et
-                          ///////////////////////////////////////          
                     }
 
-                    else if (TechniqueEnded)  //if portc=0x09
+                    if (S_et) //if s_et ==true ??   ->for tecno cpc
+                    {
+
+                        if ((Powr[j] == 8) && (TechNumber != 9))
+                        {//techno <8 and >9
+
+                            C[j] = Crnt[j] * 1.02207 * Math.Pow(10, Powr[j]);/////// - 6
+                        }
+                        else
+                        {
+                            C[j] = Crnt[j] * 0.61035 * Math.Pow(10, Powr[j] - 6); ////- 6  -> for cpc
+                                                                                  //Settxtfill_func(2, $"flag1={C[j]},range{Powr[j]} ", 2, 1);
+                        }
+                        if (signe[j] ^ (TechNumber == 10))
+                            C[j] = C[j] * -1;
+
+                        if (TechNumber < 8)//if techno == dcv,npv,dpv,swv,cv,lsv,dcs,dps,
+                        {
+                            //////mn////////////if (Xinv)
+                            //////mn////////////    C[j] = C[j] * -1;//در گراف سی وی اگر ولتاژ از بزرگ به کوچک برود جریان را منفی نمی کند
+
+                            if (pulsy) //if pulsy ==true
+                            {
+                                if ((TechNumber == 2) || (TechNumber == 1) || (TechNumber == 7))
+                                {
+
+                                    if (!evn)//
+                                    {
+                                        if (ngtv) //if ngtv == true
+                                        {
+                                            I1 = C[j];
+                                            I2 = C[j - 1];
+                                        }
+                                        else  ////if ngtv == false
+                                        {
+                                            I1 = C[j];
+                                            I2 = C[j - 1];
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+
+                                    if (!evn)//
+                                    {
+                                        if (ngtv) //if ngtv == true
+                                        {
+                                            //I1 = C[j];
+                                            I1 = C[j - 1];
+                                            I2 = C[j];
+                                            //Settxtfill_func(2, $"negative2", 2, 1);
+                                            //I1 = C[j] - C[j - 1];
+                                            //I2 = 0;
+                                        }
+                                        else  ////if ngtv == false
+                                        {
+
+                                            I2 = C[j];
+                                            I1 = C[j - 1];
+                                            //Settxtfill_func(2, $"positive2", 2, 1);
+                                            //I1 = C[j - 1] - C[j];
+                                            //I2 = 0;
+                                        }
+                                        // Addxy(V1,I0,'',Colr[cl])
+                                    }
+                                }
+
+                            }
+                            else//if pulsy == false
+                            {
+                                I1 = C[j];
+                                I2 = 0;
+                            }
+                            int numdigit = dschart1.chartlist1_run.Rows[row][6].ToString().Length - dschart1.chartlist1_run.Rows[row][6].ToString().IndexOf('.') - 1;// calculate digit number in of heght step
+                            if (!(pulsy && evn))
+                                if (N_gtv)
+                                {
+                                    Vold = V;
+                                    V = Math.Round(V - double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()), numdigit);
+                                }
+                                else
+                                {
+                                    Vold = V;
+                                    V = Math.Round(V + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()), numdigit);
+                                }
+
+                            if (!fst)
+                            {
+                                h = 0;
+                                Po.Clear();
+                                S_et = false;
+                            }
+
+                            j++;
+                            evn = !evn;
+
+                        }
+                        else
+                        {
+                            //techno ccc,cpc,chp,cha,chc
+
+                            if (TechNumber == 12)//if techno ==chc
+                                I1 = I1 + C[j] * ti;
+                            else//techno ...
+                                I1 = C[j]; // Addxy(V1,C[j],'',Colr[cl]);
+                            I2 = 0;
+                            Vold = V;
+                            V += ti;
+                            j++;
+                        }
+
+                        if (pulsy)
+                        {
+                            if (evn)
+                            {
+
+                                Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
+
+                                if (DebugMode || Maintenance)//for monitoring purpse
+                                {
+                                    Settxtfill_func(2, $"{Vold}:{I1}:{I2} ", 2, 1);
+                                    Settxtfill_func(2, $"vold1{Vold}", 2, 1);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
+                            if (DebugMode || Maintenance)
+                            {
+                                Settxtfill_func(2, $"{Vold}:{I1}:{I2} ", 2, 1);
+                                Settxtfill_func(2, $"vold1{Vold}", 2, 1);
+                            }
+                        }
+
+
+                    } //if S_et
+                      ///////////////////////////////////////         
+
+                    if (TechniqueEnded)  //if portc=0x09
                     {
                         for (int z = 0; z < 10; z++)
                         {
@@ -1515,12 +1353,365 @@ namespace Skydat.forms2065
 
         }
 
+        private void DoRun2CV(int row)
+        {
+            byte[] data = new byte[3];//دیتا گرفته شده از دستگاه به این ارایه منتقل میشود
+            Int64 j = 0, h = 0;
+            bool evn = true, E_nd = false, back_direction = false, TechniqueEnded = false;
+            byte[] Powr = new Byte[4000000];
+            double[] Crnt = new double[4000000];
+            double[] C = new double[4000000];
+            List<byte> Po = new List<byte>(5);
+            double[] Crn = new double[4000000];
+            Boolean[] signe = new Boolean[4000000];
+            int sign = 0;
+            int i = 0;
+            double Itot = 0;
+            double V = 0, I1 = 0, I2 = 0, Vold;
+
+
+
+            //داده های مرتبط با پارمتر های تکنیک
+            int TechNumber = int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString());
+            double E1 = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());
+            double E2 = double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString());
+            int EquilibriumTime = Convert.ToInt32(dschart1.chartlist1_run.Rows[row]["qt"].ToString());
+            double E3 = double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString());
+            int Cycle = int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString());
+
+            double deltaRange = Math.Abs(E2 - E1);
+
+            // اینوکر برای اینکه تابعی که در ترد(اصلی) دیگری اجرا می‌شود را به صورت متغییر فراخوانی کنیم
+            this.Invoke(new Action(() =>
+            {
+                OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                mainSerialPort.ReadTimeout = Timeout.Infinite;
+                mainSerialPort.DiscardInBuffer();
+                OnlineChart.ChartAreas[0].AxisX.LabelStyle.Format = "#0.##";
+            }));
+
+            if (TechNumber < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
+                V = E1;// e1 
+            else if (TechNumber == 9)//فقط برای تکنیک CPC
+                V = ti;
+            Vold = V;
+
+            flag_running = true;
+
+            I2 = 0;
+
+            bool fst_New = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000 < 50) || (Analiz_St1 < 1);
+            bool S_et_New = false;
+
+
+            if (!mainSerialPort.IsOpen)
+                mainSerialPort.Open();
+
+            if (EquilibriumTime > 0)
+            {
+                EquilibriumTimeDelay(EquilibriumTime);
+            }
+
+            try
+            {
+                Setbtnenabled(true, 1, 1);//غیرفعال کردن دکمه های Run و...
+
+                while (!_shouldStop)//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
+                {
+                    if (staterun.Trim() == "Form Closed")// برای وقتی که فرم یهویی بسته میشه
+                    {
+                        runerror = true;
+                        staterun = "";
+                        return;
+                    }
+
+                    data = ReadSerialData(out TechniqueEnded, ref sign);
+
+                    if (fst_New) //اگر Tstep از 50 میلی ثانیه کمتر شود 
+                    {
+                        Powr[j] = data[0];//SAVE IN BUFFER 
+                        Crnt[j] = ((data[1] << 6) | (data[2] >> 2)); //???
+
+                        if (Crnt[j] > 0x1FFF)//0x1fff = 8191 
+                        {
+                            Crnt[j] = (0x4000 - Crnt[j]);//16384 - current ->negative current
+                            signe[j] = true;
+                        }
+                        else
+                            signe[j] = false;
+
+                        if (StepRange != 0)//ApplyRangeLimitations
+                            if ((TechNumber < 8) && (Crnt[j] > 6560))//if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps && current >6560
+                                Crnt[j] = 6560;//current 6560
+                        if ((TechNumber == 9) && (Powr[j] == 8)) //if tecno cpc or ccc
+                            Crnt[j] = Crnt[j] * 2; //current upto 1A
+
+                        S_et_New = true;
+                    }
+                    else
+                    {
+                        if (data == null)
+                        {
+                            continue;
+                        }
+                        Po.Add(data[0]);//save power in arry po
+                        Crn[h] = ((data[1] << 6) | (data[2] >> 2));
+                        if (Crn[h] > 0x1FFF)
+                        {
+                            Crn[h] = (0x4000 - Crn[h]);
+                            Crn[h] = Crn[h] * -1;
+                        }
+
+                        h++;
+                        if (h == 5)
+                        {
+                            i++;
+
+
+                            double sum = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]);
+                            Itot = sum / 5;
+
+                            Powr[j] = Po[4];
+                            Crnt[j] = Math.Round(Itot, 2);
+                            if (Crnt[j] > 6560)
+                            {
+                                Crnt[j] = Crnt[j] / 10;
+                                Powr[j]++;
+                            }
+                            if (Crnt[j] < 0)
+                            {
+                                Crnt[j] = Crnt[j] * -1;
+                                signe[j] = true;
+                            }
+                            else
+                                signe[j] = false;
+
+                            S_et_New = true;
+                        }
+                    }
+
+                    if (S_et_New) 
+                    {
+
+                        if ((Powr[j] == 8) && (TechNumber != 9))
+                        {//techno <8 and >9
+
+                            C[j] = Crnt[j] * 1.02207 * Math.Pow(10, Powr[j]);/////// - 6
+                        }
+                        else
+                        {
+                            C[j] = Crnt[j] * 0.61035 * Math.Pow(10, Powr[j] - 6); ////- 6  -> for cpc
+                                                                                  //Settxtfill_func(2, $"flag1={C[j]},range{Powr[j]} ", 2, 1);
+                        }
+                        if (signe[j] ^ (TechNumber == 10))
+                            C[j] = C[j] * -1;
+
+
+                        I1 = C[j];
+
+                        string Hstep = dschart1.chartlist1_run.Rows[row][6].ToString();
+                        int numdigit = Hstep.Length - Hstep.IndexOf('.') - 1;// calculate digit number in of heght step
+                        if (!(pulsy && evn))
+                        {
+                            Vold = V;
+                            if (N_gtv)
+                            {
+                                V = Math.Round(V - double.Parse(Hstep), numdigit);
+                            }
+                            else
+                            {
+                                V = Math.Round(V + double.Parse(Hstep), numdigit);
+                            }
+                        }
+                        evn = !evn;
+                        j++;
+
+
+                        this.Invoke((MethodInvoker)delegate ()
+                        {
+                            OnlineChart.Series[countcv].Points.AddXY(Vold, I1);///// رسم گراف اصلی
+
+
+                            VoltageStepArray.Add(Vold);//حاوی استپ های ولتاژی
+                            othertech_val3.Add(I1);
+
+                            shomar_othertech++;
+
+                            //double percent = (Vold * 100) / (deltaRange * 2);  
+                            mainf.toolStripProgressBar1.Value ++;
+                            if (mainf.toolStripProgressBar1.Value == 100)
+                                mainf.toolStripProgressBar1.Value = 0;
+
+                        });
+
+                        if (DebugMode || Maintenance)
+                        {
+                            Settxtfill_func(2, $"{Vold}:{I1}:{I2}", 2, 1);
+                        }
+
+                        if (!fst_New)
+                        {
+                            h = 0;
+                            Po.Clear();
+                            S_et_New = false;
+                        }
+
+
+
+                        if (TechNumber == 4)// if techno ==   cv
+                        {
+                            if (E1 < E2) //if (e1<e2)
+                            {
+                                if (V >= E2) // if v>e2
+                                {
+                                    back_direction = true;
+                                    N_gtv = !N_gtv;
+                                }
+
+                                if (V < E3 && back_direction)
+                                {
+                                    Cycle = Cycle - 1;// cycle = cycle-1
+                                    if (Cycle >= 0) //if cycle >= 0
+                                    {
+                                        E_nd = true;
+                                        countcv++;
+                                        N_gtv = !N_gtv;
+                                    }
+                                }
+                            }
+                            else//if e1>e2
+                            {
+                                if (V <= E2)//if v<=e2
+                                {
+                                    back_direction = true;
+                                    N_gtv = !N_gtv;
+                                }
+
+                                if (V > E3 && back_direction)
+                                {
+                                    Cycle = Cycle - 1;
+                                    if (Cycle >= 0)
+                                    {
+                                        E_nd = true;
+                                        countcv++;
+                                        N_gtv = !N_gtv;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (E_nd)
+                        {
+                            double temp1, temp4;
+                            temp1 = VoltageStepArray[shomar_othertech - 1];
+                            temp4 = othertech_val3[shomar_othertech - 1];
+
+                            StartNewSeries();
+                            newSmoth(countcv - 1);
+                            FadeOldSeries();
+                            transferdata(row, 1);
+
+
+                            this.Invoke((MethodInvoker)delegate ()
+                            {
+                                mainf.TechStatus.Text = (RunnigTechTreeview.SelectedNode.Index + 1).ToString().Trim() + "_" + countcv.ToString() + " - Running technique " + RunnigTechTreeview.Nodes[0].Nodes[RunnigTechTreeview.SelectedNode.Index].Text;
+
+                            });
+                            cv_stop = false;
+
+                            if (Cycle > 0)//cycle >0
+                            {
+                                shomar_othertech = 1;
+                                VoltageStepArray.Clear();
+                                othertech_val3.Clear();
+                                VoltageStepArray.Add(temp1);
+                                othertech_val3.Add(temp4);
+                                //Setgrfnodetext(row, 4, 1);
+                            }
+
+                            if (N_gtv)
+                            {
+                                V = E1 - double.Parse(Hstep);//v =e1-hs
+                            }
+                            else
+                            {
+                                V = E1 + double.Parse(Hstep);//v=e1+hs
+                            }
+
+                            E_nd = false;
+                            back_direction = false;
+                        }
+
+                    }
+                    
+                    if (TechniqueEnded)  //if portc=0x09
+                    {
+                        for (int z = 0; z < 10; z++)
+                        {
+                            mainSerialPort.Write("end1");
+                            Thread.Sleep(10);
+                        }
+                        TechniqueEnded = false;
+                        mainSerialPort.Close();
+                        Thread.Sleep(100);
+                        Setbtnenabled(true, 2, 1);
+                        return;
+                    }
+
+                    if (SerialState == 0xA0)//if software == stoped 
+                    {
+                        HandleStopCondition();
+                        Settxtfill_func(3, "finish running DoRun2", 2, 1);
+                        return;
+                    }
+                }
+
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
+
+        }
+
+        private void StartNewSeries()
+        {
+            currentSeries = new Series()
+            {
+                ChartType = OnlineChart.Series[0].ChartType,
+                Color = Color.DarkCyan,
+                BorderWidth = OnlineChart.Series[0].BorderWidth,
+                MarkerStyle = OnlineChart.Series[0].MarkerStyle
+            };
+
+            this.Invoke((MethodInvoker)delegate ()
+            {
+                OnlineChart.Series.Add(currentSeries);
+            });
+        }
+
+        private void FadeOldSeries()
+        {
+            foreach (var series in OnlineChart.Series)
+            {
+                if (series == currentSeries)
+                    continue;
+
+                Color oldColor = series.Color;
+                int newAlpha = Math.Max(40, oldColor.A - 40); // کم‌کم کمرنگ کن
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    series.Color = Color.FromArgb(newAlpha, oldColor.R, oldColor.G, oldColor.B);
+                });
+            }
+        }
+
         unsafe private void dorun3(int row)
         {
             double V = 0, I1 = 0, I2 = 0;
             Int64 j = 0;
             bool evn = true;
-            Boolean strt = true, E_nd = false, back_direction = false;
+            Boolean strt = true;
 
             byte[] datas = new byte[3];
             byte[] Powr = new Byte[32710];
@@ -1676,104 +1867,7 @@ namespace Skydat.forms2065
                     }
                     j++;
                     evn = !evn;
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 4)
-                    {
-                        if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) < double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                        {
-                            if (V >= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                            {
-                                back_direction = true;
-                                N_gtv = !N_gtv;
-                                fst = fst2;
-                                if (fst)
-                                    S_et = true;
-                                else
-                                    S_et = false;
-                            }
-                            if (V < Elo && back_direction)
-                            {
-                                dschart1.chartlist1_run.Rows[row][13] = int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) - 1;
-                                if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) >= 0) //
-                                {
-                                    E_nd = true;
-                                    countcv++;
 
-                                    if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)
-                                        number_runing_cv++;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (V <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                            {
-                                back_direction = true;
-                                N_gtv = !N_gtv;
-                                fst = fst2;
-                                if (fst)
-                                    S_et = true;
-                                else
-                                    S_et = false;
-                            }
-                            if (V > Elo && back_direction)
-                            {
-                                dschart1.chartlist1_run.Rows[row][13] = int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) - 1;
-                                if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) >= 0) //E_nd:=true
-                                {
-                                    E_nd = true;
-                                    countcv++;
-
-                                    if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0)
-                                        number_runing_cv++;
-                                }
-                            }
-                        }
-                    }
-                    if (E_nd)
-                    {
-                        double temp1, temp2, temp3, temp4;
-                        temp1 = othertech_val0[shomar_othertech - 1];
-                        temp2 = othertech_val1[shomar_othertech - 1];
-                        temp3 = othertech_val2[shomar_othertech - 1];
-                        temp4 = othertech_val3[shomar_othertech - 1];
-                        newSmoth(row, OnlineChart.Series[0].Color);
-                        transferdata(row, 1);
-                        Setgrfnodetext(row, 2, 1);
-                        show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
-                        if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) > 0) //Cycle > 0
-                        {
-                            shomar_othertech = 1;
-                            Array.Clear(othertech_val0, 1, othertech_val0.Length - 1);
-                            Array.Clear(othertech_val1, 1, othertech_val1.Length - 1);
-                            Array.Clear(othertech_val2, 1, othertech_val2.Length - 1);
-                            Array.Clear(othertech_val3, 1, othertech_val3.Length - 1);
-                            othertech_val0[0] = temp1;
-                            othertech_val1[0] = temp2;
-                            othertech_val2[0] = temp3;
-                            othertech_val3[0] = temp4;
-                            Setgrfnodetext(row, 4, 1);
-                            show_cycle_runing_CV(number_runing_cv);//show number running in toolStripStatusLabel5
-                        }
-                        else if (int.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) == 0)
-                            countcv = 0;
-
-                        if (fst)
-                            S_et = true;
-                        else
-                            S_et = false;
-
-                        N_gtv = !N_gtv;
-                        if (N_gtv)
-                        {
-                            V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) - double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString());
-                        }
-                        else
-                        {
-                            V = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString());
-                        }
-                        E_nd = false;
-                        back_direction = false;
-                    }
                 }
                 else if (end == 1)  //if portc=0x09
                 {
@@ -2382,7 +2476,7 @@ namespace Skydat.forms2065
 
             while (!endFlag)
             {
-                if (staterun.Trim() == "stop")//اگر فرم بسته شد
+                if (staterun.Trim() == "Form Closed")//اگر فرم بسته شد
                 {
                     runerror = true;
                     staterun = "";
@@ -2416,7 +2510,7 @@ namespace Skydat.forms2065
 
         unsafe private void dorun2_costum_2(int row)//OCP
         {
-            
+
             string string1;
             byte end = 0;
             int sign = 0;
@@ -2430,7 +2524,7 @@ namespace Skydat.forms2065
 
             for (int n = 1; n < 4000000; n++)//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
             {
-                if (staterun.Trim() == "stop")
+                if (staterun.Trim() == "Form Closed")
                 {
                     runerror = true;
                     staterun = "";
@@ -2520,10 +2614,11 @@ namespace Skydat.forms2065
             if (this.InvokeRequired)
             {
                 showOnlineData d = new showOnlineData(Runnig2);
-                if (this.IsHandleCreated && !this.IsDisposed)
+                if (this.IsHandleCreated && !this.IsDisposed && thread_grf.IsAlive)
                 {
                     this.Invoke(d, new object[] { V, I1, I2, row });
                 }
+
             }
             else
             {
@@ -2533,48 +2628,15 @@ namespace Skydat.forms2065
 
                 this.OnlineChart.Series[0].Points.AddXY(V, I1 - I2);///// رسم گراف اصلی
 
-                if (shomar_othertech >= othertech_val0.Length)
-                {
-                    Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                    Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                    Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                    Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
 
-                }
-
-                othertech_val0[shomar_othertech] = V;//حاوی استپ های ولتاژی
-                othertech_val1[shomar_othertech] = I1;
-                othertech_val2[shomar_othertech] = I2;
-                othertech_val3[shomar_othertech] = I1 - I2;
+                VoltageStepArray.Add(V);//حاوی استپ های ولتاژی
+                othertech_val3.Add(I1-I2);
 
                 shomar_othertech++;
 
                 mainf.toolStripProgressBar1.Value++;
                 if (mainf.toolStripProgressBar1.Value == 100)
                     mainf.toolStripProgressBar1.Value = 0;
-
-                if (set_ListBoxOK)
-                {
-                    int num_Items = RunnigTechTreeview.Nodes[0].Nodes.Count;
-                    string[] items_Name = new string[num_Items];
-                    for (int i = 0; i < RunnigTechTreeview.Nodes[0].Nodes.Count; i++)
-                        items_Name[i] = RunnigTechTreeview.Nodes[0].Nodes[i].ToString();
-                    RunnigTechTreeview.Nodes[0].Nodes.Clear();
-                    if (OnlineChart.Series.Count > 0)
-                    {
-                        int n = this.OnlineChart.Series.Count;
-                        for (int num_s = 0; num_s < n; num_s++)
-                        {
-                            if (num_s < num_Items)
-                                RunnigTechTreeview.Nodes[0].Nodes.Add(items_Name[num_s].ToString());
-                            else
-                                RunnigTechTreeview.Nodes[0].Nodes.Add("Plot" + (num_s + 1).ToString());
-                            RunnigTechTreeview.Nodes[0].Nodes[num_s].Checked = true;
-                        }
-                        RunnigTechTreeview.SelectedNode = RunnigTechTreeview.Nodes[0].LastNode;
-                    }
-                    set_ListBoxOK = false;
-                }
 
                 if (!flag_running)
                 {
@@ -2595,19 +2657,24 @@ namespace Skydat.forms2065
         {
             try
             {
+
                 Setgrfnodetext(0, 3, 1);//add tech3 from chartlist run to tree3  اضافه کردن نام تکنیک در حال اجرا به درخت
 
                 for (int TechSeries = 0; TechSeries < dschart1.chartlist1_run.Rows.Count && SerialState != 0xA0; TechSeries++)//چرخ حلقه به تعداد تکنیک های انتخاب شده
                 {
                     //Declare Your Varible Here
                     cycle_number_in_file = 1;//save in file
-                    number_runing_cv = 1;
                     show_number_runing = TechSeries;
+                    countcv = 0;
 
-                    Setgrfnodetext(TechSeries, 1, 1);//show number running in toolStripStatusLabel5  نمایش شماره تکنیک به ترتیب درخت
+                    this.Invoke(new Action(() =>
+                    {
+                        RunnigTechTreeview.Nodes[0].Nodes[TechSeries].ForeColor = Color.DarkCyan;
+                        mainf.TechStatus.ForeColor = Color.DarkCyan;
+                        mainf.TechStatus.Text = (TechSeries + 1).ToString().Trim() + "- Running technique " + RunnigTechTreeview.Nodes[0].Nodes[TechSeries].Text;
+                    }));
 
-                    fillTechParameter(RunnigTechTreeview.Nodes[0].Nodes[TechSeries].Index, 1);//show status in Parameters  نمایش وضعیت در حال اجرا
-                    //fillparamdata(treeView3.Nodes[0].LastNode.Index.Index);   
+                    fillTechParameter(RunnigTechTreeview.Nodes[0].Nodes[TechSeries].Index, 1);//show status in Parameters  نمایش وضعیت در حال اجرا                                                             //fillparamdata(treeView3.Nodes[0].LastNode.Index.Index);   
 
                     movedata.main_cycle = dschart1.chartlist1_run.Rows[TechSeries][13].ToString();
                     string s = dschart1.chartlist1_run.Rows[TechSeries][1].ToString();
@@ -2615,6 +2682,7 @@ namespace Skydat.forms2065
                     {
                         movedata.main_cycle = dschart1.chartlist1_run.Rows[TechSeries][12].ToString();
                     }
+
 
                     Set_value2(TechSeries); //ست کردن و پردازش اولیه اطلاعات خام وارد شده توسط کاربر و ست درون دیتاست اجرا و ارسال به دستگاه
 
@@ -2628,7 +2696,7 @@ namespace Skydat.forms2065
                             NPV_Confiq(TechSeries);
                             if (!runerror)
                             {
-                                newSmoth(TechSeries, OnlineChart.Series[0].Color);
+                                newSmoth(0);
                                 transferdata(TechSeries, 1);
                             }
                             break;
@@ -2637,7 +2705,7 @@ namespace Skydat.forms2065
                             DPV_Confiq(TechSeries);
                             if (!runerror)
                             {
-                                newSmoth(TechSeries, OnlineChart.Series[0].Color);
+                                newSmoth(0);
                                 transferdata(TechSeries, 1);
 
                             }
@@ -2647,34 +2715,33 @@ namespace Skydat.forms2065
                             run_key_tch3(TechSeries);
                             if (!runerror)
                             {
-                                newSmoth(TechSeries, OnlineChart.Series[0].Color);
+                                newSmoth(0);
                                 transferdata(TechSeries, 1);
-
                             }
                             break;
 
                         case 4://CV   
                             run_key_tch4(TechSeries);//به علت داشتن سیکل ذخیره فایل و نرم کردن درون توابع زیرمجموعه انجام می شود
-                            dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
+                            
+                            //dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
                             if (cv_stop)
                             {
+                                newSmoth(countcv);
                                 countcv++;
                                 dschart1.chartlist1_run.Rows[TechSeries][13] = countcv;
                                 movedata.main_cycle = Convert.ToString(countcv);
-
-                                newSmoth(TechSeries, OnlineChart.Series[0].Color);
                                 transferdata(TechSeries, 1);
-
-                                Setgrfnodetext(TechSeries, 4, 1);
                                 fillTechParameter(RunnigTechTreeview.Nodes[0].Nodes[TechSeries].Index, 1);
+                                cv_stop = false;
                             }
+
                             break;
 
                         case 5://LSV
                             run_key_tch5(TechSeries);
                             if (!runerror)
                             {
-                                newSmoth(TechSeries, OnlineChart.Series[0].Color);
+                                newSmoth(0);
                                 transferdata(TechSeries, 1);
                             }
                             break;
@@ -2739,10 +2806,7 @@ namespace Skydat.forms2065
 
                     if (!runerror)
                     {
-                        if (int.Parse(dschart1.chartlist1_run.Rows[TechSeries][1].ToString()) != clasglobal.CV || SerialState == 0xA0)//if techno != cv or stop flag ==1
-                        {
-                            Setgrfnodetext(TechSeries, 2, 1);// ست کردن دیتا درون دیتاست و نمودار فرم بعدی که آنالیز می باشد
-                        }
+                        Setgrfnodetext(TechSeries, 2, 1);// ست کردن دیتا درون دیتاست و نمودار فرم بعدی که آنالیز می باشد                        
                     }
                 }
                 if (!runerror)
@@ -2753,11 +2817,13 @@ namespace Skydat.forms2065
                     xMinValue = xAxis.ScaleView.ViewMinimum;
                     xMaxValue = xAxis.ScaleView.ViewMaximum;
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         private void transferdata(int rownum, int typecall)
@@ -2791,6 +2857,11 @@ namespace Skydat.forms2065
                 s.Close();
             }
 
+            if (cv_stop)
+            {
+                clasglobal.ChangeCycle(strpath);
+            }
+
             dschart1.chartlist1_run.Rows[rownum][23] = strpath;
             StreamWriter sa1 = new StreamWriter(strpath, true);
             sa1.WriteLine("============================================================");
@@ -2807,12 +2878,10 @@ namespace Skydat.forms2065
 
             if (typecall == 1)
             {
-                for (int i = 0; i < shomar_othertech; i++)
+                for (int i = 0; i < VoltageStepArray.Count; i++)
                 {
-                    Ln = othertech_val0[i].ToString().Trim();
-                    Ln = Ln + "\t" + othertech_val3[i].ToString().Trim();
-                    Ln = Ln + "\t" + othertech_val1[i].ToString().Trim();
-                    Ln = Ln + "\t" + othertech_val2[i].ToString().Trim();
+                    Ln = VoltageStepArray[i].ToString().Trim();
+                    Ln = Ln + "\t" + othertech_val3[i].ToString().Trim() + ';';
                     sa1.WriteLine(Ln.Trim());
                 }
             }
@@ -2832,7 +2901,6 @@ namespace Skydat.forms2065
                             if (datas2_state[count1] == 1)
                             {
                                 Ln = time_cha_chc[count1].ToString();
-                                Ln = Ln + "\t" + volt_cha_chc[count1].ToString();
                                 Ln = Ln + "\t" + volt_cha_chc[count1].ToString();
                                 sa1.WriteLine(Ln);
                             }
@@ -2895,8 +2963,7 @@ namespace Skydat.forms2065
 
         private void NPV_Confiq(int row)
         {
-            fst1 = false;
-            fst = fst1;
+            fst = false;
             S_et = false;
             pulsy = false;
 
@@ -2927,8 +2994,7 @@ namespace Skydat.forms2065
 
         private void DPV_Confiq(int row)
         {
-            fst1 = false;
-            fst = fst1;
+            fst = false;
             S_et = false;
             pulsy = true;
 
@@ -2964,15 +3030,14 @@ namespace Skydat.forms2065
         {
             if (Analiz_St1 < 100)
             {
-                fst1 = true;
+                fst = true;
                 S_et = true;
             }
             else
             {
-                fst1 = false;
+                fst = false;
                 S_et = false;
             }
-            fst = fst1;
 
             double E1 = GetChartValue(row, 3);
             double E2 = GetChartValue(row, 4);
@@ -3011,31 +3076,6 @@ namespace Skydat.forms2065
 
         private void run_key_tch4(int row)
         {
-            if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000 < 50) || (Analiz_St1 < 1))
-            {
-                fst1 = true;
-                S_et = true;
-            }
-            else
-            {
-
-                fst1 = false;
-                S_et = false;
-            }
-
-            if ((double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000 < 50) || (Analiz_St2 < 1))
-            {
-                fst2 = true;
-
-            }
-            else
-            {
-                fst2 = false;
-
-            }
-
-            fst = (fst1 & fst2);
-
             double E1 = GetChartValue(row, 3);
             double E2 = GetChartValue(row, 4);
 
@@ -3062,44 +3102,22 @@ namespace Skydat.forms2065
 
             pulsy = false;
 
-
-
-            Elo = double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString());
-            if (double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) != double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()))
-            {
-
-                Elo = double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString());
-            }
-
-
-            if (!fst)
-            {
-                // scanrate <= .2
-                fst = fst1;
-                DoRun2(row);
-            }
-            else
-            {
-                //dorun3(row);//دکتر از این تابع استفاده کرده بود اما در تکنیک سی وی وقتی اسکن ریت بالا می رفت گراف خطا میزد
-
-                DoRun2(row);/////mn
-            }
+            DoRun2CV(row);
         }
 
         private void run_key_tch5(int row)
         {
             if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000 < 50) || (Analiz_St1 < 1))
             {
-                fst1 = true;
+                fst = true;
                 S_et = true;
             }
             else
             {
-                fst1 = false;
+                fst = false;
                 S_et = false;
 
             }
-            fst = fst1;
 
             double E1 = GetChartValue(row, 3);
             double E2 = GetChartValue(row, 4);
@@ -3136,6 +3154,9 @@ namespace Skydat.forms2065
         private void run_key_tch9(int row)
         {
             N_gtv = false;
+            fst = true;
+            S_et = true;
+
             dschart1.chartlist1_run.Rows[row][6] = 1;
             //v_ry = true;
 
@@ -3235,7 +3256,7 @@ namespace Skydat.forms2065
                 Analiz_CT1 = clasglobal.cpctprms.CT1;
                 Analiz_CT2 = clasglobal.cpctprms.CT2;
                 Analiz_CT3 = clasglobal.cpctprms.CT3;
-                Range1 = rng;
+                StepRange = rng;
             }
 
             if (SerialState == 0xA0)//if serial is stop 
@@ -3280,33 +3301,10 @@ namespace Skydat.forms2065
                     }
                     else
                     {
-                        ////Ye seri kar alaki bara rangi kardan line chart :| (keighobadi)
-                        //num_Series = OnlineChart.Series.Count - 1;
-                        //Random Random1 = new Random();
-                        //int Random_Color_Index = 0;
-                        //Random_Color_Index = (int)(Random1.NextDouble() * 90);
-                        //OnlineChart.Series[0].Color = Color.Red;
-                        OnlineChart.Series[0].Color = Color.Red;
-
-                        if (!overlaymain)
-                        {
-                            OnlineChart.Series[0].Points.Clear();
-                            OnlineChart.Series.Remove(OnlineChart.Series[0]);
-                            if (OnlineChart.Series.Count > 1)
-                            {
-                                OnlineChart.Series[1].Points.Clear();
-                                OnlineChart.Series.Remove(OnlineChart.Series[1]);
-                            }
-                        }
-
                         OnlineChart.Titles[0].Text = clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
                         OnlineChart.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
                         OnlineChart.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
 
-                        if (num_Series < 1)
-                            Overlay_tech[0] = int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString());
-                        else
-                            Overlay_tech[num_Series] = int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString());
 
                         OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
                         OnlineChart.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
@@ -3409,7 +3407,7 @@ namespace Skydat.forms2065
         }
 
         delegate void Setgrftchart1Callback1(Series ser1, int code, int state);
-        private void Setgrftchart11(Series ser1, int code, int state)
+        private void AddSeriesToChart(Series ser1, int code, int state)
         {
             switch (code)
             {
@@ -3417,7 +3415,7 @@ namespace Skydat.forms2065
 
                     if (state == 1)
                     {
-                        Setgrftchart1Callback1 d = new Setgrftchart1Callback1(Setgrftchart11);
+                        Setgrftchart1Callback1 d = new Setgrftchart1Callback1(AddSeriesToChart);
                         this.Invoke(d, new object[] { ser1, code, 2 });
                     }
                     else
@@ -3500,7 +3498,7 @@ namespace Skydat.forms2065
             panel1.Width = (int)(this.ClientSize.Width * 0.8);
             panel1.Left = panel3.Right + 5;
             toolsPanel.Width = (int)(OnlineChart.Width * 0.04);
-            if(toolsPanel.Width < 40)
+            if (toolsPanel.Width < 40)
                 toolsPanel.Width = 43;
 
             toolsPanel.Left = OnlineChart.Left;
@@ -3510,7 +3508,7 @@ namespace Skydat.forms2065
                 control.Height = toolsPanel.Height / 7;
             }
 
-            
+
         }
 
         private Image ResizeImage(Image image, int width, int height)
@@ -3537,14 +3535,15 @@ namespace Skydat.forms2065
                 staterun = "Form Closed";
 
                 runerror = true;
-                if (DebugMode) Settxtfill_func(2, "Form Closed", 2, 1);
 
+                _shouldStop = true;
+                cv_stop = true;
                 if (!mainSerialPort.IsOpen)
                     mainSerialPort.Open();
+
                 mainSerialPort.Write("stop");
                 mainSerialPort.Close();
 
-                _shouldStop = true;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -3682,19 +3681,6 @@ namespace Skydat.forms2065
         {
             switch (code)
             {
-                case 1:
-                    if (state == 1)//Vazeiaty Mibashad Baraye Neshan Dadan Technique Dar Hal Ejra
-                    {
-                        SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                        this.Invoke(d, new object[] { txt, code, 2 });
-                    }
-                    else
-                    {
-                        this.RunnigTechTreeview.Nodes[0].Nodes[txt].ForeColor = Color.DarkCyan;
-                        mainf.TechStatus.ForeColor = Color.DarkCyan;
-                        mainf.TechStatus.Text = (txt + 1).ToString().Trim() + "- Running technique " + RunnigTechTreeview.Nodes[0].Nodes[txt].Text;
-                    }
-                    break;
                 case 2:
                     if (state == 1)
                     {
@@ -3703,14 +3689,16 @@ namespace Skydat.forms2065
                     }
                     else
                     {
-                        this.RunnigTechTreeview.Nodes[0].Nodes[txt].ForeColor = Color.Green;
+                        RunnigTechTreeview.Nodes[0].Nodes[txt].ForeColor = Color.Green;
                         if (OnlineChart.Series[0].Points.Count > 0)// مقادیر پیک جریان یا ولتاژی نمودار را نشان می‌دهد
                             Parameters.Text = Parameters.Text + "\n\t*******************\nE1:" + OnlineChart.Series[0].Points.FindMinByValue("X").XValue.ToString("000e-0") +
                                 "\nE2:" + OnlineChart.Series[0].Points.FindMaxByValue("X").XValue.ToString("000e-0") + "\nMin. I:" + OnlineChart.Series[0].Points.FindMinByValue("Y").YValues[0].ToString("000e-0") +
                                 "\nMax. I:" + OnlineChart.Series[0].Points.FindMaxByValue("Y").YValues[0].ToString("000e-0");
 
+                        int TechNumber = int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
+
                         DataRow dr = this.mainf.grf.dschart2.analyselist.NewRow();
-                        dr[0] = int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
+                        dr[0] = TechNumber;
                         dr[1] = double.Parse(dschart1.chartlist1_run.Rows[txt][3].ToString());
                         dr[2] = double.Parse(dschart1.chartlist1_run.Rows[txt][4].ToString());
                         dr[3] = double.Parse(dschart1.chartlist1_run.Rows[txt][5].ToString());
@@ -3723,7 +3711,7 @@ namespace Skydat.forms2065
                         dr[10] = double.Parse(dschart1.chartlist1_run.Rows[txt][12].ToString());
                         dr[11] = movedata.main_cycle;// double.Parse(dschart1.chartlist1_run.Rows[txt][13].ToString());//i dont know why set value 1 less 
                         dr[12] = double.Parse(dschart1.chartlist1_run.Rows[txt][14].ToString());
-                        if (int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString()) == 9)
+                        if (TechNumber == 9)
                             dr[13] = double.Parse(dschart1.chartlist1_run.Rows[txt][15].ToString()) * 0.001;
                         else
                             dr[13] = double.Parse(dschart1.chartlist1_run.Rows[txt][15].ToString()) * 1000;
@@ -3736,45 +3724,45 @@ namespace Skydat.forms2065
                         dr[20] = 0;
                         dr[21] = dschart1.chartlist1_run.Rows[txt][23].ToString();
                         dr[22] = dschart1.chartlist1_run.Rows[txt][24].ToString();
-                        this.mainf.grf.dschart2.analyselist.Rows.Add(dr);
-                        this.mainf.grf.dschart2.analyselist.AcceptChanges();
-                        int maxrana = this.mainf.grf.dschart2.analyselist.Rows.Count;
-
-                        
-
-                        if (countcv == 0)
-                            if (dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() == "")//comment
-                                this.mainf.grf.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())]);
-                            else
-                                this.mainf.grf.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] + "(" + dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() + ")");
-                        else
-                            if (dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() == "")
-                            this.mainf.grf.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] + "-" + countcv);
-                        else
-                            this.mainf.grf.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] + "(" + dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() + ") -" + countcv);
+                        mainf.grf.dschart2.analyselist.Rows.Add(dr);
+                        mainf.grf.dschart2.analyselist.AcceptChanges();
+                        int maxrana = mainf.grf.dschart2.analyselist.Rows.Count;
 
                         Color color = Color.FromArgb(clasglobal.Graph_Color);
-                        this.mainf.grf.treeView3.Nodes[0].LastNode.ForeColor = color;
-                        this.mainf.grf.treeView3.SelectedNode = mainf.grf.treeView3.Nodes[0].LastNode;
+                        string ParentNodeName = clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())];
+                        if (dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() != "")
+                            ParentNodeName += "(" + dschart1.chartlist1_run.Rows[txt][24].ToString().Trim() + ")";
+
+                        TreeNode ParentNode = new TreeNode(ParentNodeName) { ForeColor = color };
 
 
-                        long countarr = 0;
-                        if (int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString()) == 10 || int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString()) == 11 || int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString()) == 12)
+                        if (countcv > 0)
+                        {
+                            for (int i = 0; i < countcv; i++)
+                            {
+                                TreeNode ChildrenNode = new TreeNode($"Cycle_{i+1}") { ForeColor = color };
+                                ParentNode.Nodes.Add(ChildrenNode);
+                            }
+                        }
+                        mainf.grf.TechTreeview.Nodes[0].Nodes.Add(ParentNode);
+                        mainf.grf.TechTreeview.SelectedNode = mainf.grf.TechTreeview.Nodes[0].LastNode;
+                        int ParentNodeIndex = mainf.grf.TechTreeview.Nodes[0].LastNode.Index;
+                        mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
+
+                        //if (!(mainf.tabControl1.SelectedTab == mainf.tabControl1.TabPages[2]))
+                        //{
+                        //    var lastTab = mainf.tabControl1.SelectedTab;
+                        //    mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
+                        //    Thread.Sleep(1);
+                        //    mainf.tabControl1.SelectedTab = lastTab;// برگشتن به فرم در حال اجرا
+                        //}
+                        string ParentSeriesName = ParentNodeName + '-' + mainf.grf.TechTreeview.Nodes[0].LastNode.Index;
+
+                        if (TechNumber == 10 || TechNumber == 11 || TechNumber == 12)
                         {
                             Array.Resize(ref time_cha_chc, shomar_cha_chc);
                             Array.Resize(ref volt_cha_chc, shomar_cha_chc);
-
-                            countarr = shomar_cha_chc;
-
-                            this.mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
-                            // this.mainf.grf.Set_Graph(0, false, true);
-
-                            if (!(mainf.tabControl1.SelectedTab == mainf.tabControl1.TabPages[2]))
-                            {
-                                var lastTab = mainf.tabControl1.SelectedTab;
-                                mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
-                                mainf.tabControl1.SelectedTab = lastTab;// برگشتن به فرم در حال اجرا
-                            }
+                            mainf.grf.SetSeriesForAnalyseChart(color, ParentSeriesName);
 
                             if (SampleRateMultiplier != 0)
                             {
@@ -3800,37 +3788,48 @@ namespace Skydat.forms2065
                                     index++;
                                 }
 
-                                this.mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", DeceasedArray, DeceasedArrayVoltage, true);
+                                mainf.grf.tChart1.Series[ParentSeriesName].Points.DataBindXY(DeceasedArray, DeceasedArrayVoltage);
                             }
                             else
-                                this.mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", time_cha_chc, volt_cha_chc, true);
+                                mainf.grf.tChart1.Series[ParentSeriesName].Points.DataBindXY(time_cha_chc, volt_cha_chc);
 
+                            mainf.grf.tChart1.Series[ParentSeriesName].Enabled = false;
 
-                            //this.mainf.grf.treeView3.SelectedNode = this.mainf.grf.treeView3.Nodes[0].Nodes[maxrana - 1];
-                            this.mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
+                        }
+                        else if (TechNumber == 4)//cv
+                        {
+                            mainf.grf.SetSeriesForAnalyseChart(color, ParentSeriesName);
+
+                            for (int i = 0; i < countcv; i++)
+                            {
+                                string SeriesName = $"Cycle_{(i + 1)}-{ParentNodeIndex}";
+                                mainf.grf.SetSeriesForAnalyseChart(color, SeriesName);
+
+                                List<double> xValues = new List<double>();
+                                List<double> yValues = new List<double>();
+
+                                Series series = OnlineChart.Series[i];
+
+                                foreach (DataPoint point in series.Points)
+                                {
+                                    xValues.Add(point.XValue);
+                                    yValues.Add(point.YValues[0]); // چون ممکنه DataPoint چند مقدار Y داشته باشه (مثل نمودار stack یا bubble)، YValues[0] می‌گیریم
+                                }
+                                mainf.grf.tChart1.Series[SeriesName].Points.DataBindXY(xValues, yValues);
+                                mainf.grf.smooth_new(SeriesName, xValues, yValues);
+                                mainf.grf.tChart1.Series[SeriesName].Enabled = false;
+                            }
+
                         }
                         else
                         {
-                            Array.Resize(ref othertech_val0, Convert.ToInt32(shomar_othertech));
-                            Array.Resize(ref othertech_val1, Convert.ToInt32(shomar_othertech));
-                            Array.Resize(ref othertech_val2, Convert.ToInt32(shomar_othertech));
-                            Array.Resize(ref othertech_val3, Convert.ToInt32(shomar_othertech));
-                            countarr = shomar_othertech;
+                            mainf.grf.SetSeriesForAnalyseChart(color, ParentSeriesName);
+                            mainf.grf.tChart1.Series[ParentSeriesName].Points.DataBindXY(VoltageStepArray, othertech_val3);
+                            mainf.grf.smooth_new(ParentSeriesName, VoltageStepArray, othertech_val3);
+                            mainf.grf.tChart1.Series[ParentSeriesName].Enabled = false;
 
-                            this.mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
-                            // this.mainf.grf.Set_Graph(0, false, true);
-
-                            if (!(mainf.tabControl1.SelectedTab == mainf.tabControl1.TabPages[2]))
-                            {
-                                var lastTab = mainf.tabControl1.SelectedTab;
-                                mainf.tabControl1.SelectedTab = mainf.tabControl1.TabPages[2];// نمایان کردن فرم آنالیز
-                                Thread.Sleep(20);
-                                mainf.tabControl1.SelectedTab = lastTab;// برگشتن به فرم در حال اجرا
-                            }
-
-                            mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", othertech_val0, othertech_val3, true);
-                            //this.mainf.grf.treeView3.SelectedNode = this.mainf.grf.treeView3.Nodes[0].Nodes[maxrana - 1];
-                            mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
+                            //mainf.grf.show_Graph(color.ToArgb(), this.mainf.grf, "MainChart", othertech_val0, othertech_val3, true);
+                            //mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
                         }
                     }
                     break;
@@ -3843,24 +3842,11 @@ namespace Skydat.forms2065
                     else
                     {
                         this.RunnigTechTreeview.Nodes[0].Nodes.Clear();
-                        for (int iii1 = 0; iii1 < dschart1.chartlist1_run.Rows.Count; iii1++)
+                        for (int i = 0; i < dschart1.chartlist1_run.Rows.Count; i++)
                         {
-                            this.RunnigTechTreeview.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(this.dschart1.chartlist1_run.Rows[iii1][1].ToString())]);
-                            this.RunnigTechTreeview.Nodes[0].Nodes[iii1].ForeColor = Color.Black;
+                            this.RunnigTechTreeview.Nodes[0].Nodes.Add(clasglobal.TechName[int.Parse(this.dschart1.chartlist1_run.Rows[i][1].ToString())]);
+                            this.RunnigTechTreeview.Nodes[0].Nodes[i].ForeColor = Color.Black;
                         }
-                    }
-                    break;
-                case 4:
-                    if (state == 1)
-                    {
-                        SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                        this.Invoke(d, new object[] { txt, code, 2 });
-                    }
-                    else
-                    {
-                        OnlineChart.Series[0].Points.Clear();
-                        OnlineChart.Series[0].Points.AddXY(othertech_val0[0], othertech_val1[0]);
-
                     }
                     break;
             }
@@ -3997,10 +3983,8 @@ namespace Skydat.forms2065
         private void Set_value2(int row)
         {
             shomar_othertech = 0;
-            Array.Clear(othertech_val0, 0, othertech_val0.Length);
-            Array.Clear(othertech_val1, 0, othertech_val1.Length);
-            Array.Clear(othertech_val2, 0, othertech_val2.Length);
-            Array.Clear(othertech_val3, 0, othertech_val3.Length);
+            VoltageStepArray.Clear();
+            othertech_val3.Clear();
 
             switch (byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()))//switch(tech)
             {
@@ -4038,9 +4022,6 @@ namespace Skydat.forms2065
                     else
                         dschart1.chartlist1_run.Rows[row][15] = (int)(Math.Truncate(Analiz_St1));
 
-
-
-                    Analiz_St2 = Analiz_St1;
                     dschart1.chartlist1_run.Rows[row][15] = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) / 1000;
                     dschart1.chartlist1_run.Rows[row][16] = dschart1.chartlist1_run.Rows[row][15];
                     //if (!cbOverlay.Checked)
@@ -4066,7 +4047,6 @@ namespace Skydat.forms2065
                         dschart1.chartlist1_run.Rows[row][15] = Math.Round(Analiz_St1, 2);
                     dschart1.chartlist1_run.Rows[row][15] = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) / 1000;
                     dschart1.chartlist1_run.Rows[row][16] = dschart1.chartlist1_run.Rows[row][15];
-                    Analiz_St2 = Analiz_St1;
                     break;
 
                 case clasglobal.CPC:
@@ -4152,7 +4132,7 @@ namespace Skydat.forms2065
                 mainSerialPort.Write(Temp.ToString() + "@");
                 if ((int)Tech_Number == 0)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4165,7 +4145,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 1)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4180,7 +4160,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 2)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4197,7 +4177,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 3)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4215,7 +4195,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 4)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4232,7 +4212,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 5)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4246,7 +4226,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 6)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4263,7 +4243,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 7)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4295,9 +4275,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 9)
                 {
-                    fst = true;
-                    S_et = true;
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()));// t1 
@@ -4316,7 +4294,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 10)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4333,8 +4311,6 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
 
-                    fst = true;
-                    S_et = true;
                     Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
 
                     //if (Analiz_T3 > 5024) //if (t1+t2)*1000  > 5024
@@ -4346,7 +4322,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 11)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
@@ -4355,8 +4331,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     //Settxtfill_func(2, $"t1{Temp}", 2, 1);
 
-                    fst = true;
-                    S_et = true;
+
                     Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
 
                     if (Analiz_T3 > 5024) //if (t1+t2)*1000  > 5024
@@ -4373,7 +4348,7 @@ namespace Skydat.forms2065
                 }
                 if ((int)Tech_Number == 12)
                 {
-                    mainSerialPort.Write(Range1.ToString() + "@");
+                    mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//i1 
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//i2 
@@ -4383,8 +4358,6 @@ namespace Skydat.forms2065
                     if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))
                     {
 
-                        fst = true;
-                        S_et = true;
                         if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))//if techno >9 and techno  < 15  
                         {
                             Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
@@ -4446,8 +4419,6 @@ namespace Skydat.forms2065
                     if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))
                     {
 
-                        fst = true;
-                        S_et = true;
                         if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))//if techno >9 and techno  < 15  
                         {
                             Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
@@ -4496,8 +4467,6 @@ namespace Skydat.forms2065
                     if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 15))
                     {
 
-                        fst = true;
-                        S_et = true;
                         if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 15))//if techno >9 and techno  < 15  
                         {
                             Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
@@ -4558,14 +4527,14 @@ namespace Skydat.forms2065
         }
 
 
-        public void newSmoth(int row1, Color color1)
+        public void newSmoth(int ChartSeriesIndex)
         {
             try
             {
                 List<double> xValues = new List<double>();
                 List<double> yValues = new List<double>();
 
-                Series series = OnlineChart.Series[0];
+                Series series = OnlineChart.Series[ChartSeriesIndex];
 
                 foreach (DataPoint point in series.Points)
                 {
@@ -4573,7 +4542,7 @@ namespace Skydat.forms2065
                     yValues.Add(point.YValues[0]); // چون ممکنه DataPoint چند مقدار Y داشته باشه (مثل نمودار stack یا bubble)، YValues[0] می‌گیریم
                 }
 
-                
+
 
                 // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
                 var medianFiltered = MedianFilter(yValues, windowSize: 5);
@@ -4581,22 +4550,21 @@ namespace Skydat.forms2065
                 List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 9);
                 this.Invoke(new Action(() =>
                 {
-                    OnlineChart.Series[0].Points.Clear();
+                    series.Points.Clear();
                 }));
 
                 for (int i = 0; i < xValues.Count; i++)
                 {
                     this.Invoke(new Action(() =>
                     {
-                        OnlineChart.Series[0].Points.AddXY(xValues[i], smothedX[i]);
-                    }));
-                    Thread.Sleep(10);
-                }
+                        series.Points.AddXY(xValues[i], smothedX[i]);
 
-                for (int i = 0; i < smothedX.Count; i++)
-                {
-                    othertech_val1[i] = yValues[i];
-                    othertech_val3[i] = smothedX[i];
+                        mainf.toolStripProgressBar1.Value++;
+                        if (mainf.toolStripProgressBar1.Value == 100)
+                            mainf.toolStripProgressBar1.Value = 0;
+                    }));
+
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception)
@@ -4704,7 +4672,8 @@ namespace Skydat.forms2065
             double Stp = 0;
             double IE = 0, I0, I1 = 0, Ec, V1, SS, Vi = 0, Tstp;
             int Ts, k, k1, ser = 0, ngtv = 0, R_cmp = 0;
-            long len, Fore = 0, Rev = 0, j = 0, NUM, vn = 0;
+            long Fore = 0, Rev = 0; 
+            int  vn = 0, NUM, j = 0, len;
             bool ctrl = false, Drvt = false, grftfl = false;
             int L_Teq; //,a;
 
@@ -4726,18 +4695,18 @@ namespace Skydat.forms2065
 
             vn = NUM;
 
-            for (long i = 1; i <= vn - 1; i++)
+            for (int i = 1; i <= vn - 1; i++)
             {
                 if (Math.Abs(othertech_val3[i] - othertech_val3[i - 1]) > 1000)
                     othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i + 1]) / 2;
             }
 
-            for (long i = vn; i >= 2; i--)
+            for (int i = vn; i >= 2; i--)
             {
                 othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i]) / 2;
             }
 
-            for (long i = 1; i <= vn - 2; i++)
+            for (int i = 1; i <= vn - 2; i++)
             {
                 othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i + 1]) / 2;
             }
@@ -4781,7 +4750,7 @@ namespace Skydat.forms2065
             if (ctrl)
             {
 
-                for (long i = len; i >= 1; i--)
+                for (int i = len; i >= 1; i--)
                 {
                     V1 = 1 / Math.Sqrt(SS * i);
                     I1 = othertech_val3[i];
@@ -4863,7 +4832,7 @@ namespace Skydat.forms2065
             SerialState = 0xA0;
             if (!mainSerialPort.IsOpen)
                 mainSerialPort.Open();
-            
+
             mainSerialPort.Write("stop");
             mainSerialPort.Close();
 
@@ -4890,88 +4859,81 @@ namespace Skydat.forms2065
                     {
                         ///////////////////////////////
                         // if (SerialState = 0x60) H_ld = true;
-                        if (fst)
+
+                        Powr = datas2_2[i];
+                        Crnt = ((datas2_0[i] << 6) | (datas2_1[i] >> 2));
+                        if (Crnt > 0x1FFF)
                         {
+                            Crnt = (0x4000 - Crnt);
+                            signe = true;
+                        }
+                        else
+                            signe = false;
 
-                            Powr = datas2_2[i];
-                            Crnt = ((datas2_0[i] << 6) | (datas2_1[i] >> 2));
-                            if (Crnt > 0x1FFF)
-                            {
-                                Crnt = (0x4000 - Crnt);
-                                signe = true;
-                            }
+                        //if (Range1 != 0)
+                        //    if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8) && (Crnt > 6560))
+                        //        Crnt = 6560;
+                        //if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 9) && (Powr == 8))
+                        //    Crnt = Crnt * 2; //current upto 1A
+
+                        if (Powr == 8)
+                            C = Crnt * 1.02207 * Math.Pow(10, Powr);/////// - 6
+                        else
+                            C = Crnt * 0.61035 * Math.Pow(10, Powr - 6); //// - 6
+                        if (signe ^ (TechNumber == 10))
+                            C = C * -1;
+
+                        if (shomar_cha_chc >= time_cha_chc.Length)
+                        {
+                            Array.Resize(ref time_cha_chc, time_cha_chc.Length + 200);
+                            Array.Resize(ref volt_cha_chc, volt_cha_chc.Length + 200);
+                        }
+                        time_cha_chc[shomar_cha_chc] = Math.Round((i + 1) * ti, 3, MidpointRounding.AwayFromZero);
+
+                        if (TechNumber == 12)//CHC
+                            if (shomar_cha_chc == 0)
+                                volt_cha_chc[shomar_cha_chc] = C * ti;
                             else
-                                signe = false;
+                                volt_cha_chc[shomar_cha_chc] = volt_cha_chc[shomar_cha_chc - 1] + (C * ti);
+                        else
+                            volt_cha_chc[shomar_cha_chc] = C;
 
-                            //if (Range1 != 0)
-                            //    if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 8) && (Crnt > 6560))
-                            //        Crnt = 6560;
-                            //if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 9) && (Powr == 8))
-                            //    Crnt = Crnt * 2; //current upto 1A
+                        //this.OnlineChart.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(dschart1.chartlist1_run.Rows[row][3]) - 1;
+                        //this.OnlineChart.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(dschart1.chartlist1_run.Rows[row][4]) + 1;
+
+                        //رسم برای سه تکنیک  chp cha chc
+                        if (shomar_cha_chc == 0 && TechNumber != 12)//برای رسم در نقطه صفر زمان غیر از تکنیک سی اچ سیmn
+                            this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc] - 1, volt_cha_chc[shomar_cha_chc]);
+
+                        if (TechNumber == 11)
+                        {
+                            time_cha_chc[shomar_cha_chc] /= 10;
+                        }
+                        if (TechNumber == 10)//CP
+                        {
+                            time_cha_chc[shomar_cha_chc] /= 5;
+                        }
+                        if (TechNumber == 14)
+                        {
+                            time_cha_chc[shomar_cha_chc] /= 10;
                         }
 
-                        if (S_et)
+                        if (shomar_cha_chc == 0 && TechNumber == 12)//برای رسم در نقطه صفر زمان در  تکنیک سی اچ سیmn
                         {
-                            if (Powr == 8)
-                                C = Crnt * 1.02207 * Math.Pow(10, Powr);/////// - 6
-                            else
-                                C = Crnt * 0.61035 * Math.Pow(10, Powr - 6); //// - 6
-                            if (signe ^ (TechNumber == 10))
-                                C = C * -1;
-
-                            if (shomar_cha_chc >= time_cha_chc.Length)
-                            {
-                                Array.Resize(ref time_cha_chc, time_cha_chc.Length + 200);
-                                Array.Resize(ref volt_cha_chc, volt_cha_chc.Length + 200);
-                            }
-                            time_cha_chc[shomar_cha_chc] = Math.Round((i + 1) * ti, 3, MidpointRounding.AwayFromZero);
-
-                            if (TechNumber == 12)//CHC
-                                if (shomar_cha_chc == 0)
-                                    volt_cha_chc[shomar_cha_chc] = C * ti;
-                                else
-                                    volt_cha_chc[shomar_cha_chc] = volt_cha_chc[shomar_cha_chc - 1] + (C * ti);
-                            else
-                                volt_cha_chc[shomar_cha_chc] = C;
-
-                            //this.OnlineChart.ChartAreas[0].AxisY.Minimum = Convert.ToDouble(dschart1.chartlist1_run.Rows[row][3]) - 1;
-                            //this.OnlineChart.ChartAreas[0].AxisY.Maximum = Convert.ToDouble(dschart1.chartlist1_run.Rows[row][4]) + 1;
-
-                            //رسم برای سه تکنیک  chp cha chc
-                            if (shomar_cha_chc == 0 && TechNumber != 12)//برای رسم در نقطه صفر زمان غیر از تکنیک سی اچ سیmn
-                                this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc] - 1, volt_cha_chc[shomar_cha_chc]);
-
-                            if (TechNumber == 11)
-                            {
-                                time_cha_chc[shomar_cha_chc] /= 10;
-                            }
-                            if (TechNumber == 10)//CP
-                            {
-                                time_cha_chc[shomar_cha_chc] /= 5;
-                            }
-                            if (TechNumber == 14)
-                            {
-                                time_cha_chc[shomar_cha_chc] /= 10;
-                            }
-
-                            if (shomar_cha_chc == 0 && TechNumber == 12)//برای رسم در نقطه صفر زمان در  تکنیک سی اچ سیmn
-                            {
-                                this.OnlineChart.Series[0].Points.AddXY(0, volt_cha_chc[shomar_cha_chc]);
-                                shomar_cha_chc++;
-                                continue;
-                            }
-
-                            datas2_state[i] = 1;
-
-                            if (TechNumber != 12)//mn
-                                this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc], volt_cha_chc[shomar_cha_chc]);
-                            else//mn
-                                this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc], volt_cha_chc[shomar_cha_chc]);//CHC
-
-
+                            this.OnlineChart.Series[0].Points.AddXY(0, volt_cha_chc[shomar_cha_chc]);
                             shomar_cha_chc++;
+                            continue;
+                        }
 
-                        } //if S_et
+                        datas2_state[i] = 1;
+
+                        if (TechNumber != 12)//mn
+                            this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc], volt_cha_chc[shomar_cha_chc]);
+                        else//mn
+                            this.OnlineChart.Series[0].Points.AddXY(time_cha_chc[shomar_cha_chc], volt_cha_chc[shomar_cha_chc]);//CHC
+
+
+                        shomar_cha_chc++;
                     }
                 }
             }

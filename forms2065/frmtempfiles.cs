@@ -208,6 +208,17 @@ namespace Skydat.forms2065
                         }
                         else                // if (isData)
                         {
+                            if (s.Length == 0) { continue; }//newline
+
+                            if (s.LastIndexOf("========") >= 0)
+                            {
+                                continue;
+                            }
+                            else if (s.Contains("Cycle Number"))
+                            {
+                                continue;
+                            }
+
                             int l = 0;
                             string sss = "";
                             int num = 0;
@@ -232,11 +243,6 @@ namespace Skydat.forms2065
                                 }
                                 l++;
                             }
-
-                            try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }
-                            try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }
-                            try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; }
-                            try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; }
 
                             if (shomar_val >= othertech_val0.Length)
                             {

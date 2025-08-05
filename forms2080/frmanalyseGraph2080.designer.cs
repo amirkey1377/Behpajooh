@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmanalyseGraph2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDataPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,12 +190,12 @@ namespace Skydat.forms2080
             // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
-            chartArea7.BackColor = System.Drawing.Color.Black;
-            chartArea7.Name = "ChartArea1";
-            chartArea7.Position.Auto = false;
-            chartArea7.Position.Height = 100F;
-            chartArea7.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea7);
+            chartArea3.BackColor = System.Drawing.Color.Black;
+            chartArea3.Name = "ChartArea1";
+            chartArea3.Position.Auto = false;
+            chartArea3.Position.Height = 100F;
+            chartArea3.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea3);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
@@ -484,12 +484,12 @@ namespace Skydat.forms2080
             // 
             this.tChart2.BackColor = System.Drawing.Color.Black;
             this.tChart2.BorderlineColor = System.Drawing.Color.Black;
-            chartArea8.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea8.Name = "ChartArea1";
-            chartArea8.Position.Auto = false;
-            chartArea8.Position.Height = 100F;
-            chartArea8.Position.Width = 100F;
-            this.tChart2.ChartAreas.Add(chartArea8);
+            chartArea4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea4.Name = "ChartArea1";
+            chartArea4.Position.Auto = false;
+            chartArea4.Position.Height = 100F;
+            chartArea4.Position.Width = 100F;
+            this.tChart2.ChartAreas.Add(chartArea4);
             this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart2, "tChart2");
             this.tChart2.Name = "tChart2";
@@ -606,9 +606,12 @@ namespace Skydat.forms2080
             // toolStripButton11
             // 
             resources.ApplyResources(this.toolStripButton11, "toolStripButton11");
+            this.toolStripButton11.Checked = true;
+            this.toolStripButton11.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton11.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon1;
             this.toolStripButton11.Name = "toolStripButton11";
+            this.toolStripButton11.CheckedChanged += new System.EventHandler(this.toolStripButton11_CheckedChanged);
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click_1);
             // 
             // toolStripButton27

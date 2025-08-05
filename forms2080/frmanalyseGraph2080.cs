@@ -14,6 +14,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Office.Interop.Excel;
 using System.Threading;
+using Button = System.Windows.Forms.Button;
 
 namespace Skydat.forms2080
 {
@@ -6080,6 +6081,19 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton11_CheckedChanged(object sender, EventArgs e)
+        {
+            ToolStripButton btn = sender as ToolStripButton;
+            if (btn.Checked)
+            {
+                btn.BackColor = Color.Gray;
+            }
+            else
+            {
+                btn.BackColor = Color.Transparent;
+            }
         }
 
         private void ch_area_CheckedChanged(object sender, EventArgs e)

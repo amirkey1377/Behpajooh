@@ -742,7 +742,6 @@ namespace Skydat.classes2065
 
         }
 
-
         public static void WriteToFile(DataRow dr, string tchName, string fileName, int row, int typedevice)//ذخیره اطلاعات و دیتای تکنیک درون فایل متنی
         {
             StreamWriter Fl = new StreamWriter(fileName, false, Encoding.ASCII);
@@ -751,6 +750,7 @@ namespace Skydat.classes2065
             {
                 Fl.WriteLine("Settings for Parameters:");
                 Fl.WriteLine("Date:" + DateTime.Now.ToString());
+
                 clasglobal.SetChartColor();
                 Fl.WriteLine("Color:" + clasglobal.Graph_Color);
 
@@ -817,8 +817,6 @@ namespace Skydat.classes2065
 
                     Fl.WriteLine("\n");
                     Fl.WriteLine("Technic: CV");
-                    //Fl.WriteLine("TchNo: " + CV.ToString());
-                    //Fl.WriteLine("Cycles:" + dr[13].ToString());   // i dont knowb why cycle 1 lesses than from user set thise here
                     Fl.WriteLine("Cycles:" + movedata.main_cycle);
                     Fl.WriteLine("E1:" + dr[3].ToString());
                     Fl.WriteLine("E2:" + dr[4].ToString());

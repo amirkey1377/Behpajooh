@@ -36,14 +36,14 @@ namespace Skydat.forms2065
             cPeak.SR_Peak = fm.ScanRate;
             if (fm.Detect_Peak && rbAutoPeak.Checked)
             {
-                if (fm.grf.treeView3.Nodes[0].Nodes.Count > 1)
+                if (fm.grf.TechTreeview.Nodes[0].Nodes.Count > 1)
                 {
                     MessageBox.Show("Select one graph for peak search");
                     return;
                 }
                 double[] BBR = mc.BR;
-                for (int i = 0; i < fm.grf.treeView3.Nodes[0].Nodes.Count; i++)
-                    if (fm.grf.treeView3.Nodes[0].Nodes[i].Checked)
+                for (int i = 0; i < fm.grf.TechTreeview.Nodes[0].Nodes.Count; i++)
+                    if (fm.grf.TechTreeview.Nodes[0].Nodes[i].Checked)
                     {
                         Selected_Item = i;
                         break;
