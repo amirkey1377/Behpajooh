@@ -93,7 +93,7 @@ namespace Skydat.classes2065
 
 
         //جهت ست کردن مقدار به پارامترهای هر تکنیک یک مقدار به تکنیک داده شده تا نام مخفف آن با عدد صدا زده شود
-        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16,CDtest = 17;/////, CA = 11
+        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16, CDtest = 17, Tafel = 18;/////, CA = 11
         
         //2080
         public const byte NPV2080 = 1, DPV2080 = 2, SWV2080 = 3, CV2080 = 4, OCP2080 = 15, CPC2080 = 9, CHA2080 = 11, CCC2080 = 12, LSV2080 = 5, CHP2080 = 10;/////, CA = 11

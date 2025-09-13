@@ -767,7 +767,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CHEM1.ICO" />
-    <Content Include="forms2065\Bitmap1.bmp" />
     <None Include="Resources\11.png" />
     <Content Include="Resources\165.png" />
     <None Include="Resources\لوگوی سایت.png" />

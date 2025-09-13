@@ -88,7 +88,7 @@ namespace Skydat.forms2065
         //Adding library
         [DllImport("User32.dll", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private static extern IntPtr LoadCursorFromFile(String str);
-        public int flag_cd = 0;
+
 
 
         //Setting for set customize icon for zoomin & zoomoutButton
@@ -268,8 +268,8 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) != 9999) Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-
                         break;
+
                     case clasglobal.NPV:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -279,6 +279,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
                         break;
+
                     case clasglobal.DPV:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -289,6 +290,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
                         break;
+
                     case clasglobal.SWV:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -298,6 +300,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][12].ToString()) != 9999) Parameters.Text = Parameters.Text + "Frequency =" + double.Parse(dschart1.chartlist1_run.Rows[row][12].ToString()) + "\n";
                         break;
+
                     case clasglobal.CV:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -308,6 +311,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
                         break;
+
                     case clasglobal.LSV:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -316,6 +320,7 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
                         break;
+
                     case clasglobal.DCs:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -323,8 +328,8 @@ namespace Skydat.forms2065
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) != 9999) Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) != 9999) Parameters.Text = Parameters.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) != 9999) Parameters.Text = Parameters.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-
                         break;
+
                     case clasglobal.DPs:
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) != 9999) Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
                         if (double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) != 9999) Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
@@ -575,13 +580,13 @@ namespace Skydat.forms2065
                                     this.Invoke((MethodInvoker)delegate ()
                                     {
                                         K++;
-                                        if (K == (5 * SampleRateMultiplier))
+                                        if (K == (5 * SampleRateMultiplier) || SampleRateMultiplier == 0)
                                         {
                                             double scope = time_cha_chc[SampleRateMultiplier * 5] - time_cha_chc[0];
+                                            if (SampleRateMultiplier == 0) scope = (double)1/5;
                                             pos += scope;
                                             size += scope;
                                             OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                                            //Settxtfill_func(2, $"scope:{scope},pos{pos},size{size},K{K}", 2, 1);
                                             K = 0;
                                         }
                                     });
@@ -703,9 +708,10 @@ namespace Skydat.forms2065
                                         this.Invoke((MethodInvoker)delegate ()
                                         {
                                             K++;
-                                            if (K == (10 * SampleRateMultiplier))
+                                            if (K == (10 * SampleRateMultiplier) || SampleRateMultiplier == 0)
                                             {
                                                 double scope = time_cha_chc[SampleRateMultiplier * 10] - time_cha_chc[0];
+                                                if (SampleRateMultiplier == 0) scope = (double)1 / 10;
                                                 pos += scope;
                                                 size += scope;
                                                 OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
@@ -843,24 +849,6 @@ namespace Skydat.forms2065
                         return;
                     }
                 }
-            }
-        }
-
-        static void ShiftLeft(double[] arr)
-        {
-            if (arr.Length > 1)
-            {
-                // ذخیره اولین عنصر
-                double firstElement = arr[0];
-
-                // همه عناصر را یک خانه به سمت چپ شیفت دهید
-                for (int i = 0; i < arr.Length - 1; i++)
-                {
-                    arr[i] = arr[i + 1];
-                }
-
-                // قرار دادن اولین عنصر در خانه آخر
-                arr[arr.Length - 1] = 0;
             }
         }
 
@@ -1490,7 +1478,7 @@ namespace Skydat.forms2065
                         }
                     }
 
-                    if (S_et_New) 
+                    if (S_et_New)
                     {
 
                         if ((Powr[j] == 8) && (TechNumber != 9))
@@ -1538,7 +1526,7 @@ namespace Skydat.forms2065
                             shomar_othertech++;
 
                             //double percent = (Vold * 100) / (deltaRange * 2);  
-                            mainf.toolStripProgressBar1.Value ++;
+                            mainf.toolStripProgressBar1.Value++;
                             if (mainf.toolStripProgressBar1.Value == 100)
                                 mainf.toolStripProgressBar1.Value = 0;
 
@@ -1643,7 +1631,7 @@ namespace Skydat.forms2065
                         }
 
                     }
-                    
+
                     if (TechniqueEnded)  //if portc=0x09
                     {
                         for (int z = 0; z < 10; z++)
@@ -1932,12 +1920,9 @@ namespace Skydat.forms2065
 
         unsafe private void dorun2_costum(int row)//CD
         {
-            byte[] datas = new byte[3];
-            int n = 0;
-            string string1;
+            string ReadLineString;
             byte end = 0;
             double counter = 0, number = 0;
-            double volt = 0;
             double pos = 0, K = 0;
             int Cd_Counter = 0;
 
@@ -1954,7 +1939,7 @@ namespace Skydat.forms2065
             }
 
             int sign = 0;
-            double I2 = 0, Vold, I1;
+            double Vold, I1;
             //double[] I1 = new double [2]{ 0, 0 };
 
             int DataPerSecond = 10;
@@ -1987,6 +1972,10 @@ namespace Skydat.forms2065
 
                 OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
                 OnlineChart.ChartAreas[0].AxisX.Maximum = Double.NaN;
+                Series RaiseTime = new Series("RaiseTime") { Color = Color.Green, ChartType = OnlineChart.Series[0].ChartType };
+                OnlineChart.Series.Add(RaiseTime);
+                Series FallTime = new Series("FallTime") { Color = Color.Red, ChartType = OnlineChart.Series[0].ChartType };
+                OnlineChart.Series.Add(FallTime);
             });
 
             flag_running = true;
@@ -2002,7 +1991,7 @@ namespace Skydat.forms2065
                     staterun = "";
                     return;
                 }
-                string1 = null;
+                ReadLineString = null;
                 string[] strings = new string[4];
 
                 try
@@ -2010,83 +1999,43 @@ namespace Skydat.forms2065
                     number = mainSerialPort.BytesToRead;
                     if (number > 0)
                     {
-                        string1 = mainSerialPort.ReadLine();
+                        ReadLineString = mainSerialPort.ReadLine();
 
                         if (sign == 0)
                         {
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 14)
+
+                            if (ReadLineString.Contains("end14"))
                             {
-                                flag_cd = 1;
-
-                                if (string1.Contains("end14"))
-                                {
-                                    end = 1;
-                                    string1 = "";
-                                    Settxtfill_func(2, "TechniqueEnded", 2, 1);
-                                    sign = 1;
-                                }
-                                else
-                                {
-                                    strings = string1.Split('@');
-
-                                    //counter = Math.Round((Math.Round(double.Parse(strings[1]) * 10) / 10));
-                                    counter = double.Parse(strings[1]);
-                                    volt1 = int.Parse(strings[2]);
-                                    if (DebugMode || Maintenance)
-                                        Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
-
-                                    sign = 1;
-                                    number = 0;
-                                    flag_running = true;
-                                    string1 = "";
-                                }
+                                end = 1;
+                                ReadLineString = "";
+                                Settxtfill_func(2, "TechniqueEnded", 2, 1);
+                                sign = 1;
                             }
-
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == 15)
+                            else
                             {
-                                if (string1.Contains("end15"))
-                                {
-                                    end = 1;
-                                    string1 = "";
-                                    Settxtfill_func(2, "end15", 2, 1);
-                                }
-                                else
-                                {
-                                    strings = string1.Split('@');
-                                    //Settxtfill_func(2, $"endpacket:{ReciveString}", 2, 1);
-                                    volt = double.Parse(strings[1]);
-                                    datas[0] = byte.Parse(strings[2]);
-                                    datas[1] = byte.Parse(strings[3]);
-                                    counter = int.Parse(strings[4]);
-                                    volt1 = int.Parse(strings[5]);
-                                    //Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
-                                    //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
-                                    //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
-                                    //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
-                                    counter++;
-                                    sign = 1;
-                                    number = 0;
-                                    flag_running = true;
-                                }
+                                strings = ReadLineString.Split('@');
+
+                                //counter = Math.Round((Math.Round(double.Parse(strings[1]) * 10) / 10));
+                                counter = double.Parse(strings[1]);
+                                volt1 = int.Parse(strings[2]);
+                                if (DebugMode || Maintenance)
+                                    Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
+
+                                sign = 1;
+                                number = 0;
+                                flag_running = true;
+                                ReadLineString = "";
                             }
                         }
                     }
-                    n--;
                 }
                 catch (Exception Ex)
                 {
-                    //if (!serialPort2.IsOpen)
-                    //{
-                    //    Thread.Sleep(1000);
-                    //    DeviceIsConnected();
-                    //   
-                    //else throw;
                     MessageBox.Show(Ex.Message);
                 }
 
                 if (sign == 1)
                 {
-
                     Vold = counter;
                     I1 = volt1;
 
@@ -2094,11 +2043,11 @@ namespace Skydat.forms2065
                     {
                         if (Cd_Counter % (DataPerSecond * SampleRateMultiplier) == 0)
                         {
-                            Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
+                            RunnigCD(Vold, I1, 0, row);///// رسم گراف اصلی
                         }
                     }
                     else
-                        Runnig2(Vold, I1, I2, row);///// رسم گراف اصلی
+                        RunnigCD(Vold, I1, 0, row);///// رسم گراف اصلی
 
 
                     if (time_Of_Period_cd * ChartScaleMultiplier * DataPerSecond < Cd_Counter)
@@ -2108,28 +2057,28 @@ namespace Skydat.forms2065
                                 this.Invoke((MethodInvoker)delegate ()
                                 {
                                     K++;
-                                    if (K == (DataPerSecond * SampleRateMultiplier))
+                                    if (K == (DataPerSecond * SampleRateMultiplier) || SampleRateMultiplier == 0)
                                     {
                                         double scope = SampleRateMultiplier;
+                                        if (SampleRateMultiplier == 0) scope = (double)1 / DataPerSecond;
                                         pos += scope;
                                         size += scope;
                                         OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
-                                        //Settxtfill_func(2, $"scope:{scope},pos{pos},size{size},K{K}", 2, 1);
                                         K = 0;
                                     }
                                 });
+
                                 break;
                             case true:
                                 this.Invoke((MethodInvoker)delegate ()
                                 {
                                     if (OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum >= (time_Of_Period_cd * ChartScaleMultiplier))
                                     {
-                                        OnlineChart.Series[0].Points.RemoveAt(0); // حذف اولین داده (قدیمی‌ترین داده)
+                                        OnlineChart.Series[1].Points.RemoveAt(0); // حذف اولین داده (قدیمی‌ترین داده)
                                     }
 
-                                    // به‌روزرسانی محور X برای نمایش فقط 20 داده اخیر
-                                    OnlineChart.ChartAreas[0].AxisX.Minimum = OnlineChart.Series[0].Points[0].XValue;
-                                    OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.Series[0].Points[OnlineChart.Series[0].Points.Count - 1].XValue;
+                                    OnlineChart.ChartAreas[0].AxisX.Minimum = OnlineChart.Series[1].Points[0].XValue;
+                                    OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.Series[1].Points[OnlineChart.Series[1].Points.Count - 1].XValue;
 
                                 });
                                 break;
@@ -2151,15 +2100,18 @@ namespace Skydat.forms2065
                     // System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));//delay with equlibirum 
                     // System.Threading.Thread.Sleep(int.Parse(this.dschart1.chartlist.Rows[row][7].ToString()));
                     Setbtnenabled(true, 2, 1);
-                    Settxtfill_func(1, $"finish running-1 :{end} :{string1}", 2, 1);
+                    Settxtfill_func(1, $"finish running-1 :{end} :{ReadLineString}", 2, 1);
                     return;
                 }
 
                 if (SerialState == 0xA0)//if software ==pause 
                 {
-                    mainSerialPort.Write("stop");
-                    System.Threading.Thread.Sleep(1000);
-                    mainSerialPort.Close();
+                    if (mainSerialPort.IsOpen)
+                    {
+                        mainSerialPort.Write("stop");
+                        System.Threading.Thread.Sleep(1000);
+                        mainSerialPort.Close();
+                    }
                     Setbtnenabled(true, 2, 1);
                     Settxtfill_func(1, "finish running-2", 2, 1);
                     return;
@@ -2508,7 +2460,7 @@ namespace Skydat.forms2065
 
         }
 
-        unsafe private void dorun2_costum_2(int row)//OCP
+        unsafe private void OCP_Reading(int row)//OCP
         {
 
             string string1;
@@ -2522,7 +2474,7 @@ namespace Skydat.forms2065
 
             mainSerialPort.DiscardInBuffer();
 
-            for (int n = 1; n < 4000000; n++)//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
+            for (;;)//تا زمانی که دستور پایان را از دستگاه نگیرد میچرخد
             {
                 if (staterun.Trim() == "Form Closed")
                 {
@@ -2532,8 +2484,6 @@ namespace Skydat.forms2065
                 }
                 string1 = null;
                 string[] strings = new string[4];
-                ////Setbtnenabled(true, 1, 2);
-                // serialPort2.WriteLine("start");
                 float number = mainSerialPort.BytesToRead;
 
                 try
@@ -2541,7 +2491,6 @@ namespace Skydat.forms2065
                     if (number > 0)
                     {
                         string1 = mainSerialPort.ReadLine();
-                        //DataReceived.Remove(DataReceived.Length-1);
                         if (sign == 0)
                         {
                             if (string1.Contains("end15"))
@@ -2557,30 +2506,24 @@ namespace Skydat.forms2065
                                 volt1 = Int32.Parse(strings[2]);
 
                                 Settxtfill_func(2, $"voltage:{volt1}", 2, 1);
-                                // Settxtfill_func(2, $"counter:{counter}", 2, 1);
-                                //Settxtfill_func(2, $"a:{datas[0]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"b:{datas[1]},i{i}", 2, 1);
-                                //Settxtfill_func(2, $"counter:{counter},i{i}", 2, 1);
                                 //serialPort2.DiscardInBuffer();
+
                                 sign = 1;
                                 number = 0;
                                 flag_running = true;
                             }
                         }
                     }
-                    n--;
                 }
-                catch
+                catch(Exception Ex)
                 {
-
+                    MessageBox.Show(Ex.Message);
                 }
 
                 if (sign == 1)
                 {
                     double I1 = volt1;
-                    //Settxtfill_func(2, $"vold2{Vold}", 2, 1);
                     Runnig2(counter, I1, 0, row);///// رسم گراف اصلی
-                    //Settxtfill_func(2, $"2={Vold}:{I1}:{I2} ", 2, 1);
                     sign = 0;
                 }
                 else if (end == 1)  //if portc=0x09
@@ -2588,9 +2531,8 @@ namespace Skydat.forms2065
                     end = 0;
                     mainSerialPort.Write("end1");
                     mainSerialPort.Close();
-                    System.Threading.Thread.Sleep(1000);
-                    // System.Threading.Thread.Sleep(1000 * Convert.ToInt32(this.dschart1.chartlist1_run.Rows[row]["qt"].ToString()));//delay with equlibirum 
-                    // System.Threading.Thread.Sleep(int.Parse(this.dschart1.chartlist.Rows[row][7].ToString()));
+                    Thread.Sleep(1000);
+                   
                     Setbtnenabled(true, 2, 1);
                     Settxtfill_func(1, $"finish running-1 :{end} :{string1}", 2, 1);
                     return;
@@ -2598,9 +2540,9 @@ namespace Skydat.forms2065
 
                 if (SerialState == 0xA0)//if software ==pause 
                 {
-
                     mainSerialPort.Write("stop");
-                    mainSerialPort.Close();
+                    if (mainSerialPort.IsOpen) mainSerialPort.Close();
+
                     Thread.Sleep(1000);
                     Setbtnenabled(true, 2, 1);
                     Settxtfill_func(1, "finish running-2", 2, 1);
@@ -2626,11 +2568,11 @@ namespace Skydat.forms2065
                 // do_smooth_Run_Time(false, Already_Drawing_Graph);
                 // this.OnlineChart.Series[row].Points.AddXY(V, I1 - I2);
 
-                this.OnlineChart.Series[0].Points.AddXY(V, I1 - I2);///// رسم گراف اصلی
+                OnlineChart.Series[0].Points.AddXY(V, I1 - I2);///// رسم گراف اصلی
 
 
                 VoltageStepArray.Add(V);//حاوی استپ های ولتاژی
-                othertech_val3.Add(I1-I2);
+                othertech_val3.Add(I1 - I2);
 
                 shomar_othertech++;
 
@@ -2652,6 +2594,63 @@ namespace Skydat.forms2065
                 }
             }
         }
+
+        public void RunnigCD(double V, double I1, double I2, int row)
+        {
+            if (this.InvokeRequired)
+            {
+                showOnlineData d = new showOnlineData(RunnigCD);
+                if (this.IsHandleCreated && !this.IsDisposed && thread_grf.IsAlive)
+                {
+                    this.Invoke(d, new object[] { V, I1, I2, row });
+                }
+
+            }
+            else
+            {
+                int T1 = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000);
+                int T2 = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);
+                int Ttotal = T1 + T2;
+                double x = V / Ttotal;
+                int Cycle = (int)x * Ttotal;
+
+                if (V <= (T1 + Cycle))
+                {
+                    this.OnlineChart.Series[2].Points.AddXY(V, double.NaN);
+                    this.OnlineChart.Series[1].Points.AddXY(V, I1 - I2);///// رسم گراف اصلی
+                }
+                else
+                {
+                    this.OnlineChart.Series[1].Points.AddXY(V, double.NaN);
+                    this.OnlineChart.Series[2].Points.AddXY(V, I1 - I2);///// رسم گراف اصلی
+                }
+
+
+
+                VoltageStepArray.Add(V);//حاوی استپ های ولتاژی
+                othertech_val3.Add(I1 - I2);
+
+                shomar_othertech++;
+
+                mainf.toolStripProgressBar1.Value++;
+                if (mainf.toolStripProgressBar1.Value == 100)
+                    mainf.toolStripProgressBar1.Value = 0;
+
+                if (!flag_running)
+                {
+                    mainf.toolStripProgressBar1.Visible = false;
+                    //do_smooth_Run_Time(false, Already_Drawing_Graph);
+                    mainf.xyLabel.Visible = true;
+                    flag_running = false;
+                    //if (thread_grf != null)
+                    //    if (thread_grf.ThreadState == ThreadState.Running)
+                    //        thread_grf.Abort();
+
+                    OnlineChart.Update();
+                }
+            }
+        }
+
 
         private void Run_key()
         {
@@ -2722,7 +2721,6 @@ namespace Skydat.forms2065
 
                         case 4://CV   
                             run_key_tch4(TechSeries);//به علت داشتن سیکل ذخیره فایل و نرم کردن درون توابع زیرمجموعه انجام می شود
-                            
                             //dschart1.chartlist1_run.Rows[TechSeries][13] = movedata.main_cycle;//به علت این که سیکل دارد و هنگام اجرا خانه این فیلد مورد استفاده قرار میگیرد بنابراین با اجرای این تابع دیتای سیکل را از بین نمیبریم
                             if (cv_stop)
                             {
@@ -2796,7 +2794,7 @@ namespace Skydat.forms2065
                             break;
 
                         case 16://RT
-                            run_key_tch16(TechSeries);
+                            run_key_tch15(TechSeries);
                             if (!runerror)
                             {
                                 transferdata(TechSeries, 1);
@@ -3218,6 +3216,7 @@ namespace Skydat.forms2065
             //dorun2_costum(row);
             doRun2_1(row);
         }
+
         private void run_key_tch14(int row)
         {
             N_gtv = false;
@@ -3236,12 +3235,7 @@ namespace Skydat.forms2065
         }
         private void run_key_tch15(int row)
         {
-            N_gtv = false;
-            dorun2_costum_2(row);
-        }
-        private void run_key_tch16(int row)
-        {
-            dorun2_costum_2(row);
+            OCP_Reading(row);
         }
 
         public void Runf(byte rng, bool precondtion)
@@ -3548,11 +3542,6 @@ namespace Skydat.forms2065
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void OnlineChart_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void OnlineChart_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle) // وقتی دکمه‌ی وسط ماوس (اسکرول) فشرده شد
@@ -3740,7 +3729,7 @@ namespace Skydat.forms2065
                         {
                             for (int i = 0; i < countcv; i++)
                             {
-                                TreeNode ChildrenNode = new TreeNode($"Cycle_{i+1}") { ForeColor = color };
+                                TreeNode ChildrenNode = new TreeNode($"Cycle_{i + 1}") { ForeColor = color };
                                 ParentNode.Nodes.Add(ChildrenNode);
                             }
                         }
@@ -3825,7 +3814,9 @@ namespace Skydat.forms2065
                         {
                             mainf.grf.SetSeriesForAnalyseChart(color, ParentSeriesName);
                             mainf.grf.tChart1.Series[ParentSeriesName].Points.DataBindXY(VoltageStepArray, othertech_val3);
-                            mainf.grf.smooth_new(ParentSeriesName, VoltageStepArray, othertech_val3);
+                            if (TechNumber != 14)
+                                mainf.grf.smooth_new(ParentSeriesName, VoltageStepArray, othertech_val3);
+
                             mainf.grf.tChart1.Series[ParentSeriesName].Enabled = false;
 
                             //mainf.grf.show_Graph(color.ToArgb(), this.mainf.grf, "MainChart", othertech_val0, othertech_val3, true);
@@ -4130,7 +4121,7 @@ namespace Skydat.forms2065
                 mainSerialPort.Write(Temp.ToString() + "@");
                 Temp = (int)double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString());//quesent time
                 mainSerialPort.Write(Temp.ToString() + "@");
-                if ((int)Tech_Number == 0)
+                if (Tech_Number == 0)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
@@ -4143,10 +4134,10 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 1)
+                else if (Tech_Number == 1)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
-                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
+                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
                     mainSerialPort.Write(Temp.ToString() + "@");
@@ -4158,10 +4149,10 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 2)
+                else if (Tech_Number == 2)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
-                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
+                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
                     mainSerialPort.Write(Temp.ToString() + "@");
@@ -4171,20 +4162,20 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) * 1000);//ph
                     mainSerialPort.Write(Temp.ToString() + "@");
-                    Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][10].ToString()) * 1000);
+                    Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][10].ToString()) * 1000);//pw
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 3)
+                else if (Tech_Number == 3)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
-                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
+                    Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) * 1000);//e2
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) * 1000);//hs
                     mainSerialPort.Write(Temp.ToString() + "@");
-                    Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000);// t1 
+                    Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000);//t1 
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) * 1000);//ph
                     mainSerialPort.Write(Temp.ToString() + "@");
@@ -4193,7 +4184,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 4)
+                else if (Tech_Number == 4)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
@@ -4210,7 +4201,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 5)
+                else if (Tech_Number == 5)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
@@ -4224,7 +4215,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(".");
 
                 }
-                if ((int)Tech_Number == 6)
+                else if (Tech_Number == 6)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
@@ -4241,7 +4232,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 7)
+                else if (Tech_Number == 7)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);
@@ -4259,7 +4250,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(".");
 
                 }
-                if ((int)Tech_Number == 8)
+                else if (Tech_Number == 8)
                 {
                     //Tech_Number = Range1;
                     //serialPort2.Write(Tech_Number.ToString() + "@");
@@ -4273,7 +4264,7 @@ namespace Skydat.forms2065
                     //serialPort2.Write(Temp.ToString() + "@");
                     //serialPort2.Write("finish_p");
                 }
-                if ((int)Tech_Number == 9)
+                else if (Tech_Number == 9)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
@@ -4285,14 +4276,14 @@ namespace Skydat.forms2065
                     Settxtfill_func(2, $"cpc_mode={Temp}", 2, 1);
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
+
                     Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
                     ti = 0.02;
                     if (Analiz_T3 > 100)
                         ti = ((int)(Analiz_T3 / 100)) * ti;
-                    //serialPort2.Write("finish_p");
 
                 }
-                if ((int)Tech_Number == 10)
+                else if (Tech_Number == 10)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
@@ -4320,7 +4311,7 @@ namespace Skydat.forms2065
 
                     ti = 1;
                 }
-                if ((int)Tech_Number == 11)
+                else if (Tech_Number == 11)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//e1
@@ -4346,7 +4337,7 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 12)
+                else if (Tech_Number == 12)
                 {
                     mainSerialPort.Write(StepRange.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) * 1000);//i1 
@@ -4355,49 +4346,28 @@ namespace Skydat.forms2065
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000);//t1
                     mainSerialPort.Write(Temp.ToString() + "@");
-                    if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))
+
+                    Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
+
+                    if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000 > 5024) //if (t1+t2)*1000  > 5024
                     {
-
-                        if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))//if techno >9 and techno  < 15  
-                        {
-                            Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
-
-                            if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000 > 5024) //if (t1+t2)*1000  > 5024
-                            {
-                                Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);//t2
-                                ti = ((int)(Analiz_T3 / 25)) * 0.005;//analize-t3 = (t1+t2)*1000
-                                                                     //Settxtfill_func(2, $"t_cloun3={Temp}", 2, 1);
-                            }
-                            else
-                            {
-                                Temp = (long)(5024 - (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000));
-                                ti = 1;
-
-                            }
-                            Int16 tmep_t = 0;
-                            if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != 14)
-                            {
-                                tmep_t = (Int16)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);
-                                //Settxtfill_func(2, $"analiz={tmep_t}", 2, 1);
-                                mainSerialPort.Write(tmep_t.ToString() + "@");
-                                mainSerialPort.Write(".");
-
-                            }
-                        }
-                        else  //Tch=13
-                        {
-
-                            Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
-                            ti = 0.02;
-                            if (Analiz_T3 > 100)
-                                ti = ((int)(Analiz_T3 / 100)) * ti;
-
-                        }
-
-                        // V = ti; 
+                        Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);//t2
+                        ti = ((int)(Analiz_T3 / 25)) * 0.005;//analize-t3 = (t1+t2)*1000
+                                                             //Settxtfill_func(2, $"t_cloun3={Temp}", 2, 1);
                     }
+                    else
+                    {
+                        Temp = (long)(5024 - (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000));
+                        ti = 1;
+
+                    }
+                    Int16 tmep_t = 0;
+                    tmep_t = (Int16)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);
+                    //Settxtfill_func(2, $"analiz={tmep_t}", 2, 1);
+                    mainSerialPort.Write(tmep_t.ToString() + "@");
+                    mainSerialPort.Write(".");
                 }
-                if ((int)Tech_Number == 14)
+                else if (Tech_Number == 14)
                 {
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) * 1000);//ecut 
                     mainSerialPort.Write(Temp.ToString() + "@");
@@ -4416,112 +4386,36 @@ namespace Skydat.forms2065
                     //Settxtfill_func(2, $"analiz={Temp}", 2, 1);
                     mainSerialPort.Write(".");
 
-                    if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))
+                    Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
+
+                    if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000 > 5024) //if (t1+t2)*1000  > 5024
                     {
+                        Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);//t2
+                        ti = ((int)(Analiz_T3 / 25)) * 0.005;//analize-t3 = (t1+t2)*1000
+                                                             //Settxtfill_func(2, $"t_cloun3={Temp}", 2, 1);
+                    }
+                    else
+                    {
+                        Temp = (long)(5024 - (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000));
+                        ti = 1;
 
-                        if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) < 15))//if techno >9 and techno  < 15  
-                        {
-                            Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
-
-                            if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000 > 5024) //if (t1+t2)*1000  > 5024
-                            {
-                                Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);//t2
-                                ti = ((int)(Analiz_T3 / 25)) * 0.005;//analize-t3 = (t1+t2)*1000
-                                                                     //Settxtfill_func(2, $"t_cloun3={Temp}", 2, 1);
-                            }
-                            else
-                            {
-                                Temp = (long)(5024 - (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000));
-                                ti = 1;
-
-                            }
-                            Int16 tmep_t = 0;
-                            if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != 14)
-                            {
-                                tmep_t = (Int16)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);
-
-                                mainSerialPort.Write(tmep_t.ToString() + "@");
-
-                            }
-                        }
-                        else  //Tch=13
-                        {
-
-                            Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
-                            ti = 0.02;
-                            if (Analiz_T3 > 100)
-                                ti = ((int)(Analiz_T3 / 100)) * ti;
-
-                        }
-
-                        // V = ti; 
                     }
 
-                    //serialPort2.Write("finish_p");
                 }
-                if ((int)Tech_Number == 15)
+                else if (Tech_Number == 15)
                 {
                     Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000);//t1
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
-                    if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 15))
-                    {
 
-                        if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) > 9) && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) <= 15))//if techno >9 and techno  < 15  
-                        {
-                            Analiz_T3 = (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000;//t1+t2
-
-                            if ((double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString())) * 1000 > 5024) //if (t1+t2)*1000  > 5024
-                            {
-                                Temp = (long)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);//t2
-                                ti = ((int)(Analiz_T3 / 25)) * 0.005;//analize-t3 = (t1+t2)*1000
-                                                                     //Settxtfill_func(2, $"t_cloun3={Temp}", 2, 1);
-                            }
-                            else
-                            {
-                                Temp = (long)(5024 - (double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) * 1000));
-                                ti = 1;
-
-                            }
-                            //if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != 14)
-                            //{
-                            //    tmep_t = (Int16)(double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) * 1000);
-
-                            //    //serialPort2.Write(tmep_t.ToString() + "@");
-                            //    //serialPort2.Write(".");
-
-                            //}
-                        }
-                        else  //Tch=13
-                        {
-
-                            Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
-                            ti = 0.02;
-                            if (Analiz_T3 > 100)
-                                ti = ((int)(Analiz_T3 / 100)) * ti;
-
-                        }
-
-                        // V = ti; 
-                    }
-
-                    //serialPort2.Write("finish_p");
                 }
-                if ((int)Tech_Number == 16)
+                else if (Tech_Number == 16)
                 {
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()));//for low cpc,and high cpc
-
                     mainSerialPort.Write(Temp.ToString() + "@");
                     Temp = (int)(double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()));
-
                     mainSerialPort.Write(Temp.ToString() + "@");
                     mainSerialPort.Write(".");
-
-                    //Analiz_T3 = double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString());//t1
-                    //ti = 0.02;
-                    //if (Analiz_T3 > 100) ti = ((int)(Analiz_T3 / 100)) * ti;
-                    //serialPort2.Write("finish_p");
-
                 }
             }
         }
@@ -4573,33 +4467,6 @@ namespace Skydat.forms2065
                 throw;
             }
 
-        }
-
-        public static List<double> AdaptiveSmooth(List<double> data, int windowSize = 5, double gradientThreshold = 0.02)
-        {
-            var smoothed = new List<double>(data.Count);
-            int halfWindow = windowSize / 2;
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                double sum = 0;
-                double weightSum = 0;
-
-                for (int j = -halfWindow; j <= halfWindow; j++)
-                {
-                    int idx = i + j;
-                    if (idx < 0 || idx >= data.Count) continue;
-
-                    double gradient = Math.Abs(data[idx] - data[i]);
-                    double weight = gradient < gradientThreshold ? 1.0 : 0.1; // کم‌کردن وزن در نواحی با تغییر زیاد
-                    sum += data[idx] * weight;
-                    weightSum += weight;
-                }
-
-                smoothed.Add(sum / weightSum);
-            }
-
-            return smoothed;
         }
 
         public static List<double> MedianFilter(List<double> data, int windowSize)
@@ -4660,7 +4527,6 @@ namespace Skydat.forms2065
             return result;
         }
 
-
         public void smootht9(int row1, Color color1)
         {
             //byte[] data = new byte[65000];
@@ -4672,8 +4538,8 @@ namespace Skydat.forms2065
             double Stp = 0;
             double IE = 0, I0, I1 = 0, Ec, V1, SS, Vi = 0, Tstp;
             int Ts, k, k1, ser = 0, ngtv = 0, R_cmp = 0;
-            long Fore = 0, Rev = 0; 
-            int  vn = 0, NUM, j = 0, len;
+            long Fore = 0, Rev = 0;
+            int vn = 0, NUM, j = 0, len;
             bool ctrl = false, Drvt = false, grftfl = false;
             int L_Teq; //,a;
 
@@ -4999,8 +4865,6 @@ namespace Skydat.forms2065
                     time_cha_chc[shomar_cha_chc] /= 10;
                 }
 
-
-
                 datas2_state[shomar_cha_chc] = 1;
 
                 if (SampleRateMultiplier != 0)
@@ -5257,14 +5121,13 @@ namespace Skydat.forms2065
         {
             forms2065.frmshowdata frm = new forms2065.frmshowdata();
             frm.listView1.Items.Clear();
-            for (int i = 0; i < OnlineChart.Series[0].Points.Count; i++)
+            for (int i = 0; i < VoltageStepArray.Count; i++)
             {
-                frm.listView1.Items.Add(OnlineChart.Series[0].Points[i].XValue + "          " + OnlineChart.Series[0].Points[i].YValues[0]);
+                frm.listView1.Items.Add(VoltageStepArray[i] + "          " + othertech_val3[i]);
             }
             frm.StartPosition = FormStartPosition.CenterScreen;
             frm.ShowDialog();
         }
-
-
     }
+
 }

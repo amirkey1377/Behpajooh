@@ -405,7 +405,7 @@ namespace Skydat.forms2065
                         string OldTitle = tChart1.ChartAreas[0].AxisY.Title;
                         if ((NewTitle != OldTitle) & (OldTitle != ""))
                         {
-                            MessageBox.Show("تکنیک انتخاب شده قابل مقایسه با تکنیک های قبلی نیست !", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show(".تکنیک انتخاب شده قابل مقایسه با تکنیک های قبلی نیست !\n .به همین دلیل نمایش داده نمیشود", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             node.Checked = false;
                             return;
                         }
@@ -444,7 +444,7 @@ namespace Skydat.forms2065
                     string OldTitle = tChart1.ChartAreas[0].AxisY.Title;
                     if ((NewTitle != OldTitle) & (OldTitle != ""))
                     {
-                        MessageBox.Show("تکنیک انتخاب شده قابل مقایسه با تکنیک های قبلی نیست", "Conflict" ,MessageBoxButtons.OK ,MessageBoxIcon.Exclamation);
+                        MessageBox.Show(".تکنیک انتخاب شده قابل مقایسه با تکنیک های قبلی نیست !\n .به همین دلیل نمایش داده نمیشود", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         node.Checked = false;
                         return;
                     }

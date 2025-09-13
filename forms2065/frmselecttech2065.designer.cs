@@ -144,7 +144,6 @@ namespace Skydat.forms2065
             this.btnZoom = new System.Windows.Forms.Button();
             this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblTechDescription = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lblTechName = new System.Windows.Forms.Label();
             this.contextMenuSelectedTech = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,6 +161,8 @@ namespace Skydat.forms2065
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.btnOCP = new System.Windows.Forms.Button();
             this.panel6.SuspendLayout();
             this.tabParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -179,6 +180,7 @@ namespace Skydat.forms2065
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
             this.contextMenuSelectedTech.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel6
@@ -198,6 +200,7 @@ namespace Skydat.forms2065
             this.tabParam.Controls.Add(this.tabPage4);
             this.tabParam.Controls.Add(this.tabPage5);
             this.tabParam.Controls.Add(this.tabPage6);
+            this.tabParam.Controls.Add(this.tabPage7);
             resources.ApplyResources(this.tabParam, "tabParam");
             this.tabParam.Name = "tabParam";
             this.tabParam.SelectedIndex = 0;
@@ -968,6 +971,7 @@ namespace Skydat.forms2065
             this.toolstripChart.Name = "toolstripChart";
             this.toolstripChart.Stretch = true;
             this.toolstripChart.TabStop = true;
+            this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
             this.toolstripChart.Resize += new System.EventHandler(this.toolstripChart_Resize);
             // 
             // tsbNew
@@ -1033,7 +1037,7 @@ namespace Skydat.forms2065
             // panel8
             // 
             this.panel8.AllowDrop = true;
-            this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.BackColor = System.Drawing.Color.Transparent;
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel8.Controls.Add(this.label16);
             this.panel8.Controls.Add(this.radioButton7);
@@ -1148,7 +1152,6 @@ namespace Skydat.forms2065
             this.panel3.Controls.Add(this.chartApplayTech);
             this.panel3.Controls.Add(this.panel8);
             this.panel3.Controls.Add(this.lblTechDescription);
-            this.panel3.Controls.Add(this.checkBox1);
             this.panel3.Controls.Add(this.lblTechName);
             this.panel3.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panel3, "panel3");
@@ -1174,6 +1177,9 @@ namespace Skydat.forms2065
             // 
             this.chartApplayTech.BackColor = System.Drawing.Color.Transparent;
             chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
+            chartArea1.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.White;
+            chartArea1.AxisX.ScrollBar.IsPositionedInside = false;
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chartApplayTech.ChartAreas.Add(chartArea1);
@@ -1194,15 +1200,6 @@ namespace Skydat.forms2065
             this.lblTechDescription.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.lblTechDescription, "lblTechDescription");
             this.lblTechDescription.Name = "lblTechDescription";
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.TabStop = false;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // lblTechName
             // 
@@ -1331,6 +1328,20 @@ namespace Skydat.forms2065
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.btnOCP);
+            resources.ApplyResources(this.tabPage7, "tabPage7");
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // btnOCP
+            // 
+            this.btnOCP.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.btnOCP, "btnOCP");
+            this.btnOCP.Name = "btnOCP";
+            this.btnOCP.UseVisualStyleBackColor = true;
+            // 
             // frmselecttech2065
             // 
             resources.ApplyResources(this, "$this");
@@ -1372,11 +1383,11 @@ namespace Skydat.forms2065
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).EndInit();
             this.contextMenuSelectedTech.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).EndInit();
+            this.tabPage7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1508,13 +1519,14 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Label Description_LSV;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.ComboBox comboBoxRTtech;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartApplayTech;
         private System.Windows.Forms.Button btnZoom;
         private System.Windows.Forms.PictureBox picBoxOcp;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button btnOCP;
     }
 }
 
