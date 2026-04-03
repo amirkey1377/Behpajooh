@@ -32,11 +32,11 @@ namespace Skydat.forms2065
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsocpTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.xyLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.TechStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.colAA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +74,7 @@ namespace Skydat.forms2065
             this.TechStatus,
             this.toolStripProgressBar1,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 937);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1018, 24);
             this.statusStrip1.TabIndex = 6;
@@ -96,13 +96,6 @@ namespace Skydat.forms2065
             this.tsocpTime.AutoSize = false;
             this.tsocpTime.Name = "tsocpTime";
             this.tsocpTime.Size = new System.Drawing.Size(120, 19);
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.AutoSize = false;
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(210, 19);
             // 
             // xyLabel
             // 
@@ -131,6 +124,13 @@ namespace Skydat.forms2065
             // 
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 18);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.AutoSize = false;
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.Red;
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(210, 19);
             // 
             // colAA
             // 
@@ -187,7 +187,7 @@ namespace Skydat.forms2065
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1018, 663);
+            this.tabControl1.Size = new System.Drawing.Size(1018, 937);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -198,7 +198,7 @@ namespace Skydat.forms2065
             this.tabPage2.Location = new System.Drawing.Point(124, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(890, 655);
+            this.tabPage2.Size = new System.Drawing.Size(890, 929);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Select Techniques and set parameters";
             // 
@@ -208,7 +208,7 @@ namespace Skydat.forms2065
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(884, 649);
+            this.panel1.Size = new System.Drawing.Size(884, 923);
             this.panel1.TabIndex = 0;
             // 
             // tabPage1
@@ -217,7 +217,7 @@ namespace Skydat.forms2065
             this.tabPage1.Location = new System.Drawing.Point(124, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(890, 655);
+            this.tabPage1.Size = new System.Drawing.Size(890, 929);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Show Running Techniques";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -228,7 +228,7 @@ namespace Skydat.forms2065
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(884, 649);
+            this.panel2.Size = new System.Drawing.Size(884, 923);
             this.panel2.TabIndex = 1;
             // 
             // tabPage3
@@ -236,7 +236,7 @@ namespace Skydat.forms2065
             this.tabPage3.Controls.Add(this.panel3);
             this.tabPage3.Location = new System.Drawing.Point(124, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(890, 655);
+            this.tabPage3.Size = new System.Drawing.Size(890, 929);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Show Results and Analyse ";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -247,7 +247,7 @@ namespace Skydat.forms2065
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(890, 655);
+            this.panel3.Size = new System.Drawing.Size(890, 929);
             this.panel3.TabIndex = 1;
             // 
             // tabPage4
@@ -255,7 +255,7 @@ namespace Skydat.forms2065
             this.tabPage4.Controls.Add(this.panel4);
             this.tabPage4.Location = new System.Drawing.Point(124, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(890, 655);
+            this.tabPage4.Size = new System.Drawing.Size(890, 929);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Show temp files";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@ namespace Skydat.forms2065
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(890, 655);
+            this.panel4.Size = new System.Drawing.Size(890, 929);
             this.panel4.TabIndex = 1;
             // 
             // tabPage5
@@ -274,7 +274,7 @@ namespace Skydat.forms2065
             this.tabPage5.Controls.Add(this.panel5);
             this.tabPage5.Location = new System.Drawing.Point(124, 4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(890, 655);
+            this.tabPage5.Size = new System.Drawing.Size(890, 929);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Run in offline state";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@ namespace Skydat.forms2065
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(890, 655);
+            this.panel5.Size = new System.Drawing.Size(890, 929);
             this.panel5.TabIndex = 1;
             // 
             // frmMain2065
@@ -296,7 +296,7 @@ namespace Skydat.forms2065
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1018, 687);
+            this.ClientSize = new System.Drawing.Size(1018, 961);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.statusStrip1);
@@ -305,6 +305,7 @@ namespace Skydat.forms2065
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(1000, 700);
             this.Name = "frmMain2065";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PGS 2066";

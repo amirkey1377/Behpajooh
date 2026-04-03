@@ -282,6 +282,35 @@ namespace Skydat.classes2065
                                     s = "            ";
                                 }
                                 catch { }
+                            if ((s.Substring(9) == "Battery") && s.LastIndexOf("Technic") >= 0 && s != "")
+                                try
+                                {
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.I1 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.I2 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.EUP = Convert.ToDouble(s.Substring(4));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.EDO = Convert.ToDouble(s.Substring(4));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.EquilibriumTime = Convert.ToDouble(s.Substring(17));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.T1 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.T2 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.batteryprms.Cycle = Convert.ToDouble(s.Substring(7));
+                                    s = Fl.ReadLine();
+                                    if (s != null && s.Trim().Length >= 7)
+                                    {
+                                        if (s.Trim().Substring(0, 7) == "comment")
+                                        {
+                                            clasglobal.batteryprms.comment1 = s.Substring(8);
+                                        }
+                                        else
+                                            clasglobal.batteryprms.comment1 = "";
+
+                                    }
+                                    else
+                                    {
+                                        clasglobal.batteryprms.comment1 = "";
+                                    }
+                                    s = "            ";
+                                }
+                                catch { }
                             if ((s.Substring(9) == "CD") && s.LastIndexOf("Technic") >= 0 && s != "")
                                 try
                                 {
@@ -298,15 +327,15 @@ namespace Skydat.classes2065
                                     {
                                         if (s.Trim().Substring(0, 7) == "comment")
                                         {
-                                            clasglobal.chpprms.comment1 = s.Substring(8);
+                                            clasglobal.cdprms.comment1 = s.Substring(8);
                                         }
                                         else
-                                            clasglobal.chpprms.comment1 = "";
+                                            clasglobal.cdprms.comment1 = "";
 
                                     }
                                     else
                                     {
-                                        clasglobal.chpprms.comment1 = "";
+                                        clasglobal.cdprms.comment1 = "";
                                     }
                                     s = "            ";
                                 }
@@ -316,10 +345,23 @@ namespace Skydat.classes2065
                                 {
                                     s = Fl.ReadLine(); clasglobal.ocpprms.Time = Convert.ToDouble(s.Substring(5));
                                     //s = Fl.ReadLine(); //clasglobal.ocpprms.Cycles = Convert.ToDouble(s.Substring(7));
-                                    //s = "            ";
+                                    s = "            ";
                                 }
                                 catch { }
                             flag1 = true;
+
+                            if ((s.Substring(9) == "Tafel") && s.LastIndexOf("Technic") >= 0 && s != "")
+                                try
+                                {
+                                    s = Fl.ReadLine(); clasglobal.tafelprms.E1 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.tafelprms.E2 = Convert.ToDouble(s.Substring(3));
+                                    s = Fl.ReadLine(); clasglobal.tafelprms.HStep = Convert.ToDouble(s.Substring(6));
+                                    s = Fl.ReadLine(); clasglobal.tafelprms.ScanRate = Convert.ToDouble(s.Substring(10));
+                                    s = Fl.ReadLine(); clasglobal.tafelprms.TStep = Convert.ToDouble(s.Substring(6));
+                                    s = Fl.ReadLine();
+                                    s = "            ";
+                                }
+                                catch { }
                         }
                         if (tchName == "Singel" && flag1)
                         {
@@ -421,6 +463,18 @@ namespace Skydat.classes2065
                 Fl.WriteLine("TStep:" + clasglobal.lsvprms.TStep.ToString());
             }
 
+            if (tchName == "Tafel" || tchName == "All")
+            {
+                Fl.WriteLine("");
+                Fl.WriteLine("Technic: Tafel");
+                //Fl.WriteLine("TchNo: " + LSV.ToString());
+                Fl.WriteLine("E1:" + clasglobal.tafelprms.E1.ToString());
+                Fl.WriteLine("E2:" + clasglobal.tafelprms.E2.ToString());
+                Fl.WriteLine("HStep:" + clasglobal.tafelprms.HStep.ToString());
+                Fl.WriteLine("Scan Rate:" + clasglobal.tafelprms.ScanRate.ToString());
+                Fl.WriteLine("TStep:" + clasglobal.tafelprms.TStep.ToString());
+            }
+
             if (tchName == "CPC" || tchName == "All")
             {
                 Fl.WriteLine("");
@@ -458,6 +512,21 @@ namespace Skydat.classes2065
                 Fl.WriteLine("T1:" + clasglobal.chpprms.T1.ToString());
                 Fl.WriteLine("T2:" + clasglobal.chpprms.T2.ToString());
                 Fl.WriteLine("Cycles:" + clasglobal.chpprms.Cycle.ToString());
+            }
+
+            if (tchName == "Battery" || tchName == "All")
+            {
+                Fl.WriteLine("");
+                Fl.WriteLine("Technic: Battery");
+                //Fl.WriteLine("TchNo: " + CA.ToString());
+                Fl.WriteLine("I1:" + clasglobal.batteryprms.I1.ToString());
+                Fl.WriteLine("I2:" + clasglobal.batteryprms.I2.ToString());
+                Fl.WriteLine("EUP:" + clasglobal.batteryprms.EUP.ToString());
+                Fl.WriteLine("EDO:" + clasglobal.batteryprms.EDO.ToString());
+                Fl.WriteLine("Equilibrium Time:" + clasglobal.batteryprms.EquilibriumTime.ToString());
+                Fl.WriteLine("T1:" + clasglobal.batteryprms.T1.ToString());
+                Fl.WriteLine("T2:" + clasglobal.batteryprms.T2.ToString());
+                Fl.WriteLine("Cycles:" + clasglobal.batteryprms.Cycle.ToString());
             }
 
             if (tchName == "CC" || tchName == "All")
@@ -853,6 +922,24 @@ namespace Skydat.classes2065
 
                 }
 
+                if (tchName == "Tafel" || tchName == "All")
+                {
+                    Fl.WriteLine("\n");
+                    Fl.WriteLine("Technic: Tafel");
+                    //Fl.WriteLine("TchNo: " + LSV.ToString());
+                    Fl.WriteLine("E1:" + dr[3].ToString());
+                    Fl.WriteLine("E2:" + dr[4].ToString());
+                    Fl.WriteLine("HStep:" + dr[6].ToString());
+                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
+                    Fl.WriteLine("TStep:" + dr[9].ToString());
+                    if (typedevice == 2)
+                    {
+                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
+                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
+                    }
+
+                }
+
                 if (tchName == "CPC" || tchName == "All")
                 {
                     Fl.WriteLine("\n");
@@ -874,6 +961,26 @@ namespace Skydat.classes2065
                 {
                     Fl.WriteLine("\n");
                     Fl.WriteLine("Technic: CP");
+                    //Fl.WriteLine("TchNo: " + CA.ToString());
+                    Fl.WriteLine("I1:" + dr[17].ToString());
+                    Fl.WriteLine("I2:" + dr[18].ToString());
+                    Fl.WriteLine("Vup:" + dr[5].ToString());
+                    Fl.WriteLine("Vdo:" + dr[13].ToString());
+                    Fl.WriteLine("T1:" + double.Parse(dr[15].ToString()) * 1000);
+                    Fl.WriteLine("T2:" + double.Parse(dr[16].ToString()) * 1000);
+                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
+                    Fl.WriteLine("Cycle:" + double.Parse(dr[12].ToString()));
+                    if (typedevice == 2)
+                    {
+                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
+                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
+                    }
+                }
+
+                if (tchName == "Battery" || tchName == "All")
+                {
+                    Fl.WriteLine("\n");
+                    Fl.WriteLine("Technic: Battery");
                     //Fl.WriteLine("TchNo: " + CA.ToString());
                     Fl.WriteLine("I1:" + dr[17].ToString());
                     Fl.WriteLine("I2:" + dr[18].ToString());

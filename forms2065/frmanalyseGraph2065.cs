@@ -142,7 +142,7 @@ namespace Skydat.forms2065
             {
                 ChartConfiq();
 
-                
+
 
             }
             catch (Exception x)
@@ -388,10 +388,35 @@ namespace Skydat.forms2065
             drawline1.removeall_master();
         }
 
+        bool suppressAfterCheck = false;
+
+        private void treeView3_DoubleClick(object sender, EventArgs e)
+        {
+            //TreeViewEventArgs en = new TreeViewEventArgs(TechTreeview.SelectedNode);
+            //treeView3_AfterCheck(sender, en);
+
+            // جلوگیری از تریگر دوباره‌ی AfterCheck در دابل کلیک
+            suppressAfterCheck = true;
+        }
+
+        private void TechTreeview_BeforeCheck(object sender, TreeViewCancelEventArgs e)
+        {
+            // اگر دابل کلیک شده، تغییر را لغو کن
+            if (suppressAfterCheck)
+            {
+                e.Cancel = true;
+                suppressAfterCheck = false; // فقط یک بار بی‌اثر کن
+            }
+        }
+
         private void treeView3_AfterCheck(object sender, TreeViewEventArgs e)
         {
             TreeView treeView = sender as TreeView; // Cast sender to TreeView
             TreeNode node = e.Node; // Get the node that was checked/unchecked
+
+            if (suppressAfterCheck)
+                return;
+
 
             if (node.Level == 2)
             {
@@ -456,6 +481,8 @@ namespace Skydat.forms2065
                         ChildrenNode.Checked = true;
                         tChart1.Series[$"{ChildrenNode.Text}-{node.Index}"].Enabled = true;
                     }
+                    if (node.Text.Contains("Tafel"))
+                        btnCalcTafel.Visible = true;
 
                     tChart1.Series[$"{node.Text}-{node.Index}"].Enabled = true;
                     TechTreeview.AfterCheck += treeView3_AfterCheck;
@@ -478,6 +505,20 @@ namespace Skydat.forms2065
                     }
                     tChart1.Series[$"{node.Text}-{node.Index}"].Enabled = false;
                     tChart1.ChartAreas[0].RecalculateAxesScale();
+
+                    if (node.Text.Contains("Tafel"))
+                    {
+                        btnCalcTafel.Visible = false;
+                        foreach (TreeNode treenode in TechTreeview.Nodes[0].Nodes)
+                        {
+                            if (treenode.Checked && treenode.Text.Contains("Tafel"))
+                            {
+                                btnCalcTafel.Visible = true;
+                                break;
+                            }
+                        }
+                    }
+                    
 
                     TechTreeview.AfterCheck += treeView3_AfterCheck;
 
@@ -541,6 +582,7 @@ namespace Skydat.forms2065
                     }
                 }
             }
+
         }
 
         private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
@@ -596,58 +638,58 @@ namespace Skydat.forms2065
             {
 
                 for (int i = 0; i <= ofd.FileNames.GetUpperBound(0); i++)
-                if (ofd.FileNames.GetValue(i).ToString() != "")
-                {
-                    cycle = 1;
+                    if (ofd.FileNames.GetValue(i).ToString() != "")
+                    {
+                        cycle = 1;
 
-                    string FilePath = ofd.FileNames.GetValue(i).ToString();//address and filename
-                    int k = FilePath.Length - 1;
-                    // distinct file names from file path
-                    string FileNameWithFormat = "";
-                    while (k > 0)
-                        if (FilePath[k] == '\\')
+                        string FilePath = ofd.FileNames.GetValue(i).ToString();//address and filename
+                        int k = FilePath.Length - 1;
+                        // distinct file names from file path
+                        string FileNameWithFormat = "";
+                        while (k > 0)
+                            if (FilePath[k] == '\\')
+                            {
+                                FileNameWithFormat = FilePath.Substring(k + 1);  // mn_CV.dat
+                                break;
+                            }
+                            else
+                                k--;
+
+                        string FileNameWithoutFormat = FileNameWithFormat.Substring(0, FileNameWithFormat.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
+
+                        restore_Data(FilePath, FileNameWithoutFormat);
+
+
+                        if (tech == clasglobal.CV)
                         {
-                            FileNameWithFormat = FilePath.Substring(k + 1);  // mn_CV.dat
-                            break;
+                            // ایجاد یک نود جدید
+                            TreeNode ParentNode = new TreeNode(FileNameWithoutFormat);
+                            // تنظیم رنگ متن نود
+                            ParentNode.ForeColor = GetColor();
+                            // اضافه کردن نود جدید به نود صفرم TreeView
+                            for (int Counter = 1; Counter <= cycle; Counter++)
+                            {
+                                TreeNode ChildrenNode = new TreeNode($"Cycle_{Counter}") { ForeColor = ParentNode.ForeColor };
+                                ParentNode.Nodes.Add(ChildrenNode);
+                            }
+                            TechTreeview.Nodes[0].Nodes.Add(ParentNode);
                         }
                         else
-                            k--;
-
-                    string FileNameWithoutFormat = FileNameWithFormat.Substring(0, FileNameWithFormat.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
-
-                    restore_Data(FilePath, FileNameWithoutFormat);
-
-
-                    if (tech == clasglobal.CV)
-                    {
-                        // ایجاد یک نود جدید
-                        TreeNode ParentNode = new TreeNode(FileNameWithoutFormat);
-                        // تنظیم رنگ متن نود
-                        ParentNode.ForeColor = GetColor();
-                        // اضافه کردن نود جدید به نود صفرم TreeView
-                        for (int Counter = 1; Counter <= cycle; Counter++)
                         {
-                            TreeNode ChildrenNode = new TreeNode($"Cycle_{Counter}") { ForeColor= ParentNode.ForeColor };
-                            ParentNode.Nodes.Add(ChildrenNode);
+                            //treeView3.Nodes[0].Nodes.Add(fName);  // CV.dat
+                            // ایجاد یک نود جدید
+                            TreeNode newNode = new TreeNode(FileNameWithoutFormat);
+                            // تنظیم رنگ متن نود
+                            newNode.ForeColor = GetColor();
+                            // اضافه کردن نود جدید به نود صفرم TreeView
+                            TechTreeview.Nodes[0].Nodes.Add(newNode);
                         }
-                        TechTreeview.Nodes[0].Nodes.Add(ParentNode);
-                    }
-                    else
-                    {
-                        //treeView3.Nodes[0].Nodes.Add(fName);  // CV.dat
-                        // ایجاد یک نود جدید
-                        TreeNode newNode = new TreeNode(FileNameWithoutFormat);
-                        // تنظیم رنگ متن نود
-                        newNode.ForeColor = GetColor();
-                        // اضافه کردن نود جدید به نود صفرم TreeView
-                        TechTreeview.Nodes[0].Nodes.Add(newNode);
+
+                        cycle = 1;
+                        Text = ofd.FileNames.GetValue(i).ToString();
                     }
 
-                    cycle = 1;
-                    Text = ofd.FileNames.GetValue(i).ToString();
-                }
 
-            
                 if (TechTreeview.Nodes[0].Nodes.Count > 0)
                 {
                     TechTreeview.SelectedNode = TechTreeview.Nodes[0].LastNode;
@@ -709,12 +751,12 @@ namespace Skydat.forms2065
                             {
                                 if (s.IndexOf(':') >= 0)
                                 {
-                                    for (int i = 0; i < 16; i++)
+                                    for (int i = 0; i < 20; i++)
                                         if (clasglobal.TechName[i] == s.Substring(s.IndexOf(':') + 1).Trim())
                                         {
                                             tch = i;
                                             string TechName = clasglobal.TechName[i].ToLower();
-                                            if (TechName == "ca" || TechName == "cp" || TechName == "chc" || TechName == "cd")
+                                            if (TechName == "ca" || TechName == "cp" || TechName == "chc" || TechName == "cd" || TechName == "Battery")
                                                 smooth_state = false;
                                             else
                                                 smooth_state = true;
@@ -728,6 +770,7 @@ namespace Skydat.forms2065
 
                                 SetSeriesForAnalyseChart(seriesColor, SeriesName);
                                 tChart1.Series[SeriesName].Enabled = false;
+                                
 
                             }
                             else if (s.IndexOf("Current Range") >= 0) CR = restore_One_Data(s, "Current Range");
@@ -920,14 +963,6 @@ namespace Skydat.forms2065
                 }
                 switch (byte.Parse(dschart2.analyselist.Rows[row][0].ToString()))
                 {
-                    case clasglobal.DCV:
-                        if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][4].ToString()) != 9999) str_fillparam = str_fillparam + "HStep =" + double.Parse(dschart2.analyselist.Rows[row][4].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
-                        if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                        break;
                     case clasglobal.NPV:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
@@ -1037,7 +1072,6 @@ namespace Skydat.forms2065
                 byte Tch;
                 switch (strTch)
                 {
-                    case "DCV": Tch = clasglobal.DCV; break;
                     case "NPV": Tch = clasglobal.NPV; break;
                     case "DPV": Tch = clasglobal.DPV; break;
                     case "SWV": Tch = clasglobal.SWV; break;
@@ -1046,6 +1080,7 @@ namespace Skydat.forms2065
                     case "OCP": Tch = clasglobal.OCP; break;
                     case "CPC": Tch = clasglobal.CPC; break;
                     case "CHP": Tch = clasglobal.CHP; break;
+                    case "Battery": Tch = clasglobal.Battery; break;
                     case "CA": Tch = clasglobal.CA; break;
                     case "CC": Tch = clasglobal.CHC; break;
                     case "CD": Tch = clasglobal.CD; break;
@@ -1429,11 +1464,32 @@ namespace Skydat.forms2065
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
             int shomarcheck = 0;
+            TreeNode node = null;
             for (int i = 0; i < TechTreeview.Nodes[0].Nodes.Count; i++)
                 if (TechTreeview.Nodes[0].Nodes[i].Checked)
+                {
                     shomarcheck++;
+                    node = TechTreeview.Nodes[0].Nodes[i];
+                }
             if (shomarcheck == 1)
             {
+                drawline1.EnableDraw = true;
+
+                if (node != null && node.Text.ToLower() == "tafel")
+                {
+                    tChart2.Series.Clear();
+                    var data = tChart1.Series[$"{node.Text}-{node.Index}"].Points;
+                    var series = new Series();
+                    foreach (var item in data)
+                    {
+                        series.Points.AddXY(item.XValue, item.YValues[0]);
+                    }
+                    series.ChartType = SeriesChartType.FastLine;
+                    series.BorderWidth = 2;
+                    tChart2.Series.Add(series);
+                    return;
+                }
+
                 for (int i = 0; i < tChart1.Series.Count; i++)
                     if (tChart1.Series[i].Enabled)
                     {
@@ -1448,7 +1504,6 @@ namespace Skydat.forms2065
                         show_Graph("Tafel", mc.AR, mc.BR);
                         nindexchart2 = i;
                     }
-                drawline1.EnableDraw = true;
 
                 tChart2.Focus();
             }
@@ -2693,9 +2748,9 @@ namespace Skydat.forms2065
                             {
                                 FlagCv = true;
                                 string cycleNum = s.Substring(s.IndexOf(":") + 1);
-                                cycleNumber = Convert.ToInt32(cycleNum) -1;
+                                cycleNumber = Convert.ToInt32(cycleNum) - 1;
                                 string SeriesName = $"Cycle_{cycleNumber}-{TechTreeview.SelectedNode.Index}";
-                                Series WithoutSmothCycle = new Series(SeriesName) { Color=Color.Blue,ChartType=SeriesChartType.Line };
+                                Series WithoutSmothCycle = new Series(SeriesName) { Color = Color.Blue, ChartType = SeriesChartType.Line };
                                 tChart2.Series.Add(WithoutSmothCycle);
                                 tChart2.Series[SeriesName].Points.DataBindXY(VoltageStepArray, othertech_val1);
                                 tChart2.Series[SeriesName].Enabled = false;
@@ -2901,6 +2956,8 @@ namespace Skydat.forms2065
                 else
                     show_Graph("show_without_smoothing", VoltageStepArray, othertech_val1);
 
+                tChart2.ChartAreas[0].AxisX.Title = tChart1.ChartAreas[0].AxisX.Title;
+                tChart2.ChartAreas[0].AxisY.Title = tChart1.ChartAreas[0].AxisY.Title;
             }
             else
                 MessageBox.Show("show graph without smoothing Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
@@ -2995,7 +3052,7 @@ namespace Skydat.forms2065
             }
         }
 
-        private string ExportToExcel(int colnum1, int typecall1, string outputPath)
+        private string ExportToExcel(int colnum, int typecall, string outputPath)
         {
             //try
             //{
@@ -3127,10 +3184,10 @@ namespace Skydat.forms2065
                 var excelApp = new Microsoft.Office.Interop.Excel.Application();
                 var excelWorkbook = excelApp.Workbooks.Add(Type.Missing);
                 int i2 = 0, i1 = 0;
-                int rownum1 = typecall1 == 1 ? tChart1.Series.Sum(series => series.Points.Count) : tChart2.Series[0].Points.Count;
-                object[,] rawData = new object[rownum1 + 1, colnum1];
+                int rownum = typecall == 1 ? tChart1.Series.Sum(series => series.Points.Count) : tChart2.Series[0].Points.Count;//condition ? value_if_true : value_if_false;
+                object[,] rawData = new object[rownum + 1, colnum];
 
-                if (typecall1 == 1)
+                if (typecall == 1)
                 {
                     rawData[i2, 0] = "technique number";
                     rawData[i2, 1] = "technique name";
@@ -3142,15 +3199,37 @@ namespace Skydat.forms2065
                     foreach (TreeNode node in TechTreeview.Nodes[0].Nodes.Cast<TreeNode>().Where(n => n.Checked))
                     {
                         i1 = node.Index;
-                        for (int cc1 = 0; cc1 < tChart1.Series[i1].Points.Count; cc1++)
+                        string SeriesName = node.Text + '-' + node.Index;
+                        if (node.Nodes.Count > 0)
                         {
-                            rawData[i2, 0] = ExportedTechNumbers;
-                            rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i1][0].ToString())];
-                            rawData[i2, 2] = cc1 + 1;
-                            rawData[i2, 3] = tChart1.Series[i1].Points[cc1].XValue;
-                            rawData[i2, 4] = tChart1.Series[i1].Points[cc1].YValues[0];
-                            i2++;
+                            foreach (TreeNode item in node.Nodes)
+                            {
+                                string ChildNodeNameSeries = item.Text + '-' + node.Index;
+                                for (int cc1 = 0; cc1 < tChart1.Series[ChildNodeNameSeries].Points.Count; cc1++)
+                                {
+                                    rawData[i2, 0] = ExportedTechNumbers;
+                                    rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i1][0].ToString())] + $"_Cycle({item.Index})" ;
+                                    rawData[i2, 2] = cc1 + 1;
+                                    rawData[i2, 3] = tChart1.Series[ChildNodeNameSeries].Points[cc1].XValue;
+                                    rawData[i2, 4] = tChart1.Series[ChildNodeNameSeries].Points[cc1].YValues[0];
+                                    i2++;
+                                }
+                            }
                         }
+                        else
+                        {
+                            for (int cc1 = 0; cc1 < tChart1.Series[SeriesName].Points.Count; cc1++)
+                            {
+                                rawData[i2, 0] = ExportedTechNumbers;
+                                rawData[i2, 1] = clasglobal.TechName[int.Parse(dschart2.analyselist.Rows[i1][0].ToString())];
+                                rawData[i2, 2] = cc1 + 1;
+                                rawData[i2, 3] = tChart1.Series[SeriesName].Points[cc1].XValue;
+                                rawData[i2, 4] = tChart1.Series[SeriesName].Points[cc1].YValues[0];
+                                i2++;
+                            }
+
+                        }
+
                         ExportedTechNumbers++;
                     }
                 }
@@ -3170,16 +3249,16 @@ namespace Skydat.forms2065
                 }
 
                 string colCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                string finalColLetter = colnum1 > colCharset.Length ? colCharset[(colnum1 - 1) / colCharset.Length - 1].ToString() : "";
-                finalColLetter += colCharset[(colnum1 - 1) % colCharset.Length];
+                string finalColLetter = colnum > colCharset.Length ? colCharset[(colnum - 1) / colCharset.Length - 1].ToString() : "";
+                finalColLetter += colCharset[(colnum - 1) % colCharset.Length];
 
                 // دریافت اولین شیت اکسل و تنظیم نام آن
                 Worksheet excelSheet = (Worksheet)excelWorkbook.Sheets[1];
                 excelSheet.Name = "Behpajooh 2066";
                 excelSheet.DisplayRightToLeft = false;
-                excelSheet.get_Range($"A1:{finalColLetter}{rownum1 + 1}", Type.Missing).Value2 = rawData;
+                excelSheet.get_Range($"A1:{finalColLetter}{rownum + 1}", Type.Missing).Value2 = rawData;
                 ((Range)excelSheet.Rows[1]).Font.Bold = true;
-                for (int col = 0; col < colnum1; col++)
+                for (int col = 0; col < colnum; col++)
                     ((Range)excelSheet.Columns[col + 1]).EntireColumn.AutoFit();
 
                 excelWorkbook.SaveAs(outputPath, XlFileFormat.xlOpenXMLWorkbook); // ذخیره به عنوان .xlsx
@@ -3213,10 +3292,11 @@ namespace Skydat.forms2065
                     DefaultExt = "xlsx",  // تغییر پیش‌فرض به فرمت جدید
                     Filter = "Excel Workbook (*.xlsx)|*.xlsx|Excel 97-2003 Workbook (*.xls)|*.xls"
                 })
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
                         MessageBox.Show(ExportToExcel(5, 1, sfd.FileName), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                }
 
             }
             else
@@ -3668,6 +3748,8 @@ namespace Skydat.forms2065
                         tChart2.Titles[0].Text = "Tafel Results :      ";
                         tChart2.Titles[0].Text += "Ba=" + slp1.ToString("#0.00") + "        Bc=" + slp2.ToString("#0.00");
                     }
+
+                    btnCalcTafel.Enabled = true;
                 }
             }
         }
@@ -6180,23 +6262,10 @@ namespace Skydat.forms2065
             }
         }
 
-
-        private void treeView3_MouseClick(object sender, MouseEventArgs e)
-        {
-            TreeViewEventArgs en = new TreeViewEventArgs(TechTreeview.SelectedNode);
-            //treeView3_AfterCheck(sender, en);
-        }
-
-        private void treeView3_DoubleClick(object sender, EventArgs e)
-        {
-            TreeViewEventArgs en = new TreeViewEventArgs(TechTreeview.SelectedNode);
-            treeView3_AfterCheck(sender, en);
-        }
-
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {
             if (!point_start.IsEmpty)
-                e.Graphics.DrawLine(Pens.White, point_start, TempPoint);
+                e.Graphics.DrawLine(Pens.DarkCyan, point_start, TempPoint);
 
             for (int p = 0; p < drawline1.Lines.Count; p++)
             {
@@ -6267,11 +6336,6 @@ namespace Skydat.forms2065
             ColorChangedFlag = true;
         }
 
-        private void toolstripChart_SizeChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void ResizeHandeler(Panel Nav)
         {
 
@@ -6302,15 +6366,45 @@ namespace Skydat.forms2065
 
                 foreach (ToolStripItem item in Nav.Items)
                 {
-                    item.Width = itemWidth;
                     item.Font = new System.Drawing.Font(item.Font.FontFamily, fontSize);
+                    if (item.Name == "btnCalcTafel")
+                    {
+                        item.Font = new System.Drawing.Font(item.Font.FontFamily, fontSize, FontStyle.Bold);
+                    }
+
+                    // اندازه‌گیری طول واقعی متن
+                    Size textSize = TextRenderer.MeasureText(item.Text, item.Font);
+                    if (item.DisplayStyle == ToolStripItemDisplayStyle.Image)
+                    {
+                        textSize.Width = 0;
+                    }
+
+                    int iconWidth = 0;
+                    if (item.Image != null)
+                        iconWidth = item.Image.Width;
+
+                    // محاسبه عرض نهایی بر اساس متن + آیکن + پدینگ
+                    int newWidth = Math.Max(itemWidth, textSize.Width);
+
+                    item.Width = newWidth;
+
 
                     if (item is ToolStripButton button && button.Image != null)
                     {
                         button.Image = ResizeImage(button.Image, iconSize, iconSize);
                     }
                     item.Height = Nav.Height;
+
+                    int newNAVwidth = (newWidth * Nav.Items.Count);
+                    if (Nav.Width < newNAVwidth)
+                    {
+                        if (Nav.Name == "toolstripFile")
+                        {
+                            pnlNav.Width = newNAVwidth;
+                        }
+                    }
                 }
+                
             }
         }
 
@@ -6390,6 +6484,11 @@ namespace Skydat.forms2065
 
         }
 
+        private void panel8_SizeChanged(object sender, EventArgs e)
+        {
+            ResizeHandeler(panel8);
+        }
+
         private void btnshowaxes_1_Click(object sender, EventArgs e)
         {
             statebutton_1 = "";
@@ -6416,9 +6515,17 @@ namespace Skydat.forms2065
         private void button1_Click_2(object sender, EventArgs e)
         {
             if (statebutton_1.Trim() == "drawline")
+            {
                 statebutton_1 = "";
+                //button1.BackColor = Color.White;
+                button1.FlatAppearance.BorderColor = Color.White;
+            }
             else
+            {
                 statebutton_1 = "drawline";
+                //button1.BackColor = Color.Gray;
+                button1.FlatAppearance.BorderColor = Color.DarkCyan;
+            }
             selectpchart_func_1(false);
         }
 

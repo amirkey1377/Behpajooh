@@ -36,6 +36,12 @@ namespace Skydat.forms2065
             this.panel6 = new System.Windows.Forms.Panel();
             this.tabParam = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.Description = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.EqTime = new System.Windows.Forms.TextBox();
@@ -54,6 +60,12 @@ namespace Skydat.forms2065
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
             this.PH_DPV = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.EqTime_DPV = new System.Windows.Forms.TextBox();
@@ -79,6 +91,11 @@ namespace Skydat.forms2065
             this.rd_low_cpc = new System.Windows.Forms.RadioButton();
             this.pGrid = new System.Windows.Forms.PropertyGrid();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
             this.Description_CV = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.EqTime_CV = new System.Windows.Forms.TextBox();
@@ -99,6 +116,11 @@ namespace Skydat.forms2065
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
             this.Description_LSV = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.EqTime_LSV = new System.Windows.Forms.TextBox();
@@ -116,6 +138,35 @@ namespace Skydat.forms2065
             this.label36 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.gpBoxTafelParam = new System.Windows.Forms.GroupBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.Ts_tafel = new System.Windows.Forms.TextBox();
+            this.cmbTafelE2 = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.SR_tafel = new System.Windows.Forms.TextBox();
+            this.cmbTafelE1 = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.Hs_tafel = new System.Windows.Forms.TextBox();
+            this.E1tafel = new System.Windows.Forms.TextBox();
+            this.E2tafel = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAvgTimeTafel = new System.Windows.Forms.Label();
+            this.txtAvgTimeTafel = new System.Windows.Forms.TextBox();
+            this.CheckBoxAvgOcpTafel = new System.Windows.Forms.CheckBox();
+            this.lblmV = new System.Windows.Forms.Label();
+            this.txtDiifVoltage = new System.Windows.Forms.TextBox();
+            this.ChekBoxDiffrencial = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnOCP = new System.Windows.Forms.Button();
+            this.OcpTime = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.toolstripChart = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
@@ -140,6 +191,13 @@ namespace Skydat.forms2065
             this.checkCPsCTs = new System.Windows.Forms.CheckBox();
             this.pGrid2 = new System.Windows.Forms.PropertyGrid();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnExcell = new System.Windows.Forms.Button();
+            this.lblVoltageDiffOcpResualt = new System.Windows.Forms.Label();
+            this.lblVoltageDiffOcp = new System.Windows.Forms.Label();
+            this.lblTimeSpentOcpTafelResualt = new System.Windows.Forms.Label();
+            this.lblAvgOcpTafelResualt = new System.Windows.Forms.Label();
+            this.lblTimeSpentOcpTafel = new System.Windows.Forms.Label();
+            this.lblAvgOcpTafel = new System.Windows.Forms.Label();
             this.picBoxOcp = new System.Windows.Forms.PictureBox();
             this.btnZoom = new System.Windows.Forms.Button();
             this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -161,8 +219,7 @@ namespace Skydat.forms2065
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.treeView2 = new System.Windows.Forms.TreeView();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.btnOCP = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel6.SuspendLayout();
             this.tabParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -171,6 +228,9 @@ namespace Skydat.forms2065
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.gpBoxTafelParam.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolstripChart.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -180,7 +240,7 @@ namespace Skydat.forms2065
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
             this.contextMenuSelectedTech.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
-            this.tabPage7.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel6
@@ -210,6 +270,12 @@ namespace Skydat.forms2065
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage1.Controls.Add(this.label44);
+            this.tabPage1.Controls.Add(this.label43);
+            this.tabPage1.Controls.Add(this.label42);
+            this.tabPage1.Controls.Add(this.label41);
+            this.tabPage1.Controls.Add(this.label40);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.Description);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.EqTime);
@@ -231,6 +297,42 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             // 
+            // label44
+            // 
+            resources.ApplyResources(this.label44, "label44");
+            this.label44.ForeColor = System.Drawing.Color.Black;
+            this.label44.Name = "label44";
+            // 
+            // label43
+            // 
+            resources.ApplyResources(this.label43, "label43");
+            this.label43.ForeColor = System.Drawing.Color.Black;
+            this.label43.Name = "label43";
+            // 
+            // label42
+            // 
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.ForeColor = System.Drawing.Color.Black;
+            this.label42.Name = "label42";
+            // 
+            // label41
+            // 
+            resources.ApplyResources(this.label41, "label41");
+            this.label41.ForeColor = System.Drawing.Color.Black;
+            this.label41.Name = "label41";
+            // 
+            // label40
+            // 
+            resources.ApplyResources(this.label40, "label40");
+            this.label40.ForeColor = System.Drawing.Color.Black;
+            this.label40.Name = "label40";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Name = "label5";
+            // 
             // Description
             // 
             resources.ApplyResources(this.Description, "Description");
@@ -247,6 +349,7 @@ namespace Skydat.forms2065
             // 
             // EqTime
             // 
+            this.EqTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.EqTime, "EqTime");
             this.EqTime.ForeColor = System.Drawing.Color.Black;
             this.EqTime.Name = "EqTime";
@@ -265,6 +368,7 @@ namespace Skydat.forms2065
             // 
             // PW
             // 
+            this.PW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.PW, "PW");
             this.PW.ForeColor = System.Drawing.Color.Black;
             this.PW.Name = "PW";
@@ -283,6 +387,7 @@ namespace Skydat.forms2065
             // 
             // Comment
             // 
+            this.Comment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Comment, "Comment");
             this.Comment.Name = "Comment";
             this.Comment.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_MouseClick);
@@ -303,6 +408,7 @@ namespace Skydat.forms2065
             // 
             // SR
             // 
+            this.SR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.SR, "SR");
             this.SR.ForeColor = System.Drawing.Color.Black;
             this.SR.Name = "SR";
@@ -315,6 +421,7 @@ namespace Skydat.forms2065
             // 
             // Ts
             // 
+            this.Ts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Ts, "Ts");
             this.Ts.Name = "Ts";
             this.Ts.ReadOnly = true;
@@ -322,6 +429,7 @@ namespace Skydat.forms2065
             // 
             // Hs
             // 
+            this.Hs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Hs, "Hs");
             this.Hs.ForeColor = System.Drawing.Color.Black;
             this.Hs.Name = "Hs";
@@ -334,6 +442,7 @@ namespace Skydat.forms2065
             // 
             // E2
             // 
+            this.E2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E2, "E2");
             this.E2.ForeColor = System.Drawing.Color.Black;
             this.E2.Name = "E2";
@@ -346,6 +455,7 @@ namespace Skydat.forms2065
             // 
             // E1
             // 
+            this.E1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E1, "E1");
             this.E1.ForeColor = System.Drawing.Color.Black;
             this.E1.Name = "E1";
@@ -378,6 +488,12 @@ namespace Skydat.forms2065
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Controls.Add(this.label50);
+            this.tabPage2.Controls.Add(this.label49);
+            this.tabPage2.Controls.Add(this.label48);
+            this.tabPage2.Controls.Add(this.label47);
+            this.tabPage2.Controls.Add(this.label46);
+            this.tabPage2.Controls.Add(this.label45);
             this.tabPage2.Controls.Add(this.PH_DPV);
             this.tabPage2.Controls.Add(this.label21);
             this.tabPage2.Controls.Add(this.EqTime_DPV);
@@ -400,8 +516,45 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             // 
+            // label50
+            // 
+            resources.ApplyResources(this.label50, "label50");
+            this.label50.ForeColor = System.Drawing.Color.Black;
+            this.label50.Name = "label50";
+            // 
+            // label49
+            // 
+            resources.ApplyResources(this.label49, "label49");
+            this.label49.ForeColor = System.Drawing.Color.Black;
+            this.label49.Name = "label49";
+            // 
+            // label48
+            // 
+            resources.ApplyResources(this.label48, "label48");
+            this.label48.ForeColor = System.Drawing.Color.Black;
+            this.label48.Name = "label48";
+            // 
+            // label47
+            // 
+            resources.ApplyResources(this.label47, "label47");
+            this.label47.ForeColor = System.Drawing.Color.Black;
+            this.label47.Name = "label47";
+            // 
+            // label46
+            // 
+            resources.ApplyResources(this.label46, "label46");
+            this.label46.ForeColor = System.Drawing.Color.Black;
+            this.label46.Name = "label46";
+            // 
+            // label45
+            // 
+            resources.ApplyResources(this.label45, "label45");
+            this.label45.ForeColor = System.Drawing.Color.Black;
+            this.label45.Name = "label45";
+            // 
             // PH_DPV
             // 
+            this.PH_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.PH_DPV, "PH_DPV");
             this.PH_DPV.ForeColor = System.Drawing.Color.Black;
             this.PH_DPV.Name = "PH_DPV";
@@ -419,6 +572,7 @@ namespace Skydat.forms2065
             // 
             // EqTime_DPV
             // 
+            this.EqTime_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.EqTime_DPV, "EqTime_DPV");
             this.EqTime_DPV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_DPV.Name = "EqTime_DPV";
@@ -438,6 +592,7 @@ namespace Skydat.forms2065
             // 
             // E1_DPV
             // 
+            this.E1_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E1_DPV, "E1_DPV");
             this.E1_DPV.ForeColor = System.Drawing.Color.Black;
             this.E1_DPV.Name = "E1_DPV";
@@ -455,6 +610,7 @@ namespace Skydat.forms2065
             // 
             // PW_DPV
             // 
+            this.PW_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.PW_DPV, "PW_DPV");
             this.PW_DPV.ForeColor = System.Drawing.Color.Black;
             this.PW_DPV.Name = "PW_DPV";
@@ -472,6 +628,7 @@ namespace Skydat.forms2065
             // 
             // E2_DPV
             // 
+            this.E2_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E2_DPV, "E2_DPV");
             this.E2_DPV.ForeColor = System.Drawing.Color.Black;
             this.E2_DPV.Name = "E2_DPV";
@@ -503,6 +660,7 @@ namespace Skydat.forms2065
             // 
             // Hs_DPV
             // 
+            this.Hs_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Hs_DPV, "Hs_DPV");
             this.Hs_DPV.ForeColor = System.Drawing.Color.Black;
             this.Hs_DPV.Name = "Hs_DPV";
@@ -520,6 +678,7 @@ namespace Skydat.forms2065
             // 
             // SR_DPV
             // 
+            this.SR_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.SR_DPV, "SR_DPV");
             this.SR_DPV.ForeColor = System.Drawing.Color.Black;
             this.SR_DPV.Name = "SR_DPV";
@@ -537,6 +696,7 @@ namespace Skydat.forms2065
             // 
             // Ts_DPV
             // 
+            this.Ts_DPV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Ts_DPV, "Ts_DPV");
             this.Ts_DPV.Name = "Ts_DPV";
             this.Ts_DPV.ReadOnly = true;
@@ -601,10 +761,10 @@ namespace Skydat.forms2065
             this.pGrid.CommandsActiveLinkColor = System.Drawing.Color.Transparent;
             this.pGrid.CommandsBackColor = System.Drawing.Color.Black;
             this.pGrid.CommandsForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.pGrid, "pGrid");
             this.pGrid.HelpBackColor = System.Drawing.Color.White;
             this.pGrid.HelpForeColor = System.Drawing.Color.Black;
             this.pGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            resources.ApplyResources(this.pGrid, "pGrid");
             this.pGrid.Name = "pGrid";
             this.pGrid.PropertySort = System.Windows.Forms.PropertySort.NoSort;
             this.pGrid.ToolbarVisible = false;
@@ -616,6 +776,11 @@ namespace Skydat.forms2065
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
             this.tabPage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage4.Controls.Add(this.label54);
+            this.tabPage4.Controls.Add(this.label55);
+            this.tabPage4.Controls.Add(this.label53);
+            this.tabPage4.Controls.Add(this.label52);
+            this.tabPage4.Controls.Add(this.label51);
             this.tabPage4.Controls.Add(this.Description_CV);
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.EqTime_CV);
@@ -638,6 +803,36 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             // 
+            // label54
+            // 
+            resources.ApplyResources(this.label54, "label54");
+            this.label54.ForeColor = System.Drawing.Color.Black;
+            this.label54.Name = "label54";
+            // 
+            // label55
+            // 
+            resources.ApplyResources(this.label55, "label55");
+            this.label55.ForeColor = System.Drawing.Color.Black;
+            this.label55.Name = "label55";
+            // 
+            // label53
+            // 
+            resources.ApplyResources(this.label53, "label53");
+            this.label53.ForeColor = System.Drawing.Color.Black;
+            this.label53.Name = "label53";
+            // 
+            // label52
+            // 
+            resources.ApplyResources(this.label52, "label52");
+            this.label52.ForeColor = System.Drawing.Color.Black;
+            this.label52.Name = "label52";
+            // 
+            // label51
+            // 
+            resources.ApplyResources(this.label51, "label51");
+            this.label51.ForeColor = System.Drawing.Color.Black;
+            this.label51.Name = "label51";
+            // 
             // Description_CV
             // 
             resources.ApplyResources(this.Description_CV, "Description_CV");
@@ -654,6 +849,7 @@ namespace Skydat.forms2065
             // 
             // EqTime_CV
             // 
+            this.EqTime_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.EqTime_CV, "EqTime_CV");
             this.EqTime_CV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_CV.Name = "EqTime_CV";
@@ -665,6 +861,7 @@ namespace Skydat.forms2065
             // 
             // Hs_CV
             // 
+            this.Hs_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Hs_CV, "Hs_CV");
             this.Hs_CV.ForeColor = System.Drawing.Color.Black;
             this.Hs_CV.Name = "Hs_CV";
@@ -676,6 +873,7 @@ namespace Skydat.forms2065
             // 
             // E1_CV
             // 
+            this.E1_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E1_CV, "E1_CV");
             this.E1_CV.ForeColor = System.Drawing.Color.Black;
             this.E1_CV.Name = "E1_CV";
@@ -693,6 +891,7 @@ namespace Skydat.forms2065
             // 
             // Hold_CV
             // 
+            this.Hold_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Hold_CV, "Hold_CV");
             this.Hold_CV.ForeColor = System.Drawing.Color.Black;
             this.Hold_CV.Name = "Hold_CV";
@@ -710,6 +909,7 @@ namespace Skydat.forms2065
             // 
             // E2_CV
             // 
+            this.E2_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E2_CV, "E2_CV");
             this.E2_CV.ForeColor = System.Drawing.Color.Black;
             this.E2_CV.Name = "E2_CV";
@@ -727,6 +927,7 @@ namespace Skydat.forms2065
             // 
             // Comment_CV
             // 
+            this.Comment_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Comment_CV, "Comment_CV");
             this.Comment_CV.Name = "Comment_CV";
             this.Comment_CV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_CV_MouseClick);
@@ -740,6 +941,7 @@ namespace Skydat.forms2065
             // 
             // Cycle_CV
             // 
+            this.Cycle_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Cycle_CV, "Cycle_CV");
             this.Cycle_CV.ForeColor = System.Drawing.Color.Black;
             this.Cycle_CV.Name = "Cycle_CV";
@@ -757,6 +959,7 @@ namespace Skydat.forms2065
             // 
             // SR_CV
             // 
+            this.SR_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.SR_CV, "SR_CV");
             this.SR_CV.ForeColor = System.Drawing.Color.Black;
             this.SR_CV.Name = "SR_CV";
@@ -774,6 +977,7 @@ namespace Skydat.forms2065
             // 
             // Ts_CV
             // 
+            this.Ts_CV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Ts_CV, "Ts_CV");
             this.Ts_CV.Name = "Ts_CV";
             this.Ts_CV.ReadOnly = true;
@@ -796,6 +1000,11 @@ namespace Skydat.forms2065
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
             this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage5.Controls.Add(this.label60);
+            this.tabPage5.Controls.Add(this.label59);
+            this.tabPage5.Controls.Add(this.label56);
+            this.tabPage5.Controls.Add(this.label57);
+            this.tabPage5.Controls.Add(this.label58);
             this.tabPage5.Controls.Add(this.Description_LSV);
             this.tabPage5.Controls.Add(this.label30);
             this.tabPage5.Controls.Add(this.EqTime_LSV);
@@ -814,6 +1023,36 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             // 
+            // label60
+            // 
+            resources.ApplyResources(this.label60, "label60");
+            this.label60.ForeColor = System.Drawing.Color.Black;
+            this.label60.Name = "label60";
+            // 
+            // label59
+            // 
+            resources.ApplyResources(this.label59, "label59");
+            this.label59.ForeColor = System.Drawing.Color.Black;
+            this.label59.Name = "label59";
+            // 
+            // label56
+            // 
+            resources.ApplyResources(this.label56, "label56");
+            this.label56.ForeColor = System.Drawing.Color.Black;
+            this.label56.Name = "label56";
+            // 
+            // label57
+            // 
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.ForeColor = System.Drawing.Color.Black;
+            this.label57.Name = "label57";
+            // 
+            // label58
+            // 
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.ForeColor = System.Drawing.Color.Black;
+            this.label58.Name = "label58";
+            // 
             // Description_LSV
             // 
             resources.ApplyResources(this.Description_LSV, "Description_LSV");
@@ -830,6 +1069,7 @@ namespace Skydat.forms2065
             // 
             // EqTime_LSV
             // 
+            this.EqTime_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.EqTime_LSV, "EqTime_LSV");
             this.EqTime_LSV.ForeColor = System.Drawing.Color.Black;
             this.EqTime_LSV.Name = "EqTime_LSV";
@@ -847,6 +1087,7 @@ namespace Skydat.forms2065
             // 
             // Comment_LSV
             // 
+            this.Comment_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Comment_LSV, "Comment_LSV");
             this.Comment_LSV.Name = "Comment_LSV";
             this.Comment_LSV.MouseClick += new System.Windows.Forms.MouseEventHandler(this.E1_LSV_MouseClick);
@@ -867,6 +1108,7 @@ namespace Skydat.forms2065
             // 
             // SR_LSV
             // 
+            this.SR_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.SR_LSV, "SR_LSV");
             this.SR_LSV.ForeColor = System.Drawing.Color.Black;
             this.SR_LSV.Name = "SR_LSV";
@@ -878,6 +1120,7 @@ namespace Skydat.forms2065
             // 
             // Ts_LSV
             // 
+            this.Ts_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Ts_LSV, "Ts_LSV");
             this.Ts_LSV.Name = "Ts_LSV";
             this.Ts_LSV.ReadOnly = true;
@@ -885,6 +1128,7 @@ namespace Skydat.forms2065
             // 
             // Hs_LSV
             // 
+            this.Hs_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.Hs_LSV, "Hs_LSV");
             this.Hs_LSV.ForeColor = System.Drawing.Color.Black;
             this.Hs_LSV.Name = "Hs_LSV";
@@ -896,6 +1140,7 @@ namespace Skydat.forms2065
             // 
             // E2_LSV
             // 
+            this.E2_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E2_LSV, "E2_LSV");
             this.E2_LSV.ForeColor = System.Drawing.Color.Black;
             this.E2_LSV.Name = "E2_LSV";
@@ -907,6 +1152,7 @@ namespace Skydat.forms2065
             // 
             // E1_LSV
             // 
+            this.E1_LSV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.E1_LSV, "E1_LSV");
             this.E1_LSV.ForeColor = System.Drawing.Color.Black;
             this.E1_LSV.Name = "E1_LSV";
@@ -948,6 +1194,248 @@ namespace Skydat.forms2065
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Name = "label11";
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.gpBoxTafelParam);
+            this.tabPage7.Controls.Add(this.groupBox1);
+            resources.ApplyResources(this.tabPage7, "tabPage7");
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // gpBoxTafelParam
+            // 
+            this.gpBoxTafelParam.Controls.Add(this.label65);
+            this.gpBoxTafelParam.Controls.Add(this.label64);
+            this.gpBoxTafelParam.Controls.Add(this.label63);
+            this.gpBoxTafelParam.Controls.Add(this.label62);
+            this.gpBoxTafelParam.Controls.Add(this.label61);
+            this.gpBoxTafelParam.Controls.Add(this.Ts_tafel);
+            this.gpBoxTafelParam.Controls.Add(this.cmbTafelE2);
+            this.gpBoxTafelParam.Controls.Add(this.label39);
+            this.gpBoxTafelParam.Controls.Add(this.label38);
+            this.gpBoxTafelParam.Controls.Add(this.SR_tafel);
+            this.gpBoxTafelParam.Controls.Add(this.cmbTafelE1);
+            this.gpBoxTafelParam.Controls.Add(this.label37);
+            this.gpBoxTafelParam.Controls.Add(this.label29);
+            this.gpBoxTafelParam.Controls.Add(this.Hs_tafel);
+            this.gpBoxTafelParam.Controls.Add(this.E1tafel);
+            this.gpBoxTafelParam.Controls.Add(this.E2tafel);
+            resources.ApplyResources(this.gpBoxTafelParam, "gpBoxTafelParam");
+            this.gpBoxTafelParam.Name = "gpBoxTafelParam";
+            this.gpBoxTafelParam.TabStop = false;
+            // 
+            // label65
+            // 
+            resources.ApplyResources(this.label65, "label65");
+            this.label65.ForeColor = System.Drawing.Color.Black;
+            this.label65.Name = "label65";
+            // 
+            // label64
+            // 
+            resources.ApplyResources(this.label64, "label64");
+            this.label64.ForeColor = System.Drawing.Color.Black;
+            this.label64.Name = "label64";
+            // 
+            // label63
+            // 
+            resources.ApplyResources(this.label63, "label63");
+            this.label63.ForeColor = System.Drawing.Color.Black;
+            this.label63.Name = "label63";
+            // 
+            // label62
+            // 
+            resources.ApplyResources(this.label62, "label62");
+            this.label62.ForeColor = System.Drawing.Color.Black;
+            this.label62.Name = "label62";
+            // 
+            // label61
+            // 
+            resources.ApplyResources(this.label61, "label61");
+            this.label61.ForeColor = System.Drawing.Color.Black;
+            this.label61.Name = "label61";
+            // 
+            // Ts_tafel
+            // 
+            this.Ts_tafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.Ts_tafel, "Ts_tafel");
+            this.Ts_tafel.Name = "Ts_tafel";
+            this.Ts_tafel.ReadOnly = true;
+            // 
+            // cmbTafelE2
+            // 
+            this.cmbTafelE2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTafelE2.FormattingEnabled = true;
+            this.cmbTafelE2.Items.AddRange(new object[] {
+            resources.GetString("cmbTafelE2.Items"),
+            resources.GetString("cmbTafelE2.Items1")});
+            resources.ApplyResources(this.cmbTafelE2, "cmbTafelE2");
+            this.cmbTafelE2.Name = "cmbTafelE2";
+            this.cmbTafelE2.TextChanged += new System.EventHandler(this.cmbTafelE1_TextChanged);
+            // 
+            // label39
+            // 
+            resources.ApplyResources(this.label39, "label39");
+            this.label39.ForeColor = System.Drawing.Color.Black;
+            this.label39.Name = "label39";
+            // 
+            // label38
+            // 
+            resources.ApplyResources(this.label38, "label38");
+            this.label38.ForeColor = System.Drawing.Color.Black;
+            this.label38.Name = "label38";
+            // 
+            // SR_tafel
+            // 
+            this.SR_tafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.SR_tafel, "SR_tafel");
+            this.SR_tafel.ForeColor = System.Drawing.Color.Black;
+            this.SR_tafel.Name = "SR_tafel";
+            this.SR_tafel.TextChanged += new System.EventHandler(this.E2tafel_TextChanged);
+            this.SR_tafel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
+            // 
+            // cmbTafelE1
+            // 
+            this.cmbTafelE1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTafelE1.FormattingEnabled = true;
+            this.cmbTafelE1.Items.AddRange(new object[] {
+            resources.GetString("cmbTafelE1.Items"),
+            resources.GetString("cmbTafelE1.Items1")});
+            resources.ApplyResources(this.cmbTafelE1, "cmbTafelE1");
+            this.cmbTafelE1.Name = "cmbTafelE1";
+            this.cmbTafelE1.TextChanged += new System.EventHandler(this.cmbTafelE1_TextChanged);
+            // 
+            // label37
+            // 
+            resources.ApplyResources(this.label37, "label37");
+            this.label37.ForeColor = System.Drawing.Color.Black;
+            this.label37.Name = "label37";
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.ForeColor = System.Drawing.Color.Black;
+            this.label29.Name = "label29";
+            // 
+            // Hs_tafel
+            // 
+            this.Hs_tafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.Hs_tafel, "Hs_tafel");
+            this.Hs_tafel.ForeColor = System.Drawing.Color.Black;
+            this.Hs_tafel.Name = "Hs_tafel";
+            this.Hs_tafel.TextChanged += new System.EventHandler(this.E2tafel_TextChanged);
+            this.Hs_tafel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Hs_KeyPress);
+            // 
+            // E1tafel
+            // 
+            this.E1tafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.E1tafel, "E1tafel");
+            this.E1tafel.ForeColor = System.Drawing.Color.Black;
+            this.E1tafel.Name = "E1tafel";
+            this.E1tafel.TextChanged += new System.EventHandler(this.E2tafel_TextChanged);
+            this.E1tafel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
+            // 
+            // E2tafel
+            // 
+            this.E2tafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.E2tafel, "E2tafel");
+            this.E2tafel.ForeColor = System.Drawing.Color.Black;
+            this.E2tafel.Name = "E2tafel";
+            this.E2tafel.TextChanged += new System.EventHandler(this.E2tafel_TextChanged);
+            this.E2tafel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.E1_KeyPress);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblAvgTimeTafel);
+            this.groupBox1.Controls.Add(this.txtAvgTimeTafel);
+            this.groupBox1.Controls.Add(this.CheckBoxAvgOcpTafel);
+            this.groupBox1.Controls.Add(this.lblmV);
+            this.groupBox1.Controls.Add(this.txtDiifVoltage);
+            this.groupBox1.Controls.Add(this.ChekBoxDiffrencial);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.btnOCP);
+            this.groupBox1.Controls.Add(this.OcpTime);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // lblAvgTimeTafel
+            // 
+            resources.ApplyResources(this.lblAvgTimeTafel, "lblAvgTimeTafel");
+            this.lblAvgTimeTafel.ForeColor = System.Drawing.Color.Black;
+            this.lblAvgTimeTafel.Name = "lblAvgTimeTafel";
+            // 
+            // txtAvgTimeTafel
+            // 
+            this.txtAvgTimeTafel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txtAvgTimeTafel, "txtAvgTimeTafel");
+            this.txtAvgTimeTafel.ForeColor = System.Drawing.Color.Black;
+            this.txtAvgTimeTafel.Name = "txtAvgTimeTafel";
+            this.txtAvgTimeTafel.TextChanged += new System.EventHandler(this.txtAvgTimeTafel_TextChanged);
+            this.txtAvgTimeTafel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OcpTime_KeyPress);
+            // 
+            // CheckBoxAvgOcpTafel
+            // 
+            resources.ApplyResources(this.CheckBoxAvgOcpTafel, "CheckBoxAvgOcpTafel");
+            this.CheckBoxAvgOcpTafel.ForeColor = System.Drawing.Color.Black;
+            this.CheckBoxAvgOcpTafel.Name = "CheckBoxAvgOcpTafel";
+            this.CheckBoxAvgOcpTafel.UseVisualStyleBackColor = true;
+            this.CheckBoxAvgOcpTafel.CheckedChanged += new System.EventHandler(this.CheckBoxAvgOcpTafel_CheckedChanged);
+            // 
+            // lblmV
+            // 
+            resources.ApplyResources(this.lblmV, "lblmV");
+            this.lblmV.ForeColor = System.Drawing.Color.Black;
+            this.lblmV.Name = "lblmV";
+            // 
+            // txtDiifVoltage
+            // 
+            this.txtDiifVoltage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.txtDiifVoltage, "txtDiifVoltage");
+            this.txtDiifVoltage.ForeColor = System.Drawing.Color.Black;
+            this.txtDiifVoltage.Name = "txtDiifVoltage";
+            this.txtDiifVoltage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiifVoltage_KeyPress);
+            // 
+            // ChekBoxDiffrencial
+            // 
+            resources.ApplyResources(this.ChekBoxDiffrencial, "ChekBoxDiffrencial");
+            this.ChekBoxDiffrencial.ForeColor = System.Drawing.Color.Black;
+            this.ChekBoxDiffrencial.Name = "ChekBoxDiffrencial";
+            this.ChekBoxDiffrencial.Tag = "";
+            this.toolTip1.SetToolTip(this.ChekBoxDiffrencial, resources.GetString("ChekBoxDiffrencial.ToolTip"));
+            this.ChekBoxDiffrencial.UseVisualStyleBackColor = true;
+            this.ChekBoxDiffrencial.CheckedChanged += new System.EventHandler(this.ChekBoxDiffrencial_CheckedChanged);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Name = "label1";
+            // 
+            // btnOCP
+            // 
+            this.btnOCP.ForeColor = System.Drawing.Color.Black;
+            this.btnOCP.Image = global::Skydat.Properties.Resources.Run;
+            resources.ApplyResources(this.btnOCP, "btnOCP");
+            this.btnOCP.Name = "btnOCP";
+            this.btnOCP.UseVisualStyleBackColor = true;
+            this.btnOCP.Click += new System.EventHandler(this.btnOCP_Click);
+            // 
+            // OcpTime
+            // 
+            this.OcpTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.OcpTime, "OcpTime");
+            this.OcpTime.ForeColor = System.Drawing.Color.Black;
+            this.OcpTime.Name = "OcpTime";
+            this.OcpTime.TextChanged += new System.EventHandler(this.txtAvgTimeTafel_TextChanged);
+            this.OcpTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OcpTime_KeyPress);
+            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -971,7 +1459,6 @@ namespace Skydat.forms2065
             this.toolstripChart.Name = "toolstripChart";
             this.toolstripChart.Stretch = true;
             this.toolstripChart.TabStop = true;
-            this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
             this.toolstripChart.Resize += new System.EventHandler(this.toolstripChart_Resize);
             // 
             // tsbNew
@@ -1004,7 +1491,7 @@ namespace Skydat.forms2065
             // 
             resources.ApplyResources(this.tsbRun, "tsbRun");
             this.tsbRun.ForeColor = System.Drawing.Color.Black;
-            this.tsbRun.Image = global::Skydat.Properties.Resources.Run1;
+            this.tsbRun.Image = global::Skydat.Properties.Resources.Run;
             this.tsbRun.Name = "tsbRun";
             this.tsbRun.Click += new System.EventHandler(this.tsbRun_Click);
             // 
@@ -1047,8 +1534,8 @@ namespace Skydat.forms2065
             this.panel8.Controls.Add(this.radioButton3);
             this.panel8.Controls.Add(this.radioButton2);
             this.panel8.Controls.Add(this.radioButton1);
-            this.panel8.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.ForeColor = System.Drawing.Color.Black;
             this.panel8.Name = "panel8";
             // 
             // label16
@@ -1147,15 +1634,64 @@ namespace Skydat.forms2065
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnExcell);
+            this.panel3.Controls.Add(this.lblVoltageDiffOcpResualt);
+            this.panel3.Controls.Add(this.lblVoltageDiffOcp);
+            this.panel3.Controls.Add(this.lblTimeSpentOcpTafelResualt);
+            this.panel3.Controls.Add(this.lblAvgOcpTafelResualt);
+            this.panel3.Controls.Add(this.lblTimeSpentOcpTafel);
+            this.panel3.Controls.Add(this.lblAvgOcpTafel);
             this.panel3.Controls.Add(this.picBoxOcp);
             this.panel3.Controls.Add(this.btnZoom);
             this.panel3.Controls.Add(this.chartApplayTech);
             this.panel3.Controls.Add(this.panel8);
             this.panel3.Controls.Add(this.lblTechDescription);
             this.panel3.Controls.Add(this.lblTechName);
-            this.panel3.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.ForeColor = System.Drawing.Color.Black;
             this.panel3.Name = "panel3";
+            // 
+            // btnExcell
+            // 
+            resources.ApplyResources(this.btnExcell, "btnExcell");
+            this.btnExcell.ForeColor = System.Drawing.Color.Black;
+            this.btnExcell.Image = global::Skydat.Properties.Resources.excell_Icon;
+            this.btnExcell.Name = "btnExcell";
+            this.btnExcell.UseVisualStyleBackColor = true;
+            this.btnExcell.Click += new System.EventHandler(this.btnExcell_Click);
+            // 
+            // lblVoltageDiffOcpResualt
+            // 
+            resources.ApplyResources(this.lblVoltageDiffOcpResualt, "lblVoltageDiffOcpResualt");
+            this.lblVoltageDiffOcpResualt.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblVoltageDiffOcpResualt.Name = "lblVoltageDiffOcpResualt";
+            // 
+            // lblVoltageDiffOcp
+            // 
+            resources.ApplyResources(this.lblVoltageDiffOcp, "lblVoltageDiffOcp");
+            this.lblVoltageDiffOcp.Name = "lblVoltageDiffOcp";
+            // 
+            // lblTimeSpentOcpTafelResualt
+            // 
+            resources.ApplyResources(this.lblTimeSpentOcpTafelResualt, "lblTimeSpentOcpTafelResualt");
+            this.lblTimeSpentOcpTafelResualt.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblTimeSpentOcpTafelResualt.Name = "lblTimeSpentOcpTafelResualt";
+            // 
+            // lblAvgOcpTafelResualt
+            // 
+            resources.ApplyResources(this.lblAvgOcpTafelResualt, "lblAvgOcpTafelResualt");
+            this.lblAvgOcpTafelResualt.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblAvgOcpTafelResualt.Name = "lblAvgOcpTafelResualt";
+            // 
+            // lblTimeSpentOcpTafel
+            // 
+            resources.ApplyResources(this.lblTimeSpentOcpTafel, "lblTimeSpentOcpTafel");
+            this.lblTimeSpentOcpTafel.Name = "lblTimeSpentOcpTafel";
+            // 
+            // lblAvgOcpTafel
+            // 
+            resources.ApplyResources(this.lblAvgOcpTafel, "lblAvgOcpTafel");
+            this.lblAvgOcpTafel.Name = "lblAvgOcpTafel";
             // 
             // picBoxOcp
             // 
@@ -1210,6 +1746,7 @@ namespace Skydat.forms2065
             // 
             // contextMenuSelectedTech
             // 
+            this.contextMenuSelectedTech.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuSelectedTech.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem4,
             this.copyOneToolStripMenuItem,
@@ -1305,8 +1842,8 @@ namespace Skydat.forms2065
             this.reSize1.AutoCenterFormOnLoad = false;
             this.reSize1.Enabled = true;
             this.reSize1.HostContainer = this;
-            this.reSize1.InitialHostContainerHeight = 603D;
-            this.reSize1.InitialHostContainerWidth = 743D;
+            this.reSize1.InitialHostContainerHeight = 827D;
+            this.reSize1.InitialHostContainerWidth = 1132D;
             this.reSize1.Tag = null;
             // 
             // dschart1
@@ -1316,43 +1853,35 @@ namespace Skydat.forms2065
             // 
             // treeView2
             // 
-            resources.ApplyResources(this.treeView2, "treeView2");
             this.treeView2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.treeView2.ContextMenuStrip = this.contextMenuSelectedTech;
             this.treeView2.ForeColor = System.Drawing.Color.Black;
             this.treeView2.ItemHeight = 22;
             this.treeView2.LineColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.treeView2, "treeView2");
             this.treeView2.Name = "treeView2";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView2.Nodes")))});
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
             // 
-            // tabPage7
+            // panel2
             // 
-            this.tabPage7.Controls.Add(this.btnOCP);
-            resources.ApplyResources(this.tabPage7, "tabPage7");
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // btnOCP
-            // 
-            this.btnOCP.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.btnOCP, "btnOCP");
-            this.btnOCP.Name = "btnOCP";
-            this.btnOCP.UseVisualStyleBackColor = true;
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.panel6);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
             // 
             // frmselecttech2065
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.BackColor = System.Drawing.Color.Gainsboro;
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.panel3);
+            this.BackColor = System.Drawing.Color.Maroon;
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmselecttech2065";
@@ -1375,6 +1904,11 @@ namespace Skydat.forms2065
             this.tabPage5.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.gpBoxTafelParam.ResumeLayout(false);
+            this.gpBoxTafelParam.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.toolstripChart.ResumeLayout(false);
             this.toolstripChart.PerformLayout();
@@ -1383,13 +1917,14 @@ namespace Skydat.forms2065
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).EndInit();
             this.contextMenuSelectedTech.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).EndInit();
-            this.tabPage7.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1526,6 +2061,63 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button btnZoom;
         private System.Windows.Forms.PictureBox picBoxOcp;
         private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox Hs_tafel;
+        private System.Windows.Forms.TextBox E2tafel;
+        private System.Windows.Forms.TextBox E1tafel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblmV;
+        private System.Windows.Forms.TextBox txtDiifVoltage;
+        private System.Windows.Forms.CheckBox ChekBoxDiffrencial;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox OcpTime;
+        private System.Windows.Forms.GroupBox gpBoxTafelParam;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox SR_tafel;
+        private System.Windows.Forms.ComboBox cmbTafelE1;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ComboBox cmbTafelE2;
+        private System.Windows.Forms.Label lblAvgTimeTafel;
+        private System.Windows.Forms.TextBox txtAvgTimeTafel;
+        private System.Windows.Forms.CheckBox CheckBoxAvgOcpTafel;
+        private System.Windows.Forms.Label lblTimeSpentOcpTafel;
+        private System.Windows.Forms.Label lblAvgOcpTafel;
+        private System.Windows.Forms.Label lblTimeSpentOcpTafelResualt;
+        private System.Windows.Forms.Label lblAvgOcpTafelResualt;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblVoltageDiffOcpResualt;
+        private System.Windows.Forms.Label lblVoltageDiffOcp;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox Ts_tafel;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.Button btnExcell;
         private System.Windows.Forms.Button btnOCP;
     }
 }

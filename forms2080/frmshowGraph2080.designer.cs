@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmshowGraph2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,9 +48,7 @@ namespace Skydat.forms2080
             this.label4 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.tsbstop = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tsbshowd = new System.Windows.Forms.ToolStripButton();
             this.tsbsave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -60,6 +58,7 @@ namespace Skydat.forms2080
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.sp1 = new System.IO.Ports.SerialPort(this.components);
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
+            this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -71,9 +70,9 @@ namespace Skydat.forms2080
             // treeView3
             // 
             this.treeView3.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.treeView3, "treeView3");
             this.treeView3.ForeColor = System.Drawing.Color.Black;
             this.treeView3.LineColor = System.Drawing.Color.Silver;
-            resources.ApplyResources(this.treeView3, "treeView3");
             this.treeView3.Name = "treeView3";
             this.treeView3.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView3.Nodes")))});
@@ -178,20 +177,20 @@ namespace Skydat.forms2080
             // 
             this.tChart1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tChart1.BorderlineColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 100F;
-            chartArea2.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea2);
+            chartArea3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea3.Name = "ChartArea1";
+            chartArea3.Position.Auto = false;
+            chartArea3.Position.Height = 100F;
+            chartArea3.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea3);
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
-            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            series2.Name = "Series1";
-            this.tChart1.Series.Add(series2);
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine;
+            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            series3.Name = "test";
+            this.tChart1.Series.Add(series3);
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseMove);
             this.tChart1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseUp);
@@ -199,16 +198,17 @@ namespace Skydat.forms2080
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.toolStrip1);
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.treeView3);
+            this.panel3.Controls.Add(this.toolStrip1);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             this.label4.ReadOnly = true;
@@ -217,52 +217,45 @@ namespace Skydat.forms2080
             // 
             this.label1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.ForeColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Name = "label1";
             // 
             // toolStrip1
             // 
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel2,
             this.tsbstop,
-            this.toolStripLabel1,
             this.tsbshowd,
             this.tsbsave});
             this.toolStrip1.Name = "toolStrip1";
             // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
-            // 
             // tsbstop
             // 
             resources.ApplyResources(this.tsbstop, "tsbstop");
+            this.tsbstop.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tsbstop.Image = global::Skydat.Properties.Resources.Stop_icon;
             this.tsbstop.Margin = new System.Windows.Forms.Padding(0);
             this.tsbstop.Name = "tsbstop";
             this.tsbstop.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            resources.ApplyResources(this.toolStripLabel1, "toolStripLabel1");
-            // 
             // tsbshowd
             // 
+            this.tsbshowd.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.tsbshowd.Image = global::Skydat.Properties.Resources.Data_Sheet;
             resources.ApplyResources(this.tsbshowd, "tsbshowd");
-            this.tsbshowd.Image = global::Skydat.Properties.Resources.checklist_icon;
             this.tsbshowd.Margin = new System.Windows.Forms.Padding(0);
             this.tsbshowd.Name = "tsbshowd";
             this.tsbshowd.Click += new System.EventHandler(this.tsbshowd_Click);
             // 
             // tsbsave
             // 
+            this.tsbsave.ForeColor = System.Drawing.SystemColors.MenuText;
             this.tsbsave.Image = global::Skydat.Properties.Resources.Save;
             resources.ApplyResources(this.tsbsave, "tsbsave");
+            this.tsbsave.Margin = new System.Windows.Forms.Padding(0);
             this.tsbsave.Name = "tsbsave";
             this.tsbsave.Click += new System.EventHandler(this.tsbsave_Click);
             // 
@@ -294,27 +287,33 @@ namespace Skydat.forms2080
             // 
             // sp1
             // 
-            this.sp1.BaudRate = 115200;
+            this.sp1.BaudRate = 57600;
             this.sp1.ReadBufferSize = 524288;
             this.sp1.ReadTimeout = 5000;
+            this.sp1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.sp1_DataReceived);
             // 
             // reSize1
             // 
             this.reSize1.About = null;
             this.reSize1.AutoCenterFormOnLoad = false;
-            this.reSize1.Enabled = true;
+            this.reSize1.Enabled = false;
             this.reSize1.HostContainer = this;
-            this.reSize1.InitialHostContainerHeight = 702D;
-            this.reSize1.InitialHostContainerWidth = 884D;
+            this.reSize1.InitialHostContainerHeight = 877D;
+            this.reSize1.InitialHostContainerWidth = 1312D;
             this.reSize1.Tag = null;
+            // 
+            // timerResizeFrm
+            // 
+            this.timerResizeFrm.Interval = 200;
+            this.timerResizeFrm.Tick += new System.EventHandler(this.timerResizeFrm_Tick);
             // 
             // frmshowGraph2080
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.shapeContainer1);
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -323,6 +322,7 @@ namespace Skydat.forms2080
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphForm_FormClosing);
             this.Load += new System.EventHandler(this.GraphForm_Load);
             this.Enter += new System.EventHandler(this.GraphForm_Enter);
+            this.Resize += new System.EventHandler(this.frmshowGraph2080_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -360,10 +360,9 @@ namespace Skydat.forms2080
         private System.Windows.Forms.Button btnshowgrid;
         private System.Windows.Forms.Button btnshowaxes;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.Button button1;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
         private System.Windows.Forms.RichTextBox label4;
+        private System.Windows.Forms.Timer timerResizeFrm;
     }
 }

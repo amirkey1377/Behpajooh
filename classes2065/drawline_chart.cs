@@ -10,10 +10,10 @@ namespace Skydat.classes2065
     {
         public Pen pen_ch;
         public bool EnableDraw = false, Active = false;
-        public Point FromPoint, ToPoint;
+        public System.Drawing.Point FromPoint, ToPoint;
         public struct lines
         {
-            public Point point1, point2;
+            public System.Drawing.Point point1, point2;
         };
         public struct multipoint
         {

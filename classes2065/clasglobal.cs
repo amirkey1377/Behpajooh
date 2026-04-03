@@ -20,25 +20,27 @@ namespace Skydat.classes2065
         public static string[] TechName = { "DCV", "NPV", "DPV", "SWV",
                                             "CV", "LSV", "DCS","DPS",
                                             "CCC", "CPC","CP","CA",
-                                            "CHC","","CD","OCP","RT","CDtest"};       
+                                            "CHC","","CD","OCP","RT","CDtest","Tafel","Battery"};       
        
         //نام کامل تکنیکها
         public static string[] Tech_FullName = { "DC Voltammetry","Normal Pulse Voltammetry","Diff. Pulse Voltammetry","Square Wave Voltammetry",
                                                  "Cyclic Voltammetry","Liner Sweep Voltammetry","Stripping DC Voltammetry","Stripping Diff. Pulse Voltammetry",
                                                  "","Controlled Potential Coulometry","Chrono Ptential  Col","Chrono Amperometry",
-                                                 "Chrono Coulometry","","Charge and Discharge","Open Circuit Potential","resistance trim"};
+                                                 "Chrono Coulometry","","Charge and Discharge","Open Circuit Potential","resistance trim","","Tafel Plot"};
 
         //واحد های اندازه گیری هر تکنیک روی نمودار محور افقی 
         public static string[] HAxisTitle = { "Potential(V)", "Potential(V)", "Potential(V)", "Potential(V)",
                                               "Potential(V)","Potential(V)","Potential(V)","Potential(V)",
                                                "Time(S)", "Time(S)", "Time(S)", "Time(S)",
-                                               "Time(S)" ,"","Time(S)","Time(S)","Time(S)"};
+                                               "Time(S)" ,"","Time(S)","Time(S)",
+                                               "Time(S)", "", "Potential(E)", "Time(S)"};
 
         //واحد های اندازه گیری هر تکنیک روی نمودار محور عمودی
         public static string[] VAxisTitle = {"Current(UA)", "Current(UA)", "Current(UA)", "Current(UA)",
                                              "Current(UA)", "Current(UA)", "Current(UA)", "Current(UA)",
                                              "Current(UA)","Current(UA)", "Potential(mV)", "Current(UA)",
-                                             "Q(UC)" ,"","Potential(mV)","Potential(mV)","Current(UA)"};
+                                             "Q(UC)" ,"","Potential(mV)","Potential(mV)",
+                                             "Current(UA)", "", "Log(i)", "Potential(mV)"};
         
         //مخفف دستگاه 2080
         public static string[] TechName2080 ={ "", "DCV", "NPV", "DPV",
@@ -93,23 +95,22 @@ namespace Skydat.classes2065
 
 
         //جهت ست کردن مقدار به پارامترهای هر تکنیک یک مقدار به تکنیک داده شده تا نام مخفف آن با عدد صدا زده شود
-        public const byte DCV = 0, NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, DCs = 6, DPs = 7, CCC = 8, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16, CDtest = 17, Tafel = 18;/////, CA = 11
+        public const byte NPV = 1, DPV = 2, SWV = 3, CV = 4, LSV = 5, CPC = 9, CHP = 10, CA = 11, CHC = 12, CD = 14, OCP = 15, RT = 16, CDtest = 17, Tafel = 18, Battery = 19;/////, CA = 11
         
         //2080
         public const byte NPV2080 = 1, DPV2080 = 2, SWV2080 = 3, CV2080 = 4, OCP2080 = 15, CPC2080 = 9, CHA2080 = 11, CCC2080 = 12, LSV2080 = 5, CHP2080 = 10;/////, CA = 11
 
         //برای هر تکنیکی پارامترهایی تعریف شده است که داخل کلاس پارام کلاسهای تعریف هر تکنیک و پارامترهاشون قرار دارد
-        public static DCV_params dcvprms = new DCV_params();
         public static NPV_params npvprms = new NPV_params();
         public static DPV_params dpvprms = new DPV_params();
         public static SWV_params swvprms = new SWV_params();
         public static CV_params cvprms = new CV_params();
         public static LSV_params lsvprms = new LSV_params();
-        //public static DCS_params dcsprms = new DCS_params();
-        //public static DPS_params dpsprms = new DPS_params();
+
         public static CPC_params cpcprms = new CPC_params();
         public static CCC_params cccprms = new CCC_params();
         public static CHP_params chpprms = new CHP_params();
+        public static Battery_params batteryprms = new Battery_params();
         public static CHA_params chaprms = new CHA_params();
         public static CHC_params chcprms = new CHC_params();
         public static cpct_params cpctprms = new cpct_params();
@@ -117,6 +118,8 @@ namespace Skydat.classes2065
         public static OCP_params ocpprms = new OCP_params();
         public static RT_params rtprms = new RT_params();
         public static CDtest_params cdtestprms = new CDtest_params();
+        public static Tafel_params tafelprms = new Tafel_params();
+
         //2080
         public static CCP_params_ocp cpctprms_ocp = new CCP_params_ocp();
         public static DCV_params_ocp dcvprms_ocp = new DCV_params_ocp();
@@ -145,6 +148,7 @@ namespace Skydat.classes2065
                 case LSV: pGrid.SelectedObject = lsvprms; break;;
                 case CPC: pGrid.SelectedObject = cpcprms; break;
                 case CHP: pGrid.SelectedObject = chpprms; break;
+                case Battery: pGrid.SelectedObject = batteryprms; break;
                 case CA: pGrid.SelectedObject = chaprms; break;
                 case CHC: pGrid.SelectedObject = chcprms; break;
                 case CD: pGrid.SelectedObject = cdprms; break;
@@ -207,10 +211,9 @@ namespace Skydat.classes2065
         {
             var lines = File.ReadAllLines(fileName).ToList();
             lines.RemoveAt(6);
-            lines.Insert(6, ("Cycles:" + movedata.main_cycle)); // افزودن محتوای جدید
+            lines.Insert(6, "Cycles:" + movedata.main_cycle); // افزودن محتوای جدید
             File.WriteAllLines(fileName, lines);
         }
-
 
         public static void SetChartColor()
         {

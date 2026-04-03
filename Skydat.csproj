@@ -20,6 +20,8 @@
     <UpgradeBackupLocation />
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>C:\Users\f\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -36,8 +38,6 @@
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +52,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -156,11 +157,13 @@
     <Reference Include="OxyPlot.WindowsForms, Version=2.2.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
       <HintPath>packages\OxyPlot.WindowsForms.2.2.0\lib\net462\OxyPlot.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="Sentinel.v3.5Client" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Web.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.dll</HintPath>
@@ -173,6 +176,7 @@
       <HintPath>D:\Software\VS tools\Component\Chart framework 3.5\System.Windows.Forms.DataVisualization.Design.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -181,7 +185,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WinFormsChartSamples.resources, Version=1.0.6629.20919, Culture=af, processorArchitecture=x86">
@@ -190,6 +193,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes2065\ChartData.cs" />
     <Compile Include="classes2065\clasparam2080.cs" />
     <Compile Include="classes2065\clasglobal.cs" />
     <Compile Include="classes2065\clasPeak.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="classes2065\drawline_chart.cs" />
     <Compile Include="classes2065\errors_cls.cs" />
     <Compile Include="classes2065\movedata.cs" />
+    <Compile Include="ClassGlobal\classTechnique.cs" />
     <Compile Include="datasets\Dschart1.cs">
       <DependentUpon>Dschart1.xsd</DependentUpon>
     </Compile>
@@ -210,6 +215,12 @@
     </Compile>
     <Compile Include="formEIS\LandingEIS.Designer.cs">
       <DependentUpon>LandingEIS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\PreviewFormTafel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\PreviewFormTafel.Designer.cs">
+      <DependentUpon>PreviewFormTafel.cs</DependentUpon>
     </Compile>
     <Compile Include="forms2065\frmChartSetting.cs">
       <SubType>Form</SubType>
@@ -512,6 +523,9 @@
     <EmbeddedResource Include="formEIS\LandingEIS.resx">
       <DependentUpon>LandingEIS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\PreviewFormTafel.resx">
+      <DependentUpon>PreviewFormTafel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmChartSetting.resx">
       <DependentUpon>frmChartSetting.cs</DependentUpon>
     </EmbeddedResource>
@@ -691,11 +705,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="forms2065\frmRegister2065.resx">
       <DependentUpon>frmRegister2065.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -703,6 +712,10 @@
     <EmbeddedResource Include="forms2065\frmSmoothing2065.resx">
       <DependentUpon>frmSmoothing2065.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest">
@@ -768,6 +781,12 @@
   <ItemGroup>
     <Content Include="CHEM1.ICO" />
     <None Include="Resources\11.png" />
+    <None Include="Resources\101.png" />
+    <None Include="Resources\10.jpg" />
+    <None Include="Resources\10.png" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\13.png" />
+    <None Include="Resources\15.png" />
     <Content Include="Resources\165.png" />
     <None Include="Resources\لوگوی سایت.png" />
     <None Include="Resources\activity_grid21600.png" />
@@ -809,6 +828,21 @@
     <None Include="Resources\zoom1.png" />
     <None Include="Resources\alert %281%29.png" />
     <None Include="Resources\Experimental-set-up-for-open-circuit-potential-measurements.png" />
+    <None Include="Resources\swap.png" />
+    <None Include="Resources\swap %281%29.png" />
+    <None Include="Resources\math.png" />
+    <None Include="Resources\Zoom-out-icon1.png" />
+    <None Include="Resources\1651.png" />
+    <None Include="Resources\OK1.bmp" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\9 %282%29.png" />
+    <None Include="Resources\20653.png" />
+    <None Include="Resources\ForeColor.png" />
+    <None Include="Resources\hdd.png" />
+    <None Include="Resources\mximize.png" />
+    <None Include="Resources\peak.png" />
     <Content Include="Resources\zoomin.ico" />
     <Content Include="Resources\Zoomout.ico" />
     <None Include="Resources\2000px-Tangent_to_a_curve.svg.png" />

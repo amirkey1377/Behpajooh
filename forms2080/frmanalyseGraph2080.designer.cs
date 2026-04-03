@@ -609,7 +609,7 @@ namespace Skydat.forms2080
             this.toolStripButton11.Checked = true;
             this.toolStripButton11.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon1;
+            this.toolStripButton11.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon;
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.CheckedChanged += new System.EventHandler(this.toolStripButton11_CheckedChanged);
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click_1);

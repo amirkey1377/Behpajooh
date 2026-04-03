@@ -33,6 +33,8 @@ namespace Skydat.forms2065
             {
                 e.DrawBackground();
                 Brush myBrush = Brushes.Black;
+                if (e.Index == -1)
+                    return;
                 var item = listView1.Items[e.Index];
                 if (e.Index % 2 == 0)
                 {

@@ -117,9 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="treeView3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="treeView3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="treeView3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 71</value>
+    <value>0, 77</value>
+  </data>
+  <data name="treeView3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="treeView3.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -132,7 +142,7 @@
 </value>
   </data>
   <data name="treeView3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 249</value>
+    <value>287, 306</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="treeView3.TabIndex" type="System.Int32, mscorlib">
@@ -148,7 +158,7 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;treeView3.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="dschart1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -177,11 +187,20 @@
   <data name="&gt;&gt;tChart1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 0</value>
+    <value>291, 0</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="panel1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 699</value>
+    <value>1021, 877</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -196,7 +215,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
@@ -283,10 +302,13 @@
     <value>6</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 4</value>
+    <value>26, 50</value>
+  </data>
+  <data name="panel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 236</value>
+    <value>43, 290</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -303,7 +325,6 @@
   <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -311,10 +332,13 @@
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 197</value>
+    <value>0, 242</value>
+  </data>
+  <data name="button1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -338,10 +362,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnshowvalue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 17</value>
+    <value>0, 21</value>
+  </data>
+  <data name="btnshowvalue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnshowvalue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnshowvalue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -361,17 +388,17 @@
   <data name="btnselectonly.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="btnselectonly.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnselectonly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnselectonly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 47</value>
+    <value>0, 58</value>
+  </data>
+  <data name="btnselectonly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnselectonly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnselectonly.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -398,10 +425,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnzoomin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 76</value>
+    <value>0, 94</value>
+  </data>
+  <data name="btnzoomin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnzoomin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnzoomin.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -428,10 +458,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnzoomout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 106</value>
+    <value>0, 130</value>
+  </data>
+  <data name="btnzoomout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnzoomout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnzoomout.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -455,10 +488,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnshowgrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 136</value>
+    <value>0, 167</value>
+  </data>
+  <data name="btnshowgrid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnshowgrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnshowgrid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -482,10 +518,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnshowaxes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 166</value>
+    <value>0, 204</value>
+  </data>
+  <data name="btnshowaxes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnshowaxes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 30</value>
+    <value>40, 37</value>
   </data>
   <data name="btnshowaxes.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -503,13 +542,19 @@
     <value>6</value>
   </data>
   <data name="tChart1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+    <value>Fill</value>
   </data>
   <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 0</value>
+    <value>10, 10</value>
+  </data>
+  <data name="tChart1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 20, 20, 20</value>
+  </data>
+  <data name="tChart1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>20, 20, 20, 20</value>
   </data>
   <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 695</value>
+    <value>997, 853</value>
   </data>
   <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -526,11 +571,47 @@
   <data name="&gt;&gt;tChart1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 791</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 82</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>panel3</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 326</value>
+    <value>0, 383</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 271</value>
+    <value>287, 408</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -548,30 +629,6 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 600</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 91</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panel3</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -580,14 +637,11 @@
   <data name="toolStrip1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
+    <value>0, 0</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 66</value>
+    <value>287, 77</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -605,13 +659,19 @@
     <value>panel3</value>
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="panel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 699</value>
+    <value>291, 877</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -626,13 +686,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="toolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 63</value>
-  </data>
-  <data name="toolStripLabel2.Text" xml:space="preserve">
-    <value>         </value>
+    <value>1</value>
   </data>
   <data name="tsbstop.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -644,7 +698,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbstop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 66</value>
+    <value>44, 77</value>
   </data>
   <data name="tsbstop.Text" xml:space="preserve">
     <value>Stop</value>
@@ -655,15 +709,6 @@
   <data name="tsbstop.ToolTipText" xml:space="preserve">
     <value>Stop </value>
   </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 63</value>
-  </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
-    <value>         </value>
-  </data>
-  <data name="tsbshowd.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="tsbshowd.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -671,7 +716,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbshowd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 66</value>
+    <value>49, 77</value>
   </data>
   <data name="tsbshowd.Text" xml:space="preserve">
     <value>Show</value>
@@ -689,7 +734,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbsave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 63</value>
+    <value>42, 77</value>
   </data>
   <data name="tsbsave.Text" xml:space="preserve">
     <value>save</value>
@@ -728,7 +773,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="shapeContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>884, 702</value>
+    <value>1312, 877</value>
   </data>
   <data name="shapeContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -776,10 +821,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>884, 702</value>
+    <value>1312, 877</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -798,29 +843,20 @@
         gADgDgAA4A8AAOAD3N/gCeKf4Az8f+AOfH/gDztP4A+HJ8APzzuAD/+5gA//nQ==
 </value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="&gt;&gt;dschart1.Name" xml:space="preserve">
     <value>dschart1</value>
   </data>
   <data name="&gt;&gt;dschart1.Type" xml:space="preserve">
     <value>Skydat.datasets.Dschart1, datasets.Dschart1.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolStripLabel2.Name" xml:space="preserve">
-    <value>toolStripLabel2</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tsbstop.Name" xml:space="preserve">
     <value>tsbstop</value>
   </data>
   <data name="&gt;&gt;tsbstop.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
-    <value>toolStripLabel1</value>
-  </data>
-  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsbshowd.Name" xml:space="preserve">
     <value>tsbshowd</value>
@@ -870,10 +906,19 @@
   <data name="&gt;&gt;reSize1.Type" xml:space="preserve">
     <value>LarcomAndYoung.Windows.Forms.ReSize, LarcomAndYoung.Windows.Forms.ReSize, Version=4.1.1130.7807, Culture=neutral, PublicKeyToken=2ccc9fa17f463fce</value>
   </data>
+  <data name="&gt;&gt;timerResizeFrm.Name" xml:space="preserve">
+    <value>timerResizeFrm</value>
+  </data>
+  <data name="&gt;&gt;timerResizeFrm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmshowGraph2080</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <metadata name="timerResizeFrm.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>573, 22</value>
+  </metadata>
 </root>

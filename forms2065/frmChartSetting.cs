@@ -23,7 +23,7 @@ namespace Skydat.forms2065
         public frmChartSetting(string node)
         {
             InitializeComponent();
-            if (node == "CA" || node == "CHP" || node == "CD")
+            if (node == "CA" || node == "CHP" || node == "CD" || node == "Battery")
             {
                 gbAdvance.Enabled = true;
             }
