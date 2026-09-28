@@ -141,9 +141,6 @@ namespace Skydat.forms2065
             try
             {
                 ChartConfiq();
-
-
-
             }
             catch (Exception x)
             {
@@ -409,6 +406,23 @@ namespace Skydat.forms2065
             }
         }
 
+        private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Level >= 1)
+            {
+                TreeNode node = e.Node;
+                if (node.Level >= 2)
+                {
+                    node = node.Parent;
+                }
+
+                if (node.IsSelected)
+                {
+                    TechParameters.Text = fillparam(1, node.Index);
+                }
+            }
+        }
+
         private void treeView3_AfterCheck(object sender, TreeViewEventArgs e)
         {
             TreeView treeView = sender as TreeView; // Cast sender to TreeView
@@ -583,23 +597,6 @@ namespace Skydat.forms2065
                 }
             }
 
-        }
-
-        private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (e.Node.Level >= 1)
-            {
-                TreeNode node = e.Node;
-                if (node.Level >= 2)
-                {
-                    node = node.Parent;
-                }
-
-                if (node.IsSelected)
-                {
-                    TechParameters.Text = fillparam(1, node.Index);
-                }
-            }
         }
 
         public Color GetColor()
@@ -1254,12 +1251,6 @@ namespace Skydat.forms2065
 
         private void clearselplot()
         {
-            if (tChart1.Series.Count > TechTreeview.Nodes[0].Nodes.Count)
-                for (int i = TechTreeview.Nodes[0].Nodes.Count; i < tChart1.Series.Count; i++)
-                {
-                    tChart1.Series.Remove(this.tChart1.Series[i]);
-                    num_Series--;
-                }
 
             if (MessageBox.Show("Removed all selected Plot(s)?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -1281,7 +1272,8 @@ namespace Skydat.forms2065
                         for (int i = 0; i < n; i++)
                             if (TechTreeview.Nodes[0].Nodes[i - num_del].Checked)
                             {
-                                tChart1.Series.Remove(tChart1.Series[i - num_del]);
+                                TreeNode node = TechTreeview.Nodes[0].Nodes[i - num_del];
+                                tChart1.Series.Remove(tChart1.Series[$"{node.Text}-{node.Index}"]);
                                 TechTreeview.Nodes[0].Nodes[i - num_del].Remove();
                                 dschart2.analyselist.Rows[i - num_del].Delete();
                                 dschart2.analyselist.AcceptChanges();
@@ -1289,7 +1281,6 @@ namespace Skydat.forms2065
                                 num_Series--;
                                 tChart1.Refresh();
                             }
-
                     }
                     catch { }
 
@@ -6237,31 +6228,6 @@ namespace Skydat.forms2065
             }
         }
 
-        private void button2_Click_2(object sender, EventArgs e)
-        {
-            if (tChart2.Series.Count > 0)
-            {
-                forms2065.frm_big_analys frm = new forms2065.frm_big_analys();
-                frm.WindowState = FormWindowState.Maximized;
-
-                foreach (System.Windows.Forms.DataVisualization.Charting.Series ser in tChart2.Series)
-                    frm.chart1.Series.Add(ser);
-
-                frm.chart1.BackColor = tChart1.BackColor;
-                frm.chart1.BorderlineColor = tChart1.BackColor;
-                frm.chart1.ChartAreas[0].BackColor = tChart1.BackColor;
-                frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-                frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-
-                if (tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled == true)
-                {
-                    frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
-                    frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
-                }
-                frm.ShowDialog();
-            }
-        }
-
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {
             if (!point_start.IsEmpty)
@@ -6487,6 +6453,31 @@ namespace Skydat.forms2065
         private void panel8_SizeChanged(object sender, EventArgs e)
         {
             ResizeHandeler(panel8);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (tChart2.Series.Count > 0)
+            {
+                frm_big_analys frm = new frm_big_analys();
+                frm.WindowState = FormWindowState.Maximized;
+
+                foreach (Series ser in tChart2.Series)
+                    frm.chart1.Series.Add(ser);
+
+                frm.chart1.BackColor = tChart1.BackColor;
+                frm.chart1.BorderlineColor = tChart1.BackColor;
+                frm.chart1.ChartAreas[0].BackColor = tChart1.BackColor;
+                frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+                if (tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled == true)
+                {
+                    frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                    frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                }
+                frm.ShowDialog();
+            }
         }
 
         private void btnshowaxes_1_Click(object sender, EventArgs e)

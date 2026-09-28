@@ -34,7 +34,7 @@
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.Btn2066 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.Btn2090 = new System.Windows.Forms.ToolStripButton();
+            this.Btn2190 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.PortBtn = new System.Windows.Forms.ToolStripButton();
@@ -61,10 +61,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 123);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 100);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1579, 734);
+            this.pictureBox1.Size = new System.Drawing.Size(1184, 596);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
@@ -79,7 +78,7 @@
             this.toolStripLabel8.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.toolStripLabel8.ForeColor = System.Drawing.Color.Coral;
             this.toolStripLabel8.Name = "toolStripLabel8";
-            this.toolStripLabel8.Size = new System.Drawing.Size(41, 120);
+            this.toolStripLabel8.Size = new System.Drawing.Size(31, 97);
             this.toolStripLabel8.Text = "        ";
             // 
             // Btn2066
@@ -104,32 +103,32 @@
             // 
             this.toolStripLabel5.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel5.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel5.Text = "            ";
             // 
-            // Btn2090
+            // Btn2190
             // 
-            this.Btn2090.AutoSize = false;
-            this.Btn2090.BackColor = System.Drawing.Color.White;
-            this.Btn2090.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Btn2090.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.Btn2090.Image = global::Skydat.Properties.Resources._2090_illustrat;
-            this.Btn2090.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.Btn2090.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.Btn2090.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.Btn2090.Name = "Btn2090";
-            this.Btn2090.Size = new System.Drawing.Size(100, 95);
-            this.Btn2090.Text = "2090 - 2080";
-            this.Btn2090.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.Btn2090.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.Btn2090.ToolTipText = "Device 2080 - 2090";
-            this.Btn2090.Click += new System.EventHandler(this.Btn2090_Click);
+            this.Btn2190.AutoSize = false;
+            this.Btn2190.BackColor = System.Drawing.Color.White;
+            this.Btn2190.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn2190.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.Btn2190.Image = global::Skydat.Properties.Resources._2090_illustrat;
+            this.Btn2190.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2190.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Btn2190.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.Btn2190.Name = "Btn2190";
+            this.Btn2190.Size = new System.Drawing.Size(100, 95);
+            this.Btn2190.Text = "2090 - 2080";
+            this.Btn2190.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2190.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Btn2190.ToolTipText = "Device 2080 - 2090";
+            this.Btn2190.Click += new System.EventHandler(this.Btn2090_Click);
             // 
             // toolStripLabel10
             // 
             this.toolStripLabel10.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel10.Name = "toolStripLabel10";
-            this.toolStripLabel10.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel10.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel10.Text = "            ";
             // 
             // toolStripSeparator1
@@ -137,7 +136,7 @@
             this.toolStripSeparator1.BackColor = System.Drawing.Color.DarkRed;
             this.toolStripSeparator1.ForeColor = System.Drawing.Color.Maroon;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 123);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 100);
             // 
             // PortBtn
             // 
@@ -161,7 +160,7 @@
             // 
             this.toolStripLabel1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel1.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel1.Text = "            ";
             // 
             // HelpBtn
@@ -204,7 +203,7 @@
             // 
             this.toolStripLabel2.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel2.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel2.Text = "            ";
             // 
             // TechnicalBtn
@@ -229,7 +228,7 @@
             // 
             this.toolStripLabel7.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel7.Name = "toolStripLabel7";
-            this.toolStripLabel7.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel7.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel7.Text = "            ";
             // 
             // toolStripButton5
@@ -259,7 +258,7 @@
             this.toolStripLabel11.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel11.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel11.Name = "toolStripLabel11";
-            this.toolStripLabel11.Size = new System.Drawing.Size(0, 120);
+            this.toolStripLabel11.Size = new System.Drawing.Size(0, 97);
             // 
             // toolStrip1
             // 
@@ -271,7 +270,7 @@
             this.toolStripLabel8,
             this.Btn2066,
             this.toolStripLabel5,
-            this.Btn2090,
+            this.Btn2190,
             this.toolStripLabel10,
             this.EIS,
             this.toolStripLabel12,
@@ -294,7 +293,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1579, 123);
+            this.toolStrip1.Size = new System.Drawing.Size(1184, 100);
             this.toolStrip1.TabIndex = 16;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -321,7 +320,7 @@
             // 
             this.toolStripLabel12.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel12.Name = "toolStripLabel12";
-            this.toolStripLabel12.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel12.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel12.Text = "            ";
             // 
             // ImportBtn
@@ -346,13 +345,13 @@
             // 
             this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
             this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(57, 120);
+            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel9.Text = "            ";
             // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(53, 120);
+            this.toolStripLabel3.Size = new System.Drawing.Size(40, 15);
             this.toolStripLabel3.Text = "           ";
             // 
             // toolStripSeparator2
@@ -364,21 +363,20 @@
             // 
             this.toolStripLabel6.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel6.Name = "toolStripLabel6";
-            this.toolStripLabel6.Size = new System.Drawing.Size(29, 120);
+            this.toolStripLabel6.Size = new System.Drawing.Size(22, 15);
             this.toolStripLabel6.Text = "     ";
             // 
             // frmbase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1579, 857);
+            this.ClientSize = new System.Drawing.Size(1184, 696);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmbase";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -398,7 +396,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
         private System.Windows.Forms.ToolStripButton Btn2066;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripButton Btn2090;
+        private System.Windows.Forms.ToolStripButton Btn2190;
         private System.Windows.Forms.ToolStripLabel toolStripLabel10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton PortBtn;

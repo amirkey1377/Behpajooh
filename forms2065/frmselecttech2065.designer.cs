@@ -168,7 +168,7 @@ namespace Skydat.forms2065
             this.btnOCP = new System.Windows.Forms.Button();
             this.OcpTime = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolstripChart = new System.Windows.Forms.ToolStrip();
+            this.tsOptions = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
             this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
@@ -178,7 +178,7 @@ namespace Skydat.forms2065
             this.colQ2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlSelectStep = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -190,19 +190,20 @@ namespace Skydat.forms2065
             this.panel5 = new System.Windows.Forms.Panel();
             this.checkCPsCTs = new System.Windows.Forms.CheckBox();
             this.pGrid2 = new System.Windows.Forms.PropertyGrid();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlDiscription = new System.Windows.Forms.Panel();
+            this.lblAvgOcpTafel = new System.Windows.Forms.Label();
             this.btnExcell = new System.Windows.Forms.Button();
             this.lblVoltageDiffOcpResualt = new System.Windows.Forms.Label();
             this.lblVoltageDiffOcp = new System.Windows.Forms.Label();
             this.lblTimeSpentOcpTafelResualt = new System.Windows.Forms.Label();
             this.lblAvgOcpTafelResualt = new System.Windows.Forms.Label();
             this.lblTimeSpentOcpTafel = new System.Windows.Forms.Label();
-            this.lblAvgOcpTafel = new System.Windows.Forms.Label();
             this.picBoxOcp = new System.Windows.Forms.PictureBox();
-            this.btnZoom = new System.Windows.Forms.Button();
-            this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lblTechDescription = new System.Windows.Forms.Label();
+            this.lblDiscription = new System.Windows.Forms.Label();
             this.lblTechName = new System.Windows.Forms.Label();
+            this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnZoom = new System.Windows.Forms.Button();
             this.contextMenuSelectedTech = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -214,12 +215,13 @@ namespace Skydat.forms2065
             this.restoreTechniquesparametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.tvAllTechList = new System.Windows.Forms.TreeView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.treeView2 = new System.Windows.Forms.TreeView();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlParam = new System.Windows.Forms.Panel();
+            this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
+            this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
             this.panel6.SuspendLayout();
             this.tabParam.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -232,15 +234,16 @@ namespace Skydat.forms2065
             this.gpBoxTafelParam.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.toolstripChart.SuspendLayout();
-            this.panel8.SuspendLayout();
+            this.tsOptions.SuspendLayout();
+            this.pnlSelectStep.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnlDiscription.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
+            this.panel2.SuspendLayout();
             this.contextMenuSelectedTech.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.pnlParam.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel6
@@ -336,7 +339,7 @@ namespace Skydat.forms2065
             // Description
             // 
             resources.ApplyResources(this.Description, "Description");
-            this.Description.BackColor = System.Drawing.Color.Transparent;
+            this.Description.BackColor = System.Drawing.Color.White;
             this.Description.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Description.ForeColor = System.Drawing.Color.DarkCyan;
             this.Description.Name = "Description";
@@ -1358,6 +1361,7 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lblAvgTimeTafel
             // 
@@ -1439,27 +1443,27 @@ namespace Skydat.forms2065
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.toolstripChart);
+            this.panel1.Controls.Add(this.tsOptions);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // toolstripChart
+            // tsOptions
             // 
-            resources.ApplyResources(this.toolstripChart, "toolstripChart");
-            this.toolstripChart.BackColor = System.Drawing.Color.White;
-            this.toolstripChart.CanOverflow = false;
-            this.toolstripChart.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolstripChart.ImageScalingSize = new System.Drawing.Size(0, 0);
-            this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources(this.tsOptions, "tsOptions");
+            this.tsOptions.BackColor = System.Drawing.Color.White;
+            this.tsOptions.CanOverflow = false;
+            this.tsOptions.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsOptions.ImageScalingSize = new System.Drawing.Size(0, 0);
+            this.tsOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.tsbOpen,
             this.tsbSaveAll,
             this.tsbRun});
-            this.toolstripChart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolstripChart.Name = "toolstripChart";
-            this.toolstripChart.Stretch = true;
-            this.toolstripChart.TabStop = true;
-            this.toolstripChart.Resize += new System.EventHandler(this.toolstripChart_Resize);
+            this.tsOptions.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.tsOptions.Name = "tsOptions";
+            this.tsOptions.Stretch = true;
+            this.tsOptions.TabStop = true;
+            this.tsOptions.Resize += new System.EventHandler(this.toolstripChart_Resize);
             // 
             // tsbNew
             // 
@@ -1521,22 +1525,22 @@ namespace Skydat.forms2065
             // 
             this.toolTip1.ShowAlways = true;
             // 
-            // panel8
+            // pnlSelectStep
             // 
-            this.panel8.AllowDrop = true;
-            this.panel8.BackColor = System.Drawing.Color.Transparent;
-            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel8.Controls.Add(this.label16);
-            this.panel8.Controls.Add(this.radioButton7);
-            this.panel8.Controls.Add(this.radioButton6);
-            this.panel8.Controls.Add(this.radioButton5);
-            this.panel8.Controls.Add(this.radioButton4);
-            this.panel8.Controls.Add(this.radioButton3);
-            this.panel8.Controls.Add(this.radioButton2);
-            this.panel8.Controls.Add(this.radioButton1);
-            resources.ApplyResources(this.panel8, "panel8");
-            this.panel8.ForeColor = System.Drawing.Color.Black;
-            this.panel8.Name = "panel8";
+            this.pnlSelectStep.AllowDrop = true;
+            this.pnlSelectStep.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSelectStep.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlSelectStep.Controls.Add(this.label16);
+            this.pnlSelectStep.Controls.Add(this.radioButton7);
+            this.pnlSelectStep.Controls.Add(this.radioButton6);
+            this.pnlSelectStep.Controls.Add(this.radioButton5);
+            this.pnlSelectStep.Controls.Add(this.radioButton4);
+            this.pnlSelectStep.Controls.Add(this.radioButton3);
+            this.pnlSelectStep.Controls.Add(this.radioButton2);
+            this.pnlSelectStep.Controls.Add(this.radioButton1);
+            resources.ApplyResources(this.pnlSelectStep, "pnlSelectStep");
+            this.pnlSelectStep.ForeColor = System.Drawing.Color.Black;
+            this.pnlSelectStep.Name = "pnlSelectStep";
             // 
             // label16
             // 
@@ -1614,7 +1618,7 @@ namespace Skydat.forms2065
             // 
             // pGrid2
             // 
-            this.pGrid2.BackColor = System.Drawing.Color.White;
+            this.pGrid2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.pGrid2.CategoryForeColor = System.Drawing.Color.Black;
             this.pGrid2.CommandsActiveLinkColor = System.Drawing.Color.Red;
             this.pGrid2.CommandsBackColor = System.Drawing.Color.White;
@@ -1630,26 +1634,30 @@ namespace Skydat.forms2065
             this.pGrid2.ViewForeColor = System.Drawing.Color.Black;
             this.pGrid2.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pGrid2_PropertyValueChanged);
             // 
-            // panel3
+            // pnlDiscription
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btnExcell);
-            this.panel3.Controls.Add(this.lblVoltageDiffOcpResualt);
-            this.panel3.Controls.Add(this.lblVoltageDiffOcp);
-            this.panel3.Controls.Add(this.lblTimeSpentOcpTafelResualt);
-            this.panel3.Controls.Add(this.lblAvgOcpTafelResualt);
-            this.panel3.Controls.Add(this.lblTimeSpentOcpTafel);
-            this.panel3.Controls.Add(this.lblAvgOcpTafel);
-            this.panel3.Controls.Add(this.picBoxOcp);
-            this.panel3.Controls.Add(this.btnZoom);
-            this.panel3.Controls.Add(this.chartApplayTech);
-            this.panel3.Controls.Add(this.panel8);
-            this.panel3.Controls.Add(this.lblTechDescription);
-            this.panel3.Controls.Add(this.lblTechName);
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.ForeColor = System.Drawing.Color.Black;
-            this.panel3.Name = "panel3";
+            this.pnlDiscription.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pnlDiscription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDiscription.Controls.Add(this.lblAvgOcpTafel);
+            this.pnlDiscription.Controls.Add(this.btnExcell);
+            this.pnlDiscription.Controls.Add(this.lblVoltageDiffOcpResualt);
+            this.pnlDiscription.Controls.Add(this.lblVoltageDiffOcp);
+            this.pnlDiscription.Controls.Add(this.lblTimeSpentOcpTafelResualt);
+            this.pnlDiscription.Controls.Add(this.lblAvgOcpTafelResualt);
+            this.pnlDiscription.Controls.Add(this.lblTimeSpentOcpTafel);
+            this.pnlDiscription.Controls.Add(this.picBoxOcp);
+            this.pnlDiscription.Controls.Add(this.lblDiscription);
+            this.pnlDiscription.Controls.Add(this.lblTechName);
+            this.pnlDiscription.Controls.Add(this.chartApplayTech);
+            this.pnlDiscription.Controls.Add(this.panel2);
+            this.pnlDiscription.ForeColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.pnlDiscription, "pnlDiscription");
+            this.pnlDiscription.Name = "pnlDiscription";
+            // 
+            // lblAvgOcpTafel
+            // 
+            resources.ApplyResources(this.lblAvgOcpTafel, "lblAvgOcpTafel");
+            this.lblAvgOcpTafel.Name = "lblAvgOcpTafel";
             // 
             // btnExcell
             // 
@@ -1688,26 +1696,27 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.lblTimeSpentOcpTafel, "lblTimeSpentOcpTafel");
             this.lblTimeSpentOcpTafel.Name = "lblTimeSpentOcpTafel";
             // 
-            // lblAvgOcpTafel
-            // 
-            resources.ApplyResources(this.lblAvgOcpTafel, "lblAvgOcpTafel");
-            this.lblAvgOcpTafel.Name = "lblAvgOcpTafel";
-            // 
             // picBoxOcp
             // 
             this.picBoxOcp.Image = global::Skydat.Properties.Resources.Experimental_set_up_for_open_circuit_potential_measurements;
             resources.ApplyResources(this.picBoxOcp, "picBoxOcp");
             this.picBoxOcp.Name = "picBoxOcp";
             this.picBoxOcp.TabStop = false;
+            this.picBoxOcp.Click += new System.EventHandler(this.picBoxOcp_Click);
             // 
-            // btnZoom
+            // lblDiscription
             // 
-            this.btnZoom.ForeColor = System.Drawing.Color.Black;
-            this.btnZoom.Image = global::Skydat.Properties.Resources.zoom1;
-            resources.ApplyResources(this.btnZoom, "btnZoom");
-            this.btnZoom.Name = "btnZoom";
-            this.btnZoom.UseVisualStyleBackColor = true;
-            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
+            this.lblDiscription.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.lblDiscription, "lblDiscription");
+            this.lblDiscription.ForeColor = System.Drawing.Color.Black;
+            this.lblDiscription.Name = "lblDiscription";
+            // 
+            // lblTechName
+            // 
+            this.lblTechName.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.lblTechName, "lblTechName");
+            this.lblTechName.ForeColor = System.Drawing.Color.Black;
+            this.lblTechName.Name = "lblTechName";
             // 
             // chartApplayTech
             // 
@@ -1719,9 +1728,9 @@ namespace Skydat.forms2065
             chartArea1.BackColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chartApplayTech.ChartAreas.Add(chartArea1);
+            resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
             legend1.Name = "Legend1";
             this.chartApplayTech.Legends.Add(legend1);
-            resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
             this.chartApplayTech.Name = "chartApplayTech";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
@@ -1730,19 +1739,21 @@ namespace Skydat.forms2065
             series1.Name = "Series1";
             this.chartApplayTech.Series.Add(series1);
             // 
-            // lblTechDescription
+            // panel2
             // 
-            this.lblTechDescription.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.lblTechDescription.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.lblTechDescription, "lblTechDescription");
-            this.lblTechDescription.Name = "lblTechDescription";
+            this.panel2.Controls.Add(this.btnZoom);
+            this.panel2.Controls.Add(this.pnlSelectStep);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
             // 
-            // lblTechName
+            // btnZoom
             // 
-            this.lblTechName.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.lblTechName, "lblTechName");
-            this.lblTechName.ForeColor = System.Drawing.Color.Black;
-            this.lblTechName.Name = "lblTechName";
+            resources.ApplyResources(this.btnZoom, "btnZoom");
+            this.btnZoom.ForeColor = System.Drawing.Color.Black;
+            this.btnZoom.Image = global::Skydat.Properties.Resources.zoom1;
+            this.btnZoom.Name = "btnZoom";
+            this.btnZoom.UseVisualStyleBackColor = true;
+            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
             // 
             // contextMenuSelectedTech
             // 
@@ -1823,28 +1834,18 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.settingToolStripMenuItem, "settingToolStripMenuItem");
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
-            // treeView1
+            // tvAllTechList
             // 
-            this.treeView1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            resources.ApplyResources(this.treeView1, "treeView1");
-            this.treeView1.ForeColor = System.Drawing.Color.Black;
-            this.treeView1.FullRowSelect = true;
-            this.treeView1.HideSelection = false;
-            this.treeView1.LineColor = System.Drawing.Color.Silver;
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            ((System.Windows.Forms.TreeNode)(resources.GetObject("treeView1.Nodes")))});
-            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
-            // 
-            // reSize1
-            // 
-            this.reSize1.About = null;
-            this.reSize1.AutoCenterFormOnLoad = false;
-            this.reSize1.Enabled = true;
-            this.reSize1.HostContainer = this;
-            this.reSize1.InitialHostContainerHeight = 827D;
-            this.reSize1.InitialHostContainerWidth = 1132D;
-            this.reSize1.Tag = null;
+            this.tvAllTechList.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.tvAllTechList, "tvAllTechList");
+            this.tvAllTechList.ForeColor = System.Drawing.Color.Black;
+            this.tvAllTechList.FullRowSelect = true;
+            this.tvAllTechList.HideSelection = false;
+            this.tvAllTechList.LineColor = System.Drawing.Color.Silver;
+            this.tvAllTechList.Name = "tvAllTechList";
+            this.tvAllTechList.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("tvAllTechList.Nodes")))});
+            this.tvAllTechList.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
             // dschart1
             // 
@@ -1865,23 +1866,38 @@ namespace Skydat.forms2065
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
             // 
-            // panel2
+            // pnlParam
             // 
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.panel6);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
+            this.pnlParam.Controls.Add(this.panel5);
+            this.pnlParam.Controls.Add(this.panel6);
+            resources.ApplyResources(this.pnlParam, "pnlParam");
+            this.pnlParam.Name = "pnlParam";
+            // 
+            // timerResizeFrm
+            // 
+            this.timerResizeFrm.Interval = 200;
+            this.timerResizeFrm.Tick += new System.EventHandler(this.timerResizeFrm_Tick);
+            // 
+            // reSize1
+            // 
+            this.reSize1.About = null;
+            this.reSize1.AutoCenterFormOnLoad = false;
+            this.reSize1.Enabled = true;
+            this.reSize1.HostContainer = this;
+            this.reSize1.InitialHostContainerHeight = 672D;
+            this.reSize1.InitialHostContainerWidth = 849D;
+            this.reSize1.Tag = null;
             // 
             // frmselecttech2065
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.BackColor = System.Drawing.Color.Maroon;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.treeView2);
-            this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.tvAllTechList);
+            this.Controls.Add(this.pnlDiscription);
+            this.Controls.Add(this.pnlParam);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmselecttech2065";
@@ -1910,20 +1926,21 @@ namespace Skydat.forms2065
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.toolstripChart.ResumeLayout(false);
-            this.toolstripChart.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
+            this.tsOptions.ResumeLayout(false);
+            this.tsOptions.PerformLayout();
+            this.pnlSelectStep.ResumeLayout(false);
+            this.pnlSelectStep.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnlDiscription.ResumeLayout(false);
+            this.pnlDiscription.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.contextMenuSelectedTech.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlParam.ResumeLayout(false);
+            this.pnlParam.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1931,7 +1948,7 @@ namespace Skydat.forms2065
         #endregion
 
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.ToolStrip toolstripChart;
+        private System.Windows.Forms.ToolStrip tsOptions;
         public System.Windows.Forms.ToolStripButton tsbRun;
         public System.Windows.Forms.ToolStripButton tsbNew;
         private System.Windows.Forms.SaveFileDialog sfd;
@@ -1941,19 +1958,19 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolTip toolTip1;
      
       
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView tvAllTechList;
         private System.Windows.Forms.CheckBox checkCPsCTs;
         public System.Windows.Forms.PropertyGrid pGrid;
         private datasets.Dschart1 dschart1;
         private System.Windows.Forms.ContextMenuStrip contextMenuSelectedTech;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlDiscription;
         private System.Windows.Forms.Label lblTechName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
         private System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.PropertyGrid pGrid2;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlSelectStep;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton5;
@@ -1972,8 +1989,7 @@ namespace Skydat.forms2065
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.RadioButton rd_low_cpc;
         private System.Windows.Forms.RadioButton rd_hieght_cpc;
-        private LarcomAndYoung.Windows.Forms.ReSize reSize1;
-        private System.Windows.Forms.Label lblTechDescription;
+        private System.Windows.Forms.Label lblDiscription;
         private System.Windows.Forms.TabControl tabParam;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label9;
@@ -2061,7 +2077,7 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button btnZoom;
         private System.Windows.Forms.PictureBox picBoxOcp;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlParam;
         private System.Windows.Forms.TextBox Hs_tafel;
         private System.Windows.Forms.TextBox E2tafel;
         private System.Windows.Forms.TextBox E1tafel;
@@ -2119,6 +2135,9 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Button btnExcell;
         private System.Windows.Forms.Button btnOCP;
+        private System.Windows.Forms.Timer timerResizeFrm;
+        private System.Windows.Forms.Panel panel2;
+        private LarcomAndYoung.Windows.Forms.ReSize reSize1;
     }
 }
 

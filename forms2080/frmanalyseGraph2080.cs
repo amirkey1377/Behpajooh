@@ -1,20 +1,20 @@
-﻿
+﻿using Microsoft.Office.Interop.Excel;
+using Skydat.classes2065;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows;
-using Skydat.classes2065;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Microsoft.Office.Interop.Excel;
-using System.Threading;
-using Button = System.Windows.Forms.Button;
+using Chart = System.Windows.Forms.DataVisualization.Charting.Chart;
+using ChartArea = System.Windows.Forms.DataVisualization.Charting.ChartArea;
+using Series = System.Windows.Forms.DataVisualization.Charting.Series;
 
 namespace Skydat.forms2080
 {
@@ -33,7 +33,7 @@ namespace Skydat.forms2080
             this.tChart2.Titles[0].ForeColor = Color.Black;
             // OnlineChart.ChartAreas.Add("a1");
             //OnlineChart.Legends.Add("a1");
-           
+
             tChart1.ChartAreas[0].Area3DStyle.Enable3D = false;
 
             tChart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
@@ -56,14 +56,10 @@ namespace Skydat.forms2080
             this.tChart1.ChartAreas[0].AxisX.MinorGrid.LineColor = Color.Black;
             this.tChart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
             this.tChart1.ChartAreas[0].AxisY.MinorGrid.LineColor = Color.Black;
-            tChart1.ChartAreas[0].AxisX.ScrollBar.Enabled = false;
-            tChart1.ChartAreas[0].AxisY.ScrollBar.Enabled = false;
 
-            tChart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.Black;
-            tChart1.ChartAreas[0].AxisY.ScrollBar.BackColor = Color.Black;
             //   tChart2.ChartAreas.Add("b1");
             // tChart2.Legends.Add("b1");
-           
+
             tChart2.ChartAreas[0].Area3DStyle.Enable3D = false;
 
             tChart2.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
@@ -94,29 +90,29 @@ namespace Skydat.forms2080
         public string operation = "";
         public System.Windows.Forms.DataVisualization.Charting.Chart chart;
         public drawline_chart drawline1;
-        private string statebutton = "", statebutton_1 = "";
-        
+        private string Chart1_ActionState = "", statebutton_1 = "";
+
+        public byte tech = 0;
         public int num_Series = 0;
         double[] othertech_val0 = new double[200];
         double[] othertech_val1 = new double[200];
         private int shomar_val = 0;
         public int[] Overlay_tech = new int[1000];
-        public byte tech = 0;
-        public int grfNo = 0,nindexchart2=0;
+        public int grfNo = 0, nindexchart2 = 0;
         public frmselecttech2080 sf;
         public frmMain12080 mainf;
         public frmOption12080 opForm;
         public clasMain mc = new clasMain();
-      
+
         public frmShowPeaks12080 fPeak;
-       
+
         public bool isSelectedLine = false;
 
         double[] x1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, y1 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             x2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, y2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         KeyEventArgs ee = new KeyEventArgs(Keys.Alt);
         private int cycles = 1;
-       // private int Num_Graph_Point = 0, isReversed = 0;
+        // private int Num_Graph_Point = 0, isReversed = 0;
         private void GraphForm_Load(object sender, EventArgs e)
         {
             try
@@ -130,7 +126,7 @@ namespace Skydat.forms2080
                 tChart2.BackColor = cl;
                 tChart2.BorderlineColor = cl;
                 tChart2.ChartAreas[0].BackColor = cl;
-                panel1.BackColor = cl;
+                pnlGraph.BackColor = cl;
                 panel2.BackColor = cl;
                 panel8.BackColor = cl;
 
@@ -138,6 +134,10 @@ namespace Skydat.forms2080
                 cl = Color.FromArgb(Convert.ToInt32(s));
                 for (int i = 0; i < tChart1.Series.Count; i++)
                     tChart1.Series[i].Color = cl;
+
+
+
+
             }
             catch (Exception x)
             {
@@ -145,7 +145,7 @@ namespace Skydat.forms2080
             }
 
             drawline1 = new drawline_chart();
-           
+
             if (opForm.cbDrawLine.Checked)
                 Set_line_Setting();
             else
@@ -175,7 +175,7 @@ namespace Skydat.forms2080
             {
                 if (isSelectedLine)
                 {
-                   
+
                     if (mainf.Detect_Peak && fPeak.rbManualPeak.Checked)
                     {
                         double Step = Math.Abs(tChart1.Series[0].Points[1].XValue - tChart1.Series[0].Points[1].XValue);
@@ -184,14 +184,14 @@ namespace Skydat.forms2080
                         int X2 = sender.ToPoint.X;
                         int Y2 = sender.ToPoint.Y;
                         var results1 = tChart1.HitTest(X1, Y1, false, ChartElementType.PlottingArea);
-                        double X_V1=0, Y_V1=0, X_V2=0, Y_V2=0;
+                        double X_V1 = 0, Y_V1 = 0, X_V2 = 0, Y_V2 = 0;
                         foreach (var result in results1)
                         {
                             if (result.ChartElementType == ChartElementType.PlottingArea)
                             {
                                 X_V1 = result.ChartArea.AxisX.PixelPositionToValue(X1);
                                 Y_V1 = result.ChartArea.AxisY.PixelPositionToValue(Y1);
-                                
+
                             }
                         }
                         var results2 = tChart1.HitTest(X2, Y2, false, ChartElementType.PlottingArea);
@@ -222,7 +222,7 @@ namespace Skydat.forms2080
                         }
                         try
                         {
-                            
+
                             //fPeak.richTextBox1.Text += cPeak.manual(OnlineChart.Series[0].,XValues.Value, OnlineChart.Series[0].YValues.Value, X_V1, Y_V1, X_V2, Y_V2, (int)(Math.Abs(P2 - P1) / Step));
                             //fPeak.richTextBox1.Text += cPeak.findp1(XX, YY, (int)((P2 - P1) / Step));
                         }
@@ -245,86 +245,86 @@ namespace Skydat.forms2080
 
         private void Chart1_MouseMove(object sender, MouseEventArgs e)
         {
-            try
-            {
-                if (e.Button == MouseButtons.Left)
-                {
-                    double xv = tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X);
-                    double yv = tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y);
-                    if (xv - mDown > 0)
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum + (difxview / 500);
-                    else if (xv - mDown < 0)
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum - (difxview / 500);
-                    else
-                        tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-                    if ((yv - mDowny) > 0)
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum + (difyview / 500);
-                    else if ((yv - mDowny) < 0)
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
-                    else
-                        tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                    tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
-                    tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
+            //try
+            //{
+            //    if (e.Button == MouseButtons.Left)
+            //    {
+            //        double xv = tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X);
+            //        double yv = tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y);
+            //        if (xv - mDown > 0)
+            //            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum + (difxview / 500);
+            //        else if (xv - mDown < 0)
+            //            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum - (difxview / 500);
+            //        else
+            //            tChart1.ChartAreas[0].AxisX.ScaleView.Position = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+            //        if ((yv - mDowny) > 0)
+            //            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum + (difyview / 500);
+            //        else if ((yv - mDowny) < 0)
+            //            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum - (difyview / 500);
+            //        else
+            //            tChart1.ChartAreas[0].AxisY.ScaleView.Position = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+            //        tChart1.ChartAreas[0].AxisX.ScaleView.Size = difxview; //(OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum); //+ xv - mDown;OnlineChart.ChartAreas[0].AxisX.Minimum +
+            //        tChart1.ChartAreas[0].AxisY.ScaleView.Size = difyview;// (OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum - OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum) + yv - mDowny;//OnlineChart.ChartAreas[0].AxisX.Minimum +
 
-                    mDown = xv;
-                    mDowny = yv;
+            //        mDown = xv;
+            //        mDowny = yv;
 
-                }
-                else
-                {
-                    var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
-                    foreach (var result in results11)
-                    {
-                        if (result.ChartElementType == ChartElementType.PlottingArea)
-                        {
+            //    }
+            //    else
+            //    {
+            //        var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+            //        foreach (var result in results11)
+            //        {
+            //            if (result.ChartElementType == ChartElementType.PlottingArea)
+            //            {
 
-                            switch (statebutton)
-                            {
-                                case "selectonly":
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
-                                    break;
-                                case "showvalue":
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            //                switch (statebutton)
+            //                {
+            //                    case "selectonly":
+            //                        tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
+            //                        break;
+            //                    case "showvalue":
+            //                        tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
 
-                                    break;
-                                default:
-                                    tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-                                    break;
-                            }
+            //                        break;
+            //                    default:
+            //                        tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+            //                        break;
+            //                }
 
-                        }
-                        else
-                            tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+            //            }
+            //            else
+            //                tChart1.Cursor = System.Windows.Forms.Cursors.Default;
 
 
-                    }
-                    switch (statebutton)
-                    {
-                        case "selectonly":
-                            System.Drawing.Point mousePoint = new System.Drawing.Point(e.X, e.Y);
-                            tChart1.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
-                            tChart1.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
+            //        }
+            //        switch (statebutton)
+            //        {
+            //            case "selectonly":
+            //                System.Drawing.Point mousePoint = new System.Drawing.Point(e.X, e.Y);
+            //                tChart1.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
+            //                tChart1.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
 
-                            break;
-                        case "showvalue":
-                            var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
-                            double x111 = 0, y111 = 0;
-                            foreach (var result in results12)
-                            {
+            //                break;
+            //            case "showvalue":
+            //                var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+            //                double x111 = 0, y111 = 0;
+            //                foreach (var result in results12)
+            //                {
 
-                                if (result.ChartElementType == ChartElementType.PlottingArea)
-                                {
-                                    x111 = result.ChartArea.AxisX.PixelPositionToValue(e.X);
-                                    y111 = result.ChartArea.AxisY.PixelPositionToValue(e.Y);
-                                }
-                            }
-                            mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
+            //                    if (result.ChartElementType == ChartElementType.PlottingArea)
+            //                    {
+            //                        x111 = result.ChartArea.AxisX.PixelPositionToValue(e.X);
+            //                        y111 = result.ChartArea.AxisY.PixelPositionToValue(e.Y);
+            //                    }
+            //                }
+            //                mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
 
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //                break;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Chart1_KeyDown(object sender, KeyEventArgs e)
@@ -336,7 +336,7 @@ namespace Skydat.forms2080
 
 
                 chart.Dispose();
-              
+
             }
 
         }
@@ -371,7 +371,7 @@ namespace Skydat.forms2080
         //        ShowHideAxes.Text = "Hide Axes";
         //    else
         //        ShowHideAxes.Text = "Show Axes";
-           
+
         //    dimensionToolStripMenuItem.Checked = OnlineChart.ChartAreas[0].Area3DStyle.Enable3D;
         //}    
 
@@ -380,7 +380,7 @@ namespace Skydat.forms2080
         //{
         //    this.toolStripButton15_Click(dimensionToolStripMenuItem, e);
         //}
-       
+
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             opForm.mf = this.mainf;
@@ -392,89 +392,267 @@ namespace Skydat.forms2080
         {
             clearselplot();
         }
-        
+
         public void clearform()
         {
-            for (int i = treeView3.Nodes[0].Nodes.Count - 1; i >= 0; i--)
-                treeView3.Nodes[0].Nodes[i].Remove();
-            label4.Text = "";
+            for (int i = tvTechList.Nodes[0].Nodes.Count - 1; i >= 0; i--)
+                tvTechList.Nodes[0].Nodes[i].Remove();
+            label41.Text = "";
             label41.Text = "";
             for (int i = tChart1.Series.Count - 1; i >= 0; i--)
                 tChart1.Series.RemoveAt(i);
             tChart1.Refresh();
-            dschart2.analyselist.Clear();          
+            dschart2.analyselist.Clear();
             tChart2.Titles[0].Text = "";
             tChart2.Series.Clear();
             drawline1.removeall();
             drawline1.removeall_master();
 
-
+            TechLine.Clear();
         }
 
         private void treeView3_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Level > 0)
+            if (e.Node.Level == 2)
             {
-                for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                {
-                    if (treeView3.Nodes[0].Nodes[i].Checked)
-                    {
-                        if (i >= tChart1.Series.Count)
-                            tChart1.Series.Add("ser" + i + 1);
-                        tChart1.Series[i].Enabled = true;
-                      //  OnlineChart.Titles[0].Text = classes.clasglobal.TechName[Overlay_tech[i]];
-                       // OnlineChart.Series[i].Title = OnlineChart.Header.Text;
-                        tChart1.ChartAreas[0].AxisY.LabelStyle.Angle = 0;
-                        tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle2080[Overlay_tech[i]];
-                        tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle2080[Overlay_tech[i]];
-                        tChart1.ChartAreas[0].RecalculateAxesScale();
-                    }
-                    else
-                    {
-                        tChart1.Series[i].Enabled = false;
-                        tChart1.ChartAreas[0].RecalculateAxesScale();
-                    }
-                    difxview = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-                    difyview = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                ITechniques tech = TechLine[e.Node.Parent.Index];
+                //جلوگیری از اتفاق event
+                tvTechList.AfterCheck -= treeView3_AfterCheck;
 
-                }
-               
-            }
-            else if (e.Node.Level == 0)
-            {
-                if (treeView3.Nodes[0].Checked)
+                if (e.Node.Checked)
                 {
-                    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        treeView3.Nodes[0].Nodes[i].Checked = true;
+                    tChart1.Series[$"{tech.Name}-{e.Node.Parent.Index}_{e.Node.Index + 1}"].Enabled = true;
+                    e.Node.Parent.Checked = true;
                 }
                 else
                 {
-                    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        treeView3.Nodes[0].Nodes[i].Checked = false;
+                    tChart1.Series[$"{tech.Name}-{e.Node.Parent.Index}_{e.Node.Index + 1}"].Enabled = false;
+                    bool AllUnchecked = true;
+                    foreach (TreeNode item in e.Node.Parent.Nodes)
+                    {
+                        if (item.Checked)
+                        {
+                            AllUnchecked = false;
+                        }
+                    }
+                    if (AllUnchecked)
+                        e.Node.Parent.Checked = false;
+                }
+
+                tvTechList.AfterCheck += treeView3_AfterCheck;
+
+            }
+            else if (e.Node.Level == 1)
+            {
+                ITechniques tech = TechLine[e.Node.Index];
+
+                if (tech.Name == "CV")
+                {
+                    //جلوگیری از اتفاق event
+                    tvTechList.AfterCheck -= treeView3_AfterCheck;
+
+                    if (e.Node.Checked)
+                    {
+                        if (!IsTheAxisTitleSame(tech))
+                        {
+                            e.Node.Checked = false;
+                            return;
+                        }
+
+                        foreach (TreeNode item in e.Node.Nodes)
+                        {
+
+                            item.Checked = true;
+                            tChart1.Series[$"{tech.Name}-{e.Node.Index}_{item.Index + 1}"].Enabled = true;
+                        }
+
+                    }
+                    else
+                    {
+                        foreach (TreeNode item in e.Node.Nodes)
+                        {
+                            item.Checked = false;
+                            tChart1.Series[$"{tech.Name}-{e.Node.Index}_{item.Index + 1}"].Enabled = false;
+                        }
+                    }
+
+                    tvTechList.AfterCheck += treeView3_AfterCheck;
+
+                }
+                else
+                {
+                    if (e.Node.Checked)
+                    {
+                        if (!IsTheAxisTitleSame(tech))
+                        {
+                            e.Node.Checked = false;
+                            return;
+                        }
+
+                        tChart1.Series[$"{tech.Name}-{e.Node.Index}"].Enabled = true;
+                    }
+                    else
+                    {
+                        tChart1.Series[$"{tech.Name}-{e.Node.Index}"].Enabled = false;
+                    }
+
+                }
+                tChart1.ChartAreas[0].RecalculateAxesScale();
+
+                bool AllUnchecked = true;
+                foreach (TreeNode item in e.Node.Parent.Nodes)
+                {
+                    if (item.Checked)
+                    {
+                        AllUnchecked = false;
+                    }
+                }
+                if (AllUnchecked)
+                {
+                    tvTechList.AfterCheck -= treeView3_AfterCheck;
+                    e.Node.Parent.Checked = false;
+                    tChart1.ChartAreas[0].AxisX.Title = "";
+                    tChart1.ChartAreas[0].AxisY.Title = "";
+                    tvTechList.AfterCheck += treeView3_AfterCheck;
+                }
+            }
+            else if (e.Node.Level == 0)
+            {
+                if (tvTechList.Nodes[0].Checked)
+                {
+                    for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                        tvTechList.Nodes[0].Nodes[i].Checked = true;
+                }
+                else
+                {
+                    for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                        tvTechList.Nodes[0].Nodes[i].Checked = false;
+
+                    tChart1.ChartAreas[0].AxisX.Title = "";
+                    tChart1.ChartAreas[0].AxisY.Title = "";
                 }
 
             }
-            
+
+
+
+        }
+
+        private bool IsTheAxisTitleSame(ITechniques tech)
+        {
+            string TitleX = tech.XY_Axis_Title[1];
+            string TitleY = tech.XY_Axis_Title[0];
+
+            string CurrentTitleX = tChart1.ChartAreas[0].AxisX.Title;
+            string CurrentTitleY = tChart1.ChartAreas[0].AxisY.Title;
+
+            if (CurrentTitleX == "" || CurrentTitleY == "")
+            {
+                CurrentTitleX = TitleX;
+                CurrentTitleY = TitleY;
+            }
+
+            if (TitleX == CurrentTitleX & CurrentTitleY == TitleY)
+            {
+                tChart1.ChartAreas[0].AxisX.Title = TitleX;
+                tChart1.ChartAreas[0].AxisY.Title = TitleY;
+
+                return true;
+            }
+            else
+            {
+                if (TitleX != CurrentTitleX)
+                    MessageBox.Show("Axis X Type is Not the Same");
+                else
+                    MessageBox.Show("Axis Y Type is Not the Same");
+
+                return false;
+            }
+
         }
 
         private void treeView3_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Level > 0)
+            if (e.Node.Level == 1)
             {
-                if (e.Node.IsSelected)
+                //label4.Text = fillparam(1, e.Node.Index);
+                //fillparamdata(e.Node.Index);
+                ITechniques tech = TechLine[e.Node.Index];
+                label41.Text = "";
+                label41.Text = tech.FullName + "\n";
+                label41.Text += "\n" + "Parameters:" + "\n";
+                switch (tech.Number)
                 {
-                    label4.Text=fillparam(1,e.Node.Index);
-                   // fillparamdata(e.Node.Index);
+                    case 1:
+                        NPV npv = tech as NPV;
+                        label41.Text += "E1 =" + npv.E1 + "\n";
+                        label41.Text += "E2 =" + npv.E2 + "\n";
+                        label41.Text += "Tstep =" + npv.TStep + "\n";
+                        label41.Text += "Hstep =" + npv.HStep + "\n";
+                        label41.Text += "Scan Rate =" + npv.ScanRate + "\n";
+                        label41.Text += "Pulse Width =" + npv.PulseWidth + "\n";
+                        label41.Text += "EquilibriumTime =" + npv.EquilibriumTime + "\n";
+                        label41.Text += "Comment =" + npv.Comment + "\n";
+                        break;
 
+                    case 2:
+                        DPV dpv = tech as DPV;
+                        label41.Text += "E1 =" + dpv.E1 + "\n";
+                        label41.Text += "E2 =" + dpv.E2 + "\n";
+                        label41.Text += "Tstep =" + dpv.TStep + "\n";
+                        label41.Text += "Hstep =" + dpv.HStep + "\n";
+                        label41.Text += "Scan Rate =" + dpv.ScanRate + "\n";
+                        label41.Text += "Pulse Width =" + dpv.PulseWidth + "\n";
+                        label41.Text += "Pulse Height =" + dpv.PulseHeight + "\n";
+                        label41.Text += "EquilibriumTime =" + dpv.EquilibriumTime + "\n";
+                        label41.Text += "Comment =" + dpv.Comment + "\n";
+                        break;
+
+                    case 3:
+                        SWV swv = tech as SWV;
+                        label41.Text += "E1 =" + swv.E1 + "\n";
+                        label41.Text += "E2 =" + swv.E2 + "\n";
+                        label41.Text += "Frequency =" + swv.Frequency + "\n";
+                        label41.Text += "Hstep =" + swv.HStep + "\n";
+                        label41.Text += "Scan Rate =" + swv.ScanRate + "\n";
+                        label41.Text += "Pulse Height =" + swv.PulseHeight + "\n";
+                        label41.Text += "EquilibriumTime =" + swv.EquilibriumTime + "\n";
+                        label41.Text += "Comment =" + swv.Comment + "\n";
+                        break;
+
+                    case 4:
+                        CV cv = tech as CV;
+                        label41.Text += "E1 =" + cv.E1 + "\n";
+                        label41.Text += "E2 =" + cv.E2 + "\n";
+                        label41.Text += "E3 =" + cv.E3 + "\n";
+                        label41.Text += "Tstep =" + cv.TStep + "\n";
+                        label41.Text += "Hstep =" + cv.HStep + "\n";
+                        label41.Text += "Scan Rate =" + cv.ScanRate + "\n";
+                        label41.Text += "EquilibriumTime =" + cv.EquilibriumTime + "\n";
+                        label41.Text += "Comment =" + cv.Comment + "\n";
+                        break;
+
+                    case 5:
+                        LSV lsv = tech as LSV;
+                        label41.Text += "E1 =" + lsv.E1 + "\n";
+                        label41.Text += "E2 =" + lsv.E2 + "\n";
+                        label41.Text += "Tstep =" + lsv.TStep + "\n";
+                        label41.Text += "Hstep =" + lsv.HStep + "\n";
+                        label41.Text += "Scan Rate =" + lsv.ScanRate + "\n";
+                        label41.Text += "EquilibriumTime =" + lsv.EquilibriumTime + "\n";
+                        label41.Text += "Comment =" + lsv.Comment + "\n";
+                        break;
+
+                    default:
+                        break;
                 }
 
             }
-
         }
+
         public void opengraph()
         {
-            bool overlaymain = true;
-            if (treeView3.Nodes[0].Nodes.Count > 0)
+            if (tvTechList.Nodes[0].Nodes.Count > 0)
             {
                 switch (MessageBox.Show("Other graphs exist in this chart.Do you want to show new graph there?\n----------------------------------\nyes : show all graphs in this chart\nno : remove other graphs in this chart and show this graph only\ncancle : dont show this graph\n--------------------------------", "question", MessageBoxButtons.YesNoCancel))
                 {
@@ -485,7 +663,6 @@ namespace Skydat.forms2080
                         break;
                     case DialogResult.Cancel:
                         return;
-
                 }
             }
 
@@ -493,300 +670,20 @@ namespace Skydat.forms2080
             ofd.DereferenceLinks = false;
             ofd.AutoUpgradeEnabled = false;
             ofd.Multiselect = true;
-            ofd.DefaultExt = "txt";
-            ofd.Filter = "Text Files(*.Txt);Data Files(*.Dat)|*.txt;*.dat";
-          
+            ofd.DefaultExt = "csv";
+            ofd.Filter = "Data Files(*.csv)|*.csv";
+
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                bool beOverlay = overlaymain;
-                for (int i = 0; i <= ofd.FileNames.GetUpperBound(0); i++)
-                    if (ofd.FileNames.GetValue(i).ToString() != "")
-                    {
-                        overlaymain = true;
-                        int n = dschart2.analyselist.Rows.Count;
-
-                        cycle = 1;
-                        line_file = -1;//if cycle>1 get number line for continue read file
-
-                        string fName = ofd.FileNames.GetValue(i).ToString();
-                        int k = fName.Length - 1;
-                        // distinct file names from file path
-                        while (k > 0)
-                            if (fName[k] == '\\')
-                            {
-                                fName = fName.Substring(k + 1);  // mn_CV.dat
-                                break;
-                            }
-                            else
-                                k--;
-
-                        string fName_2 = fName;
-                        fName = "";
-                        int ok = 0;
-
-                        for (int g = 0; g < fName_2.Length; g++)
-                        {
-                            if (ok == 1)
-                                if (fName_2[g].ToString() == "_" || fName_2[g].ToString() == "-" || fName_2[g].ToString() == ".")
-                                    break;
-                                else
-                                    fName = fName + fName_2[g].ToString();  //mnfile
-
-
-                            if (fName_2[g].ToString() == "_") ok = 1;
-                        }
-                        if (ok == 0) fName = fName_2.Substring(0, fName_2.Length - 4);    // اگر فرمت نام فایل غیر از تعریف نرم افزار باشد
-
-                        for (int ii = 0; ii < cycle; ii++)
-                        {
-                            restore_Data(ofd.FileNames.GetValue(i).ToString(), overlaymain);
-                            fillparamdata(n);
-                            n++;
-
-                            if (cycle > 1)
-                                treeView3.Nodes[0].Nodes.Add(fName + "-" + (ii + 1));  // CV-1.dat
-                            else
-                                treeView3.Nodes[0].Nodes.Add(fName);  // CV.dat
-                        }
-
-                        n--;
-
-                        if (dschart2.analyselist.Rows.Count == n)
-                        {
-                            MessageBox.Show("FILE FORMAT IS NOT CORRECT" + Environment.NewLine + "Please try again");
-                            return;
-                        }
-
-                        cycle = 1;
-
-                        Text = ofd.FileNames.GetValue(i).ToString();
-                    }
-
-
-                try
+                foreach (string fileName in ofd.FileNames)
                 {
-                    treeView3.SelectedNode = treeView3.Nodes[0].LastNode;
-                    treeView3.Nodes[0].LastNode.Checked = true;
-                    treeView3.Nodes[0].LastNode.ForeColor = tChart1.Series[tChart1.Series.Count - 1].Color;
+                    LoadCsvToChart(fileName, tChart1);
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-
-
-                overlaymain = beOverlay;
-                // Chart2 = OnlineChart;
-                treeView3.ExpandAll();
-                //grf.tech = 0;
             }
 
         }
-        Int16 cycle = 1, line_file = -1;
-        private void restore_Data(string fileName, bool overlaymain)
-        {
-            int row = 0, num_ser = 0, num_data = 0;
-            double[] xTmp = { 0 };
-            double[] yTmp = { 0 };
-            string s = "", fs = "";
-            int tch = 0;
-            bool isData = false;
-            if (fileName != "")
-                fs = fileName;
-            StreamReader Fl;
-            double CR = 9999, E1 = 9999, E2 = 9999, E3 = 9999, HS = 9999, QT = 9999, SRF = 9999, SRR = 9999;
-            double TS = 9999, PW = 9999, PH = 9999, FR = 9999, CY = 9999, HT = 9999, T1 = 9999, T2 = 9999, I1 = 9999, I2 = 9999;
-            double AA = 9999, Q1 = 9999, OCPmeas = 9999;
-            bool vs_OCP = false;
-            EventArgs e = new EventArgs();
-            if (fs != "")
-            {
-                Fl = new StreamReader(fs);
-                if (overlaymain)
-                    num_data = tChart1.Series.Count;
-
-                try
-                {
-                    Int32 line = -1;
-
-                    while (!Fl.EndOfStream)
-                    {
-                        s = Fl.ReadLine();
-
-                        line_file++;
-
-                        line++;
-
-                        if (s.ToUpper().IndexOf("NEW SERIES") >= 0)
-                        {
-                            overlaymain = true;
-                            show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain, xTmp.Length);
-                            tChart1.Series[num_data + num_ser].Points.Clear();
-                            num_ser++;
-                            s = Fl.ReadLine();
-                            row = 0;
-                        }
-
-                        if (!isData)
-                        {
-                            if (s.IndexOf("Cycles") >= 0)
-                            {
-                                if (s.IndexOf(":") >= 0)
-                                {
-                                    string c = s.Substring(s.IndexOf(":") + 1);
-                                    cycle = Int16.Parse(c);
-                                }
-                            }
-
-                            if (s.IndexOf("Tech") >= 0)
-                            {
-                                if (s.IndexOf(':') >= 0)
-                                {
-                                    for (int i = 0; i < 16; i++)
-                                        if (clasglobal.TechName2080[i] == s.Substring(s.IndexOf(':') + 1).Trim())
-                                        {
-                                            tch = i;
-                                            break;
-                                        }
-
-                                }
-
-                                tech = (byte)restore_One_Data(s, "Tech");
-                                show_Graph(num_data + num_ser, this, "MainChart", xTmp, yTmp, overlaymain, xTmp.Length);
-                                tChart1.Series[num_data + num_ser].Points.Clear();
-                            }
-                            else if (s.IndexOf("Current Range") >= 0) CR = restore_One_Data(s, "Current Range");
-                            else if (s.IndexOf("E1") >= 0) E1 = restore_One_Data(s, "E1");
-                            else if (s.IndexOf("E2") >= 0) E2 = restore_One_Data(s, "E2");
-                            else if (s.IndexOf("E3") >= 0) E3 = restore_One_Data(s, "E3");
-                            else if (s.IndexOf("HStep") >= 0) HS = restore_One_Data(s, "HStep");
-                            else if (s.IndexOf("Equilibrium Time") >= 0) QT = restore_One_Data(s, "Equilibrium Time");
-                            else if (s.IndexOf("Hold Time") >= 0) HT = restore_One_Data(s, "Hold Time");
-                            else if (s.IndexOf("Scan Rate") >= 0) SRF = restore_One_Data(s, "Scan Rate");
-                            else if (s.IndexOf("ScanRate_R") >= 0) SRR = restore_One_Data(s, "ScanRate_R");
-                            else if (s.IndexOf("TStep") >= 0) TS = restore_One_Data(s, "TStep");
-                            else if (s.IndexOf("Pulse Width") >= 0) PW = restore_One_Data(s, "Pulse Width");
-                            else if (s.IndexOf("pulse ") >= 0) PH = restore_One_Data(s, "Hpuls");
-                            else if (s.IndexOf("Frequency") >= 0) FR = restore_One_Data(s, "Frequency");
-                            else if (s.IndexOf("Cycle") >= 0) CY = restore_One_Data(s, "Cycle");
-                            else if (s.IndexOf("T1") >= 0) T1 = restore_One_Data(s, "T1");
-                            else if (s.IndexOf("T2") >= 0) T2 = restore_One_Data(s, "T2");
-                            else if (s.IndexOf("I1") >= 0) I1 = restore_One_Data(s, "I1");
-                            else if (s.IndexOf("I2") >= 0) I2 = restore_One_Data(s, "I2");
-                            else if (s.IndexOf("vs_OCP") >= 0)
-                                if (restore_One_Data(s, "vs_OCP") == 0)
-                                    vs_OCP = false;
-                                else
-                                    vs_OCP = true;
-                            else if (s.IndexOf("OCPmeas") >= 0) OCPmeas = restore_One_Data(s, "OCPmeas");
-
-                            if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
-                            {
-                                fillgraphlist(tch, CR, E1, E2, E3, HS, QT, SRF, SRR, TS, PW, PH, FR, CY, HT, T1, T2, I1, I2, AA, Q1, vs_OCP, OCPmeas, fileName.Trim());
-
-                                isData = true;
-                                shomar_val = 0;
-                                Array.Clear(othertech_val0, 0, othertech_val0.Length);
-                                Array.Clear(othertech_val1, 0, othertech_val1.Length);
-
-                                if (line_file > line)
-                                    line_file -= 17;//this is not cycle 1 then less lines header from all lines
-
-                                //after insert header read go to another section file
-                                while (line < line_file) { s = Fl.ReadLine(); line++; }
-                            }
-                            //if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
-                            //{
-                            //    isData = true;
-                            //    s = Fl.ReadLine();
-                            //    shomar_val = 0;
-                            //    Array.Clear(othertech_val0, 0, othertech_val0.Length);
-                            //    Array.Clear(othertech_val1, 0, othertech_val1.Length);
-                            //}
-                        }
-                        else                // if (isData)
-                        {
-                            if (s.Length == 0) { continue; }//newline
-                                                            //if (line_file > 230) MessageBox.Show(s);
-                            if (s.LastIndexOf("========") >= 0)
-                            {
-
-                                //===
-                                line_file++; //cycle number
-                                line_file++; //new line ""
-                                line_file++; // data
-
-                                Fl.Close();
-
-                                break;
-                            }
 
 
-                            int l = 0;
-                            string sss = "";
-                            int num = 0;
-                            double x = 0, y = 0, z = 0, w = 0;
-                            while (l < s.Length)
-                            {
-
-                                if (s[l] != '\t' && s[l] != ';' && s[l] != ' ')
-                                    sss = sss + s[l];
-
-                                if ((s[l] == '\t' || s[l] == ';' || s[l] == ' ') && sss != "")
-                                {
-                                    while (l < s.Length && s[l] == ' ') l++;
-
-                                    try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }  //this.grf.dataE[num_data + num_ser, row] //890220
-                                    try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }//this.grf.dataI1[num_data + num_ser, row] = Convert.ToDouble(sss);
-                                    try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; } //this.grf.dataI2[num_data + num_ser, row] = Convert.ToDouble(sss);
-                                    try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; } //this.grf.dataI2[num_data + num_ser, row] = Convert.ToDouble(sss);
-
-                                    sss = "";
-                                    num++;
-                                }
-                                l++;
-                            }
-
-                            try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }
-                            try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }
-                            try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; }
-                            try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; }
-
-                            if (shomar_val >= othertech_val0.Length)
-                            {
-                                Array.Resize(ref othertech_val0, othertech_val0.Length + 10);
-                                Array.Resize(ref othertech_val1, othertech_val1.Length + 10);
-
-                            }
-                            othertech_val0[shomar_val] = x;
-                            othertech_val1[shomar_val] = y;
-                            shomar_val++;
-                            row++;
-
-                            if (row >= 10000) row = 0;
-                        }
-                    }
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message+Environment.NewLine+"selected File is not in valid Format...", "Warning");
-                    //if (overlayopen == 1 || this.grf.OnlineChart.Series.Count < 1)
-                    //    this.grf.Close();
-
-                    //isOkfile = false;
-                }
-                //Fl.Close();
-
-                int k = fileName.Length - 1;
-                while (k > 0)
-                    if (fileName[k] == '\\')
-                    {
-                        fileName = fileName.Substring(k + 1);
-                        break;
-                    }
-                    else
-                        k--;
-            }
-
-        }
         private void restore_Data_part(string fileName, int typedata1, int numberaddnode)
         {
 
@@ -798,7 +695,7 @@ namespace Skydat.forms2080
             if (fileName != "")
                 fs = fileName;
             StreamReader Fl;
-           
+
             EventArgs e = new EventArgs();
             if (fs != "")
             {
@@ -811,7 +708,7 @@ namespace Skydat.forms2080
                         s = Fl.ReadLine();
                         if (!isData)
                         {
-                            
+
                             if (s.LastIndexOf("Potential") >= 0 || s.LastIndexOf("========") >= 0)
                             {
                                 isData = true;
@@ -858,7 +755,7 @@ namespace Skydat.forms2080
                             switch (typedata1)
                             {
                                 case 1:
-                                    
+
                                     othertech_val1[shomar_val] = y;
                                     break;
                                 case 2:
@@ -871,7 +768,7 @@ namespace Skydat.forms2080
                                     break;
 
                             }
-                            shomar_val++; 
+                            shomar_val++;
                             row++;
                             if (row >= 10000) row = 0;
                         }
@@ -891,52 +788,24 @@ namespace Skydat.forms2080
             }
 
         }
-    
-        private void fillgraphlist(int tch, double CR, double E1, double E2, double E3, double HS, double QT, double SRF, double SRR,
-           double TS, double PW, double PH, double FR, double CY, double HT, double T1, double T2, double I1, double I2, double AA, double Q1,bool vs_OCP,double OCPmeas,string pathfile)
-        {
 
-            DataRow dr = dschart2.analyselist.NewRow();
-            dr[0] = tch;
-            dr[1] = E1;
-            dr[2] = E2;
-            dr[3] = E3;
-            dr[4] = HS;
-            dr[5] = QT;
-            dr[6] = SRF;
-            dr[7] = TS;
-            dr[8] = PW;
-            dr[9] = PH;
-            dr[10] = FR;
-            dr[11] = CY;
-            dr[12] = HT;
-            dr[13] = T1;
-            dr[14] = T2;
-            dr[15] = I1;
-            dr[16] = I2;
-            dr[17] = CR;
-            dr[18] = 1;
-            dr[19] = vs_OCP;
-            dr[20] = OCPmeas;
-            dr[21] = pathfile.Trim();
-            dschart2.analyselist.Rows.Add(dr);
-
-        }
-        private string fillparam(int typecall ,int row)
+        private string fillparam(int typecall, int row)
         {
-             string str_fillparam = "";
+            string str_fillparam = "";
             try
             {
-               
+
                 if (typecall == 1)
                 {
                     str_fillparam = "Properties :" + Environment.NewLine;
                     label41.Text = "";
                     label41.Text = "Technique name :" + clasglobal.TechName2080[int.Parse(dschart2.analyselist.Rows[row][0].ToString())];
                 }
-                else {
-                    str_fillparam = "Technique name :" + clasglobal.TechName2080[int.Parse(dschart2.analyselist.Rows[row][0].ToString())] + "\n\n"+"Properties :" +"\n";
+                else
+                {
+                    str_fillparam = "Technique name :" + clasglobal.TechName2080[int.Parse(dschart2.analyselist.Rows[row][0].ToString())] + "\n\n" + "Properties :" + "\n";
                 }
+
                 switch (byte.Parse(dschart2.analyselist.Rows[row][0].ToString()))
                 {
                     case clasglobal.NPV2080:
@@ -947,9 +816,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
                     case clasglobal.DPV2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -960,9 +829,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
                     case clasglobal.SWV2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -972,9 +841,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][10].ToString()) != 9999) str_fillparam = str_fillparam + "Frequency =" + double.Parse(dschart2.analyselist.Rows[row][10].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
                     case clasglobal.CV2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -985,9 +854,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
                     case clasglobal.LSV2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -996,9 +865,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][6].ToString()) != 9999) str_fillparam = str_fillparam + "Scan Rate =" + double.Parse(dschart2.analyselist.Rows[row][6].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][7].ToString()) != 9999) str_fillparam = str_fillparam + "TStep =" + double.Parse(dschart2.analyselist.Rows[row][7].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
 
                     case clasglobal.CPC2080:
@@ -1006,17 +875,17 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
                         //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       
+
                         break;
                     case clasglobal.CCC2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
+                        //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) //str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
                     case clasglobal.CHP2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][15].ToString()) != 9999) str_fillparam = str_fillparam + "I1 =" + double.Parse(dschart2.analyselist.Rows[row][15].ToString()) + "\n";
@@ -1024,9 +893,9 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
+                        //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
                     case clasglobal.CHA2080:
                         if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
@@ -1034,18 +903,18 @@ namespace Skydat.forms2080
                         if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                         str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
+                        str_fillparam = str_fillparam + "vs_OCP =" + dschart2.analyselist.Rows[row][19].ToString() + "\n";
                         if (double.Parse(dschart2.analyselist.Rows[row][20].ToString()) != 9999) str_fillparam = str_fillparam + "OCPmeas =" + double.Parse(dschart2.analyselist.Rows[row][20].ToString()) + "\n";
-                       //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
+                        //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
                         break;
-                    //case clasglobal.CHC2080:
-                    //    if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
-                    //    if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
-                    //    if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
-                    //    if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
-                    //    if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
-                    //    //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
-                    //    break;
+                        //case clasglobal.CHC2080:
+                        //    if (double.Parse(dschart2.analyselist.Rows[row][1].ToString()) != 9999) str_fillparam = str_fillparam + "E1 =" + double.Parse(dschart2.analyselist.Rows[row][1].ToString()) + "\n";
+                        //    if (double.Parse(dschart2.analyselist.Rows[row][2].ToString()) != 9999) str_fillparam = str_fillparam + "E2 =" + double.Parse(dschart2.analyselist.Rows[row][2].ToString()) + "\n";
+                        //    if (double.Parse(dschart2.analyselist.Rows[row][13].ToString()) != 9999) str_fillparam = str_fillparam + "T1 =" + double.Parse(dschart2.analyselist.Rows[row][13].ToString()) + "\n";
+                        //    if (double.Parse(dschart2.analyselist.Rows[row][14].ToString()) != 9999) str_fillparam = str_fillparam + "T2 =" + double.Parse(dschart2.analyselist.Rows[row][14].ToString()) + "\n";
+                        //    if (double.Parse(dschart2.analyselist.Rows[row][5].ToString()) != 9999) str_fillparam = str_fillparam + "Equilibrium Time =" + double.Parse(dschart2.analyselist.Rows[row][5].ToString()) + "\n";
+                        //    //if (double.Parse(dschart2.analyselist.Rows[row][11].ToString()) != 9999) str_fillparam = str_fillparam + "Cycles =" + double.Parse(dschart2.analyselist.Rows[row][11].ToString()) + "\n";
+                        //    break;
 
                 }
 
@@ -1054,35 +923,8 @@ namespace Skydat.forms2080
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             return str_fillparam;
         }
-        private void fillparamdata(int row)
-        {
-            //dschart2.analyselistdatashow.Clear();
-            //DataRow dr;
-            //for (int ii = 0; ii < dschart2.analyselistdata.Rows.Count; ii++)
-            //{
 
-            //    if (int.Parse(dschart2.analyselistdata.Rows[ii][0].ToString()) == row)
-            //    {
-            //        dr = dschart2.analyselistdatashow.NewRow();
-            //        dr[0] = row;
-            //        dr[1] = dschart2.analyselistdata.Rows[ii][1];
-            //        dr[2] = dschart2.analyselistdata.Rows[ii][2];
-            //        dr[3] = dschart2.analyselistdata.Rows[ii][3];
-            //        dr[4] = dschart2.analyselistdata.Rows[ii][4];
-            //        dschart2.analyselistdatashow.Rows.Add(dr);
-            //    }
-            //}
-             
-            smootht4(row,tChart1.Series[row].Color,1,2);
-            //if (tcbdimy.Enabled)
-            //{
-            //    if (tcbdimy.Text.Trim() == "" || tcbdimy.Text.Trim() == "0")
-            //        tcbdimy.Text = "1";
-            //}
-            //else
-            //    tcbdimy.Text = "1";
-            //changeaxxy_dimension(double.Parse(tcbdimy.Text.Trim()));
-        }
+
         //private void changeaxxy_dimension(double dimy) {
         //    double maxaxx = 0, minaxx = 0, shomartech = 0, maxaxy = 0, minaxy = 0;
         //    for (int ii = 0; ii < treeView3.Nodes[0].Nodes.Count; ii++)
@@ -1145,80 +987,29 @@ namespace Skydat.forms2080
 
 
         //    }
-           
+
         //        OnlineChart.ChartAreas[0].AxisX.Maximum = maxaxx;
         //        OnlineChart.ChartAreas[0].AxisX.Minimum = minaxx;
         //        OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((maxaxx - minaxx) / 10, 1);
         //        OnlineChart.ChartAreas[0].AxisY.Maximum = maxaxy*dimy;
         //        OnlineChart.ChartAreas[0].AxisY.Minimum = minaxy*dimy;
         //        OnlineChart.ChartAreas[0].AxisY.Interval = Math.Round((maxaxy - minaxy)*dimy / 10, 1);
-            
 
-        
+
+
         //}
-        private double restore_One_Data(string str, string prmName)
-        {
-            if (prmName == "Tech")
-            {
-                string strTch = "";
-                byte Tch = 0;
-                strTch = str.Substring(str.IndexOf(':') + 1).Trim();
-                switch (strTch)
-                {
-                    case "NPV": Tch = clasglobal.NPV2080; break;
-                    case "DPV": Tch = clasglobal.DPV2080; break;
-                    case "SWV": Tch = clasglobal.SWV2080; break;
-                    case "CV": Tch = clasglobal.CV2080; break;
-                    case "LSV": Tch = clasglobal.LSV2080; break;
-                    case "OCP": Tch = clasglobal.OCP2080; break;
-                    case "CPC": Tch = clasglobal.CPC2080; break;
-                    case "CHP": Tch = clasglobal.CHP2080; break;
-                    case "CHA": Tch = clasglobal.CHA2080; break;
-                   // case "CHC": Tch = clasglobal.CHC; break;
-                    case "CCC": Tch = clasglobal.CCC2080; break;
-                    default: Tch = 15; break;
-                }
-                return (double)Tch;
-            }
-            str = str.ToLower();
-            prmName = prmName.ToLower();
-            double val = 0;
-            if (str.IndexOf(prmName) >= 0)
-            {
-                if (str.IndexOf(':') >= 0)
-                {
-                    if(prmName.Trim()=="vs_ocp")
-                        if(str.Substring(str.IndexOf(':') + 1)=="false")
-                            val=0;
-                        else
-                            val=1;
-                    else
-                        val = Convert.ToDouble(str.Substring(str.IndexOf(':') + 1));
-                }
-                if (str.IndexOf('=') >= 0)
-                    if (prmName.Trim() == "vs_ocp")
-                        if (str.Substring(str.IndexOf('=') + 1) == "false")
-                            val = 0;
-                        else
-                            val = 1;
-                    else
-                        val = Convert.ToDouble(str.Substring(str.IndexOf('=') + 1));
-            }
-            
-            return val;
-        }
         public void bgsubtractionf()
         {
             operation = "Overlay";
             int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                     shomarcheck++;
             if (shomarcheck == 2)
             {
                 int N1 = -1, N2 = -1;
-                for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                    if (treeView3.Nodes[0].Nodes[i].Checked)
+                for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                    if (tvTechList.Nodes[0].Nodes[i].Checked)
                         if (N1 == -1) N1 = i;
                         else N2 = i;
                 int count1 = tChart1.Series[N1].Points.Count;
@@ -1262,7 +1053,7 @@ namespace Skydat.forms2080
             if (main_subchart == "MainChart")
             {
                 Set_Graph(0, true, overlaymain);
-              
+
                 tChart1.Series[num_Series].Points.DataBindXY(xx, yy);
             }
             if (main_subchart == "SubChart")
@@ -1282,9 +1073,9 @@ namespace Skydat.forms2080
 
                     tChart2.ChartAreas[0].AxisX.LabelStyle.Format = "#.#e-0";
                     tChart2.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
-                    if ( operation == "i_Forward")
+                    if (operation == "i_Forward")
                         smootht4(0, tChart2.Series[0].Color, 2, 3);
-                    else if (operation == "i_Reverse" )
+                    else if (operation == "i_Reverse")
                         smootht4(0, tChart2.Series[0].Color, 2, 4);
                     else
                         tChart2.Series[0].Points.DataBindXY(xx, yy);
@@ -1293,116 +1084,116 @@ namespace Skydat.forms2080
                 }
             }
         }
-       
+
         public void Set_Graph(int num, bool isFromOpen, bool overlaymain)
         {
             Random Random1 = new Random();
-           
+
             //OnlineChart.Titles[0].Text = "  ";
             int Random_Color_Index = 0;
-                Random_Color_Index = (int)(Random1.NextDouble() * 90);
+            Random_Color_Index = (int)(Random1.NextDouble() * 90);
             if (!overlaymain)
                 if (cycles == 1)
-            tChart1.Series.Clear();
+                    tChart1.Series.Clear();
             System.Windows.Forms.DataVisualization.Charting.Series ser1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             ser1.Color = clasglobal.color_Graph[Random_Color_Index];
             ser1.LabelFormat = "#,##0.###########";
             if (opForm.rbfLine.Checked)
             {
-                ser1.ChartType=SeriesChartType.FastLine; 
+                ser1.ChartType = SeriesChartType.FastLine;
 
             }
             if (opForm.rbLine.Checked)
             {
-                ser1.ChartType = SeriesChartType.Line; 
+                ser1.ChartType = SeriesChartType.Line;
             }
             if (opForm.rbPoint.Checked)
             {
-                ser1.ChartType = SeriesChartType.Point; 
-               
+                ser1.ChartType = SeriesChartType.Point;
+
 
             }
             tChart1.Series.Add(ser1);
             num_Series = tChart1.Series.Count - 1;////////////////////////////
-            //Num_Graph_Point = 0;
+                                                  //Num_Graph_Point = 0;
 
             //isReversed = 0;
-             tChart1.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
-           
-           
+            tChart1.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
+
+
             if (!overlaymain)
             {
                 tChart1.Series[num_Series].Points.Clear();
-               
+
                 tChart1.Series.Remove(tChart1.Series[0]);
-            } 
+            }
             tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle2080[tech];
             tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle2080[tech];
             if (num_Series < 1)
                 Overlay_tech[0] = tech;
             else
                 Overlay_tech[num_Series] = tech;
-            
-            }
+
+        }
 
         private void clearselplot()
         {
 
-            
-                if (tChart1.Series.Count > treeView3.Nodes[0].Nodes.Count)
-                    for (int i = treeView3.Nodes[0].Nodes.Count; i < tChart1.Series.Count; i++)
-                    {
-                        tChart1.Series.Remove(this.tChart1.Series[i]);
-                        num_Series--;
-                       
-                       
-                    }
-              
-                    if ( MessageBox.Show("Removed all selected Plot(s)?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        int num_del = 0;
-                        int n = tChart1.Series.Count;
-                        if (n == 1)
-                        {
 
-                            try
-                            {
-                                clearform();
-                            }
-                            catch { }
-                           
-                        }
-                        else
-                            try
-                            {
-                                for (int i = 0; i < n; i++)
-                                    if (treeView3.Nodes[0].Nodes[i - num_del].Checked )
-                                    {
-                                        tChart1.Series.Remove(tChart1.Series[i - num_del]);
-                                        treeView3.Nodes[0].Nodes[i - num_del].Remove();
-                                        dschart2.analyselist.Rows[i - num_del].Delete();
-                                        dschart2.analyselist.AcceptChanges(); 
-                                        num_del++;
-                                        num_Series--;
-                                        tChart1.Refresh();
-                                    }
-
-                            }
-                            catch { }
-                       
-                    }
-                if (this.treeView3.Nodes[0].Nodes.Count > 0)
+            if (tChart1.Series.Count > tvTechList.Nodes[0].Nodes.Count)
+                for (int i = tvTechList.Nodes[0].Nodes.Count; i < tChart1.Series.Count; i++)
                 {
-                    this.treeView3.SelectedNode = this.treeView3.Nodes[0].FirstNode;
-                    this.treeView3.Nodes[0].FirstNode.Checked = true;
+                    tChart1.Series.Remove(this.tChart1.Series[i]);
+                    num_Series--;
+
 
                 }
-            
 
-          
+            if (MessageBox.Show("Removed all selected Plot(s)?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                int num_del = 0;
+                int n = tChart1.Series.Count;
+                if (n == 1)
+                {
+
+                    try
+                    {
+                        clearform();
+                    }
+                    catch { }
+
+                }
+                else
+                    try
+                    {
+                        for (int i = 0; i < n; i++)
+                            if (tvTechList.Nodes[0].Nodes[i - num_del].Checked)
+                            {
+                                tChart1.Series.Remove(tChart1.Series[i - num_del]);
+                                tvTechList.Nodes[0].Nodes[i - num_del].Remove();
+                                dschart2.analyselist.Rows[i - num_del].Delete();
+                                dschart2.analyselist.AcceptChanges();
+                                num_del++;
+                                num_Series--;
+                                tChart1.Refresh();
+                            }
+
+                    }
+                    catch { }
+
+            }
+            if (this.tvTechList.Nodes[0].Nodes.Count > 0)
+            {
+                this.tvTechList.SelectedNode = this.tvTechList.Nodes[0].FirstNode;
+                this.tvTechList.Nodes[0].FirstNode.Checked = true;
+
+            }
+
+
+
         }
 
-       
+
         public void mathematicf(int XorY, string txt, double value, int i)
         {
 
@@ -1427,8 +1218,8 @@ namespace Skydat.forms2080
             drawline1.EnableDraw = false;
             drawline1.removeall();
             int shomarcheck = 0, i1 = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                     i1 = i;
@@ -1449,26 +1240,48 @@ namespace Skydat.forms2080
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int i1 = 0;
             int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                     i1 = i;
                 }
+            inja:
             if (shomarcheck == 1)
             {
                 operation = "Integral";
-                mc.tq = tech;
-                double[] P = new double[this.tChart1.Series[i1].Points.Count];
-                double[] I = new double[this.tChart1.Series[i1].Points.Count];
+                ITechniques tech = TechLine[i1];
+                mc.tq = tech.Number;
+                var Chart = tChart1.Series[$"{tech.Name}-{i1}"];
+                double[] P = new double[Chart.Points.Count];
+                double[] I = new double[Chart.Points.Count];
+                if (tech.Name == "CV")
+                {
+                    int i2 = 0;
+                    shomarcheck = 0;
+                    for (int i = 0; i < tvTechList.Nodes[0].Nodes[i1].Nodes.Count; i++)
+                        if (tvTechList.Nodes[0].Nodes[i].Checked)
+                        {
+                            shomarcheck++;
+                            i2 = i;
+                        }
+                    if (shomarcheck > 1)
+                        goto inja;
+
+                    if (shomarcheck == 1)
+                    {
+                        Chart = tChart1.Series[$"{tech.Name}-{i1}_{i2 + 1}"];
+                        P = new double[Chart.Points.Count];
+                        I = new double[Chart.Points.Count];
+                    }
+                }
                 for (int k = 0; k < this.tChart1.Series[i1].Points.Count; k++)
                 {
-                    P[k] = this.tChart1.Series[i1].Points[k].XValue;
-                    I[k] = this.tChart1.Series[i1].Points[k].YValues[0];
-
+                    P[k] = Chart.Points[k].XValue;
+                    I[k] = Chart.Points[k].YValues[0];
                 }
                 mc.Integral(P, I, 0, 10);
                 show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
@@ -1476,13 +1289,14 @@ namespace Skydat.forms2080
             }
             else
                 MessageBox.Show("Integration work with one graph" + (char)13 + "Please select ONE only!!!");
+
         }
 
-       
 
 
 
-     
+
+
 
         private void toolStripButton16_Click(object sender, EventArgs e)
         {
@@ -1494,7 +1308,7 @@ namespace Skydat.forms2080
             fpeak.Show();
         }
 
-      
+
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
@@ -1506,10 +1320,10 @@ namespace Skydat.forms2080
         private void toolStripButton21_Click(object sender, EventArgs e)
         {
             tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-          //  OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
+            //  OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-          //  OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
+            //  OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
             tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
 
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
@@ -1519,7 +1333,7 @@ namespace Skydat.forms2080
             //this.ShowHideGrid.Text = "Show Grids";
         }
 
-    
+
         private void tsbOpen_Click(object sender, EventArgs e)
         {
             tChart2.Series.Clear();
@@ -1529,12 +1343,6 @@ namespace Skydat.forms2080
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
             opengraph();
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
-
-            //string[] color = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat");  // هنگام باز کردن رنگ همه یکی میشود
-            //string s = color[8].ToString().Substring(color[8].ToString().IndexOf(":") + 1);
-            //Color cl = Color.FromArgb(Convert.ToInt32(s));
-            //for (int i = 0; i < OnlineChart.Series.Count; i++)
-            //    OnlineChart.Series[i].Color = cl;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1543,8 +1351,8 @@ namespace Skydat.forms2080
             drawline1.removeall();
             int i1 = 0;
             int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                     i1 = i;
@@ -1573,10 +1381,10 @@ namespace Skydat.forms2080
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                     shomarcheck++;
             if (shomarcheck == 1)
             {
@@ -1604,95 +1412,49 @@ namespace Skydat.forms2080
 
         private void save_Data()
         {
-            try
+            // 1. انتخاب پوشه توسط کاربر
+            using (var folderDialog = new SaveFileDialog())
             {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.AddExtension = true;
-                sfd.DefaultExt = "dat";
-                string dir_sfd = "";
-                sfd.Filter = "Data Files(*.dat)|*.dat|Signal File(*.sig)|*.sig";
-                int nn = this.treeView3.Nodes[0].Nodes.Count;
-                int filename_index = 1, index_main_dataset = 0;
-                string filename = "0";
+                folderDialog.AddExtension = true;
+                folderDialog.DefaultExt = "csv";
+                folderDialog.Filter = "Data Files(*.csv)|*.csv";
 
-                if (dir_sfd != "") sfd.InitialDirectory = dir_sfd;
-
-                if (sfd.ShowDialog() == DialogResult.OK)
+                if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string ext = sfd.FileName.Substring(sfd.FileName.Length - 3, 3);
+                    string selectedPath = Path.GetDirectoryName(folderDialog.FileName);
 
-                    if (ext == "dat")
+                    foreach (TreeNode node in tvTechList.Nodes[0].Nodes)
                     {
-
-                        for (int j = 0; j < nn; j++)
+                        if (node.Checked)
                         {
-                            if (Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) > 1) //cycle > 1
+                            ITechniques tech = TechLine[node.Index];
+
+                            // مسیر فایل مبدا
+                            string sourcePath = tech.SeriesPath;
+
+                            string UserDesierName = Path.GetFileNameWithoutExtension(folderDialog.FileName);
+                            // استخراج نام فایل از مسیر
+                            string fileName = UserDesierName + "_" + Path.GetFileName(sourcePath);
+
+                            // ساخت مسیر کامل مقصد
+                            string destinationPath = Path.Combine(selectedPath, fileName);
+
+                            try
                             {
-                                for (int f = j; f < (j + Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString())); f++)
-                                    if (this.treeView3.Nodes[0].Nodes[f].Checked)
-                                    {
-                                        filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[f].Text + "_" + (filename_index).ToString() + ".dat";
-
-                                        File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
-                                        filename_index++;
-                                        break;
-                                    }
-
-                                j += Convert.ToInt16(dschart2.analyselist.Rows[j][11].ToString()) - 1; // becuse cycle this here is a graf but in database not rows
+                                File.Copy(sourcePath, destinationPath);
+                                MessageBox.Show($"فایل CSV با موفقیت در:\n{selectedPath} ذخیره شد.", "موفقیت",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                if (this.treeView3.Nodes[0].Nodes[j].Checked)
-                                {
-                                    filename = sfd.FileName.Substring(0, sfd.FileName.Length - 4) + "_" + treeView3.Nodes[0].Nodes[j].Text + "_" + (filename_index).ToString() + ".dat";
-
-                                    File.Copy(dschart2.analyselist.Rows[j][21].ToString(), filename, true);
-
-                                    filename_index++;
-                                }
+                                MessageBox.Show($"خطا در ذخیره فایل:\n{ex.Message}", "خطا",
+                                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
 
-                            index_main_dataset++;
                         }
                     }
-                    else if (ext == "sig")
-                    {
-                        string name = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
-
-                        for (int j = 0; j < nn; j++)
-                        {
-                            string file_name = name + "_" + (j + 1).ToString() + "." + ext;
-
-                            if (this.treeView3.Nodes[0].Nodes[j].Checked)
-                            {
-                                Array.Clear(volt, 0, Counter_num);
-                                Array.Clear(current, 0, Counter_num);
-
-                                Counter_num = tChart1.Series[j].Points.Count;
-
-                                Array.Resize(ref volt, Counter_num);
-                                Array.Resize(ref current, Counter_num);
-
-                                for (int i = 0; i < Counter_num; i++)
-                                {
-                                    double d = tChart1.Series[j].Points[i].XValue;
-                                    string msg = string.Format("{0:N4}", d);
-                                    msg = msg + "1";//نرم افزاری که فایل سیگ را باز میکند اگر مقادیر اعشار نداشته باشد گراف ترسیم نمیکند
-
-                                    volt[i] = Double.Parse(msg);
-                                    current[i] = tChart1.Series[j].Points[i].YValues[0];
-                                }
-
-                                File.WriteAllBytes(file_name, fill_matris());
-                            }
-
-                            row_sig++;
-                        }
-                    }
-                    MessageBox.Show("save done successfully");
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         int row_sig = 0;
@@ -2373,7 +2135,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("Technic: CV");
                     //Fl.WriteLine("TchNo: " + CV.ToString());
                     Fl.WriteLine("Current Range:0");
-                   // Fl.WriteLine("Cycles:1";
+                    // Fl.WriteLine("Cycles:1";
                     Fl.WriteLine("E1:" + dschart2.analyselist.Rows[row][1].ToString());
                     Fl.WriteLine("E2:" + dschart2.analyselist.Rows[row][2].ToString());
                     Fl.WriteLine("E3:" + dschart2.analyselist.Rows[row][3].ToString());
@@ -2447,7 +2209,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("Technic: OCP");
                     //Fl.WriteLine("TchNo: " + OCP.ToString());
                     Fl.WriteLine("Time:" + clasglobal.ocpprms_ocp.Time.ToString());
-                   // Fl.WriteLine("Cycles:" + "1"); //clasglobal.ocpprms.Cycles.ToString());
+                    // Fl.WriteLine("Cycles:" + "1"); //clasglobal.ocpprms.Cycles.ToString());
                 }
 
                 if (tchName == "CPC" || tchName == "All")
@@ -2462,7 +2224,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("vs_OCP:" + dschart2.analyselist.Rows[row][19].ToString());
                     Fl.WriteLine("OCPmeas:" + dschart2.analyselist.Rows[row][20].ToString());
 
-                 //   Fl.WriteLine("Cycles:1");
+                    //   Fl.WriteLine("Cycles:1");
                 }
 
                 if (tchName == "CCC" || tchName == "All")
@@ -2477,7 +2239,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("vs_OCP:" + dschart2.analyselist.Rows[row][19].ToString());
                     Fl.WriteLine("OCPmeas:" + dschart2.analyselist.Rows[row][20].ToString());
 
-                  //  Fl.WriteLine("Cycles:1");
+                    //  Fl.WriteLine("Cycles:1");
                 }
                 if (tchName == "CHP" || tchName == "All")
                 {
@@ -2507,7 +2269,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("vs_OCP:" + dschart2.analyselist.Rows[row][19].ToString());
                     Fl.WriteLine("OCPmeas:" + dschart2.analyselist.Rows[row][20].ToString());
 
-                   // Fl.WriteLine("Cycles:" + "1"); //caprms.Cycles.ToString());
+                    // Fl.WriteLine("Cycles:" + "1"); //caprms.Cycles.ToString());
 
                 }
                 if (tchName == "CHC" || tchName == "All")
@@ -2520,26 +2282,91 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     Fl.WriteLine("Equilibrium Time:" + dschart2.analyselist.Rows[row][5].ToString());
                     Fl.WriteLine("T1:" + dschart2.analyselist.Rows[row][13].ToString());
                     Fl.WriteLine("T2:" + dschart2.analyselist.Rows[row][14].ToString());
-                   // Fl.WriteLine("Cycles:" + "1"); //caprms.Cycles.ToString());
+                    // Fl.WriteLine("Cycles:" + "1"); //caprms.Cycles.ToString());
                     Fl.WriteLine("vs_OCP:" + dschart2.analyselist.Rows[row][19].ToString());
                     Fl.WriteLine("OCPmeas:" + dschart2.analyselist.Rows[row][20].ToString());
 
                 }
-               
+
             }
 
-           
+
             Fl.Close();
 
         }
+
         private void tsbSaveAll_Click(object sender, EventArgs e)
         {
-            save_Data();
+            if (tvTechList.Nodes[0].Nodes.Cast<TreeNode>().Any(node => node.Checked))
+                save_Data();
+            else
+                MessageBox.Show("There is not any case selected for saving !!!");
         }
-       
+
+        public string ConvertSeriesToCsv(ITechniques Tech, string delimiter = ",", bool includeHeader = true)
+        {
+            Series series = null;
+
+            if (series == null)
+                throw new ArgumentNullException(nameof(series));
+
+            var sb = new StringBuilder();
+
+            // 📌 نوشتن هدر (نام ستون‌ها)
+            if (includeHeader)
+            {
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "SeriesName",
+                "PointIndex",
+                "XValue",
+                "YValues",
+                "IsEmpty"
+                }));
+            }
+
+            // 📌 دریافت اطلاعات کلی سری
+            string seriesName = Tech.Name;
+
+            // 📌 پیمایش تمام نقاط داده
+            for (int i = 0; i < series.Points.Count; i++)
+            {
+                DataPoint point = series.Points[i];
+
+                // مدیریت مقادیر Y (ممکن است چندین مقدار داشته باشد)
+                string yValues = string.Join(";", point.YValues);
+
+                // فرار از کاراکترهای ویژه در XValue (در صورت نیاز)
+                string xValue = point.XValue.ToString();
+                if (xValue.Contains(delimiter) || xValue.Contains("\""))
+                    xValue = $"\"{xValue.Replace("\"", "\"\"")}\"";
+
+                // تشکیل خط CSV
+                string[] fields = new string[]
+                {
+                    seriesName,
+                    i.ToString(),
+                    xValue,
+                    yValues,
+                    point.IsEmpty.ToString()
+                };
+
+                // اعمال فرار از کاراکترهای خاص برای تمام فیلدها
+                for (int j = 0; j < fields.Length; j++)
+                {
+                    if (fields[j].Contains(delimiter) || fields[j].Contains("\""))
+                        fields[j] = $"\"{fields[j].Replace("\"", "\"\"")}\"";
+                }
+
+                sb.AppendLine(string.Join(delimiter, fields));
+            }
+
+            return sb.ToString();
+        }
+
         private System.Drawing.Point point_start, TempPoint, point_end;
         int numline = -1;
-       // bool endline = false;
+        // bool endline = false;
         private void tChart2_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -2560,7 +2387,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
                 double x = tChart2.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X);
                 double y = tChart2.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y);
-                
+
                 if (start_click == 1)
                 {
                     tChart2.Series[1].ChartType = SeriesChartType.Point;
@@ -2580,7 +2407,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     tChart2.Cursor = Cursors.Default;
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }    
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         public void draw_point(double x, double y)
@@ -2810,7 +2637,11 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                             if (!(point_start == null))
                             {
                                 Graphics g = this.CreateGraphics();
-                                Pen ErasePen = new Pen(Color.White);
+                                Pen ErasePen = new Pen(Color.Black);
+                                if (tChart2.BackColor == Color.White)
+                                {
+                                    ErasePen.Color = Color.Black;
+                                }
                                 g.DrawLine(ErasePen, point_start, TempPoint);
                                 TempPoint = new System.Drawing.Point(e.X, e.Y);
                                 this.tChart2.Refresh();
@@ -2839,27 +2670,32 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 }
             }
 
-                  }
+        }
 
         private void tChart2_Paint(object sender, PaintEventArgs e)
         {
-            
-                if (!point_start.IsEmpty)
-                    e.Graphics.DrawLine(Pens.White, point_start, TempPoint);
+            var pen = new Pen(Color.White);
+            if (tChart2.BackColor == Color.White)
+            {
+                pen.Color = Color.Black;
+            }
 
-                for (int p = 0; p < drawline1.Lines.Count; p++)
-                {
-                    if (p == numline)
-                        e.Graphics.DrawLine(Pens.Red, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
-                    else
-                        e.Graphics.DrawLine(Pens.White, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
-                }
-           
+            if (!point_start.IsEmpty)
+                e.Graphics.DrawLine(pen, point_start, TempPoint);
+
+            for (int p = 0; p < drawline1.Lines.Count; p++)
+            {
+                if (p == numline)
+                    e.Graphics.DrawLine(Pens.Red, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
+                else
+                    e.Graphics.DrawLine(pen, drawline1.Lines[p].point1, drawline1.Lines[p].point2);
+            }
+
 
 
         }
 
-       
+
         private void tChart2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue == 108 || e.KeyValue == 76)
@@ -2884,8 +2720,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         }
 
-      
-        public void conv_pixel_cord(int xx,int yy)
+
+        public void conv_pixel_cord(int xx, int yy)
         {
             var results = tChart2.HitTest(xx, yy, false, ChartElementType.PlottingArea);
             foreach (var result in results)
@@ -2895,16 +2731,16 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     double xVal = result.ChartArea.AxisX.PixelPositionToValue(xx);
                     double yVal = result.ChartArea.AxisY.PixelPositionToValue(yy);
                     drawline_chart.multipoint l1;
-                    l1.pointx=xVal;
-                    l1.pointy=yVal;
+                    l1.pointx = xVal;
+                    l1.pointy = yVal;
 
-                     drawline1.Lines_master.Add(l1);
+                    drawline1.Lines_master.Add(l1);
 
                 }
             }
         }
-     
-        public void smootht4(int row1,Color color1,int typechart,int colnum)
+
+        public void smootht4(int row1, Color color1, int typechart, int colnum)
         {
             double I0, I1 = 0;
             int vn = shomar_val;
@@ -2961,49 +2797,50 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
                 }
             }
-               
 
 
-           
-            
 
-           
-                     
-                           
-                     
+
+
+
+
+
+
+
         }
 
         private void tsbNew_Click(object sender, EventArgs e)
         {
-              if ( MessageBox.Show("are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)                     
-                  clearform();
-        }  
+            if (MessageBox.Show("are you sure?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                clearform();
+        }
 
         private void toolStripButton2_Click_1(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
-            int shomarcheck = 0,ii=0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked){
+            drawline1.removeall();
+            int shomarcheck = 0, ii = 0;
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
+                {
                     shomarcheck++;
-                    ii=i;
+                    ii = i;
                 }
             if (shomarcheck == 1)
             {
-                treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
+                tvTechList.SelectedNode = tvTechList.Nodes[0].Nodes[ii];
                 if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == clasglobal.DPV2080 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == clasglobal.SWV2080)
                 {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2, 1);      
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 2, 1);
 
-                   
 
-                   
+
+
                     operation = "i_Forward";
                     show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
                     nindexchart2 = ii;
                 }
-                else 
+                else
                 {
                     MessageBox.Show("operation is not correct for this technique", "Error");
                     return;
@@ -3011,28 +2848,28 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
             else
                 MessageBox.Show("i_Forward Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
-      
+
         }
 
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int shomarcheck = 0, ii = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                     ii = i;
                 }
             if (shomarcheck == 1)
             {
-                treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
+                tvTechList.SelectedNode = tvTechList.Nodes[0].Nodes[ii];
                 if (int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == clasglobal.DPV2080 || int.Parse(dschart2.analyselist.Rows[ii][0].ToString()) == clasglobal.SWV2080)
                 {
-                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);      
+                    restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 3, 1);
 
-                   
+
                     operation = "i_Reverse";
                     show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
                     nindexchart2 = ii;
@@ -3045,40 +2882,40 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
             else
                 MessageBox.Show("i_Reverse Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
-      
+
         }
 
-       
+
         private void toolStripButton11_Click_1(object sender, EventArgs e)
         {
             drawline1.EnableDraw = false;
-            drawline1.removeall(); 
+            drawline1.removeall();
             int shomarcheck = 0, ii = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                     ii = i;
                 }
             if (shomarcheck == 1)
             {
-                treeView3.SelectedNode = treeView3.Nodes[0].Nodes[ii];
+                tvTechList.SelectedNode = tvTechList.Nodes[0].Nodes[ii];
 
                 restore_Data_part(dschart2.analyselist.Rows[ii][21].ToString(), 1, 1);
                 nindexchart2 = ii;
 
 
 
-                    operation = "show_without_smoothing";
-                    show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
-               
+                operation = "show_without_smoothing";
+                show_Graph(0, this, "SubChart", othertech_val0, othertech_val1, true, shomar_val);
+
             }
             else
                 MessageBox.Show("show graph without smoothing Operation work with one graph" + (char)13 + "Please select ONE only!!!!!!");
         }
 
-     
-     
+
+
         private string ExportToExcel(int colnum1, int typecall1, string outputPath)
         {
             try
@@ -3115,8 +2952,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     rawData[i2, 3] = "X value";
                     rawData[i2, 4] = "Y value";
                     i2++;
-                    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        if (treeView3.Nodes[0].Nodes[i].Checked)
+                    for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                        if (tvTechList.Nodes[0].Nodes[i].Checked)
                         {
                             for (int cc1 = 0; cc1 < tChart1.Series[i].Points.Count; cc1++)
                             {
@@ -3209,13 +3046,13 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 return ex.Message + code;
             }
         }
-     
+
         private void toolStripButton10_Click_1(object sender, EventArgs e)
         {
 
             int shomarcheck = 0;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                 }
@@ -3239,8 +3076,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         private void toolStripButton9_Click_1(object sender, EventArgs e)
         {
             int shomarcheck = 0, i1 = 1, i2 = 1;
-            for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                if (treeView3.Nodes[0].Nodes[i].Checked)
+            for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                if (tvTechList.Nodes[0].Nodes[i].Checked)
                 {
                     shomarcheck++;
                 }
@@ -3259,9 +3096,9 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
 
                         i2++;
-                        for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
+                        for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
                         {
-                            if (treeView3.Nodes[0].Nodes[i].Checked)
+                            if (tvTechList.Nodes[0].Nodes[i].Checked)
                             {
                                 Fl.WriteLine(i1.ToString().Trim() + "-" + clasglobal.TechName2080[int.Parse(dschart2.analyselist.Rows[i][0].ToString())]);
                                 Fl.WriteLine("---------------------------------------------------");
@@ -3290,7 +3127,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                         MessageBox.Show(ex.ToString());
                     }
                 }
-               
+
             }
             else
             {
@@ -3300,8 +3137,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         private void toolStripButton8_Click_1(object sender, EventArgs e)
         {
-            int  i1 = 1, i2 = 1;
-           
+            int i1 = 1, i2 = 1;
+
             if (tChart2.Series[0].Points.Count > 0)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -3372,7 +3209,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             {
                 MessageBox.Show(ex.ToString());
             }
-            
+
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -3390,10 +3227,10 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         private void btnshowvalue_Click(object sender, EventArgs e)
         {
-            if (statebutton == "showvalue")
-                statebutton = "";
+            if (Chart1_ActionState == "showvalue")
+                Chart1_ActionState = "";
             else
-                statebutton = "showvalue";
+                Chart1_ActionState = "showvalue";
             selectpchart_func(false);
         }
 
@@ -3410,67 +3247,202 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             {
                 tChart1.ChartAreas[0].CursorX.LineWidth = 1;
                 tChart1.ChartAreas[0].CursorY.LineWidth = 1;
-
-
-
             }
             else
             {
                 tChart1.ChartAreas[0].CursorX.LineWidth = 0;
                 tChart1.ChartAreas[0].CursorY.LineWidth = 0;
-
-
-
             }
         }
 
         private void btnselectonly_Click(object sender, EventArgs e)
         {
-            if (statebutton == "selectonly")
+            if (btnSelectAreaTS.Checked)
             {
-                statebutton = "";
-                selectpchart_func(false);
-                btnselectonly.FlatAppearance.BorderSize = 0;
+                Chart1_ActionState = "selectonly";
+                selectpchart_func(true);
+                tChart1.Cursor = Cursors.Default;
+                btnzoominTS.Checked = false;
+                btnZoomOutTS.Checked = false;
             }
             else
             {
-                statebutton = "selectonly";
-                selectpchart_func(true);
-                btnselectonly.FlatAppearance.BorderSize = 1;
-                btnselectonly.FlatAppearance.BorderColor = Color.Black;
-
+                selectpchart_func(false);
+                Chart1_ActionState = "";
             }
         }
-        double mDown = double.NaN, mDowny = double.NaN, difxview = double.NaN, difyview = double.NaN, difxview2 = double.NaN, difyview2 = double.NaN;
-       
-        private void btnzoomin_Click(object sender, EventArgs e)
+        double mDown = double.NaN, mDowny = double.NaN, difxview2 = double.NaN, difyview2 = double.NaN;
+
+        [DllImport("User32.dll", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        private static extern IntPtr LoadCursorFromFile(String str);
+
+        public static System.Windows.Forms.Cursor LoadCursorFromResource(System.Drawing.Icon icono)  // Assuming that the resource is an Icon, but also could be a Image or a Bitmap
         {
-            statebutton = "";
-            selectpchart_func(false);
-            this.tChart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            double xMin = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-            double xMax = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
-            double yMin = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-            double yMax = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
-            tChart1.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * (xMax - xMin), DateTimeIntervalType.Auto, true);
-            tChart1.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * (yMax - yMin), DateTimeIntervalType.Auto, true);
-            difxview = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-            difyview = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;            
-      
+            string fileName1 = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".cur";
+            using (var fileStream = File.Open(fileName1, FileMode.Create))
+            {
+                icono.Save(fileStream);
+            }
+            System.Windows.Forms.Cursor result = new System.Windows.Forms.Cursor(LoadCursorFromFile(fileName1));
+            File.Delete(fileName1);
+
+            return result;
+        }
+
+        private int zoomClickCount = 0;
+        private double originalMinX, originalMaxX;
+
+        private void btnZoomIn_Click(object sender, EventArgs e)
+        {
+
+            if (btnzoominTS.Checked)
+            {
+                btnZoomOutTS.Checked = false;
+                btnSelectAreaTS.Checked = false;
+                tChart1.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.zoomin);
+                Chart1_ActionState = "zoomin";
+            }
+            else
+            {
+                Chart1_ActionState = "";
+
+                tChart1.Cursor = Cursors.Default;
+            }
+
+            // فقط بار اول، بازه‌ی اصلی محور X را ذخیره می‌کنیم
+            if (zoomClickCount == 0)
+            {
+                System.Windows.Forms.DataVisualization.Charting.ChartArea area = tChart1.ChartAreas[0];
+                originalMinX = area.AxisX.Minimum;
+                originalMaxX = area.AxisX.Maximum;
+            }
+
+        }
+
+        private DateTime lastZoomOutClickTime = DateTime.MinValue;
+        private const int DoubleClickThresholdMs = 400; // بازه زمانی برای تشخیص دابل کلیک
+
+        private void tChart1_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                ChartArea area = tChart1.ChartAreas[0];
+                double totalRange = originalMaxX - originalMinX;
+
+
+                switch (Chart1_ActionState)
+                {
+                    case "zoomin":
+
+
+                        // تبدیل مختصات پیکسلی کلیک به مقدار روی محور X
+                        double clickValueX = area.AxisX.PixelPositionToValue(e.X);
+
+                        zoomClickCount++;
+
+                        double zoomFactor = 1 - (zoomClickCount * 0.10); // هر کلیک 20٪ بیشتر زوم
+
+                        if (zoomFactor < 0.1) zoomFactor = 0.1; // جلوگیری از صفر یا منفی شدن بازه
+
+                        double newRange = totalRange * zoomFactor;
+
+                        double newMin = clickValueX - newRange / 2;
+                        double newMax = clickValueX + newRange / 2;
+
+                        // اگر بازه جدید از محدوده اصلی خارج شد، اصلاحش می‌کنیم
+                        if (newMin < originalMinX)
+                        {
+                            newMin = originalMinX;
+                            newMax = newMin + newRange;
+                        }
+                        if (newMax > originalMaxX)
+                        {
+                            newMax = originalMaxX;
+                            newMin = newMax - newRange;
+                        }
+
+                        area.AxisX.ScaleView.Zoom(newMin, newMax);
+                        break;
+
+                    case "zoomout":
+
+                        DateTime now = DateTime.Now;
+                        bool isDoubleClick = (now - lastZoomOutClickTime).TotalMilliseconds <= DoubleClickThresholdMs;
+                        lastZoomOutClickTime = now;
+
+
+                        if (isDoubleClick)
+                        {
+                            // دو کلیک پشت‌سرهم -> بازگشت کامل به حالت اولیه
+                            area.AxisX.ScaleView.ZoomReset();
+                            zoomClickCount = 0;
+                            lastZoomOutClickTime = DateTime.MinValue; // جلوگیری از زنجیره‌ای شدن با کلیک بعدی
+                            return;
+                        }
+
+                        // اگر اصلا زومی روی نمودار نیست، کاری لازم نیست انجام شود
+                        if (!area.AxisX.ScaleView.IsZoomed)
+                            return;
+
+                        double currentMin = area.AxisX.ScaleView.ViewMinimum;
+                        double currentMax = area.AxisX.ScaleView.ViewMaximum;
+                        double center = (currentMin + currentMax) / 2;
+
+                        double expandAmount = totalRange * 0.10; // 10% از کل بازه اصلی باز می‌شود
+
+                        newMin = currentMin - expandAmount / 2;
+                        newMax = currentMax + expandAmount / 2;
+
+                        if (newMin <= originalMinX && newMax >= originalMaxX)
+                        {
+                            // اگر با این باز شدن، کل بازه پوشش داده شد -> ریست کامل
+                            area.AxisX.ScaleView.ZoomReset();
+                            zoomClickCount = 0;
+                        }
+                        else
+                        {
+                            if (newMin < originalMinX) newMin = originalMinX;
+                            if (newMax > originalMaxX) newMax = originalMaxX;
+
+                            area.AxisX.ScaleView.Zoom(newMin, newMax);
+
+                            // برای هماهنگی با شمارنده کلیک روی نمودار (اختیاری)
+                            if (zoomClickCount > 0) zoomClickCount--;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnzoomout_Click(object sender, EventArgs e)
         {
-            statebutton_1 = "";
-            selectpchart_func(false);
-            this.tChart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            tChart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
-            tChart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(1); 
+            if (btnZoomOutTS.Checked)
+            {
+                btnzoominTS.Checked = false;
+                btnSelectAreaTS.Checked = false;
+                tChart1.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.Zoomout);
+                Chart1_ActionState = "zoomout";
+            }
+            else
+            {
+                Chart1_ActionState = "";
+
+                tChart1.Cursor = Cursors.Default;
+
+            }
+
         }
 
         private void btnshowgrid_Click(object sender, EventArgs e)
         {
-            statebutton = "";
+            Chart1_ActionState = "";
             selectpchart_func(false);
             this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled;
             this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled;
@@ -3478,7 +3450,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         private void btnshowaxes_Click(object sender, EventArgs e)
         {
-            statebutton = "";
+            Chart1_ActionState = "";
             selectpchart_func(false);
             tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
             tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
@@ -3508,8 +3480,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 case 3:
 
                     double xminb = 0, xmaxb = 0, yminb = 0, ymaxb = 0, shomartypevi = 0, shomartypevt = 0, shomartypeit = 0, shomartypeqt = 0;
-                    for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                        if (treeView3.Nodes[0].Nodes[i].Checked)
+                    for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                        if (tvTechList.Nodes[0].Nodes[i].Checked)
                         {
                             if (clasglobal.HAxisTitle2080[int.Parse(dschart2.analyselist.Rows[i][0].ToString())].Substring(0, 1) == "P" && clasglobal.VAxisTitle2080[int.Parse(dschart2.analyselist.Rows[i][0].ToString())].Substring(0, 1) == "C")
                                 shomartypevi++;
@@ -3552,14 +3524,14 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                         titlegraph = "QT";
                     else if (shomartypevi == 0 && (shomartypevt == 0 && shomartypeqt == 0 && shomartypeit > 0))
                         titlegraph = "IT";
-                    if(shomarcheck==0)
+                    if (shomarcheck == 0)
                     {
                         MessageBox.Show("EXPORTING works with one graph" + (char)13 + "Please select ONE !!!");
                     }
                     else if (shomarcheck == 1)
                     {
                         strlegend = fillparam(2, i1);
-                        forms2065.frmshowgraph frm1 = new forms2065.frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph,"");
+                        forms2065.frmshowgraph frm1 = new forms2065.frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph, "");
                         if (frm1.Chart1.Series.Count > 0)
                             frm1.Chart1.Series[0].Points.Clear();
                         for (int i = 0; i < tChart1.Series[i1].Points.Count; i++)
@@ -3574,7 +3546,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                         // MessageBox.Show("EXPORTING works with one graph" + (char)13 + "Please select ONE only!!!");
                         strlegend = "";
 
-                        forms2065.frmshowgraph frm2 = new forms2065.frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph,"");
+                        forms2065.frmshowgraph frm2 = new forms2065.frmshowgraph(strlegend, xminb, xmaxb, yminb, ymaxb, titlegraph, "");
                         if (frm2.Chart1.Series.Count > 0)
                         {
                             frm2.Chart1.Series[0].Points.Clear();
@@ -3585,12 +3557,12 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
                         }
                         int b = 0;
-                        for (int i = 0; i < treeView3.Nodes[0].Nodes.Count; i++)
-                            if (treeView3.Nodes[0].Nodes[i].Checked)
+                        for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
+                            if (tvTechList.Nodes[0].Nodes[i].Checked)
                             {
                                 if (frm2.Chart1.Series.Count <= b)
                                 {
-                                    frm2.Chart1.Series.Add(treeView3.Nodes[0].Nodes[i].Name);
+                                    frm2.Chart1.Series.Add(tvTechList.Nodes[0].Nodes[i].Name);
                                     frm2.Chart1.Series[b].ChartType = SeriesChartType.FastLine;
                                     if (dschart2.analyselist.Rows[i]["comment"].ToString().Trim() != "")
                                         frm2.Chart1.Series[b].LegendText = clasglobal.TechName2080[int.Parse(dschart2.analyselist.Rows[i][0].ToString())] + "(" + dschart2.analyselist.Rows[i]["comment"].ToString().Trim() + ")";
@@ -3615,17 +3587,6 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
         }
 
-        private void tChart1_MouseDown(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                System.Windows.Forms.DataVisualization.Charting.Axis ax = tChart1.ChartAreas[0].AxisX;
-                mDown = ax.PixelPositionToValue(e.Location.X);
-                System.Windows.Forms.DataVisualization.Charting.Axis ay = tChart1.ChartAreas[0].AxisY;
-                mDowny = ay.PixelPositionToValue(e.Location.Y);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
 
         private void tChart1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -3641,7 +3602,6 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             if (drawline1.Lines.Count == 0)
             {
                 MessageBox.Show("There is not any line for selecting !!!");
-
             }
 
             tChart2.Refresh();
@@ -3664,7 +3624,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     tChart2.BackColor = cl.Color;
                     tChart2.BorderlineColor = cl.Color;
                     tChart2.ChartAreas[0].BackColor = cl.Color;
-                    panel1.BackColor = cl.Color;
+                    pnlGraph.BackColor = cl.Color;
                     panel2.BackColor = cl.Color;
                     panel8.BackColor = cl.Color;
 
@@ -3692,10 +3652,23 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     color[8] = "2065 graph analysis:" + cl.Color.ToArgb().ToString();
                     File.WriteAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat", color);
                     //for (int i = 0; i < OnlineChart.Series.Count; i++)
-                    int i = treeView3.SelectedNode.Index;
-                    tChart1.Series[i].Color = cl.Color;
+                    TreeNode node = tvTechList.SelectedNode;
+                    if (node.Level > 1)
+                    {
+                        node = node.Parent;
+                    }
 
-                    try { tChart2.Series[0].Color = cl.Color; } catch { }
+                    int i = node.Index;
+                    ITechniques tech = TechLine[i];
+                    tech.ColorCode = cl.Color.ToArgb();
+                    node.ForeColor = cl.Color;
+
+                    tChart1.Series[$"{tech.Name}-{i}"].Color = cl.Color;
+                    foreach (TreeNode child in node.Nodes)
+                    {
+                        child.ForeColor = cl.Color;
+                        tChart1.Series[$"{tech.Name}-{i}_{child.Index + 1}"].Color = cl.Color;
+                    }
                 }
             }
             catch (Exception x)
@@ -3723,1486 +3696,1836 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         {
             this.Cursor = Cursors.WaitCursor;
 
-            try
-            {
-                if (tChart1.Series.Count > 0)
-                {
-                    int j = -1;
-                    for (int i = 0; i < this.treeView3.Nodes[0].Nodes.Count; i++)
-                        if (this.treeView3.Nodes[0].Nodes[i].Checked == true)//فقط اولین سری که تیک خورده باشد انتخاب می شود
-                        {
-                            j = i;
+            //try
+            //{
+            //    if (tChart1.Series.Count > 0)
+            //    {
+            //        int j = -1;
+            //        for (int i = 0; i < this.tvTechList.Nodes[0].Nodes.Count; i++)
+            //            if (this.tvTechList.Nodes[0].Nodes[i].Checked == true)//فقط اولین سری که تیک خورده باشد انتخاب می شود
+            //            {
+            //                j = i;
 
-                            for (int k = i + 1; k < this.treeView3.Nodes[0].Nodes.Count; k++)//غیر تیک کردن بقیه گرافها
-                                this.treeView3.Nodes[0].Nodes[k].Checked = false;
+            //                for (int k = i + 1; k < this.tvTechList.Nodes[0].Nodes.Count; k++)//غیر تیک کردن بقیه گرافها
+            //                    this.tvTechList.Nodes[0].Nodes[k].Checked = false;
 
-                            TreeNode sel = treeView3.Nodes[0].Nodes[i];//انتخاب گراف تیک دار
-                            treeView3.SelectedNode = sel;
-                            treeView3.Focus();
+            //                TreeNode sel = tvTechList.Nodes[0].Nodes[i];//انتخاب گراف تیک دار
+            //                tvTechList.SelectedNode = sel;
+            //                tvTechList.Focus();
 
-                            break;
-                        }
+            //                break;
+            //            }
 
-                    if (j == -1)
-                    {
-                        this.Cursor = Cursors.Default;
-                        MessageBox.Show("A graph of the list needs to be checked.", "Error");
-                        return;
-                    }
+            //        if (j == -1)
+            //        {
+            //            this.Cursor = Cursors.Default;
+            //            MessageBox.Show("A graph of the list needs to be checked.", "Error");
+            //            return;
+            //        }
 
-                    radioButton1.Checked = true;
+            //        radioButton1.Checked = true;
 
-                    Array.Clear(volt, 0, volt.Length);
-                    Array.Clear(current, 0, current.Length);
+            //        Array.Clear(volt, 0, volt.Length);
+            //        Array.Clear(current, 0, current.Length);
 
-                    Counter_num = tChart1.Series[j].Points.Count;
+            //        Counter_num = tChart1.Series[j].Points.Count;
 
-                    Array.Resize(ref volt, Counter_num);
-                    Array.Resize(ref current, Counter_num);
+            //        Array.Resize(ref volt, Counter_num);
+            //        Array.Resize(ref current, Counter_num);
 
 
-                    if (tChart2.Series.Count == 0)
-                    {
-                        txt_res.Text = (Convert.ToInt16(Counter_num / 20)).ToString();//این عدد تجربی است یعنی حالتی است که بیشتر قله ها گرفته میشود
-                        txt_noise.Text = "0";
-                    }
+            //        if (tChart2.Series.Count == 0)
+            //        {
+            //            txt_res.Text = (Convert.ToInt16(Counter_num / 20)).ToString();//این عدد تجربی است یعنی حالتی است که بیشتر قله ها گرفته میشود
+            //            txt_noise.Text = "0";
+            //        }
 
 
-                    tChart2.Series.Clear();//پاک کردن گرافها
-                    tChart2.Refresh();
+            //        tChart2.Series.Clear();//پاک کردن گرافها
+            //        tChart2.Refresh();
 
-                    Thread.Sleep(100);//جهت متوجه شدن کاربر                               
+            //        Thread.Sleep(100);//جهت متوجه شدن کاربر                               
 
 
-                    Array.Clear(series_height_index, 0, series_height_index.Length);//جهت نگهداری اندیس سری هایی از چارت که مربوط با ارتفاع است برای نمایش چک باکس
-                    Array.Resize(ref series_height_index, 0);
-                    Array.Clear(series_width_index, 0, series_width_index.Length);
-                    Array.Resize(ref series_width_index, 0);
-                    Array.Clear(series_area_index, 0, series_area_index.Length);
-                    Array.Resize(ref series_area_index, 0);
+            //        Array.Clear(series_height_index, 0, series_height_index.Length);//جهت نگهداری اندیس سری هایی از چارت که مربوط با ارتفاع است برای نمایش چک باکس
+            //        Array.Resize(ref series_height_index, 0);
+            //        Array.Clear(series_width_index, 0, series_width_index.Length);
+            //        Array.Resize(ref series_width_index, 0);
+            //        Array.Clear(series_area_index, 0, series_area_index.Length);
+            //        Array.Resize(ref series_area_index, 0);
 
 
-                    int ser = 0;
+            //        int ser = 0;
 
-                    tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
-                    tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                    tChart2.Series[ser].Color = tChart1.Series[0].Color;
-                    tChart2.Series[ser].BorderWidth = 2;
-                    tChart2.Titles[ser].Text = "Peak Search";
-                    tChart2.ChartAreas[0].AxisY.Title = tChart1.ChartAreas[0].AxisY.Title;
-                    tChart2.ChartAreas[0].AxisX.Title = tChart1.ChartAreas[0].AxisX.Title;
-                    ser++;
+            //        tChart2.Series.Add(new Series());
+            //        tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //        tChart2.Series[ser].Color = tChart1.Series[0].Color;
+            //        tChart2.Series[ser].BorderWidth = 2;
+            //        tChart2.Titles[ser].Text = "Peak Search";
+            //        tChart2.ChartAreas[0].AxisY.Title = tChart1.ChartAreas[0].AxisY.Title;
+            //        tChart2.ChartAreas[0].AxisX.Title = tChart1.ChartAreas[0].AxisX.Title;
+            //        ser++;
 
+            //        if (TechLine[j].Number == 10 || TechLine[j].Number == 11 || TechLine[j].Number == 12)
+            //            tChart2.Series[0].Points.AddXY(0, othertech_val1[0]);//رسم در نقطه صفر زمان // technics chp cha chc
 
-                    if (dschart2.analyselist.Rows[j][0].ToString() == "10" || dschart2.analyselist.Rows[j][0].ToString() == "11" || dschart2.analyselist.Rows[j][0].ToString() == "12")
-                        tChart2.Series[0].Points.AddXY(0, othertech_val1[0]);//رسم در نقطه صفر زمان // technics chp cha chc
 
-                    for (int i = 0; i < Counter_num; i++)
-                    {
-                        volt[i] = tChart1.Series[j].Points[i].XValue;
-                        current[i] = tChart1.Series[j].Points[i].YValues[0];
+            //        for (int i = 0; i < Counter_num; i++)
+            //        {
+            //            volt[i] = tChart1.Series[j].Points[i].XValue;
+            //            current[i] = tChart1.Series[j].Points[i].YValues[0];
 
-                        tChart2.Series[0].Points.AddXY(volt[i], current[i]);
-                    }
+            //            tChart2.Series[0].Points.AddXY(volt[i], current[i]);
+            //        }
 
 
-                    //============================ شروع عملیات
+            //        //============================ شروع عملیات
 
-                    int forward_count = Counter_num;//برای گراف سی وی که رفت و برگشت دارد این رفت
+            //        int forward_count = Counter_num;//برای گراف سی وی که رفت و برگشت دارد این رفت
 
-                    for (int i = 1; i < Counter_num; i++)
-                    {
-                        if (volt[i] < volt[i - 1])//برای تکنیک سی وی هنگام برگشت
-                        {
-                            forward_count = i - 1;
+            //        for (int i = 1; i < Counter_num; i++)
+            //        {
+            //            if (volt[i] < volt[i - 1])//برای تکنیک سی وی هنگام برگشت
+            //            {
+            //                forward_count = i - 1;
 
-                            break;
-                        }
-                    }
+            //                break;
+            //            }
+            //        }
 
 
-                    bool is_cv = false;//سی وی است یا خیر
-                    if (forward_count < Counter_num)
-                        is_cv = true;
+            //        bool isCv = forward_count < Counter_num;
 
 
-                    if (Convert.ToInt16(txt_res.Text) < 1)
-                        txt_res.Text = "1";
+            //        if (Convert.ToInt16(txt_res.Text) < 1)
+            //            txt_res.Text = "1";
 
-                    if (Convert.ToInt16(txt_noise.Text) < 0)
-                        txt_noise.Text = "0";
+            //        if (Convert.ToInt16(txt_noise.Text) < 0)
+            //            txt_noise.Text = "0";
 
-                    int res = Convert.ToInt16(txt_res.Text);  //در هر این تعداد نقطه ماکس رو می گیرد
-                    int result_noise = Convert.ToInt16(txt_noise.Text);  //هنگام مقایسه هر نقطه با بعدی یا قبلی اگر تعداد اختلاف از این حد بگذرد انتهای یا ابتدای پیک است
+            //        int resolution = Convert.ToInt16(txt_res.Text);  //در هر این تعداد نقطه ماکس رو می گیرد
+            //        int result_noise = Convert.ToInt16(txt_noise.Text);  //هنگام مقایسه هر نقطه با بعدی یا قبلی اگر تعداد اختلاف از این حد بگذرد انتهای یا ابتدای پیک است
 
-                    if (forward_count - res < 1)
-                    {
-                        this.Cursor = Cursors.Default;
-                        MessageBox.Show("Resolution is larger than the function.", "Error");
-                        return;
-                    }
+            //        if (forward_count - resolution < 1)
+            //        {
+            //            this.Cursor = Cursors.Default;
+            //            MessageBox.Show("Resolution is larger than the function.", "Error");
+            //            return;
+            //        }
 
 
 
-                    //===================== گرفتن ماکس ها به مقیاس مشخص
+            //        //===================== گرفتن ماکس ها به مقیاس مشخص
 
-                    int[] maxs = new int[0];
+            //        List<int> maxs = new List<int>();
 
-                    int index = 0;
-                    int last_point = 0;
+            //        for (int i = 0; i < forward_count - resolution; i += resolution)
+            //        {
+            //            int maxIndex = i;
 
-                    for (int i = 0; i < forward_count - res; i += res)
-                    {
-                        double max = current[i];
+            //            for (int x = i + 1; x < i + resolution; x++)
+            //            {
+            //                if (current[x] >= current[maxIndex])
+            //                    maxIndex = x;
+            //            }
 
-                        for (int x = 0; x < res; x++)
-                        {
-                            if (current[i + x] >= max)//بزرگتر از قبل
-                            {
-                                max = current[i + x];
+            //            maxs.Add(maxIndex);
+            //        }
 
-                                index = i + x;
-                            }
-                        }
 
-                        Array.Resize(ref maxs, maxs.Length + 1);
-                        maxs[maxs.Length - 1] = index;
+            //        //==========مرتب کردن ماکس ها از بزرگترین چرا که برخی ماکس های کوچک در درون بزرگهاست
+            //        maxs.Sort((a, b) => current[b].CompareTo(current[a]));
 
-                        last_point = i;
-                    }
 
-                    if (last_point + res < forward_count - 1)//هنگامی که گام حلقه اجازه نمیدهد ادامه آرایه بررسی شود این قسمت از انتهای قبل تا انتهای آرایه بررسی می کند
-                    {
-                        int i = last_point + res;
+            //        //=============;// پیدا کردن شروع قله                  
 
-                        double max = current[i];
+            //        int[] all_start = new int[maxs.Count];
+            //        int[] all_end = new int[maxs.Count];
 
-                        for (int x = i; x < forward_count - 1; x++)
-                        {
-                            if (current[x + 1] >= max)//بزرگتر از قبل
-                            {
-                                max = current[x + 1];
+            //        int noise = 0;
 
-                                index = x + 1;
-                            }
-                        }
+            //        if (isCv == false)//اگر گراف سی وی نیست
+            //        {
+            //            //============================================================
+            //            // تنظیمات
+            //            // ============================================================
 
-                        Array.Resize(ref maxs, maxs.Length + 1);
-                        maxs[maxs.Length - 1] = index;
-                    }
+            //            double minHeight = Convert.ToDouble(txt_height.Text);
+            //            double minWidth = Convert.ToDouble(txt_width.Text);
 
+            //            int peakCount = maxs.Count;
 
-                    //==========مرتب کردن ماکس ها از بزرگترین چرا که برخی ماکس های کوچک در درون بزرگهاست
+            //            // ============================================================
+            //            // مرتب کردن Peak ها بر اساس مقدار جریان
+            //            // بزرگترین جریان اول
+            //            // ============================================================
 
-                    int temp = 0;
+            //            maxs.Sort((a, b) => current[b].CompareTo(current[a]));
 
-                    for (int i = 0; i < maxs.Length; i++)
-                    {
-                        for (int k = 0; k < maxs.Length - 1; k++)
-                        {
-                            if (current[maxs[k]] < current[maxs[k + 1]])//ماکس ها را به ترتیب از کوچکترین مقدار که در حالت معکوس قله می باشد مرتب می کند
-                            {
-                                temp = maxs[k];
-                                maxs[k] = maxs[k + 1];
-                                maxs[k + 1] = temp;
-                            }
-                        }
-                    }
+            //            // ============================================================
+            //            // پردازش Peak ها
+            //            // ============================================================
 
+            //            for (int i = 0; i < peakCount; i++)
+            //            {
+            //                int peak = maxs[i];
 
-                    //=============;// پیدا کردن شروع قله                  
+            //                // --------------------------------------------------------
+            //                // 1. پیدا کردن شروع Peak
+            //                // --------------------------------------------------------
 
-                    int[] all_start = new int[maxs.Length];
-                    int[] all_end = new int[maxs.Length];
+            //                int startIndex = FindPeakStart(
+            //                    peak,
+            //                    current,
+            //                    result_noise);
 
-                    int noise = 0;
 
-                    if (is_cv == false)//اگر گراف سی وی نیست
-                    {
-                        for (int i = 0; i < maxs.Length; i++)
-                        {
-                            //===================// پیدا کردن شروع قله
+            //                // --------------------------------------------------------
+            //                // 2. پیدا کردن پایان Peak
+            //                // --------------------------------------------------------
 
-                            double start = current[maxs[i]];
-                            int start_index = maxs[i];
+            //                int endIndex = FindPeakEnd(
+            //                    peak,
+            //                    result_noise,
+            //                    current,
+            //                    result_noise);
 
-                            for (int k = maxs[i]; k > 0; k--)//اگر نقطه قبل از نقطه فعلی کوچکتراست
-                            {
-                                if (current[k - 1] <= start)
-                                {
-                                    start = current[k - 1];
-                                    start_index = k - 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
 
-                                    noise++;
-                                }
+            //                // --------------------------------------------------------
+            //                // 3. اصلاح Start و End بر اساس Baseline
+            //                // --------------------------------------------------------
 
-                            }
+            //                FixPeakBounds(
+            //                    ref startIndex,
+            //                    ref endIndex,
+            //                    peak,
+            //                    volt,
+            //                    current);
 
-                            //===================// پیدا کردن پایان قله
 
-                            noise = 0;
+            //                // --------------------------------------------------------
+            //                // 4. بررسی Peak های تو در تو
+            //                // --------------------------------------------------------
 
-                            double end = current[maxs[i]];
-                            int end_index = maxs[i];
+            //                bool reject = false;
 
-                            for (int k = maxs[i]; k < forward_count - 1; k++)
-                            {
-                                if (current[k + 1] <= end)
-                                {
-                                    end = current[k + 1];
-                                    end_index = k + 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
+            //                for (int k = 0; k < i; k++)
+            //                {
+            //                    if (startIndex >= all_start[k] &&
+            //                        endIndex <= all_end[k])
+            //                    {
+            //                        reject = true;
+            //                        break;
+            //                    }
+            //                }
 
-                                    noise++;
-                                }
-                            }
+            //                if (reject)
+            //                    continue;
 
 
-                            ////=== بررسی عدم قطع گراف در ابتدای قله
+            //                all_start[i] = startIndex;
+            //                all_end[i] = endIndex;
 
-                            ////(y2 - y1) = shib(x2 - x1)            فرمول معادله خط
-                            ////y2 - y1 = (shib * x2) - (shib * x1)
-                            ////y2 = (shib * x2) - (shib * x1) + y1
 
-                            for (int k = start_index; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
-                            {
-                                double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
+            //                // --------------------------------------------------------
+            //                // 5. محاسبه ارتفاع خالص Peak
+            //                // --------------------------------------------------------
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //                double peakHeight = CalculatePeakHeight(
+            //                    peak,
+            //                    startIndex,
+            //                    endIndex,
+            //                    volt,
+            //                    current);
 
-                                if (y > current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
-                                {
-                                    start_index = k + 1;
-                                }
-                            }
 
+            //                // اگر ارتفاع صفر یا کمتر از حد تعیین شده باشد
+            //                if (peakHeight < minHeight)
+            //                    continue;
 
-                            //=== بررسی عدم قطع گراف در انتهای قله
 
-                            for (int k = end_index; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
-                            {
-                                double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
+            //                // --------------------------------------------------------
+            //                // 6. محاسبه پهنا در نصف ارتفاع
+            //                // --------------------------------------------------------
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //                double halfHeight =
+            //                    current[startIndex] +
+            //                    peakHeight / 2.0;
 
-                                if (y > current[k])
-                                {
-                                    end_index = k;
-                                }
-                            }
 
+            //                if (!TryFindHalfWidth(
+            //                        peak,
+            //                        startIndex,
+            //                        endIndex,
+            //                        halfHeight,
+            //                        volt,
+            //                        current,
+            //                        out double leftX,
+            //                        out double rightX))
+            //                {
+            //                    continue;
+            //                }
 
 
-                            //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
+            //                // --------------------------------------------------------
+            //                // 7. محاسبه Width
+            //                // --------------------------------------------------------
 
-                            bool reject = false;
+            //                double width = Math.Abs(rightX - leftX);
 
-                            for (int k = 0; k < i; k++)
-                            {
-                                if (start_index >= all_start[k] && end_index <= all_end[k])
-                                {
-                                    reject = true;
-                                    break;
-                                }
-                            }
+            //                if (width < minWidth)
+            //                    continue;
 
-                            if (reject == true)
-                                continue;
 
+            //                // --------------------------------------------------------
+            //                // 8. محاسبه Area
+            //                // --------------------------------------------------------
 
-                            all_start[i] = start_index;
-                            all_end[i] = end_index;
+            //                double area = CalculatePeakArea(
+            //                    startIndex,
+            //                    endIndex,
+            //                    volt,
+            //                    current);
 
 
-                            //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
+            //                // ========================================================
+            //                // اینجا Peak معتبر است
+            //                // ========================================================
 
-                            double x11 = volt[start_index], y11 = current[start_index], x22 = volt[end_index], y22 = current[end_index];
-                            double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x32, y32;
+            //                // peak         = اندیس نقطه ماکسیمم
+            //                // startIndex   = شروع Peak
+            //                // endIndex     = پایان Peak
+            //                // peakHeight   = ارتفاع خالص
+            //                // width        = پهنا در نصف ارتفاع
+            //                // area         = مساحت Peak
 
-                            int peak = 0;
-                            double max_jarian_khales = 0;
 
+            //                // --------------------------------------------------------
+            //                // ادامه کد قبلی خودت برای رسم / ذخیره اطلاعات Peak
+            //                // --------------------------------------------------------
 
+            //            }
 
-                            //==فقط جریان خالص ماکس
-                            peak = maxs[i];
-                            x32 = volt[maxs[i]];
-                            y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
-                            max_jarian_khales = current[maxs[i]] - y32;
-                            if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                                max_jarian_khales = max_jarian_khales * (-1);
-                            //==
+            //            //for (int i = 0; i < maxs.Count; i++)
+            //            //{
+            //            //    //===================// پیدا کردن شروع قله
+            //            //    int peak = maxs[i];
 
+            //            //    double start = current[peak];
+            //            //    int startIndex = peak;
+            //            //    noise = 0;
 
-                            ////این قسمت همه جریانهای خالص را از اولین نقطه زیر پیک تا آخرین نقطه زیر پیک حساب می کند و بزرگترین جریان را به همراه قله اش انتخاب میکند
-                            //for (int k = start_index; k < end_index; k++)
-                            //{
-                            //    x32 = volt[k];
-                            //    y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
+            //            //    for (int k = peak; k > 0; k--)
+            //            //    {
+            //            //        if (current[k - 1] <= start)
+            //            //        {
+            //            //            start = current[k - 1];
+            //            //            startIndex = k - 1;
+            //            //            noise = 0;
+            //            //        }
+            //            //        else if (++noise >= result_noise)
+            //            //            break;
+            //            //    }
 
-                            //    double H_khales = current[k] - y32;
-                            //    if (H_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                            //        H_khales = H_khales * (-1);
+            //            //    //===================// پیدا کردن پایان قله
 
-                            //    if (H_khales >= max_jarian_khales)
-                            //    {
-                            //        peak = k;
-                            //        max_jarian_khales = H_khales;
-                            //    }
-                            //}
+            //            //    double end = current[peak];
+            //            //    int endIndex = peak;
+            //            //    noise = 0;
 
+            //            //    for (int k = peak; k < forward_count - 1; k++)
+            //            //    {
+            //            //        if (current[k + 1] <= end)
+            //            //        {
+            //            //            end = current[k + 1];
+            //            //            endIndex = k + 1;
+            //            //            noise = 0;
+            //            //        }
+            //            //        else if (++noise >= result_noise)
+            //            //            break;
+            //            //    }
 
-                            if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
-                                continue;
+            //            //    for (int k = startIndex; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
+            //            //    {
+            //            //        double x1 = volt[startIndex], y1 = current[startIndex], x2 = volt[endIndex], y2 = current[endIndex];
+            //            //        double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //        double x, y;
 
+            //            //        x = volt[k];
+            //            //        y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
-                            if (max_jarian_khales < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //            //        if (y > current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
+            //            //        {
+            //            //            startIndex = k + 1;
+            //            //        }
+            //            //    }
 
-                            //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
 
-                            double base_peak = start_index;
+            //            //    //=== بررسی عدم قطع گراف در انتهای قله
 
-                            double x13 = volt[start_index], y13 = current[start_index], x23 = volt[end_index], y23 = current[end_index];
-                            double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x3, y3;
+            //            //    for (int k = endIndex; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
+            //            //    {
+            //            //        double x1 = volt[startIndex], y1 = current[startIndex], x2 = volt[endIndex], y2 = current[endIndex];
+            //            //        double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //        double x, y;
 
-                            x3 = volt[peak];
-                            y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
-                            base_peak = y3;
+            //            //        x = volt[k];
+            //            //        y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
+            //            //        if (y > current[k])
+            //            //        {
+            //            //            endIndex = k;
+            //            //        }
+            //            //    }
 
-                            //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            int find_half = 0;
 
-                            double nesf = base_peak + (max_jarian_khales / 2);
-                            double p1 = volt[start_index], p2 = volt[end_index];
+            //            //    //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
 
-                            for (int k = peak; k > start_index; k--)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //            //    bool reject = false;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //            //    for (int k = 0; k < i; k++)
+            //            //    {
+            //            //        if (startIndex >= all_start[k] && endIndex <= all_end[k])
+            //            //        {
+            //            //            reject = true;
+            //            //            break;
+            //            //        }
+            //            //    }
 
-                                        p1 = x30;
-                                    }
-                                    else
-                                        p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //            //    if (reject == true)
+            //            //        continue;
 
 
-                                    find_half = 1;
+            //            //    all_start[i] = startIndex;
+            //            //    all_end[i] = endIndex;
 
-                                    break;
-                                }
-                            }
 
+            //            //    //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
+            //            //    double baselineAtPeak = LineY(
+            //            //                                    volt[peak],
+            //            //                                    volt[startIndex],
+            //            //                                    current[startIndex],
+            //            //                                    volt[endIndex],
+            //            //                                    current[endIndex]);
 
-                            if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
+            //            //    double maxNetCurrent = Math.Abs(current[peak] - baselineAtPeak);
 
-                            //============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
+            //            //    if (maxNetCurrent == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
+            //            //        continue;
 
 
-                            find_half = 0;
+            //            //    if (maxNetCurrent < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //            //        continue;
 
-                            for (int k = peak; k < end_index; k++)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //            //    //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //            //    double base_peak = startIndex;
 
-                                        p2 = x30;
-                                    }
-                                    else
-                                        p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //            //    double x13 = volt[startIndex], y13 = current[startIndex], x23 = volt[endIndex], y23 = current[endIndex];
+            //            //    double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //    double x3, y3;
 
+            //            //    x3 = volt[peak];
+            //            //    y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
+            //            //    base_peak = y3;
 
-                                    find_half = 1;
 
-                                    break;
-                                }
-                            }
+            //            //    //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
+            //            //    int find_half = 0;
 
-                            double pahna_dar_nesf = p2 - p1;
-                            if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
+            //            //    double nesf = base_peak + (maxNetCurrent / 2);
+            //            //    double p1 = volt[startIndex], p2 = volt[endIndex];
 
-                            if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //            //    for (int k = peak; k > startIndex; k--)
+            //            //    {
+            //            //        if (current[k] <= nesf)
+            //            //        {
+            //            //            if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
+            //            //            {
+            //            //                double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
+            //            //                double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //                double x30, y30 = nesf;
 
+            //            //                x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            //======== محاسبه مساحت زیر گراف
+            //            //                p1 = x30;
+            //            //            }
+            //            //            else
+            //            //                p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            //رابطه بدست آمده از انتگرال
-                            //
-                            //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
 
-                            double aria = 0, t = 0, ft = 0, ft1 = 0, ft2 = 0;
+            //            //            find_half = 1;
 
-                            double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
-                            double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double xx, yy;
+            //            //            break;
+            //            //        }
+            //            //    }
 
-                            for (int k = start_index + 1; k <= end_index; k++)
-                            {
-                                xx = volt[k - 1];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
-                                ft1 = current[k - 1] - yy;//هر نقطه از جریان منهای همان نقطه در بیس لاین می شود تا جریان خالص زیر پیک در هر نقطه بدست آید
 
-                                if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
+            //            //    if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //            //        continue;
 
-                                xx = volt[k];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
-                                ft2 = current[k] - yy;
+            //            //    //============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
-                                if (ft2 < 0) ft2 = 0;
 
-                                t = volt[k] - volt[k - 1];
-                                ft = (ft1 + ft2) / 2;
-                                aria = aria + (t * ft);
-                            }
+            //            //    find_half = 0;
 
-                            //============
+            //            //    for (int k = peak; k < endIndex; k++)
+            //            //    {
+            //            //        if (current[k] <= nesf)
+            //            //        {
+            //            //            if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
+            //            //            {
+            //            //                double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
+            //            //                double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //                double x30, y30 = nesf;
 
+            //            //                x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[start_index], current[start_index]);
-                            tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
-                            ser++;
+            //            //                p2 = x30;
+            //            //            }
+            //            //            else
+            //            //                p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
 
-                            string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
-                            tChart2.Series[ser].Points[0].Label = "Aria: " + a;
-                            Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
-                            series_area_index[series_area_index.Length - 1] = ser;
-                            ser++;
+            //            //            find_half = 1;
 
+            //            //            break;
+            //            //        }
+            //            //    }
 
-                            string height = max_jarian_khales.ToString();
-                            try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Gold;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
-                            //tChart2.Series[ser].Points.AddXY(volt[peak], current[peak] - (max_jarian_khales / 4));//این نقطه به جهت نمایش لیبل ارتفاع خالص است
-                            tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
-                            tChart2.Series[ser].Points[0].Label = "H: " + height;
-                            Array.Resize(ref series_height_index, series_height_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
-                            series_height_index[series_height_index.Length - 1] = ser;
-                            ser++;
+            //            //    if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //            //        continue;
 
+            //            //    double pahna_dar_nesf = p2 - p1;
+            //            //    if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
 
-                            string w = pahna_dar_nesf.ToString();
-                            try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.SpringGreen;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(p1, nesf);
-                            //tChart2.Series[ser].Points.AddXY((volt[maxs[i]] + p1) / 2, nesf);//این نقطه به جهت نمایش لیبل پهنا است
-                            tChart2.Series[ser].Points.AddXY(p2, nesf);
-                            tChart2.Series[ser].Points[0].Label = "W: " + w;
-                            Array.Resize(ref series_width_index, series_width_index.Length + 1);
-                            series_width_index[series_width_index.Length - 1] = ser;
-                            ser++;
-                        }
-                    }
-                    //====cv
-                    else
-                    //====cv
-                    {
-                        //===================== گرفتن ماکس ها به مقیاس مشخص
+            //            //    if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //            //        continue;
 
-                        for (int i = 0; i < maxs.Length; i++)
-                        {
-                            //===================// پیدا کردن شروع قله
 
-                            double start = current[maxs[i]];
-                            int start_index = maxs[i];
-                            noise = 0;
+            //            //    //======== محاسبه مساحت زیر گراف
 
-                            for (int k = maxs[i]; k > 0; k--)//اگر نقطه قبل از نقطه فعلی کوچکتراست
-                            {
-                                if (current[k - 1] <= start)
-                                {
-                                    start = current[k - 1];
-                                    start_index = k - 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
+            //            //    //رابطه بدست آمده از انتگرال
+            //            //    //
+            //            //    //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
 
-                                    noise++;
-                                }
-                            }
+            //            //    double aria = 0, t = 0, ft = 0, ft1 = 0, ft2 = 0;
 
+            //            //    double xx1 = volt[startIndex], yy1 = current[startIndex], xx2 = volt[endIndex], yy2 = current[endIndex];
+            //            //    double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //            //    double xx, yy;
 
-                            //===================// پیدا کردن پایان قله
+            //            //    for (int k = startIndex + 1; k <= endIndex; k++)
+            //            //    {
+            //            //        xx = volt[k - 1];
+            //            //        yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
+            //            //        ft1 = current[k - 1] - yy;//هر نقطه از جریان منهای همان نقطه در بیس لاین می شود تا جریان خالص زیر پیک در هر نقطه بدست آید
 
-                            noise = 0;
+            //            //        if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
 
-                            double end = current[maxs[i]];
-                            int end_index = maxs[i];
+            //            //        xx = volt[k];
+            //            //        yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
+            //            //        ft2 = current[k] - yy;
 
-                            for (int k = maxs[i]; k < forward_count - 1; k++)
-                            {
-                                if (current[k + 1] <= end)
-                                {
-                                    end = current[k + 1];
-                                    end_index = k + 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
+            //            //        if (ft2 < 0) ft2 = 0;
 
-                                    noise++;
-                                }
-                            }
+            //            //        t = volt[k] - volt[k - 1];
+            //            //        ft = (ft1 + ft2) / 2;
+            //            //        aria = aria + (t * ft);
+            //            //    }
 
+            //            //    //============
 
-                            ////=== بررسی عدم قطع گراف در ابتدای قله
 
-                            ////(y2 - y1) = shib(x2 - x1)            فرمول معادله خط
-                            ////y2 - y1 = (shib * x2) - (shib * x1)
-                            ////y2 = (shib * x2) - (shib * x1) + y1
+            //            //    tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
+            //            //    tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //            //    tChart2.Series[ser].Color = Color.Red;
+            //            //    tChart2.Series[ser].BorderWidth = 1;
+            //            //    tChart2.Series[ser].Points.AddXY(volt[startIndex], current[startIndex]);
+            //            //    tChart2.Series[ser].Points.AddXY(volt[endIndex], current[endIndex]);
+            //            //    ser++;
 
-                            for (int k = start_index; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
-                            {
-                                double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //            //    string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //            //    try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
+            //            //    tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
+            //            //    tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //            //    tChart2.Series[ser].Color = Color.Red;
+            //            //    tChart2.Series[ser].BorderWidth = 1;
+            //            //    tChart2.Series[ser].Points.AddXY(volt[endIndex], current[endIndex]);
+            //            //    tChart2.Series[ser].Points[0].Label = "Aria: " + a;
+            //            //    Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
+            //            //    series_area_index[series_area_index.Length - 1] = ser;
+            //            //    ser++;
 
-                                if (y > current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
-                                {
-                                    start_index = k + 1;
-                                }
-                            }
 
+            //            //    string height = maxNetCurrent.ToString();
+            //            //    try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
+            //            //    tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
+            //            //    tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //            //    tChart2.Series[ser].Color = Color.Gold;
+            //            //    tChart2.Series[ser].BorderWidth = 1;
+            //            //    tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
+            //            //    //tChart2.Series[ser].Points.AddXY(volt[peak], current[peak] - (max_jarian_khales / 4));//این نقطه به جهت نمایش لیبل ارتفاع خالص است
+            //            //    tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
+            //            //    tChart2.Series[ser].Points[0].Label = "H: " + height;
+            //            //    Array.Resize(ref series_height_index, series_height_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
+            //            //    series_height_index[series_height_index.Length - 1] = ser;
+            //            //    ser++;
 
-                            //=== بررسی عدم قطع گراف در انتهای قله
 
-                            for (int k = end_index; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
-                            {
-                                double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
+            //            //    string w = pahna_dar_nesf.ToString();
+            //            //    try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
+            //            //    tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
+            //            //    tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //            //    tChart2.Series[ser].Color = Color.SpringGreen;
+            //            //    tChart2.Series[ser].BorderWidth = 1;
+            //            //    tChart2.Series[ser].Points.AddXY(p1, nesf);
+            //            //    //tChart2.Series[ser].Points.AddXY((volt[maxs[i]] + p1) / 2, nesf);//این نقطه به جهت نمایش لیبل پهنا است
+            //            //    tChart2.Series[ser].Points.AddXY(p2, nesf);
+            //            //    tChart2.Series[ser].Points[0].Label = "W: " + w;
+            //            //    Array.Resize(ref series_width_index, series_width_index.Length + 1);
+            //            //    series_width_index[series_width_index.Length - 1] = ser;
+            //            //    ser++;
+            //            //}
+            //        }
+            //        else
+            //        {
+            //            //===================== گرفتن ماکس ها به مقیاس مشخص
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //            for (int i = 0; i < maxs.Count; i++)
+            //            {
+            //                //===================// پیدا کردن شروع قله
 
-                                if (y > current[k])
-                                {
-                                    end_index = k;
-                                }
-                            }
+            //                double start = current[maxs[i]];
+            //                int start_index = maxs[i];
+            //                noise = 0;
 
+            //                for (int k = maxs[i]; k > 0; k--)//اگر نقطه قبل از نقطه فعلی کوچکتراست
+            //                {
+            //                    if (current[k - 1] <= start)
+            //                    {
+            //                        start = current[k - 1];
+            //                        start_index = k - 1;
+            //                        noise = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        if (noise >= result_noise)
+            //                            break;
 
+            //                        noise++;
+            //                    }
+            //                }
 
-                            //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
 
-                            bool reject = false;
+            //                //===================// پیدا کردن پایان قله
 
-                            for (int k = 0; k < i; k++)
-                            {
-                                if (start_index >= all_start[k] && end_index <= all_end[k])
-                                {
-                                    reject = true;
-                                    break;
-                                }
-                            }
+            //                noise = 0;
 
-                            if (reject == true)
-                                continue;
+            //                double end = current[maxs[i]];
+            //                int end_index = maxs[i];
 
+            //                for (int k = maxs[i]; k < forward_count - 1; k++)
+            //                {
+            //                    if (current[k + 1] <= end)
+            //                    {
+            //                        end = current[k + 1];
+            //                        end_index = k + 1;
+            //                        noise = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        if (noise >= result_noise)
+            //                            break;
 
-                            all_start[i] = start_index;
-                            all_end[i] = end_index;
+            //                        noise++;
+            //                    }
+            //                }
 
 
-                            //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
+            //                ////=== بررسی عدم قطع گراف در ابتدای قله
 
-                            double x11 = volt[start_index], y11 = current[start_index], x22 = volt[end_index], y22 = current[end_index];
-                            double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x32, y32;
+            //                ////(y2 - y1) = shib(x2 - x1)            فرمول معادله خط
+            //                ////y2 - y1 = (shib * x2) - (shib * x1)
+            //                ////y2 = (shib * x2) - (shib * x1) + y1
 
-                            int peak = 0;
-                            double max_jarian_khales = 0;
+            //                for (int k = start_index; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
+            //                {
+            //                    double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
+            //                    double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                    double x, y;
 
+            //                    x = volt[k];
+            //                    y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
-                            //==فقط جریان خالص ماکس
-                            peak = maxs[i];
-                            x32 = volt[maxs[i]];
-                            y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
-                            max_jarian_khales = current[maxs[i]] - y32;
-                            if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                                max_jarian_khales = max_jarian_khales * (-1);
+            //                    if (y > current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
+            //                    {
+            //                        start_index = k + 1;
+            //                    }
+            //                }
 
-                            //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
 
-                            double base_peak = start_index;
+            //                //=== بررسی عدم قطع گراف در انتهای قله
 
-                            double x13 = volt[start_index], y13 = current[start_index], x23 = volt[end_index], y23 = current[end_index];
-                            double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x3, y3;
+            //                for (int k = end_index; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
+            //                {
+            //                    double x1 = volt[start_index], y1 = current[start_index], x2 = volt[end_index], y2 = current[end_index];
+            //                    double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                    double x, y;
 
-                            x3 = volt[peak];
-                            y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
-                            base_peak = y3;
+            //                    x = volt[k];
+            //                    y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
+            //                    if (y > current[k])
+            //                    {
+            //                        end_index = k;
+            //                    }
+            //                }
 
-                            //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            int find_half = 0;
 
-                            double nesf = base_peak + (max_jarian_khales / 2);
-                            double p1 = volt[start_index], p2 = volt[end_index];
+            //                //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
 
-                            for (int k = peak; k > start_index; k--)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                bool reject = false;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                for (int k = 0; k < i; k++)
+            //                {
+            //                    if (start_index >= all_start[k] && end_index <= all_end[k])
+            //                    {
+            //                        reject = true;
+            //                        break;
+            //                    }
+            //                }
 
-                                        p1 = x30;
-                                    }
-                                    else
-                                        p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                if (reject == true)
+            //                    continue;
 
 
-                                    find_half = 1;
+            //                all_start[i] = start_index;
+            //                all_end[i] = end_index;
 
-                                    break;
-                                }
-                            }
 
+            //                //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
 
-                            ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
+            //                double x11 = volt[start_index], y11 = current[start_index], x22 = volt[end_index], y22 = current[end_index];
+            //                double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x32, y32;
 
+            //                int peak = 0;
+            //                double max_jarian_khales = 0;
 
-                            find_half = 0;
 
-                            for (int k = peak; k < end_index; k++)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                //==فقط جریان خالص ماکس
+            //                peak = maxs[i];
+            //                x32 = volt[maxs[i]];
+            //                y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
+            //                max_jarian_khales = current[maxs[i]] - y32;
+            //                if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
+            //                    max_jarian_khales = max_jarian_khales * (-1);
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
 
-                                        p2 = x30;
-                                    }
-                                    else
-                                        p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                double base_peak = start_index;
 
+            //                double x13 = volt[start_index], y13 = current[start_index], x23 = volt[end_index], y23 = current[end_index];
+            //                double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x3, y3;
 
-                                    find_half = 1;
+            //                x3 = volt[peak];
+            //                y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
+            //                base_peak = y3;
 
-                                    break;
-                                }
-                            }
 
+            //                //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            //====***====//تا قبل از اینجا طبق روال سابق جهت صحت قله قرار دادم اما محاسبات و بیس لاین اصلی از اینجا انجام می شود
+            //                int find_half = 0;
 
+            //                double nesf = base_peak + (max_jarian_khales / 2);
+            //                double p1 = volt[start_index], p2 = volt[end_index];
 
-                            //======= گراف تکنیک سی وی باید بیس لاین قبل از قله پیدا شود بعد امتداد یابد
-                            int st = start_index - 1;
-                            if (st <= 0) st = 1;
+            //                for (int k = peak; k > start_index; k--)
+            //                {
+            //                    if (current[k] <= nesf)
+            //                    {
+            //                        if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[st]; y22 = current[st];
-                            double shib_a = (y22 - y11) / (x22 - x11);//شیب دونقطه قبل از استارت را به عنوان مرجع می گیریم و تا جایی که کمترین شیب موجود باشد امتداد می دهیم
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            int pt1 = st;
-                            for (int k = start_index - 1; k > 0; k--)
-                            {
-                                x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[k]; y22 = current[k];
-                                double shib_b = (y22 - y11) / (x22 - x11);
+            //                            p1 = x30;
+            //                        }
+            //                        else
+            //                            p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                                if (shib_b < shib_a)
-                                {
-                                    shib_a = shib_b;
-                                    pt1 = k - 1;
-                                }
-                            }
 
-                            //==محدوده شروع قله تا انتخاب نقطه اول را تقسیم دو میکنیم سپس مینیمم هرقسمت نقاط ما هستند
+            //                        find_half = 1;
 
-                            int div = (st - pt1) / 2;
+            //                        break;
+            //                    }
+            //                }
 
-                            for (int k = pt1 + 1; k < pt1 + div; k++)//از محدوده بیس مشخص شده به عنوان نقطه اول مینیمم میگیریم
-                            {
-                                if (current[k] < current[k - 1])
-                                {
-                                    pt1 = k;
-                                }
-                            }
 
-                            int pt2 = pt1 + div;// از محدوده مشخص شده به عنوان نقطه دوم مینیمم دوم میگیریم.
-                            for (int k = pt1 + div; k < st; k++)
-                            {
-                                if (current[k] < current[k - 1])
-                                {
-                                    pt2 = k;
-                                }
-                            }
+            //                ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
 
-                            //============= بدست آوردن ارتفاع خالص
+            //                find_half = 0;
 
-                            double x15 = volt[pt1], y15 = current[pt1], x25 = volt[pt2], y25 = current[pt2];
-                            double shib5 = (y25 - y15) / (x25 - x15);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x5, y5;
-                            x5 = volt[forward_count];//بدست آوردن نقطه امتداد بیس لاین در انتها
-                            y5 = (shib5 * x5) - (shib5 * x15) + y15;//فرمول معادله خط                          
+            //                for (int k = peak; k < end_index; k++)
+            //                {
+            //                    if (current[k] <= nesf)
+            //                    {
+            //                        if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            x32 = volt[peak];//بدست آوردن ارتفاع روی بیس لاین
-                            base_peak = (shib5 * x32) - (shib5 * x15) + y15;//فرمول معادله خط
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            max_jarian_khales = current[peak] - base_peak;
-                            if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                                max_jarian_khales = max_jarian_khales * (-1);
+            //                            p2 = x30;
+            //                        }
+            //                        else
+            //                            p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
-                                continue;
 
-                            if (max_jarian_khales < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //                        find_half = 1;
 
-                            ////===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
+            //                        break;
+            //                    }
+            //                }
 
-                            find_half = 0;
 
-                            nesf = base_peak + (max_jarian_khales / 2);
-                            p1 = volt[start_index]; p2 = volt[end_index];
+            //                //====***====//تا قبل از اینجا طبق روال سابق جهت صحت قله قرار دادم اما محاسبات و بیس لاین اصلی از اینجا انجام می شود
 
-                            for (int k = peak; k > start_index; k--)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                //======= گراف تکنیک سی وی باید بیس لاین قبل از قله پیدا شود بعد امتداد یابد
+            //                int st = start_index - 1;
+            //                if (st <= 0) st = 1;
 
-                                        p1 = x30;
-                                    }
-                                    else
-                                        p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[st]; y22 = current[st];
+            //                double shib_a = (y22 - y11) / (x22 - x11);//شیب دونقطه قبل از استارت را به عنوان مرجع می گیریم و تا جایی که کمترین شیب موجود باشد امتداد می دهیم
 
+            //                int pt1 = st;
+            //                for (int k = start_index - 1; k > 0; k--)
+            //                {
+            //                    x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[k]; y22 = current[k];
+            //                    double shib_b = (y22 - y11) / (x22 - x11);
 
-                                    find_half = 1;
+            //                    if (shib_b < shib_a)
+            //                    {
+            //                        shib_a = shib_b;
+            //                        pt1 = k - 1;
+            //                    }
+            //                }
 
-                                    break;
-                                }
-                            }
+            //                //==محدوده شروع قله تا انتخاب نقطه اول را تقسیم دو میکنیم سپس مینیمم هرقسمت نقاط ما هستند
 
+            //                int div = (st - pt1) / 2;
 
-                            if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
+            //                for (int k = pt1 + 1; k < pt1 + div; k++)//از محدوده بیس مشخص شده به عنوان نقطه اول مینیمم میگیریم
+            //                {
+            //                    if (current[k] < current[k - 1])
+            //                    {
+            //                        pt1 = k;
+            //                    }
+            //                }
 
+            //                int pt2 = pt1 + div;// از محدوده مشخص شده به عنوان نقطه دوم مینیمم دوم میگیریم.
+            //                for (int k = pt1 + div; k < st; k++)
+            //                {
+            //                    if (current[k] < current[k - 1])
+            //                    {
+            //                        pt2 = k;
+            //                    }
+            //                }
 
-                            ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
+            //                //============= بدست آوردن ارتفاع خالص
 
-                            find_half = 0;
+            //                double x15 = volt[pt1], y15 = current[pt1], x25 = volt[pt2], y25 = current[pt2];
+            //                double shib5 = (y25 - y15) / (x25 - x15);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x5, y5;
+            //                x5 = volt[forward_count];//بدست آوردن نقطه امتداد بیس لاین در انتها
+            //                y5 = (shib5 * x5) - (shib5 * x15) + y15;//فرمول معادله خط                          
 
-                            for (int k = peak; k < Counter_num; k++)
-                            {
-                                if (current[k] <= nesf)
-                                {
-                                    if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                x32 = volt[peak];//بدست آوردن ارتفاع روی بیس لاین
+            //                base_peak = (shib5 * x32) - (shib5 * x15) + y15;//فرمول معادله خط
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                max_jarian_khales = current[peak] - base_peak;
+            //                if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
+            //                    max_jarian_khales = max_jarian_khales * (-1);
 
-                                        p2 = x30;
-                                    }
-                                    else
-                                        p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
+            //                    continue;
 
+            //                if (max_jarian_khales < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //                    continue;
 
-                                    find_half = 1;
+            //                ////===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                                    break;
-                                }
-                            }
+            //                find_half = 0;
 
-                            if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
+            //                nesf = base_peak + (max_jarian_khales / 2);
+            //                p1 = volt[start_index]; p2 = volt[end_index];
 
-                            double pahna_dar_nesf = p2 - p1;
-                            if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
+            //                for (int k = peak; k > start_index; k--)
+            //                {
+            //                    if (current[k] <= nesf)
+            //                    {
+            //                        if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
+            //                            p1 = x30;
+            //                        }
+            //                        else
+            //                            p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            //======== محاسبه مساحت زیر گراف
 
-                            //رابطه بدست آمده از انتگرال
-                            //
-                            //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
+            //                        find_half = 1;
 
-                            double t = 0, ft = 0, ft1 = 0, ft2 = 0, aria = 0;
+            //                        break;
+            //                    }
+            //                }
 
-                            double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
-                            double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double xx, yy;
 
-                            for (int k = start_index + 1; k <= forward_count; k++)
-                            {
-                                xx = volt[k - 1];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
-                                ft1 = current[k - 1] - yy;//هر نقطه از جریان منهای همان نقطه در بیس لاین می شود تا جریان خالص زیر پیک در هر نقطه بدست آید
+            //                if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //                    continue;
 
-                                if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
 
-                                xx = volt[k];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
-                                ft2 = current[k] - yy;
+            //                ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
-                                if (ft2 < 0) ft2 = 0;
 
-                                t = volt[k] - volt[k - 1];
-                                ft = (ft1 + ft2) / 2;
-                                aria = aria + (t * ft);
-                            }
+            //                find_half = 0;
 
+            //                for (int k = peak; k < Counter_num; k++)
+            //                {
+            //                    if (current[k] <= nesf)
+            //                    {
+            //                        if (current[k] < nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[pt1], current[pt1]);
-                            tChart2.Series[ser].Points.AddXY(volt[pt2], current[pt2]);
-                            tChart2.Series[ser].Points.AddXY(x5, y5);
-                            ser++;
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
-                            tChart2.Series[ser].Points[0].Label = "Aria Forward: " + a;
-                            Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
-                            series_area_index[series_area_index.Length - 1] = ser;
-                            ser++;
+            //                            p2 = x30;
+            //                        }
+            //                        else
+            //                            p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            string height = max_jarian_khales.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Gold;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
-                            tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
-                            tChart2.Series[ser].Points[0].Label = "H: " + height;
-                            Array.Resize(ref series_height_index, series_height_index.Length + 1);
-                            series_height_index[series_height_index.Length - 1] = ser;
-                            ser++;
 
-                            string w = pahna_dar_nesf.ToString();
-                            try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.SpringGreen;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(p1, nesf);
-                            tChart2.Series[ser].Points.AddXY(p2, nesf);
-                            tChart2.Series[ser].Points[0].Label = "W: " + w;
-                            Array.Resize(ref series_width_index, series_width_index.Length + 1);
-                            series_width_index[series_width_index.Length - 1] = ser;
-                            ser++;
-                        }
+            //                        find_half = 1;
 
+            //                        break;
+            //                    }
+            //                }
 
+            //                if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //                    continue;
 
-                        //================
-                        //=============cv برگشت
-                        //=============
+            //                double pahna_dar_nesf = p2 - p1;
+            //                if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
 
+            //                if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //                    continue;
 
-                        Array.Clear(maxs, 0, maxs.Length);
-                        Array.Resize(ref maxs, 0);
 
-                        index = 0;
-                        last_point = 0;
+            //                //======== محاسبه مساحت زیر گراف
 
-                        for (int i = forward_count + 1; i < Counter_num - res; i += res)
-                        {
-                            double max = current[i];
+            //                //رابطه بدست آمده از انتگرال
+            //                //
+            //                //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
 
-                            for (int x = 0; x < res; x++)
-                            {
-                                if (current[i + x] <= max)
-                                {
-                                    max = current[i + x];
-                                    index = i + x;
-                                }
-                            }
+            //                double t = 0, ft = 0, ft1 = 0, ft2 = 0, aria = 0;
 
-                            Array.Resize(ref maxs, maxs.Length + 1);
-                            maxs[maxs.Length - 1] = index;
+            //                double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
+            //                double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double xx, yy;
 
-                            last_point = i;
-                        }
+            //                for (int k = start_index + 1; k <= forward_count; k++)
+            //                {
+            //                    xx = volt[k - 1];
+            //                    yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
+            //                    ft1 = current[k - 1] - yy;//هر نقطه از جریان منهای همان نقطه در بیس لاین می شود تا جریان خالص زیر پیک در هر نقطه بدست آید
 
-                        if (last_point + res < Counter_num - 1)//هنگامی که گام حلقه اجازه نمیدهد ادامه آرایه بررسی شود این قسمت از انتهای قبل تا انتهای آرایه بررسی می کند
-                        {
-                            int i = last_point + res;
+            //                    if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
 
-                            double max = current[i];
+            //                    xx = volt[k];
+            //                    yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
+            //                    ft2 = current[k] - yy;
 
-                            for (int x = i; x < Counter_num - 1; x++)
-                            {
-                                if (current[x + 1] <= max)//بزرگتر از قبل
-                                {
-                                    max = current[x + 1];
-                                    index = x + 1;
-                                }
-                            }
+            //                    if (ft2 < 0) ft2 = 0;
 
-                            Array.Resize(ref maxs, maxs.Length + 1);
-                            maxs[maxs.Length - 1] = index;
-                        }
-                        //==========مرتب کردن ماکس ها از بزرگترین چرا که برخی ماکس های کوچک در درون بزرگهاست
+            //                    t = volt[k] - volt[k - 1];
+            //                    ft = (ft1 + ft2) / 2;
+            //                    aria = aria + (t * ft);
+            //                }
 
-                        temp = 0;
 
-                        for (int i = 0; i < maxs.Length; i++)
-                        {
-                            for (int k = 0; k < maxs.Length - 1; k++)
-                            {
-                                if (current[maxs[k]] < current[maxs[k + 1]])//ماکس ها را به ترتیب از کوچکترین مقدار که در حالت معکوس قله می باشد مرتب می کند
-                                {
-                                    temp = maxs[k];
-                                    maxs[k] = maxs[k + 1];
-                                    maxs[k + 1] = temp;
-                                }
-                            }
-                        }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Red;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[pt1], current[pt1]);
+            //                tChart2.Series[ser].Points.AddXY(volt[pt2], current[pt2]);
+            //                tChart2.Series[ser].Points.AddXY(x5, y5);
+            //                ser++;
 
-                        //=============;// پیدا کردن شروع قله       
+            //                string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //                try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Red;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
+            //                tChart2.Series[ser].Points[0].Label = "Aria Forward: " + a;
+            //                Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
+            //                series_area_index[series_area_index.Length - 1] = ser;
+            //                ser++;
 
-                        int[] all_start_2 = new int[maxs.Length];
-                        int[] all_end_2 = new int[maxs.Length];
+            //                string height = max_jarian_khales.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //                try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Gold;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
+            //                tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
+            //                tChart2.Series[ser].Points[0].Label = "H: " + height;
+            //                Array.Resize(ref series_height_index, series_height_index.Length + 1);
+            //                series_height_index[series_height_index.Length - 1] = ser;
+            //                ser++;
 
-                        noise = 0;
+            //                string w = pahna_dar_nesf.ToString();
+            //                try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.SpringGreen;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(p1, nesf);
+            //                tChart2.Series[ser].Points.AddXY(p2, nesf);
+            //                tChart2.Series[ser].Points[0].Label = "W: " + w;
+            //                Array.Resize(ref series_width_index, series_width_index.Length + 1);
+            //                series_width_index[series_width_index.Length - 1] = ser;
+            //                ser++;
+            //            }
+            //            //================
+            //            //=============cv برگشت
+            //            //=============
 
-                        for (int i = 0; i < maxs.Length; i++)
-                        {
-                            double start = current[maxs[i]];
-                            int start_index = maxs[i];
 
-                            for (int k = maxs[i]; k > forward_count + 1; k--)
-                            {
-                                if (current[k - 1] >= start)
-                                {
-                                    start = current[k - 1];
-                                    start_index = k - 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
+            //            //Array.Clear(maxs, 0, maxs.Count);
+            //            //Array.Resize(ref maxs, 0);
+            //            maxs.Clear();
 
-                                    noise++;
-                                }
+            //            int index = 0;
+            //            int last_point = 0;
 
-                            }
+            //            for (int i = forward_count + 1; i < Counter_num - resolution; i += resolution)
+            //            {
+            //                double max = current[i];
 
-                            //===================// پیدا کردن پایان قله
+            //                for (int x = 0; x < resolution; x++)
+            //                {
+            //                    if (current[i + x] <= max)
+            //                    {
+            //                        max = current[i + x];
+            //                        index = i + x;
+            //                    }
+            //                }
 
-                            noise = 0;
+            //                maxs.
+            //                maxs[maxs.Count - 1] = index;
 
-                            double end = current[maxs[i]];
-                            int end_index = maxs[i];
+            //                last_point = i;
+            //            }
 
-                            for (int k = maxs[i]; k < Counter_num - 1; k++)
-                            {
-                                if (current[k + 1] >= end)
-                                {
-                                    end = current[k + 1];
-                                    end_index = k + 1;
-                                    noise = 0;
-                                }
-                                else
-                                {
-                                    if (noise >= result_noise)
-                                        break;
+            //            if (last_point + resolution < Counter_num - 1)//هنگامی که گام حلقه اجازه نمیدهد ادامه آرایه بررسی شود این قسمت از انتهای قبل تا انتهای آرایه بررسی می کند
+            //            {
+            //                int i = last_point + resolution;
 
-                                    noise++;
-                                }
-                            }
+            //                double max = current[i];
 
-                            //=== بررسی عدم قطع گراف در ابتدای قله
+            //                for (int x = i; x < Counter_num - 1; x++)
+            //                {
+            //                    if (current[x + 1] <= max)//بزرگتر از قبل
+            //                    {
+            //                        max = current[x + 1];
+            //                        index = x + 1;
+            //                    }
+            //                }
 
-                            ////(y2 - y1) = shib(x2 - x1)            فرمول معادله خط
-                            ////y2 - y1 = (shib * x2) - (shib * x1)
-                            ////y2 = (shib * x2) - (shib * x1) + y1
+            //                Array.Resize(ref maxs, maxs.Count + 1);
+            //                maxs[maxs.Count - 1] = index;
+            //            }
+            //            //==========مرتب کردن ماکس ها از بزرگترین چرا که برخی ماکس های کوچک در درون بزرگهاست
 
-                            for (int k = start_index; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
-                            {
-                                double x1 = volt[end_index], y1 = current[end_index], x2 = volt[start_index], y2 = current[start_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
+            //            int temp = 0;
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //            for (int i = 0; i < maxs.Count; i++)
+            //            {
+            //                for (int k = 0; k < maxs.Count - 1; k++)
+            //                {
+            //                    if (current[maxs[k]] < current[maxs[k + 1]])//ماکس ها را به ترتیب از کوچکترین مقدار که در حالت معکوس قله می باشد مرتب می کند
+            //                    {
+            //                        temp = maxs[k];
+            //                        maxs[k] = maxs[k + 1];
+            //                        maxs[k + 1] = temp;
+            //                    }
+            //                }
+            //            }
 
-                                if (y < current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
-                                {
-                                    start_index = k + 1;
-                                }
-                            }
+            //            //=============;// پیدا کردن شروع قله       
 
+            //            int[] all_start_2 = new int[maxs.Count];
+            //            int[] all_end_2 = new int[maxs.Count];
 
-                            //=== بررسی عدم قطع گراف در انتهای قله
+            //            noise = 0;
 
-                            for (int k = end_index; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
-                            {
-                                double x1 = volt[end_index], y1 = current[end_index], x2 = volt[start_index], y2 = current[start_index];
-                                double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                double x, y;
+            //            for (int i = 0; i < maxs.Count; i++)
+            //            {
+            //                double start = current[maxs[i]];
+            //                int start_index = maxs[i];
 
-                                x = volt[k];
-                                y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
+            //                for (int k = maxs[i]; k > forward_count + 1; k--)
+            //                {
+            //                    if (current[k - 1] >= start)
+            //                    {
+            //                        start = current[k - 1];
+            //                        start_index = k - 1;
+            //                        noise = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        if (noise >= result_noise)
+            //                            break;
 
-                                if (y < current[k])
-                                {
-                                    end_index = k;
-                                }
-                            }
+            //                        noise++;
+            //                    }
 
+            //                }
 
+            //                //===================// پیدا کردن پایان قله
 
-                            //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
+            //                noise = 0;
 
+            //                double end = current[maxs[i]];
+            //                int end_index = maxs[i];
 
-                            bool reject = false;
+            //                for (int k = maxs[i]; k < Counter_num - 1; k++)
+            //                {
+            //                    if (current[k + 1] >= end)
+            //                    {
+            //                        end = current[k + 1];
+            //                        end_index = k + 1;
+            //                        noise = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        if (noise >= result_noise)
+            //                            break;
 
-                            for (int k = 0; k < i; k++)
-                            {
-                                if (start_index >= all_start_2[k] && end_index <= all_end_2[k])
-                                {
-                                    reject = true;
-                                    break;
-                                }
-                            }
+            //                        noise++;
+            //                    }
+            //                }
 
-                            if (reject == true)
-                                continue;
+            //                //=== بررسی عدم قطع گراف در ابتدای قله
 
-                            all_start_2[i] = start_index;
-                            all_end_2[i] = end_index;
+            //                ////(y2 - y1) = shib(x2 - x1)            فرمول معادله خط
+            //                ////y2 - y1 = (shib * x2) - (shib * x1)
+            //                ////y2 = (shib * x2) - (shib * x1) + y1
 
+            //                for (int k = start_index; k < maxs[i]; k++)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت ابتدا قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت شروع بیس لاین است. بنا براین یک خطی فرضی از نقطه انتهای پیک به ابتدای پیک رسم کردم و در هر نقطه از ابتدا شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است شروع از آنجا باشد
+            //                {
+            //                    double x1 = volt[end_index], y1 = current[end_index], x2 = volt[start_index], y2 = current[start_index];
+            //                    double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                    double x, y;
 
-                            //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
+            //                    x = volt[k];
+            //                    y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
-                            double x11 = volt[end_index], y11 = current[end_index], x22 = volt[start_index], y22 = current[start_index];
-                            double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x32, y32;
+            //                    if (y < current[k])//اگر نقطه در خط فرضی بزرگتر از همان نقطه در گراف باشد
+            //                    {
+            //                        start_index = k + 1;
+            //                    }
+            //                }
 
-                            int peak = 0;
-                            double max_jarian_khales = 0;
 
-                            //==فقط جریان خالص ماکس
-                            peak = maxs[i];
-                            x32 = volt[maxs[i]];
-                            y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
-                            max_jarian_khales = current[maxs[i]] - y32;
-                            if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                                max_jarian_khales = max_jarian_khales * (-1);
+            //                //=== بررسی عدم قطع گراف در انتهای قله
 
+            //                for (int k = end_index; k > maxs[i]; k--)//در برخی موارد هنگامی که بیس لاین از شروع پیک تا انتها رسم می شود در قسمت اانتها قسمتی از گراف را قطع میکند که این خود باعت اشتباه در قسمت انتهای بیس لاین است. بنا براین یک خطی فرضی از نقطه شروع پیک به انتهای پیک رسم کردم و در هر نقطه از انتها شیب آن را محاسبه کرده و  بررسی کردم که اگر این نقطه بزرگتر از نقطه گراف است انتها از آنجا باشد
+            //                {
+            //                    double x1 = volt[end_index], y1 = current[end_index], x2 = volt[start_index], y2 = current[start_index];
+            //                    double shib = (y2 - y1) / (x2 - x1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                    double x, y;
 
-                            //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
+            //                    x = volt[k];
+            //                    y = (shib * x) - (shib * x1) + y1;//فرمول معادله خط
 
-                            double base_peak = start_index;
+            //                    if (y < current[k])
+            //                    {
+            //                        end_index = k;
+            //                    }
+            //                }
 
-                            double x13 = volt[end_index], y13 = current[end_index], x23 = volt[start_index], y23 = current[start_index];
-                            double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x3, y3;
 
-                            x3 = volt[peak];
-                            y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
-                            base_peak = y3;
 
+            //                //================//اگر این  قله تو دل قله های قبلی است صرف نظر کن
 
-                            //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            int find_half = 0;
+            //                bool reject = false;
 
-                            double nesf = base_peak - (max_jarian_khales / 2);
-                            double p1 = volt[start_index], p2 = volt[end_index];
+            //                for (int k = 0; k < i; k++)
+            //                {
+            //                    if (start_index >= all_start_2[k] && end_index <= all_end_2[k])
+            //                    {
+            //                        reject = true;
+            //                        break;
+            //                    }
+            //                }
 
-                            for (int k = peak; k > start_index; k--)
-                            {
-                                if (current[k] >= nesf)
-                                {
-                                    if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                if (reject == true)
+            //                    continue;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                all_start_2[i] = start_index;
+            //                all_end_2[i] = end_index;
 
-                                        p1 = x30;
-                                    }
-                                    else
-                                        p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
+            //                //بدست آوردن همه ارتفاع های خالص از اول پیک تا آخر پیک و پیدا کردن بلندترین آن
 
-                                    find_half = 1;
+            //                double x11 = volt[end_index], y11 = current[end_index], x22 = volt[start_index], y22 = current[start_index];
+            //                double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x32, y32;
 
-                                    break;
-                                }
-                            }
+            //                int peak = 0;
+            //                double max_jarian_khales = 0;
 
+            //                //==فقط جریان خالص ماکس
+            //                peak = maxs[i];
+            //                x32 = volt[maxs[i]];
+            //                y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
+            //                max_jarian_khales = current[maxs[i]] - y32;
+            //                if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
+            //                    max_jarian_khales = max_jarian_khales * (-1);
 
-                            //============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
+            //                //=========== بدست آوردن نقطه پایین ارتفاع پیک در ناحیه قطع بیس لاین
 
-                            find_half = 0;
+            //                double base_peak = start_index;
 
-                            for (int k = peak; k < end_index; k++)
-                            {
-                                if (current[k] >= nesf)
-                                {
-                                    if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                double x13 = volt[end_index], y13 = current[end_index], x23 = volt[start_index], y23 = current[start_index];
+            //                double shib3 = (y23 - y13) / (x23 - x13);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x3, y3;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                x3 = volt[peak];
+            //                y3 = (shib3 * x3) - (shib3 * x13) + y13;//فرمول معادله خط
+            //                base_peak = y3;
 
-                                        p2 = x30;
-                                    }
-                                    else
-                                        p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
+            //                //===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                                    find_half = 1;
+            //                int find_half = 0;
 
-                                    break;
-                                }
-                            }
+            //                double nesf = base_peak - (max_jarian_khales / 2);
+            //                double p1 = volt[start_index], p2 = volt[end_index];
 
+            //                for (int k = peak; k > start_index; k--)
+            //                {
+            //                    if (current[k] >= nesf)
+            //                    {
+            //                        if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            //====***====//تا قبل از اینجا طبق روال سابق جهت صحت قله قرار دادم اما محاسبات و بیس لاین اصلی از اینجا انجام می شود
+            //                            p1 = x30;
+            //                        }
+            //                        else
+            //                            p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
 
+            //                        find_half = 1;
 
-                            //======= گراف تکنیک سی وی باید بیس لاین قبل از قله پیدا شود بعد امتداد یابد
-                            int st = start_index - 1;
-                            if (st <= 0) st = 1;
+            //                        break;
+            //                    }
+            //                }
 
-                            x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[st]; y22 = current[st];
-                            double shib_a = (y22 - y11) / (x22 - x11);//شیب دونقطه قبل از استارت را به عنوان مرجع می گیریم و تا جایی که کمترین شیب موجود باشد امتداد می دهیم
 
-                            int pt1 = st;
-                            for (int k = start_index - 1; k > forward_count + 1; k--)
-                            {
-                                x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[k]; y22 = current[k];
-                                double shib_b = (y22 - y11) / (x22 - x11);
+            //                //============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
-                                if (shib_b < shib_a)
-                                {
-                                    shib_a = shib_b;
-                                    pt1 = k - 1;
-                                }
-                            }
 
+            //                find_half = 0;
 
-                            //==محدوده شروع قله تا انتخاب نقطه اول را تقسیم دو میکنیم سپس مینیمم هرقسمت نقاط ما هستند
+            //                for (int k = peak; k < end_index; k++)
+            //                {
+            //                    if (current[k] >= nesf)
+            //                    {
+            //                        if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            int div = (st - pt1) / 2;
-                            int last = pt1 + div;
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                            if (last > Counter_num) last = Counter_num;
+            //                            p2 = x30;
+            //                        }
+            //                        else
+            //                            p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            for (int k = pt1 + 1; k < last; k++)//از محدوده بیس مشخص شده به عنوان نقطه اول مینیمم میگیریم
-                            {
-                                if (current[k] > current[k - 1])
-                                {
-                                    pt1 = k;
-                                }
-                            }
 
-                            int pt2 = pt1 + div;// از محدوده مشخص شده به عنوان نقطه دوم مینیمم دوم میگیریم.
-                            for (int k = pt1 + div; k < st; k++)
-                            {
-                                if (current[k] > current[k - 1])
-                                {
-                                    pt2 = k;
-                                }
-                            }
+            //                        find_half = 1;
 
+            //                        break;
+            //                    }
+            //                }
 
-                            //============= بدست آوردن ارتفاع خالص
 
-                            double x15 = volt[pt1], y15 = current[pt1], x25 = volt[pt2], y25 = current[pt2];
-                            double shib5 = (y25 - y15) / (x25 - x15);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double x5, y5;
-                            x5 = volt[Counter_num - 1];//بدست آوردن نقطه امتداد بیس لاین در انتها
-                            y5 = (shib5 * x5) - (shib5 * x15) + y15;//فرمول معادله خط
 
+            //                //====***====//تا قبل از اینجا طبق روال سابق جهت صحت قله قرار دادم اما محاسبات و بیس لاین اصلی از اینجا انجام می شود
 
 
-                            x32 = volt[peak];//بدست آوردن ارتفاع روی بیس لاین
-                            base_peak = (shib5 * x32) - (shib5 * x15) + y15;//فرمول معادله خط
 
+            //                //======= گراف تکنیک سی وی باید بیس لاین قبل از قله پیدا شود بعد امتداد یابد
+            //                int st = start_index - 1;
+            //                if (st <= 0) st = 1;
 
-                            max_jarian_khales = current[peak] - base_peak;
-                            if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
-                                max_jarian_khales = max_jarian_khales * (-1);
+            //                x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[st]; y22 = current[st];
+            //                double shib_a = (y22 - y11) / (x22 - x11);//شیب دونقطه قبل از استارت را به عنوان مرجع می گیریم و تا جایی که کمترین شیب موجود باشد امتداد می دهیم
 
-                            if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
-                                continue;
+            //                int pt1 = st;
+            //                for (int k = start_index - 1; k > forward_count + 1; k--)
+            //                {
+            //                    x11 = volt[start_index]; y11 = current[start_index]; x22 = volt[k]; y22 = current[k];
+            //                    double shib_b = (y22 - y11) / (x22 - x11);
 
-                            if (max_jarian_khales < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //                    if (shib_b < shib_a)
+            //                    {
+            //                        shib_a = shib_b;
+            //                        pt1 = k - 1;
+            //                    }
+            //                }
 
-                            ////===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                            find_half = 0;
+            //                //==محدوده شروع قله تا انتخاب نقطه اول را تقسیم دو میکنیم سپس مینیمم هرقسمت نقاط ما هستند
 
-                            nesf = base_peak - (max_jarian_khales / 2);
-                            p1 = volt[start_index]; p2 = volt[end_index];
+            //                int div = (st - pt1) / 2;
+            //                int last = pt1 + div;
 
-                            for (int k = peak; k > start_index; k--)
-                            {
-                                if (current[k] >= nesf)
-                                {
-                                    if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
+            //                if (last > Counter_num) last = Counter_num;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                for (int k = pt1 + 1; k < last; k++)//از محدوده بیس مشخص شده به عنوان نقطه اول مینیمم میگیریم
+            //                {
+            //                    if (current[k] > current[k - 1])
+            //                    {
+            //                        pt1 = k;
+            //                    }
+            //                }
 
-                                        p1 = x30;
-                                    }
-                                    else
-                                        p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                int pt2 = pt1 + div;// از محدوده مشخص شده به عنوان نقطه دوم مینیمم دوم میگیریم.
+            //                for (int k = pt1 + div; k < st; k++)
+            //                {
+            //                    if (current[k] > current[k - 1])
+            //                    {
+            //                        pt2 = k;
+            //                    }
+            //                }
 
 
-                                    find_half = 1;
+            //                //============= بدست آوردن ارتفاع خالص
 
-                                    break;
-                                }
-                            }
+            //                double x15 = volt[pt1], y15 = current[pt1], x25 = volt[pt2], y25 = current[pt2];
+            //                double shib5 = (y25 - y15) / (x25 - x15);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double x5, y5;
+            //                x5 = volt[Counter_num - 1];//بدست آوردن نقطه امتداد بیس لاین در انتها
+            //                y5 = (shib5 * x5) - (shib5 * x15) + y15;//فرمول معادله خط
 
-                            if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
 
-                            ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
-                            find_half = 0;
+            //                x32 = volt[peak];//بدست آوردن ارتفاع روی بیس لاین
+            //                base_peak = (shib5 * x32) - (shib5 * x15) + y15;//فرمول معادله خط
 
-                            for (int k = peak; k < Counter_num; k++)
-                            {
-                                if (current[k] >= nesf)
-                                {
-                                    if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
-                                    {
-                                        double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
-                                        double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                                        double x30, y30 = nesf;
 
-                                        x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
+            //                max_jarian_khales = current[peak] - base_peak;
+            //                if (max_jarian_khales < 0)//برای مثبت کردن جریان خالص یا همان ارتفاع زیر پیک
+            //                    max_jarian_khales = max_jarian_khales * (-1);
 
-                                        p2 = x30;
-                                    }
-                                    else
-                                        p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
+            //                if (max_jarian_khales == 0)//اگر یک پیکی گرفت اما ارتفاعش 0 بود اصلا چیزی رسم نکند
+            //                    continue;
 
+            //                if (max_jarian_khales < Convert.ToDouble(txt_height.Text))//اگر ارتفاع از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //                    continue;
 
-                                    find_half = 1;
+            //                ////===================================//پیدا کردن شروع نقطه پهنا در سمت چپ گراف
 
-                                    break;
-                                }
-                            }
+            //                find_half = 0;
 
-                            if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
-                                continue;
+            //                nesf = base_peak - (max_jarian_khales / 2);
+            //                p1 = volt[start_index]; p2 = volt[end_index];
 
-                            double pahna_dar_nesf = p2 - p1;
-                            if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
+            //                for (int k = peak; k > start_index; k--)
+            //                {
+            //                    if (current[k] >= nesf)
+            //                    {
+            //                        if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد یعنی بین دو نقطه باشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k + 1], y230 = current[k + 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                            if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
-                                continue;
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
+            //                            p1 = x30;
+            //                        }
+            //                        else
+            //                            p1 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
-                            //======== محاسبه مساحت زیر گراف
 
-                            //رابطه بدست آمده از انتگرال
-                            //
-                            //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
+            //                        find_half = 1;
 
-                            double t = 0, ft = 0, ft1 = 0, ft2 = 0, aria = 0;
+            //                        break;
+            //                    }
+            //                }
 
-                            double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
-                            double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
-                            double xx, yy;
+            //                if (find_half == 0)//اگر گراف در سمت چپ پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //                    continue;
 
-                            for (int k = Counter_num - 2; k >= start_index; k--)//حرکت معکوس
-                            {
-                                xx = volt[k + 1];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
-                                ft1 = yy - current[k + 1];//***هر نقطه از جریان در بیس لاین منهای همان نقطه در جریان اصلی می شود تا جریان خالص زیر پیک در هر نقطه بدست آید***معکوس
+            //                ////============//پیدا کردن شروع نقطه پهنا در سمت راست گراف
 
-                                if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
+            //                find_half = 0;
 
-                                xx = volt[k];
-                                yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
-                                ft2 = yy - current[k];
+            //                for (int k = peak; k < Counter_num; k++)
+            //                {
+            //                    if (current[k] >= nesf)
+            //                    {
+            //                        if (current[k] > nesf)//در صورتی که مقدار نصف با مقدار جریان در ناحیه مرزی گراف مساوی نباشد
+            //                        {
+            //                            double x130 = volt[k], y130 = current[k], x230 = volt[k - 1], y230 = current[k - 1];
+            //                            double shib30 = (y230 - y130) / (x230 - x130);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                            double x30, y30 = nesf;
 
-                                if (ft2 < 0) ft2 = 0;
+            //                            x30 = ((shib30 * x130) + (y30 - y130)) / shib30;//فرمول معادله خط
 
-                                t = volt[k] - volt[k + 1];
-                                ft = (ft1 + ft2) / 2;
-                                aria = aria + (t * ft);
-                            }
+            //                            p2 = x30;
+            //                        }
+            //                        else
+            //                            p2 = volt[k];// اگر مساوی بود که نیاز به محاسبه نیست
 
 
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[pt1], current[pt1]);
-                            tChart2.Series[ser].Points.AddXY(volt[pt2], current[pt2]);
-                            tChart2.Series[ser].Points.AddXY(x5, y5);
-                            ser++;
+            //                        find_half = 1;
 
-                            string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Red;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
-                            tChart2.Series[ser].Points[0].Label = "Aria Backward: " + a;
-                            Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
-                            series_area_index[series_area_index.Length - 1] = ser;
-                            ser++;
+            //                        break;
+            //                    }
+            //                }
 
+            //                if (find_half == 0)//اگر گراف در سمت راست پیک نصف پیدا نکرد پس این پیک اشتباه گرفته شده است
+            //                    continue;
 
-                            string height = max_jarian_khales.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.Gold;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
-                            tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
-                            tChart2.Series[ser].Points[0].Label = "H: " + height;
-                            Array.Resize(ref series_height_index, series_height_index.Length + 1);
-                            series_height_index[series_height_index.Length - 1] = ser;
-                            ser++;
+            //                double pahna_dar_nesf = p2 - p1;
+            //                if (pahna_dar_nesf < 0) pahna_dar_nesf = (-1) * pahna_dar_nesf;//مثبت کردن اندازه پهنا
 
+            //                if (pahna_dar_nesf < Convert.ToDouble(txt_width.Text))//اگر پهنا از مقدار داده شده کاربر کمتر است پیک نگیرد
+            //                    continue;
 
-                            string w = pahna_dar_nesf.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
-                            try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
-                            tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
-                            tChart2.Series[ser].ChartType = SeriesChartType.Spline;
-                            tChart2.Series[ser].Color = Color.SpringGreen;
-                            tChart2.Series[ser].BorderWidth = 1;
-                            tChart2.Series[ser].Points.AddXY(p1, nesf);
-                            tChart2.Series[ser].Points.AddXY(p2, nesf);
-                            tChart2.Series[ser].Points[0].Label = "W: " + w;
-                            Array.Resize(ref series_width_index, series_width_index.Length + 1);
-                            series_width_index[series_width_index.Length - 1] = ser;
-                            ser++;
-                        }
-                    }
 
-                    ch_height_CheckedChanged(sender, e);
-                    ch_width_CheckedChanged(sender, e);
-                    ch_area_CheckedChanged(sender, e);
-                }
-                else
-                    MessageBox.Show("graph is not available.");
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show(x.Message);
-            }
+            //                //======== محاسبه مساحت زیر گراف
+
+            //                //رابطه بدست آمده از انتگرال
+            //                //
+            //                //  aria = (t2 - t1)[( f(t1) + f(t2) ) / 2]
+
+            //                double t = 0, ft = 0, ft1 = 0, ft2 = 0, aria = 0;
+
+            //                double xx1 = volt[start_index], yy1 = current[start_index], xx2 = volt[end_index], yy2 = current[end_index];
+            //                double shibb = (yy2 - yy1) / (xx2 - xx1);//   (y2-y1) / (x2-x1)فرمول شیب خط
+            //                double xx, yy;
+
+            //                for (int k = Counter_num - 2; k >= start_index; k--)//حرکت معکوس
+            //                {
+            //                    xx = volt[k + 1];
+            //                    yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط برای بدست آوردن جریان معادل در بیس لاین
+            //                    ft1 = yy - current[k + 1];//***هر نقطه از جریان در بیس لاین منهای همان نقطه در جریان اصلی می شود تا جریان خالص زیر پیک در هر نقطه بدست آید***معکوس
+
+            //                    if (ft1 < 0) ft1 = 0;//قاعدتا جریان در یک نقطه باید از بیس لاین در همان نقطه بیشتر باشد در غیر این صورت این نقطه از بیس لاین خارج از محدوده است
+
+            //                    xx = volt[k];
+            //                    yy = (shibb * xx) - (shibb * xx1) + yy1;//فرمول معادله خط
+            //                    ft2 = yy - current[k];
+
+            //                    if (ft2 < 0) ft2 = 0;
+
+            //                    t = volt[k] - volt[k + 1];
+            //                    ft = (ft1 + ft2) / 2;
+            //                    aria = aria + (t * ft);
+            //                }
+
+
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم بیس لاین
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Red;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[pt1], current[pt1]);
+            //                tChart2.Series[ser].Points.AddXY(volt[pt2], current[pt2]);
+            //                tChart2.Series[ser].Points.AddXY(x5, y5);
+            //                ser++;
+
+            //                string a = aria.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //                try { a = a.Substring(0, a.IndexOf('.') + 6); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//نمایش اندازه مساحت
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Red;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[end_index], current[end_index]);
+            //                tChart2.Series[ser].Points[0].Label = "Aria Backward: " + a;
+            //                Array.Resize(ref series_area_index, series_area_index.Length + 1);//قرار دادن اندیس برای نمایش با چک باکس
+            //                series_area_index[series_area_index.Length - 1] = ser;
+            //                ser++;
+
+
+            //                string height = max_jarian_khales.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //                try { height = height.Substring(0, height.IndexOf('.') + 4); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم ارتفاع یا همان جریان خالص
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.Gold;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(volt[peak], current[peak]);
+            //                tChart2.Series[ser].Points.AddXY(volt[peak], base_peak);
+            //                tChart2.Series[ser].Points[0].Label = "H: " + height;
+            //                Array.Resize(ref series_height_index, series_height_index.Length + 1);
+            //                series_height_index[series_height_index.Length - 1] = ser;
+            //                ser++;
+
+
+            //                string w = pahna_dar_nesf.ToString();// توابع مقادیر را گرد میکردند و نمایش واقعی عدد نبود
+            //                try { w = w.Substring(0, w.IndexOf('.') + 4); } catch { }
+            //                tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());//رسم پهنا در نصف ارتفاع
+            //                tChart2.Series[ser].ChartType = SeriesChartType.Spline;
+            //                tChart2.Series[ser].Color = Color.SpringGreen;
+            //                tChart2.Series[ser].BorderWidth = 1;
+            //                tChart2.Series[ser].Points.AddXY(p1, nesf);
+            //                tChart2.Series[ser].Points.AddXY(p2, nesf);
+            //                tChart2.Series[ser].Points[0].Label = "W: " + w;
+            //                Array.Resize(ref series_width_index, series_width_index.Length + 1);
+            //                series_width_index[series_width_index.Length - 1] = ser;
+            //                ser++;
+            //            }
+            //        }
+
+            //        ch_height_CheckedChanged(sender, e);
+            //        ch_width_CheckedChanged(sender, e);
+            //        ch_area_CheckedChanged(sender, e);
+            //    }
+            //    else
+            //        MessageBox.Show("graph is not available.");
+            //}
+            //catch (Exception x)
+            //{
+            //    MessageBox.Show(x.Message);
+            //}
 
             this.Cursor = Cursors.Default;
         }
+
+        private static double InterpolateX(
+        double x1,
+        double y1,
+        double x2,
+        double y2,
+        double targetY)
+        {
+            double dy = y2 - y1;
+
+            if (Math.Abs(dy) < double.Epsilon)
+                return x1;
+
+            return x1 + (targetY - y1) * (x2 - x1) / dy;
+        }
+
+        private static bool TryFindHalfWidth(
+        int peak,
+        int startIndex,
+        int endIndex,
+        double halfHeight,
+        double[] volt,
+        double[] current,
+        out double leftX,
+        out double rightX)
+        {
+            leftX = 0;
+            rightX = 0;
+
+
+            // ========================================================
+            // سمت چپ Peak
+            // ========================================================
+
+            bool foundLeft = false;
+
+            for (int k = peak; k > startIndex; k--)
+            {
+                if (current[k] <= halfHeight)
+                {
+                    if (current[k] == halfHeight)
+                    {
+                        leftX = volt[k];
+                    }
+                    else
+                    {
+                        leftX = InterpolateX(
+                            volt[k],
+                            current[k],
+                            volt[k + 1],
+                            current[k + 1],
+                            halfHeight);
+                    }
+
+                    foundLeft = true;
+                    break;
+                }
+            }
+
+            if (!foundLeft)
+                return false;
+
+
+            // ========================================================
+            // سمت راست Peak
+            // ========================================================
+
+            bool foundRight = false;
+
+            for (int k = peak; k < endIndex; k++)
+            {
+                if (current[k] <= halfHeight)
+                {
+                    if (current[k] == halfHeight)
+                    {
+                        rightX = volt[k];
+                    }
+                    else
+                    {
+                        rightX = InterpolateX(
+                            volt[k],
+                            current[k],
+                            volt[k - 1],
+                            current[k - 1],
+                            halfHeight);
+                    }
+
+                    foundRight = true;
+                    break;
+                }
+            }
+
+            return foundRight;
+        }
+
+        private static int FindPeakStart(
+        int peak,
+        double[] current,
+        int resultNoise)
+        {
+            double start = current[peak];
+            int startIndex = peak;
+            int noise = 0;
+
+            for (int k = peak; k > 0; k--)
+            {
+                if (current[k - 1] <= start)
+                {
+                    start = current[k - 1];
+                    startIndex = k - 1;
+                    noise = 0;
+                }
+                else
+                {
+                    noise++;
+
+                    if (noise >= resultNoise)
+                        break;
+                }
+            }
+
+            return startIndex;
+        }
+
+        private static int FindPeakEnd(
+        int peak,
+        int forwardCount,
+        double[] current,
+        int resultNoise)
+        {
+            double end = current[peak];
+            int endIndex = peak;
+            int noise = 0;
+
+            for (int k = peak; k < forwardCount - 1; k++)
+            {
+                if (current[k + 1] <= end)
+                {
+                    end = current[k + 1];
+                    endIndex = k + 1;
+                    noise = 0;
+                }
+                else
+                {
+                    noise++;
+
+                    if (noise >= resultNoise)
+                        break;
+                }
+            }
+
+            return endIndex;
+        }
+
+        private static double GetLineY(
+        double x,
+        double x1,
+        double y1,
+        double x2,
+        double y2)
+        {
+            double dx = x2 - x1;
+
+            if (Math.Abs(dx) < double.Epsilon)
+                return y1;
+
+            return y1 + (y2 - y1) * (x - x1) / dx;
+        }
+
+        private static double CalculatePeakHeight(
+        int peak,
+        int startIndex,
+        int endIndex,
+        double[] volt,
+        double[] current)
+        {
+            double baselineAtPeak = GetLineY(
+                volt[peak],
+                volt[startIndex],
+                current[startIndex],
+                volt[endIndex],
+                current[endIndex]);
+
+            return Math.Abs(current[peak] - baselineAtPeak);
+        }
+
+        private static double CalculatePeakArea(
+        int startIndex,
+        int endIndex,
+        double[] volt,
+        double[] current)
+        {
+            double area = 0;
+
+            double x1 = volt[startIndex];
+            double y1 = current[startIndex];
+
+            double x2 = volt[endIndex];
+            double y2 = current[endIndex];
+
+
+            for (int k = startIndex + 1; k <= endIndex; k++)
+            {
+                double baseline1 = GetLineY(
+                    volt[k - 1],
+                    x1,
+                    y1,
+                    x2,
+                    y2);
+
+                double baseline2 = GetLineY(
+                    volt[k],
+                    x1,
+                    y1,
+                    x2,
+                    y2);
+
+
+                double netCurrent1 =
+                    Math.Max(0, current[k - 1] - baseline1);
+
+                double netCurrent2 =
+                    Math.Max(0, current[k] - baseline2);
+
+
+                double dx =
+                    volt[k] - volt[k - 1];
+
+
+                area +=
+                    dx *
+                    (netCurrent1 + netCurrent2) /
+                    2.0;
+            }
+
+            return area;
+        }
+
+        private static void FixPeakBounds(
+        ref int startIndex,
+        ref int endIndex,
+        int peak,
+        double[] volt,
+        double[] current)
+        {
+            // ========================================================
+            // اصلاح شروع Peak
+            // ========================================================
+
+            for (int k = startIndex; k < peak; k++)
+            {
+                double baseline = GetLineY(
+                    volt[k],
+                    volt[startIndex],
+                    current[startIndex],
+                    volt[endIndex],
+                    current[endIndex]);
+
+                if (baseline > current[k])
+                {
+                    startIndex = k + 1;
+                }
+            }
+
+
+
+            // ========================================================
+            // اصلاح پایان Peak
+            // ========================================================
+
+            for (int k = endIndex; k > peak; k--)
+            {
+                double baseline = GetLineY(
+                    volt[k],
+                    volt[startIndex],
+                    current[startIndex],
+                    volt[endIndex],
+                    current[endIndex]);
+
+                if (baseline > current[k])
+                {
+                    endIndex = k;
+                }
+            }
+        }
+
 
         System.Drawing.PointF p1 = new System.Drawing.PointF(10, 10), p2 = new System.Drawing.PointF(100, 100);
         System.Drawing.PointF[] p1_arr = new System.Drawing.PointF[0];
@@ -5257,17 +5580,17 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 if (tChart1.Series.Count > 0)
                 {
                     int j = -1;
-                    for (int i = 0; i < this.treeView3.Nodes[0].Nodes.Count; i++)
-                        if (this.treeView3.Nodes[0].Nodes[i].Checked == true)//فقط اولین سری که تیک خورده باشد انتخاب می شود
+                    for (int i = 0; i < this.tvTechList.Nodes[0].Nodes.Count; i++)
+                        if (this.tvTechList.Nodes[0].Nodes[i].Checked == true)//فقط اولین سری که تیک خورده باشد انتخاب می شود
                         {
                             j = i;
 
-                            for (int k = i + 1; k < this.treeView3.Nodes[0].Nodes.Count; k++)//غیر تیک کردن بقیه گرافها
-                                this.treeView3.Nodes[0].Nodes[k].Checked = false;
+                            for (int k = i + 1; k < this.tvTechList.Nodes[0].Nodes.Count; k++)//غیر تیک کردن بقیه گرافها
+                                this.tvTechList.Nodes[0].Nodes[k].Checked = false;
 
-                            TreeNode sel = treeView3.Nodes[0].Nodes[i];//انتخاب گراف تیک دار
-                            treeView3.SelectedNode = sel;
-                            treeView3.Focus();
+                            TreeNode sel = tvTechList.Nodes[0].Nodes[i];//انتخاب گراف تیک دار
+                            tvTechList.SelectedNode = sel;
+                            tvTechList.Focus();
 
                             break;
                         }
@@ -5673,14 +5996,14 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                         double pahna_dar_nesf = 0, max_jarian_khales = 0, base_peak = 0, nesf = 0, p1 = 0, p2 = 0, aria = 0;
                         int peak = 0;
                         string cv_direct = "";
-                        
+
                         if (start_index < forward_count)//cv رفت
                         {
                             double x11 = volt[start_index], y11 = current[start_index], x22 = volt[end_index], y22 = current[end_index];
                             double shib32 = (y22 - y11) / (x22 - x11);//   (y2-y1) / (x2-x1)فرمول شیب خط
                             double x32, y32;
                             cv_direct = "Aria Forward: ";
-                          
+
                             x32 = volt[forward_count];
                             y32 = (shib32 * x32) - (shib32 * x11) + y11;//فرمول معادله خط
                             tChart2.Series[1].Points.AddXY(x32, y32);// رسم ادامه بیس لاین
@@ -6050,7 +6373,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 forms2065.frm_big_analys frm = new forms2065.frm_big_analys();
                 frm.WindowState = FormWindowState.Maximized;
 
-                foreach (System.Windows.Forms.DataVisualization.Charting.Series ser in tChart2.Series)
+                foreach (Series ser in tChart2.Series)
                     frm.chart1.Series.Add(ser);
 
                 frm.chart1.BackColor = tChart1.BackColor;
@@ -6069,16 +6392,6 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         }
 
         private void tChart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label41_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
         {
 
         }
@@ -6110,10 +6423,52 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
         private void button1_Click(object sender, EventArgs e)
         {
             if (statebutton_1.Trim() == "drawline")
+            {
+                tsBtnDrawLine.Checked = false;
                 statebutton_1 = "";
+            }
             else
+            {
                 statebutton_1 = "drawline";
+                tsBtnDrawLine.Checked = true;
+            }
             selectpchart_func_1(false);
+        }
+
+        private void timerResizeFrm_Tick(object sender, EventArgs e)
+        {
+            timerResizeFrm.Stop();
+            tsGraphTools.Height = (int)(this.Height * 0.05);
+            tsFile.Height = (int)(this.Height * 0.07);
+
+            tvTechList.Height = (int)(this.Height * 0.3);
+
+            panel8.Width = (int)(tChart1.Width * 0.03);
+            foreach (System.Windows.Forms.Button item in panel8.Controls)
+            {
+                item.Height = item.Width;
+            }
+
+            panel2.Width = (int)(tChart2.Width * 0.03);
+            foreach (System.Windows.Forms.Button item in panel2.Controls)
+            {
+                item.Height = item.Width;
+            }
+
+            int imageSize = (int)(tChart2.Width * 0.025);
+            toolStrip2.ImageScalingSize = toolStrip1.ImageScalingSize = new Size(imageSize, imageSize);
+            toolStrip2.Width = toolStrip1.Width = imageSize + 10;
+
+
+            if (this.Height != 0) splitContainer.SplitterDistance = (int)(splitContainer.Height - panel2.Height - 5);
+
+
+        }
+
+        private void frmanalyseGraph2080_Resize(object sender, EventArgs e)
+        {
+            timerResizeFrm.Stop();
+            timerResizeFrm.Start();
         }
 
         private void selectpchart_func_1(bool state)
@@ -6130,8 +6485,6 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 tChart2.ChartAreas[0].CursorX.LineWidth = 1;
                 tChart2.ChartAreas[0].CursorY.LineWidth = 1;
 
-
-
             }
             else
             {
@@ -6142,6 +6495,53 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
             }
             tChart2.Focus();
+        }
+
+        private void btnzoominTS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSelectAreaTS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (btnSelectAreaTS.Checked)
+            {
+                Chart1_ActionState = "selectonly";
+                selectpchart_func(true);
+                tChart1.Cursor = Cursors.Default;
+                btnzoominTS.Checked = false;
+                btnZoomOutTS.Checked = false;
+            }
+            else
+            {
+                selectpchart_func(false);
+                Chart1_ActionState = "";
+            }
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            if (tChart2.Series.Count > 0)
+            {
+                forms2065.frm_big_analys frm = new forms2065.frm_big_analys();
+                frm.WindowState = FormWindowState.Maximized;
+
+                foreach (Series ser in tChart2.Series)
+                    frm.chart1.Series.Add(ser);
+
+                frm.chart1.BackColor = tChart1.BackColor;
+                frm.chart1.BorderlineColor = tChart1.BackColor;
+                frm.chart1.ChartAreas[0].BackColor = tChart1.BackColor;
+                frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+                if (tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled == true)
+                {
+                    frm.chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;
+                    frm.chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;
+                }
+                frm.Show();
+            }
         }
 
         private void btndeleteline_Click(object sender, EventArgs e)
@@ -6188,8 +6588,8 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     if (tech == 10)
                     {
                         slop2 = drawline1.Lines_master[0].pointx - Math.Abs((drawline1.Lines_master[2].pointx + (drawline1.Lines_master[2].pointy - drawline1.Lines_master[0].pointy) / slop1));
-                        label4.Text += Environment.NewLine + "T(s)= " + slop2;
-                        label4.Text += Environment.NewLine + "I* T 1/2="; //+Math.Sqrt(slop2)*Math.Abs(IE/1000.0);
+                        label41.Text += Environment.NewLine + "T(s)= " + slop2;
+                        label41.Text += Environment.NewLine + "I* T 1/2="; //+Math.Sqrt(slop2)*Math.Abs(IE/1000.0);
                     }
                     if (slop1 != 0 && slop2 != 0)
                     {
@@ -6201,15 +6601,20 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
         }
 
+        private void btnzoominTS_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void showDataPointsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView3.SelectedNode.Index >= 0 && treeView3.SelectedNode.Level == 1)
+            if (tvTechList.SelectedNode.Index >= 0 && tvTechList.SelectedNode.Level == 1)
             {
                 forms2065.frmshowdata frm = new forms2065.frmshowdata();
                 frm.listView1.Items.Clear();
-                for (int i = 0; i < tChart1.Series[treeView3.SelectedNode.Index].Points.Count; i++)
+                for (int i = 0; i < tChart1.Series[tvTechList.SelectedNode.Index].Points.Count; i++)
                 {
-                    frm.listView1.Items.Add(tChart1.Series[treeView3.SelectedNode.Index].Points[i].XValue + "          " + tChart1.Series[treeView3.SelectedNode.Index].Points[i].YValues[0]);
+                    frm.listView1.Items.Add(tChart1.Series[tvTechList.SelectedNode.Index].Points[i].XValue + "          " + tChart1.Series[tvTechList.SelectedNode.Index].Points[i].YValues[0]);
                 }
                 frm.StartPosition = FormStartPosition.CenterScreen;
                 frm.ShowDialog();
@@ -6269,17 +6674,26 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             tChart2.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * (xMax - xMin), DateTimeIntervalType.Auto, true);
             tChart2.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * (yMax - yMin), DateTimeIntervalType.Auto, true);
             difxview2 = tChart2.ChartAreas[0].AxisX.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-            difyview2 = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum; 
-       
+            difyview2 = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMaximum - tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+
         }
 
         private void btnzoomout_1_Click(object sender, EventArgs e)
         {
+            if (statebutton_1 != "")
+            {
+                btnzoomout_1.FlatAppearance.BorderColor = Color.White;
+                pictureBox1.Image = pictureBox1.Image.ApplyGrayscaleFilter();
+            }
+            else
+            {
+                btnzoomout_1.FlatAppearance.BorderColor = Color.DarkCyan;
+            }
             statebutton_1 = "";
             selectpchart_func_1(false);
             this.tChart2.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             tChart2.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
-            tChart2.ChartAreas[0].AxisY.ScaleView.ZoomReset(1); 
+            tChart2.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
         }
 
         private void btnshowgrid_1_Click(object sender, EventArgs e)
@@ -6288,7 +6702,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             selectpchart_func_1(false);
             this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled;
             this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled;
-          
+
         }
 
         private void btnshowaxes_1_Click(object sender, EventArgs e)
@@ -6299,7 +6713,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             tChart2.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart2.ChartAreas[0].AxisX.MajorTickMark.Enabled;
             tChart2.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart2.ChartAreas[0].AxisY.LabelStyle.Enabled;
             tChart2.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart2.ChartAreas[0].AxisY.MajorTickMark.Enabled;
-      
+
         }
 
         private void btnexport_1_Click(object sender, EventArgs e)
@@ -6323,7 +6737,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     toolStripButton7_Click_1(sender, e);
                     break;
                 case 3:
-                    if (tChart2.Series.Count>0 && tChart2.Series[0].Points.Count > 0)
+                    if (tChart2.Series.Count > 0 && tChart2.Series[0].Points.Count > 0)
                         shomarcheck = 1;
                     i1 = 0;
                     if (shomarcheck == 1)
@@ -6350,10 +6764,232 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
         }
 
-      
+        List<ITechniques> TechLine = new List<ITechniques>();
 
-            
-        
-      
+        public void AddTechnique(ITechniques Tech)
+        {
+            try
+            {
+                LoadCsvToChart(Tech.SeriesPath, tChart1);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "AddTechnique_Error");
+            }
+
+
+        }
+
+        public void LoadCsvToChart(string fileName, Chart chart)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(fileName);
+
+                if (lines.Length < 2)
+                    return;
+
+                //-----------------------------------
+                // نام تکنیک از اولین سطر داده
+                //-----------------------------------
+                string[] firstRow = lines[1].Split(',');
+
+                string techName = firstRow[0].Trim();
+                ITechniques Tech = null;
+                DeviceSpecification device = frmMain12080.Device;
+
+                try
+                {
+                    switch (techName)
+                    {
+                        case "NPV":
+                            double E1 = Convert.ToDouble(firstRow[2]);
+                            double E2 = Convert.ToDouble(firstRow[3]);
+                            double ScanRate = Convert.ToDouble(firstRow[4]);
+                            double Hstep = Convert.ToDouble(firstRow[5]);
+                            double PulseWidth = Convert.ToDouble(firstRow[6]);
+                            int DelayTime = Convert.ToInt32(firstRow[7]);
+                            string Comment = firstRow[8].Trim();
+                            
+                            Tech = new NPV(device.Techniques["NPV"], E1, E2, ScanRate, Hstep, PulseWidth, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "DPV":
+                            E1 = Convert.ToDouble(firstRow[2]);
+                            E2 = Convert.ToDouble(firstRow[3]);
+                            ScanRate = Convert.ToDouble(firstRow[4]);
+                            Hstep = Convert.ToDouble(firstRow[5]);
+                            PulseWidth = Convert.ToDouble(firstRow[6]);
+                            double PulseHeight = Convert.ToDouble(firstRow[7]);
+                            DelayTime = Convert.ToInt32(firstRow[8]);
+                            Comment = firstRow[9].Trim();
+
+                            Tech = new DPV(E1, E2, ScanRate, Hstep, PulseWidth, PulseHeight, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "SWV":
+                            E1 = Convert.ToDouble(firstRow[2]);
+                            E2 = Convert.ToDouble(firstRow[3]);
+                            ScanRate = Convert.ToDouble(firstRow[4]);
+                            Hstep = Convert.ToDouble(firstRow[5]);
+                            PulseHeight = Convert.ToDouble(firstRow[6]);
+                            DelayTime = Convert.ToInt32(firstRow[7]);
+                            Comment = firstRow[8].Trim();
+
+                            Tech = new SWV(E1, E2, ScanRate, Hstep, PulseHeight, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "CV":
+                            E1 = Convert.ToDouble(firstRow[2]);
+                            E2 = Convert.ToDouble(firstRow[3]);
+                            ScanRate = Convert.ToDouble(firstRow[4]);
+                            Hstep = Convert.ToDouble(firstRow[5]);
+                            int Cycle = Convert.ToInt32(firstRow[6]);
+                            DelayTime = Convert.ToInt32(firstRow[7]);
+                            Comment = firstRow[8].Trim();
+
+                            Tech = new CV(E1, E2, ScanRate, Hstep, Cycle, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "LSV":
+                            E1 = Convert.ToDouble(firstRow[2]);
+                            E2 = Convert.ToDouble(firstRow[3]);
+                            ScanRate = Convert.ToDouble(firstRow[4]);
+                            Hstep = Convert.ToDouble(firstRow[5]);
+                            DelayTime = Convert.ToInt32(firstRow[6]);
+                            Comment = firstRow[7].Trim();
+
+                            Tech = new LSV(E1, E2, ScanRate, Hstep, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "OCP":
+                            int Time = Convert.ToInt16(firstRow[2]);
+                            DelayTime = Convert.ToInt16(firstRow[3]);
+                            Comment = firstRow[3].Trim();
+
+                            Tech = new OCP(Time, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        case "CA":
+                            E1 = Convert.ToDouble(firstRow[2]);
+                            E2 = Convert.ToDouble(firstRow[3]);
+                            int T1 = Convert.ToInt16(firstRow[4]);
+                            int T2 = Convert.ToInt16(firstRow[5]);
+                            Cycle = Convert.ToInt16(firstRow[6]);
+                            DelayTime = Convert.ToInt32(firstRow[7]);
+                            Comment = firstRow[8].Trim();
+
+                            Tech = new CA(E1, E2, T1, T2, Cycle, DelayTime, Comment);
+                            Tech.ColorCode = Convert.ToInt32(firstRow[1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show($"فرمت خواندن فایل مناسب نیست \n {Ex.Message}");
+                    return;
+                }
+
+                Tech.SeriesPath = fileName;
+                TechLine.Add(Tech);
+
+                //-----------------------------------
+                // نود اصلی
+                //-----------------------------------
+                TreeNode Node = new TreeNode()
+                {
+                    Text = Tech.Name,
+                    ForeColor = Color.FromArgb(Tech.ColorCode)
+                };
+
+                if (Tech.Number == 4)
+                {
+                    CV cv = Tech as CV;
+                    for (int i = 0; i < cv.Cycles; i++)
+                    {
+                        TreeNode ChildNode = new TreeNode()
+                        {
+                            Text = Tech.Name + "_" + (i + 1).ToString(),
+                            ForeColor = Color.FromArgb(Tech.ColorCode),
+                            Checked = true
+                        };
+
+                        Node.Nodes.Add(ChildNode);
+                    }
+                }
+
+                tvTechList.Nodes[0].Nodes.Add(Node);
+
+                tvTechList.ExpandAll();
+
+                //جلوگیری از اتفاق event
+                tvTechList.AfterCheck -= treeView3_AfterCheck;
+                tvTechList.Nodes[0].LastNode.Checked = true;
+                tvTechList.AfterCheck += treeView3_AfterCheck;
+
+                Series currentSeries = null;
+                int currentCycle = -1;
+
+                currentSeries = new Series($"{Tech.Name}-{Node.Index}")
+                {
+                    ChartType = Tech.SeriesType,
+                    BorderWidth = 2,
+                    Color = Color.FromArgb(Tech.ColorCode)                  
+                };
+
+                chart.Series.Add(currentSeries);
+                tChart1.ChartAreas[0].AxisX.Title = Tech.XY_Axis_Title[1];
+                tChart1.ChartAreas[0].AxisY.Title = Tech.XY_Axis_Title[0];
+
+                for (int i = 3; i < lines.Length; i++)
+                {
+                    string[] cols = lines[i].Split(',');
+
+                    double x = double.Parse(cols[1], CultureInfo.InvariantCulture);
+                    double y = double.Parse(cols[2], CultureInfo.InvariantCulture);
+                    int cycle = int.Parse(cols[3]);
+
+                    // اگر Cycle عوض شد یک سری جدید بساز
+                    if (cycle != currentCycle)
+                    {
+                        currentCycle = cycle;
+
+                        if (cycle >= 1)
+                        {
+                            currentSeries = new Series($"{Tech.Name}-{Node.Index}_{cycle}")
+                            {
+                                ChartType = Tech.SeriesType,
+                                BorderWidth = 2,
+                                Color = Color.FromArgb(Tech.ColorCode)
+                            };
+
+                            chart.Series.Add(currentSeries);
+                        }
+
+                    }
+
+                    currentSeries.Points.AddXY(x, y);
+
+
+                }
+
+                tvTechList.ExpandAll();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }

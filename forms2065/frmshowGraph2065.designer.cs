@@ -31,8 +31,8 @@ namespace Skydat.forms2065
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmshowGraph2065));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.RunnigTechTreeview = new System.Windows.Forms.TreeView();
             this.dschart1 = new Skydat.datasets.Dschart1();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -76,6 +76,7 @@ namespace Skydat.forms2065
             this.contextMenuDataLoger = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MaintenanceItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DebugItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dschart1)).BeginInit();
             this.panel1.SuspendLayout();
             this.toolsPanel.SuspendLayout();
@@ -220,23 +221,23 @@ namespace Skydat.forms2065
             this.OnlineChart.BackColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineColor = System.Drawing.Color.Black;
             this.OnlineChart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea2.AxisX.IsMarksNextToAxis = false;
-            chartArea2.AxisX.LineWidth = 2;
-            chartArea2.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
-            chartArea2.BackColor = System.Drawing.Color.AliceBlue;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 100F;
-            chartArea2.Position.Width = 97F;
-            chartArea2.Position.X = 2F;
-            this.OnlineChart.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.IsMarksNextToAxis = false;
+            chartArea1.AxisX.LineWidth = 2;
+            chartArea1.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
+            chartArea1.BackColor = System.Drawing.Color.AliceBlue;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 100F;
+            chartArea1.Position.Width = 97F;
+            chartArea1.Position.X = 2F;
+            this.OnlineChart.ChartAreas.Add(chartArea1);
             resources.ApplyResources(this.OnlineChart, "OnlineChart");
             this.OnlineChart.Name = "OnlineChart";
-            series2.BorderWidth = 50;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Name = "Series1";
-            this.OnlineChart.Series.Add(series2);
+            series1.BorderWidth = 50;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series1";
+            this.OnlineChart.Series.Add(series1);
             this.OnlineChart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseDown);
             this.OnlineChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseMove);
             this.OnlineChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnlineChart_MouseUp);
@@ -448,8 +449,8 @@ namespace Skydat.forms2065
             this.reSize1.AutoCenterFormOnLoad = false;
             this.reSize1.Enabled = true;
             this.reSize1.HostContainer = this;
-            this.reSize1.InitialHostContainerHeight = 864D;
-            this.reSize1.InitialHostContainerWidth = 1179D;
+            this.reSize1.InitialHostContainerHeight = 702D;
+            this.reSize1.InitialHostContainerWidth = 884D;
             this.reSize1.Tag = null;
             // 
             // mainSerialPort
@@ -486,6 +487,11 @@ namespace Skydat.forms2065
             this.DebugItem.Name = "DebugItem";
             resources.ApplyResources(this.DebugItem, "DebugItem");
             this.DebugItem.CheckedChanged += new System.EventHandler(this.DebugItem_CheckedChanged);
+            // 
+            // timerResizeFrm
+            // 
+            this.timerResizeFrm.Interval = 200;
+            this.timerResizeFrm.Tick += new System.EventHandler(this.timerResizeFrm_Tick);
             // 
             // frmshowGraph2065
             // 
@@ -563,5 +569,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripMenuItem DebugItem;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnSwapArea;
+        private System.Windows.Forms.Timer timerResizeFrm;
     }
 }

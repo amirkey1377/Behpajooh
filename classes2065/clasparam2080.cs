@@ -1707,27 +1707,26 @@ namespace Skydat.classes2065
     {
         //private double _Cycles;
         private double _E1;
-        private double _T1;
-        //private double _E2;
-        //private double _T2;
+        private int _T1;
+        private double _E2;
+        private int _T2;
         private double _EquilibriumTime;
-        private bool _vs_OCP;
-        private double _OCPmeasurment;
-       // private double _Range;
+        private int _Cycles;
+        // private double _Range;
 
-        //[CategoryAttribute("CA Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    1000")]
-        //public double Cycles
-        //{
-        //    get
-        //    {
-        //        return _Cycles;
-        //    }
+        [CategoryAttribute("CA Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    1000")]
+        public int Cycles
+        {
+            get
+            {
+                return _Cycles;
+            }
 
-        //    set
-        //    {
-        //        _Cycles = value;
-        //    }
-        //}
+            set
+            {
+                _Cycles = value;
+            }
+        }
 
         [CategoryAttribute("CA Values"), DescriptionAttribute("First potential step(V)\n -5    +5")]
         public double E1
@@ -1743,7 +1742,7 @@ namespace Skydat.classes2065
             }
         }
         [CategoryAttribute("CA Values"), DescriptionAttribute("First step time(S)\n 1    65000")]
-        public double T1
+        public int T1
         {
             get
             {
@@ -1756,7 +1755,7 @@ namespace Skydat.classes2065
             }
         }
 
-        /*[CategoryAttribute("CA Values"), DescriptionAttribute("First potential step(V)\n -5    +5")]
+        [CategoryAttribute("CA Values"), DescriptionAttribute("First potential step(V)\n -5    +5")]
         public double E2
         {
             get
@@ -1770,7 +1769,7 @@ namespace Skydat.classes2065
             }
         }
         [CategoryAttribute("CA Values"), DescriptionAttribute("First step time(S)\n 1    65000")]
-        public double T2
+        public int T2
         {
             get
             {
@@ -1781,7 +1780,7 @@ namespace Skydat.classes2065
             {
                 _T2 = value;
             }
-        }*/
+        }
 
         [CategoryAttribute("CA Values"), DescriptionAttribute("Quiescent time before start measuring(S)\n 0    2000")]
         [DisplayName("Equilibrium Time")]
@@ -1798,51 +1797,6 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("CA Values"), DescriptionAttribute("vs OCP(True;False)")]
-        [DisplayName("vs OCP")]
-        public bool vs_OCP
-        {
-            get
-            {
-                return _vs_OCP;
-            }
-
-            set
-            {
-                _vs_OCP = value;
-            }
-        }
-
-        [CategoryAttribute("CA Values"), DescriptionAttribute("Measurment of OCP Time(S)")]
-        [DisplayName("OCP Measurment")]
-        public double OCPmeasurment
-        {
-            get
-            {
-                return _OCPmeasurment;
-            }
-
-            set
-            {
-                _OCPmeasurment = value;
-            }
-        }
-       /* 
-        [CategoryAttribute("CA Values"), DescriptionAttribute("0=Auto   1=0.4uA   2=4uA   3=40uA  \n              4=0.4mA  5=4mA  6=20mA ")]
-        [DisplayName("Select Range ")]
-        public double Range
-        {
-            get
-            {
-                return _Range;
-            }
-
-            set
-            {
-                _Range = value;
-            }
-        }
-        * */
         public CA_params_ocp()
         {
             //
@@ -1855,7 +1809,7 @@ namespace Skydat.classes2065
     public class OCP_params_ocp
     {
         //private double _Cycles;
-        private double _Time;
+        private int _Time;
 
         //[CategoryAttribute("OCP Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    1000")]
         //public double Cycles
@@ -1872,7 +1826,7 @@ namespace Skydat.classes2065
         //}
         
         [CategoryAttribute("OCP Values"), DescriptionAttribute("Time(S)\n 0    +65000")]
-        public double Time
+        public int Time
         {
             get
             {

@@ -43,8 +43,8 @@ namespace Skydat.forms2065
             this.tChart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlCharts = new System.Windows.Forms.Panel();
             this.pnlToolChart = new System.Windows.Forms.Panel();
+            this.ChartNewWindow = new System.Windows.Forms.PictureBox();
             this.tChart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -135,8 +135,8 @@ namespace Skydat.forms2065
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
             this.pnlCharts.SuspendLayout();
             this.pnlToolChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartNewWindow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tChart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel8.SuspendLayout();
             this.pnlMainChart.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -154,6 +154,7 @@ namespace Skydat.forms2065
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showDataPointsToolStripMenuItem,
             this.clearPlotsToolStripMenuItem,
@@ -249,11 +250,20 @@ namespace Skydat.forms2065
             // 
             // pnlToolChart
             // 
+            this.pnlToolChart.Controls.Add(this.ChartNewWindow);
             this.pnlToolChart.Controls.Add(this.tChart2);
-            this.pnlToolChart.Controls.Add(this.pictureBox1);
             this.pnlToolChart.Controls.Add(this.panel8);
             resources.ApplyResources(this.pnlToolChart, "pnlToolChart");
             this.pnlToolChart.Name = "pnlToolChart";
+            // 
+            // ChartNewWindow
+            // 
+            resources.ApplyResources(this.ChartNewWindow, "ChartNewWindow");
+            this.ChartNewWindow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ChartNewWindow.Name = "ChartNewWindow";
+            this.ChartNewWindow.TabStop = false;
+            this.toolTip1.SetToolTip(this.ChartNewWindow, resources.GetString("ChartNewWindow.ToolTip"));
+            this.ChartNewWindow.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // tChart2
             // 
@@ -274,15 +284,6 @@ namespace Skydat.forms2065
             this.tChart2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseDown);
             this.tChart2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseMove);
             this.tChart2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tChart2_MouseUp);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox1, resources.GetString("pictureBox1.ToolTip"));
-            this.pictureBox1.Click += new System.EventHandler(this.button2_Click_2);
             // 
             // panel8
             // 
@@ -578,6 +579,7 @@ namespace Skydat.forms2065
             // 
             resources.ApplyResources(this.toolStripToolbar, "toolStripToolbar");
             this.toolStripToolbar.BackColor = System.Drawing.Color.White;
+            this.toolStripToolbar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnShowWithoutSmooth,
             this.btnCalc,
@@ -960,6 +962,7 @@ namespace Skydat.forms2065
             this.toolstripFile.BackColor = System.Drawing.Color.White;
             this.toolstripFile.CanOverflow = false;
             this.toolstripFile.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripFile.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolstripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNew,
             this.tsbOpen,
@@ -1054,6 +1057,7 @@ namespace Skydat.forms2065
             this.miniToolStrip.BackColor = System.Drawing.Color.Gainsboro;
             this.miniToolStrip.CanOverflow = false;
             this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.miniToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.TabStop = true;
@@ -1077,8 +1081,8 @@ namespace Skydat.forms2065
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).EndInit();
             this.pnlCharts.ResumeLayout(false);
             this.pnlToolChart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ChartNewWindow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tChart2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel8.ResumeLayout(false);
             this.pnlMainChart.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -1159,7 +1163,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ToolStripMenuItem setActiveToolStripMenuItem;
         private System.Windows.Forms.Panel pnlToolChart;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
@@ -1202,5 +1205,6 @@ namespace Skydat.forms2065
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.PictureBox ChartNewWindow;
     }
 }

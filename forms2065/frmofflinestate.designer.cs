@@ -188,7 +188,6 @@ namespace Skydat.forms2065
             this.tsbReceive.Image = global::Skydat.Properties.Resources.Mailbox_receive_message_2_icon;
             this.tsbReceive.Margin = new System.Windows.Forms.Padding(0);
             this.tsbReceive.Name = "tsbReceive";
-            this.tsbReceive.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // tsbshowdata
             // 

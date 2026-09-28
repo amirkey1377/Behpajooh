@@ -63,7 +63,6 @@ namespace Skydat.forms2065
 
         private bool isScrolling = false;
 
-        private drawline_chart drawline1;
         public frmMain2065 mainf;
         public frmChartSetting chartSetting;
 
@@ -73,7 +72,7 @@ namespace Skydat.forms2065
         private bool DebugMode = false;
         private bool Maintenance = false;
 
-        //فعال یا غیرفعال کردن فیلتر آنلاین CV
+        //فعال یا غیرفعال کردن فیلتر آنلاین CVS_et
         public static bool FilterOnline = false;
 
         //متغیرهای برای تعویض رنگ های استفاده شده در نرم افزار
@@ -1124,9 +1123,13 @@ namespace Skydat.forms2065
                         if (bytesAvailable > 16300)
                         {
                             if (bytesAvailable == 16384)
+                            {
                                 if (DebugMode) Settxtfill_func(1, $"مقدار بافر سریال اورفلو شده است = {bytesAvailable}", 2, 1);
-                                else
+                            }
+                            else
+                            {
                                 if (DebugMode) Settxtfill_func(1, $"مقدار بافر سریال نزدیک به اورفلو شدن است = {bytesAvailable}", 2, 1);
+                            }
                         }
 
                         string receivedData = mainSerialPort.ReadLine();
@@ -1382,28 +1385,18 @@ namespace Skydat.forms2065
                                 }
                                 else
                                 {
-
                                     if (!evn)//
                                     {
                                         if (ngtv) //if ngtv == true
                                         {
-                                            //I1 = C[j];
                                             I1 = C[j - 1];
                                             I2 = C[j];
-                                            //Settxtfill_func(2, $"negative2", 2, 1);
-                                            //I1 = C[j] - C[j - 1];
-                                            //I2 = 0;
                                         }
                                         else  ////if ngtv == false
                                         {
-
                                             I2 = C[j];
                                             I1 = C[j - 1];
-                                            //Settxtfill_func(2, $"positive2", 2, 1);
-                                            //I1 = C[j - 1] - C[j];
-                                            //I2 = 0;
                                         }
-                                        // Addxy(V1,I0,'',Colr[cl])
                                     }
                                 }
 
@@ -1413,6 +1406,7 @@ namespace Skydat.forms2065
                                 I1 = C[j];
                                 I2 = 0;
                             }
+
                             int numdigit = dschart1.chartlist1_run.Rows[row][6].ToString().Length - dschart1.chartlist1_run.Rows[row][6].ToString().IndexOf('.') - 1;// calculate digit number in of heght step
                             if (!(pulsy && evn))
                                 if (N_gtv)
@@ -1492,8 +1486,11 @@ namespace Skydat.forms2065
                     {
                         for (int z = 0; z < 10; z++)
                         {
-                            mainSerialPort.Write("end1");
-                            Thread.Sleep(10);
+                            if (mainSerialPort.IsOpen)
+                            {
+                                mainSerialPort.Write("end1");
+                                Thread.Sleep(10);
+                            }
                         }
                         TechniqueEnded = false;
                         mainSerialPort.Close();
@@ -1511,7 +1508,7 @@ namespace Skydat.forms2065
                 }
             }
             catch (Exception Ex)
-            {  
+            {
                 MessageBox.Show(Ex.Message);
             }
 
@@ -1529,7 +1526,6 @@ namespace Skydat.forms2065
             double[] Crn = new double[4000000];
             Boolean[] signe = new Boolean[4000000];
             int sign = 0;
-            int SerialReadError = 0;
 
             double Itot = 0;
             double V = 0, I1 = 0, I2 = 0, Vold;
@@ -3083,7 +3079,7 @@ namespace Skydat.forms2065
             var availableNumber = Enumerable.Range(100001, 1000000)
                 .FirstOrDefault(num => !File.Exists(Path.Combine(targetDirectory, $"{techName}{num}.dat")));
 
-            
+
 
             if (availableNumber != 0)
             {
@@ -3722,8 +3718,8 @@ namespace Skydat.forms2065
 
         private void serialPort2_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
         {
-            string error = GetSerialErrorMessage(e.EventType); 
-            MessageBox.Show(error,"Serial Port Error Flag", MessageBoxButtons.OK,MessageBoxIcon.Error);
+            string error = GetSerialErrorMessage(e.EventType);
+            MessageBox.Show(error, "Serial Port Error Flag", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
@@ -3748,20 +3744,9 @@ namespace Skydat.forms2065
 
         private void frmshowGraph2065_Resize(object sender, EventArgs e)
         {
-            RunnigTechTreeview.Top = panel2.Bottom + 5;
-            panel3.Width = (int)(this.ClientSize.Width * 0.2);
-            panel1.Width = (int)(this.ClientSize.Width * 0.8);
-            panel1.Left = panel3.Right + 5;
-            toolsPanel.Width = (int)(OnlineChart.Width * 0.04);
-            if (toolsPanel.Width < 40)
-                toolsPanel.Width = 43;
-
-            toolsPanel.Left = OnlineChart.Left;
-            toolsPanel.Top = OnlineChart.Top + 2;
-            foreach (Control control in toolsPanel.Controls)
-            {
-                control.Height = toolsPanel.Height / 8;
-            }
+            timerResizeFrm.Stop();
+            timerResizeFrm.Start();
+            
 
 
         }
@@ -4021,7 +4006,7 @@ namespace Skydat.forms2065
                             if (SampleRateMultiplier != 0)
                             {
                                 int factor = 10 * SampleRateMultiplier;
-                                if (clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] == ("CP") 
+                                if (clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] == ("CP")
                                     || clasglobal.TechName[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())] == ("Battery"))
                                 {
                                     factor = 5 * SampleRateMultiplier;
@@ -4234,6 +4219,27 @@ namespace Skydat.forms2065
         private void btnSwapArea_Click_1(object sender, EventArgs e)
         {
             SwapAxes(OnlineChart);
+        }
+
+        private void timerResizeFrm_Tick(object sender, EventArgs e)
+        {
+            timerResizeFrm.Stop();
+
+            RunnigTechTreeview.Top = panel2.Bottom + 5;
+            panel3.Width = (int)(this.ClientSize.Width * 0.2);
+            panel1.Width = (int)(this.ClientSize.Width * 0.8);
+            panel1.Left = panel3.Right + 5;
+            toolsPanel.Width = (int)(OnlineChart.Width * 0.04);
+            if (toolsPanel.Width < 40)
+                toolsPanel.Width = 43;
+
+            toolsPanel.Left = OnlineChart.Left;
+            toolsPanel.Top = OnlineChart.Top + 2;
+            foreach (Control control in toolsPanel.Controls)
+            {
+                control.Height = toolsPanel.Height / 8;
+            }
+
         }
 
         private void Setbtnenabled(bool bl, int code, int state)
@@ -4460,7 +4466,7 @@ namespace Skydat.forms2065
             {
                 Tech_Number = 5; //تافل را به lsv تبدیل میکنیم
             }
-            else if(Tech_Number == 19)
+            else if (Tech_Number == 19)
             {
                 Tech_Number = 10;
             }
@@ -4820,7 +4826,7 @@ namespace Skydat.forms2065
                             mainf.toolStripProgressBar1.Value = 0;
                     }));
 
-                    Thread.Sleep(10);
+                    //Thread.Sleep(10);
                 }
             }
             catch (Exception)
@@ -5082,7 +5088,7 @@ namespace Skydat.forms2065
                 bool signe = false;
                 int TechNumber = int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString());
 
-                
+
 
 
                 for (int i = 0; i < datas2_state.Length; i++)

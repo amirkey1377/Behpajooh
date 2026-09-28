@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Skydat.classes2065;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Runtime.InteropServices;
-using Skydat.classes2065;
 
 
 namespace Skydat.forms2080
@@ -31,69 +35,64 @@ namespace Skydat.forms2080
 
             return result;
         }
+
         public frmshowGraph2080()
         {
             InitializeComponent();
 
-            tChart1.ChartAreas[0].Area3DStyle.Enable3D = false;
+            OnlineChart.ChartAreas[0].Area3DStyle.Enable3D = false;
 
-            tChart1.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
-            tChart1.ChartAreas[0].AxisX.LineColor = Color.Black;
-            tChart1.ChartAreas[0].AxisY.LineColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisX.LineColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisY.LineColor = Color.Black;
 
-            tChart1.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.Black;
             //OnlineChart.ChartAreas[0].AxisY.Title = "coulomb(c)";
             //OnlineChart.ChartAreas[0].AxisX.Title = "Time(s)";
-            tChart1.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
-            tChart1.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisX.TitleForeColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisY.TitleForeColor = Color.Black;
 
-            tChart1.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
-            tChart1.ChartAreas[0].AxisX.LabelStyle.Format = "#0.##";
-            this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
-            this.tChart1.ChartAreas[0].AxisX.MinorGrid.LineColor = Color.Black;
-            this.tChart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
-            this.tChart1.ChartAreas[0].AxisY.MinorGrid.LineColor = Color.Black;
-            tChart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.Black;
-            tChart1.ChartAreas[0].AxisY.ScrollBar.BackColor = Color.Black;
-            this.tChart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            OnlineChart.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
+            OnlineChart.ChartAreas[0].AxisX.LabelStyle.Format = "#0.##";
+            this.OnlineChart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            this.OnlineChart.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
+            this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            this.OnlineChart.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
+            this.OnlineChart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Black;
+            this.OnlineChart.ChartAreas[0].AxisX.MinorGrid.LineColor = Color.Black;
+            this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Black;
+            this.OnlineChart.ChartAreas[0].AxisY.MinorGrid.LineColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.Black;
+            OnlineChart.ChartAreas[0].AxisY.ScrollBar.BackColor = Color.Black;
+            this.OnlineChart.ChartAreas[0].AxisY.IsStartedFromZero = false;
 
-            this.treeView3.ExpandAll();
+            this.tvTechniqueQueue.ExpandAll();
 
             thread_grf = new Thread(Run_key);
 
+            //therad_incomebuffer = new Thread(ReadIncomBuffer);
+            //therad_incomebuffer.Name = "readSerial";
         }
 
-        bool detect_Error = false, is_set_graph = false, showMessageError = false;
-        private double Prior_I2 = 0, Analiz_CT1 = 0, Analiz_CT2 = 0, Analiz_CT3 = 0, Analiz_CP1 = 0, Analiz_CP2 = 0, Analiz_CP3 = 0, Analiz_CP4 = 0, Analiz_CP5 = 0, Analiz_CT4 = 0, Analiz_CT5 = 0;
-        byte Teq = 1, Run = 2, E1 = 3, E2 = 4, E3 = 5, CP1 = 40, CP2 = 7, CP3 = 8, CP4 = 9, CP5 = 10;
-        byte CT1 = 11, CT2 = 12, CT3 = 13, CT4 = 14, CT5 = 15, HS = 16, TS = 17, SR = 18, QT = 19, CY = 20;
-        byte frequency = 22, PulsWidth = 24, PulsHeight = 25, Norma_Seq = 26, Multirun_Delay = 27;
-        byte Code_Check_Lock = 33, vs_OCP = 34, OCP_Meas = 35, Soft_Lock = 36, Current_Range = 37;
-        int Num_OverFlow_CPC_CA = 0, number = 0;
+        private double Analiz_CT1 = 0, Analiz_CT2 = 0, Analiz_CT3 = 0, Analiz_CP1 = 0, Analiz_CP2 = 0, Analiz_CP3 = 0, Analiz_CP4 = 0, Analiz_CP5 = 0, Analiz_CT4 = 0, Analiz_CT5 = 0;
         private byte Range1;
         private string statebutton = "";
         private Thread thread_grf;
         public delegate void showOnlineData1(double v, double i1, double i2, int row);
 
         public bool OCP_Ok = false;
-        private bool flag_running = false;
         public int OCP_Timer = 0;
         public drawline_chart drawline1;
         public frmMain12080 mainf;
         public frmOption12080 opForm;
 
-        double[] othertech_val0 = new double[200];
-        double[] othertech_val1 = new double[200];
-        double[] othertech_val2 = new double[200];
-        double[] othertech_val3 = new double[200];
-
         // int shomar_cha_chc = 0;
         long shomar_othertech = 0;
         KeyEventArgs ee = new KeyEventArgs(Keys.Alt);
+
+        bool smothState = true;
+
+        public string SerialState = null;
 
         private void GraphForm_Load(object sender, EventArgs e)
         {
@@ -102,18 +101,33 @@ namespace Skydat.forms2080
                 string[] color = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat");
                 string s = color[4].ToString().Substring(color[4].ToString().IndexOf(":") + 1);
                 Color cl = Color.FromArgb(Convert.ToInt32(s));
-                tChart1.BackColor = cl;
-                tChart1.BorderlineColor = cl;
-                tChart1.ChartAreas[0].BackColor = cl;
+                OnlineChart.BackColor = cl;
+                OnlineChart.BorderlineColor = cl;
+                OnlineChart.ChartAreas[0].BackColor = cl;
                 panel1.BackColor = cl;
-                panel4.BackColor = cl;
+                pnlChartTools.BackColor = cl;
+
+                drawline1 = new drawline_chart();
+                if (opForm.cbDrawLine.Checked)
+                    Set_line_Setting();
+                else
+                    drawline1.Active = false;
 
                 int[] Xvalue = { 0, 1, 2, 3, 4, 5 };
                 int[] Yvalue = { 0, 1, 2, 3, 4, 5 };
 
                 for (int i = 0; i < Yvalue.Length; i++)
                 {
-                    tChart1.Series[0].Points.AddXY(Xvalue[i], Yvalue[i]);
+                    OnlineChart.Series[0].Points.AddXY(Xvalue[i], Yvalue[i]);
+                }
+
+                try
+                {
+                    DeviceIsConnected();
+                }
+                catch (Exception x)
+                {
+                    MessageBox.Show(x.Message);
                 }
 
             }
@@ -122,35 +136,75 @@ namespace Skydat.forms2080
                 MessageBox.Show(x.Message);
             }
 
-            try
-            {
-                sp1.PortName = Properties.Settings.Default.portname;
-                sp1.BaudRate = int.Parse(Properties.Settings.Default.baudrate);
-                sp1.ReadTimeout = int.Parse(Properties.Settings.Default.rtport);
-                sp1.WriteTimeout = int.Parse(Properties.Settings.Default.wtport);
-                if (!sp1.IsOpen)
-                    sp1.Open();
-
-                drawline1 = new drawline_chart();
-                if (opForm.cbDrawLine.Checked)
-                    Set_line_Setting();
-                else
-                    drawline1.Active = false;
-            }
-            catch
-            {
-                try
-                {
-                    if (!sp1.IsOpen)
-                        sp1.Open();
-                }
-                catch { }
-            }
-
-
         }
 
 
+        List<string> ComPortNames(String VID, String PID)//COM این متد وظیفه پیدا کردن و لیست کردن پورت‌های
+                                                         //مربوط به یک دستگاه خاص را دارد
+                                                         //که با استفاده از شناسه سخت‌افزاری آن دستگاه، یعنی
+                                                         //VID (Vendor ID) و PID (Product ID) مشخص می‌شود.
+        {
+            String pattern = String.Format("^VID_{0}.PID_{1}", VID, PID);
+            Regex _rx = new Regex(pattern, RegexOptions.IgnoreCase);
+            List<string> comports = new List<string>();
+            RegistryKey rk1 = Registry.LocalMachine;
+            RegistryKey rk2 = rk1.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum");
+            foreach (String s3 in rk2.GetSubKeyNames())
+            {
+                RegistryKey rk3 = rk2.OpenSubKey(s3);
+                foreach (String s in rk3.GetSubKeyNames())
+                {
+                    if (_rx.Match(s).Success)
+                    {
+                        RegistryKey rk4 = rk3.OpenSubKey(s);
+                        foreach (String s2 in rk4.GetSubKeyNames())
+                        {
+                            RegistryKey rk5 = rk4.OpenSubKey(s2);
+                            RegistryKey rk6 = rk5.OpenSubKey("Device Parameters");
+                            comports.Add((string)rk6.GetValue("PortName"));
+                        }
+                    }
+                }
+            }
+            return comports;
+        }
+
+        public bool DeviceIsConnected()
+        {
+            try
+            {
+                List<string> names = ComPortNames("1a86", "7523");
+                string[] x = SerialPort.GetPortNames();
+                foreach (String c in x)
+                {
+                    if (names.Contains(c))
+                    {
+                        try
+                        {
+                            using (sp1)
+                            {
+                                sp1.PortName = c;
+                                //frmPortOption2065 frm = new frmPortOption2065();
+                                sp1.BaudRate = 57600;
+                            }
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("به دلیل وجود مشکل در ارتباط دستگاه به نرم افزار متصل نشده، لطفا از اتصال صحیح کابل اطمینان حاصل فرمایید"
+                                , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("مشکل در ارتباط\n" + e.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                return false;
+            }
+        }
 
         public void Set_line_Setting()
         {
@@ -180,408 +234,978 @@ namespace Skydat.forms2080
                 sp1.Close();
         }
 
-
-
         private void GraphForm_Enter(object sender, EventArgs e)
         {
             if (mainf != null)
                 mainf.grf1 = (sender as frmshowGraph2080);
         }
 
-
         public void clearform()
         {
-            for (int i = treeView3.Nodes[0].Nodes.Count - 1; i >= 0; i--)
-                treeView3.Nodes[0].Nodes[i].Remove();
-            label4.Text = "";
-            for (int i = tChart1.Series.Count - 1; i >= 0; i--)
-                tChart1.Series.RemoveAt(i);
-            tChart1.Refresh();
-            dschart1.chartlist1_run.Clear();
-            dschart1.graphlist.Clear();
+            for (int i = tvTechniqueQueue.Nodes[0].Nodes.Count - 1; i >= 0; i--)
+                tvTechniqueQueue.Nodes[0].Nodes[i].Remove();
+            rtbParameters.Text = "";
+            for (int i = OnlineChart.Series.Count - 1; i >= 0; i--)
+                OnlineChart.Series.RemoveAt(i);
+            OnlineChart.Refresh();
 
         }
 
-        delegate void SetfillparamCallback(int row, int state);
 
-        private void fillparam(int row, int state)
+
+        delegate void SetfillparamCallback(ITechniques tech, int state);
+
+        private void fillparam(ITechniques tech, int state)
         {
             if (state == 1)
             {
                 SetfillparamCallback d = new SetfillparamCallback(fillparam);
-                this.Invoke(d, new object[] { row, 2 });
+                this.Invoke(d, new object[] { tech, 2 });
             }
             else
             {
-                this.treeView3.SelectedNode = this.treeView3.Nodes[0].Nodes[row];
-
-                label4.Text = "";
-                switch (byte.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()))
+                rtbParameters.Text = "";
+                switch (tech.Name)
                 {
-
-                    case clasglobal.NPV2080:
-
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        label4.Text = label4.Text + "Pulse Width =" + double.Parse(dschart1.chartlist1_run.Rows[row][10].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                        label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
-                    case clasglobal.DPV2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        label4.Text = label4.Text + "Pulse Width =" + double.Parse(dschart1.chartlist1_run.Rows[row][10].ToString()) + "\n";
-                        label4.Text = label4.Text + "Pulse Height =" + double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                        label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
-                    case clasglobal.SWV2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        label4.Text = label4.Text + "Pulse Height =" + double.Parse(dschart1.chartlist1_run.Rows[row][11].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                        label4.Text = label4.Text + "Frequency =" + double.Parse(dschart1.chartlist1_run.Rows[row][12].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
-                    case clasglobal.CV2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "E3 =" + double.Parse(dschart1.chartlist1_run.Rows[row][5].ToString()) + "\n";
-                        label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        //if (double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) != 9999) Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                        label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        break;
-                    case clasglobal.LSV2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "HStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][6].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "Scan Rate =" + double.Parse(dschart1.chartlist1_run.Rows[row][8].ToString()) + "\n";
-                        label4.Text = label4.Text + "TStep =" + double.Parse(dschart1.chartlist1_run.Rows[row][9].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
+                    case "NPV":
+                        NPV techNPV = (NPV)tech;
+                        rtbParameters.Text += "E1 =" + techNPV.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techNPV.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techNPV.HStep.Value.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Width =" + techNPV.PulseWidth.Value.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techNPV.ScanRate.Value.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techNPV.TStep.Value.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techNPV.EquilibriumTime.ToString() + "\n";
                         break;
 
-                    case clasglobal.CPC2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
-
-                        // //Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                    case "DPV":
+                        DPV techDPV = (DPV)tech;
+                        rtbParameters.Text += "E1 =" + techDPV.E1.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techDPV.E2.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techDPV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Width =" + techDPV.PulseWidth.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Height =" + techDPV.PulseHeight.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techDPV.EquilibriumTime.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techDPV.ScanRate.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techDPV.TStep.ToString() + "\n";
                         break;
-                    case clasglobal.CCC2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // //Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                    case "SWV":
+                        SWV techSWV = (SWV)tech;
+                        rtbParameters.Text += "E1 =" + techSWV.E1.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techSWV.E2.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techSWV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Height =" + techSWV.PulseHeight.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techSWV.EquilibriumTime.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techSWV.ScanRate.ToString() + "\n";
+                        rtbParameters.Text += "Frequency =" + techSWV.Frequency.ToString() + "\n";
                         break;
-                    case clasglobal.CHP2080:
-                        label4.Text = label4.Text + "I1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][17].ToString()) + "\n";
-                        label4.Text = label4.Text + "I2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][18].ToString()) + "\n";
-                        label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        label4.Text = label4.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                    case "CV":
+                        CV techCV = (CV)tech;
+                        rtbParameters.Text += "E1 =" + techCV.E1.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techCV.E2.ToString() + "\n";
+                        rtbParameters.Text += "E3 =" + techCV.E3.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techCV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techCV.EquilibriumTime.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techCV.ScanRate.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techCV.TStep.ToString() + "\n";
                         break;
-                    case clasglobal.CHA2080:
-                        label4.Text = label4.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        label4.Text = label4.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        label4.Text = label4.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        label4.Text = label4.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
-                        label4.Text = label4.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        label4.Text = label4.Text + "vs_OCP =" + dschart1.chartlist1_run.Rows[row][19].ToString() + "\n";
-                        label4.Text = label4.Text + "OCP Measurment =" + dschart1.chartlist1_run.Rows[row][20].ToString() + "\n";
 
-                        // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
+                    case "LSV":
+                        LSV techLSV = (LSV)tech;
+                        rtbParameters.Text += "E1 =" + techLSV.E1.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techLSV.E2.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techLSV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techLSV.EquilibriumTime.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techLSV.ScanRate.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techLSV.TStep.ToString() + "\n";
                         break;
-                        //case clasglobal.CHC2080:
-                        //     Parameters.Text = Parameters.Text + "E1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + "\n";
-                        //     Parameters.Text = Parameters.Text + "E2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + "\n";
-                        //     Parameters.Text = Parameters.Text + "T1 =" + double.Parse(dschart1.chartlist1_run.Rows[row][15].ToString()) + "\n";
-                        //     Parameters.Text = Parameters.Text + "T2 =" + double.Parse(dschart1.chartlist1_run.Rows[row][16].ToString()) + "\n";
-                        //     Parameters.Text = Parameters.Text + "Equilibrium Time =" + double.Parse(dschart1.chartlist1_run.Rows[row][7].ToString()) + "\n";
-                        //    // Parameters.Text = Parameters.Text + "Cycles =" + double.Parse(dschart1.chartlist1_run.Rows[row][13].ToString()) + "\n";
-                        //    break;
-                }
-            }
-            //pGrid.Refresh();
-        }
-
-
-        public void Set_Graph(bool overlaymain, int row1)
-        {
-
-
-            Setgrftchart1(overlaymain, 0, 1, 1);
-
-            Series ser1 = new Series();
-            ser1.LabelFormat = "#,##0.###########";
-            if (opForm.rbfLine.Checked)
-            {
-                ser1.ChartType = SeriesChartType.FastLine;
-            }
-            if (opForm.rbLine.Checked)
-            {
-                ser1.ChartType = SeriesChartType.Line;
-            }
-            if (opForm.rbPoint.Checked)
-            {
-                ser1.ChartType = SeriesChartType.Point;
-            }
-
-            Setgrftchart11(ser1, 1, 1);///////
-
-            Setgrftchart1(overlaymain, row1, 2, 1);///
-        }
-
-
-
-
-
-
-        private void toolStripButton21_Click(object sender, EventArgs e)
-        {
-            tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-            // OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MinorTickMark.Enabled;
-            tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
-            tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-            //   OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MinorTickMark.Enabled;
-            tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
-
-            this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-            this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled = false;
-
-        }
-
-
-        private bool Read_Lock()
-        {
-            string Read_Lock1 = "3E8", Read_Lock2 = "BB8";
-            int Write_Lock = 2000;
-            //byte[] buf = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            byte[] buf = new byte[13];//mn
-            string Lock_String_Num = "";
-            if (sp1.IsOpen)
-            {
-                try
-                {
-                    sp1.DiscardInBuffer();
-                    Set_Command(Soft_Lock, 1);//mn
-                    Set_Command(38, 2);
-                    System.Threading.Thread.Sleep(600);
-                    if (sp1.BytesToRead > 0)
-                        sp1.Read(buf, 0, 7);
-
-
-                    // for (int i = 0; i < result.Length; i++)
-                    //    Lock_String_Num = Lock_String_Num + (char)buf[i];// +(char)buf[2] + (char)buf[3] + (char)buf[4];
-
-                    for (int i = 0; i < buf.Length; i++)
-                        Lock_String_Num = Lock_String_Num + (char)buf[i];// +(char)buf[2] + (char)buf[3] + (char)buf[4];
-
-                    if (Lock_String_Num.IndexOf(Read_Lock1) >= 0)
-                    {
-                        sp1.DiscardInBuffer();
-                        for (int k = 0; k < 13; k++) buf[k] = 0;
-                        Set_Command(Code_Check_Lock, Write_Lock);
-                        System.Threading.Thread.Sleep(600);
-                        if (sp1.BytesToRead > 0)
-                            sp1.Read(buf, 0, 7);
-                        Lock_String_Num = "";
-                        for (int i = 0; i < buf.Length; i++)
-                            Lock_String_Num = Lock_String_Num + (char)buf[i]; // +(char)buf[2] + (char)buf[3] + (char)buf[4];
-                    }
-                }
-                catch { }
-            }
-            if (Lock_String_Num.IndexOf(Read_Lock2) >= 0)
-                return true;
-            else
-                return false;
-        }
-        public void smootht4(int row)
-        {
-            double I0, I1 = 0;
-            int vn = (int)shomar_othertech;
-
-            for (int i = 1; i < vn - 1; i++)
-            {
-                if (Math.Abs(othertech_val3[i] - othertech_val3[i - 1]) > 1000)
-                    othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i + 1]) / 2;
-            }
-            for (int i = vn - 1; i >= 1; i--)
-            {
-                othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i]) / 2;
-            }
-            for (int i = 1; i < vn - 1; i++)
-            {
-                othertech_val3[i] = (othertech_val3[i - 1] + othertech_val3[i + 1]) / 2;
-            }
-            for (int j1 = 3; j1 >= 0; j1--)
-            {
-                for (int i = 4; i <= vn - 3; i++)
-                {
-
-                    I0 = ((othertech_val3[i - 1] - othertech_val3[i - 2]) + (othertech_val3[i - 2] - othertech_val3[i - 3]) + (othertech_val3[i - 3] - othertech_val3[i - 4])) / 3;
-                    I1 = Math.Abs(othertech_val3[i] - othertech_val3[i - 1]);
-                    if (I1 > Math.Abs(j1 * I0))
-                        othertech_val3[i] = (othertech_val3[i - 2] + othertech_val3[i - 1] + othertech_val3[i + 2] + othertech_val3[i + 1]) / 4;
 
                 }
             }
-
-            for (int i = 3; i <= vn - 4; i++)
-            {
-                othertech_val3[i] = (othertech_val3[i - 3] + othertech_val3[i - 2] + othertech_val3[i - 1] + othertech_val3[i + 3] + othertech_val3[i + 2] + othertech_val3[i + 1]) / 6;
-            }
-
-            tecnic_row_for_label_text_ocp = row;//mn
-            Setgrfnodetext(1, 5, 1);
         }
 
-        int tecnic_row_for_label_text_ocp = 0;//mn
 
-        int number_runing_teq = 0, show_number_runing = 0;//mehrdad 
+
         public int cycle_number_in_file = 1;//mn
+
+        SeriesChartType CurrentGraphChartType = SeriesChartType.FastLine;
+        bool FlagSmothEnded = true;
+
         unsafe void Run_key()
         {
-            //Read_Lock();//بررسی قفل در گذشته بود
+            SerialState = "Run";
+            AddTechniqueQueue(TechLine);
 
-            Setgrfnodetext(0, 3, 1);
-
-            //   timer1.Start();
-
-            show_number_runing = 0;
-
-            for (int cnnnn = 0; cnnnn < dschart1.chartlist1_run.Rows.Count; cnnnn++)
+            for (int k = 0; k < TechLine.Count; k++)
             {
-                cycle_number_in_file = 1;
+                StartingOfTech(k);//UI Changes in the Starting of Technique
 
-                int cycle = Convert.ToInt32(dschart1.chartlist1_run.Rows[cnnnn]["CY"].ToString());
-                if (cycle == 0) cycle = 1;//برای تکنیک هایی که سیکل ندارند
+                fillparam(TechLine[k], 1);//Write Technique Parameter
 
-                //remove_graph_last();//مخفی گرافهایی که با سیکل قبل ایجاد شدند
+                ButtonStates(true);
 
-                for (int i = 0; i < cycle; i++)
+                ChartStartingTechPreparation(TechLine[k]);
+
+                RecivedPacketCounter = 0;
+
+                try
                 {
-                    number_runing_teq++;
+                    if(sp1.IsOpen)
+                        sp1.DiscardInBuffer();
+                }
+                catch (Exception Ex)
+                {
+                    MessageBox.Show(Ex.Message, "Run_key_Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                    //Set_Command(Teq, Convert.ToInt32(dschart1.chartlist1_run.Rows[cnnnn]["techno"].ToString()));
-                    //Set_Command(Run, 2);
-                    //Set_Command(Multirun_Delay, Convert.ToInt32("0" + dschart1.chartlist1_run.Rows[cnnnn]["QT"].ToString()));
-                    //Set_Command(Norma_Seq, 0);
+                StopFlag = false;
+                EndTechFlag = false;
+                StartFlag = false;
+                techname = -1;
+                ReceivedBytesThreshold = 4;
+                ocpCount = 0;
 
-                    Setgrfnodetext(cnnnn, 1, 1);
+                SetDelay(TechLine[k].EquilibriumTime);
 
-                    fillparam(treeView3.Nodes[0].Nodes[cnnnn].Index, 1);
+                DeviceSpecification device = frmMain12080.Device;
 
-                    Setbtnenabled(false, 1, 1);
+                SendToUsb(TechLine[k], device);
 
-                    Set_Graph(false, cnnnn);
+                this.Invoke(new Action(() =>
+                {
+                    mainf.pbRunnigTech.Value = 0;
+                    mainf.pbRunnigTech.Maximum = VoltageBuffer.Length;
+                }));
 
-                    //Set_Command(Teq, Convert.ToInt32(dschart1.chartlist1_run.Rows[cnnnn]["techno"].ToString()));
-                    //Set_value(cnnnn);
+                CurrentGraphChartType = TechLine[k].SeriesType;
+
+
+                if (TechLine[k].Name == "OCP")
+                {
+                    OCP ocp = TechLine[k] as OCP;
                     this.Invoke(new Action(() =>
                     {
-                        tChart1.Series["test"].Points.Clear();
-                    }));
-
-                    EndTechFlag = false;
-                    SendToUsb(cnnnn);
-
-                    this.Invoke(new Action(() =>
-                    {
-                        mainf.pbRunnigTech.Value = 0;
-                        mainf.pbRunnigTech.Maximum = VoltageBuffer.Length + 10;
+                        OnlineChart.ChartAreas[0].AxisX.Maximum = ocp.time;
+                        OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
                     }));
 
                     while (!EndTechFlag)
                     {
+                        readOCP();
+                        if (ocpCount - 1 == ocp.time)
+                        {
+                            Setfilllable($"تکنیک تمام شده", "sucses");
+                            RecivedPacketCounter = 0;
+                            EndTechFlag = true;
+                            StartFlag = false;
+                            break;
+                        }
+                    }
+                }
+                else if (TechLine[k].Name == "CV")
+                {
+                    CV cv = TechLine[k] as CV;
+                    this.Invoke(new Action(() =>
+                    {
+                        graphPreSetup(cv.E1, cv.E2, cv.HStep);
+                    }));
 
+                    for (int i = 1; i <= cv.Cycles; i++)
+                    {
+                        this.Invoke(new Action(() =>
+                        {
+                            mainf.toolStripStatusLabel5.Text = (k + 1).ToString().Trim() + " - Running " + cv.Name + $" _ Cycle: {i}";
+                        }));
+
+                        CheckBuffer();
+                        this.Invoke(new Action(() =>
+                        {
+                            //error control
+                            if (!OnlineChart.Series.Any(s => s.Name == "live"))
+                                return;
+
+                            Series historySeries = new Series()
+                            {
+                                ChartType = OnlineChart.Series["live"].ChartType,
+                                BorderWidth = 1,
+                                Color = OnlineChart.Series["live"].Color
+                            };
+
+                            historySeries.Name = $"CV-{i + 1}";
+
+                            // کپی نقاط
+                            foreach (var p in OnlineChart.Series["live"].Points)
+                            {
+                                historySeries.Points.AddXY(p.XValue, p.YValues[0]);
+                            }
+                            OnlineChart.Series.Add(historySeries);
+
+                            if (smothState)
+                            {
+                                Task.Run(() =>
+                                {
+                                    newSmoth(OnlineChart.Series.Count - 1);
+                                });
+                            }
+
+                            OnlineChart.Series["live"].Points.Clear();
+                            UpdateSeriesOpacity(OnlineChart);
+                            OnlineChart.Series[0].Color = Color.FromArgb(255,
+                            OnlineChart.Series[0].Color.R,
+                            OnlineChart.Series[0].Color.G,
+                            OnlineChart.Series[0].Color.B);
+                            mainf.pbRunnigTech.Value = 0;
+
+
+                        }));
+
+                        if (StopFlag)
+                        {
+                            CV tech = TechLine[k] as CV;
+                            tech.Cycles = OnlineChart.Series.Count - 1;
+                            TechLine[k] = tech;
+
+                            break;
+                        }
+
+                        if (i != cv.Cycles)
+                        {
+                            EndTechFlag = false;
+                            StartFlag = true;
+                            //techname = -1;
+                            ReceivedBytesThreshold = 46;
+                        }
                     }
 
-                    //Thread.Sleep(1000);
-                    //GetDataFromUsb();
+                    this.Invoke(new Action(() =>
+                    {
+                        mainf.pbRunnigTech.Value = mainf.pbRunnigTech.Maximum;
+                    }));
 
-                    //if (detect_Error)
-                    //{
-                    //    Setgrfnodetext(1, 4, 1);
-                    //    //this.mainf.stf.runToolStripMenuItem1.Enabled = true;
-                    //    //this.mainf.stf.tsbRun.Enabled = true;
+                }
+                else if (TechLine[k].Name == "NPV")
+                {
+                    NPV npv = TechLine[k] as NPV;
+                    this.Invoke(new Action(() =>
+                    {
+                        graphPreSetup(npv.E1, npv.E2, npv.HStep);
+                    }));
 
-                    //    return;
-                    //}
-                    //else
-                    //    Set_Command(Run, 1);
+                    if (device.Device.Model == "2066")
+                    {
+                        DoRun2(npv, npv.E1, npv.E2, npv.HStep, sp1);
+                    }
+                    else if (device.Device.Model == "2190")
+                    {
+                        CheckBuffer();
+                    }
 
-                    //shomar_othertech = 0;
+                    if (smothState)
+                        newSmoth(0);
+                }
+                else if (TechLine[k].Name == "DPV")
+                {
+                    DPV dpv = TechLine[k] as DPV;
+                    this.Invoke(new Action(() =>
+                    {
+                        graphPreSetup(dpv.E1, dpv.E2, dpv.HStep);
+                    }));
 
-                    //Array.Clear(othertech_val0, 0, othertech_val0.Length);
-                    //Array.Clear(othertech_val1, 0, othertech_val1.Length);
-                    //Array.Clear(othertech_val2, 0, othertech_val2.Length);
-                    //Array.Clear(othertech_val3, 0, othertech_val3.Length);
+                    CheckBuffer();
 
-                    //doRun(cnnnn);//رسم گراف
+                    if (smothState)
+                        newSmoth(0);
+                }
+                else if (TechLine[k].Name == "SWV")
+                {
+                    SWV swv = TechLine[k] as SWV;
+                    this.Invoke(new Action(() =>
+                    {
+                        graphPreSetup(swv.E1, swv.E2, swv.HStep);
+                    }));
 
-                    //if (shomar_othertech > 0)
-                    //{
-                    //    transferdata(cnnnn);
+                    CheckBuffer();
 
-                    //    smootht4(cnnnn);
-                    //    // shomartime = 0;
-                    //    Setgrfnodetext(cnnnn, 2, 1);
-                    //}
+                    if (smothState)
+                        newSmoth(0);
+                }
+                else if (TechLine[k].Name == "LSV")
+                {
+                    LSV lsv = TechLine[k] as LSV;
+                    this.Invoke(new Action(() =>
+                    {
+                        graphPreSetup(lsv.E1, lsv.E2, lsv.HStep);
+                    }));
+
+                    CheckBuffer();
+
+                    if (smothState)
+                        newSmoth(0);
+                }
+                else if (TechLine[k].Name == "CA")
+                {
+                    CA ca = TechLine[k] as CA;
+
+                    int totalPoint = (ca.T1 + ca.T2) * ca.Cycles;
+
+                    this.Invoke(new Action(() =>
+                    {
+                        OnlineChart.ChartAreas[0].AxisX.Maximum = totalPoint;
+                        OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
+                    }));
+
+                    while (!EndTechFlag)
+                    {
+                        readCA();
+                        if (ocpCount == totalPoint)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    CheckBuffer();
+                    if (smothState)
+                        newSmoth(0);
                 }
 
-                //number_runing_teq = 0;//نمایش  تعداد سیکل
-                //show_number_runing++;//نمایش تعداد تکنیک
+                Thread.Sleep(2000);
+                if (smothState)
+                {
+                    while (!FlagSmothEnded) ;
+                }
+
+                ITechniques technique = TechLine[k].Clone();
+
+                TechLine[k].SeriesPath = BackupData(technique);
+
+                Setgrfnodetext(k, 2, 1);
+
+                Setbtnenabled(true, 1, 1);
+
+                this.Invoke(new Action(() =>
+                {
+                    mainf.toolStripStatusLabel5.ForeColor = Color.DarkCyan;
+                }));
+
+                if (StopFlag)
+                    break;
             }
 
-            //Setbtnenabled(true, 2, 1);
-
-            //timer1.Stop();
-
-
-            //try { sp1.Close(); } catch { }
         }
+
+        private void AddTechniqueQueue(List<ITechniques> TechniqueQueue)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new Action<List<ITechniques>>(AddTechniqueQueue), TechniqueQueue);
+                return;
+            }
+
+            this.tvTechniqueQueue.Nodes[0].Nodes.Clear();
+            for (int i = 0; i < TechLine.Count; i++)
+            {
+                this.tvTechniqueQueue.Nodes[0].Nodes.Add(TechniqueQueue[i].Name);
+            }
+            tvTechniqueQueue.ExpandAll();
+        }
+
+        private void StartingOfTech(int NumberOfTechInQueueList)
+        {
+
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new Action<int>(StartingOfTech), NumberOfTechInQueueList);
+                return;
+            }
+
+            tvTechniqueQueue.Nodes[0].Nodes[NumberOfTechInQueueList].ForeColor = Color.Red;
+
+            mainf.toolStripStatusLabel5.Text = "";
+            mainf.toolStripStatusLabel5.ForeColor = Color.Green;
+
+            mainf.toolStripStatusLabel5.Text = (NumberOfTechInQueueList + 1).ToString().Trim() + " - Running technique " + TechLine[NumberOfTechInQueueList].Name;
+
+        }
+
+        private void ButtonStates(bool StateRun)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<bool>(ButtonStates), StateRun);
+                return;
+            }
+
+            mainf.stf.tsbRun.Enabled = !StateRun;
+            mainf.stf.tsbNew.Enabled = !StateRun;
+            mainf.stf.runToolStripMenuItem1.Enabled = !StateRun;
+
+            tsbhold.Enabled = StateRun;
+            tsbstop.Enabled = StateRun;
+        }
+
+        private void ChartStartingTechPreparation(ITechniques RuningTech)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new Action<ITechniques>(ChartStartingTechPreparation), RuningTech);
+                return;
+            }
+
+            if (OnlineChart.Series.Count > 0)
+            {
+                OnlineChart.Series.Clear();
+            }
+
+            OnlineChart.ChartAreas[0].AxisX.Maximum = double.NaN;
+            OnlineChart.ChartAreas[0].AxisX.Minimum = double.NaN;
+            OnlineChart.ChartAreas[0].AxisY.Maximum = double.NaN;
+            OnlineChart.ChartAreas[0].AxisY.Minimum = double.NaN;
+
+            OnlineChart.ChartAreas[0].AxisX.Title = RuningTech.XY_Axis_Title[1];
+            OnlineChart.ChartAreas[0].AxisY.Title = RuningTech.XY_Axis_Title[0];
+
+        }
+
+
+        private void SetDelay(int Delay)
+        {
+
+            if (Delay > 0)
+            {
+                string txt = mainf.toolStripStatusLabel5.Text;
+
+                this.Invoke(new Action(() =>
+                {
+                    mainf.toolStripStatusLabel5.ForeColor = Color.DarkRed;
+                    mainf.toolStripStatusLabel5.Text = "Equilibrium Time";
+                    mainf.pbRunnigTech.ForeColor = Color.DarkRed;
+                    mainf.pbRunnigTech.Value = 0;
+                    mainf.pbRunnigTech.Maximum = Delay;
+                }));
+
+                for (int i = 0; i < Delay; i++)
+                {
+                    Thread.Sleep(1000);
+                    this.Invoke(new Action(() =>
+                    {
+                        mainf.pbRunnigTech.Value += 1;
+                    }));
+                    if (StopFlag)
+                    {
+                        //Setbtnenabled(false, 1, 1);
+                        EndTechFlag = false;
+                        StopFlag = false;
+                        break;
+                    }
+                    if (tsbhold.Text == "Countinue")
+                    {
+                        while (tsbhold.Text == "Countinue") ;
+                    }
+
+                }
+
+                this.Invoke(new Action(() =>
+                {
+                    mainf.pbRunnigTech.ForeColor = Color.DarkCyan;
+                    mainf.toolStripStatusLabel5.ForeColor = Color.Green;
+                    mainf.toolStripStatusLabel5.Text = txt;
+                }));
+
+            }
+
+
+        }
+
+        private string BackupData(ITechniques tech)
+        {
+            string targetDirectory = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile2190\\";
+
+            // چک کردن وجود دایرکتوری و ساختن آن
+            if (!Directory.Exists(targetDirectory))
+            {
+                // این متد تمام سلسله مراتب پوشه‌ها را در صورت نیاز می‌سازد
+                Directory.CreateDirectory(targetDirectory);
+            }
+
+            // 3. تبدیل داده به فرمت CSV
+            string csvContent = ConvertSeriesToCsv(tech);
+
+            // 4. ذخیره فایل با پسوند .csv
+            string fileName = $"{tech.Name}_{DateTime.Now.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}" +
+                $"_{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}.csv";
+            string fullPath = Path.Combine(targetDirectory, fileName);
+
+            try
+            {
+                File.WriteAllText(fullPath, csvContent, Encoding.UTF8);
+
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "BackupData_Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return fullPath;
+        }
+
+        public string ConvertSeriesToCsv(ITechniques Tech, string delimiter = ",", bool includeHeader = true)
+        {
+            var sb = new StringBuilder();
+
+            if (Tech.Number == 1)//NPV
+            {
+                NPV npvTech = Tech as NPV;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "PulseWidth",
+                "EquilibriumTime",
+                "Comment"
+                }));
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{npvTech.Name}",
+                $"{npvTech.ColorCode}",
+                $"{npvTech.E1.Value}",
+                $"{npvTech.E2.Value}",
+                $"{npvTech.ScanRate.Value}",
+                $"{npvTech.HStep.Value}",
+                $"{npvTech.PulseWidth.Value}",
+                $"{npvTech.EquilibriumTime}",
+                $"{npvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 2)//DPV
+            {
+                DPV dpvTech = Tech as DPV;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "Pulse Width",
+                "Pulse Height",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{dpvTech.Name}",
+                $"{dpvTech.ColorCode}",
+                $"{dpvTech.E1}",
+                $"{dpvTech.E2}",
+                $"{dpvTech.ScanRate}",
+                $"{dpvTech.HStep}",
+                $"{dpvTech.PulseWidth}",
+                $"{dpvTech.PulseHeight}",
+                $"{dpvTech.EquilibriumTime}",
+                $"{dpvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 3)//SWV
+            {
+                SWV swvTech = Tech as SWV;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "Pulse Height",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{swvTech.Name}",
+                $"{swvTech.ColorCode}",
+                $"{swvTech.E1}",
+                $"{swvTech.E2}",
+                $"{swvTech.ScanRate}",
+                $"{swvTech.HStep}",
+                $"{swvTech.PulseHeight}",
+                $"{swvTech.EquilibriumTime}",
+                $"{swvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 4)//CV
+            {
+                CV cvTech = Tech as CV;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "Cycles",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{cvTech.Name}",
+                $"{cvTech.ColorCode}",
+                $"{cvTech.E1}",
+                $"{cvTech.E2}",
+                $"{cvTech.ScanRate}",
+                $"{cvTech.HStep}",
+                $"{cvTech.Cycles}",
+                $"{cvTech.EquilibriumTime}",
+                $"{cvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 5)//LSV
+            {
+                LSV lsvTech = Tech as LSV;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{lsvTech.Name}",
+                $"{lsvTech.ColorCode}",
+                $"{lsvTech.E1}",
+                $"{lsvTech.E2}",
+                $"{lsvTech.ScanRate}",
+                $"{lsvTech.HStep}",
+                $"{lsvTech.EquilibriumTime}",
+                $"{lsvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 6)//OCP
+            {
+                OCP ocpTech = Tech as OCP;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "Time",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{ocpTech.Name}",
+                $"{ocpTech.ColorCode}",
+                $"{ocpTech.time}",
+                $"{ocpTech.EquilibriumTime}",
+                $"{ocpTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 7)//CA
+            {
+                CA caTech = Tech as CA;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "T1",
+                "T2",
+                "Cycle",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{caTech.Name}",
+                $"{caTech.ColorCode}",
+                $"{caTech.E1}",
+                $"{caTech.E2}",
+                $"{caTech.T1}",
+                $"{caTech.T2}",
+                $"{caTech.Cycles}",
+                $"{caTech.EquilibriumTime}",
+                $"{caTech.Comment}",
+                }));
+            }
+
+            // 📌 نوشتن هدر (نام ستون‌ها)
+            if (includeHeader)
+            {
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "PointIndex",
+                "XValue",
+                "YValues",
+                "Cycle",
+                "IsEmpty"
+                }));
+            }
+
+
+            foreach (Series series in OnlineChart.Series)
+            {
+                if (series == null)
+                    throw new ArgumentNullException(nameof(series));
+
+                int Cycle = OnlineChart.Series.IndexOf(series);
+
+                // 📌 پیمایش تمام نقاط داده
+                for (int i = 0; i < series.Points.Count; i++)
+                {
+                    DataPoint point = series.Points[i];
+
+                    // مدیریت مقادیر Y (ممکن است چندین مقدار داشته باشد)
+                    string yValues = string.Join(";", point.YValues);
+
+                    // فرار از کاراکترهای ویژه در XValue (در صورت نیاز)
+                    string xValue = point.XValue.ToString();
+                    if (xValue.Contains(delimiter) || xValue.Contains("\""))
+                        xValue = $"\"{xValue.Replace("\"", "\"\"")}\"";
+
+
+                    // تشکیل خط CSV
+                    string[] fields = new string[]
+                    {
+                    i.ToString(),
+                    xValue,
+                    yValues,
+                    Cycle.ToString(),
+                    point.IsEmpty.ToString()
+                    };
+
+                    // اعمال فرار از کاراکترهای خاص برای تمام فیلدها
+                    for (int j = 0; j < fields.Length; j++)
+                    {
+                        if (fields[j].Contains(delimiter) || fields[j].Contains("\""))
+                            fields[j] = $"\"{fields[j].Replace("\"", "\"\"")}\"";
+                    }
+
+                    sb.AppendLine(string.Join(delimiter, fields));
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private void graphPreSetup(double E1, double E2, double Hstep)
+        {
+            double min = Math.Min(E1, E2) * 1000;
+            double max = Math.Max(E1, E2) * 1000;
+
+            OnlineChart.ChartAreas[0].AxisX.Maximum = max;
+            OnlineChart.ChartAreas[0].AxisX.Minimum = min;
+            double intervalBase = Hstep * 1000; // مضرب دلخواه
+
+            double range = max - min;
+
+            // حدود 12 برچسب
+            double desiredStep = range / 15.0;
+
+            // نزدیک‌ترین مضرب intervalBase
+            double axisInterval =
+                Math.Ceiling(desiredStep / intervalBase) * intervalBase;
+
+            OnlineChart.ChartAreas[0].AxisX.Interval = axisInterval;
+
+        }
+
+        private void UpdateSeriesOpacity(Chart chart)
+        {
+            int count = chart.Series.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                Series s = chart.Series[i];
+
+                int opacity = 100 - ((count - 1 - i) * 10);
+
+                if (opacity < 10)
+                    opacity = 5;
+
+                Color c = s.Color;
+
+                s.Color = Color.FromArgb(
+                    (int)(255 * opacity / 100.0),
+                    c.R,
+                    c.G,
+                    c.B);
+            }
+        }
+
+        public void newSmoth(int ChartSeriesIndex)
+        {
+            try
+            {
+                FlagSmothEnded = false;
+
+                List<double> xValues = new List<double>();
+                List<double> yValues = new List<double>();
+
+                if (OnlineChart.Series.Count == 0)
+                {
+                    return;
+                }
+                Series series = OnlineChart.Series[ChartSeriesIndex];
+
+                foreach (DataPoint point in series.Points)
+                {
+                    xValues.Add(point.XValue);
+                    yValues.Add(point.YValues[0]); // چون ممکنه DataPoint چند مقدار Y داشته باشه (مثل نمودار stack یا bubble)، YValues[0] می‌گیریم
+                }
+
+
+
+                // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
+                var medianFiltered = MedianFilter(yValues, windowSize: 5);
+
+                List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 9);
+
+                var area = OnlineChart.ChartAreas[0];
+
+                double ymin = area.AxisY.Minimum;
+                double ymax = area.AxisY.Maximum;
+
+                this.Invoke(new Action(() =>
+                {
+                    //OnlineChart.SuspendLayout();
+                    //series.Points.SuspendUpdates();
+                    series.Points.Clear();
+
+                    area.AxisY.Minimum = ymin;
+                    area.AxisY.Maximum = ymax;
+
+                }));
+
+                //Thread.Sleep(10);
+
+
+                var points = xValues
+                .Select((x, i) => new { X = x, Y = smothedX[i] })
+                .ToList();
+
+                int batchSize = 10;
+
+                for (int start = 0; start < xValues.Count; start += batchSize)
+                {
+                    int end = Math.Min(start + batchSize, xValues.Count);
+
+                    this.Invoke(new Action(() =>
+                    {
+                        for (int i = start; i < end; i++)
+                        {
+                            series.Points.AddXY(xValues[i], smothedX[i]);
+                        }
+
+                        //series.Points.ResumeUpdates();
+                        //OnlineChart.ResumeLayout();
+                    }));
+
+                    Thread.Sleep(20); // حس انیمیشن
+                }
+
+                FlagSmothEnded = true;
+
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message, "newSmoth_Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+        }
+
+        public static List<double> MedianFilter(List<double> data, int windowSize)
+        {
+            int half = windowSize / 2;
+            int n = data.Count;
+            List<double> result = new List<double>();
+
+            for (int i = 0; i < n; i++)
+            {
+                List<double> window = new List<double>();
+
+                for (int j = i - half; j <= i + half; j++)
+                {
+                    int index = Math.Max(0, Math.Min(j, n - 1));
+                    window.Add(data[index]);
+                }
+
+                window.Sort();
+                result.Add(window[window.Count / 2]);
+            }
+
+            return result;
+        }
+
+        public static List<double> SavitzkyGolaySmooth(List<double> data, int windowSize = 7, int polyOrder = 2)
+        {
+            if (windowSize % 2 == 0 || windowSize < 3)
+                throw new ArgumentException("Window size must be odd and >= 3.");
+
+            int half = windowSize / 2;
+            int n = data.Count;
+            List<double> result = new List<double>(new double[n]);
+            double[] coeffs;
+
+            if (windowSize == 5 && polyOrder == 2)
+                coeffs = new double[] { -3.0 / 35, 12.0 / 35, 17.0 / 35, 12.0 / 35, -3.0 / 35 };
+            else if (windowSize == 7 && polyOrder == 2)
+                coeffs = new double[] { -2.0 / 21, 3.0 / 21, 6.0 / 21, 7.0 / 21, 6.0 / 21, 3.0 / 21, -2.0 / 21 };
+            else if (windowSize == 9 && polyOrder == 2)
+                coeffs = new double[] { -21.0 / 231, 14.0 / 231, 39.0 / 231, 54.0 / 231, 59.0 / 231, 54.0 / 231, 39.0 / 231, 14.0 / 231, -21.0 / 231 };
+            else
+                throw new NotSupportedException("Only windowSize=5,7,9 and polyOrder=2 are implemented.");
+
+            for (int i = 0; i < n; i++)
+            {
+                double sum = 0;
+                for (int j = -half; j <= half; j++)
+                {
+                    int k = i + j;
+                    k = Math.Max(0, Math.Min(k, n - 1)); // Clamp to edge
+                    sum += data[k] * coeffs[j + half];
+                }
+                result[i] = sum;
+            }
+            return result;
+        }
+
 
         private int TotalByteExpectedToRead;
         private int[] VoltageBuffer;
-        private void SendToUsb(int techRow)
+        private void SendToUsb(ITechniques tech, DeviceSpecification device)
         {
-            byte[] buffer = new byte[1];
-            int E1,E2;
-
             try
             {
                 if (!sp1.IsOpen)
@@ -595,458 +1219,504 @@ namespace Skydat.forms2080
                 return;
             }
 
-            byte Technum = Convert.ToByte(dschart1.chartlist1_run.Rows[techRow]["techno"].ToString());
-            buffer[0] = Technum;
-
-            switch (Technum)
+            if (device.Device.Model == "2066")
             {
-                case clasglobal.NPV2080:
-                    Array.Resize(ref buffer, 14);
-                    buffer[1] = 11;
-                    E1 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E1"].ToString()) * 1000);
-                    buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-                    buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
+                string CommondRun = $"@{tech.Number}@";
+                long Temp = (long)Analiz_CP1;
+                CommondRun += Temp.ToString() + "@";
+                Temp = (long)Analiz_CP2;
+                CommondRun += Temp.ToString() + "@";
+                Temp = (long)Analiz_CP3;
+                CommondRun += Temp.ToString() + "@";
+                Temp = (long)Analiz_CT1;
+                CommondRun += Temp.ToString() + "@";
+                Temp = (long)Analiz_CT2;
+                CommondRun += Temp.ToString() + "@";
+                Temp = (long)Analiz_CT3;
+                CommondRun += Temp.ToString() + "@";
+                Temp = tech.EquilibriumTime;//quesent time
+                CommondRun += Temp.ToString() + "@";
 
-                    E2 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E2"].ToString()) * 1000);
-                    buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-                    buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
+                tech.SendToUsb_For_2066(ref CommondRun);
 
-                    var hs = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["HS"].ToString()) * 1000);
-                    buffer[6] = hs;   
+                sp1.BaudRate = 1000000;
+                sp1.Write(CommondRun);
 
-                    if (E1 > E2)
-                    {
-                        TotalByteExpectedToRead = (((E1 - E2) / hs) + 1) * 2;
+                VoltageBuffer = new int[100];
+            }
+            else if (device.Device.Model == "2190")
+            {
+                byte[] buffer = new byte[1];
+                byte Technum = tech.Number;
+                buffer[0] = Technum;
 
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-
-                            //if (VoltageBuffer[i] == E2)
-                            //{
-
-                            //}
-                        }
-                    }
-                    else
-                    {
-                        TotalByteExpectedToRead = (((E2 - E1) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                        }
-                    }
-
-                    int TS = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["TS"].ToString()) * 1000);
-                    buffer[7] = (byte)(TS >> 8);   // بایت بالا
-                    buffer[8] = (byte)(TS & 0xFF); // بایت پایین
-
-                    int Delay = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["QT"].ToString()));
-                    buffer[9] = (byte)(Delay >> 8);   // بایت بالا
-                    buffer[10] = (byte)(Delay & 0xFF); // بایت پایین
-
-                    int PW = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["PW"].ToString()) * 1000);
-                    buffer[11] = (byte)(PW >> 8);   // بایت بالا
-                    buffer[12] = (byte)(PW & 0xFF); // بایت پایین
-
-                    for (int i = 2; i < 13; i++)
-                    {
-                        buffer[13] ^= buffer[i];
-                    }
-
-                    break;
-                    
-
-                case clasglobal.DPV2080:
-                    Array.Resize(ref buffer, 15);
-                    buffer[1] = 12;
-                    E1 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E1"].ToString()) * 1000);
-                    buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-                    buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
-
-                    E2 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E2"].ToString()) * 1000);
-                    buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-                    buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
-
-                    hs = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["HS"].ToString()) * 1000);
-                    buffer[6] = hs;
+                VoltageBuffer = tech.SendToUsb(ref TotalByteExpectedToRead, ref buffer);
 
 
-                    if (E1 > E2)
-                    {
-                        TotalByteExpectedToRead = (((E1 - E2) / hs) + 1) * 2;
+                sp1.Write(buffer, 0, buffer.Length);
 
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-
-                            //if (VoltageBuffer[i] == E2)
-                            //{
-
-                            //}
-                        }
-                    }
-                    else
-                    {
-                        TotalByteExpectedToRead = (((E2 - E1) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                        }
-                    }
-
-                    TS = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["TS"].ToString()) * 1000);
-                    buffer[7] = (byte)(TS >> 8);   // بایت بالا
-                    buffer[8] = (byte)(TS & 0xFF); // بایت پایین
-
-                    Delay = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["QT"].ToString()));
-                    buffer[9] = (byte)(Delay >> 8);   // بایت بالا
-                    buffer[10] = (byte)(Delay & 0xFF); // بایت پایین
-
-                    PW = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["PW"].ToString()) * 1000);
-                    buffer[11] = (byte)(PW >> 8);   // بایت بالا
-                    buffer[12] = (byte)(PW & 0xFF); // بایت پایین
-
-                    var PH = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["PH"].ToString()) * 1000);
-                    buffer[13] = PH;
-
-                    for (int i = 2; i < 14; i++)
-                    {
-                        buffer[14] ^= buffer[i];
-                    }
-
-                    break;
-
-                case clasglobal.SWV2080:
-                    Array.Resize(ref buffer, 14);
-                    buffer[1] = 11;
-                    E1 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E1"].ToString()) * 1000);
-                    buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-                    buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
-
-                    E2 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E2"].ToString()) * 1000);
-                    buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-                    buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
-
-                    hs = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["HS"].ToString()) * 1000);
-                    buffer[6] = hs;   // بایت بالا
-
-                    if (E1 > E2)
-                    {
-                        TotalByteExpectedToRead = (((E1 - E2) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-
-                            //if (VoltageBuffer[i] == E2)
-                            //{
-
-                            //}
-                        }
-                    }
-                    else
-                    {
-                        TotalByteExpectedToRead = (((E2 - E1) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                        }
-                    }
-
-                    TS = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["FR"].ToString()) * 1000);
-                    buffer[7] = (byte)(TS >> 8);   // بایت بالا
-                    buffer[8] = (byte)(TS & 0xFF); // بایت پایین
-
-                    Delay = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["QT"].ToString()));
-                    buffer[9] = (byte)(Delay >> 8);   // بایت بالا
-                    buffer[10] = (byte)(Delay & 0xFF); // بایت پایین
-
-                    PW = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["PW"].ToString()) * 1000);
-                    buffer[11] = (byte)(PW >> 8);   // بایت بالا
-                    buffer[12] = (byte)(PW & 0xFF); // بایت پایین
-
-                    for (int i = 2; i < 13; i++)
-                    {
-                        buffer[13] ^= buffer[i];
-                    }
-                    break;
-
-                case clasglobal.CV2080:
-                    Array.Resize(ref buffer, 12);
-                    buffer[1] = 9;
-                    E1 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E1"].ToString()) * 1000);
-                    buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-                    buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
-
-                    E2 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E2"].ToString()) * 1000);
-                    buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-                    buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
-
-                    hs = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["HS"].ToString()) * 1000);
-                    buffer[6] = hs;   // بایت بالا
-
-                    if (E1 > E2)
-                    {
-                        TotalByteExpectedToRead = ((((E1 - E2) / hs) + 1) * 2) - 1;
-                        TotalByteExpectedToRead = TotalByteExpectedToRead * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            if(VoltageBuffer[i - 1] > E2)
-                                VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-                            else
-                                VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                        }
-                    }
-                    else
-                    {
-                        TotalByteExpectedToRead = ((((E2 - E1) / hs) + 1) * 2) - 1;
-                        TotalByteExpectedToRead = TotalByteExpectedToRead * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        bool BackDirction = false;
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            if (!BackDirction)
-                            {
-                                VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                                if (VoltageBuffer[i] >= E2)
-                                {
-                                    BackDirction = true;
-                                }
-                            }
-                            else
-                                VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-                        }
-                    }
-
-                    TS = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["TS"].ToString()) * 1000);
-                    buffer[7] = (byte)(TS >> 8);   // بایت بالا
-                    buffer[8] = (byte)(TS & 0xFF); // بایت پایین
-
-                    Delay = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["QT"].ToString()));
-                    buffer[9] = (byte)(Delay >> 8);   // بایت بالا
-                    buffer[10] = (byte)(Delay & 0xFF); // بایت پایین
-
-                    for (int i = 2; i < 11; i++)
-                    {
-                        buffer[11] ^= buffer[i];
-                    }
-                    break;
-
-                case clasglobal.LSV2080:
-                    Array.Resize(ref buffer, 12);
-                    buffer[1] = 9;
-                    E1 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E1"].ToString()) * 1000);
-                    buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-                    buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
-
-                    E2 = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["E2"].ToString()) * 1000);
-                    buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-                    buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
-
-                    hs = Convert.ToByte(double.Parse(dschart1.chartlist1_run.Rows[techRow]["HS"].ToString()) * 1000);
-                    buffer[6] = hs;   // بایت بالا
-
-                    if (E1 > E2)
-                    {
-                        TotalByteExpectedToRead = (((E1 - E2) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] - hs);
-
-                            //if (VoltageBuffer[i] == E2)
-                            //{
-
-                            //}
-                        }
-                    }
-                    else
-                    {
-                        TotalByteExpectedToRead = (((E2 - E1) / hs) + 1) * 2;
-
-                        VoltageBuffer = new int[TotalByteExpectedToRead / 2];
-                        VoltageBuffer[0] = E1;
-                        for (int i = 1; i < VoltageBuffer.Length; i++)
-                        {
-                            VoltageBuffer[i] = (VoltageBuffer[i - 1] + hs);
-                        }
-                    }
-
-
-
-                    TS = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["TS"].ToString()) * 1000);
-                    buffer[7] = (byte)(TS >> 8);   // بایت بالا
-                    buffer[8] = (byte)(TS & 0xFF); // بایت پایین
-
-                    Delay = Convert.ToInt16(double.Parse(dschart1.chartlist1_run.Rows[techRow]["QT"].ToString()));
-                    buffer[9] = (byte)(Delay >> 8);   // بایت بالا
-                    buffer[10] = (byte)(Delay & 0xFF); // بایت پایین
-
-                    for (int i = 2; i < 11; i++)
-                    {
-                        buffer[11] ^= buffer[i];
-                    }
-                    break;
-
-    
-                default: break;
             }
 
-            sp1.Write(buffer, 0, buffer.Length);
-                      
         }
 
-        private int RecivedPacketCounter = 0;
-        bool EndTechFlag = false, StartFlag = false;
+        int ReceivedBytesThreshold = 4;
 
-        private void sp1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        int ocpCount = 0;
+        void readOCP()
         {
-            try
+
+            int bytesAvailable = sp1.BytesToRead;
+            int Erorr = 0;
+            if (bytesAvailable > 0)
             {
-                //Thread.Sleep(100);
-                int ByteToRead = sp1.BytesToRead;
-                int ExpectedByteToRead = TotalByteExpectedToRead - (RecivedPacketCounter * 50);
-
-                int errorCount = 0;
-                while (ByteToRead == 0 && sp1.IsOpen)
+                Erorr = 0;
+                while (bytesAvailable < 6)
                 {
-                    ByteToRead = sp1.BytesToRead;
-                    errorCount++;
-                    if (errorCount >= 1000)
-                        Setfilllable($"{errorCount}", 1, 1);
-                    //Thread.Sleep(1);
+                    bytesAvailable = sp1.BytesToRead;
+                    Thread.Sleep(10);
+                    Erorr++;
+                    if (Erorr >= 1000 || !sp1.IsOpen)
+                    {
+                        //ارور
+                        Setfilllable($"bytesAvailable <= ReceivedBytesThreshold error", "error");
+                        //return;
+                    }
+                    if (EndTechFlag)
+                    {
+                        return;
+                    }
                 }
-                if (!sp1.IsOpen)
-                {
-                    MessageBox.Show("پورت سریال باز نیست", "sp1_DataReceived_Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                //int errorCount = 0;
-                //while (ExpectedByteToRead >= ByteToRead && sp1.IsOpen)
-                //{
-                //    Thread.Sleep(1);
-                //    ByteToRead = sp1.BytesToRead;
-                //    errorCount++;
-                //    if (errorCount >= 1000)
-                //        Setfilllable($"ExpectedByteToRead = {ExpectedByteToRead} - ByteToRead = {ByteToRead}", 1, 1);
-                //}
-                //if (!sp1.IsOpen)
-                //{
-                //    Setfilllable($"پورت باز نیست", 1, 1);
-                //    return;
-                //}
 
-                //if (ExpectedByteToRead > 50)
-                //{
-
-                //}
-
-                //if (ByteToRead == 0)
-                //{
-                //    Setfilllable("هیچ داده ای بر روی سریال نیست", 1, 1);
-                //    return;
-                //}'
                 if (!StartFlag)
                 {
-                    Thread.Sleep(10);
+                    //Thread.Sleep(10);
                     byte[] buff = new byte[4];
                     sp1.Read(buff, 0, 4);
                     if (buff[0] == 31 && buff[1] == 1 && buff[2] == 1 && buff[3] == 1)
                     {
                         StartFlag = true;
-                        Setfilllable("Start", 1, 1);
+                        Setfilllable("Start", "sucses");
                         return;
                     }
                     else
                     {
                         //دوباره بفرست
+                        Setfilllable("دوباره بفرست", "error");
+                        return;
                     }
                 }
-                Thread.Sleep(10);
-                ByteToRead = sp1.BytesToRead;
 
-                if (ByteToRead > 54) ByteToRead = 54;
-                byte[] buffer = new byte[ByteToRead];
+                if (bytesAvailable > 6) bytesAvailable = 6;
+                byte[] buffer = new byte[bytesAvailable];
 
 
-                sp1.Read(buffer, 0, ByteToRead);
+                int test = sp1.Read(buffer, 0, bytesAvailable);
 
                 int TechNum = buffer[0];
 
-                uint ByteNum = (ushort)((buffer[1] << 8) | buffer[2]);
+                if (techname != -1)
+                {
+                    if (techname != TechNum)
+                    {
+                        Setfilllable("بافر به درستی خوانده نمیشود!", "error");
+                        return;
+                    }
+                }
+                else
+                {
+                    techname = TechNum;
+                }
+
+                byte CheckSum = buffer[1];
+                for (int i = 0; i < 3; i++)
+                {
+                    CheckSum ^= buffer[i + 2];
+                }
+
+                double[] DataY = new double[1];
+                int[] DataX = new int[1];
+
+
+                if (CheckSum == buffer[5])
+                {
+                    DataY[0] = ((Int32)((buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4])) * (-1 / 10.0);
+                    DataX[0] = ocpCount;
+
+                    PlotGraph(OnlineChart, DataX, DataY);
+                    //if (ExpectedByteToRead <= 40)
+                    //{
+                    //    //تکنیک تمام شده
+                    //    Setfilllable($"تکنیک تمام شده", "sucses", 1);
+                    //    RecivedPacketCounter = 0;
+                    //    EndTechFlag = true;
+                    //    StartFlag = false;
+                    //    //this.Invoke(new Action(() =>
+                    //    //{
+                    //    //    mainf.pbRunnigTech.Value += mainf.pbRunnigTech.Maximum;
+                    //    //}));
+                    //}
+                    ocpCount++;
+
+                }
+                else
+                {
+                    Setfilllable("چکسام درست نیست", "error");
+                    return;
+                }
+
+            }
+
+        }
+
+        void readCA()
+        {
+            int bytesAvailable = sp1.BytesToRead;
+            int Erorr = 0;
+            if (bytesAvailable > 0)
+            {
+                Erorr = 0;
+                while (bytesAvailable < 7)
+                {
+                    bytesAvailable = sp1.BytesToRead;
+                    Thread.Sleep(10);
+                    Erorr++;
+                    if (Erorr >= 1000 || !sp1.IsOpen)
+                    {
+                        //ارور
+                        Setfilllable($"bytesAvailable <= ReceivedBytesThreshold error", "error");
+                        //return;
+                    }
+                    if (EndTechFlag)
+                    {
+                        return;
+                    }
+                }
+
+                if (!StartFlag)
+                {
+                    //Thread.Sleep(10);
+                    byte[] buff = new byte[4];
+                    sp1.Read(buff, 0, 4);
+                    if (buff[0] == 31 && buff[1] == 1 && buff[2] == 1 && buff[3] == 1)
+                    {
+                        StartFlag = true;
+                        Setfilllable("Start", "sucses");
+                        return;
+                    }
+                    else
+                    {
+                        //دوباره بفرست
+                        Setfilllable("دوباره بفرست", "error");
+                        return;
+                    }
+                }
+
+                if (bytesAvailable > 7) bytesAvailable = 7;
+                byte[] buffer = new byte[bytesAvailable];
+
+
+                int test = sp1.Read(buffer, 0, bytesAvailable);
+
+                int TechNum = buffer[0];
+
+                if (techname != -1)
+                {
+                    if (techname != TechNum)
+                    {
+                        Setfilllable("بافر به درستی خوانده نمیشود!", "error");
+                        return;
+                    }
+                }
+                else
+                {
+                    techname = TechNum;
+                }
+
+                byte CheckSum = buffer[1];
+                for (int i = 0; i < 4; i++)
+                {
+                    CheckSum ^= buffer[i + 2];
+                }
+
+                double[] DataY = new double[1];
+                int[] DataX = new int[1];
+
+
+                if (CheckSum == buffer[6])
+                {
+                    DataY[0] = ((Int32)((buffer[2] << 24) | (buffer[3] << 16) | (buffer[4] << 8) | buffer[5])) * (-1 / 10.0);
+                    DataX[0] = ocpCount;
+
+                    PlotGraph(OnlineChart, DataX, DataY);
+                    ocpCount++;
+                }
+                else
+                {
+                    Setfilllable("چکسام درست نیست", "error");
+                    return;
+                }
+
+            }
+
+        }
+
+        void CheckBuffer()
+        {
+            while (!EndTechFlag)
+            {
+                int bytesAvailable = sp1.BytesToRead;
+                int Erorr = 0;
+                while (bytesAvailable == 0)
+                {
+                    Thread.Sleep(10);
+                    Erorr++;
+                    if (Erorr >= 1000 || !sp1.IsOpen)
+                    {
+                        //ارور
+                        Setfilllable($"bytesAvailable == 0 error", "error");
+                        Erorr = 0;
+                        //return;
+                    }
+                    bytesAvailable = sp1.BytesToRead;
+                    if (EndTechFlag)
+                    {
+                        return;
+                    }
+                }
+
+                if (bytesAvailable > 0)
+                {
+                    Erorr = 0;
+                    while (bytesAvailable < ReceivedBytesThreshold)
+                    {
+                        bytesAvailable = sp1.BytesToRead;
+                        Thread.Sleep(10);
+                        Erorr++;
+                        if (Erorr >= 1000 || !sp1.IsOpen)
+                        {
+                            //ارور
+                            Setfilllable($"bytesAvailable <= ReceivedBytesThreshold error", "error");
+                            //return;
+                        }
+                        if (EndTechFlag)
+                        {
+                            return;
+                        }
+                    }
+
+                    ReadIncomBuffer(bytesAvailable);
+                }
+            }
+        }
+
+        private int RecivedPacketCounter = 0;
+        bool StopFlag = false, EndTechFlag = false, StartFlag = false;
+        int techname = -1;
+
+        void ReadIncomBuffer(int ByteToRead)
+        {
+
+            try
+            {
+                // برای مواقعی که تکنیک تمام شده ولی هنوز پس از ان ایونت انفاق میوفتد
+                if (EndTechFlag == true)
+                {
+                    Setfilllable($"DataReceived Happen but EndFlag true", "warning");
+                    return;
+                }
+
+                Setfilllable($"ReadIncomBuffer", "log");
+                if (ByteToRead <= 40)
+                {
+                    Setfilllable($"بافر زیر ۴۰ خوانده شده {ByteToRead}", "log");
+                }
+                int ExpectedByteToRead = TotalByteExpectedToRead - (RecivedPacketCounter * 40);
+                if (ExpectedByteToRead <= 40)
+                {
+                    //تکنیک تمام شده
+                    Setfilllable($"زیر ۴۰{ExpectedByteToRead}", "log");
+                }
+
+                //int errorCount = 0;
+                //while (ByteToRead == 0 && sp1.IsOpen)
+                //{
+                //    ByteToRead = sp1.BytesToRead;
+                //    errorCount++;
+                //    if (errorCount >= 2000)
+                //    {
+                //        if (errorCount / 1000 == 0)
+                //        {
+                //            Setfilllable($"{errorCount}", "warning", 1);
+                //        }
+                //        if (errorCount == 5000)
+                //            return;
+                //    }
+                //    //Thread.Sleep(1);
+                //}
+                if (!sp1.IsOpen)
+                {
+                    MessageBox.Show("پورت سریال باز نیست", "sp1_DataReceived_Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!StartFlag)
+                {
+                    //Thread.Sleep(10);
+                    byte[] buff = new byte[4];
+                    sp1.Read(buff, 0, 4);
+                    if (buff[0] == 31 && buff[1] == 1 && buff[2] == 1 && buff[3] == 1)
+                    {
+                        StartFlag = true;
+                        Setfilllable("Start", "sucses");
+                        //تنظیم میکنیم که چه زمانی اینتراپت دیتا بخورد
+                        if (ExpectedByteToRead <= 40)
+                            ReceivedBytesThreshold = ExpectedByteToRead + 6;
+                        else
+                            ReceivedBytesThreshold = 46;
+
+                        return;
+                    }
+                    else
+                    {
+                        //دوباره بفرست
+                        Setfilllable("دوباره بفرست", "error");
+                        return;
+                    }
+                }
+
+                //Thread.Sleep(10);
+                //ByteToRead = sp1.BytesToRead;
+                if (ByteToRead < 2)
+                {
+                    Setfilllable("پکت زیر دو بایت است!", "warning");
+                    ByteToRead = sp1.BytesToRead;
+                }
+
+                if (ByteToRead > ReceivedBytesThreshold) ByteToRead = ReceivedBytesThreshold;
+                byte[] buffer = new byte[ReceivedBytesThreshold];
+
+
+                int test = sp1.Read(buffer, 0, ReceivedBytesThreshold);
+
+                int TechNum = buffer[0];
+
+                if (techname != -1)
+                {
+                    if (techname != TechNum)
+                    {
+                        Setfilllable("بافر به درستی خوانده نمیشود!", "error");
+                        return;
+                    }
+                }
+                else
+                {
+                    techname = TechNum;
+                }
+
+                uint ByteNum = (uint)((buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4]);
                 if (ByteNum == ExpectedByteToRead)
                     RecivedPacketCounter++;
                 else
                 {
-                    Setfilllable($"پکت به درستی گرفته نشد {RecivedPacketCounter}", 1, 1); 
+                    Setfilllable($"پکت به درستی گرفته نشد {RecivedPacketCounter}", "error");
+                    return;
                 }
 
-                
 
-                if (ByteNum >= 50)
-                    ByteNum = 50;
 
-                if (ByteNum + 4 != ByteToRead)
+                if (ByteNum >= 40)
+                    ByteNum = 40;
+
+                //حالت خطایابی
+                if ((ByteNum + 6) > ByteToRead)
                 {
-                    int error =0;
+
+                    Setfilllable($"حالت خطایابی {ByteNum},{ByteToRead}", "warning");
+
+                    int diff = (int)ByteNum + 6 - ByteToRead;
+                    while (ByteNum + 6 >= ByteToRead)
+                    {
+                        ByteToRead = sp1.BytesToRead;
+
+                    }
+                    int i = buffer.Length - 1;
+                    Array.Resize(ref buffer, (int)ByteNum + 6);
+
+                    byte[] diffBuffer = new byte[diff];
+                    sp1.Read(diffBuffer, 0, diff);
+                    foreach (byte data in diffBuffer)
+                    {
+                        i++;
+                        buffer[i] = data;
+                    }
                 }
 
-                byte CheckSum = buffer[3];
+                byte CheckSum = buffer[5];
                 for (int i = 0; i < ByteNum - 1; i++)
                 {
-                    CheckSum ^= buffer[i + 4];
+                    CheckSum ^= buffer[i + 6];
                 }
 
-                int[] DataY = new int[ByteNum / 2];
-                int[] DataX = new int[ByteNum / 2];
+                double[] DataY = new double[ByteNum / 4];
+                int[] DataX = new int[ByteNum / 4];
 
-
-                if (CheckSum == buffer[ByteNum + 3])
+                if (CheckSum == buffer[ByteNum + 5])
                 {
                     //MessageBox.Show("اطلاعات به درستی ذخیره شده");
-                    for (int i = 0; i < ByteNum / 2; i++)
+                    for (int i = 0; i < ByteNum / 4; i++)
                     {
-                        DataY[i] = (short)((buffer[i * 2 + 3] << 8) | buffer[i * 2 + 4]);
-                        DataX[i] = VoltageBuffer[i + ((RecivedPacketCounter - 1) * 25)];
+                        DataY[i] = ((Int32)((buffer[i * 4 + 5] << 24) | (buffer[i * 4 + 6] << 16) | (buffer[i * 4 + 7] << 8) | buffer[i * 4 + 8])) * -1 / 10.00;
+                        DataX[i] = VoltageBuffer[i + ((RecivedPacketCounter - 1) * 10)];
                     }
-                    PlotGraph(tChart1, DataX, DataY);
-                    if (ExpectedByteToRead <= 50)
+                    //if (TechNum == 2)//DPV
+                    //{
+                    //    double[] PulsyDataY = new double[DataY.Length / 2];
+                    //    DataX = new int[PulsyDataY.Length];
+                    //    for (int i = 0,j = 0; i < DataY.Length; i += 2,j++)
+                    //    {
+                    //        PulsyDataY[j] = DataY[i + 1] - DataY[i];
+                    //        DataX[j] = VoltageBuffer[j + ((RecivedPacketCounter - 1) * 5)];
+                    //    }
+                    //    PlotGraph(OnlineChart, DataX, PulsyDataY);
+                    //}
+                    //else
+                    //{
+                    //    for (int i = 0; i < ByteNum / 4; i++)
+                    //    {
+                    //        DataX[i] = VoltageBuffer[i + ((RecivedPacketCounter - 1) * 10)];
+                    //    }
+                    //    PlotGraph(OnlineChart, DataX, DataY);
+                    //}
+
+                    PlotGraph(OnlineChart, DataX, DataY);
+
+                    if (ExpectedByteToRead <= 40)
                     {
                         //تکنیک تمام شده
+                        Setfilllable($"تکنیک تمام شده", "sucses");
                         RecivedPacketCounter = 0;
                         EndTechFlag = true;
-                        //this.Invoke(new Action(() =>
-                        //{
-                        //    mainf.pbRunnigTech.Value += mainf.pbRunnigTech.Maximum;
-                        //}));
+                        StartFlag = false;
+
+                        this.Invoke(new Action(() =>
+                        {
+                            mainf.pbRunnigTech.Value = mainf.pbRunnigTech.Maximum;
+                        }));
                     }
+
                 }
                 else
                 {
-                    Setfilllable("چکسام درست نیست", 1, 1);
+                    Setfilllable("چکسام درست نیست", "error");
+                    return;
+                }
+
+                ExpectedByteToRead = TotalByteExpectedToRead - (RecivedPacketCounter * 40);
+                if (ExpectedByteToRead <= 40)
+                {
+                    //تکنیک تمام شده
+                    ReceivedBytesThreshold = ExpectedByteToRead + 6;
+                    Setfilllable($"پکت بعدی زیر ۴۰{ExpectedByteToRead}", "log");
                 }
             }
             catch (Exception EX)
@@ -1054,316 +1724,123 @@ namespace Skydat.forms2080
                 MessageBox.Show(EX.Message, "DataRecive_Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //throw;
             }
-            
 
         }
 
-        public void PlotGraph(Chart chart, int[] Xvalues, int[] Yvalues)
+        public void PlotGraph(Chart chart, int xValue, double yValue)
         {
-            if (chart == null || Yvalues == null || Yvalues.Length == 0)
+            if (chart == null)
                 return;
 
-            // اگر از Thread غیر UI صدا زده شد
             if (chart.InvokeRequired)
             {
-                chart.Invoke(new Action(() => PlotGraph(chart, Xvalues, Yvalues)));
+                chart.Invoke(new Action(() => PlotGraph(chart, xValue, yValue)));
                 return;
             }
 
-            chart.BeginInit();
+            Series series;
+
+            if (chart.Series.IndexOf("live") == -1)
+            {
+                series = new Series("live")
+                {
+                    ChartType = CurrentGraphChartType,
+                    BorderWidth = 3,
+                    Color = Color.Red
+                };
+
+                chart.Series.Add(series);
+            }
+            else
+            {
+                series = chart.Series["live"];
+            }
+
+            chart.SuspendLayout();
 
             try
             {
-                Series series;
+                series.Points.SuspendUpdates();
 
-                // بررسی وجود سری
-                if (chart.Series.IsUniqueName("test"))
-                {
-                    series = new Series("test");
-                    series.ChartType = SeriesChartType.Line; // یا هر نوعی که خواستی
-                    series.BorderWidth = 2;
-                    chart.Series.Add(series);
+                series.Points.AddXY(xValue, yValue);
 
-                }
-                else
-                {
-                    series = chart.Series["test"];
-                }
+                mainf.pbRunnigTech.Value++;
+                if (mainf.pbRunnigTech.Value == 100)
+                    mainf.pbRunnigTech.Value = 0;
 
-                // اضافه کردن کامل داده‌ها
-                for (int i = 0; i < Yvalues.Length; i++)
+                if (!flag_running)
                 {
-                    series.Points.AddXY(Xvalues[i], Yvalues[i]);
+                    mainf.pbRunnigTech.Visible = false;
+                    mainf.xyLabel.Visible = true;
+                    flag_running = false;
+
+                    OnlineChart.Update();
                 }
 
-                if (mainf.pbRunnigTech.Value > mainf.pbRunnigTech.Maximum - 25)
-                    mainf.pbRunnigTech.Value = mainf.pbRunnigTech.Maximum;
-                else
-                    mainf.pbRunnigTech.Value += 25;
-
+                series.Points.ResumeUpdates();
             }
             finally
             {
-                chart.EndInit();
+                chart.ResumeLayout();
+                chart.Invalidate();
             }
+
         }
 
-
-
-        delegate void removegraphb();
-        private void remove_graph_last()
+        public void PlotGraph(Chart chart, int[] xValues, double[] yValues)
         {
-            if (tChart1.InvokeRequired)
+            if (chart == null || xValues == null || yValues == null)
+                return;
+
+            if (chart.InvokeRequired)
             {
-                removegraphb d = new removegraphb(remove_graph_last);
-                this.Invoke(d, new object[] { });
+                chart.Invoke(new Action(() => PlotGraph(chart, xValues, yValues)));
+                return;
+            }
+
+            Series series;
+
+            if (chart.Series.IndexOf("live") == -1)
+            {
+                series = new Series("live")
+                {
+                    ChartType = CurrentGraphChartType,
+                    BorderWidth = 3,
+                    Color = Color.Red
+                };
+
+                chart.Series.Add(series);
             }
             else
             {
-                for (int k = 0; k < tChart1.Series.Count; k++)
-                    tChart1.Series[k].Enabled = false;
+                series = chart.Series["live"];
             }
-        }
 
-        private void transferdata(int rownum)
-        {
-            string strpath = "";// fName = "";
-            for (long i = 100001; i < 1000000; i++)
+            chart.SuspendLayout();
+
+            try
             {
-                if (!File.Exists(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile2080\\" + clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat"))
-                {
-                    if (cycle_number_in_file <= 1)// without cycle
-                    {
-                        strpath = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile2080\\" + clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
-                        //fName = clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
-                        break;
-                    }
-                    else
-                    {
-                        strpath = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile2080\\" + clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + (i - 1).ToString().Trim() + ".dat";
-                        //fName = clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())].Trim() + i.ToString().Trim() + ".dat";
-                        break;
-                    }
-                }
-            }
+                series.Points.SuspendUpdates();
 
-            if (cycle_number_in_file <= 1)
-                WriteToFile_2080(dschart1.chartlist1_run.Rows[rownum], clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[rownum][1].ToString())], strpath, rownum, 2);//header in file
-            else
+                // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
+                var medianFiltered = MedianFilter(yValues.ToList(), windowSize: 3);
+
+                List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 5);
+
+
+                for (int i = 0; i < yValues.Length; i++)
+                {
+                    series.Points.AddXY(xValues[i], smothedX[i]);
+                }
+                mainf.pbRunnigTech.Value += yValues.Length;
+
+                series.Points.ResumeUpdates();
+            }
+            finally
             {
-                StreamWriter s = new StreamWriter(strpath, true);
-                s.WriteLine();
-                s.Close();
+                chart.ResumeLayout();
+                chart.Invalidate();
             }
-
-            StreamWriter sa1 = new StreamWriter(strpath, true);
-            sa1.WriteLine("============================================================");
-
-            if (cycle_number_in_file > 1)
-            {
-                sa1.WriteLine("Cycle Number: " + cycle_number_in_file.ToString());
-                sa1.WriteLine();
-            }
-
-            cycle_number_in_file++;
-
-            string Ln = "";
-
-            for (int i = 0; i < shomar_othertech; i++)
-            {
-                Ln = othertech_val0[i].ToString();
-                Ln = Ln + "\t" + othertech_val3[i].ToString();
-                Ln = Ln + "\t" + othertech_val1[i].ToString();
-                Ln = Ln + "\t" + othertech_val2[i].ToString();
-                sa1.WriteLine(Ln);
-            }
-
-            sa1.Close();
-            dschart1.chartlist1_run.Rows[rownum][23] = strpath;
-
-        }
-
-        public static void WriteToFile_2080(DataRow dr, string tchName, string fileName, int row, int typedevice)
-        {
-            StreamWriter Fl = new StreamWriter(fileName, false, Encoding.ASCII);
-
-            if (tchName != "APP" && tchName != "SEQ")
-            {
-                Fl.WriteLine("Settings for Parameters:");
-                Fl.WriteLine("Date:" + DateTime.Now.ToString());
-
-                if (tchName == "NPV" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: NPV");
-                    //Fl.WriteLine("TchNo: " + NPV.ToString());
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("Cycles:" + dr[13].ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("HStep:" + dr[6].ToString());
-                    Fl.WriteLine("Pulse Width:" + dr[10].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
-                    Fl.WriteLine("TStep:" + dr[9].ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-                }
-
-                if (tchName == "DPV" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: DPV");
-                    //Fl.WriteLine("TchNo: " + DPV.ToString());
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("Cycles:" + dr[13].ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("HStep:" + dr[6].ToString());
-                    Fl.WriteLine("Pulse Height:" + dr[11].ToString());
-                    Fl.WriteLine("Pulse Width:" + dr[10].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
-                    Fl.WriteLine("TStep:" + dr[9].ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-                }
-
-                if (tchName == "SWV" || tchName == "All")
-                {
-
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: SWV");
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("Cycles:" + dr[13].ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("Frequency:" + dr[12].ToString());
-                    Fl.WriteLine("HStep:" + dr[6].ToString());
-                    Fl.WriteLine("Pulse Height:" + dr[11].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-                }
-
-                if (tchName == "CV" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: CV");
-                    //Fl.WriteLine("TchNo: " + CV.ToString());
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("Cycles:" + dr[13].ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("E3:" + dr[5].ToString());
-                    Fl.WriteLine("Hold Time:0");
-                    Fl.WriteLine("HStep:" + dr[6].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
-                    Fl.WriteLine("ScanRate_R:" + dr[8].ToString());
-                    Fl.WriteLine("TStep:" + dr[9].ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-                }
-
-                if (tchName == "LSV" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: LSV");
-                    //Fl.WriteLine("TchNo: " + LSV.ToString());
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("Cycles:" + dr[13].ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("HStep:" + dr[6].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("Scan Rate:" + dr[8].ToString());
-                    Fl.WriteLine("TStep:" + dr[9].ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-
-                }
-
-                if (tchName == "CPC" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: CPC");
-                    //Fl.WriteLine("TchNo: " + CPC.ToString());
-                    Fl.WriteLine("Current Range:0");
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    Fl.WriteLine("T1:" + dr[15].ToString());
-                    Fl.WriteLine("Cycles:1");
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-                    }
-                }
-
-                if (tchName == "OCP" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: OCP");
-                    //Fl.WriteLine("TchNo: " + OCP.ToString());
-                    Fl.WriteLine("Time:" + clasglobal.ocpprms_ocp.Time.ToString());
-                }
-
-                if (tchName == "CHA" || tchName == "All")
-                {
-                    Fl.WriteLine("\n");
-                    Fl.WriteLine("Technic: CHA");
-                    //Fl.WriteLine("TchNo: " + CA.ToString());
-                    Fl.WriteLine("E1:" + dr[3].ToString());
-                    if (typedevice == 1)
-                        Fl.WriteLine("E2:" + dr[4].ToString());
-                    Fl.WriteLine("Equilibrium Time:" + dr[7].ToString());
-                    if (typedevice == 1)
-                        Fl.WriteLine("T1:" + double.Parse(dr[15].ToString()) * 1000);
-                    else
-                        Fl.WriteLine("T1:" + double.Parse(dr[15].ToString()));
-
-                    if (typedevice == 1)
-                        Fl.WriteLine("T2:" + double.Parse(dr[16].ToString()) * 1000);
-                    Fl.WriteLine("Cycles:" + "1"); //caprms.Cycles.ToString());
-                    if (typedevice == 2)
-                    {
-                        Fl.WriteLine("vs_OCP:" + dr[19].ToString());
-                        Fl.WriteLine("OCP Measurment:" + dr[20].ToString());
-
-                    }
-
-                }
-                Fl.Close();
-            }
-
-            Fl.Close();
-        }
-        private int HexToDecimal(string hex)
-        {
-            int sum = 0;
-            for (int i = hex.Length - 1; i >= 0; i--)
-                if ((int)hex[i] >= 48 && (int)hex[i] <= 57)
-                    sum += ((int)hex[i] - 48) * (int)Math.Pow(16, hex.Length - i - 1);
-                else
-                    sum += ((int)hex[i] - 55) * (int)Math.Pow(16, hex.Length - i - 1);
-            return sum;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1371,17 +1848,17 @@ namespace Skydat.forms2080
             try
             {
                 ColorDialog cl = new ColorDialog();
-                cl.Color = tChart1.ChartAreas[0].BackColor;
-                cl.CustomColors = new int[] { tChart1.ChartAreas[0].BackColor.R, tChart1.ChartAreas[0].BackColor.G, tChart1.ChartAreas[0].BackColor.B };
+                cl.Color = OnlineChart.ChartAreas[0].BackColor;
+                cl.CustomColors = new int[] { OnlineChart.ChartAreas[0].BackColor.R, OnlineChart.ChartAreas[0].BackColor.G, OnlineChart.ChartAreas[0].BackColor.B };
                 cl.FullOpen = true;
 
                 if (cl.ShowDialog() == DialogResult.OK)
                 {
-                    tChart1.BackColor = cl.Color;
-                    tChart1.BorderlineColor = cl.Color;
-                    tChart1.ChartAreas[0].BackColor = cl.Color;
+                    OnlineChart.BackColor = cl.Color;
+                    OnlineChart.BorderlineColor = cl.Color;
+                    OnlineChart.ChartAreas[0].BackColor = cl.Color;
                     panel1.BackColor = cl.Color;
-                    panel4.BackColor = cl.Color;
+                    pnlChartTools.BackColor = cl.Color;
 
                     string[] color = File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\Color.dat");
                     color[4] = "2080 show:" + cl.Color.ToArgb().ToString();
@@ -1408,518 +1885,24 @@ namespace Skydat.forms2080
         private void timerResizeFrm_Tick(object sender, EventArgs e)
         {
             timerResizeFrm.Stop();
+            toolStrip1.Height = (int)(this.Height * 0.1);
+            tvTechniqueQueue.Height = (int)(this.Height * 0.3);
+            pnlParam.Height = (int)(this.Height * 0.4);
+            pnlChartTools.Width = (int)(OnlineChart.Width * 0.03);
+            foreach (Button item in pnlChartTools.Controls)
+            {
+                item.Height = item.Width;
+            }
+            //rtbLogger.Height = (int)(this.Height * 0.2);
         }
 
-        public void Calc_V_I1_I2(string VI_endstr, bool show_online, int row)
+        List<ITechniques> TechLine;
+
+        public void runf(List<ITechniques> techLine, byte rng, double cp11, double ct11, double cp12, double ct12, double cp13, double ct13, double cp14, double ct14, double cp15, double ct15)
         {
-            Boolean I_sin = true;
-            try
-            {
-                string SS = "";
-                //double[] stepCurr = { 0, 0, 10000000, 1100000, 100100, 9990, 990, 90.1 };
-                //double[] stepCurr = { 0, 0, 8887901.3443, c, 66733, 6660, 660, 60 };
-                //double[] stepCurr = { 0, 0, 10000000, 999900, 101490, 10180, 1021, 103 };  //modares Tehran
-                //double[] stepCurr = { 0, 0, 10000000, 1029999, 104500, 10500, 1055, 105 }; //DR bagherzade
-                // double[] stepCurr = { 0, 0, 10000000, 1000000, 101000, 10100, 1040, 104 }; //Elmi-Ahvaz
-                double[] stepCurr = { 0, 10000000, 1000000, 100000, 10000, 1000, 100 };////man0, 0,
-                                                                                       // double[] stepCurr = {0, 10000000, 1000000, 101000, 10100, 10400, 104 }; //Elmi-Ahvaz
-                                                                                       // int chsum = 0;
-                double V = 0, I1 = 0, I2 = 0;
-                int StepCurNum1 = 0, StepCurNum2 = 0;
-                byte CS = 0;
-                while (VI_endstr[CS] != '$') { CS++; if (CS > 16) break; }
-                if (CS > 0) VI_endstr = VI_endstr.Substring(CS);
-                string s = VI_endstr.Substring(CS + 1, 4);// endstr[1] + endstr[2] + endstr[3] + endstr[4];
-                //if (new_numSeries != this.grf.num_Series)
-                //{
-                //    Row_Data = 0;
-                //    new_numSeries = this.grf.num_Series;
-                //}
-                SS = VI_endstr;
-                //V = (double)HexToDecimal(s);
-                V = (int)HexToDecimal(s);
-                s = VI_endstr.Substring(CS + 5, 4); //(endstr[5] + endstr[6] + endstr[7] + endstr[8]).ToString();
-                // I1 = (double)HexToDecimal(s);
-                I1 = (int)HexToDecimal(s);
-                s = VI_endstr.Substring(CS + 9, 4);  //] + endstr[10] + endstr[11] + endstr[12]).ToString();
-                // I2 = (double)HexToDecimal(s);
-                I2 = (int)HexToDecimal(s);
-                CS = 0;
-                StepCurNum1 = Convert.ToInt16(VI_endstr[13]) - 48;
-                StepCurNum2 = Convert.ToInt16(VI_endstr[14]) - 48;
-                /////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////
-                /*******************************************************************
-                grdTech.Rows.Insert(rrrr + 1, 1);
-                grdTech.Rows[rrrr].Cells["Row"].Value = VI_endstr;
-                grdTech.Rows[rrrr].Cells["TCH"].Value = StepCurNum1.ToString();
-                grdTech.Rows[rrrr].Cells["Dly"].Value = StepCurNum2.ToString();
-                rrrr++;
-                /*******************************************************************/
-                //if (grf.tech != CPC && grf.tech != CA && grf.tech != SC)
-                //    I2 += StepCurNum2 * 65536; 
-                CS = (byte)(VI_endstr[15]);
-                /*
-                chsum = 0;
-                try
-                {
-                    chsum = (int)V + (int)I1 + (int)I2 + StepCurNum1 + StepCurNum2;
-                    ////////////////////man/////////////
-                    if ((byte)chsum != (byte)CS)
-                    {
-                        Num_Error++;
+            TechLine = techLine;
+            this.tvTechniqueQueue.Nodes[0].Nodes.Clear();
 
-
-                    }// this.grf.Rawdata(this.grf.num_Series, Row_Data) = "Error";
-                }
-                catch { }
-                */
-
-                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080))    // CPC return (0,I,T,StepCurr,0)   || SC return (0,I,T,0,0);;   
-                {
-                    if (I2 < Prior_I2) Num_OverFlow_CPC_CA++;
-                    Prior_I2 = I2;
-                    I2 += (Num_OverFlow_CPC_CA * 65535);
-                    V = I2;
-                    I2 = 0;
-                }
-                if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != 99 && (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.OCP2080 && OCP_Timer == 0 && !OCP_Ok))
-                {
-
-                    ////////////// calculat I1
-                    if (I1 > 0x1FFF)
-                    {
-                        I1 = 0x4000 - I1;
-                        I1 = I1 * -1;
-                        I_sin = true;              //bit i_sin
-                    }
-                    else I_sin = false;
-                    if (I1 > 0x8000) I1 -= 65536;
-                    I1 = I1 * 0.61035; ////0.61035
-                    if (I_sin) I1 *= -1;
-                    I1 /= 1000;                  //  if (I1 >0) I1*=-1;
-                    ////////////////calculat I2
-                    if (I2 > 0x1FFF)
-                    {
-                        I2 = 0x4000 - I2;
-                        I2 = I2 * -1;
-                        I_sin = true;              //bit i_sin
-                    }
-                    else
-                        I_sin = false;
-                    //   if (I1 > 0x8000) I1 -= 65536; 
-                    I2 = I2 * 0.61035; ////0.61035
-                    if (I_sin) I2 *= -1;
-
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CPC2080 && int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.CHA2080)
-                    {
-                        if (V > 0x8000) V -= 65536;
-                        //  if (I2 > 0x8000) I2 -= 65536;
-                        V /= 1000;
-                        I2 /= 1000;
-
-                    }
-
-                    ///////////////////////
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.OCP2080 && OCP_Timer == 0 && !OCP_Ok)
-                    {
-
-                        if (StepCurNum1 > 0 && StepCurNum1 < 7)
-                            if (stepCurr[StepCurNum1] != 0)
-                                I1 = I1 / stepCurr[StepCurNum1];   //in Amper
-                            else
-                                I1 = 0;
-
-                    }
-
-                    if (StepCurNum2 >= 0 && StepCurNum2 < 8)
-                        if (stepCurr[StepCurNum2] != 0)
-                            I2 = I2 / stepCurr[StepCurNum2];  // in Amper
-                        else I2 = 0;
-
-                }
-
-                double temp = 0;
-                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.OCP2080 || OCP_Ok))     // OCP return (V,T,0,0,0);&&(CP_Ok == false)
-                {
-                    //I1 *= 1000;
-                    if (V > 0x1FFF)
-                    {
-                        V = 0x4000 - V;
-                        V = V * -1;
-                        I_sin = true;              //bit i_sin
-                    }
-                    else I_sin = false;
-
-
-                    V = V * 0.6104;
-                    V *= -1;
-                    V /= 1000;
-
-
-
-                    if (OCP_Ok && OCP_Timer > 0)
-                    {
-                        show_online = false;
-                        Setfilllable(Environment.NewLine + "Time(S): " + ((int)I1).ToString() + "        OCP(mV): " + (V).ToString("000e-0"), 1, 1);
-                        System.Threading.Thread.Sleep(1000);
-                        OCP_Timer--;
-
-                        //tsocpTime.Text = "Time(S): " + ((int)I1).ToString();
-                        //toolStripStatusLabel3.Text = "OCP(mV): " + (V).ToString("000e-0");
-
-                        //return;
-                    }
-                    //else
-                    //    OCP_Timer = 0;
-
-
-
-
-                    temp = V;
-                    V = I1;
-                    I1 = temp;
-                    I2 = 0;
-
-                    if (OCP_Timer <= 0 && OCP_Ok)
-                    {
-                        show_online = false;
-                        OCP_Ok = false;
-                        V = 0;
-                        I2 = 0;
-                        I1 = 0;
-                    }
-                }
-                //////////////////////////////////////////////////////////
-                if ((int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080))    // CPC return (0,I,T,StepCurr,0)   || SC return (0,I,T,0,0);;   
-                {
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CHA2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080)
-                        V *= 10;
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CPC2080)
-                        I1 *= V;
-
-                }
-
-                if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.OCP2080)
-                {
-                    V = Math.Round(V, 2);
-                    I1 = Math.Round(I1, 2);
-                    I2 = Math.Round(I2, 2);
-                }
-                number++;
-                if (I1 != 0 && show_online)
-                {
-                    Runnig(V, I1, I2, row);//گراف                             
-                }
-                if (OCP_Timer == 0)
-                    show_online = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void Runnig(double V, double I1, double I2, int row)
-        {
-            if (this.InvokeRequired)
-            {
-                showOnlineData1 d = new showOnlineData1(Runnig);
-                this.Invoke(d, new object[] { V, I1, I2, row });
-            }
-            else
-            {
-
-                if (!is_set_graph)
-                {
-                    Set_Graph(true, row);
-                    is_set_graph = true;
-                }
-
-                //grf.textBox1.Text = V.ToString("00e-0");
-
-                if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) != clasglobal.DPV2080)
-                {
-                    if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.NPV2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.LSV2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.CV2080 || int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.SWV2080)
-                    {
-                        if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                        {
-                            if (V >= double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) - 0.5 && V <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) + 0.5)    //this.grf.num_Series
-                            {
-
-                                this.tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(V, I1 - I2);
-                                if (shomar_othertech >= othertech_val0.Length)
-                                {
-                                    Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                                    Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                                    Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                                    Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
-
-                                }
-
-                                othertech_val0[shomar_othertech] = V;
-                                othertech_val1[shomar_othertech] = I1;
-                                othertech_val2[shomar_othertech] = I2;
-                                othertech_val3[shomar_othertech] = I1 - I2;
-
-                                shomar_othertech++;
-
-                            }
-                        }
-                        else
-                            if (V <= double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) + 0.5 && V >= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()) - 0.5)
-                        {
-                            this.tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(V, I1 - I2);
-
-
-                            if (shomar_othertech >= othertech_val0.Length)
-                            {
-                                Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                                Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                                Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                                Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
-
-                            }
-
-                            othertech_val0[shomar_othertech] = V;
-                            othertech_val1[shomar_othertech] = I1;
-                            othertech_val2[shomar_othertech] = I2;
-                            othertech_val3[shomar_othertech] = I1 - I2;
-
-                            shomar_othertech++;
-
-                        }
-                    }
-                    else
-                    {
-
-                        this.tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(V / 1000, I1 - I2);
-
-                        if (int.Parse(dschart1.chartlist1_run.Rows[row][1].ToString()) == clasglobal.OCP2080)//mn
-                        {
-                            //OnlineChart.ChartAreas[0].AxisX.LabelStyle.Angle = 0;
-                            //this.OnlineChart.ChartAreas[0].AxisX.LabelStyle.Interval = 1;
-
-                            int time_text = this.tChart1.Series[tChart1.Series.Count - 1].Points.Count - 1;
-                            this.tChart1.Series[tChart1.Series.Count - 1].Points[time_text].AxisLabel = time_text.ToString();
-                        }
-
-
-
-                        if (shomar_othertech >= othertech_val0.Length)
-                        {
-                            Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                            Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                            Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                            Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
-
-                        }
-
-                        othertech_val0[shomar_othertech] = V / 1000;
-                        othertech_val1[shomar_othertech] = I1;
-                        othertech_val2[shomar_othertech] = I2;
-                        othertech_val3[shomar_othertech] = I1 - I2;
-
-                        shomar_othertech++;
-
-
-                    }
-                }
-                else
-                {
-                    if (double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                    {
-                        if (V >= double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) && V <= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                        {
-                            this.tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(V, I1 - I2);//mn i2-i1 bood graph ra makos mizad
-                            if (shomar_othertech >= othertech_val0.Length)
-                            {
-                                Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                                Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                                Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                                Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
-
-                            }
-
-                            othertech_val0[shomar_othertech] = V;
-                            othertech_val1[shomar_othertech] = I1;
-                            othertech_val2[shomar_othertech] = I2;
-                            othertech_val3[shomar_othertech] = I1 - I2;//mn
-
-                            shomar_othertech++;
-
-                        }
-                    }
-                    else
-                        if (V <= double.Parse(dschart1.chartlist1_run.Rows[row][3].ToString()) && V >= double.Parse(dschart1.chartlist1_run.Rows[row][4].ToString()))
-                    {
-                        this.tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(V, I1 - I2);//mn i2-i1 bood graph ra makos mizad
-                        if (shomar_othertech >= othertech_val0.Length)
-                        {
-                            Array.Resize(ref othertech_val0, othertech_val0.Length + 200);
-                            Array.Resize(ref othertech_val1, othertech_val1.Length + 200);
-                            Array.Resize(ref othertech_val2, othertech_val2.Length + 200);
-                            Array.Resize(ref othertech_val3, othertech_val3.Length + 200);
-
-                        }
-
-                        othertech_val0[shomar_othertech] = V;
-                        othertech_val1[shomar_othertech] = I1;
-                        othertech_val2[shomar_othertech] = I2;
-                        othertech_val3[shomar_othertech] = I1 - I2;//mn
-
-                        shomar_othertech++;
-
-                    }
-                }
-
-                mainf.pbRunnigTech.Value++;
-                if (mainf.pbRunnigTech.Value == 50)
-                    mainf.pbRunnigTech.Value = 0;
-
-                if (!flag_running)
-                {
-                    mainf.pbRunnigTech.Visible = false;
-
-                    mainf.xyLabel.Visible = true;
-                    flag_running = false;
-
-
-                }
-                tChart1.Update();
-            }
-        }
-
-        public void doRun(int row)
-        {
-            try
-            {
-                flag_running = true;
-
-                // ShowOnline = true;
-                string S = " ", endstr = "";
-                int i_h = 0;
-
-                int num_Buffer_Bytes = 0;
-                char[] bf = new char[sp1.ReadBufferSize];
-
-                int hh = 0;
-                if (sp1.IsOpen)
-                {
-                    while (sp1.BytesToRead < 19 && hh < 20)//////20
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                        hh++;
-
-                        if (sp1.BytesToRead >= 19) break;///////20
-                    }
-
-                    if (hh >= 20)
-                    {
-                        MessageBox.Show("device not answer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        sp1.Close();
-                        return;
-                    }
-                    sp1.Read(bf, 0, num_Buffer_Bytes = sp1.BytesToRead);
-
-
-                    //while (bf[i_h] != '$' && i_h < num_Buffer_Bytes)
-                    //    i_h++;
-                    i_h = Array.IndexOf(bf, '$', i_h);
-
-                    while (flag_running)   // || Seq_Run_Num < grdTech_RowCount - 1)    //&& num_Buffer_Bytes > 0
-                    {
-                        while (i_h < num_Buffer_Bytes)
-                        {
-                            S = bf[i_h].ToString();
-                            endstr += S;
-                            i_h++;
-                            while (bf[i_h] != '$' && i_h < num_Buffer_Bytes)
-                            {
-                                S = bf[i_h].ToString();
-                                endstr += S;
-                                i_h++;
-                            }
-                            if (i_h < num_Buffer_Bytes - 2 && bf[i_h + 2] == '$' && endstr.Length > 13)
-                            {
-                                endstr = endstr + "$#";
-                                i_h += 2;
-                            }
-
-                            if (endstr.IndexOf("END") < 0 && endstr.IndexOf("DEN") < 0)  // && endstr.length < 15
-                            {
-                                if (endstr.Length > 16)
-                                {
-                                    Calc_V_I1_I2(endstr, true, row);//گراف و دیگر
-                                    endstr = "";
-                                }
-                            }
-                            else
-                            {
-                                if (endstr.IndexOf("END") >= 0 || endstr.IndexOf("DEN") >= 0)
-                                {
-                                    if (endstr.Length > 16)
-                                    {
-                                        Calc_V_I1_I2(endstr.Substring(0, endstr.Length - 6), true, row);
-                                        endstr = "";
-                                    }
-                                    flag_running = false;
-
-                                }
-                            }
-
-
-                        }
-
-                        if (num_Buffer_Bytes >= 0 && flag_running)
-                        {
-                            hh = 0;
-                            int br = 0;
-                            if (OCP_Ok || byte.Parse(dschart1.chartlist1_run.Rows[row]["techno"].ToString()) == clasglobal.OCP2080)
-                            {
-                                br = 1;
-                            }
-                            else br = 5;
-
-                            while (sp1.BytesToRead < br && hh < 5000000) hh++;
-
-                            sp1.Read(bf, 0, num_Buffer_Bytes = sp1.BytesToRead);
-                            if (num_Buffer_Bytes == 0)
-                            {
-                                System.Threading.Thread.Sleep(Convert.ToInt16(dschart1.chartlist1_run.Rows[row]["QT"].ToString()) * 1000);
-                                hh = 1000;
-                                if (num_Buffer_Bytes == 0)
-                                {
-                                    OCP_Ok = false;
-
-                                    flag_running = false;
-                                    Chart2 = tChart1;
-                                    if (thread_grf != null)
-                                        if (thread_grf.ThreadState == ThreadState.Running)
-                                            thread_grf.Abort();
-
-                                }
-
-                            }
-                            i_h = 0;
-                        }
-                    }
-
-                }
-                else
-                    MessageBox.Show("Port not open.");
-            }
-            catch
-            {
-                
-
-            }
-        }
-
-
-        public void runf(byte rng, double cp11, double ct11, double cp12, double ct12, double cp13, double ct13, double cp14, double ct14, double cp15, double ct15)
-        {
-            this.treeView3.Nodes[0].Nodes.Clear();
             Analiz_CP1 = cp11 * 1000;
             Analiz_CP2 = cp12 * 1000;
             Analiz_CP3 = cp13 * 1000;
@@ -1934,130 +1917,12 @@ namespace Skydat.forms2080
 
             Range1 = rng;
 
-            // timer1.Enabled = true;
-            //  Init_Port();
-            if (detect_Error)
-            {
-                Setgrfnodetext(1, 4, 1);
-                return;
-            }
-            if (thread_grf.ThreadState == ThreadState.Aborted || thread_grf.ThreadState == ThreadState.Unstarted)
-            {
-                thread_grf = new Thread(Run_key);//mn
 
-                thread_grf.Start();
-            }
-            else if (thread_grf.ThreadState == ThreadState.Stopped)
-            {
-                thread_grf = new Thread(Run_key);
-
-                thread_grf.Start();
-            }
+            thread_grf = new Thread(Run_key);//mn
+            thread_grf.Start();
         }
-        delegate void Setgrftchart1Callback(bool overlaymain, int row1, int code, int state);
-        private void Setgrftchart1(bool overlaymain, int row1, int code, int state)
-        {
-            switch (code)
-            {
-                case 1:
-
-                    if (state == 1)
-                    {
-                        Setgrftchart1Callback d = new Setgrftchart1Callback(Setgrftchart1);
-                        this.Invoke(d, new object[] { overlaymain, row1, code, 2 });
-                    }
-                    else
-                    {
-                        tChart1.Titles.Clear();
-                        tChart1.Titles.Add("t1");
-                    }
-                    break;
-                case 2:
-
-                    if (state == 1)
-                    {
-                        Setgrftchart1Callback d = new Setgrftchart1Callback(Setgrftchart1);
-                        this.Invoke(d, new object[] { overlaymain, row1, code, 2 });
-                    }
-                    else
-                    {
-
-                        //int num_Series = 0;//mn
-                        int num_Series = tChart1.Series.Count - 1;
 
 
-                        Random Random1 = new Random();
-                        int Random_Color_Index = 0;
-                        Random_Color_Index = (byte)(Random1.NextDouble() * 90);
-                        //OnlineChart.Series[num_Series].Color = clasglobal.color_Graph[Random_Color_Index];
-                        tChart1.Series[num_Series].Color = Color.Red;
-
-
-                        if (!overlaymain)
-                        {
-                            tChart1.Series[num_Series].Points.Clear();
-                            //// OnlineChart.Series.Remove(OnlineChart.Series[0]);
-                            //if (OnlineChart.Series.Count > 1)                      ////mn
-                            //{
-                            //    OnlineChart.Series[1].Points.Clear();
-                            //    OnlineChart.Series.Remove(OnlineChart.Series[1]);
-                            //}
-                        }
-
-                        tChart1.Titles[0].Text = clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
-                        tChart1.ChartAreas[0].AxisY.Title = clasglobal.VAxisTitle2080[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
-                        tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle2080[int.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString())];
-
-
-
-
-                        //if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CV2080)
-                        //{
-                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
-                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = Math.Min(Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString())), double.Parse(dschart1.chartlist1_run.Rows[row1][5].ToString()));
-                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
-
-                        //}
-                        //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) <= 8 || double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.LSV2080)
-                        //{
-                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
-                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = Math.Min(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][4].ToString()));
-                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
-
-                        //}
-                        //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CPC2080)
-                        //{
-                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = Math.Max(double.Parse(dschart1.chartlist1_run.Rows[row1][3].ToString()), double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString()));
-                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
-
-
-                        //}
-                        //else if (double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CHA2080 || double.Parse(dschart1.chartlist1_run.Rows[row1][1].ToString()) == clasglobal.CHP2080 )
-                        //{
-                        //    OnlineChart.ChartAreas[0].AxisX.Maximum = double.Parse(dschart1.chartlist1_run.Rows[row1][15].ToString())  ;
-                        //    OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                        //    OnlineChart.ChartAreas[0].AxisX.Interval = Math.Round((OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum) / 10, 1);
-
-
-                        //}
-
-                    }
-                    break;
-                case 3:
-                    if (state == 1)
-                    {
-                        Setgrftchart1Callback d = new Setgrftchart1Callback(Setgrftchart1);
-                        this.Invoke(d, new object[] { overlaymain, row1, code, 2 });
-                    }
-                    else
-                    {
-                        tChart1.Series[row1].Points.Clear();
-                    }
-                    break;
-
-            }
-        }
         delegate void Setgrftchart1Callback1(Series ser1, int code, int state);
         private void Setgrftchart11(Series ser1, int code, int state)
         {
@@ -2073,9 +1938,7 @@ namespace Skydat.forms2080
                     else
                     {
                         //if (OnlineChart.Series.Count == 0)
-                        tChart1.Series.Add(ser1);
-
-                        is_set_graph = true;//mn
+                        OnlineChart.Series.Add(ser1);
                     }
                     break;
 
@@ -2095,47 +1958,13 @@ namespace Skydat.forms2080
                     }
                     else
                     {
-                        tChart1.Series[ser1].Points.AddXY(V1, I1);
+                        OnlineChart.Series[ser1].Points.AddXY(V1, I1);
                     }
                     break;
 
             }
         }
-        delegate void Setgrftchart1Callback3(int row1, Color color1, int code, int state);
-        private void Setgrftchart13(int row1, Color color1, int code, int state)
-        {
-            switch (code)
-            {
-                case 1:
 
-                    if (state == 1)
-                    {
-                        Setgrftchart1Callback3 d = new Setgrftchart1Callback3(Setgrftchart13);
-                        this.Invoke(d, new object[] { row1, color1, code, 2 });
-                    }
-                    else
-                    {
-                        tChart1.Series[0].Color = color1;
-                        // OnlineChart.Series[0].Points.Clear();
-
-                        for (int i = 0; i < shomar_othertech; i++)
-                        {
-                            if (i < tChart1.Series[0].Points.Count)
-                            {
-                                tChart1.Series[0].Points[i].XValue = othertech_val0[i];
-                                tChart1.Series[0].Points[i].YValues[0] = othertech_val3[i];
-
-                            }
-                            else
-                            {
-                                tChart1.Series[0].Points.AddXY(othertech_val0[i], othertech_val3[i]);
-                            }
-                        }
-                    }
-                    break;
-
-            }
-        }
 
         delegate void SetgrfnodeCallback(int txt, int code, int state);
         private void Setgrfnodetext(int txt, int code, int state)
@@ -2144,31 +1973,7 @@ namespace Skydat.forms2080
             {
                 switch (code)
                 {
-                    case 1:
 
-                        if (state == 1)
-                        {
-                            SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                            this.Invoke(d, new object[] { txt, code, 2 });
-                        }
-                        else
-                        {
-
-                            treeView3.Nodes[0].Nodes[txt].ForeColor = Color.Red;
-                            //this.dschart1.graphlistdata.Clear();
-                            //this.dschart1.graphlistdatashow.Clear();
-                            // mainf.toolStripStatusLabel5.Text = "";
-                            mainf.toolStripStatusLabel5.ForeColor = Color.Green;
-
-                            if (number_runing_teq > 1)
-                                mainf.toolStripStatusLabel5.Text = (show_number_runing + 1).ToString().Trim() + "_" + number_runing_teq.ToString() + " - Running technique " + treeView3.Nodes[0].Nodes[show_number_runing].Text;
-                            else
-                                mainf.toolStripStatusLabel5.Text = (show_number_runing + 1).ToString().Trim() + " - Running technique " + treeView3.Nodes[0].Nodes[show_number_runing].Text;
-
-                            //mainf.toolStripStatusLabel5.Text = (txt + 1).ToString().Trim() + "- Running technique " + treeView3.Nodes[0].Nodes[txt].Text;
-
-                        }
-                        break;
                     case 2:
                         if (state == 1)
                         {
@@ -2182,143 +1987,62 @@ namespace Skydat.forms2080
                         else
                         {
 
-                            this.treeView3.Nodes[0].Nodes[txt].ForeColor = Color.Green;
-                            label4.Text = label4.Text + "\t\t*******************\nE1:" + tChart1.Series[tChart1.Series.Count - 1].Points.FindMinByValue("X").XValue.ToString("000e-0") +
-                                "\nE2:" + tChart1.Series[tChart1.Series.Count - 1].Points.FindMaxByValue("X").XValue.ToString("000e-0") + "\nMin. I:" + tChart1.Series[tChart1.Series.Count - 1].Points.FindMinByValue("Y").YValues[0].ToString("000e-0") +
-                                "\nMax. I:" + tChart1.Series[tChart1.Series.Count - 1].Points.FindMaxByValue("Y").YValues[0].ToString("000e-0");
+                            this.tvTechniqueQueue.Nodes[0].Nodes[txt].ForeColor = Color.Green;
+                            rtbParameters.Text += "\t\t*******************\nE1:" + OnlineChart.Series[OnlineChart.Series.Count - 1].Points.FindMinByValue("X").XValue.ToString("000e-0") +
+                                "\nE2:" + OnlineChart.Series[OnlineChart.Series.Count - 1].Points.FindMaxByValue("X").XValue.ToString("000e-0") + "\nMin. I:" + OnlineChart.Series[OnlineChart.Series.Count - 1].Points.FindMinByValue("Y").YValues[0].ToString("000e-0") +
+                                "\nMax. I:" + OnlineChart.Series[OnlineChart.Series.Count - 1].Points.FindMaxByValue("Y").YValues[0].ToString("000e-0");
 
-                            DataRow dr = this.mainf.grf.dschart2.analyselist.NewRow();
-                            dr[0] = int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
-                            dr[1] = double.Parse(dschart1.chartlist1_run.Rows[txt][3].ToString());
-                            dr[2] = double.Parse(dschart1.chartlist1_run.Rows[txt][4].ToString());
-                            dr[3] = double.Parse(dschart1.chartlist1_run.Rows[txt][5].ToString());
-                            dr[4] = double.Parse(dschart1.chartlist1_run.Rows[txt][6].ToString());
-                            dr[5] = double.Parse(dschart1.chartlist1_run.Rows[txt][7].ToString());
-                            dr[6] = double.Parse(dschart1.chartlist1_run.Rows[txt][8].ToString());
-                            dr[7] = double.Parse(dschart1.chartlist1_run.Rows[txt][9].ToString());
-                            dr[8] = double.Parse(dschart1.chartlist1_run.Rows[txt][10].ToString());
-                            dr[9] = double.Parse(dschart1.chartlist1_run.Rows[txt][11].ToString());
-                            dr[10] = double.Parse(dschart1.chartlist1_run.Rows[txt][12].ToString());
-                            dr[11] = double.Parse(dschart1.chartlist1_run.Rows[txt][13].ToString());
-                            dr[12] = double.Parse(dschart1.chartlist1_run.Rows[txt][14].ToString());
-                            dr[13] = double.Parse(dschart1.chartlist1_run.Rows[txt][15].ToString());
-                            dr[14] = double.Parse(dschart1.chartlist1_run.Rows[txt][16].ToString());
-                            dr[15] = double.Parse(dschart1.chartlist1_run.Rows[txt][17].ToString());
-                            dr[16] = double.Parse(dschart1.chartlist1_run.Rows[txt][18].ToString());
-                            dr[17] = double.Parse(dschart1.chartlist1_run.Rows[txt][2].ToString());
-                            dr[18] = 0;
-                            dr[19] = dschart1.chartlist1_run.Rows[txt][19].ToString();
-                            dr[20] = double.Parse(dschart1.chartlist1_run.Rows[txt][20].ToString());
-                            dr[21] = dschart1.chartlist1_run.Rows[txt][23].ToString();
-                            dr[22] = dschart1.chartlist1_run.Rows[txt][24].ToString();
-                            this.mainf.grf.dschart2.analyselist.Rows.Add(dr);
-                            this.mainf.grf.dschart2.analyselist.AcceptChanges();
-                            int maxrana = this.mainf.grf.dschart2.analyselist.Rows.Count;
-                            this.mainf.grf.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName2080[int.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString())]);
+                            //ITechniques techPass = TechLine[txt].Clone();
+                            //techPass.Series = TechLine[txt].Series;
+                            //ITechniques tech = TechLine[txt].Clone();
+                            mainf.grf.AddTechnique(TechLine[txt]);
 
-                            //this.mainf.grf.treeView3.Nodes[0].LastNode.ForeColor = Color.Blue;
-                            double[] xval = new double[shomar_othertech];
-                            double[] yval = new double[shomar_othertech];
-
-                            //for (int countr = 0; countr < shomar_othertech; countr++)
-                            //{
-                            //    dr = this.mainf.grf.dschart2.analyselistdata.NewRow();
-                            //    dr[0] = maxrana-1;
-                            //    dr[1] = double.Parse(dschart1.graphlistdata.Rows[countr][1].ToString());
-                            //    xval[countr]=double.Parse(dr[1].ToString());
-                            //    dr[2] = double.Parse(dschart1.graphlistdata.Rows[countr][2].ToString());
-                            //    yval[countr]=double.Parse(dr[2].ToString());
-                            //    dr[3] = double.Parse(dschart1.graphlistdata.Rows[countr][3].ToString());
-                            //    dr[4] = double.Parse(dschart1.graphlistdata.Rows[countr][4].ToString());
-
-                            //    this.mainf.grf.dschart2.analyselistdata.Rows.Add(dr);
-                            //    this.mainf.grf.dschart2.analyselistdata.AcceptChanges();
-                            //}
-                            this.mainf.grf.tech = byte.Parse(dschart1.chartlist1_run.Rows[txt][1].ToString());
-                            //// this.mainf.grf.Set_Graph(0, false, true);
-                            this.mainf.grf.show_Graph(maxrana - 1, this.mainf.grf, "MainChart", othertech_val0, othertech_val3, true, (int)shomar_othertech);
-                            this.mainf.grf.treeView3.SelectedNode = this.mainf.grf.treeView3.Nodes[0].Nodes[maxrana - 1];
-                            this.mainf.grf.tChart1.Series[maxrana - 1].Enabled = false;
-                            Num_OverFlow_CPC_CA = 0;
-                            Prior_I2 = 0;
-                        }
-                        break;
-                    case 3:
-                        if (state == 1)
-                        {
-                            SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                            this.Invoke(d, new object[] { txt, code, 2 });
-                        }
-                        else
-                        {
-                            this.treeView3.Nodes[0].Nodes.Clear();
-                            for (int iii1 = 0; iii1 < dschart1.chartlist1_run.Rows.Count; iii1++)
-                            {
-                                this.treeView3.Nodes[0].Nodes.Add(clasglobal.TechName2080[int.Parse(this.dschart1.chartlist1_run.Rows[iii1][1].ToString())]);
-                            }
-
-                        }
-                        break;
-                    case 4:
-                        if (state == 1)
-                        {
-                            SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                            this.Invoke(d, new object[] { txt, code, 2 });
-                        }
-                        else
-                        {
-                            this.mainf.stf.runToolStripMenuItem1.Enabled = true;
-                            this.mainf.stf.tsbRun.Enabled = true;
-                        }
-                        break;
-
-                    case 5:
-                        if (state == 1)
-                        {
-                            SetgrfnodeCallback d = new SetgrfnodeCallback(Setgrfnodetext);
-                            this.Invoke(d, new object[] { txt, code, 2 });
-                        }
-                        else
-                        {
-                            tChart1.Series[tChart1.Series.Count - 1].Points.Clear();
-                            for (int i = 0; i < shomar_othertech; i++)
-                            {
-                                tChart1.Series[tChart1.Series.Count - 1].Points.AddXY(othertech_val0[i], othertech_val3[i]);
-
-                                if (int.Parse(dschart1.chartlist1_run.Rows[tecnic_row_for_label_text_ocp][1].ToString()) == clasglobal.OCP2080)//mn
-                                {
-                                    int time_text = i;
-                                    this.tChart1.Series[tChart1.Series.Count - 1].Points[time_text].AxisLabel = (time_text + 1).ToString();
-                                }
-                            }
                         }
                         break;
                 }
             }
             catch { }
         }
-        delegate void Setfilllablecallback(string txt, int code, int state);
-        private void Setfilllable(string txt, int code, int state)
+
+        private void Setfilllable(string txt, string title = "log")
         {
-            switch (code)
+            if (this.InvokeRequired)
             {
-                case 1:
+                this.BeginInvoke(new Action<string, string>(Setfilllable), txt, title);
+                return;
+            }
 
-                    if (state == 1)
-                    {
-                        Setfilllablecallback d = new Setfilllablecallback(Setfilllable);
-                        this.Invoke(d, new object[] { txt, code, 2 });
-                    }
-                    else
-                    {
+            Color color;
 
-                        label1.Text = txt + Environment.NewLine + label1.Text.Trim();
-
-                    }
+            switch (title.ToLowerInvariant())
+            {
+                case "warning":
+                    color = Color.Yellow;
                     break;
 
+                case "error":
+                    color = Color.Red;
+                    break;
+
+                case "sucses":
+                    color = Color.Green;
+                    break;
+
+                case "log":
+                    color = Color.White;
+                    break;
+
+                default:
+                    color = Color.Gray;
+                    break;
             }
+
+            clasglobal.AppendText(
+                rtbLogger,
+                txt + Environment.NewLine,
+                color);
         }
+
         delegate void SetgrfselectnodeCallback(int row, int code, int state);
         private void Setgrfnodeselect(int row, int code, int state)
         {
@@ -2333,7 +2057,7 @@ namespace Skydat.forms2080
                     }
                     else
                     {
-                        this.treeView3.SelectedNode = this.treeView3.Nodes[0].Nodes[row];
+                        this.tvTechniqueQueue.SelectedNode = this.tvTechniqueQueue.Nodes[0].Nodes[row];
                     }
                     break;
                 case 2:
@@ -2344,7 +2068,7 @@ namespace Skydat.forms2080
                     }
                     else
                     {
-                        tChart1.Refresh();
+                        OnlineChart.Refresh();
                     }
                     break;
 
@@ -2365,12 +2089,13 @@ namespace Skydat.forms2080
                     }
                     else
                     {
-                        //this.mainf.stf.tsbRun.Enabled = false;
-                        this.mainf.stf.tsbNew.Enabled = false;
-                        mainf.stf.runToolStripMenuItem1.Enabled = false;
-                        //tsbhold.Enabled = true;
-                        tsbstop.Enabled = true;
-                        mainf.pbRunnigTech.Visible = true;
+                        mainf.stf.tsbRun.Enabled = bl;
+                        mainf.stf.tsbNew.Enabled = bl;
+                        mainf.stf.runToolStripMenuItem1.Enabled = bl;
+                        tsbhold.Enabled = !bl;
+                        tsbstop.Enabled = !bl;
+
+                        //mainf.pbRunnigTech.Visible = !bl;
                     }
                     break;
                 case 2:
@@ -2402,6 +2127,7 @@ namespace Skydat.forms2080
 
             }
         }
+
         delegate void SetvisibleCallback(bool bl, int code, int state);
         private void Setvisibleitem(bool bl, int code, int state)
         {
@@ -2428,299 +2154,45 @@ namespace Skydat.forms2080
                     break;
             }
         }
-        delegate void SetcheckedCallback(bool bl, int code, int state);
-        private void Setcheckeditem(bool bl, int code, int state)
+
+        private void itemSmothState_Click(object sender, EventArgs e)
         {
-            switch (code)
+            if (itemSmothState.Checked)
             {
-                case 1:
-
-                    if (state == 1)
-                    {
-                        SetenabledCallback d = new SetenabledCallback(Setbtnenabled);
-                        this.Invoke(d, new object[] { bl, code, 2 });
-                    }
-                    else
-                    {
-                        //cbOverlay.Checked = bl;
-                    }
-                    break;
-            }
-        }
-        private void Set_value(int row)
-        {
-            //EquilibriumTime = 0;
-            //OCP_Timer = 0;
-            detect_Error = false;
-            try
-            {
-                if (!sp1.IsOpen)
-                {
-                    sp1.Open();
-                }
-                switch (int.Parse(dschart1.chartlist1_run.Rows[row]["techno"].ToString()))
-                {
-
-                    case clasglobal.NPV2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E2"].ToString()), -5, 5, E2, 1000, "E2(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["SR"].ToString()), 0.0001, 0.25, SR, 1, "Scan Rate(V/S)", "V/S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["HS"].ToString()), 0.001, 0.025, HS, 1000, "HStep(mV)", "mV");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()), 0.1, 10, TS, 10000, "TStep(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["PW"].ToString()), 0.05, double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()) - 0.05, PulsWidth, 1000, "Pulse Width(S)", "S");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-                        break;
-                    case clasglobal.DPV2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E2"].ToString()), -5, 5, E2, 1000, "E2(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["SR"].ToString()), 0.0001, 0.25, SR, 1, "Scan Rate(V/S)", "V/S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["HS"].ToString()), 0.001, 0.025, HS, 1000, "HStep(mV)", "mV");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()), 0.1, 10, TS, 10000, "TStep(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["PW"].ToString()), 0.05, double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()) - 0.05, PulsWidth, 1000, "Pulse Width(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["PH"].ToString()), 0.001, 0.25, PulsHeight, 1000, "Pulse Height(mV)", "mV");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-
-                        break;
-                    case clasglobal.SWV2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E2"].ToString()), -5, 5, E2, 1000, "E2(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["SR"].ToString()), 0.001, 25, SR, 1, "Scan Rate(V/S)", "V/S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["HS"].ToString()), 0.001, 0.025, HS, 1000, "HStep(mV)", "mV");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["FR"].ToString()), 1, 1000, frequency, 1, "Frequency(Hz)", "Hz");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["PH"].ToString()), 0.001, 0.25, PulsHeight, 1000, "Pulse Height(mV)", "mV");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-                        break;
-                    case clasglobal.CV2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E2"].ToString()), -5, 5, E2, 1000, "E2(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E3"].ToString()), -5, 5, E3, 1000, "E3(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["SR"].ToString()), 0.0001, 250, SR, 1, "Scan Rate(V/S)", "V/S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["HS"].ToString()), 0.001, 0.025, HS, 1000, "HStep(mV)", "mV");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()), 0.0001, 10, TS, 10000, "TStep(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-
-                        break;
-                    case clasglobal.LSV2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E2"].ToString()), -5, 5, E2, 1000, "E2(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["SR"].ToString()), 0.0001, 250, SR, 1, "Scan Rate(V/S)", "V/S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["HS"].ToString()), 0.001, 0.025, HS, 1000, "HStep(mV)", "mV");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["TS"].ToString()), 0.0001, 10, TS, 10000, "TStep(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-                        break;
-
-                    case clasglobal.OCP2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["T1"].ToString()), 1, 65000, TS, 1, "T1(S)", "S");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle(s)", "");
-
-                        break;
-                    case clasglobal.CPC2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["T1"].ToString()), 0, 65000, TS, 1, "Time(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle", "");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-                        break;
-
-                    case clasglobal.CHA2080:
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["E1"].ToString()), -5, 5, E1, 1000, "E1(V)", "V");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["T1"].ToString()), 1, 65000, TS, 1, "Time(S)", "S");
-                        set_complete_Comm(double.Parse(dschart1.chartlist1_run.Rows[row]["QT"].ToString()), 0, 2000, QT, 1, "Equilibrium Time(S)", "S");
-                        set_complete_Comm((double)Range1, 0, 6, Current_Range, 1, "Current Range", "");
-                        set_complete_Comm(1, 1, 1000, CY, 1, "Cycle", "");
-                        if (dschart1.chartlist1_run.Rows[row]["vs_OCP"].ToString() == "True")
-                        {
-                            Set_Command(vs_OCP, 1);
-                            if (double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) >= 1 && double.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()) <= 65000)
-                            {
-                                Set_Command(OCP_Meas, int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString()));
-                                OCP_Timer = (int)int.Parse(dschart1.chartlist1_run.Rows[row]["OCPmeas"].ToString());
-                                OCP_Ok = true;
-                            }
-                            else
-                                showError("OCP measurment(S)", "0", "65000");
-                        }
-                        else
-                        {
-                            Set_Command(vs_OCP, 0);
-                            Set_Command(OCP_Meas, 0);
-                            OCP_Timer = 0;
-                            OCP_Ok = false;
-                        }
-                        break;
-
-
-                    default: break;
-                }
-                if (row == 0)
-                {
-                    Set_Command(CP1, (int)Analiz_CP1);
-                    Set_Command(CP2, (int)Analiz_CP2);
-                    Set_Command(CP3, (int)Analiz_CP3);
-                    Set_Command(CP4, (int)Analiz_CP4);
-                    Set_Command(CP5, (int)Analiz_CP5);
-                    Set_Command(CT1, (int)Analiz_CT1);
-                    Set_Command(CT2, (int)Analiz_CT2);
-                    Set_Command(CT3, (int)Analiz_CT3);
-                    Set_Command(CT4, (int)Analiz_CT4);
-                    Set_Command(CT5, (int)Analiz_CT5);
-                    //Sum_CTn = Analiz_CT1 + Analiz_CT2 + Analiz_CT3 + Analiz_CT4 + Analiz_CT5;
-                    //Sum_CTn = Math.Round(Sum_CTn);
-                    //CP_Ok = true;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                detect_Error = true;
-
-            }
-        }
-        private void showError(string err, string val1, string val2)
-        {
-            if (showMessageError)
-                MessageBox.Show("Invalid Value of '" + err + "'" + (char)13 + "Value Must between '" + val1 + "' And '" + val2 + "'", "Parameter error");
-            detect_Error = true;
-        }
-        private double set_complete_Comm(double X, double Min, double Max, byte Comm, int Zarib, string strVal, string Unit_)
-        {
-            if (X >= Min && X <= Max)
-            {
-                Set_Command(Comm, (int)(X * Zarib));
-                //if (Comm == 3) E1_Input = X;
-                //if (Comm == 4) E2_Input = X;
+                smothState = true;
             }
             else
             {
-                showError(strVal, Min.ToString() + Unit_, Max.ToString() + Unit_);
-                X = Min;
+                smothState = false;
             }
-            return X;
+        }
+
+        private void tsbhold_Click(object sender, EventArgs e)
+        {
+            //ToolBarButton btn = sender as ToolBarButton;
+            if (tsbhold.Text == "Pause")// حالت Pause
+            {
+                byte[] buufer = new byte[] { 32, 1, 2, 2 };
+                sp1.Write(buufer, 0, 4);
+                tsbhold.Text = "Countinue";
+                tsbhold.Image = Properties.Resources.Play_icon;
+                tsbstop.Enabled = false;
+                mainf.toolStripStatusLabel5.Text = "Pause";
+
+                SerialState = "Pause";
+            }
+            else if (tsbhold.Text == "Countinue")//حالت continue
+            {
+                byte[] buufer = new byte[] { 32, 1, 1, 1 };
+                sp1.Write(buufer, 0, 4);
+                tsbhold.Text = "Pause";
+                tsbhold.Image = Properties.Resources.Pause_icon;
+                tsbstop.Enabled = true;
+                mainf.toolStripStatusLabel5.Text = "Run";
+
+                SerialState = "Run";
+            }
+
         }
 
 
@@ -2728,36 +2200,21 @@ namespace Skydat.forms2080
         {
             try
             {
-                //Set_Command(Run, 2);
-                //Set_Command(Multirun_Delay, -2);
-                System.Threading.Thread.Sleep(500);
-                sp1.DiscardInBuffer();
-                sp1.DiscardOutBuffer();
-                flag_running = false;
+                byte[] buufer = new byte[] { 32, 1, 3, 3 };
+                if (sp1.IsOpen)
+                    sp1.Write(buufer, 0, 4);
+                Setbtnenabled(true, 1, 1);
+                EndTechFlag = true;
+                StopFlag = true;
+                mainf.toolStripStatusLabel5.Text = "Stop";
 
+                SerialState = "Stop";
 
-                for (int count1 = 0; count1 < treeView3.Nodes[0].Nodes.Count; count1++)
-                {
-                    if (treeView3.Nodes[0].Nodes[count1].ForeColor == Color.Red)
-                    {
-                        //transferdata(count1);
-                        //smootht4(tecnic_row_for_label_text_ocp);
-                        // shomartime = 0;
-                        Setgrfnodetext(count1, 2, 1);
-                        Setbtnenabled(true, 2, 1);
-                        //shomar_othertech = 0;
-                        //Array.Clear(othertech_val0, 0, othertech_val0.Length);
-                        //Array.Clear(othertech_val1, 0, othertech_val1.Length);
-                        //Array.Clear(othertech_val2, 0, othertech_val2.Length);
-                        //Array.Clear(othertech_val3, 0, othertech_val3.Length);
-                        //timer1.Stop();
-                    }
-
-                }
-
-                thread_grf.Abort();
             }
-            catch { }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
@@ -2767,7 +2224,7 @@ namespace Skydat.forms2080
             try
             {
 
-                var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                var results11 = OnlineChart.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
                 foreach (var result in results11)
                 {
                     if (result.ChartElementType == ChartElementType.PlottingArea)
@@ -2776,33 +2233,33 @@ namespace Skydat.forms2080
                         switch (statebutton)
                         {
                             case "selectview":
-                                tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
+                                OnlineChart.Cursor = System.Windows.Forms.Cursors.Cross;
 
                                 break;
                             case "selectonly":
-                                tChart1.Cursor = System.Windows.Forms.Cursors.Cross;
+                                OnlineChart.Cursor = System.Windows.Forms.Cursors.Cross;
                                 break;
                             case "showvalue":
-                                tChart1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+                                OnlineChart.Cursor = System.Windows.Forms.Cursors.SizeAll;
 
                                 break;
                             case "zoomin":
 
-                                tChart1.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.zoomin);
+                                OnlineChart.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.zoomin);
 
                                 break;
                             case "zoomout":
-                                tChart1.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.Zoomout);
+                                OnlineChart.Cursor = LoadCursorFromResource(Skydat.Properties.Resources.Zoomout);
 
                                 break;
                             default:
-                                tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+                                OnlineChart.Cursor = System.Windows.Forms.Cursors.Default;
                                 break;
                         }
 
                     }
                     else
-                        tChart1.Cursor = System.Windows.Forms.Cursors.Default;
+                        OnlineChart.Cursor = System.Windows.Forms.Cursors.Default;
 
 
                 }
@@ -2840,12 +2297,12 @@ namespace Skydat.forms2080
                     //    break;
                     case "selectonly":
                         Point mousePoint = new Point(e.X, e.Y);
-                        tChart1.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
-                        tChart1.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
+                        OnlineChart.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, false);
+                        OnlineChart.ChartAreas[0].CursorY.SetCursorPixelPosition(mousePoint, false);
 
                         break;
                     case "showvalue":
-                        var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                        var results12 = OnlineChart.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
                         double x111 = 0, y111 = 0;
                         foreach (var result in results12)
                         {
@@ -2856,146 +2313,15 @@ namespace Skydat.forms2080
                                 y111 = result.ChartArea.AxisY.PixelPositionToValue(e.Y);
                             }
                         }
-                        mainf.xyLabel.Text = x111.ToString("#.##") + "," + y111.ToString("#.#e-0");
+                        mainf.xyLabel.Text = x111.ToString("#.##") + " | " + y111.ToString("#.#e-0");
 
                         break;
                 }
 
             }
-            catch (Exception ex) { errors_cls err = new errors_cls(ex, label4, 2); }
+            catch (Exception ex) { errors_cls err = new errors_cls(ex, rtbParameters, 2); }
 
 
-        }
-
-        private void Set_Command(byte comm, int val)
-        {
-            byte[] buf = new byte[18];
-            string s = "";
-            try
-            {
-                if (!sp1.IsOpen)
-                {
-                    sp1.Open();
-                }
-
-                if (sp1.IsOpen)
-                {
-                    if (val >= 0)
-                    {
-                        buf[3] = 43;
-                        s = val.ToString();
-                    }
-                    else
-                    {
-                        buf[3] = 45;
-                        s = Math.Abs(val).ToString();
-                    }
-
-                    buf[0] = 35; buf[1] = comm; buf[2] = 36;  //0.7
-                    for (int i = 0; i < s.Length; i++) buf[4 + i] = (byte)(Convert.ToByte(s[i]) - 48);
-                    for (int i = 0; i < 6 - s.Length; i++) buf[4 + s.Length + i] = 61;
-                    // buf[3 + s.Length] = 37;
-                    // sp1.Write(buf, 0, 4 + s.Length);
-                    buf[10] = 37;
-                    sp1.Write(buf, 0, 11);
-
-
-
-                    //string result = System.Text.Encoding.UTF8.GetString(buf);
-                    //MessageBox.Show(result);
-
-
-                    try
-                    {
-                        int ii = 0;
-                        while (sp1.BytesToRead < 1 && ii < 100000) ii++;
-                        int num_r = 2;
-                        if (comm == 33 || comm == 38 || comm == 36) num_r = 2;
-                        else num_r = 3;
-                        if (sp1.BytesToRead <= num_r)
-                            sp1.Read(buf, 0, sp1.BytesToRead);
-                        else
-                            sp1.Read(buf, 0, num_r);
-                    }
-                    catch { }
-
-                    /*
-                    }
-                    else
-                    {
-                        buf[0] = 35; buf[1] = comm; buf[2] = 36; buf[3] = 45;
-                        s = Math.Abs(val).ToString();
-                        for (int i = 0; i < s.Length; i++)
-                            buf[4 + i] = (byte)(Convert.ToByte(s[i]) - 48);
-                        buf[4 + s.Length] = 37;
-                        sp1.Write(buf, 0, 5 + s.Length);
-                    }
-                   */
-                }
-            }
-            catch
-            {
-
-                throw;
-            }
-        }
-        //private int shomartime=0;
-        //private void timer1_Tick(object sender, EventArgs e)
-        //{
-        //    shomartime++;
-        //    if(!(this.mainf==null))
-        //        switch (shomartime % 3)
-        //        {
-        //            case 0:
-        //                this.mainf.toolStripStatusLabel1.ForeColor = Color.Red;
-        //                break;
-        //            case 1:
-        //                this.mainf.toolStripStatusLabel1.ForeColor = Color.Blue;
-        //                break;
-        //            case 2 :
-        //                this.mainf.toolStripStatusLabel1.ForeColor = Color.Green;
-        //                break;
-        //        }
-        //    this.mainf.toolStripStatusLabel1.Text ="Elapsed Time(s)= "+ shomartime;
-
-
-        //}
-
-        private void tsbsave_Click(object sender, EventArgs e)
-        {
-            //    try
-            //    {          
-            //            if (shomar_othertech == 0)
-            //            {
-
-            //                MessageBox.Show("data not exists!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return;
-            //            }
-            //            SaveFileDialog sfd1 = new SaveFileDialog();
-            //            sfd1.AddExtension = true;
-            //            sfd1.DefaultExt = "txt";
-            //            sfd1.Filter = "Text document(*.txt)|*.txt";
-            //            if (sfd1.ShowDialog() == DialogResult.OK)
-            //            {
-
-            //                StreamWriter Fl = new StreamWriter(sfd1.FileName, false, Encoding.ASCII);
-
-            //                Fl.WriteLine("---------------------------------------------------");
-            //                Fl.WriteLine("row number      X value         Y value");
-            //                Fl.WriteLine("---------------------------------------------------");
-
-            //                for (int cc1 = 0; cc1 < shomar_othertech; cc1++)
-            //                {
-            //                    Fl.WriteLine((cc1 + 1).ToString().Trim() + "\t\t" + othertech_val0[cc1].ToString().Trim() + "\t\t" + othertech_val1[cc1].ToString().Trim());
-            //                }
-            //                Fl.Close();
-            //            }
-            //}
-
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //    }
         }
 
         private void tsbshowd_Click(object sender, EventArgs e)
@@ -3003,9 +2329,9 @@ namespace Skydat.forms2080
             forms2065.frmshowdata frm = new forms2065.frmshowdata();
             frm.listView1.Items.Clear();
 
-            for (int i = 0; i < tChart1.Series["test"].Points.Count; i++)
+            for (int i = 0; i < OnlineChart.Series["live"].Points.Count; i++)
             {
-                frm.listView1.Items.Add(tChart1.Series["test"].Points[i].XValue + "          " + tChart1.Series["test"].Points[i].YValues[0].ToString());
+                frm.listView1.Items.Add((i + 1) + "          " + OnlineChart.Series["live"].Points[i].XValue + "          " + OnlineChart.Series["live"].Points[i].YValues[0].ToString());
             }
 
             //int r = tChart1.Series.Count -1;
@@ -3030,25 +2356,19 @@ namespace Skydat.forms2080
         private void selectpchart_func(bool state)
         {
 
-            tChart1.ChartAreas[0].CursorX.IsUserEnabled = state;
-            tChart1.ChartAreas[0].CursorY.IsUserEnabled = state;
-            tChart1.ChartAreas[0].CursorX.IsUserSelectionEnabled = state;
-            tChart1.ChartAreas[0].CursorY.IsUserSelectionEnabled = state;
+            OnlineChart.ChartAreas[0].CursorX.IsUserEnabled = state;
+            OnlineChart.ChartAreas[0].CursorY.IsUserEnabled = state;
+            OnlineChart.ChartAreas[0].CursorX.IsUserSelectionEnabled = state;
+            OnlineChart.ChartAreas[0].CursorY.IsUserSelectionEnabled = state;
             if (state)
             {
-                tChart1.ChartAreas[0].CursorX.LineWidth = 1;
-                tChart1.ChartAreas[0].CursorY.LineWidth = 1;
-
-
-
+                OnlineChart.ChartAreas[0].CursorX.LineWidth = 1;
+                OnlineChart.ChartAreas[0].CursorY.LineWidth = 1;
             }
             else
             {
-                tChart1.ChartAreas[0].CursorX.LineWidth = 0;
-                tChart1.ChartAreas[0].CursorY.LineWidth = 0;
-
-
-
+                OnlineChart.ChartAreas[0].CursorX.LineWidth = 0;
+                OnlineChart.ChartAreas[0].CursorY.LineWidth = 0;
             }
         }
 
@@ -3093,18 +2413,18 @@ namespace Skydat.forms2080
         {
             statebutton = "";
             selectpchart_func(false);
-            this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled;
-            this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled;
+            this.OnlineChart.ChartAreas[0].AxisX.MajorGrid.Enabled = !this.OnlineChart.ChartAreas[0].AxisX.MajorGrid.Enabled;
+            this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.Enabled = !this.OnlineChart.ChartAreas[0].AxisY.MajorGrid.Enabled;
         }
 
         private void btnshowaxes_Click(object sender, EventArgs e)
         {
             statebutton = "";
             selectpchart_func(false);
-            tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisX.LabelStyle.Enabled;
-            tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisX.MajorTickMark.Enabled;
-            tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled = !tChart1.ChartAreas[0].AxisY.LabelStyle.Enabled;
-            tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled = !tChart1.ChartAreas[0].AxisY.MajorTickMark.Enabled;
+            OnlineChart.ChartAreas[0].AxisX.LabelStyle.Enabled = !OnlineChart.ChartAreas[0].AxisX.LabelStyle.Enabled;
+            OnlineChart.ChartAreas[0].AxisX.MajorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisX.MajorTickMark.Enabled;
+            OnlineChart.ChartAreas[0].AxisY.LabelStyle.Enabled = !OnlineChart.ChartAreas[0].AxisY.LabelStyle.Enabled;
+            OnlineChart.ChartAreas[0].AxisY.MajorTickMark.Enabled = !OnlineChart.ChartAreas[0].AxisY.MajorTickMark.Enabled;
         }
 
         private void tChart1_MouseUp(object sender, MouseEventArgs e)
@@ -3112,38 +2432,39 @@ namespace Skydat.forms2080
             switch (statebutton)
             {
                 case "zoomin":
-                    var results11 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                    var results11 = OnlineChart.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
                     foreach (var result in results11)
                     {
                         if (result.ChartElementType == ChartElementType.PlottingArea)
                         {
-                            this.tChart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-                            double xMin = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
-                            double xMax = tChart1.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
-                            double yMin = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
-                            double yMax = tChart1.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
-                            double posXStart = (tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - xMin) / 1.1;
-                            double posXFinish = (tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + xMax) / 1.1;
-                            double posYStart = (tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - yMin) / 1.1;
-                            double posYFinish = (tChart1.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + yMax) / 1.1;
+                            this.OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                            double xMin = OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+                            double xMax = OnlineChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
+                            double yMin = OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                            double yMax = OnlineChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
+                            double posXStart = (OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - xMin) / 1.1;
+                            double posXFinish = (OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + xMax) / 1.1;
+                            double posYStart = (OnlineChart.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - yMin) / 1.1;
+                            double posYFinish = (OnlineChart.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + yMax) / 1.1;
 
-                            tChart1.ChartAreas[0].AxisX.ScaleView.Zoom(tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - posXStart, tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + posXFinish, DateTimeIntervalType.Auto, true);
-                            tChart1.ChartAreas[0].AxisY.ScaleView.Zoom(tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) - posYStart, tChart1.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) + posYFinish, DateTimeIntervalType.Auto, true);
+                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - posXStart, OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + posXFinish, DateTimeIntervalType.Auto, true);
+                            OnlineChart.ChartAreas[0].AxisY.ScaleView.Zoom(OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) - posYStart, OnlineChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.Y) + posYFinish, DateTimeIntervalType.Auto, true);
 
                             //OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(xMin, 0.95 * xMax, DateTimeIntervalType.Auto, true);
                             //OnlineChart.ChartAreas[0].AxisY.ScaleView.Zoom(yMin, 0.95 * yMax, DateTimeIntervalType.Auto, true);
                         }
                     }
                     break;
+
                 case "zoomout":
-                    var results12 = tChart1.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
+                    var results12 = OnlineChart.HitTest(e.X, e.Y, false, ChartElementType.PlottingArea);
                     foreach (var result in results12)
                     {
                         if (result.ChartElementType == ChartElementType.PlottingArea)
                         {
-                            this.tChart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-                            tChart1.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
-                            tChart1.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
+                            this.OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+                            OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(1);
+                            OnlineChart.ChartAreas[0].AxisY.ScaleView.ZoomReset(1);
 
                         }
                     }
@@ -3151,29 +2472,543 @@ namespace Skydat.forms2080
             }
         }
 
+        private void DoRun2(ITechniques tech, double E1, double E2, double Hstep, SerialPort mainSerialPort, byte StepRange=0)
+        {
+            byte[] data = new byte[3];//دیتا گرفته شده از دستگاه به این ارایه منتقل میشود
+            Int64 j = 0, h = 0;
+            bool evn = true, TechniqueEnded = false;
+            byte[] Powr = new Byte[4000000];
+            double[] Crnt = new double[4000000];
+            double[] C = new double[4000000];
+            List<byte> Po = new List<byte>();
+            double[] Crn = new double[4000000];
+            Boolean[] signe = new Boolean[4000000];
+            int sign = 0;
+            int i = 0;
+            double Itot = 0;
+            double V = 0, I1 = 0, I2 = 0, Vold;
+            int SerialReadError = 0;
+
+            int averagelength = 3;
+            double[] Online_filter = new double[averagelength];
+            double[] Vold_arrey = new double[averagelength];
+            double[] I1_arrey = new double[averagelength];
+            double[] I2_arrey = new double[averagelength];
+            double[] I1_buffer = new double[2];
+
+            //داده های مرتبط با پارمتر های تکنیک
+            int TechNumber = tech.Number;
 
 
-        //private void sp1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        //{
-        //    char[] buff = new char[sp1.ReadBufferSize];
-        //    sp1.Read(buff, 0, sp1.ReadBufferSize);
-        //    string str=new string(buff);
-        //    MessageBox.Show(str);
-        //}
-
-        //private void sp1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        //{
-        //    //byte[] buff=new byte[sp1.ReadBufferSize];
-        //    //sp1.Read(buff,0,sp1.ReadBufferSize);
-        //}
+            double ti = 0;
+            bool S_et = true, pulsy = false, fst = false;
+            bool ngtv = false, N_gtv;
+            if (E1 < E2)
+            {
+                N_gtv = false;
+            }
+            else
+            {
+                N_gtv = true;
+            }
 
 
+            if (tech.Name == "NPV")
+            {
+                S_et = false;
+            }
+            else if (tech.Name == "DPV")
+            {
+                pulsy = true;
+                ngtv =! N_gtv;
+                S_et = false;
+            }
+            else if(tech.Name == "SWV")
+            {
+                pulsy = true;
+                ngtv = N_gtv;
+            }
+
+
+            // اینوکر برای اینکه تابعی که در ترد(اصلی) دیگری اجرا می‌شود را به صورت متغییر فراخوانی کنیم
+            this.Invoke(new Action(() =>
+            {
+                OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset(0);
+                mainSerialPort.ReadTimeout = Timeout.Infinite;
+                mainSerialPort.DiscardInBuffer();
+                OnlineChart.ChartAreas[0].AxisX.LabelStyle.Format = "#0.##";
+            }));
+
+            bool tafel_flag = false;
+            if (TechNumber == 18)
+            {
+                TechNumber = 5;
+                tafel_flag = true;
+            }
+
+            if (TechNumber < 8)   // if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps
+                V = E1;// e1 
+            else if (TechNumber == 9)//فقط برای تکنیک CPC
+                V = ti;
+            Vold = V;
+
+            flag_running = true;
+
+            if (!mainSerialPort.IsOpen)
+                mainSerialPort.Open();
+
+
+            try
+            {
+                while (!EndTechFlag)
+                {
+                    data = ReadSerialData(out TechniqueEnded, ref sign, mainSerialPort);
+                    if (data == null)
+                    {
+                        Setfilllable("داده های دریافتی از دستگاه خالی هستند و احتمالا دستگاه دچار مشکل شده", "log");
+
+                        SerialReadError++;
+                    }
+                    else if (data.SequenceEqual(new byte[] { 000, 222, 111 }))
+                    {
+                        if (!string.Equals(SerialState, "Stop", StringComparison.OrdinalIgnoreCase))
+                            MessageBox.Show("تکنیک به درستی اجرا نمیشود");
+                        return;
+                    }
+
+                    if (fst) //اگر Tstep از 50 میلی ثانیه کمتر شود 
+                    {
+                        Powr[j] = data[0];//SAVE IN BUFFER 
+                        Crnt[j] = ((data[1] << 6) | (data[2] >> 2)); //???
+
+                        if (Crnt[j] > 0x1FFF)//0x1fff = 8191 
+                        {
+                            Crnt[j] = (0x4000 - Crnt[j]);//16384 - current ->negative current
+                            signe[j] = true;
+                        }
+                        else
+                            signe[j] = false;
+
+                        if (StepRange != 0)//ApplyRangeLimitations
+                            if ((TechNumber < 8) && (Crnt[j] > 6560))//if techno dcv,npv,dpv,swv,cv,lsv,dcs,dps && current >6560
+                                Crnt[j] = 6560;//current 6560
+                        if ((TechNumber == 9) && (Powr[j] == 8)) //if tecno cpc or ccc
+                            Crnt[j] = Crnt[j] * 2; //current upto 1A
+                    }
+                    else
+                    {
+                        Po.Add(data[0]);//save power in arry po
+                        Crn[h] = ((data[1] << 6) | (data[2] >> 2));
+                        if (Crn[h] > 0x1FFF)
+                        {
+                            Crn[h] = (0x4000 - Crn[h]);
+                            Crn[h] = Crn[h] * -1;
+                        }
+
+                        h++;
+                        if (h == 5)
+                        {
+                            i++;
+
+                            double sum = (Crn[0] * Math.Pow(10, Po[0] - Po[4]) + Crn[1] * Math.Pow(10, Po[1] - Po[4]) + Crn[2] * Math.Pow(10, Po[2] - Po[4]) + Crn[3] * Math.Pow(10, Po[3] - Po[4]) + Crn[4]);
+                            Itot = sum / 5;
+
+                            Powr[j] = Po[4];
+                            Crnt[j] = Math.Round(Itot, 2);
+                            if (Crnt[j] > 6560)
+                            {
+                                Crnt[j] = Crnt[j] / 10;
+                                Powr[j]++;
+                            }
+                            if (Crnt[j] < 0)
+                            {
+                                Crnt[j] = Crnt[j] * -1;
+                                signe[j] = true;
+                            }
+                            else
+                                signe[j] = false;
+                            S_et = true;
+                        }
+                    }
+
+                    if (S_et) //if s_et ==true ??   ->for tecno cpc
+                    {
+                        if ((Powr[j] == 8) && (TechNumber != 9))
+                        {//techno <8 and >9
+
+                            C[j] = Crnt[j] * 1.02207 * Math.Pow(10, Powr[j]);/////// - 6
+                        }
+                        else
+                        {
+                            C[j] = Crnt[j] * 0.61035 * Math.Pow(10, Powr[j] - 6); ////- 6  -> for cpc
+                                                                                  //Settxtfill_func(2, $"flag1={C[j]},range{Powr[j]} ", 2, 1);
+                        }
+                        if (signe[j] ^ (TechNumber == 10))
+                            C[j] = C[j] * -1;
+
+                        if (TechNumber < 8)//if techno == dcv,npv,dpv,swv,cv,lsv,dcs,dps,
+                        {
+                            //////mn////////////if (Xinv)
+                            //////mn////////////    C[j] = C[j] * -1;//در گراف سی وی اگر ولتاژ از بزرگ به کوچک برود جریان را منفی نمی کند
+
+                            if (pulsy) //if pulsy ==true
+                            {
+                                if ((TechNumber == 2) || (TechNumber == 1) || (TechNumber == 7))
+                                {
+
+                                    if (!evn)//
+                                    {
+                                        if (ngtv) //if ngtv == true
+                                        {
+                                            I1 = C[j];
+                                            I2 = C[j - 1];
+                                        }
+                                        else  ////if ngtv == false
+                                        {
+                                            I1 = C[j];
+                                            I2 = C[j - 1];
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    if (!evn)//
+                                    {
+                                        if (ngtv) //if ngtv == true
+                                        {
+                                            I1 = C[j - 1];
+                                            I2 = C[j];
+                                        }
+                                        else  ////if ngtv == false
+                                        {
+                                            I2 = C[j];
+                                            I1 = C[j - 1];
+                                        }
+                                    }
+                                }
+
+                            }
+                            else//if pulsy == false
+                            {
+                                I1 = C[j];
+                                I2 = 0;
+                            }
+
+                            int numdigit = Hstep.ToString("0.############################")
+                                                .Split('.')[1]
+                                                .Length;// calculate digit number in of heght step
+
+                            if (!(pulsy && evn))
+                                if (N_gtv)
+                                {
+                                    Vold = V;
+                                    V = Math.Round(V - Hstep, numdigit);
+                                }
+                                else
+                                {
+                                    Vold = V;
+                                    V = Math.Round(V + Hstep, numdigit);
+                                }
+
+                            if (!fst)
+                            {
+                                h = 0;
+                                Po.Clear();
+                                S_et = false;
+                            }
+
+                            j++;
+                            evn = !evn;
+
+                        }
+                        else
+                        {
+                            //techno ccc,cpc,chp,cha,chc
+
+                            if (TechNumber == 12)//if techno ==chc
+                                I1 = I1 + C[j] * ti;
+                            else//techno ...
+                                I1 = C[j]; // Addxy(V1,C[j],'',Colr[cl]);
+                            I2 = 0;
+                            Vold = V;
+                            V += ti;
+                            j++;
+                        }
+
+                        if (pulsy)
+                        {
+                            if (evn)
+                            {
+
+                                Runnig2(Vold, I1, I2);///// رسم گراف اصلی
+
+                                if (DebugMode || Maintenance)//for monitoring purpse
+                                {
+                                    Setfilllable($"{Vold}:{I1}:{I2} ", "log");
+                                    Setfilllable($"vold1{Vold} ", "log");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (tafel_flag)
+                            {
+                                if (I1 == 0)
+                                    I1 = 0.0001; // جلوگیری از خطای لگاریتم
+
+                                double logI = Math.Log10(Math.Abs(I1));
+
+                                Runnig2(Vold, logI, I2);///// رسم گراف اصلی
+                            }
+                            else
+                                Runnig2(Vold, I1, I2);///// رسم گراف اصلی
+
+                            if (DebugMode || Maintenance)
+                            {
+                                Setfilllable($"{Vold}:{I1}:{I2} ", "log");
+                                Setfilllable($"vold1{Vold} ", "log");
+
+                            }
+                        }
+
+                    }
+
+                    if (TechniqueEnded)  //if portc=0x09
+                    {
+                        for (int z = 0; z < 10; z++)
+                        {
+                            if (mainSerialPort.IsOpen)
+                            {
+                                mainSerialPort.Write("end1");
+                                Thread.Sleep(10);
+                            }
+                        }
+                        TechniqueEnded = false;
+                        EndTechFlag = true;
+                        mainSerialPort.Close();
+                        Thread.Sleep(100);
+                        Setbtnenabled(true, 2, 1);
+                        return;
+                    }
+
+                    if (string.Equals(SerialState, "Stop", StringComparison.OrdinalIgnoreCase))//if software == stoped 
+                    {
+                        HandleStopCondition(sp1);
+                        Setfilllable("finish running DoRun2", "sucses");
+                        return;
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
+
+        }
+
+        private void HandleStopCondition(SerialPort mainSerialPort)
+        {
+            try
+            {
+                if (mainSerialPort == null)
+                {
+                    MessageBox.Show("پورت سریال مقداردهی نشده است.", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (!mainSerialPort.IsOpen)
+                {
+                    Thread.Sleep(10);
+                    mainSerialPort.Open();
+                }
+
+                // کد های مهم ***
+                mainSerialPort.Write("stop");
+                Setbtnenabled(true, 2, 1);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show("دسترسی به پورت سریال مجاز نیست. لطفاً بررسی کنید که برنامه دیگری از آن استفاده نمی‌کند.",
+                                "خطای دسترسی", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Setfilllable($"HandleStopCondition UnauthorizedAccessException: {ex.Message}", "error");
+
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("خطایی در ارتباط با پورت سریال رخ داده است. لطفاً اتصال سخت‌افزاری را بررسی کنید.",
+                                "خطای I/O", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Setfilllable($"HandleStopCondition IOException: {ex.Message}", "error");
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("پورت سریال در وضعیت نامعتبری قرار دارد. لطفاً تنظیمات پورت را بررسی کنید.",
+                                "خطای عملیات نامعتبر", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Setfilllable($"HandleStopCondition InvalidOperationException: {ex.Message}", "error");
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("یک خطای ناشناخته رخ داده است. لطفاً برنامه را مجدداً اجرا کنید.",
+                                "خطای نامشخص", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Setfilllable($"HandleStopCondition Exception: {ex.Message}", "error");
+
+            }
+            finally
+            {
+                if (mainSerialPort != null && mainSerialPort.IsOpen)
+                {
+                    try
+                    {
+                        mainSerialPort.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Setfilllable($"HandleStopCondition Failed to close the serial port: {ex.Message}", "error");
+                    }
+                }
+            }
+        }
 
 
 
+        //دیباگ مود برای وقتی است که میخواهیم یرای تعمیر دستگاه استپ های ولتاژی را ببینیم
+        private readonly bool DebugMode = false;
+        private readonly bool Maintenance = false;
+        private bool flag_running = false;
+
+        public void Runnig2(double V, double I1, double I2)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new Action<double, double, double>(Runnig2), V, I1, I2);
+                return;
+            }
+
+            if (OnlineChart.Series.Count == 0)
+            {
+                OnlineChart.Series.Add("tst");
+            }
+
+            V *= 1000;
+            PlotGraph(OnlineChart, (int)V, I1 - I2);
+
+            
+        }
+
+        private static readonly object serialLock = new object();
+
+        public byte[] ReadSerialData(out bool TechniqueEnded, ref int sign, SerialPort mainSerialPort)
+        {
+
+            TechniqueEnded = false;
+            byte[] data = new byte[3];
 
 
+            lock (serialLock)
+            {
+                try
+                {
+                    int bytesAvailable = mainSerialPort.BytesToRead;
+                    int Erorr = 0;
+                    while (bytesAvailable == 0)
+                    {
+                        Thread.Sleep(110);
+                        Erorr++;
+                        if (Erorr >= 100 || !mainSerialPort.IsOpen)
+                        {
+                            data[0] = 000;
+                            data[1] = 222;
+                            data[2] = 111;
+                            return data;
+                        }
+                        bytesAvailable = mainSerialPort.BytesToRead;
+                    }
 
+                    if (bytesAvailable > 0)
+                    {
+                        if (bytesAvailable > 16300)
+                        {
+                            if (bytesAvailable == 16384)
+                            {
+                                if (DebugMode)
+                                    Setfilllable($"مقدار بافر سریال اورفلو شده است = {bytesAvailable}", "log");
+
+                            }
+                            else
+                            {
+                                if (DebugMode)
+                                    Setfilllable($"مقدار بافر سریال نزدیک به اورفلو شدن است = {bytesAvailable}", "log");
+                            }
+                        }
+
+                        string receivedData = sp1.ReadLine();
+                        if (string.IsNullOrWhiteSpace(receivedData))
+                            return null;
+
+                        if (receivedData.Contains("end"))
+                        {
+                            TechniqueEnded = true;
+                            if (DebugMode) Setfilllable("TechniqueEnded", "sucses");
+                        }
+                        else if (receivedData.Contains("@"))
+                        {
+                            string[] parsedData = receivedData.Split('@');
+                            if (parsedData.Length < 4)
+                                throw new FormatException("Received data is incomplete or malformed.");
+
+                            if (DebugMode) Setfilllable("TechniqueEnded", "log");
+
+                            if (!byte.TryParse(parsedData[1], out data[0]) ||
+                                !byte.TryParse(parsedData[2], out data[1]) ||
+                                !byte.TryParse(parsedData[3], out data[2]))
+                            {
+                                throw new FormatException("Failed to parse byte values from received data.");
+                            }
+
+                            sign = 1;
+                            flag_running = true;
+
+                            if (DebugMode || Maintenance)
+                            {
+                                foreach (var item in parsedData)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(item))
+                                        Setfilllable($"c:{item}", "log");
+
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (TimeoutException ex)
+                {
+                    if (DebugMode) Setfilllable($"ReadSerialData: Timeout error: {ex.Message}", "log");
+                    data[0] = 000;
+                    data[1] = 222;
+                    data[2] = 111;
+                }
+                catch (FormatException ex)
+                {
+                    if (DebugMode) Setfilllable($"ReadSerialData: Format error: {ex.Message}", "log");
+                    data[0] = 000;
+                    data[1] = 222;
+                    data[2] = 111;
+                }
+                catch (Exception ex)
+                {
+                    if (DebugMode) Setfilllable($"ReadSerialData: Unexpected error: {ex.Message}", "log");
+                    data[0] = 000;
+                    data[1] = 222;
+                    data[2] = 111;
+                }
+
+                return data;
+            }
+
+        }
 
     }
 

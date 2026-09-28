@@ -37,7 +37,6 @@ namespace Skydat.forms2065
         private void frmbase_Load(object sender, EventArgs e)
         {
             StartMonitoring();//تعریف کردن ایونت برای قطع و وصل شدن USB
-            //if (DeviceIsConnected() != null)
             //btn2066State();
             GetBackground();
             frm.RunLoadEvent(); // اجرای رویداد Load برای تنظیم Baud Rate
@@ -83,12 +82,12 @@ namespace Skydat.forms2065
 
         private void DeviceConnectedEvent(object sender, EventArrivedEventArgs e)
         {
-            btn2066State();
+            //btn2066State();
         }
 
         private void DeviceDisconnectedEvent(object sender, EventArrivedEventArgs e)
         {
-            btn2066State();
+            //btn2066State();
         }
 
         private void btn2066State()
@@ -101,9 +100,14 @@ namespace Skydat.forms2065
                     if (resualt)
                     {
                         Btn2066.Enabled = true;
+                        Btn2190.Enabled = true;
                     }
                     else
+                    {
                         Btn2066.Enabled = false;
+                        Btn2190.Enabled = false;
+
+                    }
                 }
                 catch (NullReferenceException)
                 {

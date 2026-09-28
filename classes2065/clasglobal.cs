@@ -106,7 +106,6 @@ namespace Skydat.classes2065
         public static SWV_params swvprms = new SWV_params();
         public static CV_params cvprms = new CV_params();
         public static LSV_params lsvprms = new LSV_params();
-
         public static CPC_params cpcprms = new CPC_params();
         public static CCC_params cccprms = new CCC_params();
         public static CHP_params chpprms = new CHP_params();
@@ -130,7 +129,7 @@ namespace Skydat.classes2065
         public static LSV_params_ocp lsvprms_ocp = new LSV_params_ocp();
         public static OCP_params_ocp ocpprms_ocp = new OCP_params_ocp();
         public static CPC_params_opc cpcprms_ocp = new CPC_params_opc();
-        public static CA_params_ocp chaprms_ocp = new CA_params_ocp();
+        public static CA_params_ocp caprms_ocp = new CA_params_ocp();
         public static CCC_params_opc cccprms_ocp = new CCC_params_opc();
        
         public static DCS_params_ocp dcsprms_ocp = new DCS_params_ocp();
@@ -173,7 +172,7 @@ namespace Skydat.classes2065
                 case OCP2080: pGrid.SelectedObject = ocpprms_ocp; break;
                 case CPC2080: pGrid.SelectedObject = cpcprms_ocp; break;
                 //  case CHP: pGrid.SelectedObject = chpprms; break;
-                case CHA2080: pGrid.SelectedObject = chaprms_ocp; break;
+                case CHA2080: pGrid.SelectedObject = caprms_ocp; break;
                 //  case CHC: pGrid.SelectedObject = chcprms; break;
                 default: break;
             }

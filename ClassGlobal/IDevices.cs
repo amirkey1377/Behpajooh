@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Skydat.ClassGlobal
 {
-    class classTechnique
+    interface IDevices
     {
-        private string name { get; set; }
+        string Name { get; set; }
 
+        List<ITechniques> SupportedTechniques { get; }
 
+        
     }
 }
