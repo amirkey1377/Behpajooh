@@ -46,14 +46,10 @@ namespace Skydat
 
         public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Voltage(mV)" };
 
-        public TechniqueSpecification Specification { get; set; }
-
 
         public NPV(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")
         {
             specific.InitializeParameterNames();
-
-            Specification = specific;
 
             ParameterSpecification e1 = specific.Parameters["E1"];
             _E1 = new Parameter(e1.Name, e1.Description, e1.Default, e1.Max, e1.Min, e1.Unit, e1.Resolution);
@@ -70,6 +66,9 @@ namespace Skydat
             ParameterSpecification PulseWidth = specific.Parameters["PulseWidth"];
             _PulseWidth = new Parameter(PulseWidth.Name, PulseWidth.Description, PulseWidth.Default, PulseWidth.Max, PulseWidth.Min, PulseWidth.Unit, PulseWidth.Resolution);
 
+            ParameterSpecification Tstep = specific.Parameters["Tstep"];
+            _TStep = new Parameter(Tstep.Name, Tstep.Description, Tstep.Default, Tstep.Max, Tstep.Min, Tstep.Unit, Tstep.Resolution);
+
             SetTstep();
 
             _EquilibriumTime = EquilibriumTime;
@@ -78,17 +77,19 @@ namespace Skydat
             ColorCode = ColorUtility.GenerateHighContrastColor();
 
             _HStep.ValueChanged += HStep_ValueChanged;
+            _ScanRate.ValueChanged += HStep_ValueChanged;
 
         }
 
-        private NPV(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter PulseWidth, int EquilibriumTime = 0, string comment = "")
+        private NPV(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter PulseWidth, Parameter TStep, int EquilibriumTime = 0, string comment = "")
         {
             _E1 = E1;
             _E2 = E2;
             _ScanRate = ScanRate;
             _HStep = HStep;
             _PulseWidth = PulseWidth;
-            SetTstep();
+            _TStep = TStep;
+
             _EquilibriumTime = EquilibriumTime;
             Comment = comment;
             //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
@@ -112,6 +113,9 @@ namespace Skydat
             ParameterSpecification PulseWidthSpecific = specific.Parameters["PulseWidth"];
             _PulseWidth = new Parameter(PulseWidthSpecific.Name, PulseWidthSpecific.Description, PulseWidth, PulseWidthSpecific.Max, PulseWidthSpecific.Min, PulseWidthSpecific.Unit, PulseWidthSpecific.Resolution);
 
+            ParameterSpecification Tstep = specific.Parameters["Tstep"];
+            _TStep = new Parameter(Tstep.Name, Tstep.Description, Tstep.Default, Tstep.Max, Tstep.Min, Tstep.Unit, Tstep.Resolution);
+
             SetTstep();
             _EquilibriumTime = EquilibriumTime;
             Comment = comment;
@@ -127,15 +131,6 @@ namespace Skydat
             {
                 return _E1;
             }
-            set
-            {
-                if (value >= _E1.LowerLimit && value <= _E1.UpperLimit)
-                {
-                    _E1.Value = clasglobal.npvprms_ocp.E1 = value.Value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
         public Parameter E2
@@ -143,15 +138,6 @@ namespace Skydat
             get
             {
                 return _E2;
-            }
-            set
-            {
-                if (value >= -8 && value <= 8)
-                {
-                    _E2.Value = clasglobal.npvprms_ocp.E2 = value.Value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
             }
         }
 
@@ -162,16 +148,6 @@ namespace Skydat
             {
                 return _ScanRate;
             }
-            set
-            {
-                if (value >= 0.0001 && value <= 0.25)
-                {
-                    _ScanRate.Value = clasglobal.npvprms_ocp.ScanRate = value.Value;
-                    SetTstep();
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
         public Parameter HStep
@@ -180,16 +156,10 @@ namespace Skydat
             {
                 return _HStep;
             }
-            set
-            {
-                _HStep = value;
-      
-            }
         }
 
         private void HStep_ValueChanged(object sender, EventArgs e)
         {
-            clasglobal.npvprms_ocp.HStep = _HStep.Value;
             SetTstep();
         }
 
@@ -207,15 +177,6 @@ namespace Skydat
             {
                 return _PulseWidth;
             }
-            set
-            {
-                if (value >= 0.05 && value <= (_TStep - 0.05))
-                {
-                    _PulseWidth.Value = clasglobal.npvprms_ocp.PulseWidth = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
         public int EquilibriumTime
@@ -226,10 +187,9 @@ namespace Skydat
             }
             set
             {
-                if (value >= 0 && _EquilibriumTime <= 2000)
+                if (value >= 0 && _EquilibriumTime <= 18000)
                 {
                     _EquilibriumTime = value;
-                    clasglobal.lsvprms_ocp.EquilibriumTime = (double)value;
                 }
                 else
                     MessageBox.Show("مقدار وارد شده مجاز نیست");
@@ -239,9 +199,9 @@ namespace Skydat
         private void SetTstep()
         {
             double divide = Math.Round(_HStep / _ScanRate, 3);
-            if (divide >= 0.1 && divide <= 10)
+            if (divide >= _TStep.LowerLimit && divide <= _TStep.UpperLimit)
             {
-                _TStep.Value = clasglobal.dpvprms_ocp.TStep = divide;
+                _TStep.Value = divide;
                 _PulseWidth.UpperLimit = _TStep - 0.05;
             }
             else
@@ -250,12 +210,11 @@ namespace Skydat
             }
         }
 
-
         private Parameter _E1;
         private Parameter _E2;
         private Parameter _ScanRate;
         private Parameter _HStep;
-        private Parameter _TStep = new Parameter("Tstep", "Time", double.NaN, 10, 0.1, "s", 1);
+        private Parameter _TStep;
         private Parameter _PulseWidth;
         private int _EquilibriumTime;
 
@@ -263,11 +222,6 @@ namespace Skydat
 
         public Series previewChart()
         {
-            //var item = clasglobal.npvprms_ocp;
-            //chartApplayTech.Titles.Add(clasglobal.Tech_FullName2080[2]);
-            //chartApplayTech.ChartAreas[0].AxisX.Title = "Time(s)";
-            //chartApplayTech.ChartAreas[0].AxisY.Title = "Potential(V)";
-            //chartApplayTech.ChartAreas[0].AxisX.Minimum = 0;
 
             Series series = new Series($"{name}")
             {
@@ -321,6 +275,8 @@ namespace Skydat
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)
         {
             int[] VoltageBuffer;
+            byte Technum = number;
+            buffer[0] = Technum;
 
             Array.Resize(ref buffer, 16);
 
@@ -388,7 +344,7 @@ namespace Skydat
 
         public ITechniques Clone()
         {
-            ITechniques ClonedTech = new NPV(_E1, _E2, _ScanRate, _HStep, _PulseWidth, _EquilibriumTime, Comment);
+            ITechniques ClonedTech = new NPV(_E1, _E2, _ScanRate, _HStep, _PulseWidth, _TStep, _EquilibriumTime, Comment);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
             if (SeriesPath != null)

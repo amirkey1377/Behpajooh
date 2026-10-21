@@ -697,6 +697,7 @@ namespace Skydat.forms2065
             this.btnCalcTafel.ForeColor = System.Drawing.SystemColors.InfoText;
             this.btnCalcTafel.Name = "btnCalcTafel";
             this.btnCalcTafel.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.btnCalcTafel.Click += new System.EventHandler(this.btnCalcTafel_Click);
             // 
             // toolStripButton8
             // 

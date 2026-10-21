@@ -241,7 +241,7 @@
     <value>8, 8, 8, 8</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 51</value>
+    <value>216, 32</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -256,36 +256,6 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="picBoxOcp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="picBoxOcp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 8</value>
-  </data>
-  <data name="picBoxOcp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 257</value>
-  </data>
-  <data name="picBoxOcp.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="picBoxOcp.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="picBoxOcp.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;picBoxOcp.Name" xml:space="preserve">
-    <value>picBoxOcp</value>
-  </data>
-  <data name="&gt;&gt;picBoxOcp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picBoxOcp.Parent" xml:space="preserve">
-    <value>pnlDiscription</value>
-  </data>
-  <data name="&gt;&gt;picBoxOcp.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="lblDiscription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -319,6 +289,36 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;lblDiscription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="picBoxOcp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="picBoxOcp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 8</value>
+  </data>
+  <data name="picBoxOcp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 257</value>
+  </data>
+  <data name="picBoxOcp.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="picBoxOcp.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="picBoxOcp.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;picBoxOcp.Name" xml:space="preserve">
+    <value>picBoxOcp</value>
+  </data>
+  <data name="&gt;&gt;picBoxOcp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picBoxOcp.Parent" xml:space="preserve">
+    <value>pnlDiscription</value>
+  </data>
+  <data name="&gt;&gt;picBoxOcp.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblTechName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -922,10 +922,10 @@
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 212</value>
+    <value>172, 278</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label22.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -961,10 +961,10 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 144</value>
+    <value>172, 188</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -997,10 +997,10 @@
     <value>NoControl</value>
   </data>
   <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 110</value>
+    <value>172, 143</value>
   </data>
   <data name="label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label42.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -1036,10 +1036,10 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 76</value>
+    <value>172, 98</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
@@ -1075,10 +1075,10 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 42</value>
+    <value>172, 53</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -1117,7 +1117,7 @@
     <value>172, 8</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>13, 34</value>
+    <value>13, 45</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -1150,10 +1150,10 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 246</value>
+    <value>3, 323</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 40</value>
+    <value>69, 51</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -1189,7 +1189,7 @@
     <value>3, 8</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1252,10 +1252,10 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 42</value>
+    <value>3, 53</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1285,7 +1285,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="PW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 181</value>
+    <value>78, 236</value>
   </data>
   <data name="PW.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -1318,10 +1318,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblPulse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 178</value>
+    <value>3, 233</value>
   </data>
   <data name="lblPulse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="lblPulse.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -1351,7 +1351,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="E2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 45</value>
+    <value>78, 56</value>
   </data>
   <data name="E2.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -1384,10 +1384,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblHstep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 76</value>
+    <value>3, 98</value>
   </data>
   <data name="lblHstep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="lblHstep.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -1417,7 +1417,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="SR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 147</value>
+    <value>78, 191</value>
   </data>
   <data name="SR.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -1450,10 +1450,10 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 144</value>
+    <value>3, 188</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -1483,7 +1483,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Hs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 79</value>
+    <value>78, 101</value>
   </data>
   <data name="Hs.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 23</value>
@@ -1516,10 +1516,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblTstep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 110</value>
+    <value>3, 143</value>
   </data>
   <data name="lblTstep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="lblTstep.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -1546,7 +1546,7 @@
     <value>Fill</value>
   </data>
   <data name="Ts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 113</value>
+    <value>78, 146</value>
   </data>
   <data name="Ts.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 20</value>
@@ -1579,10 +1579,10 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 212</value>
+    <value>3, 278</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 34</value>
+    <value>69, 45</value>
   </data>
   <data name="label9.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -1612,7 +1612,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="EqTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 214</value>
+    <value>77, 280</value>
   </data>
   <data name="EqTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1645,7 +1645,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Comment_NPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 248</value>
+    <value>77, 325</value>
   </data>
   <data name="Comment_NPV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1654,7 +1654,7 @@
     <value>True</value>
   </data>
   <data name="Comment_NPV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 36</value>
+    <value>109, 47</value>
   </data>
   <data name="Comment_NPV.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -1690,7 +1690,7 @@
     <value>8</value>
   </data>
   <data name="tblNPV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 286</value>
+    <value>188, 374</value>
   </data>
   <data name="tblNPV.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -1723,7 +1723,7 @@
     <value>NoControl</value>
   </data>
   <data name="Description.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 289</value>
+    <value>3, 377</value>
   </data>
   <data name="Description.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 8, 8, 8</value>
@@ -1759,7 +1759,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 325</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1795,10 +1795,10 @@
     <value>NoControl</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 239</value>
+    <value>173, 302</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
@@ -1834,10 +1834,10 @@
     <value>NoControl</value>
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 140</value>
+    <value>173, 176</value>
   </data>
   <data name="label40.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label40.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
@@ -1873,10 +1873,10 @@
     <value>NoControl</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 74</value>
+    <value>173, 92</value>
   </data>
   <data name="label39.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label39.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -1912,10 +1912,10 @@
     <value>NoControl</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 107</value>
+    <value>173, 134</value>
   </data>
   <data name="label38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label38.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -1951,10 +1951,10 @@
     <value>NoControl</value>
   </data>
   <data name="label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 41</value>
+    <value>173, 50</value>
   </data>
   <data name="label37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label37.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -1993,7 +1993,7 @@
     <value>173, 8</value>
   </data>
   <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 33</value>
+    <value>12, 42</value>
   </data>
   <data name="label29.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
@@ -2023,7 +2023,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="EqTime_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 242</value>
+    <value>85, 305</value>
   </data>
   <data name="EqTime_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2053,7 +2053,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="PH_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 209</value>
+    <value>85, 263</value>
   </data>
   <data name="PH_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2083,7 +2083,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="PW_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 176</value>
+    <value>85, 221</value>
   </data>
   <data name="PW_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2113,7 +2113,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="SR_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 143</value>
+    <value>85, 179</value>
   </data>
   <data name="SR_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2143,7 +2143,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Ts_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 110</value>
+    <value>85, 137</value>
   </data>
   <data name="Ts_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2173,7 +2173,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Hs_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 77</value>
+    <value>85, 95</value>
   </data>
   <data name="Hs_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2203,7 +2203,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="E2_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 44</value>
+    <value>85, 53</value>
   </data>
   <data name="E2_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -2269,7 +2269,7 @@
     <value>3, 8</value>
   </data>
   <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label20.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -2302,10 +2302,10 @@
     <value>NoControl</value>
   </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 206</value>
+    <value>3, 260</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -2338,10 +2338,10 @@
     <value>NoControl</value>
   </data>
   <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 41</value>
+    <value>3, 50</value>
   </data>
   <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label19.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -2374,10 +2374,10 @@
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 74</value>
+    <value>3, 92</value>
   </data>
   <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label18.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -2410,10 +2410,10 @@
     <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 239</value>
+    <value>3, 302</value>
   </data>
   <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label12.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -2446,10 +2446,10 @@
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
+    <value>3, 134</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label17.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -2482,10 +2482,10 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 272</value>
+    <value>3, 344</value>
   </data>
   <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 38</value>
+    <value>76, 46</value>
   </data>
   <data name="label14.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -2518,10 +2518,10 @@
     <value>NoControl</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 140</value>
+    <value>3, 176</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label15.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -2554,10 +2554,10 @@
     <value>NoControl</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 173</value>
+    <value>3, 218</value>
   </data>
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 33</value>
+    <value>76, 42</value>
   </data>
   <data name="label13.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -2587,13 +2587,13 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Comment_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 275</value>
+    <value>85, 347</value>
   </data>
   <data name="Comment_DPV.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Comment_DPV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
+    <value>100, 40</value>
   </data>
   <data name="Comment_DPV.TabIndex" type="System.Int32, mscorlib">
     <value>70</value>
@@ -2629,7 +2629,7 @@
     <value>9</value>
   </data>
   <data name="tblDPV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 310</value>
+    <value>188, 390</value>
   </data>
   <data name="tblDPV.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -2662,7 +2662,7 @@
     <value>NoControl</value>
   </data>
   <data name="Description_DPV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 313</value>
+    <value>3, 393</value>
   </data>
   <data name="Description_DPV.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
@@ -2695,7 +2695,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2725,7 +2725,7 @@
     <value>10, 10</value>
   </data>
   <data name="pGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 313</value>
+    <value>176, 367</value>
   </data>
   <data name="pGrid.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2742,6 +2742,48 @@
   <data name="&gt;&gt;pGrid.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ColometryCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ColometryCheck.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="ColometryCheck.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="ColometryCheck.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ColometryCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 377</value>
+  </data>
+  <data name="ColometryCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 5, 3, 3</value>
+  </data>
+  <data name="ColometryCheck.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 6, 0, 0</value>
+  </data>
+  <data name="ColometryCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 26</value>
+  </data>
+  <data name="ColometryCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ColometryCheck.Text" xml:space="preserve">
+    <value>Colometry mode</value>
+  </data>
+  <data name="&gt;&gt;ColometryCheck.Name" xml:space="preserve">
+    <value>ColometryCheck</value>
+  </data>
+  <data name="&gt;&gt;ColometryCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ColometryCheck.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;ColometryCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -2749,7 +2791,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2785,10 +2827,10 @@
     <value>NoControl</value>
   </data>
   <data name="label48.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 230</value>
+    <value>173, 290</value>
   </data>
   <data name="label48.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label48.TabIndex" type="System.Int32, mscorlib">
     <value>104</value>
@@ -2824,10 +2866,10 @@
     <value>NoControl</value>
   </data>
   <data name="label47.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 193</value>
+    <value>173, 243</value>
   </data>
   <data name="label47.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label47.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
@@ -2863,10 +2905,10 @@
     <value>NoControl</value>
   </data>
   <data name="label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 156</value>
+    <value>173, 196</value>
   </data>
   <data name="label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label46.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
@@ -2902,10 +2944,10 @@
     <value>NoControl</value>
   </data>
   <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 119</value>
+    <value>173, 149</value>
   </data>
   <data name="label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label45.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -2941,10 +2983,10 @@
     <value>NoControl</value>
   </data>
   <data name="label44.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 45</value>
+    <value>173, 55</value>
   </data>
   <data name="label44.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label44.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -2983,7 +3025,7 @@
     <value>173, 8</value>
   </data>
   <data name="label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 37</value>
+    <value>12, 47</value>
   </data>
   <data name="label43.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -3046,10 +3088,10 @@
     <value>NoControl</value>
   </data>
   <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 267</value>
+    <value>3, 337</value>
   </data>
   <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 53</value>
   </data>
   <data name="label23.TabIndex" type="System.Int32, mscorlib">
     <value>94</value>
@@ -3082,10 +3124,10 @@
     <value>NoControl</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 230</value>
+    <value>3, 290</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
@@ -3118,10 +3160,10 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 82</value>
+    <value>3, 102</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
@@ -3151,7 +3193,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="E2_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 48</value>
+    <value>85, 58</value>
   </data>
   <data name="E2_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3184,10 +3226,10 @@
     <value>NoControl</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 193</value>
+    <value>3, 243</value>
   </data>
   <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label24.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
@@ -3217,7 +3259,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="EqTime_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 233</value>
+    <value>85, 293</value>
   </data>
   <data name="EqTime_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3250,10 +3292,10 @@
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 156</value>
+    <value>3, 196</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>91</value>
@@ -3286,10 +3328,10 @@
     <value>NoControl</value>
   </data>
   <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 119</value>
+    <value>3, 149</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>92</value>
@@ -3319,7 +3361,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Cycle_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 85</value>
+    <value>85, 105</value>
   </data>
   <data name="Cycle_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3349,13 +3391,13 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Comment_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 270</value>
+    <value>85, 340</value>
   </data>
   <data name="Comment_CV.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Comment_CV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 37</value>
+    <value>100, 47</value>
   </data>
   <data name="Comment_CV.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>
@@ -3379,7 +3421,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Hs_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 159</value>
+    <value>85, 199</value>
   </data>
   <data name="Hs_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3409,7 +3451,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Ts_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 122</value>
+    <value>85, 152</value>
   </data>
   <data name="Ts_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3442,10 +3484,10 @@
     <value>NoControl</value>
   </data>
   <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 45</value>
+    <value>3, 55</value>
   </data>
   <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label27.TabIndex" type="System.Int32, mscorlib">
     <value>90</value>
@@ -3475,7 +3517,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="SR_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 196</value>
+    <value>85, 246</value>
   </data>
   <data name="SR_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3511,7 +3553,7 @@
     <value>3, 8</value>
   </data>
   <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 37</value>
+    <value>76, 47</value>
   </data>
   <data name="label28.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>
@@ -3553,7 +3595,7 @@
     <value>8</value>
   </data>
   <data name="tblCV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 310</value>
+    <value>188, 390</value>
   </data>
   <data name="tblCV.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -3586,7 +3628,7 @@
     <value>NoControl</value>
   </data>
   <data name="Description_CV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 313</value>
+    <value>3, 393</value>
   </data>
   <data name="Description_CV.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
@@ -3619,7 +3661,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3655,10 +3697,10 @@
     <value>NoControl</value>
   </data>
   <data name="label54.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 223</value>
+    <value>173, 278</value>
   </data>
   <data name="label54.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label54.TabIndex" type="System.Int32, mscorlib">
     <value>105</value>
@@ -3694,10 +3736,10 @@
     <value>NoControl</value>
   </data>
   <data name="label53.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 180</value>
+    <value>173, 224</value>
   </data>
   <data name="label53.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label53.TabIndex" type="System.Int32, mscorlib">
     <value>104</value>
@@ -3733,10 +3775,10 @@
     <value>NoControl</value>
   </data>
   <data name="label52.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 137</value>
+    <value>173, 170</value>
   </data>
   <data name="label52.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label52.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
@@ -3772,10 +3814,10 @@
     <value>NoControl</value>
   </data>
   <data name="label51.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 94</value>
+    <value>173, 116</value>
   </data>
   <data name="label51.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label51.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
@@ -3811,10 +3853,10 @@
     <value>NoControl</value>
   </data>
   <data name="label50.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 51</value>
+    <value>173, 62</value>
   </data>
   <data name="label50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label50.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -3853,7 +3895,7 @@
     <value>173, 8</value>
   </data>
   <data name="label49.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 43</value>
+    <value>12, 54</value>
   </data>
   <data name="label49.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -3886,10 +3928,10 @@
     <value>NoControl</value>
   </data>
   <data name="label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 223</value>
+    <value>3, 278</value>
   </data>
   <data name="label30.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label30.TabIndex" type="System.Int32, mscorlib">
     <value>78</value>
@@ -3919,13 +3961,13 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Comment_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 269</value>
+    <value>85, 335</value>
   </data>
   <data name="Comment_LSV.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Comment_LSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 38</value>
+    <value>100, 52</value>
   </data>
   <data name="Comment_LSV.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -3949,7 +3991,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="EqTime_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 226</value>
+    <value>85, 281</value>
   </data>
   <data name="EqTime_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -3982,10 +4024,10 @@
     <value>NoControl</value>
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 266</value>
+    <value>3, 332</value>
   </data>
   <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 44</value>
+    <value>76, 58</value>
   </data>
   <data name="label31.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -4018,10 +4060,10 @@
     <value>NoControl</value>
   </data>
   <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 180</value>
+    <value>3, 224</value>
   </data>
   <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label32.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
@@ -4051,7 +4093,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="SR_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 183</value>
+    <value>85, 227</value>
   </data>
   <data name="SR_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -4084,10 +4126,10 @@
     <value>NoControl</value>
   </data>
   <data name="label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 137</value>
+    <value>3, 170</value>
   </data>
   <data name="label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label33.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -4117,7 +4159,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Ts_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 140</value>
+    <value>85, 173</value>
   </data>
   <data name="Ts_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -4153,7 +4195,7 @@
     <value>3, 8</value>
   </data>
   <data name="label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label36.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -4183,7 +4225,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Hs_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 97</value>
+    <value>85, 119</value>
   </data>
   <data name="Hs_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -4216,10 +4258,10 @@
     <value>NoControl</value>
   </data>
   <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 51</value>
+    <value>3, 62</value>
   </data>
   <data name="label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label35.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -4249,7 +4291,7 @@
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="E2_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 54</value>
+    <value>85, 65</value>
   </data>
   <data name="E2_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 23</value>
@@ -4282,10 +4324,10 @@
     <value>NoControl</value>
   </data>
   <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 94</value>
+    <value>3, 116</value>
   </data>
   <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 43</value>
+    <value>76, 54</value>
   </data>
   <data name="label34.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -4357,7 +4399,7 @@
     <value>7</value>
   </data>
   <data name="tblLSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 310</value>
+    <value>188, 390</value>
   </data>
   <data name="tblLSV.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -4390,7 +4432,7 @@
     <value>NoControl</value>
   </data>
   <data name="Description_LSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 313</value>
+    <value>3, 393</value>
   </data>
   <data name="Description_LSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 15</value>
@@ -4423,7 +4465,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -4459,10 +4501,10 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 108</value>
+    <value>65, 135</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 108</value>
+    <value>56, 135</value>
   </data>
   <data name="label11.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -4499,7 +4541,7 @@ for runnig</value>
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 325</value>
+    <value>188, 405</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -4526,7 +4568,7 @@ for runnig</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabPage6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4562,10 +4604,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label55.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 162</value>
+    <value>158, 202</value>
   </data>
   <data name="label55.Size" type="System.Drawing.Size, System.Drawing">
-    <value>9, 61</value>
+    <value>9, 81</value>
   </data>
   <data name="label55.TabIndex" type="System.Int32, mscorlib">
     <value>105</value>
@@ -4601,10 +4643,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label59.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 101</value>
+    <value>158, 121</value>
   </data>
   <data name="label59.Size" type="System.Drawing.Size, System.Drawing">
-    <value>9, 61</value>
+    <value>9, 81</value>
   </data>
   <data name="label59.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -4643,7 +4685,7 @@ for runnig</value>
     <value>158, 40</value>
   </data>
   <data name="label60.Size" type="System.Drawing.Size, System.Drawing">
-    <value>9, 61</value>
+    <value>9, 81</value>
   </data>
   <data name="label60.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -4679,10 +4721,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label61.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 162</value>
+    <value>23, 202</value>
   </data>
   <data name="label61.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 61</value>
+    <value>59, 81</value>
   </data>
   <data name="label61.TabIndex" type="System.Int32, mscorlib">
     <value>78</value>
@@ -4712,13 +4754,13 @@ for runnig</value>
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="Comment_OCP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 226</value>
+    <value>88, 286</value>
   </data>
   <data name="Comment_OCP.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Comment_OCP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 58</value>
+    <value>79, 78</value>
   </data>
   <data name="Comment_OCP.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -4742,7 +4784,7 @@ for runnig</value>
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="EqTime_OCP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 165</value>
+    <value>88, 205</value>
   </data>
   <data name="EqTime_OCP.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -4778,10 +4820,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label62.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 223</value>
+    <value>23, 283</value>
   </data>
   <data name="label62.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 64</value>
+    <value>59, 84</value>
   </data>
   <data name="label62.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -4820,7 +4862,7 @@ for runnig</value>
     <value>23, 40</value>
   </data>
   <data name="label65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 61</value>
+    <value>59, 81</value>
   </data>
   <data name="label65.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -4856,10 +4898,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label66.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 101</value>
+    <value>23, 121</value>
   </data>
   <data name="label66.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 61</value>
+    <value>59, 81</value>
   </data>
   <data name="label66.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -4889,7 +4931,7 @@ for runnig</value>
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
   <data name="DiffVoltage_OCP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 104</value>
+    <value>88, 124</value>
   </data>
   <data name="DiffVoltage_OCP.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
@@ -4961,7 +5003,7 @@ for runnig</value>
     <value>4</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 327</value>
+    <value>190, 407</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -4988,7 +5030,7 @@ for runnig</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabOCP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 333</value>
+    <value>196, 413</value>
   </data>
   <data name="tabOCP.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -5027,10 +5069,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label56.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 118</value>
+    <value>164, 133</value>
   </data>
   <data name="label56.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label56.TabIndex" type="System.Int32, mscorlib">
     <value>105</value>
@@ -5069,10 +5111,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label57.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 96</value>
+    <value>164, 108</value>
   </data>
   <data name="label57.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label57.TabIndex" type="System.Int32, mscorlib">
     <value>104</value>
@@ -5111,10 +5153,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label63.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 74</value>
+    <value>164, 83</value>
   </data>
   <data name="label63.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label63.TabIndex" type="System.Int32, mscorlib">
     <value>103</value>
@@ -5153,10 +5195,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label64.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 52</value>
+    <value>164, 58</value>
   </data>
   <data name="label64.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label64.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
@@ -5195,10 +5237,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label68.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 30</value>
+    <value>164, 33</value>
   </data>
   <data name="label68.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label68.TabIndex" type="System.Int32, mscorlib">
     <value>101</value>
@@ -5240,7 +5282,7 @@ for runnig</value>
     <value>164, 8</value>
   </data>
   <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
-    <value>11, 22</value>
+    <value>11, 25</value>
   </data>
   <data name="label69.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -5276,10 +5318,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label70.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 118</value>
+    <value>3, 133</value>
   </data>
   <data name="label70.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label70.TabIndex" type="System.Int32, mscorlib">
     <value>78</value>
@@ -5302,64 +5344,64 @@ for runnig</value>
   <data name="&gt;&gt;label70.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="textBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="txtTafelComment.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtTafelComment.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 143</value>
+  <data name="txtTafelComment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 161</value>
   </data>
-  <data name="textBox1.Multiline" type="System.Boolean, mscorlib">
+  <data name="txtTafelComment.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+  <data name="txtTafelComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 22</value>
   </data>
-  <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtTafelComment.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
   </data>
-  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
-    <value>textBox1</value>
+  <data name="&gt;&gt;txtTafelComment.Name" xml:space="preserve">
+    <value>txtTafelComment</value>
   </data>
-  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelComment.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelComment.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelComment.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="textBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="txtTafelDelay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtTafelDelay.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 121</value>
+  <data name="txtTafelDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 136</value>
   </data>
-  <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtTafelDelay.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtTafelDelay.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
   </data>
-  <data name="textBox2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="txtTafelDelay.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox2.Name" xml:space="preserve">
-    <value>textBox2</value>
+  <data name="&gt;&gt;txtTafelDelay.Name" xml:space="preserve">
+    <value>txtTafelDelay</value>
   </data>
-  <data name="&gt;&gt;textBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelDelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelDelay.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelDelay.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="label71.AutoSize" type="System.Boolean, mscorlib">
@@ -5375,10 +5417,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label71.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 140</value>
+    <value>3, 158</value>
   </data>
   <data name="label71.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 26</value>
+    <value>71, 28</value>
   </data>
   <data name="label71.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -5414,10 +5456,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label72.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 96</value>
+    <value>3, 108</value>
   </data>
   <data name="label72.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label72.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
@@ -5440,34 +5482,34 @@ for runnig</value>
   <data name="&gt;&gt;label72.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="textBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="SR_Tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="SR_Tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 99</value>
+  <data name="SR_Tafel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 111</value>
   </data>
-  <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SR_Tafel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox3.TabIndex" type="System.Int32, mscorlib">
+  <data name="SR_Tafel.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
-  <data name="textBox3.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="SR_Tafel.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox3.Name" xml:space="preserve">
-    <value>textBox3</value>
+  <data name="&gt;&gt;SR_Tafel.Name" xml:space="preserve">
+    <value>SR_Tafel</value>
   </data>
-  <data name="&gt;&gt;textBox3.Type" xml:space="preserve">
+  <data name="&gt;&gt;SR_Tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SR_Tafel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SR_Tafel.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="label73.AutoSize" type="System.Boolean, mscorlib">
@@ -5483,10 +5525,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label73.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 74</value>
+    <value>3, 83</value>
   </data>
   <data name="label73.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label73.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -5509,34 +5551,34 @@ for runnig</value>
   <data name="&gt;&gt;label73.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="textBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="Ts_Tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox5.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="Ts_Tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 77</value>
+  <data name="Ts_Tafel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 86</value>
   </data>
-  <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Ts_Tafel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
+  <data name="Ts_Tafel.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
   </data>
-  <data name="textBox5.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="Ts_Tafel.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox5.Name" xml:space="preserve">
-    <value>textBox5</value>
+  <data name="&gt;&gt;Ts_Tafel.Name" xml:space="preserve">
+    <value>Ts_Tafel</value>
   </data>
-  <data name="&gt;&gt;textBox5.Type" xml:space="preserve">
+  <data name="&gt;&gt;Ts_Tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Ts_Tafel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Ts_Tafel.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="label74.AutoSize" type="System.Boolean, mscorlib">
@@ -5555,7 +5597,7 @@ for runnig</value>
     <value>3, 8</value>
   </data>
   <data name="label74.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label74.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -5578,34 +5620,34 @@ for runnig</value>
   <data name="&gt;&gt;label74.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="textBox6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="Hs_Tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox6.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="Hs_Tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 55</value>
+  <data name="Hs_Tafel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 61</value>
   </data>
-  <data name="textBox6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Hs_Tafel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox6.TabIndex" type="System.Int32, mscorlib">
+  <data name="Hs_Tafel.TabIndex" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
-  <data name="textBox6.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="Hs_Tafel.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox6.Name" xml:space="preserve">
-    <value>textBox6</value>
+  <data name="&gt;&gt;Hs_Tafel.Name" xml:space="preserve">
+    <value>Hs_Tafel</value>
   </data>
-  <data name="&gt;&gt;textBox6.Type" xml:space="preserve">
+  <data name="&gt;&gt;Hs_Tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox6.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Hs_Tafel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox6.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Hs_Tafel.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="label75.AutoSize" type="System.Boolean, mscorlib">
@@ -5621,10 +5663,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label75.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 30</value>
+    <value>3, 33</value>
   </data>
   <data name="label75.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label75.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -5647,34 +5689,34 @@ for runnig</value>
   <data name="&gt;&gt;label75.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="textBox7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="E2_Tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox7.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="E2_Tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 33</value>
+  <data name="E2_Tafel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 36</value>
   </data>
-  <data name="textBox7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="E2_Tafel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox7.TabIndex" type="System.Int32, mscorlib">
+  <data name="E2_Tafel.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
   </data>
-  <data name="textBox7.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="E2_Tafel.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox7.Name" xml:space="preserve">
-    <value>textBox7</value>
+  <data name="&gt;&gt;E2_Tafel.Name" xml:space="preserve">
+    <value>E2_Tafel</value>
   </data>
-  <data name="&gt;&gt;textBox7.Type" xml:space="preserve">
+  <data name="&gt;&gt;E2_Tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox7.Parent" xml:space="preserve">
+  <data name="&gt;&gt;E2_Tafel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox7.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;E2_Tafel.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="label76.AutoSize" type="System.Boolean, mscorlib">
@@ -5690,10 +5732,10 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="label76.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 52</value>
+    <value>3, 58</value>
   </data>
   <data name="label76.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 22</value>
+    <value>71, 25</value>
   </data>
   <data name="label76.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -5716,34 +5758,34 @@ for runnig</value>
   <data name="&gt;&gt;label76.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="textBox8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="E1_Tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox8.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="E1_Tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox8.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="E1_Tafel.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 11</value>
   </data>
-  <data name="textBox8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="E1_Tafel.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
   </data>
-  <data name="textBox8.TabIndex" type="System.Int32, mscorlib">
+  <data name="E1_Tafel.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
-  <data name="textBox8.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="E1_Tafel.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox8.Name" xml:space="preserve">
-    <value>textBox8</value>
+  <data name="&gt;&gt;E1_Tafel.Name" xml:space="preserve">
+    <value>E1_Tafel</value>
   </data>
-  <data name="&gt;&gt;textBox8.Type" xml:space="preserve">
+  <data name="&gt;&gt;E1_Tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox8.Parent" xml:space="preserve">
+  <data name="&gt;&gt;E1_Tafel.Parent" xml:space="preserve">
     <value>tableLayoutPanel4</value>
   </data>
-  <data name="&gt;&gt;textBox8.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;E1_Tafel.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -5765,7 +5807,7 @@ for runnig</value>
     <value>7</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 166</value>
+    <value>178, 186</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -5777,120 +5819,123 @@ for runnig</value>
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>gpBoxTafelParam</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label56" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label57" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label63" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label64" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label68" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label69" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label70" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox1" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="textBox2" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label71" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label72" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox3" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label73" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox5" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label74" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox6" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label75" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox7" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label76" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox8" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,43.65436,Percent,47.25473,Percent,9.090909" /&gt;&lt;Rows Styles="Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label56" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label57" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label63" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label64" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label68" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label69" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label70" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtTafelComment" Row="6" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;Control Name="txtTafelDelay" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label71" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label72" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="SR_Tafel" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label73" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Ts_Tafel" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label74" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Hs_Tafel" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label75" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="E2_Tafel" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label76" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="E1_Tafel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,43.65436,Percent,47.25473,Percent,9.090909" /&gt;&lt;Rows Styles="Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Percent,14.28572,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="groupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="gpBoxTafelParam.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="gpBoxTafelParam.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 195</value>
+  <data name="gpBoxTafelParam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 185</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 177</value>
+  <data name="gpBoxTafelParam.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 200</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="gpBoxTafelParam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 206</value>
+  </data>
+  <data name="gpBoxTafelParam.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
+  <data name="gpBoxTafelParam.Text" xml:space="preserve">
     <value>Tafel Param</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="&gt;&gt;gpBoxTafelParam.Name" xml:space="preserve">
+    <value>gpBoxTafelParam</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;gpBoxTafelParam.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gpBoxTafelParam.Parent" xml:space="preserve">
     <value>tabTafel</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gpBoxTafelParam.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label77.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Description_tafel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label77.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="Description_tafel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="label77.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="Description_tafel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="label77.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Description_tafel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label77.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 372</value>
+  <data name="Description_tafel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 391</value>
   </data>
-  <data name="label77.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 15</value>
+  <data name="Description_tafel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 15</value>
   </data>
-  <data name="label77.TabIndex" type="System.Int32, mscorlib">
+  <data name="Description_tafel.TabIndex" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
-  <data name="label77.Text" xml:space="preserve">
-    <value>Description</value>
+  <data name="Description_tafel.Text" xml:space="preserve">
+    <value>Description_tafel</value>
   </data>
-  <data name="label77.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="Description_tafel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;label77.Name" xml:space="preserve">
-    <value>label77</value>
+  <data name="&gt;&gt;Description_tafel.Name" xml:space="preserve">
+    <value>Description_tafel</value>
   </data>
-  <data name="&gt;&gt;label77.Type" xml:space="preserve">
+  <data name="&gt;&gt;Description_tafel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label77.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Description_tafel.Parent" xml:space="preserve">
     <value>tabTafel</value>
   </data>
-  <data name="&gt;&gt;label77.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Description_tafel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="btnOCP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="btnTafelOCP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="btnOCP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnTafelOCP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnOCP.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnTafelOCP.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 119</value>
   </data>
-  <data name="btnOCP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btnTafelOCP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>15, 0, 0, 0</value>
   </data>
-  <data name="btnOCP.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnTafelOCP.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 39</value>
   </data>
-  <data name="btnOCP.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnTafelOCP.TabIndex" type="System.Int32, mscorlib">
     <value>107</value>
   </data>
-  <data name="btnOCP.Text" xml:space="preserve">
+  <data name="btnTafelOCP.Text" xml:space="preserve">
     <value>Run OCP</value>
   </data>
-  <data name="btnOCP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+  <data name="btnTafelOCP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
   </data>
-  <data name="&gt;&gt;btnOCP.Name" xml:space="preserve">
-    <value>btnOCP</value>
+  <data name="&gt;&gt;btnTafelOCP.Name" xml:space="preserve">
+    <value>btnTafelOCP</value>
   </data>
-  <data name="&gt;&gt;btnOCP.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnTafelOCP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOCP.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnTafelOCP.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;btnOCP.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnTafelOCP.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="CheckBoxAvgOcpTafel.AutoSize" type="System.Boolean, mscorlib">
@@ -6121,43 +6166,43 @@ for runnig</value>
   <data name="&gt;&gt;txtAvgTimeTafel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="label67.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label67.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="lblTime.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="label67.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblTime.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="label67.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label67.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 8</value>
   </data>
-  <data name="label67.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 37</value>
   </data>
-  <data name="label67.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblTime.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
-  <data name="label67.Text" xml:space="preserve">
+  <data name="lblTime.Text" xml:space="preserve">
     <value>Time</value>
   </data>
-  <data name="label67.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblTime.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="&gt;&gt;label67.Name" xml:space="preserve">
-    <value>label67</value>
+  <data name="&gt;&gt;lblTime.Name" xml:space="preserve">
+    <value>lblTime</value>
   </data>
-  <data name="&gt;&gt;label67.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label67.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTime.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;label67.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTime.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="txtDiifVoltage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -6190,34 +6235,34 @@ for runnig</value>
   <data name="&gt;&gt;txtDiifVoltage.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="textBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="txtTafelOcpTime.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="textBox4.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtTafelOcpTime.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>
   </data>
-  <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtTafelOcpTime.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 11</value>
   </data>
-  <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtTafelOcpTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 23</value>
   </data>
-  <data name="textBox4.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtTafelOcpTime.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
-  <data name="textBox4.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="txtTafelOcpTime.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
-  <data name="&gt;&gt;textBox4.Name" xml:space="preserve">
-    <value>textBox4</value>
+  <data name="&gt;&gt;txtTafelOcpTime.Name" xml:space="preserve">
+    <value>txtTafelOcpTime</value>
   </data>
-  <data name="&gt;&gt;textBox4.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelOcpTime.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;textBox4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelOcpTime.Parent" xml:space="preserve">
     <value>tableLayoutPanel3</value>
   </data>
-  <data name="&gt;&gt;textBox4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtTafelOcpTime.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -6257,7 +6302,7 @@ for runnig</value>
     <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="btnOCP" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CheckBoxAvgOcpTafel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ChekBoxDiffrencial" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblAvgTimeTafel" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblmV" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label58" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtAvgTimeTafel" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label67" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtDiifVoltage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="textBox4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,43.65436,Percent,47.25473,Percent,9.090909" /&gt;&lt;Rows Styles="Percent,25,Percent,25,Percent,25,Percent,25,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="btnTafelOCP" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="CheckBoxAvgOcpTafel" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ChekBoxDiffrencial" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblAvgTimeTafel" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblmV" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="label58" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtAvgTimeTafel" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblTime" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtDiifVoltage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtTafelOcpTime" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,43.65436,Percent,47.25473,Percent,9.090909" /&gt;&lt;Rows Styles="Percent,25,Percent,25,Percent,25,Percent,25,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="gbOCP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -6269,13 +6314,13 @@ for runnig</value>
     <value>5, 5</value>
   </data>
   <data name="gbOCP.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 190</value>
+    <value>0, 180</value>
   </data>
   <data name="gbOCP.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 8, 8, 8</value>
   </data>
   <data name="gbOCP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 190</value>
+    <value>184, 180</value>
   </data>
   <data name="gbOCP.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -6305,7 +6350,7 @@ for runnig</value>
     <value>5, 5, 5, 5</value>
   </data>
   <data name="tabTafel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 394</value>
+    <value>196, 413</value>
   </data>
   <data name="tabTafel.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -6332,7 +6377,7 @@ for runnig</value>
     <value>4, 4</value>
   </data>
   <data name="TabParameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 420</value>
+    <value>204, 439</value>
   </data>
   <data name="TabParameter.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -6359,7 +6404,7 @@ for runnig</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 428</value>
+    <value>212, 447</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -6503,7 +6548,7 @@ for runnig</value>
     <value>0, 0</value>
   </data>
   <data name="pnlParameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 502</value>
+    <value>216, 521</value>
   </data>
   <data name="pnlParameter.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -6908,7 +6953,7 @@ for runnig</value>
     <value>216, 557</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>502</value>
+    <value>521</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

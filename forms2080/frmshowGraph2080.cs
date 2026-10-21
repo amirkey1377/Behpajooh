@@ -20,6 +20,10 @@ namespace Skydat.forms2080
 {
     public partial class frmshowGraph2080 : Form
     {
+
+        public static int ChartScaleMultiplier = 2;
+        public static int SampleRateMultiplier = 1;
+
         [DllImport("User32.dll", CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private static extern IntPtr LoadCursorFromFile(String str);
 
@@ -87,8 +91,6 @@ namespace Skydat.forms2080
         public frmOption12080 opForm;
 
         // int shomar_cha_chc = 0;
-        long shomar_othertech = 0;
-        KeyEventArgs ee = new KeyEventArgs(Keys.Alt);
 
         bool smothState = true;
 
@@ -280,46 +282,56 @@ namespace Skydat.forms2080
 
                     case "DPV":
                         DPV techDPV = (DPV)tech;
-                        rtbParameters.Text += "E1 =" + techDPV.E1.ToString() + "\n";
-                        rtbParameters.Text += "E2 =" + techDPV.E2.ToString() + "\n";
-                        rtbParameters.Text += "HStep =" + techDPV.HStep.ToString() + "\n";
-                        rtbParameters.Text += "Pulse Width =" + techDPV.PulseWidth.ToString() + "\n";
-                        rtbParameters.Text += "Pulse Height =" + techDPV.PulseHeight.ToString() + "\n";
+                        rtbParameters.Text += "E1 =" + techDPV.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techDPV.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techDPV.HStep.Value.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Width =" + techDPV.PulseWidth.Value.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Height =" + techDPV.PulseHeight.Value.ToString() + "\n";
                         rtbParameters.Text += "Equilibrium Time =" + techDPV.EquilibriumTime.ToString() + "\n";
                         rtbParameters.Text += "Scan Rate =" + techDPV.ScanRate.ToString() + "\n";
-                        rtbParameters.Text += "TStep =" + techDPV.TStep.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techDPV.TStep.Value.ToString() + "\n";
                         break;
 
                     case "SWV":
                         SWV techSWV = (SWV)tech;
-                        rtbParameters.Text += "E1 =" + techSWV.E1.ToString() + "\n";
-                        rtbParameters.Text += "E2 =" + techSWV.E2.ToString() + "\n";
-                        rtbParameters.Text += "HStep =" + techSWV.HStep.ToString() + "\n";
-                        rtbParameters.Text += "Pulse Height =" + techSWV.PulseHeight.ToString() + "\n";
+                        rtbParameters.Text += "E1 =" + techSWV.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techSWV.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techSWV.HStep.Value.ToString() + "\n";
+                        rtbParameters.Text += "Pulse Height =" + techSWV.PulseHeight.Value.ToString() + "\n";
                         rtbParameters.Text += "Equilibrium Time =" + techSWV.EquilibriumTime.ToString() + "\n";
-                        rtbParameters.Text += "Scan Rate =" + techSWV.ScanRate.ToString() + "\n";
-                        rtbParameters.Text += "Frequency =" + techSWV.Frequency.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techSWV.ScanRate.Value.ToString() + "\n";
+                        rtbParameters.Text += "Frequency =" + techSWV.Frequency.Value.ToString() + "\n";
                         break;
 
                     case "CV":
                         CV techCV = (CV)tech;
-                        rtbParameters.Text += "E1 =" + techCV.E1.ToString() + "\n";
-                        rtbParameters.Text += "E2 =" + techCV.E2.ToString() + "\n";
-                        rtbParameters.Text += "E3 =" + techCV.E3.ToString() + "\n";
-                        rtbParameters.Text += "HStep =" + techCV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "E1 =" + techCV.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techCV.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "E3 =" + techCV.E3.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techCV.HStep.Value.ToString() + "\n";
                         rtbParameters.Text += "Equilibrium Time =" + techCV.EquilibriumTime.ToString() + "\n";
-                        rtbParameters.Text += "Scan Rate =" + techCV.ScanRate.ToString() + "\n";
-                        rtbParameters.Text += "TStep =" + techCV.TStep.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techCV.ScanRate.Value.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techCV.TStep.Value.ToString() + "\n";
                         break;
 
                     case "LSV":
                         LSV techLSV = (LSV)tech;
-                        rtbParameters.Text += "E1 =" + techLSV.E1.ToString() + "\n";
-                        rtbParameters.Text += "E2 =" + techLSV.E2.ToString() + "\n";
-                        rtbParameters.Text += "HStep =" + techLSV.HStep.ToString() + "\n";
+                        rtbParameters.Text += "E1 =" + techLSV.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techLSV.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techLSV.HStep.Value.ToString() + "\n";
                         rtbParameters.Text += "Equilibrium Time =" + techLSV.EquilibriumTime.ToString() + "\n";
-                        rtbParameters.Text += "Scan Rate =" + techLSV.ScanRate.ToString() + "\n";
-                        rtbParameters.Text += "TStep =" + techLSV.TStep.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techLSV.ScanRate.Value.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techLSV.TStep.Value.ToString() + "\n";
+                        break;
+
+                    case "Tafel":
+                        Tafel techTafel = (Tafel)tech;
+                        rtbParameters.Text += "E1 =" + techTafel.E1.Value.ToString() + "\n";
+                        rtbParameters.Text += "E2 =" + techTafel.E2.Value.ToString() + "\n";
+                        rtbParameters.Text += "HStep =" + techTafel.HStep.Value.ToString() + "\n";
+                        rtbParameters.Text += "Equilibrium Time =" + techTafel.EquilibriumTime.ToString() + "\n";
+                        rtbParameters.Text += "Scan Rate =" + techTafel.ScanRate.Value.ToString() + "\n";
+                        rtbParameters.Text += "TStep =" + techTafel.TStep.Value.ToString() + "\n";
                         break;
 
                 }
@@ -494,11 +506,11 @@ namespace Skydat.forms2080
                         graphPreSetup(npv.E1, npv.E2, npv.HStep);
                     }));
 
-                    if (device.Device.Model == "2066")
+                    if (device.Info.Model == "2066")
                     {
                         DoRun2(npv, npv.E1, npv.E2, npv.HStep, sp1);
                     }
-                    else if (device.Device.Model == "2190")
+                    else if (device.Info.Model == "2190")
                     {
                         CheckBuffer();
                     }
@@ -551,20 +563,79 @@ namespace Skydat.forms2080
 
                     int totalPoint = (ca.T1 + ca.T2) * ca.Cycles;
 
-                    this.Invoke(new Action(() =>
+                    if (ca.ColometryMode)
                     {
-                        OnlineChart.ChartAreas[0].AxisX.Maximum = totalPoint;
+                        this.Invoke(new Action(() =>
+                        {
+                            OnlineChart.ChartAreas[0].AxisY.Title = "Q(t)";
+                        }));
+
+                    }
+                    LastI = 0;
+                    LastT = 0;
+                    TotalQ[0] = 0;
+                    AvgI = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+                    bool OverFlow = false;
+                    double pos = 0;
+                    int PeriodTime = ca.T1 + ca.T2;
+                    double size = PeriodTime * ChartScaleMultiplier;
+
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
                         OnlineChart.ChartAreas[0].AxisX.Minimum = 0;
-                    }));
+                        OnlineChart.ChartAreas[0].AxisX.ScaleView.ZoomReset();
+                    });
+
+                    if (PeriodTime * ca.Cycles > 7200)
+                    {
+                        OverFlow = true;
+                    }
 
                     while (!EndTechFlag)
                     {
-                        readCA();
-                        if (ocpCount == totalPoint)
-                        {
+                        if (readCA(ca))
+                            if (size <= (OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum))
+                                switch (OverFlow)
+                                {
+                                    case false:
+                                        this.Invoke((MethodInvoker)delegate ()
+                                        {
+                                            double sample = 1;
+                                            if (SampleRateMultiplier != 0)
+                                            {
+                                                sample = SampleRateMultiplier;
+                                            }
+
+                                            pos += sample;
+                                            size += sample;
+                                            OnlineChart.ChartAreas[0].AxisX.ScaleView.Zoom(pos, size);
+                                        });
+                                        break;
+
+                                    case true:
+                                        this.Invoke((MethodInvoker)delegate ()
+                                        {
+                                            if (OnlineChart.ChartAreas[0].AxisX.Maximum - OnlineChart.ChartAreas[0].AxisX.Minimum >= (PeriodTime * ChartScaleMultiplier))
+                                            {
+                                                OnlineChart.Series[0].Points.RemoveAt(0);
+                                            }
+                                            OnlineChart.ChartAreas[0].AxisX.Minimum = OnlineChart.Series[0].Points[0].XValue - 1;
+                                            OnlineChart.ChartAreas[0].AxisX.Maximum = OnlineChart.Series[0].Points[OnlineChart.Series[0].Points.Count - 1].XValue;
+                                        });
+                                        break;
+                                }
+
+
+                        if (ocpCount > (totalPoint) * 10)
                             break;
-                        }
                     }
+
+                    this.Invoke((MethodInvoker)delegate ()
+                    {
+                        mainf.pbRunnigTech.Value = mainf.pbRunnigTech.Maximum;
+                       
+                    });
                 }
                 else
                 {
@@ -590,7 +661,13 @@ namespace Skydat.forms2080
                 this.Invoke(new Action(() =>
                 {
                     mainf.toolStripStatusLabel5.ForeColor = Color.DarkCyan;
+                    mainf.pbRunnigTech.Value = mainf.pbRunnigTech.Maximum;
+                    mainf.pbRunnigTech.ForeColor = Color.DarkCyan;
+                    mainf.toolStripStatusLabel5.Text = "Finshed";
+                    sp1.Close();
                 }));
+                Thread.Sleep(500);
+
 
                 if (StopFlag)
                     break;
@@ -808,12 +885,12 @@ namespace Skydat.forms2080
                 {
                 $"{dpvTech.Name}",
                 $"{dpvTech.ColorCode}",
-                $"{dpvTech.E1}",
-                $"{dpvTech.E2}",
-                $"{dpvTech.ScanRate}",
-                $"{dpvTech.HStep}",
-                $"{dpvTech.PulseWidth}",
-                $"{dpvTech.PulseHeight}",
+                $"{dpvTech.E1.Value}",
+                $"{dpvTech.E2.Value}",
+                $"{dpvTech.ScanRate.Value}",
+                $"{dpvTech.HStep.Value}",
+                $"{dpvTech.PulseWidth.Value}",
+                $"{dpvTech.PulseHeight.Value}",
                 $"{dpvTech.EquilibriumTime}",
                 $"{dpvTech.Comment}",
                 }));
@@ -839,11 +916,11 @@ namespace Skydat.forms2080
                 {
                 $"{swvTech.Name}",
                 $"{swvTech.ColorCode}",
-                $"{swvTech.E1}",
-                $"{swvTech.E2}",
-                $"{swvTech.ScanRate}",
-                $"{swvTech.HStep}",
-                $"{swvTech.PulseHeight}",
+                $"{swvTech.E1.Value}",
+                $"{swvTech.E2.Value}",
+                $"{swvTech.ScanRate.Value}",
+                $"{swvTech.HStep.Value}",
+                $"{swvTech.PulseHeight.Value}",
                 $"{swvTech.EquilibriumTime}",
                 $"{swvTech.Comment}",
                 }));
@@ -869,10 +946,10 @@ namespace Skydat.forms2080
                 {
                 $"{cvTech.Name}",
                 $"{cvTech.ColorCode}",
-                $"{cvTech.E1}",
-                $"{cvTech.E2}",
-                $"{cvTech.ScanRate}",
-                $"{cvTech.HStep}",
+                $"{cvTech.E1.Value}",
+                $"{cvTech.E2.Value}",
+                $"{cvTech.ScanRate.Value}",
+                $"{cvTech.HStep.Value}",
                 $"{cvTech.Cycles}",
                 $"{cvTech.EquilibriumTime}",
                 $"{cvTech.Comment}",
@@ -898,12 +975,40 @@ namespace Skydat.forms2080
                 {
                 $"{lsvTech.Name}",
                 $"{lsvTech.ColorCode}",
-                $"{lsvTech.E1}",
-                $"{lsvTech.E2}",
-                $"{lsvTech.ScanRate}",
-                $"{lsvTech.HStep}",
+                $"{lsvTech.E1.Value}",
+                $"{lsvTech.E2.Value}",
+                $"{lsvTech.ScanRate.Value}",
+                $"{lsvTech.HStep.Value}",
                 $"{lsvTech.EquilibriumTime}",
                 $"{lsvTech.Comment}",
+                }));
+            }
+            else if (Tech.Number == 8)//Tafel
+            {
+                Tafel tafelTech = Tech as Tafel;
+                //// 📌 نوشتن پارامتر های تکنیک
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                "TechName",
+                "Color",
+                "E1",
+                "E2",
+                "Scan Rate",
+                "HStep",
+                "EquilibriumTime",
+                "Comment"
+                }));
+
+                sb.AppendLine(string.Join(delimiter, new[]
+                {
+                $"{tafelTech.Name}",
+                $"{tafelTech.ColorCode}",
+                $"{tafelTech.E1.Value}",
+                $"{tafelTech.E2.Value}",
+                $"{tafelTech.ScanRate.Value}",
+                $"{tafelTech.HStep.Value}",
+                $"{tafelTech.EquilibriumTime}",
+                $"{tafelTech.Comment}",
                 }));
             }
             else if (Tech.Number == 6)//OCP
@@ -923,7 +1028,7 @@ namespace Skydat.forms2080
                 {
                 $"{ocpTech.Name}",
                 $"{ocpTech.ColorCode}",
-                $"{ocpTech.time}",
+                $"{ocpTech.time.Value}",
                 $"{ocpTech.EquilibriumTime}",
                 $"{ocpTech.Comment}",
                 }));
@@ -1219,7 +1324,7 @@ namespace Skydat.forms2080
                 return;
             }
 
-            if (device.Device.Model == "2066")
+            if (device.Info.Model == "2066")
             {
                 string CommondRun = $"@{tech.Number}@";
                 long Temp = (long)Analiz_CP1;
@@ -1244,11 +1349,10 @@ namespace Skydat.forms2080
 
                 VoltageBuffer = new int[100];
             }
-            else if (device.Device.Model == "2190")
+            else if (device.Info.Model == "2190")
             {
                 byte[] buffer = new byte[1];
-                byte Technum = tech.Number;
-                buffer[0] = Technum;
+
 
                 VoltageBuffer = tech.SendToUsb(ref TotalByteExpectedToRead, ref buffer);
 
@@ -1262,7 +1366,8 @@ namespace Skydat.forms2080
         int ReceivedBytesThreshold = 4;
 
         int ocpCount = 0;
-        void readOCP()
+
+        private void readOCP()
         {
 
             int bytesAvailable = sp1.BytesToRead;
@@ -1310,7 +1415,7 @@ namespace Skydat.forms2080
                 byte[] buffer = new byte[bytesAvailable];
 
 
-                int test = sp1.Read(buffer, 0, bytesAvailable);
+                sp1.Read(buffer, 0, bytesAvailable);
 
                 int TechNum = buffer[0];
 
@@ -1343,18 +1448,7 @@ namespace Skydat.forms2080
                     DataX[0] = ocpCount;
 
                     PlotGraph(OnlineChart, DataX, DataY);
-                    //if (ExpectedByteToRead <= 40)
-                    //{
-                    //    //تکنیک تمام شده
-                    //    Setfilllable($"تکنیک تمام شده", "sucses", 1);
-                    //    RecivedPacketCounter = 0;
-                    //    EndTechFlag = true;
-                    //    StartFlag = false;
-                    //    //this.Invoke(new Action(() =>
-                    //    //{
-                    //    //    mainf.pbRunnigTech.Value += mainf.pbRunnigTech.Maximum;
-                    //    //}));
-                    //}
+
                     ocpCount++;
 
                 }
@@ -1368,7 +1462,15 @@ namespace Skydat.forms2080
 
         }
 
-        void readCA()
+        private double[] TotalQ = new double[1] { 0 };
+
+        private double[] AvgI = new double[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        private double LastI { get; set; } = 0;
+
+        private double LastT { get; set; } = 0;
+
+        private bool readCA(CA RunTech)
         {
             int bytesAvailable = sp1.BytesToRead;
             int Erorr = 0;
@@ -1388,7 +1490,7 @@ namespace Skydat.forms2080
                     }
                     if (EndTechFlag)
                     {
-                        return;
+                        return false;
                     }
                 }
 
@@ -1401,13 +1503,13 @@ namespace Skydat.forms2080
                     {
                         StartFlag = true;
                         Setfilllable("Start", "sucses");
-                        return;
+                        return false;
                     }
                     else
                     {
                         //دوباره بفرست
                         Setfilllable("دوباره بفرست", "error");
-                        return;
+                        return false;
                     }
                 }
 
@@ -1424,7 +1526,7 @@ namespace Skydat.forms2080
                     if (techname != TechNum)
                     {
                         Setfilllable("بافر به درستی خوانده نمیشود!", "error");
-                        return;
+                        return false;
                     }
                 }
                 else
@@ -1439,73 +1541,162 @@ namespace Skydat.forms2080
                 }
 
                 double[] DataY = new double[1];
-                int[] DataX = new int[1];
-
+                double[] DataX = new double[1];
+                double[] Avg = new double[1];
 
                 if (CheckSum == buffer[6])
                 {
                     DataY[0] = ((Int32)((buffer[2] << 24) | (buffer[3] << 16) | (buffer[4] << 8) | buffer[5])) * (-1 / 10.0);
-                    DataX[0] = ocpCount;
-
-                    PlotGraph(OnlineChart, DataX, DataY);
+                    DataX[0] = Math.Round(ocpCount / 10.0, 1);
                     ocpCount++;
+
+
+                    int sample = 1;
+                    if (SampleRateMultiplier != 0)
+                    {
+                        sample = SampleRateMultiplier;
+                    }
+
+                    int i = (int)(DataX[0] * 10) % 10;
+                    AvgI[i] = DataY[0];
+
+                    if (i == 0)
+                    {
+                        int validDataCount = AvgI.Count(x => x != 0);
+
+                        if (validDataCount >= 6)
+                        {
+                            if (RunTech.ColometryMode)
+                            {
+                                double[] sortedAvgI = (double[])AvgI.Clone();
+                                Array.Sort(sortedAvgI);
+                                Array.Reverse(sortedAvgI);
+
+                                double sum = 0;
+                                for (int k = 2; k < sortedAvgI.Length - 2; k++)
+                                {
+                                    sum += sortedAvgI[k];
+                                }
+                                double currentI = sum / (sortedAvgI.Length - 4);
+                                double currentT = DataX[0];
+
+                                double DeltaI = (currentI + LastI);
+                                if (currentI - LastI == 0)
+                                    DeltaI = 0;
+                                else
+                                    DeltaI /= 2.0;
+
+                                double deltaT = currentT - LastT;
+
+                                TotalQ[0] = TotalQ[0] + (DeltaI * deltaT);
+                                TotalQ[0] = Math.Round(TotalQ[0], 4);
+
+                                LastI = currentI;
+                                LastT = currentT;
+
+                                double[] abs = new double[1] { TotalQ[0] };
+
+                                if (DataX[0] % sample == 0)
+                                {
+                                    PlotGraph(OnlineChart, DataX, abs, sample);
+                                    return true;
+                                }
+
+                            }
+                            else
+                            {
+                                double[] sortedAvgI = (double[])AvgI.Clone();
+                                Array.Sort(sortedAvgI);
+                                Array.Reverse(sortedAvgI);
+
+                                double sum = 0;
+                                for (int k = 2; k < sortedAvgI.Length - 2; k++)
+                                {
+                                    sum += sortedAvgI[k];
+                                }
+                                Avg[0] = sum / (sortedAvgI.Length - 4);
+                                Avg[0] = Math.Round(Avg[0], 4);
+                                if (DataX[0] % sample == 0)
+                                {
+                                    PlotGraph(OnlineChart, DataX, Avg, sample);
+                                    return true;
+                                }
+                                LastT = DataX[0];
+                            }
+                        }
+                    }
+
+
+
+
                 }
                 else
                 {
                     Setfilllable("چکسام درست نیست", "error");
-                    return;
+                    return false;
                 }
 
+
             }
+
+            return false;
+
 
         }
 
         void CheckBuffer()
         {
-            while (!EndTechFlag)
+            try
             {
-                int bytesAvailable = sp1.BytesToRead;
-                int Erorr = 0;
-                while (bytesAvailable == 0)
+                while (!EndTechFlag)
                 {
-                    Thread.Sleep(10);
-                    Erorr++;
-                    if (Erorr >= 1000 || !sp1.IsOpen)
+                    int bytesAvailable = sp1.BytesToRead;
+                    int Erorr = 0;
+                    while (bytesAvailable == 0)
                     {
-                        //ارور
-                        Setfilllable($"bytesAvailable == 0 error", "error");
-                        Erorr = 0;
-                        //return;
-                    }
-                    bytesAvailable = sp1.BytesToRead;
-                    if (EndTechFlag)
-                    {
-                        return;
-                    }
-                }
-
-                if (bytesAvailable > 0)
-                {
-                    Erorr = 0;
-                    while (bytesAvailable < ReceivedBytesThreshold)
-                    {
-                        bytesAvailable = sp1.BytesToRead;
                         Thread.Sleep(10);
                         Erorr++;
                         if (Erorr >= 1000 || !sp1.IsOpen)
                         {
                             //ارور
-                            Setfilllable($"bytesAvailable <= ReceivedBytesThreshold error", "error");
+                            Setfilllable($"bytesAvailable == 0 error", "error");
+                            Erorr = 0;
                             //return;
                         }
+                        bytesAvailable = sp1.BytesToRead;
                         if (EndTechFlag)
                         {
                             return;
                         }
                     }
 
-                    ReadIncomBuffer(bytesAvailable);
+                    if (bytesAvailable > 0)
+                    {
+                        Erorr = 0;
+                        while (bytesAvailable < ReceivedBytesThreshold)
+                        {
+                            bytesAvailable = sp1.BytesToRead;
+                            Thread.Sleep(10);
+                            Erorr++;
+                            if (Erorr >= 1000 || !sp1.IsOpen)
+                            {
+                                //ارور
+                                Setfilllable($"bytesAvailable <= ReceivedBytesThreshold error", "error");
+                                //return;
+                            }
+                            if (EndTechFlag)
+                            {
+                                return;
+                            }
+                        }
+
+                        ReadIncomBuffer(bytesAvailable);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -1725,6 +1916,62 @@ namespace Skydat.forms2080
                 //throw;
             }
 
+        }
+
+        public void PlotGraph(Chart chart, double[] xValues, double[] yValues, int sample)
+        {
+            if (chart == null || xValues == null || yValues == null)
+                return;
+
+            if (chart.InvokeRequired)
+            {
+                chart.Invoke(new Action(() => PlotGraph(chart, xValues, yValues, sample)));
+                return;
+            }
+
+            Series series;
+
+            if (chart.Series.IndexOf("live") == -1)
+            {
+                series = new Series("live")
+                {
+                    ChartType = CurrentGraphChartType,
+                    BorderWidth = 3,
+                    Color = Color.Red
+                };
+
+                chart.Series.Add(series);
+            }
+            else
+            {
+                series = chart.Series["live"];
+            }
+
+            chart.SuspendLayout();
+
+            try
+            {
+                series.Points.SuspendUpdates();
+
+                // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
+                var medianFiltered = MedianFilter(yValues.ToList(), windowSize: 3);
+
+                List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 5);
+
+
+                for (int i = 0; i < yValues.Length; i++)
+                {
+                    series.Points.AddXY(xValues[i], smothedX[i]);
+                }
+                mainf.pbRunnigTech.Value += sample;
+
+                series.Points.ResumeUpdates();
+            }
+            finally
+            {
+                chart.ResumeLayout();
+                chart.Invalidate();
+            }
         }
 
         public void PlotGraph(Chart chart, int xValue, double yValue)
@@ -2001,7 +2248,10 @@ namespace Skydat.forms2080
                         break;
                 }
             }
-            catch { }
+            catch(Exception ex) {
+                MessageBox.Show(ex.Message);
+            
+            }
         }
 
         private void Setfilllable(string txt, string title = "log")

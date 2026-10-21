@@ -10,7 +10,7 @@ namespace Skydat
 {
     public class DeviceSpecification
     {
-        public DeviceInfo Device { get; set; }
+        public DeviceInfo Info { get; set; }
 
         public Dictionary<string, TechniqueSpecification>
             Techniques

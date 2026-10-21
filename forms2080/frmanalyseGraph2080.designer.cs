@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmanalyseGraph2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDataPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,6 +68,8 @@ namespace Skydat.forms2080
             this.btnzoomout_1 = new System.Windows.Forms.Button();
             this.btnshowgrid_1 = new System.Windows.Forms.Button();
             this.btnshowaxes_1 = new System.Windows.Forms.Button();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.dschart2 = new Skydat.datasets.dschart2();
             this.pnlParam = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -118,12 +120,11 @@ namespace Skydat.forms2080
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
             this.dschart21 = new Skydat.datasets.dschart2();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.grayToolStripButton1 = new Skydat.GrayToolStripButton();
             this.grayToolStripButton2 = new Skydat.GrayToolStripButton();
             this.btnzoominTS = new Skydat.GrayToolStripButton();
             this.btnZoomOutTS = new Skydat.GrayToolStripButton();
+            this.toolTipBtnshowvalue = new Skydat.GrayToolStripButton();
             this.btnSelectAreaTS = new Skydat.GrayToolStripButton();
             this.grayToolStripButton3 = new Skydat.GrayToolStripButton();
             this.grayToolStripButton4 = new Skydat.GrayToolStripButton();
@@ -131,7 +132,8 @@ namespace Skydat.forms2080
             this.grayToolStripButton6 = new Skydat.GrayToolStripButton();
             this.grayToolStripButton7 = new Skydat.GrayToolStripButton();
             this.tsBtnDrawLine = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton8 = new Skydat.GrayToolStripButton();
+            this.btnSelectLines = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton9 = new Skydat.GrayToolStripButton();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
             this.pnlGraph.SuspendLayout();
@@ -144,6 +146,7 @@ namespace Skydat.forms2080
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tChart2)).BeginInit();
             this.panel2.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart2)).BeginInit();
             this.pnlParam.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -154,7 +157,6 @@ namespace Skydat.forms2080
             this.tsFile.SuspendLayout();
             this.tsGraphTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart21)).BeginInit();
-            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -201,15 +203,15 @@ namespace Skydat.forms2080
             // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
-            chartArea7.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
-            chartArea7.BackColor = System.Drawing.Color.Black;
-            chartArea7.CursorX.IsUserEnabled = true;
-            chartArea7.CursorX.IsUserSelectionEnabled = true;
-            chartArea7.Name = "ChartArea1";
-            chartArea7.Position.Auto = false;
-            chartArea7.Position.Height = 100F;
-            chartArea7.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea7);
+            chartArea1.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
+            chartArea1.BackColor = System.Drawing.Color.Black;
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 100F;
+            chartArea1.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
@@ -242,10 +244,10 @@ namespace Skydat.forms2080
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.toolStrip2);
             this.splitContainer.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer.Panel2.Controls.Add(this.tChart2);
             this.splitContainer.Panel2.Controls.Add(this.panel2);
+            this.splitContainer.Panel2.Controls.Add(this.toolStrip2);
             // 
             // toolStrip1
             // 
@@ -257,6 +259,7 @@ namespace Skydat.forms2080
             this.grayToolStripButton2,
             this.btnzoominTS,
             this.btnZoomOutTS,
+            this.toolTipBtnshowvalue,
             this.btnSelectAreaTS,
             this.toolStripButton7,
             this.toolStripButton6,
@@ -416,12 +419,12 @@ namespace Skydat.forms2080
             // 
             this.tChart2.BackColor = System.Drawing.Color.Black;
             this.tChart2.BorderlineColor = System.Drawing.Color.Black;
-            chartArea8.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea8.Name = "ChartArea1";
-            chartArea8.Position.Auto = false;
-            chartArea8.Position.Height = 100F;
-            chartArea8.Position.Width = 100F;
-            this.tChart2.ChartAreas.Add(chartArea8);
+            chartArea2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.Position.Auto = false;
+            chartArea2.Position.Height = 100F;
+            chartArea2.Position.Width = 100F;
+            this.tChart2.ChartAreas.Add(chartArea2);
             this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart2, "tChart2");
             this.tChart2.Name = "tChart2";
@@ -551,6 +554,32 @@ namespace Skydat.forms2080
             this.btnshowaxes_1.Name = "btnshowaxes_1";
             this.btnshowaxes_1.UseVisualStyleBackColor = false;
             this.btnshowaxes_1.Click += new System.EventHandler(this.btnshowaxes_1_Click);
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(30, 30);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.grayToolStripButton3,
+            this.grayToolStripButton4,
+            this.grayToolStripButton5,
+            this.grayToolStripButton6,
+            this.grayToolStripButton7,
+            this.toolStripButton10,
+            this.tsBtnDrawLine,
+            this.btnSelectLines,
+            this.grayToolStripButton9});
+            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton10.Image = global::Skydat.Properties.Resources.applications_32;
+            resources.ApplyResources(this.toolStripButton10, "toolStripButton10");
+            this.toolStripButton10.Name = "toolStripButton10";
             // 
             // dschart2
             // 
@@ -960,31 +989,6 @@ namespace Skydat.forms2080
             this.dschart21.DataSetName = "dschart2";
             this.dschart21.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // toolStrip2
-            // 
-            this.toolStrip2.BackColor = System.Drawing.Color.Gainsboro;
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
-            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(30, 30);
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.grayToolStripButton3,
-            this.grayToolStripButton4,
-            this.grayToolStripButton5,
-            this.grayToolStripButton6,
-            this.grayToolStripButton7,
-            this.toolStripButton10,
-            this.tsBtnDrawLine,
-            this.grayToolStripButton8});
-            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            // 
-            // toolStripButton10
-            // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton10.Image = global::Skydat.Properties.Resources.applications_32;
-            resources.ApplyResources(this.toolStripButton10, "toolStripButton10");
-            this.toolStripButton10.Name = "toolStripButton10";
-            // 
             // grayToolStripButton1
             // 
             this.grayToolStripButton1.Checked = true;
@@ -1023,6 +1027,15 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.btnZoomOutTS, "btnZoomOutTS");
             this.btnZoomOutTS.Name = "btnZoomOutTS";
             this.btnZoomOutTS.CheckedChanged += new System.EventHandler(this.btnzoomout_Click);
+            // 
+            // toolTipBtnshowvalue
+            // 
+            this.toolTipBtnshowvalue.CheckOnClick = true;
+            this.toolTipBtnshowvalue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolTipBtnshowvalue.Image = global::Skydat.Properties.Resources.cursor_icon;
+            resources.ApplyResources(this.toolTipBtnshowvalue, "toolTipBtnshowvalue");
+            this.toolTipBtnshowvalue.Name = "toolTipBtnshowvalue";
+            this.toolTipBtnshowvalue.Click += new System.EventHandler(this.toolTipBtnshowvalue_Click);
             // 
             // btnSelectAreaTS
             // 
@@ -1085,12 +1098,25 @@ namespace Skydat.forms2080
             this.tsBtnDrawLine.Name = "tsBtnDrawLine";
             this.tsBtnDrawLine.CheckedChanged += new System.EventHandler(this.button1_Click);
             // 
-            // grayToolStripButton8
+            // btnSelectLines
             // 
-            this.grayToolStripButton8.CheckOnClick = true;
-            this.grayToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.grayToolStripButton8, "grayToolStripButton8");
-            this.grayToolStripButton8.Name = "grayToolStripButton8";
+            this.btnSelectLines.CheckOnClick = true;
+            this.btnSelectLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSelectLines.Image = global::Skydat.Properties.Resources.chart_line_icon;
+            resources.ApplyResources(this.btnSelectLines, "btnSelectLines");
+            this.btnSelectLines.Name = "btnSelectLines";
+            this.btnSelectLines.CheckedChanged += new System.EventHandler(this.grayToolStripButton8_CheckedChanged);
+            this.btnSelectLines.Click += new System.EventHandler(this.grayToolStripButton8_Click);
+            // 
+            // grayToolStripButton9
+            // 
+            this.grayToolStripButton9.CheckOnClick = true;
+            this.grayToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton9.Image = global::Skydat.Properties.Resources.chart_line_delete_icon;
+            resources.ApplyResources(this.grayToolStripButton9, "grayToolStripButton9");
+            this.grayToolStripButton9.Name = "grayToolStripButton9";
+            this.grayToolStripButton9.CheckedChanged += new System.EventHandler(this.grayToolStripButton9_CheckedChanged);
+            this.grayToolStripButton9.Click += new System.EventHandler(this.grayToolStripButton9_Click);
             // 
             // frmanalyseGraph2080
             // 
@@ -1123,6 +1149,8 @@ namespace Skydat.forms2080
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tChart2)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart2)).EndInit();
             this.pnlParam.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -1137,8 +1165,6 @@ namespace Skydat.forms2080
             this.tsGraphTools.ResumeLayout(false);
             this.tsGraphTools.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dschart21)).EndInit();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1249,6 +1275,8 @@ namespace Skydat.forms2080
         private GrayToolStripButton grayToolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private GrayToolStripButton tsBtnDrawLine;
-        private GrayToolStripButton grayToolStripButton8;
+        private GrayToolStripButton btnSelectLines;
+        private GrayToolStripButton toolTipBtnshowvalue;
+        private GrayToolStripButton grayToolStripButton9;
     }
 }

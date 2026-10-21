@@ -48,13 +48,47 @@ namespace Skydat
 
         public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Voltage(mV)" };
 
-        public SWV(double E1, double E2, double ScanRate, double HStep, double PulseHeight, int EquilibriumTime = 0, string comment = "")
+        public SWV(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")
+        {
+            specific.InitializeParameterNames();
+
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, e1.Default, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, e2.Default, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification ScanRate = specific.Parameters["ScanRate"];
+            _ScanRate = new Parameter(ScanRate.Name, ScanRate.Description, ScanRate.Default, ScanRate.Max, ScanRate.Min, ScanRate.Unit, ScanRate.Resolution);
+
+            ParameterSpecification Hstep = specific.Parameters["Hstep"];
+            _HStep = new Parameter(Hstep.Name, Hstep.Description, Hstep.Default, Hstep.Max, Hstep.Min, Hstep.Unit, Hstep.Resolution);
+
+            ParameterSpecification PulseHeight = specific.Parameters["PulseHeight"];
+            _PulseHeight = new Parameter(PulseHeight.Name, PulseHeight.Description, PulseHeight.Default, PulseHeight.Max, PulseHeight.Min, PulseHeight.Unit, PulseHeight.Resolution);
+
+            ParameterSpecification Frequency = specific.Parameters["Frequency"];
+            _Frequency = new Parameter(Frequency.Name, Frequency.Description, Frequency.Default, Frequency.Max, Frequency.Min, Frequency.Unit, Frequency.Resolution);
+
+            SetFrequency();
+
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+
+            _HStep.ValueChanged += HStep_ValueChanged;
+            _ScanRate.ValueChanged += HStep_ValueChanged;
+
+        }
+
+        private SWV(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter PulseHeight, Parameter Frequency, int EquilibriumTime = 0, string comment = "")
         {
             _E1 = E1;
             _E2 = E2;
             _ScanRate = ScanRate;
             _HStep = HStep;
-            SetFrequency();
+            _Frequency = Frequency;
             _PulseHeight = PulseHeight;
             _EquilibriumTime = EquilibriumTime;
             Comment = comment;
@@ -62,83 +96,76 @@ namespace Skydat
             ColorCode = ColorUtility.GenerateHighContrastColor();
         }
 
-        public double E1
+        public SWV(TechniqueSpecification specific, double E1, double E2, double ScanRate, double HStep, double PulseWidth, int EquilibriumTime = 0, string comment = "")
+        {
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, E1, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, E2, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification ScanRateSpecific = specific.Parameters["ScanRate"];
+            _ScanRate = new Parameter(ScanRateSpecific.Name, ScanRateSpecific.Description, ScanRate, ScanRateSpecific.Max, ScanRateSpecific.Min, ScanRateSpecific.Unit, ScanRateSpecific.Resolution);
+
+            ParameterSpecification Hstep = specific.Parameters["Hstep"];
+            _HStep = new Parameter(Hstep.Name, Hstep.Description, HStep, Hstep.Max, Hstep.Min, Hstep.Unit, Hstep.Resolution);
+
+            ParameterSpecification PulseHeight = specific.Parameters["PulseHeight"];
+            _PulseHeight = new Parameter(PulseHeight.Name, PulseHeight.Description, PulseHeight.Default, PulseHeight.Max, PulseHeight.Min, PulseHeight.Unit, PulseHeight.Resolution);
+
+            ParameterSpecification Frequency = specific.Parameters["Frequency"];
+            _Frequency = new Parameter(Frequency.Name, Frequency.Description, Frequency.Default, Frequency.Max, Frequency.Min, Frequency.Unit, Frequency.Resolution);
+
+            SetFrequency();
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+        public Parameter E1
         {
             get
             {
                 return _E1;
             }
-            set
-            {
-                if (value >= -8 && value <= 8)
-                {
-                    _E1 = clasglobal.swvprms_ocp.E1 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double E2
+        public Parameter E2
         {
             get
             {
                 return _E2;
             }
-            set
-            {
-                if (value >= -8 && value <= 8)
-                {
-                    _E2 = clasglobal.swvprms_ocp.E2 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double ScanRate
+        public Parameter ScanRate
         {
             get
             {
                 return _ScanRate;
             }
-            set
-            {
-                if (value >= 0.001 && value <= 25)
-                {
-                    _ScanRate = clasglobal.swvprms_ocp.ScanRate = value;
-                    SetFrequency();
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double HStep
+        public Parameter HStep
         {
             get
             {
                 return _HStep;
             }
-            set
-            {
-                if (value >= 0.001 && value <= 0.025)
-                {
-                    _HStep = clasglobal.swvprms_ocp.HStep = value;
-                    SetFrequency();
-
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double Frequency
+        public Parameter Frequency
         {
             get
             {
                 return _Frequency;
             }
+        }
+
+        private void HStep_ValueChanged(object sender, EventArgs e)
+        {
+            SetFrequency();
         }
 
         private void SetFrequency()
@@ -147,9 +174,9 @@ namespace Skydat
                 return;
 
             double divide = Math.Round(_ScanRate / _HStep, 3);
-            if (divide >= 1 && divide <= 1000)
+            if (divide >= _Frequency.LowerLimit && divide <= _Frequency.UpperLimit)
             {
-                _Frequency = clasglobal.swvprms_ocp.Frequency = divide;
+                _Frequency.Value = divide;
             }
             else
             {
@@ -157,20 +184,11 @@ namespace Skydat
             }
         }
 
-        public double PulseHeight
+        public Parameter PulseHeight
         {
             get
             {
                 return _PulseHeight;
-            }
-            set
-            {
-                if (value >= 0.05 && (_PulseHeight - 0.5) <= 0.025)
-                {
-                    _PulseHeight = clasglobal.swvprms_ocp.PulseHeight = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
             }
         }
 
@@ -192,17 +210,17 @@ namespace Skydat
             }
         }
 
-        private double _E1;
-        private double _E2;
-        private double _ScanRate;
-        private double _HStep;
-        private double _Frequency;
-        private double _PulseHeight;
+        private Parameter _E1;
+        private Parameter _E2;
+        private Parameter _ScanRate;
+        private Parameter _HStep;
+        private Parameter _Frequency;
+        private Parameter _PulseHeight;
         private int _EquilibriumTime;
 
         public ITechniques Clone()
         {
-            ITechniques ClonedTech = new SWV(_E1, _E2, _ScanRate, _HStep, _PulseHeight, _EquilibriumTime, Comment);
+            ITechniques ClonedTech = new SWV(_E1, _E2, _ScanRate, _HStep, _PulseHeight, _Frequency, _EquilibriumTime, Comment);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
             if (SeriesPath != null)
@@ -267,6 +285,8 @@ namespace Skydat
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)
         {
             int[] VoltageBuffer;
+            byte Technum = number;
+            buffer[0] = Technum;
 
             Array.Resize(ref buffer, 17);
 

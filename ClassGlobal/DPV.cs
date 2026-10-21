@@ -50,14 +50,51 @@ namespace Skydat
 
         public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Voltage(mV)" };
 
+        public DPV(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")
+        {
+            specific.InitializeParameterNames();
 
-        public DPV(double E1, double E2, double ScanRate, double HStep, double PulseWidth, double PulseHeight, int EquilibriumTime = 0, string comment = "")
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, e1.Default, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, e2.Default, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification ScanRate = specific.Parameters["ScanRate"];
+            _ScanRate = new Parameter(ScanRate.Name, ScanRate.Description, ScanRate.Default, ScanRate.Max, ScanRate.Min, ScanRate.Unit, ScanRate.Resolution);
+
+            ParameterSpecification Hstep = specific.Parameters["Hstep"];
+            _HStep = new Parameter(Hstep.Name, Hstep.Description, Hstep.Default, Hstep.Max, Hstep.Min, Hstep.Unit, Hstep.Resolution);
+
+            ParameterSpecification PulseWidth = specific.Parameters["PulseWidth"];
+            _PulseWidth = new Parameter(PulseWidth.Name, PulseWidth.Description, PulseWidth.Default, PulseWidth.Max, PulseWidth.Min, PulseWidth.Unit, PulseWidth.Resolution);
+
+            ParameterSpecification PulseHeight = specific.Parameters["PulseHeight"];
+            _PulseHeight = new Parameter(PulseHeight.Name, PulseHeight.Description, PulseHeight.Default, PulseHeight.Max, PulseHeight.Min, PulseHeight.Unit, PulseHeight.Resolution);
+
+            ParameterSpecification Tstep = specific.Parameters["Tstep"];
+            _TStep = new Parameter(Tstep.Name, Tstep.Description, Tstep.Default, Tstep.Max, Tstep.Min, Tstep.Unit, Tstep.Resolution);
+
+            SetTstep();
+
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+
+            _HStep.ValueChanged += HStep_ValueChanged;
+            _ScanRate.ValueChanged += HStep_ValueChanged;
+
+        }
+
+        public DPV(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter PulseWidth
+            , Parameter PulseHeight, Parameter TStep,  int EquilibriumTime = 0, string comment = "")
         {
             _E1 = E1;
             _E2 = E2;
             _ScanRate = ScanRate;
             _HStep = HStep;
-            SetTstep();
+            _TStep = TStep;
             _PulseWidth = PulseWidth;
             _PulseHeight = PulseHeight;
             _EquilibriumTime = EquilibriumTime;
@@ -66,78 +103,76 @@ namespace Skydat
             ColorCode = ColorUtility.GenerateHighContrastColor();
         }
 
-        public double E1
+        public DPV(TechniqueSpecification specific, double E1, double E2, double ScanRate, double HStep
+            , double PulseWidth, double PulseHeight, int EquilibriumTime = 0, string comment = "")
+        {
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, E1, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, E2, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification ScanRateSpecific = specific.Parameters["ScanRate"];
+            _ScanRate = new Parameter(ScanRateSpecific.Name, ScanRateSpecific.Description, ScanRate, ScanRateSpecific.Max, ScanRateSpecific.Min, ScanRateSpecific.Unit, ScanRateSpecific.Resolution);
+
+            ParameterSpecification Hstep = specific.Parameters["Hstep"];
+            _HStep = new Parameter(Hstep.Name, Hstep.Description, HStep, Hstep.Max, Hstep.Min, Hstep.Unit, Hstep.Resolution);
+
+            ParameterSpecification PulseWidthSpecific = specific.Parameters["PulseWidth"];
+            _PulseWidth = new Parameter(PulseWidthSpecific.Name, PulseWidthSpecific.Description, PulseWidth, PulseWidthSpecific.Max, PulseWidthSpecific.Min, PulseWidthSpecific.Unit, PulseWidthSpecific.Resolution);
+
+            ParameterSpecification PulseHeightSpecific = specific.Parameters["PulseHeight"];
+            _PulseHeight = new Parameter(PulseHeightSpecific.Name, PulseHeightSpecific.Description, PulseHeight, PulseHeightSpecific.Max, PulseHeightSpecific.Min, PulseHeightSpecific.Unit, PulseHeightSpecific.Resolution);
+
+            ParameterSpecification Tstep = specific.Parameters["Tstep"];
+            _TStep = new Parameter(Tstep.Name, Tstep.Description, Tstep.Default, Tstep.Max, Tstep.Min, Tstep.Unit, Tstep.Resolution);
+
+            SetTstep();
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+        private void HStep_ValueChanged(object sender, EventArgs e)
+        {
+            SetTstep();
+        }
+
+        public Parameter E1
         {
             get
             {
                 return _E1;
             }
-            set
-            {
-                if (value >= -8 && value <= 8)
-                {
-                    _E1 = clasglobal.dpvprms_ocp.E1 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double E2
+        public Parameter E2
         {
             get
             {
                 return _E2;
             }
-            set
-            {
-                if (value >= -8 && value <= 8)
-                {
-                    _E2 = clasglobal.dpvprms_ocp.E2 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double ScanRate
+        public Parameter ScanRate
         {
             get
             {
                 return _ScanRate;
             }
-            set
-            {
-                if (value >= 0.0001 && value <= 0.25)
-                {
-                    _ScanRate = clasglobal.dpvprms_ocp.ScanRate = value;
-                    SetTstep();
-                    
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+
         }
 
-        public double HStep
+        public Parameter HStep
         {
             get
             {
                 return _HStep;
             }
-            set
-            {
-                if (value >= 0.001 && value <= 0.025)
-                {
-                    _HStep = clasglobal.dpvprms_ocp.HStep = value;
-                    SetTstep();
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double TStep
+        public Parameter TStep
         {
             get
             {
@@ -145,37 +180,19 @@ namespace Skydat
             }
         }
 
-        public double PulseWidth
+        public Parameter PulseWidth
         {
             get
             {
                 return _PulseWidth;
             }
-            set
-            {
-                if (value >= 0.05 && value <= (_TStep - 0.05))
-                {
-                    _PulseWidth = clasglobal.dpvprms_ocp.PulseWidth = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
         }
 
-        public double PulseHeight
+        public Parameter PulseHeight
         {
             get
             {
                 return _PulseHeight;
-            }
-            set
-            {
-                if (value >= 0.001 && value <= 0.25)
-                {
-                    _PulseHeight = clasglobal.dpvprms_ocp.PulseHeight = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
             }
         }
 
@@ -190,7 +207,6 @@ namespace Skydat
                 if (value >= 0 && _EquilibriumTime <= 2000)
                 {
                     _EquilibriumTime = value;
-                    clasglobal.dpvprms_ocp.EquilibriumTime = (double)value;
                 }
                 else
                     MessageBox.Show("مقدار وارد شده مجاز نیست");
@@ -200,9 +216,10 @@ namespace Skydat
         private void SetTstep()
         {
             double divide = Math.Round(_HStep / _ScanRate, 3);
-            if (divide >= 0.1 && divide <= 10)
+            if (divide >= _TStep.LowerLimit && divide <= _TStep.UpperLimit)
             {
-                _TStep = clasglobal.dpvprms_ocp.TStep = divide;
+                _TStep.Value = divide;
+                _PulseWidth.UpperLimit = _TStep - 0.05;
             }
             else
             {
@@ -210,19 +227,19 @@ namespace Skydat
             }
         }
 
-        private double _E1;
-        private double _E2;
-        private double _ScanRate;
-        private double _HStep;
-        private double _TStep;
-        private double _PulseWidth;
-        private double _PulseHeight;
+        private Parameter _E1;
+        private Parameter _E2;
+        private Parameter _ScanRate;
+        private Parameter _HStep;
+        private Parameter _TStep;
+        private Parameter _PulseWidth;
+        private Parameter _PulseHeight;
         private int _EquilibriumTime;
 
 
         public ITechniques Clone()
         {
-            ITechniques ClonedTech = new DPV(_E1, _E2, _ScanRate, _HStep, _PulseWidth, _PulseHeight, _EquilibriumTime, Comment);
+            ITechniques ClonedTech = new DPV(_E1, _E2, _ScanRate, _HStep, _PulseWidth, _PulseHeight, _TStep, _EquilibriumTime, Comment);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
             if (SeriesPath != null)
@@ -290,6 +307,8 @@ namespace Skydat
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)
         {
             int[] VoltageBuffer;
+            byte Technum = number;
+            buffer[0] = Technum;
 
             Array.Resize(ref buffer, 17);
             

@@ -38,7 +38,21 @@ namespace Skydat
 
         public string[] XY_Axis_Title { get; } = new string[2] { "Voltage(mV)", "Time(S)" };
 
-        public OCP(int Time, int EquilibriumTime = 0, string comment = "")
+        public OCP(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")
+        {
+            specific.InitializeParameterNames();
+
+            ParameterSpecification e1 = specific.Parameters["Time"];
+            _time = new Parameter(e1.Name, e1.Description, e1.Default, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+
+        private OCP(Parameter Time, int EquilibriumTime = 0, string comment = "")
         {
             _time = Time;
             Comment = comment;
@@ -47,25 +61,30 @@ namespace Skydat
             ColorCode = ColorUtility.GenerateHighContrastColor();
         }
 
-        private int _time;
+        public OCP(TechniqueSpecification specific, int time, int EquilibriumTime = 0, string comment = "")
+        {
+            ParameterSpecification timeSpecific = specific.Parameters["Time"];
+            _time = new Parameter(timeSpecific.Name, timeSpecific.Description, time, timeSpecific.Max, timeSpecific.Min, timeSpecific.Unit, timeSpecific.Resolution);
+
+         
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+
+        private Parameter _time;
         private int _EquilibriumTime;
 
 
-        public int time
+        public Parameter time
         {
             get
             {
                 return _time;
             }
-            set
-            {
-                if (value >= 0 && _time <= 65000)
-                {
-                    _time = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            
         }
 
         public int EquilibriumTime
@@ -105,7 +124,10 @@ namespace Skydat
 
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)
         {
-            int[] TimeBuffer = new int[time + 1];
+            byte Technum = number;
+            buffer[0] = Technum;
+
+            int[] TimeBuffer = new int[(int)time.Value + 1];
 
             Array.Resize(ref buffer, 14);
 
@@ -121,7 +143,7 @@ namespace Skydat
             byte hs = 0;
             buffer[6] = hs;   // بایت بالا
 
-            int TS = _time + 1;
+            int TS = (int)_time + 1;
             buffer[7] = (byte)(TS >> 24);   // بایت بالا
             buffer[8] = (byte)(TS >> 16); // بایت پایین
             buffer[9] = (byte)(TS >> 8);   // بایت بالا

@@ -281,6 +281,39 @@ namespace Skydat.forms2065
         {
             Process.Start(new ProcessStartInfo("https://www.behpajooh.net/") { UseShellExecute = true });
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnUpdate_Click(object sender, EventArgs e)
+        {
+            btnUpdate.Enabled = false;
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                await AppUpdater.CheckAndUpdateAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "خطای پیش‌بینی‌نشده در بروزرسانی:\n\n" + ex.Message,
+                    "خطا",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                btnUpdate.Enabled = true;
+            }
+        }
+
+        private void btnUpdate_MouseHover(object sender, EventArgs e)
+        {
+            btnUpdate.ToolTipText = AppUpdater.GetCurrentVersionText();
+        }
     }
     public class TafelResult
     {

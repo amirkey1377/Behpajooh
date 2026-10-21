@@ -47,10 +47,31 @@ namespace Skydat
 
         public int ColorCode { get; set; }
 
-        public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Time(S)" };
+        private string[] _xyAxisTitle = new string[2] { "Current(uA)", "Time(S)" };
+        public string[] XY_Axis_Title
+        {
+            get { return _xyAxisTitle; }
+            private set { _xyAxisTitle = value; }
+        }
+
+        private bool _colometryMode;
+        public bool ColometryMode
+        {
+            get { return _colometryMode; }
+            set
+            {
+                if (_colometryMode == value) return;
+                _colometryMode = value;
+
+                if (value == true)
+                    XY_Axis_Title = new string[2] { "Q(I)", "Time(S)" };
+                else
+                    XY_Axis_Title = new string[2] { "Current(uA)", "Time(S)" };
+            }
+        }
 
 
-        public CA(double E1, double E2, int T1, int T2, int Cycles, int EquilibriumTime = 0, string comment = "")
+        public CA(double E1, double E2, int T1, int T2, int Cycles, int EquilibriumTime = 0, string comment = "", bool ColometryMode = false)
         {
             _E1 = E1;
             _E2 = E2;
@@ -59,6 +80,8 @@ namespace Skydat
             _Cycles = Cycles;
             _EquilibriumTime = EquilibriumTime;
             Comment = comment;
+
+            this.ColometryMode = ColometryMode;
             //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
             ColorCode = ColorUtility.GenerateHighContrastColor();
 
@@ -176,7 +199,7 @@ namespace Skydat
 
         public ITechniques Clone()
         {
-            ITechniques ClonedTech = new CA(_E1, _E2, _T1, _T2, _Cycles, _EquilibriumTime, Comment);
+            ITechniques ClonedTech = new CA(_E1, _E2, _T1, _T2, _Cycles, _EquilibriumTime, Comment, ColometryMode);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
             if (SeriesPath != null)
@@ -223,6 +246,9 @@ namespace Skydat
 
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)
         {
+            byte Technum = number;
+            buffer[0] = Technum;
+
             int[] VoltageBuffer = new int[(_T1 + _T2) * _Cycles];
 
             Array.Resize(ref buffer, 23);

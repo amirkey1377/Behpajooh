@@ -3596,7 +3596,7 @@ for runnig</value>
     <value>3, 142</value>
   </data>
   <data name="gpBoxTafelParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 143</value>
+    <value>209, 143</value>
   </data>
   <data name="gpBoxTafelParam.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -3918,7 +3918,7 @@ for runnig</value>
     <value>3, 3</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 139</value>
+    <value>209, 139</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
@@ -3945,7 +3945,7 @@ for runnig</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 288</value>
+    <value>215, 288</value>
   </data>
   <data name="tabPage7.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -4452,13 +4452,13 @@ for runnig</value>
     <value>Bottom</value>
   </data>
   <data name="pnlSelectStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 16</value>
+    <value>0, 41</value>
   </data>
   <data name="pnlSelectStep.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>55, 4</value>
   </data>
   <data name="pnlSelectStep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 302</value>
+    <value>62, 277</value>
   </data>
   <data name="pnlSelectStep.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4595,6 +4595,9 @@ for runnig</value>
   <data name="&gt;&gt;lblAvgOcpTafel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnExcell.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btnExcell.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -4605,7 +4608,7 @@ for runnig</value>
     <value>NoControl</value>
   </data>
   <data name="btnExcell.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 24</value>
+    <value>468, 6</value>
   </data>
   <data name="btnExcell.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 30</value>
@@ -4932,7 +4935,7 @@ for runnig</value>
     <value>0, 0</value>
   </data>
   <data name="btnZoom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 16</value>
+    <value>62, 41</value>
   </data>
   <data name="btnZoom.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>

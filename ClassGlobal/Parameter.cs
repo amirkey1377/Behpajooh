@@ -23,7 +23,7 @@ namespace Skydat
                 if (value < LowerLimit || value > UpperLimit)
                 {
                     throw new ArgumentOutOfRangeException(
-                                        nameof(value),
+                                        Name, value,
                                         $"Value must be between {LowerLimit} and {UpperLimit} {Unit}");
                 }
 

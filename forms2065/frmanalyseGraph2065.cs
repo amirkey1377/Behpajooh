@@ -6480,6 +6480,11 @@ namespace Skydat.forms2065
             }
         }
 
+        private void btnCalcTafel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnshowaxes_1_Click(object sender, EventArgs e)
         {
             statebutton_1 = "";
