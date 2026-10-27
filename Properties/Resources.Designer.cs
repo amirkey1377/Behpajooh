@@ -1543,6 +1543,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rotate_right {
+            get {
+                object obj = ResourceManager.GetObject("rotate-right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Run {
             get {
                 object obj = ResourceManager.GetObject("Run", resourceCulture);
@@ -1746,6 +1756,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap Stop2 {
             get {
                 object obj = ResourceManager.GetObject("Stop2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tafel_ecorr_icorr_40x45_transparent {
+            get {
+                object obj = ResourceManager.GetObject("tafel_ecorr_icorr_40x45_transparent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

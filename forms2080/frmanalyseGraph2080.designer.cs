@@ -105,13 +105,14 @@ namespace Skydat.forms2080
             this.toolStripButton27 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton28 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton36 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton38 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton37 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton38 = new System.Windows.Forms.ToolStripButton();
+            this.btnCalculateTafel = new System.Windows.Forms.ToolStripButton();
+            this.btnRotateAxes = new System.Windows.Forms.ToolStripButton();
             this.rowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -120,6 +121,7 @@ namespace Skydat.forms2080
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
             this.dschart21 = new Skydat.datasets.dschart2();
+            this.btnExelExport = new System.Windows.Forms.ToolStripButton();
             this.grayToolStripButton1 = new Skydat.GrayToolStripButton();
             this.grayToolStripButton2 = new Skydat.GrayToolStripButton();
             this.btnzoominTS = new Skydat.GrayToolStripButton();
@@ -569,7 +571,8 @@ namespace Skydat.forms2080
             this.toolStripButton10,
             this.tsBtnDrawLine,
             this.btnSelectLines,
-            this.grayToolStripButton9});
+            this.grayToolStripButton9,
+            this.btnExelExport});
             this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
@@ -841,13 +844,14 @@ namespace Skydat.forms2080
             this.toolStripButton27,
             this.toolStripButton28,
             this.toolStripButton36,
-            this.toolStripButton38,
-            this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton4,
             this.toolStripButton37,
             this.toolStripButton3,
-            this.toolStripSeparator7});
+            this.toolStripSeparator7,
+            this.toolStripButton38,
+            this.btnCalculateTafel,
+            this.btnRotateAxes});
             this.tsGraphTools.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             resources.ApplyResources(this.tsGraphTools, "tsGraphTools");
             this.tsGraphTools.Name = "tsGraphTools";
@@ -889,22 +893,6 @@ namespace Skydat.forms2080
             this.toolStripButton36.Name = "toolStripButton36";
             this.toolStripButton36.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // toolStripButton38
-            // 
-            resources.ApplyResources(this.toolStripButton38, "toolStripButton38");
-            this.toolStripButton38.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton38.Image = global::Skydat.Properties.Resources.log_128;
-            this.toolStripButton38.Name = "toolStripButton38";
-            this.toolStripButton38.Click += new System.EventHandler(this.toolStripButton7_Click);
-            // 
-            // toolStripButton1
-            // 
-            resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::Skydat.Properties.Resources.Beta_Icon;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // toolStripButton2
             // 
             resources.ApplyResources(this.toolStripButton2, "toolStripButton2");
@@ -940,6 +928,30 @@ namespace Skydat.forms2080
             // 
             resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
             this.toolStripSeparator7.Name = "toolStripSeparator7";
+            // 
+            // toolStripButton38
+            // 
+            resources.ApplyResources(this.toolStripButton38, "toolStripButton38");
+            this.toolStripButton38.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton38.Image = global::Skydat.Properties.Resources.log_128;
+            this.toolStripButton38.Name = "toolStripButton38";
+            this.toolStripButton38.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // btnCalculateTafel
+            // 
+            resources.ApplyResources(this.btnCalculateTafel, "btnCalculateTafel");
+            this.btnCalculateTafel.ForeColor = System.Drawing.Color.Black;
+            this.btnCalculateTafel.Image = global::Skydat.Properties.Resources.tafel_ecorr_icorr_40x45_transparent;
+            this.btnCalculateTafel.Name = "btnCalculateTafel";
+            this.btnCalculateTafel.Click += new System.EventHandler(this.btnCalculateTafel_Click);
+            // 
+            // btnRotateAxes
+            // 
+            resources.ApplyResources(this.btnRotateAxes, "btnRotateAxes");
+            this.btnRotateAxes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRotateAxes.Image = global::Skydat.Properties.Resources.rotate_right;
+            this.btnRotateAxes.Name = "btnRotateAxes";
+            this.btnRotateAxes.Click += new System.EventHandler(this.btnRotateAxes_Click);
             // 
             // rowDataGridViewTextBoxColumn1
             // 
@@ -988,6 +1000,14 @@ namespace Skydat.forms2080
             // 
             this.dschart21.DataSetName = "dschart2";
             this.dschart21.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // btnExelExport
+            // 
+            this.btnExelExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.btnExelExport, "btnExelExport");
+            this.btnExelExport.Image = global::Skydat.Properties.Resources.Excell;
+            this.btnExelExport.Name = "btnExelExport";
+            this.btnExelExport.Click += new System.EventHandler(this.btnExelExport_Click);
             // 
             // grayToolStripButton1
             // 
@@ -1223,7 +1243,6 @@ namespace Skydat.forms2080
         private System.Windows.Forms.Button btnzoomout_1;
         private System.Windows.Forms.Button btnshowgrid_1;
         private System.Windows.Forms.Button btnshowaxes_1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripMenuItem showDataPointsToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.Button button4;
@@ -1278,5 +1297,8 @@ namespace Skydat.forms2080
         private GrayToolStripButton btnSelectLines;
         private GrayToolStripButton toolTipBtnshowvalue;
         private GrayToolStripButton grayToolStripButton9;
+        private System.Windows.Forms.ToolStripButton btnCalculateTafel;
+        private System.Windows.Forms.ToolStripButton btnRotateAxes;
+        private System.Windows.Forms.ToolStripButton btnExelExport;
     }
 }

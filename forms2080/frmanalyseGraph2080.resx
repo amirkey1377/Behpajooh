@@ -200,7 +200,7 @@
     <value>67, 0</value>
   </data>
   <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 322</value>
+    <value>928, 283</value>
   </data>
   <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -235,60 +235,6 @@
   <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="grayToolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton1.Text" xml:space="preserve">
-    <value>grayToolStripButton1</value>
-  </data>
-  <data name="grayToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton2.Text" xml:space="preserve">
-    <value>grayToolStripButton2</value>
-  </data>
-  <data name="btnzoominTS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="btnzoominTS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="btnzoominTS.Text" xml:space="preserve">
-    <value>grayToolStripButton4</value>
-  </data>
-  <data name="btnZoomOutTS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="btnZoomOutTS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="btnZoomOutTS.Text" xml:space="preserve">
-    <value>grayToolStripButton3</value>
-  </data>
-  <data name="toolTipBtnshowvalue.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolTipBtnshowvalue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="toolTipBtnshowvalue.Text" xml:space="preserve">
-    <value>grayToolStripButton2</value>
-  </data>
-  <data name="btnSelectAreaTS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="btnSelectAreaTS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="btnSelectAreaTS.Text" xml:space="preserve">
-    <value>Select Erea</value>
-  </data>
   <data name="toolStripButton7.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -311,7 +257,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 34</value>
+    <value>32, 34</value>
   </data>
   <data name="toolStripButton5.Text" xml:space="preserve">
     <value>Chart Setting</value>
@@ -323,7 +269,7 @@
     <value>Yes</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 322</value>
+    <value>35, 283</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -816,7 +762,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 322</value>
+    <value>32, 283</value>
   </data>
   <data name="panel8.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -869,7 +815,7 @@
     <value>NoControl</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>645, 11</value>
+    <value>972, 11</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>19, 15</value>
@@ -896,7 +842,7 @@
     <value>64, 0</value>
   </data>
   <data name="tChart2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>604, 311</value>
+    <value>931, 383</value>
   </data>
   <data name="tChart2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -972,6 +918,9 @@
   </data>
   <data name="button1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Draw lines</value>
   </data>
   <data name="&gt;&gt;button1.Name" xml:space="preserve">
     <value>button1</value>
@@ -1238,7 +1187,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 311</value>
+    <value>29, 383</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1264,51 +1213,6 @@
   <data name="toolStrip2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
-  <data name="grayToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton3.Text" xml:space="preserve">
-    <value>grayToolStripButton1</value>
-  </data>
-  <data name="grayToolStripButton4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton4.Text" xml:space="preserve">
-    <value>grayToolStripButton2</value>
-  </data>
-  <data name="grayToolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton5.Text" xml:space="preserve">
-    <value>grayToolStripButton4</value>
-  </data>
-  <data name="grayToolStripButton6.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton6.Text" xml:space="preserve">
-    <value>grayToolStripButton3</value>
-  </data>
-  <data name="grayToolStripButton7.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
-  </data>
-  <data name="grayToolStripButton7.Text" xml:space="preserve">
-    <value>Select Erea</value>
-  </data>
   <data name="toolStripButton10.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -1318,32 +1222,20 @@
   <data name="toolStripButton10.Text" xml:space="preserve">
     <value>Chart Setting</value>
   </data>
-  <data name="tsBtnDrawLine.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="btnExelExport.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnExelExport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsBtnDrawLine.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnExelExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 34</value>
   </data>
-  <data name="tsBtnDrawLine.Text" xml:space="preserve">
-    <value>grayToolStripButton8</value>
+  <data name="btnExelExport.Text" xml:space="preserve">
+    <value>Export As Exel file</value>
   </data>
-  <data name="btnSelectLines.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="btnSelectLines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 34</value>
-  </data>
-  <data name="btnSelectLines.Text" xml:space="preserve">
-    <value>grayToolStripButton8</value>
-  </data>
-  <data name="grayToolStripButton9.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="grayToolStripButton9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 34</value>
-  </data>
-  <data name="grayToolStripButton9.Text" xml:space="preserve">
-    <value>grayToolStripButton9</value>
+  <data name="btnExelExport.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomRight</value>
   </data>
   <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1352,7 +1244,7 @@
     <value>Yes</value>
   </data>
   <data name="toolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 311</value>
+    <value>35, 383</value>
   </data>
   <data name="toolStrip2.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1385,10 +1277,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>672, 648</value>
+    <value>999, 681</value>
   </data>
   <data name="splitContainer.SplitterDistance" type="System.Int32, mscorlib">
-    <value>326</value>
+    <value>287</value>
   </data>
   <data name="splitContainer.SplitterWidth" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1415,7 +1307,7 @@
     <value>225, 48</value>
   </data>
   <data name="pnlGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 652</value>
+    <value>1003, 685</value>
   </data>
   <data name="pnlGraph.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1454,7 +1346,7 @@
     <value>Vertical</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 128</value>
+    <value>213, 161</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1487,7 +1379,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 136</value>
+    <value>221, 169</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -2099,7 +1991,7 @@
     <value>Bottom</value>
   </data>
   <data name="pnl_peak_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 462</value>
+    <value>0, 495</value>
   </data>
   <data name="pnl_peak_search.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 234</value>
@@ -2213,7 +2105,7 @@
     <value>0, 0</value>
   </data>
   <data name="pnlParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 700</value>
+    <value>225, 733</value>
   </data>
   <data name="pnlParam.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -2295,39 +2187,6 @@
   </data>
   <data name="toolStripButton36.ToolTipText" xml:space="preserve">
     <value>derivative operation</value>
-  </data>
-  <data name="toolStripButton38.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripButton38.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripButton38.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButton38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 45</value>
-  </data>
-  <data name="toolStripButton38.Text" xml:space="preserve">
-    <value>toolStripButton7</value>
-  </data>
-  <data name="toolStripButton38.ToolTipText" xml:space="preserve">
-    <value>Tafel(Log(i)-I(v))</value>
-  </data>
-  <data name="toolStripButton1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripButton1.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 45</value>
-  </data>
-  <data name="toolStripButton1.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton2.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2412,11 +2271,77 @@
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>7, 37</value>
   </data>
+  <data name="toolStripButton38.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButton38.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="toolStripButton38.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton38.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 45</value>
+  </data>
+  <data name="toolStripButton38.Text" xml:space="preserve">
+    <value>toolStripButton7</value>
+  </data>
+  <data name="toolStripButton38.ToolTipText" xml:space="preserve">
+    <value>Tafel(Log(i)-I(v))</value>
+  </data>
+  <data name="btnCalculateTafel.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnCalculateTafel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="btnCalculateTafel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="btnCalculateTafel.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="btnCalculateTafel.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnCalculateTafel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 45</value>
+  </data>
+  <data name="btnCalculateTafel.Text" xml:space="preserve">
+    <value>TOFEL Results</value>
+  </data>
+  <data name="btnCalculateTafel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="btnCalculateTafel.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>Overlay</value>
+  </data>
+  <data name="btnCalculateTafel.ToolTipText" xml:space="preserve">
+    <value>Ecorr &amp; Icorr(Tofel result)</value>
+  </data>
+  <data name="btnCalculateTafel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnRotateAxes.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnRotateAxes.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnRotateAxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 45</value>
+  </data>
+  <data name="btnRotateAxes.ToolTipText" xml:space="preserve">
+    <value>Rotate Axes</value>
+  </data>
+  <data name="btnRotateAxes.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="tsGraphTools.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 0</value>
   </data>
   <data name="tsGraphTools.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 48</value>
+    <value>1003, 48</value>
   </data>
   <data name="tsGraphTools.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -2500,7 +2425,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>901, 700</value>
+    <value>1228, 733</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2518,9 +2443,6 @@
         AADgAAAA4AAAAOAIAAAgDAAAAAwAAMAOAAAgDgAAgA8AAOAPAADgDwAA4A4AAOAOAADgB8AA4AvAAOAN
         gADgDgAA4A8AAOAD3N/gCeKf4Az8f+AOfH/gDztP4A+HJ8APzzuAD/+5gA//nQ==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;showDataPointsToolStripMenuItem.Name" xml:space="preserve">
     <value>showDataPointsToolStripMenuItem</value>
@@ -2562,6 +2484,12 @@
     <value>toolStripButton10</value>
   </data>
   <data name="&gt;&gt;toolStripButton10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExelExport.Name" xml:space="preserve">
+    <value>btnExelExport</value>
+  </data>
+  <data name="&gt;&gt;btnExelExport.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dschart2.Name" xml:space="preserve">
@@ -2612,18 +2540,6 @@
   <data name="&gt;&gt;toolStripButton36.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripButton38.Name" xml:space="preserve">
-    <value>toolStripButton38</value>
-  </data>
-  <data name="&gt;&gt;toolStripButton38.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
-    <value>toolStripButton1</value>
-  </data>
-  <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripButton2.Name" xml:space="preserve">
     <value>toolStripButton2</value>
   </data>
@@ -2653,6 +2569,24 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton38.Name" xml:space="preserve">
+    <value>toolStripButton38</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton38.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCalculateTafel.Name" xml:space="preserve">
+    <value>btnCalculateTafel</value>
+  </data>
+  <data name="&gt;&gt;btnCalculateTafel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRotateAxes.Name" xml:space="preserve">
+    <value>btnRotateAxes</value>
+  </data>
+  <data name="&gt;&gt;btnRotateAxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rowDataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>rowDataGridViewTextBoxColumn1</value>
@@ -2701,90 +2635,6 @@
   </data>
   <data name="&gt;&gt;dschart21.Type" xml:space="preserve">
     <value>Skydat.datasets.dschart2, datasets.dschart2.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton1.Name" xml:space="preserve">
-    <value>grayToolStripButton1</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton1.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton2.Name" xml:space="preserve">
-    <value>grayToolStripButton2</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton2.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnzoominTS.Name" xml:space="preserve">
-    <value>btnzoominTS</value>
-  </data>
-  <data name="&gt;&gt;btnzoominTS.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnZoomOutTS.Name" xml:space="preserve">
-    <value>btnZoomOutTS</value>
-  </data>
-  <data name="&gt;&gt;btnZoomOutTS.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolTipBtnshowvalue.Name" xml:space="preserve">
-    <value>toolTipBtnshowvalue</value>
-  </data>
-  <data name="&gt;&gt;toolTipBtnshowvalue.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnSelectAreaTS.Name" xml:space="preserve">
-    <value>btnSelectAreaTS</value>
-  </data>
-  <data name="&gt;&gt;btnSelectAreaTS.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton3.Name" xml:space="preserve">
-    <value>grayToolStripButton3</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton3.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton4.Name" xml:space="preserve">
-    <value>grayToolStripButton4</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton4.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton5.Name" xml:space="preserve">
-    <value>grayToolStripButton5</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton5.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton6.Name" xml:space="preserve">
-    <value>grayToolStripButton6</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton6.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton7.Name" xml:space="preserve">
-    <value>grayToolStripButton7</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton7.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;tsBtnDrawLine.Name" xml:space="preserve">
-    <value>tsBtnDrawLine</value>
-  </data>
-  <data name="&gt;&gt;tsBtnDrawLine.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnSelectLines.Name" xml:space="preserve">
-    <value>btnSelectLines</value>
-  </data>
-  <data name="&gt;&gt;btnSelectLines.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton9.Name" xml:space="preserve">
-    <value>grayToolStripButton9</value>
-  </data>
-  <data name="&gt;&gt;grayToolStripButton9.Type" xml:space="preserve">
-    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmanalyseGraph2080</value>

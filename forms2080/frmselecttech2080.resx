@@ -258,6 +258,42 @@
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnRecalculateAvrage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnRecalculateAvrage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnRecalculateAvrage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 203</value>
+  </data>
+  <data name="btnRecalculateAvrage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 48</value>
+  </data>
+  <data name="btnRecalculateAvrage.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="btnRecalculateAvrage.Text" xml:space="preserve">
+    <value>Recalculate Avrage</value>
+  </data>
+  <data name="btnRecalculateAvrage.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>TextBeforeImage</value>
+  </data>
+  <data name="btnRecalculateAvrage.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnRecalculateAvrage.Name" xml:space="preserve">
+    <value>btnRecalculateAvrage</value>
+  </data>
+  <data name="&gt;&gt;btnRecalculateAvrage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRecalculateAvrage.Parent" xml:space="preserve">
+    <value>pnlDiscription</value>
+  </data>
+  <data name="&gt;&gt;btnRecalculateAvrage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblDiscription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -289,13 +325,49 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;lblDiscription.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="btnTafelOcpData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnTafelOcpData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnTafelOcpData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 13</value>
+  </data>
+  <data name="btnTafelOcpData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 42</value>
+  </data>
+  <data name="btnTafelOcpData.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="btnTafelOcpData.Text" xml:space="preserve">
+    <value>Analyse OCP Data</value>
+  </data>
+  <data name="btnTafelOcpData.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>TextBeforeImage</value>
+  </data>
+  <data name="btnTafelOcpData.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;btnTafelOcpData.Name" xml:space="preserve">
+    <value>btnTafelOcpData</value>
+  </data>
+  <data name="&gt;&gt;btnTafelOcpData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTafelOcpData.Parent" xml:space="preserve">
+    <value>pnlDiscription</value>
+  </data>
+  <data name="&gt;&gt;btnTafelOcpData.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="picBoxOcp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="picBoxOcp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 8</value>
+    <value>141, 8</value>
   </data>
   <data name="picBoxOcp.Size" type="System.Drawing.Size, System.Drawing">
     <value>292, 257</value>
@@ -319,7 +391,7 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;picBoxOcp.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblTechName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -355,7 +427,7 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;lblTechName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="chartApplayTech.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -382,7 +454,7 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;chartApplayTech.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="radioButton7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -711,6 +783,9 @@
   <data name="btnZoom.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="btnZoom.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>TextBeforeImage</value>
+  </data>
   <data name="btnZoom.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -751,7 +826,7 @@
     <value>pnlDiscription</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="pnlDiscription.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 280</value>

@@ -378,7 +378,7 @@ namespace Skydat.forms2080
                 StartFlag = false;
                 techname = -1;
                 ReceivedBytesThreshold = 4;
-                ocpCount = 0;
+                ocpCount = 1;
 
                 SetDelay(TechLine[k].EquilibriumTime);
 
@@ -407,7 +407,7 @@ namespace Skydat.forms2080
                     while (!EndTechFlag)
                     {
                         readOCP();
-                        if (ocpCount - 1 == ocp.time)
+                        if (ocpCount - 1 == ocp.time * 10)
                         {
                             Setfilllable($"تکنیک تمام شده", "sucses");
                             RecivedPacketCounter = 0;
@@ -1229,6 +1229,7 @@ namespace Skydat.forms2080
                     {
                         for (int i = start; i < end; i++)
                         {
+                            smothedX[i] = Math.Round(smothedX[i], 2);
                             series.Points.AddXY(xValues[i], smothedX[i]);
                         }
 
@@ -1366,6 +1367,8 @@ namespace Skydat.forms2080
         int ReceivedBytesThreshold = 4;
 
         int ocpCount = 0;
+        double[] FilterArrey = new double[10];
+
 
         private void readOCP()
         {
@@ -1439,15 +1442,32 @@ namespace Skydat.forms2080
                 }
 
                 double[] DataY = new double[1];
-                int[] DataX = new int[1];
+                double[] DataX = new double[1];
 
 
                 if (CheckSum == buffer[5])
                 {
                     DataY[0] = ((Int32)((buffer[1] << 24) | (buffer[2] << 16) | (buffer[3] << 8) | buffer[4])) * (-1 / 10.0);
-                    DataX[0] = ocpCount;
+                    //DataX[0] = ocpCount;
 
-                    PlotGraph(OnlineChart, DataX, DataY);
+                    DataX[0] = Math.Round(ocpCount / 10.0, 1);
+
+                    int i = (int)(DataX[0] * 10) % 10;
+                    FilterArrey[i] = DataY[0];
+
+                    if (i == 0)
+                    {
+                        Array.Sort(FilterArrey);
+                        Array.Reverse(FilterArrey);
+
+                        DataY[0] = Math.Round(FilterArrey.Skip(2).Take(6).Average(), 2);
+                        PlotGraph(OnlineChart, (int)DataX[0], DataY[0]);
+
+                    }
+
+                    //PlotGraph(chartApplayTech, DataX, DataY);
+
+                    //DiffrenceChecker(DataY[0]);
 
                     ocpCount++;
 
@@ -2077,6 +2097,7 @@ namespace Skydat.forms2080
 
                 for (int i = 0; i < yValues.Length; i++)
                 {
+                    smothedX[i] = Math.Round(smothedX[i], 2);
                     series.Points.AddXY(xValues[i], smothedX[i]);
                 }
                 mainf.pbRunnigTech.Value += yValues.Length;

@@ -31,7 +31,6 @@ namespace Skydat.forms2080
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmselecttech2080));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.colAA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,7 +40,9 @@ namespace Skydat.forms2080
             this.pGrid2 = new System.Windows.Forms.PropertyGrid();
             this.checkCPsCTs = new System.Windows.Forms.CheckBox();
             this.pnlDiscription = new System.Windows.Forms.Panel();
+            this.btnRecalculateAvrage = new System.Windows.Forms.Button();
             this.lblDiscription = new System.Windows.Forms.RichTextBox();
+            this.btnTafelOcpData = new System.Windows.Forms.Button();
             this.picBoxOcp = new System.Windows.Forms.PictureBox();
             this.lblTechName = new System.Windows.Forms.Label();
             this.chartApplayTech = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -344,13 +345,24 @@ namespace Skydat.forms2080
             // 
             this.pnlDiscription.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlDiscription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDiscription.Controls.Add(this.btnRecalculateAvrage);
             this.pnlDiscription.Controls.Add(this.lblDiscription);
+            this.pnlDiscription.Controls.Add(this.btnTafelOcpData);
             this.pnlDiscription.Controls.Add(this.picBoxOcp);
             this.pnlDiscription.Controls.Add(this.lblTechName);
             this.pnlDiscription.Controls.Add(this.chartApplayTech);
             this.pnlDiscription.Controls.Add(this.panel2);
             resources.ApplyResources(this.pnlDiscription, "pnlDiscription");
             this.pnlDiscription.Name = "pnlDiscription";
+            // 
+            // btnRecalculateAvrage
+            // 
+            resources.ApplyResources(this.btnRecalculateAvrage, "btnRecalculateAvrage");
+            this.btnRecalculateAvrage.ForeColor = System.Drawing.Color.Black;
+            this.btnRecalculateAvrage.Image = global::Skydat.Properties.Resources.calc_icon;
+            this.btnRecalculateAvrage.Name = "btnRecalculateAvrage";
+            this.btnRecalculateAvrage.UseVisualStyleBackColor = true;
+            this.btnRecalculateAvrage.Click += new System.EventHandler(this.btnRecalculateAvrage_Click);
             // 
             // lblDiscription
             // 
@@ -359,6 +371,15 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.lblDiscription, "lblDiscription");
             this.lblDiscription.Name = "lblDiscription";
             this.lblDiscription.ReadOnly = true;
+            // 
+            // btnTafelOcpData
+            // 
+            resources.ApplyResources(this.btnTafelOcpData, "btnTafelOcpData");
+            this.btnTafelOcpData.ForeColor = System.Drawing.Color.Black;
+            this.btnTafelOcpData.Image = global::Skydat.Properties.Resources.Actions_office_chart_line_icon;
+            this.btnTafelOcpData.Name = "btnTafelOcpData";
+            this.btnTafelOcpData.UseVisualStyleBackColor = true;
+            this.btnTafelOcpData.Click += new System.EventHandler(this.btnTafelOcpData_Click);
             // 
             // picBoxOcp
             // 
@@ -387,13 +408,10 @@ namespace Skydat.forms2080
             chartArea1.Name = "ChartArea1";
             this.chartApplayTech.ChartAreas.Add(chartArea1);
             resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
-            legend1.Name = "Legend1";
-            this.chartApplayTech.Legends.Add(legend1);
             this.chartApplayTech.Name = "chartApplayTech";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
             series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartApplayTech.Series.Add(series1);
             // 
@@ -2406,6 +2424,8 @@ namespace Skydat.forms2080
         private System.Windows.Forms.Label Description_tafel;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.CheckBox ColometryCheck;
+        private System.Windows.Forms.Button btnTafelOcpData;
+        private System.Windows.Forms.Button btnRecalculateAvrage;
     }
 }
 

@@ -63,6 +63,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -99,6 +100,7 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -555,6 +557,9 @@
     <Compile Include="forms2080\frmtempfiles2080.designer.cs">
       <DependentUpon>frmtempfiles2080.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms2080\LiveDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\FindPeakAuto.cs" />
@@ -607,6 +612,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms2080\frmanalyseGraph2080.resx">
       <DependentUpon>frmanalyseGraph2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="forms2080\frmChartSetting2190.resx">
       <DependentUpon>frmChartSetting2190.cs</DependentUpon>
@@ -885,6 +891,13 @@
     <None Include="Resources\mximize.png" />
     <None Include="Resources\peak.png" />
     <None Include="Resources\chcek update.png" />
+    <Content Include="Resources\Electrochemical Tafel Plot Diagram.png" />
+    <Content Include="Resources\rotate axes .png" />
+    <Content Include="Resources\rotate-right.png" />
+    <None Include="Resources\rotate-right1.png" />
+    <Content Include="Resources\tafel_ecorr_icorr_40x45.png" />
+    <Content Include="Resources\tafel_ecorr_icorr_40x45_transparent.png" />
+    <None Include="Resources\tafel_ecorr_icorr_40x45_transparent1.png" />
     <Content Include="Resources\zoomin.ico" />
     <Content Include="Resources\Zoomout.ico" />
     <None Include="Resources\2000px-Tangent_to_a_curve.svg.png" />

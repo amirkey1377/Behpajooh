@@ -92,6 +92,7 @@ namespace Skydat.forms2080
         public drawline_chart drawline1;
         private string Chart1_ActionState = "", statebutton_1 = "";
 
+        public bool isAxesRotated = false;
         public byte tech = 0;
         public int num_Series = 0;
         double[] othertech_val0 = new double[200];
@@ -381,7 +382,29 @@ namespace Skydat.forms2080
         //{
         //    this.toolStripButton15_Click(dimensionToolStripMenuItem, e);
         //}
+        private void UpdateRotateButtonState()
+        {
+            bool hasData = false;
 
+            // بررسی اینکه آیا tChart2 سری داده‌ای دارد یا خیر
+            if (tChart2 != null && tChart2.Series != null)
+            {
+                foreach (var series in tChart2.Series)
+                {
+                    if (series.Points.Count > 0)
+                    {
+                        hasData = true;
+                        break;
+                    }
+                }
+            }
+
+            // نام دکمه خود را جایگزین btnRotateAxes کنید
+            if (btnRotateAxes != null)
+            {
+                btnRotateAxes.Enabled = hasData;
+            }
+        }
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             opForm.mf = this.mainf;
@@ -410,6 +433,7 @@ namespace Skydat.forms2080
             drawline1.removeall_master();
 
             TechLine.Clear();
+            UpdateMyNewButtonState();
         }
 
         private void treeView3_AfterCheck(object sender, TreeViewEventArgs e)
@@ -467,6 +491,8 @@ namespace Skydat.forms2080
                             tChart1.Series[$"{tech.Name}-{e.Node.Index}_{item.Index + 1}"].Enabled = true;
                         }
 
+                        tChart1.Series[$"{tech.Name}-{e.Node.Index}"].Enabled = true;
+
                     }
                     else
                     {
@@ -475,6 +501,8 @@ namespace Skydat.forms2080
                             item.Checked = false;
                             tChart1.Series[$"{tech.Name}-{e.Node.Index}_{item.Index + 1}"].Enabled = false;
                         }
+                        tChart1.Series[$"{tech.Name}-{e.Node.Index}"].Enabled = false;
+
                     }
 
                     tvTechList.AfterCheck += treeView3_AfterCheck;
@@ -1055,37 +1083,33 @@ namespace Skydat.forms2080
                 if (yy.Length < L) L = yy.Length;
             }
             if (L == 0)
-            //for (int l = 0; l < L; l++)
-            //{
-            //    x[l] = xx[l];
-            //    y[l] = yy[l];
-            //}
             {
                 Array.Resize(ref xx, shomaresh);
                 Array.Resize(ref yy, shomaresh);
-
-
             }
             if (main_subchart == "MainChart")
             {
                 Set_Graph(0, true, overlaymain);
-
                 tChart1.Series[num_Series].Points.DataBindXY(xx, yy);
             }
             if (main_subchart == "SubChart")
             {
-
                 if (operation == "i_Reverse" || operation == "i_Forward" || operation == "Integral" || operation == "Derivation" || operation == "Mathematics" || operation == "Overlay" || operation == "Tafel" || operation == "show_without_smoothing")
                 {
                     tChart2.Series.Clear();
                     tChart2.Series.Add(new System.Windows.Forms.DataVisualization.Charting.Series());
                     tChart2.Series[0].ChartType = SeriesChartType.FastLine;
                     tChart2.Titles[0].Text = operation;
+
+                    // ★★★ اضافه کردن نام محورها از tChart1 به tChart2 ★★★
+                    tChart2.ChartAreas[0].AxisX.Title = tChart1.ChartAreas[0].AxisX.Title;
+                    tChart2.ChartAreas[0].AxisY.Title = tChart1.ChartAreas[0].AxisY.Title;
+                    // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
                     this.tChart2.ChartAreas[0].AxisX.MajorGrid.Enabled = this.tChart1.ChartAreas[0].AxisX.MajorGrid.Enabled;
                     this.tChart2.ChartAreas[0].AxisX.MinorGrid.Enabled = this.tChart1.ChartAreas[0].AxisX.MinorGrid.Enabled;
                     this.tChart2.ChartAreas[0].AxisY.MajorGrid.Enabled = this.tChart1.ChartAreas[0].AxisY.MajorGrid.Enabled;
                     this.tChart2.ChartAreas[0].AxisY.MinorGrid.Enabled = this.tChart1.ChartAreas[0].AxisY.MinorGrid.Enabled;
-
 
                     tChart2.ChartAreas[0].AxisX.LabelStyle.Format = "#.#e-0";
                     tChart2.ChartAreas[0].AxisY.LabelStyle.Format = "#.#e-0";
@@ -1096,7 +1120,7 @@ namespace Skydat.forms2080
                     else
                         tChart2.Series[0].Points.DataBindXY(xx, yy);
                     tChart2.Refresh();
-
+                    UpdateMyNewButtonState();
                 }
             }
         }
@@ -1354,6 +1378,7 @@ namespace Skydat.forms2080
         {
             tChart2.Series.Clear();
             tChart2.Refresh();
+            UpdateMyNewButtonState();
             pnl_peak_search.Visible = false;
 
             btnzoomout_Click(sender, e);//هنگام باز کردن دوباره کامل نمایش یابد
@@ -1393,18 +1418,84 @@ namespace Skydat.forms2080
                 MessageBox.Show("derivation work with one graph" + (char)13 + "Please select ONE only!!!");
 
         }
+        public void SwapAxes(Chart chart)
+        {
+            if (chart.ChartAreas.Count == 0)
+                return;
+
+            var area = chart.ChartAreas[0];
+
+            // 1. جابجا کردن داده‌های سری‌ها
+            foreach (var series in chart.Series)
+            {
+                // فقط سری‌هایی که به همین چارت‌اریا وصل‌اند
+                if (series.ChartArea == area.Name)
+                {
+                    foreach (var point in series.Points)
+                    {
+                        double temp = point.XValue;
+                        point.XValue = point.YValues[0];
+                        point.YValues[0] = temp;
+                    }
+                }
+            }
+
+            // 2. جابجا کردن محدوده‌ی محور‌ها
+            double xMin = area.AxisX.Minimum;
+            double xMax = area.AxisX.Maximum;
+            double yMin = area.AxisY.Minimum;
+            double yMax = area.AxisY.Maximum;
+
+            // اگر محور Auto هست (Minimum/Maximum = Double.NaN)، نیازی به تغییر نداره
+            if (!double.IsNaN(xMin) && !double.IsNaN(yMin))
+            {
+                area.AxisX.Minimum = yMin;
+                area.AxisY.Minimum = xMin;
+            }
+
+            if (!double.IsNaN(xMax) && !double.IsNaN(yMax))
+            {
+                area.AxisX.Maximum = yMax;
+                area.AxisY.Maximum = xMax;
+            }
+
+            // 3. جابجایی عنوان محور‌ها
+            string xTitle = area.AxisX.Title;
+            area.AxisX.Title = area.AxisY.Title;
+            area.AxisY.Title = xTitle;
+
+            chart.Invalidate();
+        }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
+            btnRotateAxes.Visible = true;
+            if (tChart2.Annotations.Count > 0)
+            {
+                tChart2.Annotations.Clear();
+                Series intersectionSeries = tChart2.Series.FindByName("IntersectionPoint");
+                if (intersectionSeries != null)
+                {
+                    intersectionSeries.Points.Clear();
+                }
+                tChart2.Refresh();
+            }
+
+            drawline1.removeall();
+            drawline1.removeall_master();
+            numline = -1;
             drawline1.EnableDraw = false;
             drawline1.removeall();
             int shomarcheck = 0;
             for (int i = 0; i < tvTechList.Nodes[0].Nodes.Count; i++)
                 if (tvTechList.Nodes[0].Nodes[i].Checked)
                     shomarcheck++;
+
             if (shomarcheck == 1)
             {
-
+                btnCalculateTafel.Visible = true;
+                MessageBox.Show("Please Select 2 Lines To Begin");
+                tsBtnDrawLine.Checked = true;
                 operation = "Tafel";// "Mathematics";
                 for (int i = 0; i < tChart1.Series.Count; i++)
                     if (tChart1.Series[i].Enabled)
@@ -1420,11 +1511,21 @@ namespace Skydat.forms2080
                         show_Graph(0, this, "SubChart", mc.AR, mc.BR, true, mc.AR.Length);
                         nindexchart2 = i;
                     }
+
+                // ★★★ اضافه کردن تایتل‌های جدید برای حالت Tafel ★★★
+                tChart2.ChartAreas[0].AxisX.Title = "E(mV)";
+                tChart2.ChartAreas[0].AxisY.Title = "Log Icorr";
+                tChart2.Refresh(); // اعمال تغییرات روی نمودار
+                                   // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
                 drawline1.EnableDraw = true;
                 tChart2.Focus();
             }
             else
+            {
+                btnCalculateTafel.Visible = false;
                 MessageBox.Show("Tafel works with one graph" + (char)13 + "Please select ONE only");
+            }
         }
 
         private void save_Data()
@@ -3915,6 +4016,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
                 tChart2.ChartAreas[0].RecalculateAxesScale();
                 tChart2.Refresh();
+                UpdateMyNewButtonState();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             finally
@@ -4402,6 +4504,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                     current[i] = selectedSeries.Points[i].YValues[0];
                     tChart2.Series[0].Points.AddXY(volt[i], current[i]);
                 }
+                UpdateMyNewButtonState();
             }
             catch (Exception x)
             {
@@ -4747,43 +4850,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (drawline1.Lines.Count != 2)
-            {
-                MessageBox.Show("the number of line must be equal to 2 ." + Environment.NewLine + "please try again.");
-            }
-            else
-            {
-                drawline1.removeall_master();
-                conv_pixel_cord(drawline1.Lines[0].point1.X, drawline1.Lines[0].point1.Y);
-                conv_pixel_cord(drawline1.Lines[0].point2.X, drawline1.Lines[0].point2.Y);
-                conv_pixel_cord(drawline1.Lines[1].point1.X, drawline1.Lines[1].point1.Y);
-                conv_pixel_cord(drawline1.Lines[1].point2.X, drawline1.Lines[1].point2.Y);
 
-                if (!drawline1.intersect_line())
-                {
-                    MessageBox.Show("there is not intersection point ." + Environment.NewLine + "please try again.");
-
-                }
-                else
-                {
-                    double slop1 = (drawline1.Lines_master[1].pointy - drawline1.Lines_master[0].pointy) / (drawline1.Lines_master[1].pointx - drawline1.Lines_master[0].pointx);
-                    double slp1 = 1 / Math.Abs(slop1);
-                    double slop2 = (drawline1.Lines_master[3].pointy - drawline1.Lines_master[2].pointy) / (drawline1.Lines_master[3].pointx - drawline1.Lines_master[2].pointx);
-                    double slp2 = 1 / Math.Abs(slop2);
-                    if (tech == 10)
-                    {
-                        slop2 = drawline1.Lines_master[0].pointx - Math.Abs((drawline1.Lines_master[2].pointx + (drawline1.Lines_master[2].pointy - drawline1.Lines_master[0].pointy) / slop1));
-                        label41.Text += Environment.NewLine + "T(s)= " + slop2;
-                        label41.Text += Environment.NewLine + "I* T 1/2="; //+Math.Sqrt(slop2)*Math.Abs(IE/1000.0);
-                    }
-                    if (slop1 != 0 && slop2 != 0)
-                    {
-                        double xx = (drawline1.Lines_master[2].pointy - drawline1.Lines_master[0].pointy + slop1 * drawline1.Lines_master[0].pointx - slop2 * drawline1.Lines_master[2].pointx) / (slop1 - slop2);
-                        tChart2.Titles[0].Text = "Tafel Results :     ";
-                        tChart2.Titles[0].Text += "Ba=" + slp1.ToString("#0.00") + "        Bc=" + slp2.ToString("#0.00");
-                    }
-                }
-            }
         }
 
         private void btnzoominTS_Click_1(object sender, EventArgs e)
@@ -4826,7 +4893,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
 
         private void grayToolStripButton9_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void grayToolStripButton8_Click(object sender, EventArgs e)
@@ -4855,9 +4922,429 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 grayToolStripButton9.Checked = true;
             }
 
-            
+
 
             this.grayToolStripButton9.CheckedChanged += new System.EventHandler(this.grayToolStripButton9_CheckedChanged);
+        }
+        private void ShowCustomResultsForm(double ecorr, double logIcorr, double icorr, double ba, double bc)
+        {
+            // 1. تنظیمات کلی فرم
+            System.Windows.Forms.Form resultForm = new System.Windows.Forms.Form();
+            resultForm.Text = "نتایج محاسبات تافل";
+            resultForm.Size = new System.Drawing.Size(460, 500);
+            resultForm.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            resultForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            resultForm.MaximizeBox = false;
+            resultForm.MinimizeBox = false;
+            resultForm.BackColor = System.Drawing.Color.White;
+            resultForm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            resultForm.RightToLeftLayout = true;
+            resultForm.ShowIcon = false;
+
+            // 2. ساخت هدر (Header)
+            System.Windows.Forms.Panel headerPanel = new System.Windows.Forms.Panel();
+            headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            headerPanel.Height = 60;
+            headerPanel.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
+
+            System.Windows.Forms.Label lblTitle = new System.Windows.Forms.Label();
+            lblTitle.Text = "نتایج آنالیز تافل (Tafel Results)";
+            lblTitle.ForeColor = System.Drawing.Color.White;
+            lblTitle.Font = new System.Drawing.Font("Segoe UI", 14, System.Drawing.FontStyle.Bold);
+            lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            headerPanel.Controls.Add(lblTitle);
+
+            // 3. ساخت فوتر (Footer)
+            System.Windows.Forms.Panel footerPanel = new System.Windows.Forms.Panel();
+            footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            footerPanel.Height = 70;
+            footerPanel.BackColor = System.Drawing.Color.FromArgb(245, 245, 245);
+
+            System.Windows.Forms.Button btnOk = new System.Windows.Forms.Button();
+            btnOk.Text = "تایید و بستن";
+            btnOk.Font = new System.Drawing.Font("Segoe UI", 11, System.Drawing.FontStyle.Bold);
+            btnOk.BackColor = System.Drawing.Color.FromArgb(0, 122, 204);
+            btnOk.ForeColor = System.Drawing.Color.White;
+            btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnOk.FlatAppearance.BorderSize = 0;
+            btnOk.Size = new System.Drawing.Size(140, 40);
+            btnOk.Location = new System.Drawing.Point((resultForm.ClientSize.Width - btnOk.Width) / 2, 15);
+            btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            footerPanel.Controls.Add(btnOk);
+
+            // 4. ساخت جدول
+            System.Windows.Forms.TableLayoutPanel table = new System.Windows.Forms.TableLayoutPanel();
+            table.Dock = System.Windows.Forms.DockStyle.Fill;
+            table.ColumnCount = 2;
+            table.RowCount = 5;
+
+            for (int i = 0; i < 5; i++)
+            {
+                table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            }
+
+            table.Padding = new System.Windows.Forms.Padding(15);
+            table.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+
+            // متد کمکی برای اضافه کردن سطر
+            Action<string, string, System.Drawing.Color> AddRow = (labelText, valueText, valueColor) =>
+            {
+                // ستون اول (متن سمت راست)
+                System.Windows.Forms.Label lbl = new System.Windows.Forms.Label();
+                lbl.Text = labelText;
+                lbl.Font = new System.Drawing.Font("Segoe UI", 10, System.Drawing.FontStyle.Bold);
+                lbl.Dock = System.Windows.Forms.DockStyle.Fill;
+                lbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+                lbl.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+
+                // ستون دوم (مقدار سمت چپ)
+                System.Windows.Forms.Label val = new System.Windows.Forms.Label();
+                val.Text = valueText;
+                val.Font = new System.Drawing.Font("Segoe UI", 12, System.Drawing.FontStyle.Bold);
+                val.ForeColor = valueColor;
+                val.Dock = System.Windows.Forms.DockStyle.Fill;
+                // ★★★ تغییر به MiddleCenter برای اینکه مقدار دقیقاً وسط سلول قرار بگیرد ★★★
+                val.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                val.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+
+                table.Controls.Add(lbl);
+                table.Controls.Add(val);
+            };
+
+            System.Drawing.Color colorEcorr = System.Drawing.Color.DarkBlue;
+            System.Drawing.Color colorIcorr = System.Drawing.Color.DarkRed;
+            System.Drawing.Color colorSlope = System.Drawing.Color.FromArgb(64, 64, 64);
+
+            // ★★★ اضافه کردن کاراکتر \u200E (چپ‌چین اجباری) به ابتدای رشته‌ها ★★★
+            AddRow("پتانسیل خوردگی (Ecorr):", "\u200E" + $"{ecorr:0.0000} V", colorEcorr);
+            AddRow("جریان خوردگی (Icorr):", "\u200E" + $"{icorr:0.00E+00} A", colorIcorr);
+            AddRow("لگاریتم جریان (log Icorr):", "\u200E" + $"{logIcorr:0.0000}", colorIcorr);
+            AddRow("شیب آندی (Ba):", "\u200E" + $"{ba:0.0000} mVolt/dec", colorSlope);
+            AddRow("شیب کاتدی (Bc):", "\u200E" + $"{bc:0.0000} mVolt/dec", colorSlope);
+
+            resultForm.Controls.Add(table);
+            resultForm.Controls.Add(headerPanel);
+            resultForm.Controls.Add(footerPanel);
+
+            resultForm.ShowDialog(this);
+        }
+
+        private void btnCalculateTafel_Click(object sender, EventArgs e)
+        {
+            // ۱. بررسی برای پاک کردن خطوط در صورت کلیک مجدد (Toggle)
+            if (tChart2.Annotations.Count > 0 || tChart2.Series.FindByName("IntersectionPoint") != null)
+            {
+                tChart2.Annotations.Clear();
+                Series intersectionSeries = tChart2.Series.FindByName("IntersectionPoint");
+                if (intersectionSeries != null)
+                {
+                    tChart2.Series.Remove(intersectionSeries); // حذف کامل سری
+                }
+                tChart2.Refresh();
+                UpdateRotateButtonState(); // به‌روزرسانی وضعیت دکمه چرخش
+                return; // خروج از متد برای پاک کردن
+            }
+
+            // ۲. بررسی وجود خطوط سفید
+            if (drawline1.Lines.Count != 2)
+            {
+                MessageBox.Show("the number of line must be equal to 2 ." + Environment.NewLine + "please try again.");
+                return;
+            }
+
+            // ۳. تبدیل مختصات پیکسلی خطوط به مختصات داده‌ای (ریاضی)
+            drawline1.removeall_master();
+            conv_pixel_cord(drawline1.Lines[0].point1.X, drawline1.Lines[0].point1.Y);
+            conv_pixel_cord(drawline1.Lines[0].point2.X, drawline1.Lines[0].point2.Y);
+            conv_pixel_cord(drawline1.Lines[1].point1.X, drawline1.Lines[1].point1.Y);
+            conv_pixel_cord(drawline1.Lines[1].point2.X, drawline1.Lines[1].point2.Y);
+
+            if (!drawline1.intersect_line())
+            {
+                MessageBox.Show("there is not intersection point ." + Environment.NewLine + "please try again.");
+                return;
+            }
+
+            try
+            {
+                // ۴. استخراج مختصات خطوط
+                double x1 = drawline1.Lines_master[0].pointx;
+                double y1 = drawline1.Lines_master[0].pointy;
+                double x2 = drawline1.Lines_master[1].pointx;
+                double y2 = drawline1.Lines_master[1].pointy;
+
+                double x3 = drawline1.Lines_master[2].pointx;
+                double y3 = drawline1.Lines_master[2].pointy;
+                double x4 = drawline1.Lines_master[3].pointx;
+                double y4 = drawline1.Lines_master[3].pointy;
+
+                // ۵. محاسبه شیب‌ها
+                double slop1 = (y2 - y1) / (x2 - x1);
+                double slop2 = (y4 - y3) / (x4 - x3);
+
+                if (slop1 == slop2)
+                {
+                    MessageBox.Show("خطوط موازی هستند و نقطه تقاطع ندارند.", "خطا");
+                    return;
+                }
+
+                // ۶. محاسبه عرض از مبدأ
+                double b1 = y1 - (slop1 * x1);
+                double b2 = y3 - (slop2 * x3);
+
+                // ۷. محاسبه نقطه تقاطع هندسی (مختصات ایکس و ایگرگ)
+                double intX = (b2 - b1) / (slop1 - slop2);
+                double intY = (slop1 * intX) + b1;
+
+                double Ecorr = 0, logIcorr = 0, Icorr = 0, Ba = 0, Bc = 0;
+
+                // ★★★ ۸. تشخیص هوشمند محورها بر اساس عنوان آن‌ها ★★★
+                string xTitle = tChart2.ChartAreas[0].AxisX.Title.ToLower();
+                bool isXCurrent = xTitle.Contains("current") || xTitle.Contains("جریان") || xTitle.Contains("i");
+
+                if (isXCurrent)
+                {
+                    // حالت چرخیده: X = جریان (لگاریتمی) ، Y = ولتاژ
+                    logIcorr = intX;
+                    Ecorr = intY;
+
+                    // طبق فرمول نارنجی: Icorr = 10^(log Icorr)
+                    Icorr = Math.Pow(10, logIcorr);
+                    Icorr = Icorr / 1000.0; // تبدیل میلی‌آمپر به آمپر
+
+                    // محاسبه شیب تافل (چون Y ولتاژ است، slop همان mV/dec است، نیازی به ضرب در 1000 نیست)
+                    Ba = Math.Abs(slop1);
+                    Bc = Math.Abs(slop2);
+                }
+                else
+                {
+                    // حالت عادی: X = ولتاژ ، Y = جریان (لگاریتمی)
+                    Ecorr = intX;
+                    logIcorr = intY;
+
+                    // طبق فرمول نارنجی: Icorr = 10^(log Icorr)
+                    Icorr = Math.Pow(10, logIcorr);
+                    Icorr = Icorr / 1000.0; // تبدیل میلی‌آمپر به آمپر
+
+                    // محاسبه شیب تافل (چون Y لگاریتمی است، 1/slop همان mV/dec است، نیازی به ضرب در 1000 نیست)
+                    Ba = Math.Abs(1 / slop1);
+                    Bc = Math.Abs(1 / slop2);
+                }
+
+                // اگر ولتاژ در حدود میلی‌ولت بود، آن را به ولت تبدیل می‌کنیم تا فرم زیبا باشد
+                if (Math.Abs(Ecorr) > 10)
+                    Ecorr = Ecorr / 1000.0;
+
+                // ==========================================
+                // ۹. رسم نقطه قرمز (نقطه تقاطع)
+                // ==========================================
+                Series intersectionSeries = tChart2.Series.FindByName("IntersectionPoint");
+                if (intersectionSeries == null)
+                {
+                    intersectionSeries = new Series("IntersectionPoint");
+                    intersectionSeries.ChartType = SeriesChartType.Point;
+                    intersectionSeries.MarkerStyle = MarkerStyle.Circle;
+                    intersectionSeries.MarkerColor = Color.Red;
+                    intersectionSeries.MarkerBorderColor = Color.Black;
+                    intersectionSeries.MarkerBorderWidth = 1;
+                    intersectionSeries.IsVisibleInLegend = false;
+                    tChart2.Series.Add(intersectionSeries);
+                }
+                else
+                {
+                    intersectionSeries.Points.Clear();
+                }
+
+                intersectionSeries.MarkerSize = 6;
+                intersectionSeries.Points.AddXY(intX, intY);
+
+                // ==========================================
+                // ۱۰. رسم خطوط نقطه چین عمودی و افقی
+                // ==========================================
+                tChart2.Annotations.Clear();
+
+                double minY = tChart2.ChartAreas[0].AxisY.Minimum;
+                double minX = tChart2.ChartAreas[0].AxisX.Minimum;
+                double maxY = tChart2.ChartAreas[0].AxisY.Maximum;
+                double maxX = tChart2.ChartAreas[0].AxisX.Maximum;
+
+                if (double.IsNaN(minY)) minY = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                if (double.IsNaN(minX)) minX = tChart2.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+                if (double.IsNaN(maxY)) maxY = tChart2.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
+                if (double.IsNaN(maxX)) maxX = tChart2.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
+
+                // خط عمودی
+                LineAnnotation verticalLine = new LineAnnotation();
+                verticalLine.AxisX = tChart2.ChartAreas[0].AxisX;
+                verticalLine.AxisY = tChart2.ChartAreas[0].AxisY;
+                verticalLine.IsSizeAlwaysRelative = false;
+                verticalLine.LineColor = Color.Red;
+                verticalLine.LineDashStyle = ChartDashStyle.Dash;
+                verticalLine.LineWidth = 1;
+                verticalLine.X = intX;
+                verticalLine.Y = intY;
+                verticalLine.Width = 0;
+                verticalLine.Height = minY - intY;
+                tChart2.Annotations.Add(verticalLine);
+
+                // خط افقی
+                LineAnnotation horizontalLine = new LineAnnotation();
+                horizontalLine.AxisX = tChart2.ChartAreas[0].AxisX;
+                horizontalLine.AxisY = tChart2.ChartAreas[0].AxisY;
+                horizontalLine.IsSizeAlwaysRelative = false;
+                horizontalLine.LineColor = Color.Red;
+                horizontalLine.LineDashStyle = ChartDashStyle.Dash;
+                horizontalLine.LineWidth = 1;
+                horizontalLine.X = intX;
+                horizontalLine.Y = intY;
+                horizontalLine.Width = minX - intX;
+                horizontalLine.Height = 0;
+                tChart2.Annotations.Add(horizontalLine);
+
+                // ==========================================
+                // ۱۱. نمایش مقادیر دقیق روی محورها
+                // ==========================================
+
+                TextAnnotation textX = new TextAnnotation();
+                textX.Text = intX.ToString("0.0000");
+                textX.ForeColor = Color.Red;
+                textX.Font = new System.Drawing.Font("Arial", 9, FontStyle.Bold);
+                textX.AxisX = tChart2.ChartAreas[0].AxisX;
+                textX.AxisY = tChart2.ChartAreas[0].AxisY;
+                textX.X = intX;
+                textX.Y = minY - (maxY - minY) * 0.04;
+                textX.Alignment = ContentAlignment.TopCenter;
+                tChart2.Annotations.Add(textX);
+
+                TextAnnotation textY = new TextAnnotation();
+                textY.Text = intY.ToString("0.0000");
+                textY.ForeColor = Color.Red;
+                textY.Font = new System.Drawing.Font("Arial", 9, FontStyle.Bold);
+                textY.AxisX = tChart2.ChartAreas[0].AxisX;
+                textY.AxisY = tChart2.ChartAreas[0].AxisY;
+                textY.X = minX - (maxX - minX) * 0.04;
+                textY.Y = intY;
+                textY.Alignment = ContentAlignment.MiddleRight;
+                tChart2.Annotations.Add(textY);
+
+                // به‌روزرسانی تایتل
+                tChart2.Titles[0].Text = "Tafel Results :     ";
+                tChart2.Titles[0].Text += "Ba=" + Ba.ToString("#0.0000") + " mV/dec        Bc=" + Bc.ToString("#0.0000") + " mV/dec";
+
+                tChart2.Refresh();
+                UpdateRotateButtonState();
+
+                // ۱۲. نمایش فرم نتایج
+                ShowCustomResultsForm(Ecorr, logIcorr, Icorr, Ba, Bc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطا در محاسبات: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRotateAxes_Click(object sender, EventArgs e)
+        {
+            // تغییر وضعیت چرخش
+            isAxesRotated = !isAxesRotated;
+
+            // ۱. پاک کردن کامل خطوط قرمز، متن‌ها و نقطه تقاطع
+            tChart2.Annotations.Clear();
+            Series intersectionSeries = tChart2.Series.FindByName("IntersectionPoint");
+            if (intersectionSeries != null)
+            {
+                tChart2.Series.Remove(intersectionSeries); // حذف کامل سری از چارت
+            }
+
+            // ۲. پاک کردن خطوط سفیدی که کاربر رسم کرده است
+            drawline1.removeall();
+            drawline1.removeall_master();
+            numline = -1;
+
+            // ۳. رفرش چارت و اعمال چرخش
+            tChart2.Refresh();
+            SwapAxes(tChart2);
+        }
+        private void UpdateMyNewButtonState()
+        {
+            bool hasData = false;
+
+            // بررسی وجود tChart2 و داشتن حداقل یک سری داده با نقطه
+            if (tChart2 != null && tChart2.Series != null)
+            {
+                foreach (var series in tChart2.Series)
+                {
+                    if (series.Points.Count > 0)
+                    {
+                        hasData = true;
+                        break;
+                    }
+                }
+            }
+
+            // اگر داده وجود داشت دکمه فعال می‌شود، در غیر این صورت غیرفعال است
+            btnExelExport.Enabled = hasData;
+        }
+        private void btnExelExport_Click(object sender, EventArgs e)
+        {
+            // ۱. بررسی وجود داده در tChart2
+            if (tChart2.Series.Count == 0 || tChart2.Series[0].Points.Count == 0)
+            {
+                MessageBox.Show("داده‌ای در نمودار دوم (tChart2) برای ذخیره وجود ندارد.", "هشدار", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // ۲. باز کردن پنجره ذخیره فایل
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.AddExtension = true;
+                sfd.DefaultExt = "csv";
+                sfd.Filter = "CSV File (*.csv)|*.csv|All Files (*.*)|*.*";
+
+                // پیشنهاد نام فایل بر اساس عنوان نمودار
+                string title = tChart2.Titles.Count > 0 ? tChart2.Titles[0].Text.Trim() : "Chart2_Data";
+                if (title == "") title = "Chart2_Data";
+                sfd.FileName = title.Replace(" ", "_").Replace(":", "");
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // ۳. نوشتن داده‌ها در فایل CSV
+                        using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+                        {
+                            // نوشتن هدر (نام ستون‌ها)
+                            sw.WriteLine($"SeriesName,{tChart2.ChartAreas[0].AxisX.Title},{tChart2.ChartAreas[0].AxisY.Title}");
+
+                            // پیمایش تمام سری‌های موجود در tChart2 (شامل خط اصلی، نقاط قله، نقطه تقاطع و ...)
+                            foreach (var series in tChart2.Series)
+                            {
+                                // اگر سری نقطه تقاطع بود یا مخفی بود، میتوانید اینجا شرط بگذارید تا ذخیره نشود
+                                // اما برای کامل بودن همه را ذخیره می‌کنیم
+                                string seriesName = string.IsNullOrEmpty(series.Name) ? "Data" : series.Name;
+
+                                foreach (var point in series.Points)
+                                {
+                                    // استفاده از CultureInfo.InvariantCulture برای جلوگیری از مشکل کاما در اکسل
+                                    string xValue = point.XValue.ToString(CultureInfo.InvariantCulture);
+                                    string yValue = point.YValues.Length > 0 ? point.YValues[0].ToString(CultureInfo.InvariantCulture) : "0";
+
+                                    sw.WriteLine($"{seriesName},{xValue},{yValue}");
+                                }
+                            }
+                        }
+                        MessageBox.Show("فایل CSV با موفقیت ذخیره شد.", "موفقیت", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("خطا در ذخیره فایل:\n" + ex.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void showDataPointsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5213,7 +5700,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                 {
                     ChartType = Tech.SeriesType,
                     BorderWidth = 2,
-                    Color = Color.FromArgb(Tech.ColorCode)                  
+                    Color = Color.FromArgb(Tech.ColorCode)
                 };
 
                 chart.Series.Add(currentSeries);

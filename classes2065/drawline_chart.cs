@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows;
+using System.Windows.Forms;
+
 namespace Skydat.classes2065
 {
     public class drawline_chart
@@ -41,21 +43,29 @@ namespace Skydat.classes2065
                 Lines.RemoveAt(k);
 
         }
+
         public void removeall_master()
         {
             for (int k = Lines_master.Count - 1; k >= 0; k--)
                 Lines_master.RemoveAt(k);
-
         }
+
         public bool intersect_line()
         {
-            Vector v1 = new Vector(Lines_master[0].pointx, Lines_master[0].pointy);
-            Vector v2 = new Vector(Lines_master[1].pointx, Lines_master[1].pointy);
-            Vector v3 = new Vector(Lines_master[2].pointx, Lines_master[2].pointy);
-            Vector v4 = new Vector(Lines_master[3].pointx, Lines_master[3].pointy);
-            Vector v5 = new Vector();
-            return Vector.LineSegementsIntersect(v1,v2,v3,v4,out v5);
-
+            try
+            {
+                Vector v1 = new Vector(Lines_master[0].pointx, Lines_master[0].pointy);
+                Vector v2 = new Vector(Lines_master[1].pointx, Lines_master[1].pointy);
+                Vector v3 = new Vector(Lines_master[2].pointx, Lines_master[2].pointy);
+                Vector v4 = new Vector(Lines_master[3].pointx, Lines_master[3].pointy);
+                Vector v5 = new Vector();
+                return Vector.LineSegementsIntersect(v1, v2, v3, v4, out v5);
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+                return false;
+            }
         }
     }
     public static class Extensions

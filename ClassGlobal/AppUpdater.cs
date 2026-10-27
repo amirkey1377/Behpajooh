@@ -56,7 +56,6 @@ namespace Skydat
             {
                 onlineError = ex.Message;
             }
-
             try
             {
                 string localReleases = FindLocalReleases();
@@ -74,38 +73,49 @@ namespace Skydat
                     onlineError = ex.Message;
             }
 
+
             string message =
                 "منبع بروزرسانی آنلاین یا محلی در دسترس نیست.";
             if (!string.IsNullOrEmpty(onlineError))
                 message += "\n\nجزئیات: " + onlineError;
-            message += "\n\nآیا می‌خواهید پوشه بروزرسانی را دستی انتخاب کنید؟";
+            message += "\n\nآیا می‌خواهید فایل بروزرسانی را دستی انتخاب کنید؟";
 
             DialogResult answer = MessageBox.Show(
                 message, "بروزرسانی",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (answer != DialogResult.Yes) return;
 
-            using (var dialog = new FolderBrowserDialog())
+            if (answer == DialogResult.Yes)
             {
-                dialog.Description =
-                    "پوشه‌ای را انتخاب کنید که فایل releases.win.json و بسته‌های آپدیت داخل آن قرار دارند.";
+                await PromptForManualUpdateAsync();
+            }
+        }
+
+        // متد انتخاب فایل به جای انتخاب پوشه
+        private static async Task PromptForManualUpdateAsync()
+        {
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Title = "فایل بروزرسانی (releases.win.json) را انتخاب کنید";
+                dialog.Filter = "فایل بروزرسانی (releases.win.json)|releases.win.json|فایل‌های JSON (*.json)|*.json|همه فایل‌ها (*.*)|*.*";
+                dialog.CheckFileExists = true;
 
                 if (dialog.ShowDialog() != DialogResult.OK)
                     return;
 
-                string releaseFile = Path.Combine(
-                    dialog.SelectedPath, "releases.win.json");
-
-                if (!File.Exists(releaseFile))
+                // بررسی اینکه آیا کاربر دقیقاً فایل درست را انتخاب کرده است یا خیر
+                if (!Path.GetFileName(dialog.FileName).Equals("releases.win.json", StringComparison.OrdinalIgnoreCase))
                 {
                     MessageBox.Show(
-                        "فایل releases.win.json در پوشه انتخاب‌شده پیدا نشد.",
-                        "خطای بروزرسانی",
+                        "لطفاً دقیقاً فایل 'releases.win.json' را که همراه بسته‌های آپدیت است انتخاب کنید.",
+                        "فایل نامعتبر",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                await CheckUpdate(dialog.SelectedPath, true);
+                // Velopack به پوشه‌ی حاوی این فایل نیاز دارد، پس مسیر پوشه را استخراج می‌کنیم
+                string selectedFolder = Path.GetDirectoryName(dialog.FileName);
+
+                await CheckUpdate(selectedFolder, true);
             }
         }
 
@@ -131,7 +141,6 @@ namespace Skydat
                 }
             }
 
-            // بررسی این‌که پاسخ واقعاً JSON است نه صفحه HTML خطا
             string trimmed = json.TrimStart();
             if (trimmed.Length == 0 || trimmed[0] != '{')
             {
@@ -250,7 +259,6 @@ namespace Skydat
                 File.Move(tmp, localPackage);
             }
 
-            // نوشتن هر دو نام، برای سازگاری با هر نسخه‌ای از Velopack
             string winFeed = Path.Combine(
                 UpdateCacheFolder, "releases.win.json");
             string plainFeed = Path.Combine(
@@ -284,7 +292,7 @@ namespace Skydat
                 Version v = typeof(AppUpdater).Assembly
                     .GetName().Version;
                 if (v != null)
-                    return "نسخه فعلی: " + v.ToString(3);
+                    return "Current Version : " + v.ToString(3);
             }
             catch { }
 
@@ -292,11 +300,11 @@ namespace Skydat
             {
                 var mgr = new UpdateManager(UpdateCacheFolder);
                 if (mgr.IsInstalled && mgr.CurrentVersion != null)
-                    return "نسخه فعلی: " + mgr.CurrentVersion;
+                    return "Current Version : " + mgr.CurrentVersion;
             }
             catch { }
 
-            return "نسخه فعلی: نامشخص";
+            return "Current Version : Unspacified";
         }
 
         private static string FindLocalReleases()
@@ -334,37 +342,71 @@ namespace Skydat
             {
                 var manager = new UpdateManager(source);
 
-                // IsInstalled را دیگر قبل از CheckForUpdatesAsync چک نمی‌کنیم
                 UpdateInfo update =
                     await manager.CheckForUpdatesAsync();
 
                 if (update == null)
                 {
-                    MessageBox.Show(
-                        "برنامه شما به‌روز است.\n\n" +
-                        "نسخه فعلی: " +
-                        (manager.CurrentVersion?.ToString() ?? "نامشخص"),
-                        "بروزرسانی",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // اگر دستی فراخوانی شده بود، فقط بگوییم فایل به‌روز است
+                    if (manual)
+                    {
+                        MessageBox.Show(
+                            "This File is Not Containing A New Update.",
+                            "Update",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return UpdateResult.NoUpdate;
+                    }
+
+                    // اگر برنامه آنلاین به‌روز بود
+                    DialogResult manualAnswer = MessageBox.Show(
+                        "App Is Up To Date.\n\n" +
+                        "Current Version : " +
+                        (manager.CurrentVersion?.ToString() ?? "Unspacified") + "\n\n" +
+                        "Do You Want To Do Manual Update ?",
+                        "System Update",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (manualAnswer == DialogResult.Yes)
+                    {
+                        await PromptForManualUpdateAsync();
+                    }
+
                     return UpdateResult.NoUpdate;
                 }
 
                 string currentVersion =
-                    manager.CurrentVersion?.ToString() ?? "نامشخص";
+                    manager.CurrentVersion?.ToString() ?? "Unspacified";
                 string newVersion =
                     update.TargetFullRelease.Version.ToString();
 
-                DialogResult answer = MessageBox.Show(
-                    "نسخه جدید پیدا شد.\n\n" +
-                    "نسخه فعلی: " + currentVersion + "\n" +
-                    "نسخه جدید: " + newVersion + "\n\n" +
-                    "آیا می‌خواهید بروزرسانی انجام شود؟",
-                    "نسخه جدید",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (!manual)
+                {
+                    // ★★★ سه دکمه: Yes (خودکار) - No (انصراف) - Cancel (دستی) ★★★
+                    DialogResult answer = MessageBox.Show(
+                        "New Version Found.\n\n" +
+                        "Current Version : " + currentVersion + "\n" +
+                        "New Version : " + newVersion + "\n\n" +
+                        "For Automated Install Press [Yes] \n" +
+                        "If You Regreat Your Choice Press [No] .\n" +
+                        "For Manual Install Press [Cancel] .",
+                        "New Version",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
-                if (answer != DialogResult.Yes)
-                    return UpdateResult.Cancelled;
+                    if (answer == DialogResult.Cancel)
+                    {
+                        // فراخوانی انتخاب فایل دستی
+                        await PromptForManualUpdateAsync();
+                        return UpdateResult.Cancelled;
+                    }
+                    if (answer == DialogResult.No)
+                    {
+                        return UpdateResult.Cancelled;
+                    }
+                    // اگر Yes بود، از اینجا رد می‌شود و دانلود شروع می‌شود
+                }
 
+                // دانلود و نصب
                 await manager.DownloadUpdatesAsync(update);
 
                 if (!manager.IsInstalled)
@@ -391,7 +433,7 @@ namespace Skydat
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return UpdateResult.SourceUnavailable;
                 }
-                throw; // در حالت عادی، خطا را به بالا منتقل کن
+                throw;
             }
         }
 

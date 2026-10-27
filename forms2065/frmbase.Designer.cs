@@ -54,6 +54,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.btnUpdate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -263,10 +264,11 @@
             this.toolStripLabel7,
             this.TechnicalBtn,
             this.toolStripLabel11,
+            this.toolStripLabel13,
+            this.btnUpdate,
             this.toolStripLabel3,
             this.toolStripSeparator2,
-            this.toolStripLabel6,
-            this.btnUpdate});
+            this.toolStripLabel6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -346,7 +348,6 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.btnUpdate.AutoSize = false;
             this.btnUpdate.BackColor = System.Drawing.Color.White;
             this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -363,6 +364,12 @@
             this.btnUpdate.ToolTipText = "Upadate";
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             this.btnUpdate.MouseHover += new System.EventHandler(this.btnUpdate_MouseHover);
+            // 
+            // toolStripLabel13
+            // 
+            this.toolStripLabel13.Name = "toolStripLabel13";
+            this.toolStripLabel13.Size = new System.Drawing.Size(40, 97);
+            this.toolStripLabel13.Text = "           ";
             // 
             // frmbase
             // 
@@ -414,5 +421,6 @@
         private System.Windows.Forms.ToolStripButton ImportBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel9;
         private System.Windows.Forms.ToolStripButton btnUpdate;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel13;
     }
 }
