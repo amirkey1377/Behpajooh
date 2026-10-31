@@ -97,11 +97,11 @@ namespace Skydat
 
         }
 
-        private Tafel(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter TStep, int EquilibriumTime = 0, string comment = "")
+        private Tafel(Parameter ocptime, Parameter difvoltage, Parameter avrgtime, Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter TStep, int EquilibriumTime = 0, string comment = "")
         {
-            //_OcpTime = ;
-            //_DiffVoltage =;
-            //_AvrageTime =;
+            _OcpTime = ocptime;
+            _DiffVoltage = difvoltage;
+            _AvrageTime = avrgtime;
             _E1 = E1;
             _E2 = E2;
             _ScanRate = ScanRate;
@@ -285,7 +285,7 @@ namespace Skydat
 
         public ITechniques Clone()
         {
-            ITechniques ClonedTech = new Tafel(_E1, _E2, _ScanRate, _HStep, _TStep, _EquilibriumTime, Comment);
+            ITechniques ClonedTech = new Tafel(_OcpTime, _DiffVoltage, _AvrageTime,_E1, _E2, _ScanRate, _HStep, _TStep, _EquilibriumTime, Comment);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
             if (SeriesPath != null)

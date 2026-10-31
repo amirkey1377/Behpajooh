@@ -5631,7 +5631,7 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
                             DelayTime = Convert.ToInt32(firstRow[7]);
                             Comment = firstRow[8].Trim();
 
-                            Tech = new CA(E1, E2, T1, T2, Cycle, DelayTime, Comment);
+                            Tech = new CA(device.Techniques["CA"], E1, E2, T1, T2, Cycle, DelayTime, Comment);
                             Tech.ColorCode = Convert.ToInt32(firstRow[1]);
                             break;
 

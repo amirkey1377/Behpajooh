@@ -7,47 +7,42 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using Newtonsoft.Json;
 using Skydat.classes2065;
+using System.ComponentModel;
 
 namespace Skydat
 {
-    class CA : ITechniques
+    class CA : ITechniques, ICustomTypeDescriptor
     {
         public const string fullName = "Chrono Amperometry";
-
         public const string name = "CA";
-
         public const byte number = 7;
 
         public static string discription = "this technique measures the current that develops " +
             "in an electrochemical cell under conditions where voltage is in excess of that predicted " +
             "by the Nernst equation. CV is performed by cycling the potential of a working electrode, and " +
-            "measuring the resulting current." +
-            "this technique has following properties:\n" +
-            "E1\n" +
-            "E2\n" +
-            "E3\n" +
-            "Hstep\n" +
-            "Tstep\n" +
-            "Scan Rate\n" +
-            "Cycle\n" +
-            "Equilibrium Time";
+            "measuring the resulting current.";
 
+        [Browsable(false)]
         public string Name { get; } = name;
 
-        [JsonIgnore]
+        [JsonIgnore, Browsable(false)]
         public byte Number { get; } = number;
 
-        [JsonIgnore]
+        [JsonIgnore, Browsable(false)]
         public string FullName { get; } = fullName;
 
-        [JsonIgnore]
+        [JsonIgnore, Browsable(false)]
         public string Discription { get; } = discription;
 
         public string Comment { get; set; }
 
+        [Browsable(false)]
         public int ColorCode { get; set; }
 
+        [Browsable(false)]
         private string[] _xyAxisTitle = new string[2] { "Current(uA)", "Time(S)" };
+
+        [Browsable(false)]
         public string[] XY_Axis_Title
         {
             get { return _xyAxisTitle; }
@@ -55,6 +50,8 @@ namespace Skydat
         }
 
         private bool _colometryMode;
+
+        [Browsable(false)]
         public bool ColometryMode
         {
             get { return _colometryMode; }
@@ -71,120 +68,125 @@ namespace Skydat
         }
 
 
-        public CA(double E1, double E2, int T1, int T2, int Cycles, int EquilibriumTime = 0, string comment = "", bool ColometryMode = false)
+        // ================== سازنده اول (از TechniqueSpecification) ==================
+        public CA(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")
         {
-            _E1 = E1;
-            _E2 = E2;
-            _T1 = T1;
-            _T2 = T2;
-            _Cycles = Cycles;
+            specific.InitializeParameterNames();
+
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, e1.Default, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, e2.Default, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification t1 = specific.Parameters["T1"];
+            _T1 = new Parameter(t1.Name, t1.Description, t1.Default, t1.Max, t1.Min, t1.Unit, t1.Resolution);
+
+            ParameterSpecification t2 = specific.Parameters["T2"];
+            _T2 = new Parameter(t2.Name, t2.Description, t2.Default, t2.Max, t2.Min, t2.Unit, t2.Resolution);
+
+            ParameterSpecification cycle = specific.Parameters["Cycles"];
+            _Cycles = new Parameter(cycle.Name, cycle.Description, cycle.Default, cycle.Max, cycle.Min, cycle.Unit, cycle.Resolution);
+
             _EquilibriumTime = EquilibriumTime;
             Comment = comment;
-
-            this.ColometryMode = ColometryMode;
-            //برای اینکه هر تکنیک کد رنگی مختص به خود را داشته باشد
             ColorCode = ColorUtility.GenerateHighContrastColor();
-
         }
 
-        private double _E1;
-        private double _E2;
-        private int _T1;
-        private int _T2;
-        private int _Cycles;
+        // ================== سازنده دوم (از Parameter ها برای Clone) ==================
+        public CA(Parameter E1, Parameter E2, Parameter T1, Parameter T2, Parameter Cycles, int EquilibriumTime = 0, string comment = "", bool ColometryMode = false)
+        {
+            _E1 = E1; _E2 = E2; _T1 = T1; _T2 = T2; _Cycles = Cycles;
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            this.ColometryMode = ColometryMode;
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+        // ================== سازنده سوم (از مقادیر عددی برای فرآیند لود) ==================
+        public CA(TechniqueSpecification specific, double E1, double E2, int T1, int T2, int Cycle, int EquilibriumTime = 0, string comment = "")
+        {
+            ParameterSpecification e1 = specific.Parameters["E1"];
+            _E1 = new Parameter(e1.Name, e1.Description, E1, e1.Max, e1.Min, e1.Unit, e1.Resolution);
+
+            ParameterSpecification e2 = specific.Parameters["E2"];
+            _E2 = new Parameter(e2.Name, e2.Description, E2, e2.Max, e2.Min, e2.Unit, e2.Resolution);
+
+            ParameterSpecification t1 = specific.Parameters["T1"];
+            _T1 = new Parameter(t1.Name, t1.Description, T1, t1.Max, t1.Min, t1.Unit, t1.Resolution);
+
+            ParameterSpecification t2 = specific.Parameters["T2"];
+            _T2 = new Parameter(t2.Name, t2.Description, T2, t2.Max, t2.Min, t2.Unit, t2.Resolution);
+
+            ParameterSpecification cycle = specific.Parameters["Cycle"];
+            _Cycles = new Parameter(cycle.Name, cycle.Description, Cycle, cycle.Max, cycle.Min, cycle.Unit, cycle.Resolution);
+
+            _EquilibriumTime = EquilibriumTime;
+            Comment = comment;
+            ColorCode = ColorUtility.GenerateHighContrastColor();
+        }
+
+        private Parameter _E1;
+        private Parameter _E2;
+        private Parameter _T1;
+        private Parameter _T2;
+        private Parameter _Cycles;
         private int _EquilibriumTime;
 
-        public double E1
+        [Browsable(false)]
+        public Parameter E1 { get { return _E1; } }
+
+        [Category("CA Values"), DisplayName("E1"), Description("")]
+        public double E1_Value
         {
-            get
-            {
-                return _E1;
-            }
-            set
-            {
-                if (value >= -5 && value <= 5)
-                {
-                    _E1 = clasglobal.caprms_ocp.E1 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            get { return _E1.Value; }
+            set { _E1.Value = value; }
         }
 
-        public double E2
+        [Browsable(false)]
+        public Parameter E2 { get { return _E2; } }
+
+        [Category("CA Values"), DisplayName("E2"), Description("")]
+        public double E2_Value
         {
-            get
-            {
-                return _E2;
-            }
-            set
-            {
-                if (value >= -5 && value <= 5)
-                {
-                    _E2 = clasglobal.caprms_ocp.E2 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            get { return _E2.Value; }
+            set { _E2.Value = value; }
         }
 
-        public int T1
+        [Browsable(false)]
+        public Parameter T1 { get { return _T1; } }
+
+        [Category("CA Values"), DisplayName("T1"), Description("")]
+        public double T1_Value
         {
-            get
-            {
-                return _T1;
-            }
-            set
-            {
-                if (value >= 0 && value <= 10000)
-                {
-                    _T1 = clasglobal.caprms_ocp.T1 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            get { return _T1.Value; }
+            set { _T1.Value = value; }
         }
 
-        public int T2
+        [Browsable(false)]
+        public Parameter T2 { get { return _T2; } }
+
+        [Category("CA Values"), DisplayName("T2"), Description("")]
+        public double T2_Value
         {
-            get
-            {
-                return _T2;
-            }
-            set
-            {
-                if (value >= 0 && value <= 10000)
-                {
-                    _T2 = clasglobal.caprms_ocp.T2 = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            get { return _T2.Value; }
+            set { _T2.Value = value; }
         }
 
-        public int Cycles
+        [Browsable(false)]
+        public Parameter Cycles { get { return _Cycles; } }
+
+        [Category("CA Values"), DisplayName("Cycles"), Description("")]
+        public double Cycles_Value
         {
-            get
-            {
-                return _Cycles;
-            }
-            set
-            {
-                if (value >= 1 && value <= 10000)
-                {
-                    _Cycles = clasglobal.caprms_ocp.Cycles = value;
-                }
-                else
-                    MessageBox.Show("مقدار وارد شده مجاز نیست");
-            }
+            get { return _Cycles.Value; }
+            set { _Cycles.Value = value; }
         }
 
+        [Category("CA Values"), DisplayName("EquilibriumTime")]
         public int EquilibriumTime
         {
-            get
-            {
-                return _EquilibriumTime;
-            }
+            get { return _EquilibriumTime; }
             set
             {
                 if (value >= 0 && _EquilibriumTime <= 2000)
@@ -202,45 +204,26 @@ namespace Skydat
             ITechniques ClonedTech = new CA(_E1, _E2, _T1, _T2, _Cycles, _EquilibriumTime, Comment, ColometryMode);
             ClonedTech.SeriesType = SeriesType;
             ClonedTech.ColorCode = ColorCode;
-            if (SeriesPath != null)
-            {
-                ClonedTech.SeriesPath = SeriesPath;
-            }
+            if (SeriesPath != null) ClonedTech.SeriesPath = SeriesPath;
             return ClonedTech;
         }
 
+        [Browsable(false)]
         public string SeriesPath { get; set; }
+
+        [Browsable(false)]
+        public SeriesChartType SeriesType { get; set; }
 
         public Series previewChart()
         {
-            Series series = new Series($"{name}")
-            {
-                ChartType = SeriesChartType.StepLine,
-                BorderWidth = 2,
-                Color = System.Drawing.Color.Blue
-            };
-
-            if (_E1 == 0 && _E2 == 0)//جلوگیری از خطا در کشیدن چارت
-                return null;
-
-
-            int fullCycle = _T1 + _T2;
-            //بیشتر از دن سیکل نمایش نمیدهد
+            Series series = new Series($"{name}") { ChartType = SeriesChartType.StepLine, BorderWidth = 2, Color = System.Drawing.Color.Blue };
+            if (_E1 == 0 && _E2 == 0) return null;
+            int fullCycle = (int)(_T1 + _T2);
             for (int i = 0; i < _Cycles && i < 10; i++)
             {
-                if (_T1 != 0)
-                {
-                    series.Points.AddXY(0 + (i * fullCycle), _E1);
-                    series.Points.AddXY(_T1 + (i * fullCycle), _E1);
-                }
-
-                if (_T2 != 0)
-                {
-                    series.Points.AddXY(_T1 + (i * fullCycle), _E2);
-                    series.Points.AddXY(fullCycle + (i * fullCycle), _E2);
-                }
+                if (_T1 != 0) { series.Points.AddXY(0 + (i * fullCycle), _E1); series.Points.AddXY(_T1 + (i * fullCycle), _E1); }
+                if (_T2 != 0) { series.Points.AddXY(_T1 + (i * fullCycle), _E2); series.Points.AddXY(fullCycle + (i * fullCycle), _E2); }
             }
-
             return series;
         }
 
@@ -248,72 +231,74 @@ namespace Skydat
         {
             byte Technum = number;
             buffer[0] = Technum;
-
-            int[] VoltageBuffer = new int[(_T1 + _T2) * _Cycles];
-
+            int[] VoltageBuffer = new int[(int)((_T1 + _T2) * _Cycles)];
             Array.Resize(ref buffer, 23);
-
             buffer[1] = 20;
-            int E1 = Convert.ToInt16(_E1 * 1000);
-            buffer[2] = (byte)(E1 >> 8);   // بایت بالا
-            buffer[3] = (byte)(E1 & 0xFF); // بایت پایین
-
-            int E2 = Convert.ToInt16(_E2 * 1000);
-            buffer[4] = (byte)(E2 >> 8);   // بایت بالا
-            buffer[5] = (byte)(E2 & 0xFF); // بایت پایین
-
-            //Hstep
-            buffer[6] = 0;   // بایت بالا
-
-            int T1 = Convert.ToInt32(_T1);
-            buffer[7] = (byte)(T1 >> 24);   // بایت بالا
-            buffer[8] = (byte)(T1 >> 16); // بایت پایین
-            buffer[9] = (byte)(T1 >> 8);   // بایت بالا
-            buffer[10] = (byte)(T1 & 0xFF); // بایت پایین
-
-            int Delay = Convert.ToInt16(_EquilibriumTime);
-            buffer[11] = 0;
-            buffer[12] = 0;
-
-            //int PW = 0;
-            buffer[13] = 0;
-            buffer[14] = 0;
-
-            //int PH = 0;
-            buffer[15] = 0;
-
-            int T2 = Convert.ToInt32(_T2);
-            buffer[16] = (byte)(T2 >> 24);   // بایت بالا
-            buffer[17] = (byte)(T2 >> 16); // بایت پایین
-            buffer[18] = (byte)(T2 >> 8);   // بایت بالا
-            buffer[19] = (byte)(T2 & 0xFF); // بایت پایین
-
-            int Cycle = Convert.ToInt16(_Cycles);
-            buffer[20] = (byte)(Cycle >> 8);   // بایت بالا
-            buffer[21] = (byte)(Cycle & 0xFF); // بایت پایین
-
-            for (int i = 2; i < 22; i++)
-            {
-                buffer[22] ^= buffer[i];
-            }
-
-            for (int i = 0; i < (_T1 + _T2) * _Cycles; i++)
-            {
-                VoltageBuffer[i] = i + 1;
-            }
-
+            int E1 = Convert.ToInt16(_E1 * 1000); buffer[2] = (byte)(E1 >> 8); buffer[3] = (byte)(E1 & 0xFF);
+            int E2 = Convert.ToInt16(_E2 * 1000); buffer[4] = (byte)(E2 >> 8); buffer[5] = (byte)(E2 & 0xFF);
+            buffer[6] = 0;
+            int T1 = Convert.ToInt32(_T1); buffer[7] = (byte)(T1 >> 24); buffer[8] = (byte)(T1 >> 16); buffer[9] = (byte)(T1 >> 8); buffer[10] = (byte)(T1 & 0xFF);
+            int Delay = Convert.ToInt16(_EquilibriumTime); buffer[11] = 0; buffer[12] = 0;
+            buffer[13] = 0; buffer[14] = 0; buffer[15] = 0;
+            int T2 = Convert.ToInt32(_T2); buffer[16] = (byte)(T2 >> 24); buffer[17] = (byte)(T2 >> 16); buffer[18] = (byte)(T2 >> 8); buffer[19] = (byte)(T2 & 0xFF);
+            int Cycle = Convert.ToInt16(_Cycles); buffer[20] = (byte)(Cycle >> 8); buffer[21] = (byte)(Cycle & 0xFF);
+            for (int i = 2; i < 22; i++) { buffer[22] ^= buffer[i]; }
+            for (int i = 0; i < (_T1 + _T2) * _Cycles; i++) { VoltageBuffer[i] = i + 1; }
             return VoltageBuffer;
         }
 
         public void SendToUsb_For_2066(ref string CommondRun)
         {
             CommondRun += 0.ToString() + "@";
-
             CommondRun += ".";
         }
 
+        // ================== تزریق توضیحات داینامیک (ICustomTypeDescriptor) ==================
+        public AttributeCollection GetAttributes() => TypeDescriptor.GetAttributes(this, true);
+        public string GetClassName() => TypeDescriptor.GetClassName(this, true);
+        public string GetComponentName() => TypeDescriptor.GetComponentName(this, true);
+        public TypeConverter GetConverter() => TypeDescriptor.GetConverter(this, true);
+        public EventDescriptor GetDefaultEvent() => TypeDescriptor.GetDefaultEvent(this, true);
+        public PropertyDescriptor GetDefaultProperty() => TypeDescriptor.GetDefaultProperty(this, true);
+        public object GetEditor(Type editorBaseType) => TypeDescriptor.GetEditor(this, editorBaseType, true);
+        public EventDescriptorCollection GetEvents(Attribute[] attributes) => TypeDescriptor.GetEvents(this, attributes, true);
+        public EventDescriptorCollection GetEvents() => TypeDescriptor.GetEvents(this, true);
+        public object GetPropertyOwner(PropertyDescriptor pd) => this;
+        public PropertyDescriptorCollection GetProperties() => GetProperties(new Attribute[0]);
 
-        public SeriesChartType SeriesType { get; set; }
+        public PropertyDescriptorCollection GetProperties(Attribute[] attributes)
+        {
+            var props = TypeDescriptor.GetProperties(this, attributes, true);
+            var newProps = new List<PropertyDescriptor>();
 
+            foreach (PropertyDescriptor prop in props)
+            {
+                string dynamicDescription = "";
+
+                // خواندن توضیحات از روی متغیرهای اصلی _E1 و ...
+                switch (prop.Name)
+                {
+                    case "E1_Value": dynamicDescription = _E1.Description; break;
+                    case "E2_Value": dynamicDescription = _E2.Description; break;
+                    case "T1_Value": dynamicDescription = _T1.Description; break;
+                    case "T2_Value": dynamicDescription = _T2.Description; break;
+                    case "Cycles_Value": dynamicDescription = _Cycles.Description; break;
+                }
+
+                if (!string.IsNullOrEmpty(dynamicDescription))
+                {
+                    Attribute[] attrs = new Attribute[prop.Attributes.Count + 1];
+                    prop.Attributes.CopyTo(attrs, 0);
+                    attrs[attrs.Length - 1] = new DescriptionAttribute(dynamicDescription);
+                    newProps.Add(TypeDescriptor.CreateProperty(typeof(CA), prop, attrs));
+                }
+                else
+                {
+                    newProps.Add(prop);
+                }
+            }
+            return new PropertyDescriptorCollection(newProps.ToArray());
+        }
+        // =====================================================================================
     }
 }

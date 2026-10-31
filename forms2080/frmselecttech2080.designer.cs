@@ -30,8 +30,8 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmselecttech2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.colAA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -399,21 +399,21 @@ namespace Skydat.forms2080
             // chartApplayTech
             // 
             this.chartApplayTech.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
-            chartArea1.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.White;
-            chartArea1.AxisX.ScrollBar.IsPositionedInside = false;
-            chartArea1.AxisX.ScrollBar.LineColor = System.Drawing.Color.DimGray;
-            chartArea1.BackColor = System.Drawing.Color.Transparent;
-            chartArea1.Name = "ChartArea1";
-            this.chartApplayTech.ChartAreas.Add(chartArea1);
+            chartArea6.AxisX.MajorGrid.Enabled = false;
+            chartArea6.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
+            chartArea6.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.White;
+            chartArea6.AxisX.ScrollBar.IsPositionedInside = false;
+            chartArea6.AxisX.ScrollBar.LineColor = System.Drawing.Color.DimGray;
+            chartArea6.BackColor = System.Drawing.Color.Transparent;
+            chartArea6.Name = "ChartArea1";
+            this.chartApplayTech.ChartAreas.Add(chartArea6);
             resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
             this.chartApplayTech.Name = "chartApplayTech";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series1.IsVisibleInLegend = false;
-            series1.Name = "Series1";
-            this.chartApplayTech.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series6.IsVisibleInLegend = false;
+            series6.Name = "Series1";
+            this.chartApplayTech.Series.Add(series6);
             // 
             // panel2
             // 

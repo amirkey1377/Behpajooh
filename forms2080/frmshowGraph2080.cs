@@ -561,7 +561,7 @@ namespace Skydat.forms2080
                 {
                     CA ca = TechLine[k] as CA;
 
-                    int totalPoint = (ca.T1 + ca.T2) * ca.Cycles;
+                    int totalPoint = (int)((ca.T1 + ca.T2) * ca.Cycles);
 
                     if (ca.ColometryMode)
                     {
@@ -578,7 +578,7 @@ namespace Skydat.forms2080
 
                     bool OverFlow = false;
                     double pos = 0;
-                    int PeriodTime = ca.T1 + ca.T2;
+                    int PeriodTime = (int)(ca.T1 + ca.T2);
                     double size = PeriodTime * ChartScaleMultiplier;
 
                     this.Invoke((MethodInvoker)delegate ()
