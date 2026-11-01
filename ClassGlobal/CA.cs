@@ -22,6 +22,8 @@ namespace Skydat
             "by the Nernst equation. CV is performed by cycling the potential of a working electrode, and " +
             "measuring the resulting current.";
 
+        public const string parentcategory = "Measurement - chrono methods";
+
         [Browsable(false)]
         public string Name { get; } = name;
 
@@ -33,6 +35,9 @@ namespace Skydat
 
         [JsonIgnore, Browsable(false)]
         public string Discription { get; } = discription;
+
+        [JsonIgnore, Browsable(false)]
+        public string ParentCategory { get; } = parentcategory;
 
         public string Comment { get; set; }
 

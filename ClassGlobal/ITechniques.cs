@@ -12,6 +12,9 @@ namespace Skydat
 
         string Discription { get; }
 
+        string ParentCategory { get; }
+
+
         string Comment { get; set; }
 
         int ColorCode { get; set; }

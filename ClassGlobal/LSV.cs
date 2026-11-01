@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Skydat.classes2065;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -27,6 +28,8 @@ namespace Skydat
             "Scan Rate\n" +
             "Equilibrium Time";
 
+        public const string parentcategory = "Measurement - cyclic and linear sweep voltammetry";
+
         public string Name { get; } = name;
 
         [JsonIgnore]
@@ -37,6 +40,9 @@ namespace Skydat
 
         [JsonIgnore]
         public string Discription { get; } = discription;
+
+        [JsonIgnore, Browsable(false)]
+        public string ParentCategory { get; } = parentcategory;
 
         public string Comment { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace Skydat
             "   OCP Time is:\n" +
             "\n";
 
+        public const string parentcategoty = "Corrosion Analysis";
+
         public string Name { get; } = name;
 
         [JsonIgnore]
@@ -35,6 +38,9 @@ namespace Skydat
 
         [JsonIgnore]
         public string Discription { get; } = discription;
+
+        [JsonIgnore, Browsable(false)]
+        public string ParentCategory { get; } = parentcategoty;
 
         public string Comment { get; set; }
 

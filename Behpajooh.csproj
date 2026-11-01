@@ -226,6 +226,7 @@
     <Compile Include="ClassGlobal\CV.cs" />
     <Compile Include="ClassGlobal\OCP.cs" />
     <Compile Include="ClassGlobal\Parameter.cs" />
+    <Compile Include="ClassGlobal\PRE.cs" />
     <Compile Include="ClassGlobal\SWV.cs" />
     <Compile Include="ClassGlobal\DPV.cs" />
     <Compile Include="ClassGlobal\ITechniques.cs" />

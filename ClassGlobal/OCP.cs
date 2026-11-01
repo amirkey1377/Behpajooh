@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace Skydat
             "this technique has following properties:\n" +
             "Tstep\n";
 
+        public const string parentcategory = "Measurement - general";
+
         public string Name { get; } = name;
 
         [JsonIgnore]
@@ -31,6 +34,9 @@ namespace Skydat
 
         [JsonIgnore]
         public string Discription { get; } = discription;
+
+        [JsonIgnore, Browsable(false)]
+        public string ParentCategory { get; } = parentcategory;
 
         public string Comment { get; set; }
 

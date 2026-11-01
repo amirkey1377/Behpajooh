@@ -30,15 +30,12 @@ namespace Skydat.forms2080
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmselecttech2080));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.colAA = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQ2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.pGrid2 = new System.Windows.Forms.PropertyGrid();
-            this.checkCPsCTs = new System.Windows.Forms.CheckBox();
             this.pnlDiscription = new System.Windows.Forms.Panel();
             this.btnRecalculateAvrage = new System.Windows.Forms.Button();
             this.lblDiscription = new System.Windows.Forms.RichTextBox();
@@ -227,6 +224,7 @@ namespace Skydat.forms2080
             this.lblTime = new System.Windows.Forms.Label();
             this.txtDiifVoltage = new System.Windows.Forms.TextBox();
             this.txtTafelOcpTime = new System.Windows.Forms.TextBox();
+            this.pnlAdvance = new System.Windows.Forms.Panel();
             this.tsOptions = new System.Windows.Forms.ToolStrip();
             this.tsbNew = new System.Windows.Forms.ToolStripButton();
             this.tsbOpen = new System.Windows.Forms.ToolStripButton();
@@ -243,9 +241,7 @@ namespace Skydat.forms2080
             this.btnSWV_Select = new System.Windows.Forms.Button();
             this.btnDPV_Select = new System.Windows.Forms.Button();
             this.pnlParam = new System.Windows.Forms.Panel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
-            this.panel5.SuspendLayout();
             this.pnlDiscription.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
@@ -277,10 +273,6 @@ namespace Skydat.forms2080
             this.pnlSelectTech.SuspendLayout();
             this.tlpTechbtns.SuspendLayout();
             this.pnlParam.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // colAA
@@ -305,41 +297,6 @@ namespace Skydat.forms2080
             // 
             this.toolTip1.ShowAlways = true;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.pGrid2);
-            this.panel5.Controls.Add(this.checkCPsCTs);
-            resources.ApplyResources(this.panel5, "panel5");
-            this.panel5.Name = "panel5";
-            // 
-            // pGrid2
-            // 
-            this.pGrid2.BackColor = System.Drawing.Color.White;
-            this.pGrid2.CategoryForeColor = System.Drawing.Color.Black;
-            this.pGrid2.CommandsActiveLinkColor = System.Drawing.Color.Red;
-            this.pGrid2.CommandsBackColor = System.Drawing.Color.White;
-            this.pGrid2.CommandsForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.pGrid2, "pGrid2");
-            this.pGrid2.HelpBackColor = System.Drawing.Color.White;
-            this.pGrid2.HelpForeColor = System.Drawing.Color.Black;
-            this.pGrid2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pGrid2.Name = "pGrid2";
-            this.pGrid2.PropertySort = System.Windows.Forms.PropertySort.NoSort;
-            this.pGrid2.ToolbarVisible = false;
-            this.pGrid2.ViewBackColor = System.Drawing.Color.White;
-            this.pGrid2.ViewForeColor = System.Drawing.Color.Black;
-            this.pGrid2.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pGrid2_PropertyValueChanged);
-            // 
-            // checkCPsCTs
-            // 
-            resources.ApplyResources(this.checkCPsCTs, "checkCPsCTs");
-            this.checkCPsCTs.ForeColor = System.Drawing.Color.Black;
-            this.checkCPsCTs.Name = "checkCPsCTs";
-            this.checkCPsCTs.UseVisualStyleBackColor = true;
-            this.checkCPsCTs.CheckedChanged += new System.EventHandler(this.checkCPsCTs_CheckedChanged);
             // 
             // pnlDiscription
             // 
@@ -399,21 +356,21 @@ namespace Skydat.forms2080
             // chartApplayTech
             // 
             this.chartApplayTech.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.AxisX.MajorGrid.Enabled = false;
-            chartArea6.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
-            chartArea6.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.White;
-            chartArea6.AxisX.ScrollBar.IsPositionedInside = false;
-            chartArea6.AxisX.ScrollBar.LineColor = System.Drawing.Color.DimGray;
-            chartArea6.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.Name = "ChartArea1";
-            this.chartApplayTech.ChartAreas.Add(chartArea6);
+            chartArea5.AxisX.MajorGrid.Enabled = false;
+            chartArea5.AxisX.ScrollBar.BackColor = System.Drawing.Color.Black;
+            chartArea5.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.White;
+            chartArea5.AxisX.ScrollBar.IsPositionedInside = false;
+            chartArea5.AxisX.ScrollBar.LineColor = System.Drawing.Color.DimGray;
+            chartArea5.BackColor = System.Drawing.Color.Transparent;
+            chartArea5.Name = "ChartArea1";
+            this.chartApplayTech.ChartAreas.Add(chartArea5);
             resources.ApplyResources(this.chartApplayTech, "chartApplayTech");
             this.chartApplayTech.Name = "chartApplayTech";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series6.IsVisibleInLegend = false;
-            series6.Name = "Series1";
-            this.chartApplayTech.Series.Add(series6);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series5.IsVisibleInLegend = false;
+            series5.Name = "Series1";
+            this.chartApplayTech.Series.Add(series5);
             // 
             // panel2
             // 
@@ -608,6 +565,7 @@ namespace Skydat.forms2080
             // panel1
             // 
             this.panel1.Controls.Add(this.TabParameter);
+            this.panel1.Controls.Add(this.pnlAdvance);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
@@ -1085,6 +1043,7 @@ namespace Skydat.forms2080
             // 
             // tabPage3
             // 
+            this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage3.Controls.Add(this.pGrid);
             this.tabPage3.Controls.Add(this.ColometryCheck);
             resources.ApplyResources(this.tabPage3, "tabPage3");
@@ -1541,6 +1500,7 @@ namespace Skydat.forms2080
             // 
             // tabOCP
             // 
+            this.tabOCP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabOCP.Controls.Add(this.tableLayoutPanel2);
             resources.ApplyResources(this.tabOCP, "tabOCP");
             this.tabOCP.Name = "tabOCP";
@@ -1926,6 +1886,11 @@ namespace Skydat.forms2080
             this.txtTafelOcpTime.ForeColor = System.Drawing.Color.Black;
             this.txtTafelOcpTime.Name = "txtTafelOcpTime";
             // 
+            // pnlAdvance
+            // 
+            resources.ApplyResources(this.pnlAdvance, "pnlAdvance");
+            this.pnlAdvance.Name = "pnlAdvance";
+            // 
             // tsOptions
             // 
             resources.ApplyResources(this.tsOptions, "tsOptions");
@@ -2115,22 +2080,9 @@ namespace Skydat.forms2080
             // 
             this.pnlParam.BackColor = System.Drawing.Color.White;
             this.pnlParam.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlParam.Controls.Add(this.splitContainer1);
+            this.pnlParam.Controls.Add(this.pnlParameter);
             resources.ApplyResources(this.pnlParam, "pnlParam");
             this.pnlParam.Name = "pnlParam";
-            // 
-            // splitContainer1
-            // 
-            resources.ApplyResources(this.splitContainer1, "splitContainer1");
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.pnlParameter);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.panel5);
             // 
             // timerResizeFrm
             // 
@@ -2155,8 +2107,6 @@ namespace Skydat.forms2080
             this.TransparencyKey = System.Drawing.Color.White;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.frmselecttech2080_Resize_1);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.pnlDiscription.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).EndInit();
@@ -2203,10 +2153,6 @@ namespace Skydat.forms2080
             this.pnlSelectTech.ResumeLayout(false);
             this.tlpTechbtns.ResumeLayout(false);
             this.pnlParam.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2218,15 +2164,12 @@ namespace Skydat.forms2080
         private System.Windows.Forms.ToolTip toolTip1;
      
         private System.Windows.Forms.TreeView treeView2;
-        private System.Windows.Forms.CheckBox checkCPsCTs;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.Panel pnlDiscription;
         private System.Windows.Forms.Label lblTechName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         public System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem1;
-        private System.Windows.Forms.Panel panel5;
-        public System.Windows.Forms.PropertyGrid pGrid2;
         private System.Windows.Forms.ToolStripMenuItem copyOneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyMultiToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -2422,10 +2365,10 @@ namespace Skydat.forms2080
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.TextBox E1_Tafel;
         private System.Windows.Forms.Label Description_tafel;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.CheckBox ColometryCheck;
         private System.Windows.Forms.Button btnTafelOcpData;
         private System.Windows.Forms.Button btnRecalculateAvrage;
+        private System.Windows.Forms.Panel pnlAdvance;
     }
 }
 
