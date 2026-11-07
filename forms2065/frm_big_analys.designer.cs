@@ -35,36 +35,22 @@
             // 
             // chart1
             // 
-            this.chart1.BackColor = System.Drawing.Color.Black;
-            this.chart1.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.BackColor = System.Drawing.Color.Black;
             chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 100F;
-            chartArea1.Position.Width = 100F;
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Cursor = System.Windows.Forms.Cursors.Default;
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(707, 493);
-            this.chart1.TabIndex = 10;
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
+            this.chart1.Size = new System.Drawing.Size(284, 261);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart2";
             // 
             // frm_big_analys
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 493);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.chart1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frm_big_analys";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.frm_big_analys_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 

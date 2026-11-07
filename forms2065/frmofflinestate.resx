@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>0, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 301</value>
+    <value>204, 300</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -168,14 +168,20 @@
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tChart1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 3</value>
+    <value>0, 0</value>
   </data>
   <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 692</value>
+    <value>678, 693</value>
   </data>
   <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>38</value>
+  </data>
+  <data name="tChart1.Text" xml:space="preserve">
+    <value>l</value>
   </data>
   <data name="&gt;&gt;tChart1.Name" xml:space="preserve">
     <value>tChart1</value>
@@ -301,7 +307,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbrun.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 40</value>
+    <value>45, 50</value>
   </data>
   <data name="tsbrun.Text" xml:space="preserve">
     <value>Run </value>
@@ -322,7 +328,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbReceive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 40</value>
+    <value>45, 50</value>
   </data>
   <data name="tsbReceive.Text" xml:space="preserve">
     <value>Receive</value>
@@ -346,7 +352,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbshowdata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 40</value>
+    <value>45, 50</value>
   </data>
   <data name="tsbshowdata.Text" xml:space="preserve">
     <value>data</value>
@@ -367,7 +373,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbSaveAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 40</value>
+    <value>45, 50</value>
   </data>
   <data name="tsbSaveAll.Text" xml:space="preserve">
     <value>save</value>
@@ -382,7 +388,7 @@
     <value>0, 0</value>
   </data>
   <data name="toolstripChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 55</value>
+    <value>210, 52</value>
   </data>
   <data name="toolstripChart.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -571,7 +577,7 @@
     <value>2, 1</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 103</value>
+    <value>213, 108</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>

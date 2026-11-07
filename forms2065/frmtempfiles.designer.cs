@@ -30,8 +30,8 @@ namespace Skydat.forms2065
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmtempfiles));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label4 = new System.Windows.Forms.Label();
             this.treeView3 = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -48,13 +48,6 @@ namespace Skydat.forms2065
             this.button4 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label41 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.toolstripChart = new System.Windows.Forms.ToolStrip();
-            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
-            this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
-            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
-            this.tsbshowdata = new System.Windows.Forms.ToolStripButton();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.rowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +55,13 @@ namespace Skydat.forms2065
             this.y2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.reSize1 = new LarcomAndYoung.Windows.Forms.ReSize(this.components);
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
+            this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
+            this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+            this.tsbshowdata = new System.Windows.Forms.ToolStripButton();
+            this.toolstripChart = new System.Windows.Forms.ToolStrip();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -69,7 +69,6 @@ namespace Skydat.forms2065
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.toolstripChart.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -150,20 +149,20 @@ namespace Skydat.forms2065
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
             this.tChart1.BorderlineColor = System.Drawing.Color.Black;
-            chartArea1.BackColor = System.Drawing.Color.Black;
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 100F;
-            chartArea1.Position.Width = 100F;
-            this.tChart1.ChartAreas.Add(chartArea1);
+            chartArea2.BackColor = System.Drawing.Color.Black;
+            chartArea2.Name = "ChartArea1";
+            chartArea2.Position.Auto = false;
+            chartArea2.Position.Height = 100F;
+            chartArea2.Position.Width = 100F;
+            this.tChart1.ChartAreas.Add(chartArea2);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.tChart1, "tChart1");
             this.tChart1.Name = "tChart1";
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "Series1";
-            this.tChart1.Series.Add(series1);
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "Series1";
+            this.tChart1.Series.Add(series2);
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             // 
             // panel1
@@ -209,69 +208,6 @@ namespace Skydat.forms2065
             resources.ApplyResources(this.label41, "label41");
             this.label41.Name = "label41";
             // 
-            // panel6
-            // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel6.Controls.Add(this.toolstripChart);
-            resources.ApplyResources(this.panel6, "panel6");
-            this.panel6.Name = "panel6";
-            // 
-            // toolstripChart
-            // 
-            this.toolstripChart.AllowDrop = true;
-            resources.ApplyResources(this.toolstripChart, "toolstripChart");
-            this.toolstripChart.BackColor = System.Drawing.Color.Gainsboro;
-            this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbRefresh,
-            this.tsbSaveAll,
-            this.tsbDelete,
-            this.tsbshowdata});
-            this.toolstripChart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolstripChart.Name = "toolstripChart";
-            this.toolstripChart.TabStop = true;
-            this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
-            // 
-            // tsbRefresh
-            // 
-            resources.ApplyResources(this.tsbRefresh, "tsbRefresh");
-            this.tsbRefresh.ForeColor = System.Drawing.Color.Black;
-            this.tsbRefresh.Image = global::Skydat.Properties.Resources.refresh;
-            this.tsbRefresh.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
-            // 
-            // tsbSaveAll
-            // 
-            resources.ApplyResources(this.tsbSaveAll, "tsbSaveAll");
-            this.tsbSaveAll.ForeColor = System.Drawing.Color.Black;
-            this.tsbSaveAll.Image = global::Skydat.Properties.Resources.flappy;
-            this.tsbSaveAll.Name = "tsbSaveAll";
-            this.tsbSaveAll.Click += new System.EventHandler(this.tsbSaveAll_Click);
-            // 
-            // tsbDelete
-            // 
-            resources.ApplyResources(this.tsbDelete, "tsbDelete");
-            this.tsbDelete.ForeColor = System.Drawing.Color.Black;
-            this.tsbDelete.Image = global::Skydat.Properties.Resources.delete1;
-            this.tsbDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.tsbDelete.Name = "tsbDelete";
-            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
-            // 
-            // tsbshowdata
-            // 
-            this.tsbshowdata.ForeColor = System.Drawing.Color.Black;
-            this.tsbshowdata.Image = global::Skydat.Properties.Resources.Data_Sheet;
-            resources.ApplyResources(this.tsbshowdata, "tsbshowdata");
-            this.tsbshowdata.Name = "tsbshowdata";
-            this.tsbshowdata.Click += new System.EventHandler(this.tsbshowdata_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.panel6);
-            resources.ApplyResources(this.panel5, "panel5");
-            this.panel5.Name = "panel5";
-            // 
             // rowDataGridViewTextBoxColumn1
             // 
             this.rowDataGridViewTextBoxColumn1.DataPropertyName = "row";
@@ -316,19 +252,88 @@ namespace Skydat.forms2065
             this.reSize1.InitialHostContainerWidth = 901D;
             this.reSize1.Tag = null;
             // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.toolstripChart);
+            resources.ApplyResources(this.panel6, "panel6");
+            this.panel6.Name = "panel6";
+            // 
+            // miniToolStrip
+            // 
+            this.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
+            this.miniToolStrip.AllowDrop = true;
+            resources.ApplyResources(this.miniToolStrip, "miniToolStrip");
+            this.miniToolStrip.BackColor = System.Drawing.Color.Gainsboro;
+            this.miniToolStrip.CanOverflow = false;
+            this.miniToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.miniToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.miniToolStrip.Name = "miniToolStrip";
+            this.miniToolStrip.TabStop = true;
+            // 
+            // tsbRefresh
+            // 
+            resources.ApplyResources(this.tsbRefresh, "tsbRefresh");
+            this.tsbRefresh.ForeColor = System.Drawing.Color.Black;
+            this.tsbRefresh.Image = global::Skydat.Properties.Resources.refresh;
+            this.tsbRefresh.Margin = new System.Windows.Forms.Padding(0);
+            this.tsbRefresh.Name = "tsbRefresh";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
+            // tsbSaveAll
+            // 
+            resources.ApplyResources(this.tsbSaveAll, "tsbSaveAll");
+            this.tsbSaveAll.ForeColor = System.Drawing.Color.Black;
+            this.tsbSaveAll.Image = global::Skydat.Properties.Resources.flappy;
+            this.tsbSaveAll.Name = "tsbSaveAll";
+            this.tsbSaveAll.Click += new System.EventHandler(this.tsbSaveAll_Click);
+            // 
+            // tsbDelete
+            // 
+            resources.ApplyResources(this.tsbDelete, "tsbDelete");
+            this.tsbDelete.ForeColor = System.Drawing.Color.Black;
+            this.tsbDelete.Image = global::Skydat.Properties.Resources.delete1;
+            this.tsbDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.tsbDelete.Name = "tsbDelete";
+            this.tsbDelete.Click += new System.EventHandler(this.tsbDelete_Click);
+            // 
+            // tsbshowdata
+            // 
+            resources.ApplyResources(this.tsbshowdata, "tsbshowdata");
+            this.tsbshowdata.ForeColor = System.Drawing.Color.Black;
+            this.tsbshowdata.Image = global::Skydat.Properties.Resources.Data_Sheet;
+            this.tsbshowdata.Name = "tsbshowdata";
+            this.tsbshowdata.Click += new System.EventHandler(this.tsbshowdata_Click);
+            // 
+            // toolstripChart
+            // 
+            resources.ApplyResources(this.toolstripChart, "toolstripChart");
+            this.toolstripChart.BackColor = System.Drawing.Color.Gainsboro;
+            this.toolstripChart.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolstripChart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbRefresh,
+            this.tsbSaveAll,
+            this.tsbDelete,
+            this.tsbshowdata});
+            this.toolstripChart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolstripChart.Name = "toolstripChart";
+            this.toolstripChart.TabStop = true;
+            this.toolstripChart.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolstripChart_ItemClicked);
+            // 
             // frmtempfiles
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel5);
             this.ForeColor = System.Drawing.SystemColors.Window;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmtempfiles";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.GraphForm_Load);
+            this.Resize += new System.EventHandler(this.frmtempfiles_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -337,7 +342,6 @@ namespace Skydat.forms2065
             this.panel6.ResumeLayout(false);
             this.toolstripChart.ResumeLayout(false);
             this.toolstripChart.PerformLayout();
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -349,20 +353,13 @@ namespace Skydat.forms2065
         public System.Windows.Forms.DataVisualization.Charting.Chart tChart1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridViewTextBoxColumn rowDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn xDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn yDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn y1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn y2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStrip toolstripChart;
-        private System.Windows.Forms.ToolStripButton tsbRefresh;
-        private System.Windows.Forms.ToolStripButton tsbDelete;
-        private System.Windows.Forms.ToolStripButton tsbSaveAll;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolStripButton tsbshowdata;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
@@ -374,5 +371,12 @@ namespace Skydat.forms2065
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel2;
         private LarcomAndYoung.Windows.Forms.ReSize reSize1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.ToolStrip toolstripChart;
+        private System.Windows.Forms.ToolStripButton tsbRefresh;
+        private System.Windows.Forms.ToolStripButton tsbSaveAll;
+        private System.Windows.Forms.ToolStripButton tsbDelete;
+        private System.Windows.Forms.ToolStripButton tsbshowdata;
+        private System.Windows.Forms.ToolStrip miniToolStrip;
     }
 }

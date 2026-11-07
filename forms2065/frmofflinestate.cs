@@ -18,7 +18,7 @@ namespace Skydat.forms2065
 {
     public partial class frmofflinestate : Form
     {
-        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21, DATA_READY = 1, TRANS_BUFF = 96;
+        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21, TRANS_BUFF = 96;
         //byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 15, DATA_READY = 1, TRANS_BUFF = 60;//delphi
 
         private Thread thread_grf;
@@ -29,7 +29,7 @@ namespace Skydat.forms2065
         private byte[] buf = new byte[1];
         private byte[] data=new byte[1];
         int shomar_data=0;
-        byte x1_r, i_sim;
+        byte x1_r;
    
         public frmofflinestate()
         {
@@ -193,7 +193,7 @@ namespace Skydat.forms2065
 
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
-                        clasglobal.WriteToFile(dschart11.chartlist1_run.Rows[0], clasglobal.TechName[int.Parse(dschart11.chartlist1_run.Rows[0][1].ToString())], sfd.FileName, 0, 1);//header in file
+                        ReadWrite.WriteToFile(dschart11.chartlist1_run.Rows[0], clasglobal.TechName[int.Parse(dschart11.chartlist1_run.Rows[0][1].ToString())], sfd.FileName, 0, 1);//header in file
 
                         StreamWriter sa1 = new StreamWriter(sfd.FileName, true);
                         sa1.WriteLine("============================================================");
@@ -241,8 +241,8 @@ namespace Skydat.forms2065
                 short[] Powr = new short[1];
                 short[] Crnt = new short[1];
 
-                bool Equ = false, pulsy = false, N_gtv = false, evn = false;
-                string Sign = "", outstr = "";
+                bool pulsy = false, N_gtv = false, evn = false;
+                string outstr = "";
                 double SR0, i1 = 0, i2 = 0, ss = 0;
                 if (!sp1.IsOpen)
                     sp1.Open();
@@ -378,7 +378,7 @@ namespace Skydat.forms2065
                         Elo = IE;
                         if (E3 != IE)
                         {
-                            Equ = false;
+                            
                             Elo = E3;
                         }
                     }
@@ -391,12 +391,10 @@ namespace Skydat.forms2065
                     if (IE < FE)
                     {
                         N_gtv = false;
-                        Sign = " ";
                     }
                     else
                     {
                         N_gtv = true;
-                        Sign = "-";
                     }
                     evn = true;
                 }

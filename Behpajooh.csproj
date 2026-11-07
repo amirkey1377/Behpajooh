@@ -1,0 +1,1112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78B753E6-1CD3-4D49-825E-B4D3F11601C1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Skydat</RootNamespace>
+    <AssemblyName>BHP20xx analysis</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>CHEM1.ICO</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>C:\Users\f\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Skydat.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Skydat.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3D8C1D0CF7D66EFBB31347BB8D62E1E7915D1C47</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Skydat_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>dlls\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LarcomAndYoung.Windows.Forms.ReSize">
+      <HintPath>..\..\automation 1396_11_20\automation\bin\Debug\LarcomAndYoung.Windows.Forms.ReSize.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=0.3.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\Software\VS tools\Component\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Naghdi\Desktop\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Basic 2005 Power Packs\3.0\Microsoft.VisualBasic.PowerPacks.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\Naghdi\Desktop\office.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=2.2.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.2.0\lib\net462\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=2.2.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.WindowsForms.2.2.0\lib\net462\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Sentinel.v3.5Client" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization">
+      <HintPath>D:\Software\VS tools\Component\Chart framework 3.5\System.Windows.Forms.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization.Design">
+      <HintPath>D:\Software\VS tools\Component\Chart framework 3.5\System.Windows.Forms.DataVisualization.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Velopack, Version=1.2.0.0, Culture=neutral, PublicKeyToken=5a523ff9c49fd93d, processorArchitecture=MSIL">
+      <HintPath>packages\Velopack.1.2.161\lib\net472\Velopack.dll</HintPath>
+    </Reference>
+    <Reference Include="WinFormsChartSamples.resources, Version=1.0.6629.20919, Culture=af, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WinFormsChartSamples.resources.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="classes2065\ChartData.cs" />
+    <Compile Include="classes2065\clasparam2080.cs" />
+    <Compile Include="classes2065\clasglobal.cs" />
+    <Compile Include="classes2065\clasPeak.cs" />
+    <Compile Include="classes2065\ReadWrite.cs" />
+    <Compile Include="classes2065\TechClass.cs" />
+    <Compile Include="classes2065\classmoothdelphi.cs" />
+    <Compile Include="classes2065\drawline_chart.cs" />
+    <Compile Include="classes2065\errors_cls.cs" />
+    <Compile Include="classes2065\movedata.cs" />
+    <Compile Include="classes2065\Vector.cs" />
+    <Compile Include="ClassGlobal\AnalysisFactory.cs" />
+    <Compile Include="ClassGlobal\AppUpdater.cs" />
+    <Compile Include="ClassGlobal\CA.cs" />
+    <Compile Include="ClassGlobal\ColorUtility.cs" />
+    <Compile Include="ClassGlobal\Device Confiq\DeviceSpecification.cs" />
+    <Compile Include="ClassGlobal\GreyFilter.cs" />
+    <Compile Include="ClassGlobal\IDevices.cs" />
+    <Compile Include="ClassGlobal\LSV.cs" />
+    <Compile Include="ClassGlobal\CV.cs" />
+    <Compile Include="ClassGlobal\OCP.cs" />
+    <Compile Include="ClassGlobal\Parameter.cs" />
+    <Compile Include="ClassGlobal\PRE.cs" />
+    <Compile Include="ClassGlobal\SWV.cs" />
+    <Compile Include="ClassGlobal\DPV.cs" />
+    <Compile Include="ClassGlobal\ITechniques.cs" />
+    <Compile Include="ClassGlobal\NPV.cs" />
+    <Compile Include="ClassGlobal\Tafel.cs" />
+    <Compile Include="CustomControls\GrayToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\GrayToolStripButton.Designer.cs">
+      <DependentUpon>GrayToolStripButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="datasets\Dschart1.cs">
+      <DependentUpon>Dschart1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="datasets\dschart2.cs">
+      <DependentUpon>dschart2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="formEIS\LandingEIS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formEIS\LandingEIS.Designer.cs">
+      <DependentUpon>LandingEIS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frm_big_analys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frm_big_analys.designer.cs">
+      <DependentUpon>frm_big_analys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\PreviewFormTafel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\PreviewFormTafel.Designer.cs">
+      <DependentUpon>PreviewFormTafel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmChartSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmChartSetting.Designer.cs">
+      <DependentUpon>frmChartSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmselecttypeshow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmselecttypeshow.designer.cs">
+      <DependentUpon>frmselecttypeshow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmofflinestate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmofflinestate.designer.cs">
+      <DependentUpon>frmofflinestate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmshowgraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmshowgraph.designer.cs">
+      <DependentUpon>frmshowgraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmtempfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmtempfiles.designer.cs">
+      <DependentUpon>frmtempfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmchangedimensions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmchangedimensions.designer.cs">
+      <DependentUpon>frmchangedimensions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmselectfiletype.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmselectfiletype.designer.cs">
+      <DependentUpon>frmselectfiletype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmbackgroundset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmbackgroundset.Designer.cs">
+      <DependentUpon>frmbackgroundset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmbase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmbase.Designer.cs">
+      <DependentUpon>frmbase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmshowdata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmshowdata.Designer.cs">
+      <DependentUpon>frmshowdata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmanalyseGraph2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmanalyseGraph2080.designer.cs">
+      <DependentUpon>frmanalyseGraph2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmChartSetting2190.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmChartSetting2190.Designer.cs">
+      <DependentUpon>frmChartSetting2190.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmClbCurve2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmClbCurve2080.designer.cs">
+      <DependentUpon>frmClbCurve2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmClbCurve12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmClbCurve12080.designer.cs">
+      <DependentUpon>frmClbCurve12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmColorSelect2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmColorSelect2080.Designer.cs">
+      <DependentUpon>frmColorSelect2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmColorSelect12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmColorSelect12080.Designer.cs">
+      <DependentUpon>frmColorSelect12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmindata2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmindata2080.Designer.cs">
+      <DependentUpon>frmindata2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmMain12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmMain12080.designer.cs">
+      <DependentUpon>frmMain12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmMath12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmMath12080.designer.cs">
+      <DependentUpon>frmMath12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmMathematical2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmMathematical2080.designer.cs">
+      <DependentUpon>frmMathematical2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmmulticopy2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmmulticopy2080.designer.cs">
+      <DependentUpon>frmmulticopy2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmOption12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmOption12080.designer.cs">
+      <DependentUpon>frmOption12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmOption112080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmOption112080.designer.cs">
+      <DependentUpon>frmOption112080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmPortOption2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmPortOption2080.designer.cs">
+      <DependentUpon>frmPortOption2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmRDECtrl2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmRDECtrl2080.designer.cs">
+      <DependentUpon>frmRDECtrl2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmRegister2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmRegister2080.designer.cs">
+      <DependentUpon>frmRegister2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmselecttech2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmselecttech2080.designer.cs">
+      <DependentUpon>frmselecttech2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmshowGraph2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmshowGraph2080.designer.cs">
+      <DependentUpon>frmshowGraph2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmShowPeaks12080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmShowPeaks12080.Designer.cs">
+      <DependentUpon>frmShowPeaks12080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmSmoothing2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmSmoothing2080.designer.cs">
+      <DependentUpon>frmSmoothing2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\frmstdAddition2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmstdAddition2080.designer.cs">
+      <DependentUpon>frmstdAddition2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="datasets\Dschart1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dschart1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="datasets\dschart2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dschart2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmmulticopy2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmmulticopy2065.designer.cs">
+      <DependentUpon>frmmulticopy2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmshowGraph2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmshowGraph2065.designer.cs">
+      <DependentUpon>frmshowGraph2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmselecttech2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmselecttech2065.designer.cs">
+      <DependentUpon>frmselecttech2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmClbCurve12065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmClbCurve12065.designer.cs">
+      <DependentUpon>frmClbCurve12065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmColorSelect12065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmColorSelect12065.Designer.cs">
+      <DependentUpon>frmColorSelect12065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmanalyseGraph2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmanalyseGraph2065.designer.cs">
+      <DependentUpon>frmanalyseGraph2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmindata2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmindata2065.Designer.cs">
+      <DependentUpon>frmindata2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmMain2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmMain2065.designer.cs">
+      <DependentUpon>frmMain2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmMath12065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmMath12065.designer.cs">
+      <DependentUpon>frmMath12065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmOption12065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmOption12065.designer.cs">
+      <DependentUpon>frmOption12065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmRDECtrl2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmRDECtrl2065.designer.cs">
+      <DependentUpon>frmRDECtrl2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmShowPeaks12065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmShowPeaks12065.Designer.cs">
+      <DependentUpon>frmShowPeaks12065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmClbCurve2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmClbCurve2065.designer.cs">
+      <DependentUpon>frmClbCurve2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2065\frmColorSelect2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmColorSelect2065.Designer.cs">
+      <DependentUpon>frmColorSelect2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes2065\clasgraph.cs" />
+    <Compile Include="classes2065\clasMain.cs" />
+    <Compile Include="forms2065\frmMathematical2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmMathematical2065.designer.cs">
+      <DependentUpon>frmMathematical2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classes2065\clasParam.cs" />
+    <Compile Include="classes2065\clasmpusbapi.cs" />
+    <Compile Include="forms2080\frmtempfiles2080.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2080\frmtempfiles2080.designer.cs">
+      <DependentUpon>frmtempfiles2080.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms2080\LiveDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\FindPeakAuto.cs" />
+    <Compile Include="Utility\FindPeakManual.cs" />
+    <EmbeddedResource Include="formEIS\LandingEIS.resx">
+      <DependentUpon>LandingEIS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frm_big_analys.resx">
+      <DependentUpon>frm_big_analys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\PreviewFormTafel.resx">
+      <DependentUpon>PreviewFormTafel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmChartSetting.resx">
+      <DependentUpon>frmChartSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmselecttypeshow.resx">
+      <DependentUpon>frmselecttypeshow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmofflinestate.resx">
+      <DependentUpon>frmofflinestate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmshowgraph.resx">
+      <DependentUpon>frmshowgraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmtempfiles.resx">
+      <DependentUpon>frmtempfiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmchangedimensions.resx">
+      <DependentUpon>frmchangedimensions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmselectfiletype.resx">
+      <DependentUpon>frmselectfiletype.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmbackgroundset.resx">
+      <DependentUpon>frmbackgroundset.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmbase.resx">
+      <DependentUpon>frmbase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmshowdata.resx">
+      <DependentUpon>frmshowdata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmanalyseGraph2080.resx">
+      <DependentUpon>frmanalyseGraph2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmChartSetting2190.resx">
+      <DependentUpon>frmChartSetting2190.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmClbCurve2080.resx">
+      <DependentUpon>frmClbCurve2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmClbCurve12080.resx">
+      <DependentUpon>frmClbCurve12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmColorSelect2080.resx">
+      <DependentUpon>frmColorSelect2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmColorSelect12080.resx">
+      <DependentUpon>frmColorSelect12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmindata2080.resx">
+      <DependentUpon>frmindata2080.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmMain12080.resx">
+      <DependentUpon>frmMain12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmMath12080.resx">
+      <DependentUpon>frmMath12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmMathematical2080.resx">
+      <DependentUpon>frmMathematical2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmmulticopy2080.resx">
+      <DependentUpon>frmmulticopy2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmOption12080.resx">
+      <DependentUpon>frmOption12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmOption112080.resx">
+      <DependentUpon>frmOption112080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmPortOption2080.resx">
+      <DependentUpon>frmPortOption2080.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmRDECtrl2080.resx">
+      <DependentUpon>frmRDECtrl2080.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmRegister2080.resx">
+      <DependentUpon>frmRegister2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmselecttech2080.resx">
+      <DependentUpon>frmselecttech2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmshowGraph2080.resx">
+      <DependentUpon>frmshowGraph2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmShowPeaks12080.resx">
+      <DependentUpon>frmShowPeaks12080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmSmoothing2080.resx">
+      <DependentUpon>frmSmoothing2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmstdAddition2080.resx">
+      <DependentUpon>frmstdAddition2080.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmmulticopy2065.resx">
+      <DependentUpon>frmmulticopy2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmshowGraph2065.resx">
+      <DependentUpon>frmshowGraph2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmselecttech2065.resx">
+      <DependentUpon>frmselecttech2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmClbCurve12065.resx">
+      <DependentUpon>frmClbCurve12065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmColorSelect12065.resx">
+      <DependentUpon>frmColorSelect12065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmanalyseGraph2065.resx">
+      <DependentUpon>frmanalyseGraph2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmindata2065.resx">
+      <DependentUpon>frmindata2065.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmMain2065.resx">
+      <DependentUpon>frmMain2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmMath12065.resx">
+      <DependentUpon>frmMath12065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmOption12065.resx">
+      <DependentUpon>frmOption12065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmRDECtrl2065.resx">
+      <DependentUpon>frmRDECtrl2065.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmShowPeaks12065.resx">
+      <DependentUpon>frmShowPeaks12065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmClbCurve2065.resx">
+      <DependentUpon>frmClbCurve2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmColorSelect2065.resx">
+      <DependentUpon>frmColorSelect2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmMathematical2065.resx">
+      <DependentUpon>frmMathematical2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2080\frmtempfiles2080.resx">
+      <DependentUpon>frmtempfiles2080.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="forms2065\frmRegister2065.resx">
+      <DependentUpon>frmRegister2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms2065\frmSmoothing2065.resx">
+      <DependentUpon>frmSmoothing2065.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="datasets\Dschart1.xsc">
+      <DependentUpon>Dschart1.xsd</DependentUpon>
+    </None>
+    <None Include="datasets\Dschart1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Dschart1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="datasets\Dschart1.xss">
+      <DependentUpon>Dschart1.xsd</DependentUpon>
+    </None>
+    <None Include="datasets\dschart2.xsc">
+      <DependentUpon>dschart2.xsd</DependentUpon>
+    </None>
+    <None Include="datasets\dschart2.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dschart2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="datasets\dschart2.xss">
+      <DependentUpon>dschart2.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\NEW" />
+    <None Include="Resources\TOOL" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="forms2065\frmRegister2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmRegister2065.designer.cs">
+      <DependentUpon>frmRegister2065.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="classes2065\clasSmooth.cs" />
+    <Compile Include="forms2065\frmSmoothing2065.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms2065\frmSmoothing2065.designer.cs">
+      <DependentUpon>frmSmoothing2065.cs</DependentUpon>
+    </Compile>
+    <None Include="Skydat_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CHEM1.ICO" />
+    <None Include="Resources\11.png" />
+    <None Include="Resources\101.png" />
+    <None Include="Resources\10.jpg" />
+    <None Include="Resources\10.png" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\13.png" />
+    <None Include="Resources\15.png" />
+    <Content Include="Resources\165.png" />
+    <None Include="Resources\لوگوی سایت.png" />
+    <None Include="Resources\activity_grid21600.png" />
+    <None Include="Resources\Pause-icon.png" />
+    <None Include="Resources\Play-icon.png" />
+    <None Include="Resources\Stop-icon.png" />
+    <None Include="Resources\Document_Icon_Transparent-01.png" />
+    <None Include="Resources\checklist-icon.png" />
+    <None Include="Resources\export-icon.png" />
+    <None Include="Resources\Actions-view-refresh-icon.png" />
+    <None Include="Resources\delete-file-icon.png" />
+    <None Include="Resources\Mailbox-receive-message-2-icon.png" />
+    <None Include="Resources\Actions-network-connect-icon.png" />
+    <None Include="Resources\Document-write-icon2.png" />
+    <None Include="Resources\Aqua-Smooth-Folder-Applications-icon.png" />
+    <None Include="Resources\color.png" />
+    <None Include="Resources\iconBehpajooh.png" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\Full logo.png" />
+    <None Include="Resources\paper.png" />
+    <None Include="Resources\paper.jpg" />
+    <None Include="Resources\paperSmall.jpg" />
+    <None Include="Resources\eraser.jpg" />
+    <None Include="Resources\eraser.png" />
+    <None Include="Resources\OpenNew.png" />
+    <None Include="Resources\flappy.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\delete1.png" />
+    <None Include="Resources\Data Sheet.png" />
+    <None Include="Resources\2066 illustrat.png" />
+    <None Include="Resources\2090 illustrat.png" />
+    <None Include="Resources\importData.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\Excell.png" />
+    <None Include="Resources\excell_Icon.png" />
+    <None Include="Resources\zoom-in1.png" />
+    <None Include="Resources\zoom.png" />
+    <None Include="Resources\zoom1.png" />
+    <None Include="Resources\alert %281%29.png" />
+    <None Include="Resources\Experimental-set-up-for-open-circuit-potential-measurements.png" />
+    <None Include="Resources\swap.png" />
+    <None Include="Resources\swap %281%29.png" />
+    <None Include="Resources\math.png" />
+    <None Include="Resources\Zoom-out-icon1.png" />
+    <None Include="Resources\1651.png" />
+    <None Include="Resources\OK1.bmp" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\9 %282%29.png" />
+    <None Include="Resources\20653.png" />
+    <None Include="Resources\ForeColor.png" />
+    <None Include="Resources\hdd.png" />
+    <None Include="Resources\mximize.png" />
+    <None Include="Resources\peak.png" />
+    <None Include="Resources\chcek update.png" />
+    <None Include="Resources\CA.png" />
+    <None Include="Resources\CV.png" />
+    <None Include="Resources\DPV.png" />
+    <None Include="Resources\checkupdate.png" />
+    <Content Include="Resources\Electrochemical Tafel Plot Diagram.png" />
+    <None Include="Resources\LSV.png" />
+    <None Include="Resources\NPV.png" />
+    <None Include="Resources\OCP.png" />
+    <None Include="Resources\PRE.png" />
+    <None Include="Resources\Layers1.ico" />
+    <None Include="Resources\Pixel-Art Yellow L-Shaped Arrow.png" />
+    <Content Include="Resources\rotate axes .png" />
+    <Content Include="Resources\rotate-right.png" />
+    <None Include="Resources\rotate-right1.png" />
+    <None Include="Resources\SWV.png" />
+    <None Include="Resources\TAFEL.png" />
+    <None Include="Resources\tafel_40x45.png" />
+    <Content Include="Resources\tafel_ecorr_icorr_40x45.png" />
+    <Content Include="Resources\tafel_ecorr_icorr_40x45_transparent.png" />
+    <None Include="Resources\tafel_ecorr_icorr_40x45_transparent1.png" />
+    <Content Include="Resources\zoomin.ico" />
+    <Content Include="Resources\Zoomout.ico" />
+    <None Include="Resources\2000px-Tangent_to_a_curve.svg.png" />
+    <None Include="Resources\20801.jpg" />
+    <None Include="Resources\20802.jpg" />
+    <None Include="Resources\20803.jpg" />
+    <None Include="Resources\20805.jpg" />
+    <None Include="Resources\20806.jpg" />
+    <None Include="Resources\20651.jpg" />
+    <None Include="Resources\20652.jpg" />
+    <None Include="Resources\20653.jpg" />
+    <Content Include="Resources\9.png" />
+    <None Include="diagrams\ClassDiagram1.cd" />
+    <None Include="diagrams\ClassDiagram2.cd" />
+    <None Include="Resources\Analyze+panel+4B.jpg" />
+    <None Include="Resources\Actions-media-playback-pause-icon.png" />
+    <None Include="Resources\Actions-media-playback-start-icon.png" />
+    <None Include="Resources\Actions-media-playback-stop-icon.png" />
+    <None Include="Resources\Adobe-PDF-Reader-Book-icon.png" />
+    <None Include="Resources\Actions-office-chart-line-icon.png" />
+    <Content Include="Resources\applications_32.png" />
+    <None Include="Resources\Apps-background-icon.png" />
+    <None Include="Resources\Apps-Run-icon.png" />
+    <Content Include="Resources\ARROW3A.ICO" />
+    <Content Include="Resources\ArrowA.bmp" />
+    <Content Include="Resources\ArrowB.bmp" />
+    <Content Include="Resources\BANNER.ICO" />
+    <Content Include="Resources\BehpajoohArm.JPG" />
+    <None Include="Resources\button_derivative.png" />
+    <None Include="Resources\Beta_Icon.png" />
+    <None Include="Resources\bgelec.jpg" />
+    <Content Include="Resources\CAD3.bmp" />
+    <Content Include="Resources\CAD3.ICO" />
+    <None Include="Resources\calculator.png" />
+    <None Include="Resources\chart-line-delete-icon.png" />
+    <None Include="Resources\chart-line-icon.png" />
+    <None Include="Resources\calc-icon.png" />
+    <None Include="Resources\chart-add-icon.png" />
+    <None Include="Resources\chart-search-icon.png" />
+    <Content Include="Resources\CHART03.ICO" />
+    <Content Include="Resources\CHEKLIST.ICO" />
+    <Content Include="Resources\Close.png" />
+    <Content Include="Resources\COMM.JPG" />
+    <Content Include="Resources\comm1.bmp" />
+    <Content Include="Resources\Comm2.png" />
+    <Content Include="Resources\confg_32.ico" />
+    <Content Include="Resources\CONNCT.ICO" />
+    <None Include="Resources\Developer-icon.png" />
+    <Content Include="Resources\cursor-icon.png" />
+    <Content Include="Resources\dimensions_icon.png" />
+    <Content Include="Resources\DLL.png" />
+    <Content Include="Resources\DottedVert.gif" />
+    <Content Include="Resources\DrawGraph.png" />
+    <Content Include="Resources\edit_32.png" />
+    <Content Include="Resources\Exit.png" />
+    <None Include="Resources\Export-To-Picture-Document-icon.png" />
+    <Content Include="Resources\Export.png" />
+    <Content Include="Resources\fastf_24.bmp" />
+    <Content Include="Resources\fastf_24.png" />
+    <None Include="Resources\File-Adobe-Dreamweaver-XML-01-icon.png" />
+    <Content Include="Resources\hard-disk_32.png" />
+    <Content Include="Resources\HDF_grid.png" />
+    <Content Include="Resources\Icon1.ico" />
+    <Content Include="Resources\Import.png" />
+    <None Include="Resources\integral.ico" />
+    <None Include="Resources\Layers.ico" />
+    <None Include="Resources\Layer-Backward-icon.png" />
+    <None Include="Resources\Layer-Forward-icon.png" />
+    <Content Include="Resources\LEONAR~1.ICO" />
+    <None Include="Resources\log-128.png" />
+    <None Include="Resources\libreoffice-math-icon.png" />
+    <None Include="Resources\Logout-icon.png" />
+    <None Include="Resources\Log-Out-icon.png" />
+    <Content Include="Resources\Line-chart-icon.png" />
+    <Content Include="Resources\Marjouei.bmp" />
+    <None Include="Resources\Mimetypes-application-vnd-ms-excel-icon.png" />
+    <None Include="Resources\modify-key-icon.png" />
+    <Content Include="Resources\New.png" />
+    <Content Include="Resources\New2.png" />
+    <Content Include="Resources\new_24.bmp" />
+    <Content Include="Resources\new_241.bmp" />
+    <None Include="Resources\OK.bmp" />
+    <None Include="Resources\Notepad-Bloc-notes-icon.png" />
+    <Content Include="Resources\Open.png" />
+    <Content Include="Resources\Open2.png" />
+    <Content Include="Resources\Options.png" />
+    <Content Include="Resources\Overlay.png" />
+    <Content Include="Resources\Pause.png" />
+    <Content Include="Resources\pause_24.png" />
+    <None Include="Resources\pictures-icon %281%29.png" />
+    <None Include="Resources\Pictures-icon.png" />
+    <Content Include="Resources\Port.png" />
+    <Content Include="Resources\Port2.png" />
+    <None Include="Resources\print-icon.png" />
+    <Content Include="Resources\product-icon.png" />
+    <Content Include="Resources\Run.png" />
+    <Content Include="Resources\Save-as-icon.png" />
+    <Content Include="Resources\Save.png" />
+    <Content Include="Resources\Save2.png" />
+    <None Include="Resources\SaveAll.PNG" />
+    <Content Include="Resources\SaveAs.png" />
+    <None Include="Resources\SEO-icon.png" />
+    <None Include="Resources\select-by-color-icon.png" />
+    <Content Include="Resources\select_all_text_icon.jpg" />
+    <Content Include="Resources\select_all_text_icon1.jpg" />
+    <Content Include="Resources\ShowAxis.png" />
+    <Content Include="Resources\ShowAxis2.png" />
+    <None Include="Resources\showgph.jpg" />
+    <Content Include="Resources\ShowLegend.png" />
+    <None Include="Resources\size-vertical-icon.png" />
+    <Content Include="Resources\Signs-Help-icon.png" />
+    <Content Include="Resources\skipf_24.png" />
+    <Content Include="Resources\Stop.png" />
+    <Content Include="Resources\Stop2.png" />
+    <Content Include="Resources\stop_32.png" />
+    <None Include="Resources\wizard.gif" />
+    <Content Include="Resources\write.png" />
+    <Content Include="Resources\zoom-in-icon.png" />
+    <Content Include="Resources\Zoom-in-icon2.png" />
+    <Content Include="Resources\zoom-in.png" />
+    <Content Include="Resources\zoom-in2.png" />
+    <Content Include="Resources\zoom-in_32.png" />
+    <Content Include="Resources\zoom-out-icon %281%29.png" />
+    <Content Include="Resources\Zoom-out-icon.png" />
+    <Content Include="Resources\zoom-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserData\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.3\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.3\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.3\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NETFramework.ReferenceAssemblies.net472.1.0.3\build\Microsoft.NETFramework.ReferenceAssemblies.net472.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

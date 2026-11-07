@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Skydat.forms2065
 {
+    
     public partial class frmselectfiletype : Form
     {
-
         //public clasMain mc = new clasMain();
         //public frmMain1 mf;
         public int filetype_select = 0;
@@ -20,10 +20,6 @@ namespace Skydat.forms2065
         {
             InitializeComponent();
         }
-     
-       
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {

@@ -74,12 +74,12 @@ namespace Skydat.forms2065
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Parameters
+            // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.label4, "label4");
             this.label4.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label4, "Parameters");
-            this.label4.Name = "Parameters";
+            this.label4.Name = "label4";
             // 
             // contextMenuStrip1
             // 
@@ -99,7 +99,7 @@ namespace Skydat.forms2065
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             // 
-            // OnlineChart
+            // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
             this.tChart1.BorderlineColor = System.Drawing.Color.Black;
@@ -110,8 +110,8 @@ namespace Skydat.forms2065
             chartArea1.Position.Width = 100F;
             this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.tChart1, "OnlineChart");
-            this.tChart1.Name = "OnlineChart";
+            resources.ApplyResources(this.tChart1, "tChart1");
+            this.tChart1.Name = "tChart1";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -188,7 +188,6 @@ namespace Skydat.forms2065
             this.tsbReceive.Image = global::Skydat.Properties.Resources.Mailbox_receive_message_2_icon;
             this.tsbReceive.Margin = new System.Windows.Forms.Padding(0);
             this.tsbReceive.Name = "tsbReceive";
-            this.tsbReceive.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // tsbshowdata
             // 

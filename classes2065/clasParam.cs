@@ -1,7 +1,4 @@
-using System;
 using System.ComponentModel;
-using System.IO;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
 
@@ -20,11 +17,10 @@ namespace Skydat.classes2065
         private double _HStep;
         private double _TStep;
         private double _EquilibriumTime;
-        //private double _ScanRateR;
         private double _HoldTime;
         private string _comment1;
 
-        [CategoryAttribute("CV Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    15")]
+        [CategoryAttribute("CV Values"), DescriptionAttribute("Number of complete cycle(s) scan\n 1    100")]
         public double Cycles
         {
             get
@@ -189,7 +185,7 @@ namespace Skydat.classes2065
             //
         }
     }
-    
+
     // LSV Properties *******************************************************************
     public class LSV_params
     {
@@ -307,6 +303,93 @@ namespace Skydat.classes2065
         }
     }
 
+    public class Tafel_params
+    {
+        private double _E1;
+        private double _E2;
+        private double _ScanRate;
+        private double _HStep;
+        private double _TStep;
+
+        [CategoryAttribute("LSV Values"), DescriptionAttribute("Initial potential(V)\n -8    +8")]
+        public double E1
+        {
+            get
+            {
+                return _E1;
+            }
+
+            set
+            {
+                _E1 = value;
+            }
+        }
+
+        [CategoryAttribute("LSV Values"), DescriptionAttribute("Final potential(V)\n -8    +8")]
+        public double E2
+        {
+            get
+            {
+                return _E2;
+            }
+
+            set
+            {
+                _E2 = value;
+            }
+        }
+
+        [CategoryAttribute("LSV Values"), DescriptionAttribute("Step height (scan increment)(V)\n 0.001    0.025")]
+        public double HStep
+        {
+            get
+            {
+                return _HStep;
+            }
+
+            set
+            {
+                _HStep = value;
+            }
+        }
+
+        [CategoryAttribute("LSV Values"), DescriptionAttribute("Step time(Hstep/ScanRate)(S)\n 0.0001    10")]
+        [ReadOnlyAttribute(true)]
+        public double TStep
+        {
+            get
+            {
+                return _TStep;
+            }
+
+            set
+            {
+                _TStep = value;
+            }
+        }
+
+        [CategoryAttribute("LSV Values"), DescriptionAttribute("potential scan rate(V/S)\n 0.0001    250")]
+        [DisplayName("Scan Rate")]
+        public double ScanRate
+        {
+            get
+            {
+                return _ScanRate;
+            }
+
+            set
+            {
+                _ScanRate = value;
+            }
+        }
+
+        public Tafel_params()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+    }
     // DCS Properties  ******************************************************************* 
     public class DCS_params
     {
@@ -549,7 +632,7 @@ namespace Skydat.classes2065
     //NPV Properties  ****************************************************************
     public class NPV_params
     {
-        private double _E1;
+        public double _E1;
         private double _E2;
         private double _ScanRate;
         private double _HStep;
@@ -1257,6 +1340,7 @@ namespace Skydat.classes2065
             //
         }
     }
+
     //CA Properties  ****************************************************************
     public class CHP_params
     {
@@ -1324,7 +1408,7 @@ namespace Skydat.classes2065
                 _T2 = value;
             }
         }
-        [CategoryAttribute("CHP Values"), DescriptionAttribute("Higger cutoff voltage(V)")]
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("Higher cutoff voltage(V)")]
         public double EUP
         {
             get
@@ -1337,7 +1421,7 @@ namespace Skydat.classes2065
                 _EUP = value;
             }
         }
-        [CategoryAttribute("CHP Values"), DescriptionAttribute("lowwer cutoff voltage(V)")]
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("lower cutoff voltage(V)")]
         public double EDO
         {
             get
@@ -1351,7 +1435,7 @@ namespace Skydat.classes2065
             }
         }
         [CategoryAttribute("Cycle Values"), DescriptionAttribute("CYCLE")]
-        public double CYCLE
+        public double Cycle
         {
             get
             {
@@ -1394,6 +1478,149 @@ namespace Skydat.classes2065
       
 
         public CHP_params()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+    }
+
+    public class Battery_params
+    {
+        //private double _Cycles;
+        private double _I1;
+        private double _T1;
+        private double _I2;
+        private double _T2;
+        private double _EUP;
+        private double _EDO;
+        private double _CYCLE;
+        private double _EquilibriumTime;
+        private string _comment1;
+
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("First current step(mA)\n -8    +8")]
+        public double I1
+        {
+            get
+            {
+                return _I1;
+            }
+
+            set
+            {
+                _I1 = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("Second current step(mA)\n -8    +8")]
+        public double I2
+        {
+            get
+            {
+                return _I2;
+            }
+
+            set
+            {
+                _I2 = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("Second step time(S)\n 1    32000-T1")]
+        public double T2
+        {
+            get
+            {
+                return _T2;
+            }
+
+            set
+            {
+                _T2 = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("Higher cutoff voltage(V)")]
+        public double EUP
+        {
+            get
+            {
+                return _EUP;
+            }
+
+            set
+            {
+                _EUP = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("lower cutoff voltage(V)")]
+        public double EDO
+        {
+            get
+            {
+                return _EDO;
+            }
+
+            set
+            {
+                _EDO = value;
+            }
+        }
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("CYCLE")]
+        public double Cycle
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("Quiescent time before start measuring(S)\n 0    2000")]
+        [DisplayName("Equilibrium Time")]
+        public double EquilibriumTime
+        {
+            get
+            {
+                return _EquilibriumTime;
+            }
+
+            set
+            {
+                _EquilibriumTime = value;
+            }
+        }
+        [CategoryAttribute("CHP Values"), DescriptionAttribute("detail of expriment")]
+        public string comment1
+        {
+            get
+            {
+                return _comment1;
+            }
+
+            set
+            {
+                _comment1 = value;
+            }
+        }
+
+
+
+        public Battery_params()
         {
             //
             // TODO: Add constructor logic here
@@ -1468,7 +1695,7 @@ namespace Skydat.classes2065
         }
 
         [CategoryAttribute("CHA Values"), DescriptionAttribute("CYCLE")]
-        public double CYCLE
+        public double Cycle
         {
             get
             {
@@ -1616,6 +1843,7 @@ namespace Skydat.classes2065
         }
     }
 
+    //OCP Properties  ****************************************************************
     public class OCP_params
     {
         //private double _Cycles;
@@ -1802,8 +2030,33 @@ namespace Skydat.classes2065
             }
         }
     */
-    // LSV Properties *******************************************************************
 
+    // RT Properties *******************************************************************
+    public class RT_params
+    {
+        //private double _Cycles;
+
+        private double _T1;
+
+
+        [CategoryAttribute("TIME Values"), DescriptionAttribute("Time(S)\n 0    +1000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
+
+
+
+    }
 
     public class Cd_params
     {
@@ -1831,6 +2084,21 @@ namespace Skydat.classes2065
                 _I1 = value;
             }
         }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
         [CategoryAttribute("Cd Values"), DescriptionAttribute("Second current step(mA)\n -360    +360")]
         public double I2
         {
@@ -1844,33 +2112,6 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("cycle Values"), DescriptionAttribute("cycle")]
-        public double CYCLE
-        {
-            get
-            {
-                return _CYCLE;
-            }
-
-            set
-            {
-                _CYCLE = value;
-            }
-        }
-
-            [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
-        public double T1
-        {
-            get
-            {
-                return _T1;
-            }
-
-            set
-            {
-                _T1 = value;
-            }
-        }
         [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
         public double T2
         {
@@ -1885,7 +2126,7 @@ namespace Skydat.classes2065
             }
         }
 
-        [CategoryAttribute("Cd Values"), DescriptionAttribute("Higger cutoff voltage(V)")]
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Higher cutoff voltage(V)")]
         public double EUP
         {
             get
@@ -1898,7 +2139,8 @@ namespace Skydat.classes2065
                 _EUP = value;
             }
         }
-        [CategoryAttribute("Cd Values"), DescriptionAttribute("lowwer cutoff voltage(V)")]
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("lower cutoff voltage(V)")]
         public double EDO
         {
             get
@@ -1909,6 +2151,20 @@ namespace Skydat.classes2065
             set
             {
                 _EDO = value;
+            }
+        }
+
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
+        public double Cycle
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
             }
         }
 
@@ -1940,6 +2196,151 @@ namespace Skydat.classes2065
             }
         }
         public Cd_params()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+    }
+
+    public class CDtest_params
+    {
+        //private double _Cycles;
+        private double _I1;
+        private double _I2;
+        private double _EUP;
+        private double _EDO;
+        private double _T1;
+        private double _T2;
+        private double _CYCLE;
+        private double _EquilibriumTime;
+        private string _comment1;
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("First current step(mA)\n -360    +360")]
+        public double I1
+        {
+            get
+            {
+                return _I1;
+            }
+
+            set
+            {
+                _I1 = value;
+            }
+        }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T1
+        {
+            get
+            {
+                return _T1;
+            }
+
+            set
+            {
+                _T1 = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Second current step(mA)\n -360    +360")]
+        public double I2
+        {
+            get
+            {
+                return _I2;
+            }
+            set
+            {
+                _I2 = value;
+            }
+        }
+
+        [CategoryAttribute("CD Values"), DescriptionAttribute("First step time(S)\n 1    32000")]
+        public double T2
+        {
+            get
+            {
+                return _T2;
+            }
+
+            set
+            {
+                _T2 = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Higher cutoff voltage(V)")]
+        public double EUP
+        {
+            get
+            {
+                return _EUP;
+            }
+
+            set
+            {
+                _EUP = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("lower cutoff voltage(V)")]
+        public double EDO
+        {
+            get
+            {
+                return _EDO;
+            }
+
+            set
+            {
+                _EDO = value;
+            }
+        }
+
+        [CategoryAttribute("Cycle Values"), DescriptionAttribute("Cycle\n 1    999")]
+        public double Cycle
+        {
+            get
+            {
+                return _CYCLE;
+            }
+
+            set
+            {
+                _CYCLE = value;
+            }
+        }
+
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("Quiescent time before start measuring(S)\n 0    2000")]
+        [DisplayName("Equilibrium Time")]
+        public double EquilibriumTime
+        {
+            get
+            {
+                return _EquilibriumTime;
+            }
+
+            set
+            {
+                _EquilibriumTime = value;
+            }
+        }
+        [CategoryAttribute("Cd Values"), DescriptionAttribute("detail of expriment")]
+        public string comment1
+        {
+            get
+            {
+                return _comment1;
+            }
+
+            set
+            {
+                _comment1 = value;
+            }
+        }
+        public CDtest_params()
         {
             //
             // TODO: Add constructor logic here
@@ -2105,6 +2506,7 @@ namespace Skydat.classes2065
 
         }
     }
+
     [DefaultPropertyAttribute("BackGroundColor")]
     public class Color_params
     {

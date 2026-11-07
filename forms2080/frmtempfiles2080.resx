@@ -117,20 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 343</value>
+    <value>0, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 288</value>
+    <value>100, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>26</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -229,14 +225,18 @@
   <data name="&gt;&gt;treeView3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tChart1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="tChart1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 3</value>
+    <value>0, 0</value>
   </data>
   <data name="tChart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 692</value>
+    <value>678, 693</value>
   </data>
   <data name="tChart1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>39</value>
   </data>
   <data name="&gt;&gt;tChart1.Name" xml:space="preserve">
     <value>tChart1</value>
@@ -325,14 +325,17 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label41.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
   <data name="label41.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 316</value>
+    <value>0, 315</value>
   </data>
   <data name="label41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 23</value>
+    <value>204, 321</value>
   </data>
   <data name="label41.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>

@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using Skydat;
@@ -12,11 +13,24 @@ namespace Skydat.forms2080
 {
     public partial class frmPortOption2080 : Form
     {
+        public static int Global_baudRate = 115200;
+        private string configFilePath;
+
         public frmPortOption2080()
         {
             InitializeComponent();
+            // تنظیم مسیر فایل در دایرکتوری نصب نرم‌افزار
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            configFilePath = Path.Combine(appPath, "Config.txt");
+
         }
-//        MainForm mform = MainForm();// = MainForm();
+
+        public void RunLoadEvent()
+        {
+            OnLoad(EventArgs.Empty); // اجرای رویداد Load به‌صورت دستی
+        }
+
+        //        MainForm mform = MainForm();// = MainForm();
         public bool isOK = false;
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,6 +62,7 @@ namespace Skydat.forms2080
             {
                 sp1.PortName = cmbPrtName.Text;
                 sp1.BaudRate = int.Parse(txtBRate.Text);
+                Global_baudRate = int.Parse(txtBRate.Text);
                 sp1.ReadTimeout = int.Parse(txtRT.Text);
                 sp1.WriteTimeout = int.Parse(txtWT.Text);
                 if (!sp1.IsOpen)
@@ -91,8 +106,50 @@ namespace Skydat.forms2080
             lblrt.Text = Properties.Settings.Default.rtport;
             lblwt.Text = Properties.Settings.Default.wtport;
 
+            LoadBaudRate();
         }
 
-       
+        private void LoadBaudRate()
+        {
+            try
+            {
+                if (File.Exists(configFilePath))
+                {
+                    string content = File.ReadAllText(configFilePath);
+                    if (int.TryParse(content, out int baudRate))
+                    {
+                        Global_baudRate = baudRate;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطا در خواندن فایل تنظیمات: " + ex.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // نمایش مقدار در فرم (در صورت نیاز)
+            txtBRate.Text = Global_baudRate.ToString();
+        }
+
+        private void SaveBaudRate()
+        {
+            try
+            {
+                File.WriteAllText(configFilePath, Global_baudRate.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطا در ذخیره فایل تنظیمات: " + ex.Message, "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBRate_Validated(object sender, EventArgs e)
+        {
+            if (int.TryParse(txtBRate.Text, out int newBaudRate) && newBaudRate != Global_baudRate)
+            {
+                Global_baudRate = newBaudRate;
+                SaveBaudRate(); // ذخیره مقدار جدید
+            }
+        }
     }
 }

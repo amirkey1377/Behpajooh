@@ -32,24 +32,26 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.Btn2066 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.Btn2190 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.PortBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.HelpBtn = new System.Windows.Forms.ToolStripButton();
+            this.CustomizeBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.TechnicalBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.EIS = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
+            this.ImportBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
+            this.btnUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
@@ -62,7 +64,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 100);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1184, 596);
+            this.pictureBox1.Size = new System.Drawing.Size(1449, 596);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
@@ -80,23 +82,23 @@
             this.toolStripLabel8.Size = new System.Drawing.Size(31, 97);
             this.toolStripLabel8.Text = "        ";
             // 
-            // toolStripButton2
+            // Btn2066
             // 
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.BackColor = System.Drawing.Color.White;
-            this.toolStripButton2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton2.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton2.Image = global::Skydat.Properties.Resources._2066_illustrat;
-            this.toolStripButton2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton2.Text = "2066";
-            this.toolStripButton2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton2.ToolTipText = "Device 2066";
-            this.toolStripButton2.Click += new System.EventHandler(this.btnAnalyze_Click);
+            this.Btn2066.AutoSize = false;
+            this.Btn2066.BackColor = System.Drawing.Color.White;
+            this.Btn2066.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn2066.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.Btn2066.Image = global::Skydat.Properties.Resources._2066_illustrat;
+            this.Btn2066.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2066.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Btn2066.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Btn2066.Name = "Btn2066";
+            this.Btn2066.Size = new System.Drawing.Size(100, 95);
+            this.Btn2066.Text = "2066";
+            this.Btn2066.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2066.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Btn2066.ToolTipText = "Device 2066";
+            this.Btn2066.Click += new System.EventHandler(this.Btn2066_Click);
             // 
             // toolStripLabel5
             // 
@@ -105,23 +107,23 @@
             this.toolStripLabel5.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel5.Text = "            ";
             // 
-            // toolStripButton4
+            // Btn2190
             // 
-            this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.BackColor = System.Drawing.Color.White;
-            this.toolStripButton4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton4.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton4.Image = global::Skydat.Properties.Resources._2090_illustrat;
-            this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton4.Text = "2090 - 2080";
-            this.toolStripButton4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton4.ToolTipText = "Device 2080 - 2090";
-            this.toolStripButton4.Click += new System.EventHandler(this.btnFRA_Click);
+            this.Btn2190.AutoSize = false;
+            this.Btn2190.BackColor = System.Drawing.Color.White;
+            this.Btn2190.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Btn2190.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.Btn2190.Image = global::Skydat.Properties.Resources._2090_illustrat;
+            this.Btn2190.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2190.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.Btn2190.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.Btn2190.Name = "Btn2190";
+            this.Btn2190.Size = new System.Drawing.Size(100, 95);
+            this.Btn2190.Text = "2090 - 2080";
+            this.Btn2190.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Btn2190.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.Btn2190.ToolTipText = "Device 2080 - 2090";
+            this.Btn2190.Click += new System.EventHandler(this.Btn2090_Click);
             // 
             // toolStripLabel10
             // 
@@ -137,30 +139,23 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 100);
             // 
-            // toolStripLabel9
+            // PortBtn
             // 
-            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripLabel9.Name = "toolStripLabel9";
-            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
-            this.toolStripLabel9.Text = "            ";
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.AutoSize = false;
-            this.toolStripButton9.BackColor = System.Drawing.Color.White;
-            this.toolStripButton9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton9.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton9.Text = "Port Setting";
-            this.toolStripButton9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton9.ToolTipText = "Port Setting";
-            this.toolStripButton9.Click += new System.EventHandler(this.button1_Click);
+            this.PortBtn.AutoSize = false;
+            this.PortBtn.BackColor = System.Drawing.Color.White;
+            this.PortBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PortBtn.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.PortBtn.Image = ((System.Drawing.Image)(resources.GetObject("PortBtn.Image")));
+            this.PortBtn.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.PortBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.PortBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.PortBtn.Name = "PortBtn";
+            this.PortBtn.Size = new System.Drawing.Size(100, 95);
+            this.PortBtn.Text = "Port Setting";
+            this.PortBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.PortBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.PortBtn.ToolTipText = "Port Setting";
+            this.PortBtn.Click += new System.EventHandler(this.PortBtn_Click);
             // 
             // toolStripLabel1
             // 
@@ -169,41 +164,41 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel1.Text = "            ";
             // 
-            // toolStripButton10
+            // HelpBtn
             // 
-            this.toolStripButton10.AutoSize = false;
-            this.toolStripButton10.BackColor = System.Drawing.Color.White;
-            this.toolStripButton10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton10.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
-            this.toolStripButton10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton10.Text = "User guide";
-            this.toolStripButton10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton10.ToolTipText = "Help";
-            this.toolStripButton10.Click += new System.EventHandler(this.button4_Click);
+            this.HelpBtn.AutoSize = false;
+            this.HelpBtn.BackColor = System.Drawing.Color.White;
+            this.HelpBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.HelpBtn.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.HelpBtn.Image = ((System.Drawing.Image)(resources.GetObject("HelpBtn.Image")));
+            this.HelpBtn.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.HelpBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.HelpBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.HelpBtn.Name = "HelpBtn";
+            this.HelpBtn.Size = new System.Drawing.Size(100, 95);
+            this.HelpBtn.Text = "User guide";
+            this.HelpBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.HelpBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.HelpBtn.ToolTipText = "Help";
+            this.HelpBtn.Click += new System.EventHandler(this.HelpBtn_Click);
             // 
-            // toolStripButton7
+            // CustomizeBtn
             // 
-            this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.BackColor = System.Drawing.Color.White;
-            this.toolStripButton7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton7.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton7.Text = "Customize";
-            this.toolStripButton7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton7.ToolTipText = "Background setting";
-            this.toolStripButton7.Click += new System.EventHandler(this.button5_Click);
+            this.CustomizeBtn.AutoSize = false;
+            this.CustomizeBtn.BackColor = System.Drawing.Color.White;
+            this.CustomizeBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CustomizeBtn.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.CustomizeBtn.Image = ((System.Drawing.Image)(resources.GetObject("CustomizeBtn.Image")));
+            this.CustomizeBtn.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.CustomizeBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.CustomizeBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CustomizeBtn.Name = "CustomizeBtn";
+            this.CustomizeBtn.Size = new System.Drawing.Size(100, 95);
+            this.CustomizeBtn.Text = "Customize";
+            this.CustomizeBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.CustomizeBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.CustomizeBtn.ToolTipText = "Background setting";
+            this.CustomizeBtn.Click += new System.EventHandler(this.CustomizeBtn_Click);
             // 
             // toolStripLabel2
             // 
@@ -212,23 +207,23 @@
             this.toolStripLabel2.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel2.Text = "            ";
             // 
-            // toolStripButton1
+            // TechnicalBtn
             // 
-            this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.BackColor = System.Drawing.Color.White;
-            this.toolStripButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton1.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(100, 95);
-            this.toolStripButton1.Text = "Technical Support";
-            this.toolStripButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.ToolTipText = "About";
-            this.toolStripButton1.Click += new System.EventHandler(this.btnchangepass_Click);
+            this.TechnicalBtn.AutoSize = false;
+            this.TechnicalBtn.BackColor = System.Drawing.Color.White;
+            this.TechnicalBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TechnicalBtn.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.TechnicalBtn.Image = ((System.Drawing.Image)(resources.GetObject("TechnicalBtn.Image")));
+            this.TechnicalBtn.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TechnicalBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.TechnicalBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TechnicalBtn.Name = "TechnicalBtn";
+            this.TechnicalBtn.Size = new System.Drawing.Size(100, 95);
+            this.TechnicalBtn.Text = "Technical Support";
+            this.TechnicalBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TechnicalBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.TechnicalBtn.ToolTipText = "About";
+            this.TechnicalBtn.Click += new System.EventHandler(this.TechnicalBtn_Click);
             // 
             // toolStripLabel7
             // 
@@ -236,28 +231,6 @@
             this.toolStripLabel7.Name = "toolStripLabel7";
             this.toolStripLabel7.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel7.Text = "            ";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton5.AutoSize = false;
-            this.toolStripButton5.BackColor = System.Drawing.Color.White;
-            this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.toolStripButton5.Image = global::Skydat.Properties.Resources.Full_logo;
-            this.toolStripButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStripButton5.Size = new System.Drawing.Size(150, 95);
-            this.toolStripButton5.Text = "Technical Support";
-            this.toolStripButton5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolStripButton5.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton5.ToolTipText = "About";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripLabel11
             // 
@@ -271,33 +244,36 @@
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.BackColor = System.Drawing.Color.White;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel8,
-            this.toolStripButton2,
+            this.Btn2066,
             this.toolStripLabel5,
-            this.toolStripButton4,
+            this.Btn2190,
             this.toolStripLabel10,
             this.EIS,
             this.toolStripLabel12,
+            this.ImportBtn,
             this.toolStripSeparator1,
             this.toolStripLabel9,
-            this.toolStripButton9,
+            this.PortBtn,
             this.toolStripLabel1,
-            this.toolStripButton10,
+            this.HelpBtn,
             this.toolStripLabel2,
-            this.toolStripButton7,
+            this.CustomizeBtn,
             this.toolStripLabel7,
-            this.toolStripButton1,
+            this.TechnicalBtn,
             this.toolStripLabel11,
+            this.toolStripLabel13,
+            this.btnUpdate,
             this.toolStripLabel3,
             this.toolStripSeparator2,
-            this.toolStripLabel6,
-            this.toolStripButton5});
+            this.toolStripLabel6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1184, 100);
+            this.toolStrip1.Size = new System.Drawing.Size(1449, 100);
             this.toolStrip1.TabIndex = 16;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -317,7 +293,7 @@
             this.EIS.Text = "EIS";
             this.EIS.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.EIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.EIS.ToolTipText = "Device 2080 - 2090";
+            this.EIS.ToolTipText = "EIS";
             this.EIS.Click += new System.EventHandler(this.EIS_Click);
             // 
             // toolStripLabel12
@@ -326,6 +302,56 @@
             this.toolStripLabel12.Name = "toolStripLabel12";
             this.toolStripLabel12.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel12.Text = "            ";
+            // 
+            // ImportBtn
+            // 
+            this.ImportBtn.AutoSize = false;
+            this.ImportBtn.BackColor = System.Drawing.Color.White;
+            this.ImportBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ImportBtn.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.ImportBtn.Image = global::Skydat.Properties.Resources.importData;
+            this.ImportBtn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ImportBtn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ImportBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportBtn.Name = "ImportBtn";
+            this.ImportBtn.Size = new System.Drawing.Size(100, 95);
+            this.ImportBtn.Text = "Import Data";
+            this.ImportBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ImportBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.ImportBtn.ToolTipText = "Import Data";
+            this.ImportBtn.Click += new System.EventHandler(this.ImportBtn_Click);
+            // 
+            // toolStripLabel9
+            // 
+            this.toolStripLabel9.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStripLabel9.Name = "toolStripLabel9";
+            this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
+            this.toolStripLabel9.Text = "            ";
+            // 
+            // toolStripLabel13
+            // 
+            this.toolStripLabel13.Name = "toolStripLabel13";
+            this.toolStripLabel13.Size = new System.Drawing.Size(40, 97);
+            this.toolStripLabel13.Text = "           ";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AutoSize = false;
+            this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.Image = global::Skydat.Properties.Resources.checkupdate;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(100, 95);
+            this.btnUpdate.Text = "Update Software";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUpdate.ToolTipText = "Upadate";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.MouseHover += new System.EventHandler(this.btnUpdate_MouseHover);
             // 
             // toolStripLabel3
             // 
@@ -352,7 +378,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1184, 696);
+            this.ClientSize = new System.Drawing.Size(1449, 696);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -373,20 +399,18 @@
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel8;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton Btn2066;
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton Btn2190;
         private System.Windows.Forms.ToolStripLabel toolStripLabel10;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton PortBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton HelpBtn;
+        private System.Windows.Forms.ToolStripButton CustomizeBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton TechnicalBtn;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel11;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
@@ -394,5 +418,9 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripButton EIS;
         private System.Windows.Forms.ToolStripLabel toolStripLabel12;
+        private System.Windows.Forms.ToolStripButton ImportBtn;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel9;
+        private System.Windows.Forms.ToolStripButton btnUpdate;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel13;
     }
 }

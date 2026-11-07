@@ -1,0 +1,90 @@
+﻿[
+  {
+    "$type": "Skydat.Tafel, BHP20xx analysis",
+    "Name": "Tafel",
+    "Comment": "",
+    "ColorCode": -2078451,
+    "XY_Axis_Title": [
+      "Current(uA)",
+      "Voltage(mV)"
+    ],
+    "OCPAvrage": 0.0,
+    "Specification": null,
+    "OcpTime": {
+      "Name": "OcpTime",
+      "Description": null,
+      "Value": 10.0,
+      "LowerLimit": 0.0,
+      "UpperLimit": 1000.0,
+      "Unit": "S",
+      "Resolution": 1.0
+    },
+    "DiffrenialVoltage": {
+      "Name": "DiffVoltage",
+      "Description": null,
+      "Value": 0.1,
+      "LowerLimit": 0.0,
+      "UpperLimit": 4.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "AvrageTime": {
+      "Name": "AvrageTime",
+      "Description": null,
+      "Value": 1.0,
+      "LowerLimit": 0.0,
+      "UpperLimit": 1000.0,
+      "Unit": "S",
+      "Resolution": 1.0
+    },
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "TStep": {
+      "Name": "Tstep",
+      "Description": "Step Time",
+      "Value": 0.1,
+      "LowerLimit": 0.0001,
+      "UpperLimit": 10.0,
+      "Unit": "S",
+      "Resolution": 0.1
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": null,
+      "Value": 0.16,
+      "LowerLimit": 0.001,
+      "UpperLimit": 100.0,
+      "Unit": "V/s",
+      "Resolution": 0.001
+    },
+    "EquilibriumTime": 0,
+    "SeriesPath": null,
+    "SeriesType": 0,
+    "previewChartOCP": null
+  }
+]

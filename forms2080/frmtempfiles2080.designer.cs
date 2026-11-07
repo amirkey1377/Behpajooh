@@ -72,12 +72,12 @@ namespace Skydat.forms2080
             this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Parameters
+            // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label4, "Parameters");
-            this.label4.Name = "Parameters";
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             // 
             // treeView3
             // 
@@ -146,7 +146,7 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.datedescToolStripMenuItem, "datedescToolStripMenuItem");
             this.datedescToolStripMenuItem.Click += new System.EventHandler(this.datedescToolStripMenuItem_Click);
             // 
-            // OnlineChart
+            // tChart1
             // 
             this.tChart1.BackColor = System.Drawing.Color.Black;
             this.tChart1.BorderlineColor = System.Drawing.Color.Black;
@@ -157,8 +157,8 @@ namespace Skydat.forms2080
             chartArea1.Position.Width = 100F;
             this.tChart1.ChartAreas.Add(chartArea1);
             this.tChart1.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.tChart1, "OnlineChart");
-            this.tChart1.Name = "OnlineChart";
+            resources.ApplyResources(this.tChart1, "tChart1");
+            this.tChart1.Name = "tChart1";
             series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
@@ -203,9 +203,9 @@ namespace Skydat.forms2080
             // label41
             // 
             this.label41.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            resources.ApplyResources(this.label41, "label41");
             this.label41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label41.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.label41, "label41");
             this.label41.Name = "label41";
             // 
             // panel6

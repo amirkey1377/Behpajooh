@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,8 +10,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows;
 using Skydat.classes2065;
 using System.Runtime.InteropServices;
-using Skydat.classes2065;
 using System.Linq;
+using System.Threading;
+
 namespace Skydat.forms2065
 {
     public partial class frmtempfiles : Form
@@ -116,17 +116,18 @@ namespace Skydat.forms2065
                 {
                     restore_Data(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\tempfile\\"+e.Node.Text.Trim());
                     if (smooth_state)
-                        smootht4();
+                    smootht4();
                     else
                     {
-                        if (tech == "CHP" || tech == "CHA" || tech == "CHC")
+                        if (tech == "CHP" || tech == "CHA" || tech == "CHC" || tech == "CD")
                             tChart1.Series[0].Points.AddXY(0, othertech_val1[0]);//رسم در نقطه صفر زمان // technics chp cha chc
 
                         tech = "";
 
-                        for (int i = 0; i < shomar_val; i++) 
+                        for (int i = 0; i < shomar_val; i++)
                         {
                             tChart1.Series[0].Points.AddXY(othertech_val0[i], othertech_val1[i]);
+                           
                         }
                     }
 
@@ -184,7 +185,7 @@ namespace Skydat.forms2065
                                             tChart1.ChartAreas[0].AxisX.Title = clasglobal.HAxisTitle[i];
                                             label41.Text = "Technique name :" + clasglobal.TechName[i];
                                             label4.Text = "";
-                                            if (clasglobal.TechName[i].ToLower() == "cha" || clasglobal.TechName[i].ToLower() == "chp" || clasglobal.TechName[i].ToLower() == "chc")
+                                            if (clasglobal.TechName[i].ToLower() == "cha" || clasglobal.TechName[i].ToLower() == "chp" || clasglobal.TechName[i].ToLower() == "chc" || clasglobal.TechName[i].ToLower() == "cd")
                                                 smooth_state = false;
                                             else
                                                 smooth_state = true;
@@ -207,6 +208,17 @@ namespace Skydat.forms2065
                         }
                         else                // if (isData)
                         {
+                            if (s.Length == 0) { continue; }//newline
+
+                            if (s.LastIndexOf("========") >= 0)
+                            {
+                                continue;
+                            }
+                            else if (s.Contains("Cycle Number"))
+                            {
+                                continue;
+                            }
+
                             int l = 0;
                             string sss = "";
                             int num = 0;
@@ -231,11 +243,6 @@ namespace Skydat.forms2065
                                 }
                                 l++;
                             }
-
-                            try { if (num == 0) x = Convert.ToDouble(sss); } catch { x = 0; }
-                            try { if (num == 1) y = Convert.ToDouble(sss); } catch { y = 0; }
-                            try { if (num == 2) z = Convert.ToDouble(sss); } catch { z = 0; }
-                            try { if (num == 3) w = Convert.ToDouble(sss); } catch { w = 0; }
 
                             if (shomar_val >= othertech_val0.Length)
                             {
@@ -493,6 +500,45 @@ namespace Skydat.forms2065
         private void tChart1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmtempfiles_Resize(object sender, EventArgs e)
+        {
+            if (toolstripChart.Height != 0 && toolstripChart.Width != 0)
+            {
+                int itemWidth = toolstripChart.Width / toolstripChart.Items.Count;// تنظیم اندازه هر آیتم
+                int iconSize = (int)(toolstripChart.Height * 0.4);
+                float fontSize = toolstripChart.Height / 8.0f;
+
+                if (iconSize <= 30)
+                {
+                    iconSize = 30;
+                }
+                foreach (ToolStripItem item in toolstripChart.Items)
+                {
+                    item.Width = itemWidth;
+                    item.Font = new Font(item.Font.FontFamily, fontSize);
+                    if (item is ToolStripButton button && button.Image != null)
+                    {
+                        button.Image = ResizeImage(button.Image, iconSize, iconSize);
+                    }
+                    item.Height = toolstripChart.Height;
+                }
+            }
+
+        }
+
+        private Image ResizeImage(Image image, int width, int height)
+        {
+            Bitmap resizedImage = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resizedImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                g.DrawImage(image, 0, 0, width, height);
+            }
+            return resizedImage;
         }
     }
 }
