@@ -33,7 +33,7 @@ namespace Skydat
             "Cycle\n" +
             "Equilibrium Time";
 
-        public const string parentcategory = "Measurement - cyclic and linear sweep voltammetry";
+        public const string parentcategory = "Measurement - voltammetric analysis";
 
         public string Name { get; } = name;
 
@@ -91,7 +91,6 @@ namespace Skydat
             _ScanRate.ValueChanged += HStep_ValueChanged;
 
         }
-
 
         public CV(Parameter E1, Parameter E2, Parameter ScanRate, Parameter HStep, Parameter TStep, int Cycles, int EquilibriumTime = 0, string comment = "")
         {

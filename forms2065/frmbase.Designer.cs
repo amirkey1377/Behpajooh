@@ -50,11 +50,11 @@
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
             this.ImportBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
+            this.btnUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-            this.btnUpdate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -328,6 +328,31 @@
             this.toolStripLabel9.Size = new System.Drawing.Size(43, 97);
             this.toolStripLabel9.Text = "            ";
             // 
+            // toolStripLabel13
+            // 
+            this.toolStripLabel13.Name = "toolStripLabel13";
+            this.toolStripLabel13.Size = new System.Drawing.Size(40, 97);
+            this.toolStripLabel13.Text = "           ";
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.AutoSize = false;
+            this.btnUpdate.BackColor = System.Drawing.Color.White;
+            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
+            this.btnUpdate.Image = global::Skydat.Properties.Resources.checkupdate;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(100, 95);
+            this.btnUpdate.Text = "Update Software";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnUpdate.ToolTipText = "Upadate";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnUpdate.MouseHover += new System.EventHandler(this.btnUpdate_MouseHover);
+            // 
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
@@ -345,31 +370,6 @@
             this.toolStripLabel6.Name = "toolStripLabel6";
             this.toolStripLabel6.Size = new System.Drawing.Size(22, 97);
             this.toolStripLabel6.Text = "     ";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.AutoSize = false;
-            this.btnUpdate.BackColor = System.Drawing.Color.White;
-            this.btnUpdate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnUpdate.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold);
-            this.btnUpdate.Image = global::Skydat.Properties.Resources.chcek_update;
-            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnUpdate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 95);
-            this.btnUpdate.Text = "Update Software";
-            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnUpdate.ToolTipText = "Upadate";
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            this.btnUpdate.MouseHover += new System.EventHandler(this.btnUpdate_MouseHover);
-            // 
-            // toolStripLabel13
-            // 
-            this.toolStripLabel13.Name = "toolStripLabel13";
-            this.toolStripLabel13.Size = new System.Drawing.Size(40, 97);
-            this.toolStripLabel13.Text = "           ";
             // 
             // frmbase
             // 

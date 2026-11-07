@@ -41,6 +41,12 @@ namespace Skydat.forms2080
             this.pnlGraph = new System.Windows.Forms.Panel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.grayToolStripButton1 = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton2 = new Skydat.GrayToolStripButton();
+            this.btnzoominTS = new Skydat.GrayToolStripButton();
+            this.btnZoomOutTS = new Skydat.GrayToolStripButton();
+            this.toolTipBtnshowvalue = new Skydat.GrayToolStripButton();
+            this.btnSelectAreaTS = new Skydat.GrayToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -69,7 +75,16 @@ namespace Skydat.forms2080
             this.btnshowgrid_1 = new System.Windows.Forms.Button();
             this.btnshowaxes_1 = new System.Windows.Forms.Button();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.grayToolStripButton3 = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton4 = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton5 = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton6 = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton7 = new Skydat.GrayToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.tsBtnDrawLine = new Skydat.GrayToolStripButton();
+            this.btnSelectLines = new Skydat.GrayToolStripButton();
+            this.grayToolStripButton9 = new Skydat.GrayToolStripButton();
+            this.btnExelExport = new System.Windows.Forms.ToolStripButton();
             this.dschart2 = new Skydat.datasets.dschart2();
             this.pnlParam = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -121,21 +136,6 @@ namespace Skydat.forms2080
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.timerResizeFrm = new System.Windows.Forms.Timer(this.components);
             this.dschart21 = new Skydat.datasets.dschart2();
-            this.btnExelExport = new System.Windows.Forms.ToolStripButton();
-            this.grayToolStripButton1 = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton2 = new Skydat.GrayToolStripButton();
-            this.btnzoominTS = new Skydat.GrayToolStripButton();
-            this.btnZoomOutTS = new Skydat.GrayToolStripButton();
-            this.toolTipBtnshowvalue = new Skydat.GrayToolStripButton();
-            this.btnSelectAreaTS = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton3 = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton4 = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton5 = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton6 = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton7 = new Skydat.GrayToolStripButton();
-            this.tsBtnDrawLine = new Skydat.GrayToolStripButton();
-            this.btnSelectLines = new Skydat.GrayToolStripButton();
-            this.grayToolStripButton9 = new Skydat.GrayToolStripButton();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tChart1)).BeginInit();
             this.pnlGraph.SuspendLayout();
@@ -201,6 +201,7 @@ namespace Skydat.forms2080
             ((System.Windows.Forms.TreeNode)(resources.GetObject("tvTechList.Nodes")))});
             this.tvTechList.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterCheck);
             this.tvTechList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView3_AfterSelect);
+            this.tvTechList.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTechList_NodeMouseClick);
             // 
             // tChart1
             // 
@@ -269,6 +270,64 @@ namespace Skydat.forms2080
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
+            // 
+            // grayToolStripButton1
+            // 
+            this.grayToolStripButton1.Checked = true;
+            this.grayToolStripButton1.CheckOnClick = true;
+            this.grayToolStripButton1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.grayToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton1.Image = global::Skydat.Properties.Resources.dimensions_icon;
+            this.grayToolStripButton1.Name = "grayToolStripButton1";
+            resources.ApplyResources(this.grayToolStripButton1, "grayToolStripButton1");
+            this.grayToolStripButton1.Click += new System.EventHandler(this.btnshowaxes_Click);
+            // 
+            // grayToolStripButton2
+            // 
+            this.grayToolStripButton2.CheckOnClick = true;
+            this.grayToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton2.Image = global::Skydat.Properties.Resources.activity_grid21600;
+            this.grayToolStripButton2.Name = "grayToolStripButton2";
+            resources.ApplyResources(this.grayToolStripButton2, "grayToolStripButton2");
+            this.grayToolStripButton2.Click += new System.EventHandler(this.btnshowgrid_Click);
+            // 
+            // btnzoominTS
+            // 
+            this.btnzoominTS.CheckOnClick = true;
+            this.btnzoominTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnzoominTS.Image = global::Skydat.Properties.Resources.Zoom_in_icon2;
+            this.btnzoominTS.Name = "btnzoominTS";
+            resources.ApplyResources(this.btnzoominTS, "btnzoominTS");
+            this.btnzoominTS.CheckedChanged += new System.EventHandler(this.btnZoomIn_Click);
+            this.btnzoominTS.Click += new System.EventHandler(this.btnzoominTS_Click_1);
+            // 
+            // btnZoomOutTS
+            // 
+            this.btnZoomOutTS.CheckOnClick = true;
+            this.btnZoomOutTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnZoomOutTS.Image = global::Skydat.Properties.Resources.Zoom_out_icon;
+            this.btnZoomOutTS.Name = "btnZoomOutTS";
+            resources.ApplyResources(this.btnZoomOutTS, "btnZoomOutTS");
+            this.btnZoomOutTS.CheckedChanged += new System.EventHandler(this.btnzoomout_Click);
+            // 
+            // toolTipBtnshowvalue
+            // 
+            this.toolTipBtnshowvalue.CheckOnClick = true;
+            this.toolTipBtnshowvalue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolTipBtnshowvalue.Image = global::Skydat.Properties.Resources.cursor_icon;
+            this.toolTipBtnshowvalue.Name = "toolTipBtnshowvalue";
+            resources.ApplyResources(this.toolTipBtnshowvalue, "toolTipBtnshowvalue");
+            this.toolTipBtnshowvalue.Click += new System.EventHandler(this.toolTipBtnshowvalue_Click);
+            // 
+            // btnSelectAreaTS
+            // 
+            this.btnSelectAreaTS.CheckOnClick = true;
+            this.btnSelectAreaTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSelectAreaTS.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
+            this.btnSelectAreaTS.Name = "btnSelectAreaTS";
+            resources.ApplyResources(this.btnSelectAreaTS, "btnSelectAreaTS");
+            this.btnSelectAreaTS.CheckedChanged += new System.EventHandler(this.btnSelectAreaTS_CheckedChanged);
+            this.btnSelectAreaTS.Click += new System.EventHandler(this.btnselectonly_Click);
             // 
             // toolStripButton7
             // 
@@ -577,12 +636,91 @@ namespace Skydat.forms2080
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
+            // grayToolStripButton3
+            // 
+            this.grayToolStripButton3.Checked = true;
+            this.grayToolStripButton3.CheckOnClick = true;
+            this.grayToolStripButton3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.grayToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton3.Image = global::Skydat.Properties.Resources.dimensions_icon;
+            this.grayToolStripButton3.Name = "grayToolStripButton3";
+            resources.ApplyResources(this.grayToolStripButton3, "grayToolStripButton3");
+            // 
+            // grayToolStripButton4
+            // 
+            this.grayToolStripButton4.CheckOnClick = true;
+            this.grayToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton4.Image = global::Skydat.Properties.Resources.activity_grid21600;
+            this.grayToolStripButton4.Name = "grayToolStripButton4";
+            resources.ApplyResources(this.grayToolStripButton4, "grayToolStripButton4");
+            // 
+            // grayToolStripButton5
+            // 
+            this.grayToolStripButton5.CheckOnClick = true;
+            this.grayToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton5.Image = global::Skydat.Properties.Resources.Zoom_in_icon2;
+            this.grayToolStripButton5.Name = "grayToolStripButton5";
+            resources.ApplyResources(this.grayToolStripButton5, "grayToolStripButton5");
+            // 
+            // grayToolStripButton6
+            // 
+            this.grayToolStripButton6.CheckOnClick = true;
+            this.grayToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton6.Image = global::Skydat.Properties.Resources.Zoom_out_icon;
+            this.grayToolStripButton6.Name = "grayToolStripButton6";
+            resources.ApplyResources(this.grayToolStripButton6, "grayToolStripButton6");
+            // 
+            // grayToolStripButton7
+            // 
+            this.grayToolStripButton7.CheckOnClick = true;
+            this.grayToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton7.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
+            this.grayToolStripButton7.Name = "grayToolStripButton7";
+            resources.ApplyResources(this.grayToolStripButton7, "grayToolStripButton7");
+            // 
             // toolStripButton10
             // 
             this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton10.Image = global::Skydat.Properties.Resources.applications_32;
             resources.ApplyResources(this.toolStripButton10, "toolStripButton10");
             this.toolStripButton10.Name = "toolStripButton10";
+            // 
+            // tsBtnDrawLine
+            // 
+            this.tsBtnDrawLine.CheckOnClick = true;
+            this.tsBtnDrawLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsBtnDrawLine.Image = global::Skydat.Properties.Resources.Aqua_Smooth_Folder_Applications_icon;
+            this.tsBtnDrawLine.Name = "tsBtnDrawLine";
+            resources.ApplyResources(this.tsBtnDrawLine, "tsBtnDrawLine");
+            this.tsBtnDrawLine.CheckedChanged += new System.EventHandler(this.button1_Click);
+            // 
+            // btnSelectLines
+            // 
+            this.btnSelectLines.CheckOnClick = true;
+            this.btnSelectLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSelectLines.Image = global::Skydat.Properties.Resources.chart_line_icon;
+            this.btnSelectLines.Name = "btnSelectLines";
+            resources.ApplyResources(this.btnSelectLines, "btnSelectLines");
+            this.btnSelectLines.CheckedChanged += new System.EventHandler(this.grayToolStripButton8_CheckedChanged);
+            this.btnSelectLines.Click += new System.EventHandler(this.grayToolStripButton8_Click);
+            // 
+            // grayToolStripButton9
+            // 
+            this.grayToolStripButton9.CheckOnClick = true;
+            this.grayToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.grayToolStripButton9.Image = global::Skydat.Properties.Resources.chart_line_delete_icon;
+            this.grayToolStripButton9.Name = "grayToolStripButton9";
+            resources.ApplyResources(this.grayToolStripButton9, "grayToolStripButton9");
+            this.grayToolStripButton9.CheckedChanged += new System.EventHandler(this.grayToolStripButton9_CheckedChanged);
+            this.grayToolStripButton9.Click += new System.EventHandler(this.grayToolStripButton9_Click);
+            // 
+            // btnExelExport
+            // 
+            this.btnExelExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.btnExelExport, "btnExelExport");
+            this.btnExelExport.Image = global::Skydat.Properties.Resources.Excell;
+            this.btnExelExport.Name = "btnExelExport";
+            this.btnExelExport.Click += new System.EventHandler(this.btnExelExport_Click);
             // 
             // dschart2
             // 
@@ -1000,143 +1138,6 @@ namespace Skydat.forms2080
             // 
             this.dschart21.DataSetName = "dschart2";
             this.dschart21.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // btnExelExport
-            // 
-            this.btnExelExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.btnExelExport, "btnExelExport");
-            this.btnExelExport.Image = global::Skydat.Properties.Resources.Excell;
-            this.btnExelExport.Name = "btnExelExport";
-            this.btnExelExport.Click += new System.EventHandler(this.btnExelExport_Click);
-            // 
-            // grayToolStripButton1
-            // 
-            this.grayToolStripButton1.Checked = true;
-            this.grayToolStripButton1.CheckOnClick = true;
-            this.grayToolStripButton1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.grayToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton1.Image = global::Skydat.Properties.Resources.dimensions_icon;
-            resources.ApplyResources(this.grayToolStripButton1, "grayToolStripButton1");
-            this.grayToolStripButton1.Name = "grayToolStripButton1";
-            this.grayToolStripButton1.Click += new System.EventHandler(this.btnshowaxes_Click);
-            // 
-            // grayToolStripButton2
-            // 
-            this.grayToolStripButton2.CheckOnClick = true;
-            this.grayToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton2.Image = global::Skydat.Properties.Resources.activity_grid21600;
-            resources.ApplyResources(this.grayToolStripButton2, "grayToolStripButton2");
-            this.grayToolStripButton2.Name = "grayToolStripButton2";
-            this.grayToolStripButton2.Click += new System.EventHandler(this.btnshowgrid_Click);
-            // 
-            // btnzoominTS
-            // 
-            this.btnzoominTS.CheckOnClick = true;
-            this.btnzoominTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnzoominTS.Image = global::Skydat.Properties.Resources.Zoom_in_icon2;
-            resources.ApplyResources(this.btnzoominTS, "btnzoominTS");
-            this.btnzoominTS.Name = "btnzoominTS";
-            this.btnzoominTS.CheckedChanged += new System.EventHandler(this.btnZoomIn_Click);
-            this.btnzoominTS.Click += new System.EventHandler(this.btnzoominTS_Click_1);
-            // 
-            // btnZoomOutTS
-            // 
-            this.btnZoomOutTS.CheckOnClick = true;
-            this.btnZoomOutTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnZoomOutTS.Image = global::Skydat.Properties.Resources.Zoom_out_icon;
-            resources.ApplyResources(this.btnZoomOutTS, "btnZoomOutTS");
-            this.btnZoomOutTS.Name = "btnZoomOutTS";
-            this.btnZoomOutTS.CheckedChanged += new System.EventHandler(this.btnzoomout_Click);
-            // 
-            // toolTipBtnshowvalue
-            // 
-            this.toolTipBtnshowvalue.CheckOnClick = true;
-            this.toolTipBtnshowvalue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolTipBtnshowvalue.Image = global::Skydat.Properties.Resources.cursor_icon;
-            resources.ApplyResources(this.toolTipBtnshowvalue, "toolTipBtnshowvalue");
-            this.toolTipBtnshowvalue.Name = "toolTipBtnshowvalue";
-            this.toolTipBtnshowvalue.Click += new System.EventHandler(this.toolTipBtnshowvalue_Click);
-            // 
-            // btnSelectAreaTS
-            // 
-            this.btnSelectAreaTS.CheckOnClick = true;
-            this.btnSelectAreaTS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSelectAreaTS.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
-            resources.ApplyResources(this.btnSelectAreaTS, "btnSelectAreaTS");
-            this.btnSelectAreaTS.Name = "btnSelectAreaTS";
-            this.btnSelectAreaTS.CheckedChanged += new System.EventHandler(this.btnSelectAreaTS_CheckedChanged);
-            this.btnSelectAreaTS.Click += new System.EventHandler(this.btnselectonly_Click);
-            // 
-            // grayToolStripButton3
-            // 
-            this.grayToolStripButton3.Checked = true;
-            this.grayToolStripButton3.CheckOnClick = true;
-            this.grayToolStripButton3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.grayToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton3.Image = global::Skydat.Properties.Resources.dimensions_icon;
-            resources.ApplyResources(this.grayToolStripButton3, "grayToolStripButton3");
-            this.grayToolStripButton3.Name = "grayToolStripButton3";
-            // 
-            // grayToolStripButton4
-            // 
-            this.grayToolStripButton4.CheckOnClick = true;
-            this.grayToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton4.Image = global::Skydat.Properties.Resources.activity_grid21600;
-            resources.ApplyResources(this.grayToolStripButton4, "grayToolStripButton4");
-            this.grayToolStripButton4.Name = "grayToolStripButton4";
-            // 
-            // grayToolStripButton5
-            // 
-            this.grayToolStripButton5.CheckOnClick = true;
-            this.grayToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton5.Image = global::Skydat.Properties.Resources.Zoom_in_icon2;
-            resources.ApplyResources(this.grayToolStripButton5, "grayToolStripButton5");
-            this.grayToolStripButton5.Name = "grayToolStripButton5";
-            // 
-            // grayToolStripButton6
-            // 
-            this.grayToolStripButton6.CheckOnClick = true;
-            this.grayToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton6.Image = global::Skydat.Properties.Resources.Zoom_out_icon;
-            resources.ApplyResources(this.grayToolStripButton6, "grayToolStripButton6");
-            this.grayToolStripButton6.Name = "grayToolStripButton6";
-            // 
-            // grayToolStripButton7
-            // 
-            this.grayToolStripButton7.CheckOnClick = true;
-            this.grayToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton7.Image = global::Skydat.Properties.Resources.select_all_text_icon1;
-            resources.ApplyResources(this.grayToolStripButton7, "grayToolStripButton7");
-            this.grayToolStripButton7.Name = "grayToolStripButton7";
-            // 
-            // tsBtnDrawLine
-            // 
-            this.tsBtnDrawLine.CheckOnClick = true;
-            this.tsBtnDrawLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsBtnDrawLine.Image = global::Skydat.Properties.Resources.Aqua_Smooth_Folder_Applications_icon;
-            resources.ApplyResources(this.tsBtnDrawLine, "tsBtnDrawLine");
-            this.tsBtnDrawLine.Name = "tsBtnDrawLine";
-            this.tsBtnDrawLine.CheckedChanged += new System.EventHandler(this.button1_Click);
-            // 
-            // btnSelectLines
-            // 
-            this.btnSelectLines.CheckOnClick = true;
-            this.btnSelectLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSelectLines.Image = global::Skydat.Properties.Resources.chart_line_icon;
-            resources.ApplyResources(this.btnSelectLines, "btnSelectLines");
-            this.btnSelectLines.Name = "btnSelectLines";
-            this.btnSelectLines.CheckedChanged += new System.EventHandler(this.grayToolStripButton8_CheckedChanged);
-            this.btnSelectLines.Click += new System.EventHandler(this.grayToolStripButton8_Click);
-            // 
-            // grayToolStripButton9
-            // 
-            this.grayToolStripButton9.CheckOnClick = true;
-            this.grayToolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.grayToolStripButton9.Image = global::Skydat.Properties.Resources.chart_line_delete_icon;
-            resources.ApplyResources(this.grayToolStripButton9, "grayToolStripButton9");
-            this.grayToolStripButton9.Name = "grayToolStripButton9";
-            this.grayToolStripButton9.CheckedChanged += new System.EventHandler(this.grayToolStripButton9_CheckedChanged);
-            this.grayToolStripButton9.Click += new System.EventHandler(this.grayToolStripButton9_Click);
             // 
             // frmanalyseGraph2080
             // 

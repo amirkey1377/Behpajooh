@@ -235,11 +235,29 @@
   <data name="toolStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="grayToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="btnzoominTS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="btnZoomOutTS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="toolTipBtnshowvalue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="btnSelectAreaTS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
   <data name="toolStripButton7.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
+    <value>34, 34</value>
   </data>
   <data name="toolStripButton7.Text" xml:space="preserve">
     <value>Chart Line Fore  Color</value>
@@ -248,7 +266,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
+    <value>34, 34</value>
   </data>
   <data name="toolStripButton6.Text" xml:space="preserve">
     <value>Chart Background Color</value>
@@ -257,7 +275,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 34</value>
+    <value>34, 34</value>
   </data>
   <data name="toolStripButton5.Text" xml:space="preserve">
     <value>Chart Setting</value>
@@ -1213,6 +1231,21 @@
   <data name="toolStrip2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
+  <data name="grayToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
   <data name="toolStripButton10.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -1221,6 +1254,15 @@
   </data>
   <data name="toolStripButton10.Text" xml:space="preserve">
     <value>Chart Setting</value>
+  </data>
+  <data name="tsBtnDrawLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="btnSelectLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
+  </data>
+  <data name="grayToolStripButton9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 34</value>
   </data>
   <data name="btnExelExport.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2462,6 +2504,42 @@
   <data name="&gt;&gt;clearPlotsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;grayToolStripButton1.Name" xml:space="preserve">
+    <value>grayToolStripButton1</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton1.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton2.Name" xml:space="preserve">
+    <value>grayToolStripButton2</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton2.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnzoominTS.Name" xml:space="preserve">
+    <value>btnzoominTS</value>
+  </data>
+  <data name="&gt;&gt;btnzoominTS.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOutTS.Name" xml:space="preserve">
+    <value>btnZoomOutTS</value>
+  </data>
+  <data name="&gt;&gt;btnZoomOutTS.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolTipBtnshowvalue.Name" xml:space="preserve">
+    <value>toolTipBtnshowvalue</value>
+  </data>
+  <data name="&gt;&gt;toolTipBtnshowvalue.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnSelectAreaTS.Name" xml:space="preserve">
+    <value>btnSelectAreaTS</value>
+  </data>
+  <data name="&gt;&gt;btnSelectAreaTS.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;toolStripButton7.Name" xml:space="preserve">
     <value>toolStripButton7</value>
   </data>
@@ -2480,11 +2558,59 @@
   <data name="&gt;&gt;toolStripButton5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;grayToolStripButton3.Name" xml:space="preserve">
+    <value>grayToolStripButton3</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton3.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton4.Name" xml:space="preserve">
+    <value>grayToolStripButton4</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton4.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton5.Name" xml:space="preserve">
+    <value>grayToolStripButton5</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton5.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton6.Name" xml:space="preserve">
+    <value>grayToolStripButton6</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton6.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton7.Name" xml:space="preserve">
+    <value>grayToolStripButton7</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton7.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;toolStripButton10.Name" xml:space="preserve">
     <value>toolStripButton10</value>
   </data>
   <data name="&gt;&gt;toolStripButton10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsBtnDrawLine.Name" xml:space="preserve">
+    <value>tsBtnDrawLine</value>
+  </data>
+  <data name="&gt;&gt;tsBtnDrawLine.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnSelectLines.Name" xml:space="preserve">
+    <value>btnSelectLines</value>
+  </data>
+  <data name="&gt;&gt;btnSelectLines.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton9.Name" xml:space="preserve">
+    <value>grayToolStripButton9</value>
+  </data>
+  <data name="&gt;&gt;grayToolStripButton9.Type" xml:space="preserve">
+    <value>Skydat.GrayToolStripButton, BHP20xx analysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnExelExport.Name" xml:space="preserve">
     <value>btnExelExport</value>

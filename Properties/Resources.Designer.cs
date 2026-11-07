@@ -543,6 +543,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CA {
+            get {
+                object obj = ResourceManager.GetObject("CA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CAD3 {
             get {
                 object obj = ResourceManager.GetObject("CAD3", resourceCulture);
@@ -633,9 +643,9 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap chcek_update {
+        internal static System.Drawing.Bitmap checklist_icon {
             get {
-                object obj = ResourceManager.GetObject("chcek update", resourceCulture);
+                object obj = ResourceManager.GetObject("checklist_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -643,9 +653,9 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap checklist_icon {
+        internal static System.Drawing.Bitmap checkupdate {
             get {
-                object obj = ResourceManager.GetObject("checklist_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("checkupdate", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -736,6 +746,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap cursor_icon {
             get {
                 object obj = ResourceManager.GetObject("cursor_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CV {
+            get {
+                object obj = ResourceManager.GetObject("CV", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -843,6 +863,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DPV {
+            get {
+                object obj = ResourceManager.GetObject("DPV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DrawGraph {
             get {
                 object obj = ResourceManager.GetObject("DrawGraph", resourceCulture);
@@ -856,6 +886,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap edit_32 {
             get {
                 object obj = ResourceManager.GetObject("edit_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Electrochemical_Tafel_Plot_Diagram {
+            get {
+                object obj = ResourceManager.GetObject("Electrochemical_Tafel_Plot_Diagram", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1203,6 +1243,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LSV {
+            get {
+                object obj = ResourceManager.GetObject("LSV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Mailbox_receive_message_2_icon {
             get {
                 object obj = ResourceManager.GetObject("Mailbox_receive_message_2_icon", resourceCulture);
@@ -1316,6 +1366,26 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap Notepad_Bloc_notes_icon {
             get {
                 object obj = ResourceManager.GetObject("Notepad_Bloc_notes_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NPV {
+            get {
+                object obj = ResourceManager.GetObject("NPV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OCP {
+            get {
+                object obj = ResourceManager.GetObject("OCP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1483,6 +1553,16 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pixel_Art_Yellow_L_Shaped_Arrow {
+            get {
+                object obj = ResourceManager.GetObject("Pixel-Art Yellow L-Shaped Arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Play_icon {
             get {
                 object obj = ResourceManager.GetObject("Play_icon", resourceCulture);
@@ -1506,6 +1586,16 @@ namespace Skydat.Properties {
         internal static System.Drawing.Bitmap Port2 {
             get {
                 object obj = ResourceManager.GetObject("Port2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PRE {
+            get {
+                object obj = ResourceManager.GetObject("PRE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1543,9 +1633,29 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rotate_axes {
+            get {
+                object obj = ResourceManager.GetObject("rotate_axes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rotate_right {
             get {
-                object obj = ResourceManager.GetObject("rotate-right", resourceCulture);
+                object obj = ResourceManager.GetObject("rotate_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rotate_right1 {
+            get {
+                object obj = ResourceManager.GetObject("rotate_right1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1763,9 +1873,59 @@ namespace Skydat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SWV {
+            get {
+                object obj = ResourceManager.GetObject("SWV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tafel {
+            get {
+                object obj = ResourceManager.GetObject("Tafel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tafel_40x45 {
+            get {
+                object obj = ResourceManager.GetObject("tafel_40x45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tafel_ecorr_icorr_40x45 {
+            get {
+                object obj = ResourceManager.GetObject("tafel_ecorr_icorr_40x45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tafel_ecorr_icorr_40x45_transparent {
             get {
                 object obj = ResourceManager.GetObject("tafel_ecorr_icorr_40x45_transparent", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tafel_ecorr_icorr_40x45_transparent1 {
+            get {
+                object obj = ResourceManager.GetObject("tafel_ecorr_icorr_40x45_transparent1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -12,8 +12,22 @@ namespace Skydat
 {
     public static class AppUpdater
     {
-        private const string WebUpdateBaseUrl =
-            "https://www.behpajooh.net/wp-content/uploads/2026/10/";
+        // 1. تغییر متغیر از const string به static readonly string[]
+        private static readonly string[] WebUpdateBaseUrls =
+        {
+            "https://www.behpajooh.net/wp-content/uploads/2026/12/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/11/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/10/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/9/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/8/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/7/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/6/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/5/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/4/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/3/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/2/",
+            "https://www.behpajooh.net/wp-content/uploads/2026/1/"
+        };
 
         private const string WebFeedFileName = "releases.json";
 
@@ -119,9 +133,33 @@ namespace Skydat
             }
         }
 
+        // 2. این متد حالا لیست آدرس‌ها را پیمایش میکند (اگر آدرس اول خطا داد، سراغ دومی میرود)
         private static async Task<string> PrepareWebReleaseFolderAsync()
         {
-            string baseUrl = WebUpdateBaseUrl.TrimEnd('/');
+            Exception lastException = null;
+
+            foreach (string url in WebUpdateBaseUrls)
+            {
+                try
+                {
+                    // تلاش برای دانلود از این آدرس
+                    return await PrepareWebReleaseFolderFromUrlAsync(url);
+                }
+                catch (Exception ex)
+                {
+                    // ذخیره خطا و رفتن به سراغ آدرس بعدی
+                    lastException = ex;
+                }
+            }
+
+            // اگر حلقه تمام شد و هیچ آدرسی جواب نداد:
+            throw new Exception("دانلود بروزرسانی از تمامی آدرس‌های داده شده ناموفق بود.", lastException);
+        }
+
+        // 3. این متد همان کدهای قبلی شماست که فقط آدرس را به عنوان پارامتر میگیرد
+        private static async Task<string> PrepareWebReleaseFolderFromUrlAsync(string baseUrlString)
+        {
+            string baseUrl = baseUrlString.TrimEnd('/');
             string feedUrl = baseUrl + "/" + WebFeedFileName;
 
             Directory.CreateDirectory(UpdateCacheFolder);

@@ -5347,6 +5347,16 @@ switch (comboBox2.Items[comboBox2.SelectedIndex].ToString())
             }
         }
 
+        private void tvTechList_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void tvTechList_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            tvTechList.SelectedNode = e.Node;
+        }
+
         private void showDataPointsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (tvTechList.SelectedNode.Index >= 0 && tvTechList.SelectedNode.Level == 1)

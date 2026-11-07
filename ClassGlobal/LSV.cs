@@ -28,7 +28,7 @@ namespace Skydat
             "Scan Rate\n" +
             "Equilibrium Time";
 
-        public const string parentcategory = "Measurement - cyclic and linear sweep voltammetry";
+        public const string parentcategory = "Measurement - voltammetric analysis";
 
         public string Name { get; } = name;
 
@@ -47,7 +47,7 @@ namespace Skydat
         public string Comment { get; set; }
 
         public int ColorCode { get; set; }
-
+        [JsonIgnore]
         public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Voltage(mV)" };
 
         public LSV(TechniqueSpecification specific, int EquilibriumTime = 0, string comment = "")

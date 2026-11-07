@@ -46,6 +46,7 @@ namespace Skydat
 
         public int ColorCode { get; set; }
 
+        [JsonIgnore]
         public string[] XY_Axis_Title { get; } = new string[2] { "Current(uA)", "Voltage(mV)" };
 
         public double OCPAvrage { get; set; }
@@ -314,36 +315,16 @@ namespace Skydat
                 Color = System.Drawing.Color.Blue
             };
 
-
-            // LSV parameters
-            var scanRate = _ScanRate; // ولت بر ثانیه
-            var sampleTime = _TStep; // مدت زمان نمونه‌گیری (ثانیه)
-            double currentTime = 0;
-            double currentV_LSV = _E1;
-
-            if (_E1 == 0 && _E2 == 0)//جلوگیری از خطا در کشیدن چارت
-                return null;
-
-            if (_E1 < _E2)
+            if (previewChartOCP != null)
             {
-                while (currentV_LSV <= _E2)
-                {
-                    series.Points.AddXY(currentTime, currentV_LSV);
-                    currentTime += sampleTime;
-                    currentV_LSV += scanRate * sampleTime;
-                }
+                series = previewChartOCP;
             }
             else
             {
-                while (currentV_LSV >= _E2)
-                {
-                    series.Points.AddXY(currentTime, currentV_LSV);
-                    currentTime += sampleTime;
-                    currentV_LSV -= scanRate * sampleTime;
-                }
+                series.Points.AddXY(0, 0);
+                series.Points.AddXY(0, 1);
             }
-
-            return null;
+            return series;
         }
 
         public int[] SendToUsb(ref int TotalByteExpectedToRead, ref byte[] buffer)

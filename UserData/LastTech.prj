@@ -1,0 +1,335 @@
+﻿[
+  {
+    "$type": "Skydat.DPV, BHP20xx analysis",
+    "Name": "DPV",
+    "Comment": "",
+    "ColorCode": -1954693,
+    "XY_Axis_Title": [
+      "Current(uA)",
+      "Voltage(mV)"
+    ],
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": "Potential Scan Rate",
+      "Value": 0.1,
+      "LowerLimit": 0.0001,
+      "UpperLimit": 0.25,
+      "Unit": "V/s",
+      "Resolution": 0.0001
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "TStep": {
+      "Name": "Tstep",
+      "Description": "Step Time",
+      "Value": 0.1,
+      "LowerLimit": 0.1,
+      "UpperLimit": 10.0,
+      "Unit": "S",
+      "Resolution": 0.1
+    },
+    "PulseWidth": {
+      "Name": "PulseWidth",
+      "Description": "Potential Pulse Time",
+      "Value": 0.05,
+      "LowerLimit": 0.05,
+      "UpperLimit": 0.05,
+      "Unit": "S",
+      "Resolution": 0.01
+    },
+    "PulseHeight": {
+      "Name": "PulseHeight",
+      "Description": "Potential Pulse Amplitude Superimposed",
+      "Value": 0.05,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.25,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "EquilibriumTime": 0,
+    "SeriesPath": null,
+    "SeriesType": 0
+  },
+  {
+    "$type": "Skydat.NPV, BHP20xx analysis",
+    "Name": "NPV",
+    "Comment": "",
+    "ColorCode": -2673211,
+    "XY_Axis_Title": [
+      "Current(uA)",
+      "Voltage(mV)"
+    ],
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": "Potential Scan Rate",
+      "Value": 0.1,
+      "LowerLimit": 0.0001,
+      "UpperLimit": 0.25,
+      "Unit": "V/s",
+      "Resolution": 0.001
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "TStep": {
+      "Name": "Tstep",
+      "Description": "Step Time",
+      "Value": 0.1,
+      "LowerLimit": 0.1,
+      "UpperLimit": 10.0,
+      "Unit": "S",
+      "Resolution": 0.1
+    },
+    "PulseWidth": {
+      "Name": "PulseWidth",
+      "Description": "Potential Pulse Time",
+      "Value": 0.05,
+      "LowerLimit": 0.0,
+      "UpperLimit": 0.05,
+      "Unit": "S",
+      "Resolution": 0.001
+    },
+    "EquilibriumTime": 0,
+    "SeriesPath": null,
+    "SeriesType": 0
+  },
+  {
+    "$type": "Skydat.LSV, BHP20xx analysis",
+    "Name": "LSV",
+    "Comment": "",
+    "ColorCode": -12116556,
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": null,
+      "Value": 1.0,
+      "LowerLimit": 0.001,
+      "UpperLimit": 100.0,
+      "Unit": "V/s",
+      "Resolution": 0.001
+    },
+    "TStep": {
+      "Name": "Tstep",
+      "Description": "Step Time",
+      "Value": 0.01,
+      "LowerLimit": 0.0001,
+      "UpperLimit": 10.0,
+      "Unit": "S",
+      "Resolution": 0.1
+    },
+    "EquilibriumTime": 0,
+    "SeriesPath": null,
+    "SeriesType": 0
+  },
+  {
+    "$type": "Skydat.CV, BHP20xx analysis",
+    "Name": "CV",
+    "Comment": "",
+    "ColorCode": -14472337,
+    "XY_Axis_Title": [
+      "Current(uA)",
+      "Voltage(mV)"
+    ],
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E3": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": null,
+      "Value": 0.1,
+      "LowerLimit": 0.001,
+      "UpperLimit": 250.0,
+      "Unit": "V/s",
+      "Resolution": 0.001
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "TStep": {
+      "Name": "Tstep",
+      "Description": "Step Time",
+      "Value": 0.1,
+      "LowerLimit": 0.0001,
+      "UpperLimit": 10.0,
+      "Unit": "S",
+      "Resolution": 0.1
+    },
+    "Cycles": 1,
+    "EquilibriumTime": 0,
+    "Series": null,
+    "SeriesPath": null,
+    "SeriesType": 0
+  },
+  {
+    "$type": "Skydat.SWV, BHP20xx analysis",
+    "Name": "SWV",
+    "Comment": "",
+    "ColorCode": -16682796,
+    "XY_Axis_Title": [
+      "Current(uA)",
+      "Voltage(mV)"
+    ],
+    "E1": {
+      "Name": "E1",
+      "Description": "Initial Potential",
+      "Value": -0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "E2": {
+      "Name": "E2",
+      "Description": "Final Potential",
+      "Value": 0.7,
+      "LowerLimit": -5.0,
+      "UpperLimit": 5.0,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "ScanRate": {
+      "Name": "ScanRate",
+      "Description": "Potential Scan Rate",
+      "Value": 0.1,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.25,
+      "Unit": "V/s",
+      "Resolution": 0.001
+    },
+    "HStep": {
+      "Name": "Hstep",
+      "Description": "Step Height",
+      "Value": 0.01,
+      "LowerLimit": -0.001,
+      "UpperLimit": 0.025,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "Frequency": {
+      "Name": "Frequency",
+      "Description": "Frequency",
+      "Value": 10.0,
+      "LowerLimit": 1.0,
+      "UpperLimit": 1000.0,
+      "Unit": "S",
+      "Resolution": 1.0
+    },
+    "PulseHeight": {
+      "Name": "PulseHeight",
+      "Description": "Potential Pulse Amplitude Superimposed",
+      "Value": 0.05,
+      "LowerLimit": 0.001,
+      "UpperLimit": 0.25,
+      "Unit": "V",
+      "Resolution": 0.001
+    },
+    "EquilibriumTime": 0,
+    "SeriesPath": null,
+    "SeriesType": 0
+  }
+]

@@ -1128,21 +1128,26 @@ namespace Skydat.forms2080
             double min = Math.Min(E1, E2) * 1000;
             double max = Math.Max(E1, E2) * 1000;
 
-            OnlineChart.ChartAreas[0].AxisX.Maximum = max;
-            OnlineChart.ChartAreas[0].AxisX.Minimum = min;
-            double intervalBase = Hstep * 1000; // مضرب دلخواه
+            var area = OnlineChart.ChartAreas[0];
 
+            // حذف حاشیه‌های پیش‌فرض
+            area.AxisX.IsMarginVisible = false;
+            area.AxisY.IsMarginVisible = false;
+
+            // تنظیم محدوده
+            area.AxisX.Minimum = min;
+            area.AxisX.Maximum = max;
+
+            // چسباندن محور Y به نقطه شروع
+            area.AxisY.Crossing = min;
+            area.AxisX.IntervalOffset = 0;
+
+            double intervalBase = Hstep * 1000;
             double range = max - min;
-
-            // حدود 12 برچسب
             double desiredStep = range / 15.0;
+            double axisInterval = Math.Ceiling(desiredStep / intervalBase) * intervalBase;
 
-            // نزدیک‌ترین مضرب intervalBase
-            double axisInterval =
-                Math.Ceiling(desiredStep / intervalBase) * intervalBase;
-
-            OnlineChart.ChartAreas[0].AxisX.Interval = axisInterval;
-
+            area.AxisX.Interval = axisInterval;
         }
 
         private void UpdateSeriesOpacity(Chart chart)
@@ -1219,7 +1224,12 @@ namespace Skydat.forms2080
                 .Select((x, i) => new { X = x, Y = smothedX[i] })
                 .ToList();
 
-                int batchSize = 10;
+
+                int batchSize = (int)(points.Count * 0.1);
+                int delayTime = 100000 / batchSize;
+                if (delayTime > 50) delayTime = 50;
+                else if(delayTime < 5) delayTime = 5;
+
 
                 for (int start = 0; start < xValues.Count; start += batchSize)
                 {
@@ -1227,17 +1237,19 @@ namespace Skydat.forms2080
 
                     this.Invoke(new Action(() =>
                     {
+
                         for (int i = start; i < end; i++)
                         {
-                            smothedX[i] = Math.Round(smothedX[i], 2);
+                            smothedX[i] = Math.Round(smothedX[i], 3);
+
                             series.Points.AddXY(xValues[i], smothedX[i]);
                         }
 
-                        //series.Points.ResumeUpdates();
-                        //OnlineChart.ResumeLayout();
                     }));
 
-                    Thread.Sleep(20); // حس انیمیشن
+                    Thread.Sleep(delayTime); // حس انیمیشن
+
+
                 }
 
                 FlagSmothEnded = true;
@@ -1748,22 +1760,7 @@ namespace Skydat.forms2080
                     Setfilllable($"زیر ۴۰{ExpectedByteToRead}", "log");
                 }
 
-                //int errorCount = 0;
-                //while (ByteToRead == 0 && sp1.IsOpen)
-                //{
-                //    ByteToRead = sp1.BytesToRead;
-                //    errorCount++;
-                //    if (errorCount >= 2000)
-                //    {
-                //        if (errorCount / 1000 == 0)
-                //        {
-                //            Setfilllable($"{errorCount}", "warning", 1);
-                //        }
-                //        if (errorCount == 5000)
-                //            return;
-                //    }
-                //    //Thread.Sleep(1);
-                //}
+
                 if (!sp1.IsOpen)
                 {
                     MessageBox.Show("پورت سریال باز نیست", "sp1_DataReceived_Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1879,25 +1876,6 @@ namespace Skydat.forms2080
                         DataY[i] = ((Int32)((buffer[i * 4 + 5] << 24) | (buffer[i * 4 + 6] << 16) | (buffer[i * 4 + 7] << 8) | buffer[i * 4 + 8])) * -1 / 10.00;
                         DataX[i] = VoltageBuffer[i + ((RecivedPacketCounter - 1) * 10)];
                     }
-                    //if (TechNum == 2)//DPV
-                    //{
-                    //    double[] PulsyDataY = new double[DataY.Length / 2];
-                    //    DataX = new int[PulsyDataY.Length];
-                    //    for (int i = 0,j = 0; i < DataY.Length; i += 2,j++)
-                    //    {
-                    //        PulsyDataY[j] = DataY[i + 1] - DataY[i];
-                    //        DataX[j] = VoltageBuffer[j + ((RecivedPacketCounter - 1) * 5)];
-                    //    }
-                    //    PlotGraph(OnlineChart, DataX, PulsyDataY);
-                    //}
-                    //else
-                    //{
-                    //    for (int i = 0; i < ByteNum / 4; i++)
-                    //    {
-                    //        DataX[i] = VoltageBuffer[i + ((RecivedPacketCounter - 1) * 10)];
-                    //    }
-                    //    PlotGraph(OnlineChart, DataX, DataY);
-                    //}
 
                     PlotGraph(OnlineChart, DataX, DataY);
 
@@ -1961,6 +1939,12 @@ namespace Skydat.forms2080
                 };
 
                 chart.Series.Add(series);
+
+                // --- این سه خط را اضافه کنید ---
+                chart.ChartAreas[0].AxisX.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.Crossing = chart.ChartAreas[0].AxisX.Minimum;
+                // ------------------------------
             }
             else
             {
@@ -1973,11 +1957,8 @@ namespace Skydat.forms2080
             {
                 series.Points.SuspendUpdates();
 
-                // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
                 var medianFiltered = MedianFilter(yValues.ToList(), windowSize: 3);
-
                 List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 5);
-
 
                 for (int i = 0; i < yValues.Length; i++)
                 {
@@ -2017,6 +1998,11 @@ namespace Skydat.forms2080
                 };
 
                 chart.Series.Add(series);
+
+                // قفل کردن محورها
+                chart.ChartAreas[0].AxisX.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.Crossing = chart.ChartAreas[0].AxisX.Minimum;
             }
             else
             {
@@ -2028,7 +2014,6 @@ namespace Skydat.forms2080
             try
             {
                 series.Points.SuspendUpdates();
-
                 series.Points.AddXY(xValue, yValue);
 
                 mainf.pbRunnigTech.Value++;
@@ -2040,7 +2025,6 @@ namespace Skydat.forms2080
                     mainf.pbRunnigTech.Visible = false;
                     mainf.xyLabel.Visible = true;
                     flag_running = false;
-
                     OnlineChart.Update();
                 }
 
@@ -2051,7 +2035,6 @@ namespace Skydat.forms2080
                 chart.ResumeLayout();
                 chart.Invalidate();
             }
-
         }
 
         public void PlotGraph(Chart chart, int[] xValues, double[] yValues)
@@ -2077,36 +2060,39 @@ namespace Skydat.forms2080
                 };
 
                 chart.Series.Add(series);
+
+                // این سه خط برای قفل کردن محورها در حین اجرای زنده
+                chart.ChartAreas[0].AxisX.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.IsMarginVisible = false;
+                chart.ChartAreas[0].AxisY.Crossing = chart.ChartAreas[0].AxisX.Minimum;
             }
             else
             {
                 series = chart.Series["live"];
             }
 
-            chart.SuspendLayout();
-
             try
             {
+                // خط IsXValueIndexed حذف شد تا X واقعی اعمال شود
                 series.Points.SuspendUpdates();
+                chart.SuspendLayout();
 
-                // 1. اعمال Median Filter (برای حذف اعوجاج تیز)
                 var medianFiltered = MedianFilter(yValues.ToList(), windowSize: 3);
-
                 List<double> smothedX = SavitzkyGolaySmooth(medianFiltered, windowSize: 5);
-
 
                 for (int i = 0; i < yValues.Length; i++)
                 {
-                    smothedX[i] = Math.Round(smothedX[i], 2);
-                    series.Points.AddXY(xValues[i], smothedX[i]);
+                    double y = Math.Round(smothedX[i], 2);
+                    series.Points.AddXY(xValues[i], y);
                 }
+
                 mainf.pbRunnigTech.Value += yValues.Length;
 
                 series.Points.ResumeUpdates();
+                chart.ResumeLayout();
             }
             finally
             {
-                chart.ResumeLayout();
                 chart.Invalidate();
             }
         }
