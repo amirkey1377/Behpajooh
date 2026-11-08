@@ -1,60 +1,19 @@
-﻿
-# Behpajooh Git Attributes
-# Normalize text files and prevent inconsistent line endings
+﻿root = true
 
-# Auto detect text files
-* text=auto
+[*]
+charset = utf-8-bom
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-# C# source files
-*.cs text eol=crlf
+[*.md]
+charset = utf-8
+end_of_line = lf
 
-# .NET project files
-*.csproj text eol=crlf
-*.sln text eol=crlf
-*.vbproj text eol=crlf
-*.props text eol=crlf
-*.targets text eol=crlf
+[*.json]
+charset = utf-8
+end_of_line = crlf
 
-# XML and resource files
-*.xml text eol=crlf
-*.resx text eol=crlf
-*.config text eol=crlf
-*.settings text eol=crlf
-
-# JSON files
-*.json text eol=crlf
-
-# Documentation
-*.md text eol=lf
-*.txt text eol=lf
-
-# Git configuration files
-.gitattributes text eol=lf
-.editorconfig text eol=lf
-.gitignore text eol=lf
-
-# YAML files
-*.yml text eol=lf
-*.yaml text eol=lf
-
-# Binary files - never normalize
-*.exe binary
-*.dll binary
-*.pdb binary
-*.ico binary
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.bmp binary
-*.gif binary
-*.pdf binary
-*.zip binary
-*.7z binary
-*.rar binary
-*.db binary
-*.sqlite binary
-*.dat binary
-*.bin binary
-*.ttf binary
-*.otf binary
-
+[*.{editorconfig,gitattributes,gitignore}]
+charset = utf-8
+end_of_line = lf
