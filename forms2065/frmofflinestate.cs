@@ -18,14 +18,14 @@ namespace Skydat.forms2065
 {
     public partial class frmofflinestate : Form
     {
-        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21, TRANS_BUFF = 96;
+        byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 21;
         //byte ENQ0 = 5, ENQ1 = 7, ENQ2 = 9, ACK = 6, NAK = 15, DATA_READY = 1, TRANS_BUFF = 60;//delphi
 
         private Thread thread_grf;
         double[] othertech_val0 = new double[200];
         double[] othertech_val1 = new double[200];
         byte[] x_rec = new byte[4];
-        private int shomar_val = 0, sh_state = 1,shomar_array=0;
+        private int sh_state = 1,shomar_array=0;
         private byte[] buf = new byte[1];
         private byte[] data=new byte[1];
         int shomar_data=0;

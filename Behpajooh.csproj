@@ -163,7 +163,6 @@
       <HintPath>packages\OxyPlot.WindowsForms.2.2.0\lib\net462\OxyPlot.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="Sentinel.v3.5Client" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
