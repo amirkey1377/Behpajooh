@@ -272,6 +272,7 @@ namespace Skydat.forms2080
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label91 = new System.Windows.Forms.Label();
             this.pnlDiscription.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxOcp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartApplayTech)).BeginInit();
@@ -2327,6 +2328,7 @@ namespace Skydat.forms2080
             // contextMenuStrip2
             // 
             resources.ApplyResources(this.contextMenuStrip2, "contextMenuStrip2");
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.deleteItemToolStripMenuItem});
@@ -2346,12 +2348,19 @@ namespace Skydat.forms2080
             resources.ApplyResources(this.deleteItemToolStripMenuItem, "deleteItemToolStripMenuItem");
             this.deleteItemToolStripMenuItem.Click += new System.EventHandler(this.deleteItemToolStripMenuItem_Click);
             // 
+            // label91
+            // 
+            resources.ApplyResources(this.label91, "label91");
+            this.label91.BackColor = System.Drawing.Color.Maroon;
+            this.label91.Name = "label91";
+            // 
             // frmselecttech2080
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.Gainsboro;
+            this.Controls.Add(this.label91);
             this.Controls.Add(this.treeView2);
             this.Controls.Add(this.pnlDiscription);
             this.Controls.Add(this.pnlSelectTech);
@@ -2416,6 +2425,7 @@ namespace Skydat.forms2080
             this.pnlParam.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -2661,6 +2671,7 @@ namespace Skydat.forms2080
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem deleteItemToolStripMenuItem;
+        private System.Windows.Forms.Label label91;
     }
 }
 
