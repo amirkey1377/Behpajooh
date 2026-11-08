@@ -771,6 +771,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="app.config" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -828,6 +829,7 @@
     <None Include="Skydat_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
     <Content Include="CHEM1.ICO" />
     <None Include="Resources\11.png" />
     <None Include="Resources\101.png" />
